@@ -1,0 +1,26 @@
+g-combine-16 1 0 2
+g-zwj-positive-16 1 0 6
+g-zwj-negative-16 1 0 2
+g-ri-16 1 0 4
+g-hangul-16 1 0 3
+g-nul-16 1 0 1
+g-hard-16 -2 0 1
+s-positive-16 1 0 2
+s-negative-16 -1
+s-unknown-one-16 1 0 1
+s-unknown-two-16 -1
+s-extensions-16 1 0 2
+s-extensions-negative-16 -1
+s-han-hangul-hira-16 1 0 3
+s-hangul-han-hira-16 -1
+s-digits-16 -1
+s-math-digits-16 -1
+s-wide-16 1 0 4
+s-k-16 -1
+s-retry-16 2 0 2 0 1
+s-atomic-16 -1
+g-raw-16 1 0 2
+s-raw-16 1 0 2
+s-raw-unknown-16 -1
+g-ri-start1-16 1 2 4
+g-ri-start2-16 1 4 6

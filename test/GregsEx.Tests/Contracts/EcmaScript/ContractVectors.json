@@ -1,0 +1,1518 @@
+{
+  "contractVersion": "ecmascript-fixtures-1",
+  "profileId": "EcmaScript2025",
+  "dataId": "Unicode-16.0.0+Emoji-16.0",
+  "cases": [
+    {
+      "id": "ECMA-C001",
+      "capabilities": [
+        "ES-001"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.3.2",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [],
+      "flags": "uv",
+      "operation": "Parse",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "InvalidSyntax",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "InvalidSyntax",
+          "featureId": "ES-001",
+          "location": "Flags",
+          "offset": 1,
+          "length": 1,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": 0,
+          "requiredCapacity": 0
+        }
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C002",
+      "capabilities": [
+        "ES-002"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.3",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        124
+      ],
+      "inputUnits": [
+        98
+      ],
+      "flags": "",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 0,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 0
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C003",
+      "capabilities": [
+        "ES-003"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.7",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        63,
+        105,
+        58,
+        97,
+        41
+      ],
+      "inputUnits": [
+        65
+      ],
+      "flags": "",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C004",
+      "capabilities": [
+        "ES-004"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.5",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        40,
+        98,
+        41,
+        41,
+        42,
+        36
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              },
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              },
+              {
+                "participated": false,
+                "index": 0,
+                "length": 0
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C005",
+      "capabilities": [
+        "ES-005"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.1.1;22.2.7.2",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        63,
+        60,
+        120,
+        62,
+        97,
+        41,
+        124,
+        40,
+        63,
+        60,
+        120,
+        62,
+        98,
+        41
+      ],
+      "inputUnits": [
+        98
+      ],
+      "flags": "d",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              },
+              {
+                "participated": false,
+                "index": 0,
+                "length": 0
+              },
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ],
+            "names": [
+              {
+                "name": "x",
+                "groupIds": [
+                  1,
+                  2
+                ],
+                "capture": {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              }
+            ],
+            "hasIndices": true
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C006",
+      "capabilities": [
+        "ES-006"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.7.2",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        40,
+        98,
+        41,
+        41,
+        92,
+        50,
+        36
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              },
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              },
+              {
+                "participated": false,
+                "index": 0,
+                "length": 0
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C007",
+      "capabilities": [
+        "ES-007"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.4",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        63,
+        60,
+        61,
+        40,
+        91,
+        97,
+        98,
+        93,
+        43,
+        41,
+        40,
+        91,
+        98,
+        99,
+        93,
+        43,
+        41,
+        41,
+        36
+      ],
+      "inputUnits": [
+        97,
+        98,
+        99
+      ],
+      "flags": "",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 3,
+            "length": 0,
+            "captures": [
+              {
+                "participated": true,
+                "index": 3,
+                "length": 0
+              },
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              },
+              {
+                "participated": true,
+                "index": 1,
+                "length": 2
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C008",
+      "capabilities": [
+        "ES-008"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.1;22.2.2.7",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        117,
+        123,
+        49,
+        70,
+        54,
+        48,
+        48,
+        125
+      ],
+      "inputUnits": [
+        55357,
+        56832
+      ],
+      "flags": "u",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 2,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C009",
+      "capabilities": [
+        "ES-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.8",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        93
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "NoMatch",
+        "lastIndexAfter": "0",
+        "matches": [],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C010",
+      "capabilities": [
+        "ES-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.8",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        94,
+        93
+      ],
+      "inputUnits": [
+        10
+      ],
+      "flags": "",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C011",
+      "capabilities": [
+        "ES-010"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.9.7;22.2.2.9.8",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        83,
+        99,
+        114,
+        105,
+        112,
+        116,
+        61,
+        71,
+        114,
+        101,
+        101,
+        107,
+        125,
+        43
+      ],
+      "inputUnits": [
+        945
+      ],
+      "flags": "u",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C012",
+      "capabilities": [
+        "ES-011"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.9",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        91,
+        97,
+        45,
+        122,
+        93,
+        45,
+        45,
+        91,
+        97,
+        101,
+        105,
+        111,
+        117,
+        93,
+        93,
+        43
+      ],
+      "inputUnits": [
+        97,
+        101,
+        105,
+        98,
+        99,
+        100
+      ],
+      "flags": "v",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 3,
+            "length": 3,
+            "captures": [
+              {
+                "participated": true,
+                "index": 3,
+                "length": 3
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C013",
+      "capabilities": [
+        "ES-011"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.10",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        92,
+        113,
+        123,
+        97,
+        98,
+        124,
+        99,
+        100,
+        125,
+        93
+      ],
+      "inputUnits": [
+        120,
+        97,
+        98
+      ],
+      "flags": "v",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 1,
+            "length": 2,
+            "captures": [
+              {
+                "participated": true,
+                "index": 1,
+                "length": 2
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C014",
+      "capabilities": [
+        "ES-012"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.9.7",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        82,
+        71,
+        73,
+        95,
+        69,
+        109,
+        111,
+        106,
+        105,
+        125
+      ],
+      "inputUnits": [
+        55357,
+        56832
+      ],
+      "flags": "v",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 2,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C015",
+      "capabilities": [
+        "ES-013"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.9",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        80,
+        123,
+        76,
+        111,
+        119,
+        101,
+        114,
+        99,
+        97,
+        115,
+        101,
+        95,
+        76,
+        101,
+        116,
+        116,
+        101,
+        114,
+        125
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "iu",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C016",
+      "capabilities": [
+        "ES-013"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.2.9",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        80,
+        123,
+        76,
+        111,
+        119,
+        101,
+        114,
+        99,
+        97,
+        115,
+        101,
+        95,
+        76,
+        101,
+        116,
+        116,
+        101,
+        114,
+        125
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "iv",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "NoMatch",
+        "lastIndexAfter": "0",
+        "matches": [],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C017",
+      "capabilities": [
+        "ES-014"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/additional-ecmascript-features-for-web-browsers.html",
+        "clause": "B.1.2",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        49,
+        52,
+        49
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C018",
+      "capabilities": [
+        "ES-015"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.7.2",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputUnits": [
+        55357,
+        56832
+      ],
+      "flags": "uy",
+      "operation": "Exec",
+      "lastIndexBefore": "1",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "2",
+        "matches": [
+          {
+            "index": 0,
+            "length": 2,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C019",
+      "capabilities": [
+        "ES-015"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.7.2",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [],
+      "inputUnits": [
+        97
+      ],
+      "flags": "g",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 0,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 0
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C020",
+      "capabilities": [
+        "ES-016"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.6.9;22.2.9.2.1",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [],
+      "inputUnits": [
+        55357,
+        56832
+      ],
+      "flags": "gu",
+      "operation": "MatchAll",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 0,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 0
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          },
+          {
+            "index": 2,
+            "length": 0,
+            "captures": [
+              {
+                "participated": true,
+                "index": 2,
+                "length": 0
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C021",
+      "capabilities": [
+        "ES-017"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.6.11;22.1.3.19.1",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        63,
+        60,
+        120,
+        62,
+        97,
+        41
+      ],
+      "inputUnits": [
+        98,
+        97
+      ],
+      "flags": "g",
+      "operation": "Replace",
+      "lastIndexBefore": "0",
+      "replacementUnits": [
+        36,
+        60,
+        120,
+        62,
+        36,
+        36
+      ],
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [],
+        "texts": [
+          [
+            98,
+            97,
+            36
+          ]
+        ],
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C022",
+      "capabilities": [
+        "ES-018"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.6.14",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        44,
+        41,
+        124,
+        40,
+        59,
+        41
+      ],
+      "inputUnits": [
+        97,
+        44,
+        98
+      ],
+      "flags": "",
+      "operation": "Split",
+      "lastIndexBefore": "7",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "7",
+        "matches": [],
+        "texts": [
+          [
+            97
+          ],
+          [
+            44
+          ],
+          null,
+          [
+            98
+          ]
+        ],
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C023",
+      "capabilities": [
+        "ES-015",
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.7.2",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        94,
+        46,
+        36
+      ],
+      "inputUnits": [
+        55296
+      ],
+      "flags": "u",
+      "operation": "Exec",
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [
+          {
+            "index": 0,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C024",
+      "capabilities": [
+        "ES-016"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.6.13",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [
+        98,
+        97
+      ],
+      "flags": "",
+      "operation": "Search",
+      "lastIndexBefore": "-0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "-0",
+        "matches": [
+          {
+            "index": 1,
+            "length": 1,
+            "captures": [
+              {
+                "participated": true,
+                "index": 1,
+                "length": 1
+              }
+            ],
+            "names": [],
+            "hasIndices": false
+          }
+        ],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C025",
+      "capabilities": [
+        "ES-015"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.2.7.2",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "y",
+      "operation": "Exec",
+      "lastIndexBefore": "+Infinity",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "NoMatch",
+        "lastIndexAfter": "0",
+        "matches": [],
+        "texts": null,
+        "error": null
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C026",
+      "capabilities": [
+        "ES-017"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "22.1.3.20",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "",
+      "operation": "ReplaceAll",
+      "lastIndexBefore": "0",
+      "replacementUnits": [
+        120
+      ],
+      "splitLimit": null,
+      "expected": {
+        "status": "HostArgumentError",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "GlobalFlagRequired",
+          "featureId": "ES-017",
+          "location": "Host",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": 0,
+          "requiredCapacity": 0
+        }
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": null
+    },
+    {
+      "id": "ECMA-C027",
+      "capabilities": [
+        "ES-017",
+        "ES-019",
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html",
+        "clause": "GregsEx ECMAScript contract ES-019/020 bounded host policy",
+        "license": "Independently authored GregsEx MIT vector; upstream specification linked, not imported",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "flags": "g",
+      "operation": "Replace",
+      "lastIndexBefore": "0",
+      "replacementUnits": [
+        120,
+        120,
+        120
+      ],
+      "splitLimit": null,
+      "expected": {
+        "status": "HostLimitExceeded",
+        "lastIndexAfter": "0",
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "OutputLimitExceeded",
+          "featureId": "ES-019",
+          "location": "Host",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 3
+        }
+      },
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": 1,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      }
+    }
+  ]
+}

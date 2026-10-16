@@ -1,0 +1,9 @@
+// Must fail CS8352: returned ranges cannot expose stack-owned capture storage.
+public static class EscapedCaptures
+{
+    public static System.ReadOnlySpan<int> Get()
+    {
+        System.Span<int> captures = stackalloc int[4];
+        return captures;
+    }
+}

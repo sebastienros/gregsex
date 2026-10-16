@@ -1,0 +1,25 @@
+g-combine-8 1 0 3
+g-zwj-positive-8 1 0 13
+g-zwj-negative-8 1 0 4
+g-ri-8 1 0 8
+g-hangul-8 1 0 9
+g-nul-8 1 0 1
+g-hard-8 -2 0 1
+s-positive-8 1 0 3
+s-negative-8 -1
+s-unknown-one-8 1 0 2
+s-unknown-two-8 -1
+s-extensions-8 1 0 6
+s-extensions-negative-8 -1
+s-han-hangul-hira-8 1 0 9
+s-hangul-han-hira-8 -1
+s-digits-8 -1
+s-math-digits-8 -1
+s-wide-8 1 0 8
+s-k-8 -1
+s-retry-8 2 0 2 0 1
+s-atomic-8 -1
+g-raw-8 1 0 2
+s-raw-8 1 0 2
+g-ri-start1-8 1 4 8
+g-ri-start2-8 1 8 12

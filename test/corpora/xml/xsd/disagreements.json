@@ -1,0 +1,2043 @@
+{
+  "format": "xsd-disagreements-1",
+  "unexplained": 0,
+  "policy": "Source/ratified expectation remains authoritative; oracle observations retained verbatim; no profile exclusion",
+  "cases": [
+    {
+      "id": "XSD-class-64",
+      "class": "oracle-escaped-range",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-class-64",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\t\\-\\\\n])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        91,
+        92,
+        116,
+        45,
+        92,
+        110,
+        93
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        10
+      ],
+      "resolution": "character_classes range parsing emits tab plus literal backslash/hyphen/n instead of singleton endpoint range9-10. Production81 permits singleCharEsc endpoints; keep LF membership.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-shortcut-125",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-shortcut-125",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\s)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        115
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        160
+      ],
+      "resolution": "patterns.py emits Python re shortcut outside classes instead of XSD set. Python w accepts underscore and rejects symbols/emoji; Python s accepts NBSP. XSD w is complementP/Z/C (ratified D2), s onlyTAB/LF/CR/SPACE. Keep contract results.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-shortcut-136",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-shortcut-136",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        95
+      ],
+      "resolution": "patterns.py emits Python re shortcut outside classes instead of XSD set. Python w accepts underscore and rejects symbols/emoji; Python s accepts NBSP. XSD w is complementP/Z/C (ratified D2), s onlyTAB/LF/CR/SPACE. Keep contract results.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-shortcut-137",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-shortcut-137",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        55357,
+        56832
+      ],
+      "resolution": "patterns.py emits Python re shortcut outside classes instead of XSD set. Python w accepts underscore and rejects symbols/emoji; Python s accepts NBSP. XSD w is complementP/Z/C (ratified D2), s onlyTAB/LF/CR/SPACE. Keep contract results.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-shortcut-139",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-shortcut-139",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        95
+      ],
+      "resolution": "patterns.py emits Python re shortcut outside classes instead of XSD set. Python w accepts underscore and rejects symbols/emoji; Python s accepts NBSP. XSD w is complementP/Z/C (ratified D2), s onlyTAB/LF/CR/SPACE. Keep contract results.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-name-i-65536",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-name-i-65536",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[:A-Z_a-z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u02ff\u0370-\u037d\u037f-\u1fff\u200c-\u200d\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        105
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        55296,
+        56320
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-name-I-65536",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-name-I-65536",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:[^:A-Z_a-z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u02ff\u0370-\u037d\u037f-\u1fff\u200c-\u200d\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        73
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        55296,
+        56320
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-name-i-983039",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-name-i-983039",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[:A-Z_a-z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u02ff\u0370-\u037d\u037f-\u1fff\u200c-\u200d\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        105
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56191,
+        57343
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-name-I-983039",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-name-I-983039",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:[^:A-Z_a-z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u02ff\u0370-\u037d\u037f-\u1fff\u200c-\u200d\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        73
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56191,
+        57343
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-name-c-65536",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-name-c-65536",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[-.0-9:A-Z_a-z\u00b7\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u037d\u037f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        99
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        55296,
+        56320
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-name-C-65536",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-name-C-65536",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:[^-.0-9:A-Z_a-z\u00b7\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u037d\u037f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        67
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        55296,
+        56320
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-name-c-983039",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-name-c-983039",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[-.0-9:A-Z_a-z\u00b7\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u037d\u037f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        99
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56191,
+        57343
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-name-C-983039",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-name-C-983039",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:[^-.0-9:A-Z_a-z\u00b7\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u037d\u037f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        67
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56191,
+        57343
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-unknown-4462",
+      "class": "oracle-unknown-block-upper-end",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-unknown-4462",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\u0000-\udbff\udffe])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        85,
+        110,
+        107,
+        110,
+        111,
+        119,
+        110,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56319,
+        57343
+      ],
+      "resolution": "elementpath patterns.py unknown block replacement spans0-10FFFE, incorrectly excluding legal XML scalar10FFFF. Both unknown-block polarities are defaultall under G.4.2.4. Keep ratified source result.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-unknown-4466",
+      "class": "oracle-unknown-block-upper-end",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-unknown-4466",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\u0000-\udbff\udffe])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        80,
+        123,
+        73,
+        115,
+        85,
+        110,
+        107,
+        110,
+        111,
+        119,
+        110,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56319,
+        57343
+      ],
+      "resolution": "elementpath patterns.py unknown block replacement spans0-10FFFE, incorrectly excluding legal XML scalar10FFFF. Both unknown-block polarities are defaultall under G.4.2.4. Keep ratified source result.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-unknown-4469",
+      "class": "oracle-extra-block",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-unknown-4469",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\u2fe0-\u2fef\ud800\ude00-\ud800\ude7f\ud800\udfe0-\ud800\udfff\ud801\udfc0-\ud801\udfff\ud802\udcb0-\ud802\udcdf\ud802\udd40-\ud802\udd7f\ud802\udea0-\ud802\udebf\ud802\udfb0-\ud802\udfff\ud803\udc50-\ud803\udc7f\ud803\udd90-\ud803\ude5f\ud804\ude50-\ud804\ude7f\ud805\udce0-\ud805\udd7f\ud805\udf50-\ud805\udfff\ud806\udc50-\ud806\udc9f\ud806\udd60-\ud806\udd9f\ud806\udf60-\ud806\udfbf\ud807\udcc0-\ud807\udcff\ud807\uddb0-\ud807\udedf\ud807\udf60-\ud807\udfaf\ud809\udd50-\ud80b\udf8f\ud811\ude80-\ud818\udcff\ud818\udd40-\ud819\udfff\ud81a\udf90-\ud81b\udd3f\ud81b\udd80-\ud81b\ude3f\ud81b\udea0-\ud81b\udeff\ud81b\udfa0-\ud81b\udfdf\ud823\udd80-\ud82b\udfef\ud82c\udf00-\ud82e\udfff\ud82f\udcb0-\ud832\udfff\ud833\udec0-\ud833\udeff\ud833\udfd0-\ud833\udfff\ud834\ude50-\ud834\udebf\ud834\udf80-\ud834\udfff\ud836\udeb0-\ud837\udeff\ud838\udc90-\ud838\udcff\ud838\udd50-\ud838\ude8f\ud838\udf00-\ud839\udccf\ud839\udd00-\ud839\uddcf\ud839\ude00-\ud839\udfdf\ud83a\udce0-\ud83a\udcff\ud83a\udd60-\ud83b\udc6f\ud83b\udcc0-\ud83b\udcff\ud83b\udd50-\ud83b\uddff\ud83b\udf00-\ud83b\udfff\ud83f\udc00-\ud83f\udfff\ud869\udee0-\ud869\udeff\ud87b\ude60-\ud87d\udfff\ud87e\ude20-\ud87f\udfff\ud888\udfb0-\udb3f\udfff\udb40\udc80-\udb40\udcff\udb40\uddf0-\udb7f\udfff])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        78,
+        111,
+        66,
+        108,
+        111,
+        99,
+        107,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        97
+      ],
+      "resolution": "elementpath UnicodeData.block invents NoBlock as complement of all named blocks. Blocks16 defines no named NoBlock; exact GregsEx inventory excludes it. XSD valid unknown name must default to all XML characters. Keep source expected.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-unknown-4470",
+      "class": "oracle-extra-block",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-unknown-4470",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\u2fe0-\u2fef\ud800\ude00-\ud800\ude7f\ud800\udfe0-\ud800\udfff\ud801\udfc0-\ud801\udfff\ud802\udcb0-\ud802\udcdf\ud802\udd40-\ud802\udd7f\ud802\udea0-\ud802\udebf\ud802\udfb0-\ud802\udfff\ud803\udc50-\ud803\udc7f\ud803\udd90-\ud803\ude5f\ud804\ude50-\ud804\ude7f\ud805\udce0-\ud805\udd7f\ud805\udf50-\ud805\udfff\ud806\udc50-\ud806\udc9f\ud806\udd60-\ud806\udd9f\ud806\udf60-\ud806\udfbf\ud807\udcc0-\ud807\udcff\ud807\uddb0-\ud807\udedf\ud807\udf60-\ud807\udfaf\ud809\udd50-\ud80b\udf8f\ud811\ude80-\ud818\udcff\ud818\udd40-\ud819\udfff\ud81a\udf90-\ud81b\udd3f\ud81b\udd80-\ud81b\ude3f\ud81b\udea0-\ud81b\udeff\ud81b\udfa0-\ud81b\udfdf\ud823\udd80-\ud82b\udfef\ud82c\udf00-\ud82e\udfff\ud82f\udcb0-\ud832\udfff\ud833\udec0-\ud833\udeff\ud833\udfd0-\ud833\udfff\ud834\ude50-\ud834\udebf\ud834\udf80-\ud834\udfff\ud836\udeb0-\ud837\udeff\ud838\udc90-\ud838\udcff\ud838\udd50-\ud838\ude8f\ud838\udf00-\ud839\udccf\ud839\udd00-\ud839\uddcf\ud839\ude00-\ud839\udfdf\ud83a\udce0-\ud83a\udcff\ud83a\udd60-\ud83b\udc6f\ud83b\udcc0-\ud83b\udcff\ud83b\udd50-\ud83b\uddff\ud83b\udf00-\ud83b\udfff\ud83f\udc00-\ud83f\udfff\ud869\udee0-\ud869\udeff\ud87b\ude60-\ud87d\udfff\ud87e\ude20-\ud87f\udfff\ud888\udfb0-\udb3f\udfff\udb40\udc80-\udb40\udcff\udb40\uddf0-\udb7f\udfff])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        78,
+        111,
+        66,
+        108,
+        111,
+        99,
+        107,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56319,
+        57343
+      ],
+      "resolution": "elementpath UnicodeData.block invents NoBlock as complement of all named blocks. Blocks16 defines no named NoBlock; exact GregsEx inventory excludes it. XSD valid unknown name must default to all XML characters. Keep source expected.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-unknown-4478",
+      "class": "oracle-unknown-block-upper-end",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-unknown-4478",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\u0000-\udbff\udffe])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        98,
+        97,
+        115,
+        105,
+        99,
+        108,
+        97,
+        116,
+        105,
+        110,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56319,
+        57343
+      ],
+      "resolution": "elementpath patterns.py unknown block replacement spans0-10FFFE, incorrectly excluding legal XML scalar10FFFF. Both unknown-block polarities are defaultall under G.4.2.4. Keep ratified source result.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-unknown-4482",
+      "class": "oracle-unknown-block-upper-end",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-unknown-4482",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\u0000-\udbff\udffe])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        80,
+        123,
+        73,
+        115,
+        98,
+        97,
+        115,
+        105,
+        99,
+        108,
+        97,
+        116,
+        105,
+        110,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56319,
+        57343
+      ],
+      "resolution": "elementpath patterns.py unknown block replacement spans0-10FFFE, incorrectly excluding legal XML scalar10FFFF. Both unknown-block polarities are defaultall under G.4.2.4. Keep ratified source result.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-unknown-4486",
+      "class": "oracle-unknown-block-upper-end",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-unknown-4486",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\u0000-\udbff\udffe])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        66,
+        97,
+        115,
+        105,
+        99,
+        76,
+        97,
+        116,
+        105,
+        110,
+        88,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56319,
+        57343
+      ],
+      "resolution": "elementpath patterns.py unknown block replacement spans0-10FFFE, incorrectly excluding legal XML scalar10FFFF. Both unknown-block polarities are defaultall under G.4.2.4. Keep ratified source result.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-unknown-4490",
+      "class": "oracle-unknown-block-upper-end",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-unknown-4490",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[\u0000-\udbff\udffe])$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        80,
+        123,
+        73,
+        115,
+        66,
+        97,
+        115,
+        105,
+        99,
+        76,
+        97,
+        116,
+        105,
+        110,
+        88,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        56319,
+        57343
+      ],
+      "resolution": "elementpath patterns.py unknown block replacement spans0-10FFFE, incorrectly excluding legal XML scalar10FFFF. Both unknown-block polarities are defaultall under G.4.2.4. Keep ratified source result.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-invalid-22",
+      "class": "oracle-syntax-extension",
+      "sourceExpected": {
+        "status": "InvalidSyntax",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "InvalidSyntax",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 2,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": null
+        }
+      },
+      "oracleOutcome": {
+        "id": "XSD-invalid-22",
+        "outcome": "valid-pattern"
+      },
+      "reducedPatternUnits": [
+        92,
+        97
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        97
+      ],
+      "resolution": "Pinned translator admits escape/category/block-name spelling outside ratified exact grammar: production84 escape repertoire; category inventory excludesCs; Is requires nonempty name; block escape name disallows spaces/underscore. No permissive oracle extension becomes GregsEx syntax. Keep InvalidSyntax.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-invalid-27",
+      "class": "oracle-syntax-extension",
+      "sourceExpected": {
+        "status": "InvalidSyntax",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "InvalidSyntax",
+          "location": "Pattern",
+          "offset": 3,
+          "length": 2,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": null
+        }
+      },
+      "oracleOutcome": {
+        "id": "XSD-invalid-27",
+        "outcome": "valid-pattern"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        67,
+        115,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        97
+      ],
+      "resolution": "Pinned translator admits escape/category/block-name spelling outside ratified exact grammar: production84 escape repertoire; category inventory excludesCs; Is requires nonempty name; block escape name disallows spaces/underscore. No permissive oracle extension becomes GregsEx syntax. Keep InvalidSyntax.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-invalid-29",
+      "class": "oracle-syntax-extension",
+      "sourceExpected": {
+        "status": "InvalidSyntax",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "InvalidSyntax",
+          "location": "Pattern",
+          "offset": 3,
+          "length": 2,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": null
+        }
+      },
+      "oracleOutcome": {
+        "id": "XSD-invalid-29",
+        "outcome": "valid-pattern"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        97
+      ],
+      "resolution": "Pinned translator admits escape/category/block-name spelling outside ratified exact grammar: production84 escape repertoire; category inventory excludesCs; Is requires nonempty name; block escape name disallows spaces/underscore. No permissive oracle extension becomes GregsEx syntax. Keep InvalidSyntax.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-invalid-30",
+      "class": "oracle-syntax-extension",
+      "sourceExpected": {
+        "status": "InvalidSyntax",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "InvalidSyntax",
+          "location": "Pattern",
+          "offset": 10,
+          "length": 1,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": null
+        }
+      },
+      "oracleOutcome": {
+        "id": "XSD-invalid-30",
+        "outcome": "valid-pattern"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        66,
+        97,
+        115,
+        105,
+        99,
+        95,
+        76,
+        97,
+        116,
+        105,
+        110,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        97
+      ],
+      "resolution": "Pinned translator admits escape/category/block-name spelling outside ratified exact grammar: production84 escape repertoire; category inventory excludesCs; Is requires nonempty name; block escape name disallows spaces/underscore. No permissive oracle extension becomes GregsEx syntax. Keep InvalidSyntax.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-invalid-33",
+      "class": "oracle-syntax-extension",
+      "sourceExpected": {
+        "status": "InvalidSyntax",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "InvalidSyntax",
+          "location": "Pattern",
+          "offset": 10,
+          "length": 1,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": null
+        }
+      },
+      "oracleOutcome": {
+        "id": "XSD-invalid-33",
+        "outcome": "valid-pattern"
+      },
+      "reducedPatternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        66,
+        97,
+        115,
+        105,
+        99,
+        32,
+        76,
+        97,
+        116,
+        105,
+        110,
+        125
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        97
+      ],
+      "resolution": "Pinned translator admits escape/category/block-name spelling outside ratified exact grammar: production84 escape repertoire; category inventory excludesCs; Is requires nonempty name; block escape name disallows spaces/underscore. No permissive oracle extension becomes GregsEx syntax. Keep InvalidSyntax.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "SEED-XML-C017",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "SEED-XML-C017",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        95
+      ],
+      "resolution": "patterns.py emits Python re shortcut outside classes instead of XSD set. Python w accepts underscore and rejects symbols/emoji; Python s accepts NBSP. XSD w is complementP/Z/C (ratified D2), s onlyTAB/LF/CR/SPACE. Keep contract results.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "SEED-XML-C018",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 2
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 2
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "SEED-XML-C018",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        55357,
+        56832
+      ],
+      "resolution": "patterns.py emits Python re shortcut outside classes instead of XSD set. Python w accepts underscore and rejects symbols/emoji; Python s accepts NBSP. XSD w is complementP/Z/C (ratified D2), s onlyTAB/LF/CR/SPACE. Keep contract results.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "SEED-XML-C024",
+      "class": "oracle-xml-name-bmp",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 4
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 4
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "SEED-XML-C024",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:[:A-Z_a-z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u02ff\u0370-\u037d\u037f-\u1fff\u200c-\u200d\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd][-.0-9:A-Z_a-z\u00b7\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u037d\u037f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd]*)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        105,
+        92,
+        99,
+        42
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        55296,
+        56320,
+        58,
+        48
+      ],
+      "resolution": "Pinned elementpath character_classes.py I_SHORTCUT_REPLACE/C_SHORTCUT_REPLACE omit supplementary10000-EFFFF. XML1.0FifthEdition productions4/4a include it. Keep source-derived expected membership and inverse.",
+      "authority": "docs/specs/xml.md; XSD REC AppendixG; XML FifthEdition; Unicode16 originals",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4664",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4664",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        2307
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4666",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4666",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        2307
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4668",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4668",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        1160
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4670",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4670",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        1160
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4672",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4672",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        768
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4674",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4674",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        768
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4688",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4688",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        95
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4690",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4690",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        95
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4716",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4716",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        36
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4718",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4718",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        36
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4720",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4720",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        94
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4722",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4722",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        94
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4724",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4724",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        43
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4726",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4726",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        43
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4728",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4728",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        166
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4730",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4730",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        166
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4748",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4748",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        768
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4750",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4750",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        768
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4760",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "Match",
+        "boolean": true,
+        "matches": [
+          {
+            "range": {
+              "index": 0,
+              "length": 1
+            },
+            "captures": [
+              {
+                "participated": true,
+                "index": 0,
+                "length": 1
+              }
+            ]
+          }
+        ],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4760",
+        "outcome": "membership",
+        "boolean": false,
+        "typedStringBoolean": false,
+        "translatedPattern": "^(?:\\w)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        119
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        36
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    },
+    {
+      "id": "XSD-word-category-4762",
+      "class": "oracle-python-predefined",
+      "sourceExpected": {
+        "status": "NoMatch",
+        "boolean": false,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      },
+      "oracleOutcome": {
+        "id": "XSD-word-category-4762",
+        "outcome": "membership",
+        "boolean": true,
+        "typedStringBoolean": true,
+        "translatedPattern": "^(?:\\W)$(?!\\n\\Z)"
+      },
+      "reducedPatternUnits": [
+        92,
+        87
+      ],
+      "reducedInputKind": "Utf16",
+      "reducedInputUnits": [
+        36
+      ],
+      "resolution": "patterns.py emits Python re w/W outside classes. It excludes XSD marks and symbols, and includes underscore(Pc). G.4.2.5 ratifiedD2 complementP/Z/C remains authoritative. Class forms provide a cross witness and the GregsEx corpus keeps its original source result.",
+      "authority": "docs/specs/xml.md XS-005; Unicode16 category original",
+      "requiredOnProduct": true
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+/(*asr:(a\x{3b1}|a))\x{3b1}$/utf
+    a\x{3b1}
+No match
+
+/(*sr:(a\x{3b1}|a))\x{3b1}$/utf
+    a\x{3b1}
+ 0: a\x{3b1}
+ 1: a
+

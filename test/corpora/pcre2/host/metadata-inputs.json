@@ -1,0 +1,62 @@
+[
+  {
+    "id": "SUBROUTINE",
+    "pattern": "(a)(?1)",
+    "flags": 0
+  },
+  {
+    "id": "CONDITION",
+    "pattern": "(a)(?(1)b|c)",
+    "flags": 0
+  },
+  {
+    "id": "REFERENCE",
+    "pattern": "(a)\\1",
+    "flags": 0
+  },
+  {
+    "id": "RECCONDITION",
+    "pattern": "(a)(?(R1)b|c)",
+    "flags": 0
+  },
+  {
+    "id": "NAMEDREF",
+    "pattern": "(?J)(?<x>a)(?<x>b)\\k<x>",
+    "flags": 0
+  },
+  {
+    "id": "CZERO",
+    "pattern": "\\C{0}",
+    "flags": 0
+  },
+  {
+    "id": "CDEFINE",
+    "pattern": "(?(DEFINE)\\C)",
+    "flags": 0
+  },
+  {
+    "id": "CUNREACH",
+    "pattern": "(*FAIL)\\C",
+    "flags": 0
+  },
+  {
+    "id": "JREDUNDANT",
+    "pattern": "(?J)",
+    "flags": 64
+  },
+  {
+    "id": "JTOGGLES",
+    "pattern": "(?J)(?-J)",
+    "flags": 0
+  },
+  {
+    "id": "JARGONLY",
+    "pattern": "a",
+    "flags": 64
+  },
+  {
+    "id": "NAMESUTF",
+    "pattern": "(?<𐐀>a)(?<Ａ>b)",
+    "flags": 524288
+  }
+]

@@ -1,0 +1,1053 @@
+{
+  "schemaVersion": "pcre2-upstream-accounting-1",
+  "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "memberCount": 106,
+  "members": [
+    {
+      "path": "testdata/grepbinary",
+      "bytes": 45,
+      "sha256": "78d42d2c9093d8c56e4eb0112335a6a217643717c61fccad7162b13c15e77d06",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepfilelist",
+      "bytes": 41,
+      "sha256": "382bb3164be8bbf23c14944149d80855698e41d4fbd8cfd4376ee395045a718c",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinput",
+      "bytes": 37455,
+      "sha256": "d8da54988d87f6aa83462f990ec2e756bc7def817ab74552c70c3332da67e77a",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinput3",
+      "bytes": 813,
+      "sha256": "b144557418ed2bb88932569ad95462d12a3abd987c227893118b1ef8779c6f40",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinput8",
+      "bytes": 228,
+      "sha256": "828889f9ceb0d0e022d996f36bd2fec117ea4a08859df0e07620327f4b30afc7",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinputBad8",
+      "bytes": 12,
+      "sha256": "2ad01e06316f85e7cc6533f5ce544169a84914d1548caddf80eacee133823053",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinputBad8_Trail",
+      "bytes": 4,
+      "sha256": "f07e4dc2549f502a4f25b960d9243e0316feaa5c830c6b7ae2efe5810fd5f755",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinputC.bz2",
+      "bytes": 315,
+      "sha256": "66bb4e0e0409dd56d7d7e878071ea87b7b8989d8b90aaec8e7d420c3722b5143",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinputC.gz",
+      "bytes": 313,
+      "sha256": "903f141de3edd6d257463a3af9992096cadde852f1734be9d396be6ddef01f46",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinputM",
+      "bytes": 275,
+      "sha256": "7fc6280992bc3e503d5582ed70f239712902e55d3fe1d5fb83071181f7573da2",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinputUN",
+      "bytes": 13,
+      "sha256": "543fed129419d39eb80896b8aa1e6d4dadf2059bf2ba01757314e38024e6e507",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinputv",
+      "bytes": 279,
+      "sha256": "7ae57940a21a46616b63a61e1f76baffe5967d34b5fefa336e1d54eb9425824c",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepinputx",
+      "bytes": 551,
+      "sha256": "c40bc6166c768651a1a5bf546d191551c71507fc37647f65864cd7fac38e8b47",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/greplist",
+      "bytes": 211,
+      "sha256": "d27e331bfab8217367cb7cdbfc6330f4b754d1b8cac0c132cfa5fbe0a3a64dce",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepnot.bz2",
+      "bytes": 551,
+      "sha256": "c40bc6166c768651a1a5bf546d191551c71507fc37647f65864cd7fac38e8b47",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutput",
+      "bytes": 35546,
+      "sha256": "b9088edfc6943ecf649064d338361e5f48c1dd7b4149629dcffa486bf90c89ea",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutput8",
+      "bytes": 1221,
+      "sha256": "fccdd7dfd85ee2148217ce3afbe410e949cf54ca5c886454f67e7bb7de28c8ea",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutputC",
+      "bytes": 1345,
+      "sha256": "ad48ea06827f6dd69549e11839ac0ab6c60cdb913eecd50c80900f68b0f390c7",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutputCN",
+      "bytes": 979,
+      "sha256": "17b298a606678a8e7155784774074ce6438134c56369ecd3a6fa880025b012ef",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutputCNU",
+      "bytes": 470,
+      "sha256": "0ba2910dc7eb06dd55ddaef83082784729ffe500864c0d312fdd0b50d7f12565",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutputCU",
+      "bytes": 506,
+      "sha256": "4503b29d54f40b664cf118869597c215684cc24b38bce18ec8faa6599057c85b",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutputCbz2",
+      "bytes": 26,
+      "sha256": "8fa103ecdc1e5e722098abd8771a01eb3e20719120eb386268b72f8d7f473c7e",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutputCgz",
+      "bytes": 13,
+      "sha256": "028d853ad3aa1d89eb4ad3a97c57aa1b8dd509f195c39d2173fcc3f11744c594",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutputN",
+      "bytes": 826,
+      "sha256": "d7e533bd2f59091c79005e522e8e793d4aec8eb9987597fe745e1a38509d23e5",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/grepoutputUN",
+      "bytes": 83,
+      "sha256": "6ee2ef555be36603de721f393797ac2c515fbe2577a07a7145227fe1658e100c",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/greppatN4",
+      "bytes": 8,
+      "sha256": "ac7695762dd9f8984053aa3f8c86350741ae2592eb1cd25eb0a57fe58e11d832",
+      "role": "auxiliary upstream recipe/member retained; see original bytes and RunTest source"
+    },
+    {
+      "path": "testdata/testbtables",
+      "bytes": 1088,
+      "sha256": "7c50a01ad9fc0306e2f0b0d875e713a6ccdcd6e777864dea53a3c3e22b71328a",
+      "role": "required imported1088byte binary character table, exact source digest and observed use_tables snapshot"
+    },
+    {
+      "path": "testdata/testinput1",
+      "bytes": 129760,
+      "sha256": "9106baab22e2eb22f4a7eac9912655afaf2747e8d59380a6ebb6f1c0c6e88123",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput10",
+      "bytes": 11780,
+      "sha256": "1c27787a19c1a26b7f7e00b45fe32212f8537da7e0d2cbbab06c824bd7c9160c",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput11",
+      "bytes": 17727,
+      "sha256": "7c4e80bc8770b3df25565fd32269a630759018592eed43f6f1937f2b0421e4e9",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput12",
+      "bytes": 11635,
+      "sha256": "4f682fff941c98768e4fd17fb11c078ee2bc1924d0060687e4c6ed0702d06c53",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput13",
+      "bytes": 318,
+      "sha256": "f9363858cd85ed2bd3b3d40018afd628ba2dcadc66406afef2cd1a7db436355b",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput14",
+      "bytes": 2340,
+      "sha256": "1b95aa7b915215355f67fd7f64a4949f499dd083514e217bbad7f9369ee3477f",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput15",
+      "bytes": 4642,
+      "sha256": "8607cba821e94c913a8f445c2ab29fc84911f1993cab0a478708a568d3139ddd",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput16",
+      "bytes": 231,
+      "sha256": "599b1c4ade9c06e3d3dbe9b08b720930cfee002779703443cdda2fd75448d1eb",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput17",
+      "bytes": 22861,
+      "sha256": "06310310afcdd63cfef5b1c39effcd9fced5c8792ce2da83ee49fb712de0cf6c",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput18",
+      "bytes": 2039,
+      "sha256": "7041c636b15fdc4cbc5e6ca208f291fac0575ff4c728808bbc70ee29240bd797",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput19",
+      "bytes": 501,
+      "sha256": "cdf299a41dcb0d9281f8d8068ef3a18f0a9f4da2c16b667e6317fff191ee59d2",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput2",
+      "bytes": 139271,
+      "sha256": "6776323f32ace765e111fa5dc6c0b13181f41e7a32d0ba015980ad2564bba0df",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput20",
+      "bytes": 1404,
+      "sha256": "cfee37bae687fe9b8e41620a24e1f1fccae2370469d544f721233da03ce55a45",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput21",
+      "bytes": 432,
+      "sha256": "e573f25c6ef0729752b796275ec4a0dcc8e9597beb27890f9a4a16235f86ad1e",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput22",
+      "bytes": 1900,
+      "sha256": "8f69b11f4901d27941e5b8ca6ac845b4d0d393f9fad1148577626ade0e68eb1a",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput23",
+      "bytes": 217,
+      "sha256": "dd86ee879256064046a5a06f9eeab3513d080af4f463b6bb279d5936c4200ceb",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput24",
+      "bytes": 4168,
+      "sha256": "a728c2b6efabb5819bbf1b7dbc9f2d23bb6e032e465a09360ab9b8240217c5a6",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput25",
+      "bytes": 676,
+      "sha256": "d00c4502d72b33be7747a7852aa7e0249129d33b905bd64e48735dbf6d25eee8",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput26",
+      "bytes": 38786,
+      "sha256": "914551819426ac042b4cbe441871fb6fc076378c84ff3e18615d32d933539456",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput27",
+      "bytes": 45688,
+      "sha256": "38df4f6d518534158ff27a60b13e51e24c02bbe9e3f4e0f8267234ae0d7194b9",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput3",
+      "bytes": 1503,
+      "sha256": "531011feca3e868f3367e88af40e68831851562d2f4b9464d934918a7e1c87e8",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput4",
+      "bytes": 62164,
+      "sha256": "2e31ff0e9010713f974e14a58290cf51f4b7a2fa57a1b682019cef4eb4606cc3",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput5",
+      "bytes": 68837,
+      "sha256": "b96a31200d93ab929bf8052ddd6e06eb0c15229828a54a19f386dea157e140fb",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput6",
+      "bytes": 92983,
+      "sha256": "0917b790b430ad2a8a645a9f7d42320fbf2f2cd89b35e32710dd65f02649cc51",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput7",
+      "bytes": 45119,
+      "sha256": "360982803f7aa02dbfd4f9fa40669b3fdb53927ad9cac3e3d84303c5e90b04eb",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput8",
+      "bytes": 7236,
+      "sha256": "f4cc7cdd0bae81a9da3b1fa5febd2400375bcc441bd3b1997f3a6b5140ffd86f",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinput9",
+      "bytes": 12712,
+      "sha256": "414bd19d0046093c841403a748cf86498fe14dcaad3de277bd21e8c39c6c01f8",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinputEBC",
+      "bytes": 2019,
+      "sha256": "3bfb2bf7d062e14db85f29bd212b11e985f1c353042bc763c40bee710ed8b78f",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testinputheap",
+      "bytes": 909,
+      "sha256": "c6cd7affee2a64219905494f4ca72cbd18b30351e3200763e45b91ac61d0adf7",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/testoutput1",
+      "bytes": 173393,
+      "sha256": "3ba0da1116c96f04692b5a62928c083d5c3ed11ae16c1c50739f1114edd30a59",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput10",
+      "bytes": 52813,
+      "sha256": "3f9fad7d7e7707ab130457ad92b6561d3481b4efeb3a778bbd6d6884a787d48e",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput11-16",
+      "bytes": 32231,
+      "sha256": "38216feab267027bbe9f1449be349d1c00b966b799cda5a60f8c84c294885f47",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput11-32",
+      "bytes": 35207,
+      "sha256": "b3951fbfd34275fad4f0ddb1d235ec57448f71faf9b373ea7b36e304fa2c0be1",
+      "role": "32bit-domain reference output excluded; preserve source bytes/digest"
+    },
+    {
+      "path": "testdata/testoutput12-16",
+      "bytes": 51965,
+      "sha256": "5666c06a730a3a1d48a641899161721e52a0d234ea9f8f8c695fe1e9d358082c",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput12-32",
+      "bytes": 50623,
+      "sha256": "312172e1591fd862743f28fcb7d6298e621594e460b1b55c2a953f41b72f672a",
+      "role": "32bit-domain reference output excluded; preserve source bytes/digest"
+    },
+    {
+      "path": "testdata/testoutput13",
+      "bytes": 399,
+      "sha256": "001aba2750de919b025f01d2f9c655dbff4ba970c9e44ce533050fc68a34f811",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput14-16",
+      "bytes": 4127,
+      "sha256": "62a66a9e6950fcda2763ff1dce33579ca8d66bc48258d5fd9524480bbb9a4d66",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput14-32",
+      "bytes": 3556,
+      "sha256": "fbfc3ed9ed14ffe552c1913e7370ea2d9e728e42c12dce6227aa21de66124e42",
+      "role": "32bit-domain reference output excluded; preserve source bytes/digest"
+    },
+    {
+      "path": "testdata/testoutput14-8",
+      "bytes": 5441,
+      "sha256": "04a4d47c669b0f4f5215364c23861d76066d0efc4880e7df79a53728b65d86a3",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput15",
+      "bytes": 11949,
+      "sha256": "1a6690454afca5cc28b4c80a33acf5de5c857a527fe10b83680b9dbce4c22f5b",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput16",
+      "bytes": 513,
+      "sha256": "68db67c7ed21f2b93673def9d05d275c92683ad7731104414fa8bcc548306621",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput17",
+      "bytes": 29144,
+      "sha256": "f4af9b242d4f7d7ed606bdeea6c9a095b32aa4d46933be755619b11969fe9d6c",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput18",
+      "bytes": 3836,
+      "sha256": "131ffde0dabcca2873658fe11c2a2ad0a4247332418cbb1d089333343fdf17a9",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput19",
+      "bytes": 622,
+      "sha256": "70568fd08c0599775e463d48bdf23b4add49fde5b0b310ce4a9ae446e199a298",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput2",
+      "bytes": 471182,
+      "sha256": "71abbff11b5071c5902ef970b7a425b9965c7f2916312c7094e079a01178c130",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput20",
+      "bytes": 2438,
+      "sha256": "9d12cce5953b594b656bac7607c5a41afe5639f9ce51a053b5f0ffe9a1e6e17b",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput21",
+      "bytes": 1863,
+      "sha256": "92e6eb07962a11c7c7edfe623a0056dae65caab36bd0ad60cf7929eebd8acd56",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput22-16",
+      "bytes": 3243,
+      "sha256": "c91a14845d510b7836c28a40ad8611b788bc952ef43a616a956da2d7bc66c2ef",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput22-32",
+      "bytes": 3100,
+      "sha256": "fb335fa06ecaf3c987183d18d53d289d5c11fb8bd57bd1fa23e79371afe0f16a",
+      "role": "32bit-domain reference output excluded; preserve source bytes/digest"
+    },
+    {
+      "path": "testdata/testoutput22-8",
+      "bytes": 3343,
+      "sha256": "de6059d78252a4afbb71f8439baa34b444f8578065442cb7878afdb601316254",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput23",
+      "bytes": 368,
+      "sha256": "8d9cb14c5298c70d3e73cebc9dbb64309928f7e55df3e12c5af1d65bdfeec80f",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput24",
+      "bytes": 8059,
+      "sha256": "5f0b82dfce580efc81f58d9aa5b6df34c816d95b14820d5759283143246d85d3",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput25",
+      "bytes": 262896,
+      "sha256": "c9b7b268f772a325ed87b6bc723c0433f5bbbca67cc54e83d8484672e1e49bdd",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput26",
+      "bytes": 47855,
+      "sha256": "3ecad393ffd2584dd836678040b3123a77633c72f88bee54516e8cbf5de83da1",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput27",
+      "bytes": 56324,
+      "sha256": "b345ec7ef2afb805f6df183cad5b279060538506e0be3ff5cb79fe9e469882b6",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput3",
+      "bytes": 2983,
+      "sha256": "b746c2cce94f9c8fd6d303543b5573fee07a8942f072c2c2d13f95f8216771ce",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput3A",
+      "bytes": 2991,
+      "sha256": "bab7bf612b64698b7f29243b913e06d420e5cd236e4654ac20a53c7d97a3e540",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput3B",
+      "bytes": 3055,
+      "sha256": "8aa00434215c55f0f1388285ccaa3c19de7ca08ce7c46382cf42feb25940c535",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput4",
+      "bytes": 94380,
+      "sha256": "01a8ad4f059a705f449592dd0cca53bc7c2d515a0e2d0946e883e6a914a20233",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput5",
+      "bytes": 178059,
+      "sha256": "f76400b1b31069f146a653a1d02c519539228d11e236c8299887d641eb922502",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput6",
+      "bytes": 131383,
+      "sha256": "43d4f559d04fe445d0c34d60523f2c8696c62fed4481d4fa6f9f5ad119210af7",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput7",
+      "bytes": 105389,
+      "sha256": "322f34a8534faf858737e7784ffdf687aed90a89e822dbcdeb2b071441d7fa2c",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput8-16-2",
+      "bytes": 29004,
+      "sha256": "21404b7c9993d35e4a0db4db751b66c94c50483c9c9c3e9c515845d9da516206",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput8-16-3",
+      "bytes": 28845,
+      "sha256": "330ebe37385974b99a23e83fe6cf62876c1b90af39f60d5cf13439ffba16bc50",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput8-16-4",
+      "bytes": 28845,
+      "sha256": "330ebe37385974b99a23e83fe6cf62876c1b90af39f60d5cf13439ffba16bc50",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput8-32-2",
+      "bytes": 28852,
+      "sha256": "2d14d53f63b986a85e89e4dd717f28a351cdaff2a076042d2dde7c98a4ce79cd",
+      "role": "32bit-domain reference output excluded; preserve source bytes/digest"
+    },
+    {
+      "path": "testdata/testoutput8-32-3",
+      "bytes": 28852,
+      "sha256": "2d14d53f63b986a85e89e4dd717f28a351cdaff2a076042d2dde7c98a4ce79cd",
+      "role": "32bit-domain reference output excluded; preserve source bytes/digest"
+    },
+    {
+      "path": "testdata/testoutput8-32-4",
+      "bytes": 28852,
+      "sha256": "2d14d53f63b986a85e89e4dd717f28a351cdaff2a076042d2dde7c98a4ce79cd",
+      "role": "32bit-domain reference output excluded; preserve source bytes/digest"
+    },
+    {
+      "path": "testdata/testoutput8-8-2",
+      "bytes": 28976,
+      "sha256": "90d9d745e32fc181e185769c44b2b8b7b4b25b62fa521ead995ce613d98a854b",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput8-8-3",
+      "bytes": 28825,
+      "sha256": "50ecb88dd8e16f69cedc6e6b503e38b0c6ffdca182a69b659e316b5cd8012170",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput8-8-4",
+      "bytes": 28826,
+      "sha256": "a702aeda260a12927f6ef8d4ce0e2da99a0de2b1f4f0005f85db8a8d704eda54",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutput9",
+      "bytes": 17883,
+      "sha256": "fd502f351b1541210558aa2950b0b059ad486fc8ce71d9ba87b6a96304f4fe03",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutputEBC",
+      "bytes": 2880,
+      "sha256": "3d0cd00be979f797bb7e2f57c4b4554ceb79404820787756e3eb99da168d6144",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutputheap-16",
+      "bytes": 4315,
+      "sha256": "9c5947f83178f30e9bea01cedc36e084beff7e31dfb7b547df086d29e54cf591",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/testoutputheap-32",
+      "bytes": 4315,
+      "sha256": "d5e6917454acaf514dec331703ced3cfe8e6dfb80235d4bfa4627ba6ab314f89",
+      "role": "32bit-domain reference output excluded; preserve source bytes/digest"
+    },
+    {
+      "path": "testdata/testoutputheap-8",
+      "bytes": 4313,
+      "sha256": "350e9f0a57b4c665305d870978060e3cd2fd22ff1e0c805e074b8f9ca5d9ca05",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    },
+    {
+      "path": "testdata/valgrind-jit.supp",
+      "bytes": 127,
+      "sha256": "8ce751a9e20f7967bd85b8a44cb1410baa6ed79c70e498ed39c372a715c47072",
+      "role": "native JIT memory diagnostic suppressions excluded"
+    },
+    {
+      "path": "testdata/wintestinput3",
+      "bytes": 1516,
+      "sha256": "bccdfe0dcb319c6eb2fea60ef9ad25637d3a3eeca7527d41489977d1d9b0c999",
+      "role": "native input recipes accounted individually; EBCDIC/Windows locale preconditions explicit"
+    },
+    {
+      "path": "testdata/wintestoutput3",
+      "bytes": 3108,
+      "sha256": "259e023e0d44cbcc5ea87c6c3713196c639a423e032716a7a634ff00a1074804",
+      "role": "exact pinned reference output; width/linksize/locale variant selection from RunTest, physical fields excluded individually"
+    }
+  ],
+  "recipeCount": 46562,
+  "uniqueNativeSourceDispatches": 23737,
+  "counts": {
+    "control": 166,
+    "pattern": 17843,
+    "subject": 28286,
+    "undispatched-dependent-source-line": 183,
+    "EBCDIC-pattern": 17,
+    "EBCDIC-subject": 67
+  },
+  "recipesArtifact": "test/corpora/pcre2/upstream-recipes.jsonl.gz",
+  "tableSnapshots": {
+    "test/corpora/pcre2/oracle/indexed/tables-16-12/2235.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-12/2308.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-12/3125.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-12/3205.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-12/3275.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-12/3356.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-12/3441.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-12/3522.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-2/109345.bin": {
+      "sha256": "afdf6677d8469f456fa73aae8a8527549305c32585f4dd98673b47145b1ecd61",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-2/109408.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-2/109449.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-2/109530.bin": {
+      "sha256": "7c50a01ad9fc0306e2f0b0d875e713a6ccdcd6e777864dea53a3c3e22b71328a",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-20/872.bin": {
+      "sha256": "afdf6677d8469f456fa73aae8a8527549305c32585f4dd98673b47145b1ecd61",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-20/891.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/-1.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1006.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1042.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1090.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1130.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1174.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1194.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1234.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1282.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1320.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1360.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1407.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/1481.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/460.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/512.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/601.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/690.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/750.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/851.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-3/898.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-5/10950.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-5/11021.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-5/31892.bin": {
+      "sha256": "40bfdd1a0c1e45c7c85c799dfefa098d30ea58e832d813d00f6dfc6bed167513",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-16-5/31941.bin": {
+      "sha256": "40bfdd1a0c1e45c7c85c799dfefa098d30ea58e832d813d00f6dfc6bed167513",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-10/4443.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-10/4516.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-10/4985.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-10/5060.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-10/5129.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-10/5210.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-10/5295.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-10/5376.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-2/109345.bin": {
+      "sha256": "afdf6677d8469f456fa73aae8a8527549305c32585f4dd98673b47145b1ecd61",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-2/109408.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-2/109449.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-2/109530.bin": {
+      "sha256": "7c50a01ad9fc0306e2f0b0d875e713a6ccdcd6e777864dea53a3c3e22b71328a",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-20/872.bin": {
+      "sha256": "afdf6677d8469f456fa73aae8a8527549305c32585f4dd98673b47145b1ecd61",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-20/891.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/-1.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1006.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1042.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1090.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1130.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1174.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1194.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1234.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1282.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1320.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1360.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1407.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/1481.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/460.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/512.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/601.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/690.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/750.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/851.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-3/898.bin": {
+      "sha256": "4fea42001771a9154b3b76c221f21abd30eb15ac74c5145bb08c6533721cc172",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-5/10950.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-5/11021.bin": {
+      "sha256": "9fe70fc635c9836a9ca0376aa65fd763240098717936f6d4cdc80840e4ee83f1",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-5/31892.bin": {
+      "sha256": "40bfdd1a0c1e45c7c85c799dfefa098d30ea58e832d813d00f6dfc6bed167513",
+      "bytes": 1088
+    },
+    "test/corpora/pcre2/oracle/indexed/tables-8-5/31941.bin": {
+      "sha256": "40bfdd1a0c1e45c7c85c799dfefa098d30ea58e832d813d00f6dfc6bed167513",
+      "bytes": 1088
+    }
+  },
+  "unicodeInputs": [
+    {
+      "path": "maint/Unicode.tables/BidiMirroring.txt",
+      "bytes": 26827,
+      "sha256": "d7afdadd1bbd66f5a663ac0e8f7958f18fd9491fc0bc59ec5877cb82db71db7d"
+    },
+    {
+      "path": "maint/Unicode.tables/CaseFolding.txt",
+      "bytes": 86092,
+      "sha256": "6f1f9c588eb4a5c718d9e8f93b782685e5c7fec872cf05e8e6878053599e09bb"
+    },
+    {
+      "path": "maint/Unicode.tables/DerivedBidiClass.txt",
+      "bytes": 171034,
+      "sha256": "71ed943a49c58568d8d92e80ecc2ba2f06e62aee9c8ebb0e6e8bd2c3ed8b180e"
+    },
+    {
+      "path": "maint/Unicode.tables/DerivedCoreProperties.txt",
+      "bytes": 1115959,
+      "sha256": "39d35161f2954497f69e08bdb9e701493f476a3d30222de20028feda36c1dabd"
+    },
+    {
+      "path": "maint/Unicode.tables/DerivedGeneralCategory.txt",
+      "bytes": 274423,
+      "sha256": "7676ab755a41ef82108460238569e60ad65c191ddafe61b36c6765ec1353f293"
+    },
+    {
+      "path": "maint/Unicode.tables/GraphemeBreakProperty.txt",
+      "bytes": 98751,
+      "sha256": "c29360bd6f7132811d701d29069541e827eb44bfc4c8fbde8c370d6982689dc1"
+    },
+    {
+      "path": "maint/Unicode.tables/PropList.txt",
+      "bytes": 144253,
+      "sha256": "53d614508e2a0b2305a8aa21cd60d993de9326cdf65993660dfcce4503548583"
+    },
+    {
+      "path": "maint/Unicode.tables/PropertyAliases.txt",
+      "bytes": 9389,
+      "sha256": "33a9f2266ad6b8e8de05c0ea3dfac411ac62cf8839ff1c94057471e4c5f6a2b3"
+    },
+    {
+      "path": "maint/Unicode.tables/PropertyValueAliases.txt",
+      "bytes": 80773,
+      "sha256": "440fd3e5460b9bfe31da67b6f923992e1989d31fe2ed91e091c4b8f8e2620bf9"
+    },
+    {
+      "path": "maint/Unicode.tables/ScriptExtensions.txt",
+      "bytes": 20576,
+      "sha256": "049117ce26b9769fe2749b06eef51a50a89faef4a97764dd2d81daa715980700"
+    },
+    {
+      "path": "maint/Unicode.tables/Scripts.txt",
+      "bytes": 189588,
+      "sha256": "9e88f0a677df47311106340be8ede2ecdacd9c1c931831218d2be6d5508e0039"
+    },
+    {
+      "path": "maint/Unicode.tables/UnicodeData.txt",
+      "bytes": 2175362,
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f"
+    },
+    {
+      "path": "maint/Unicode.tables/emoji-data.txt",
+      "bytes": 113024,
+      "sha256": "f1365a5173eee18e1f98b240cdc492e84a25f1ce7e0c9d1094eb29c41a22696a"
+    }
+  ],
+  "selectionSource": {
+    "path": "RunTest",
+    "sha256": "b5b4a5cc04dd6393ddc8cd6cd766e7282a46a774299af75644aae7fe39cb31ea",
+    "actualConfig": "test/corpora/pcre2/oracle/build-identity.json",
+    "widths": [
+      8,
+      16
+    ],
+    "linksize": 2,
+    "unicode": "16.0.0",
+    "locale": "fr_FR selected successfully; original wintestinput3 French locale failures are preserved concrete preconditions"
+  },
+  "publishedInputErrata": [
+    {
+      "id": "PCRE-C048",
+      "source": "test/corpora/pcre2/C048-erratum.md",
+      "effectiveSuccessChange": "pairCapacity1to2 only",
+      "mandatoryOriginalRegression": "explicit1pair -54",
+      "mandatoryAdditionalCounterpart": "NULLauto-full rc1/outputaa",
+      "nativeEvidence": "test/corpora/pcre2/oracle/C048-reduction.json",
+      "frozenSeedBytesUnchanged": true
+    }
+  ],
+  "note": "No whole mixed family is silently excluded. Recipe/control records preserve required observations and individually reasoned boundaries. Native errors preventing subject dispatch are preserved with raw original source lines. ABI/physical/JIT/DFA32/EBCDIC/conversion/POSIX tool boundaries are not managed grammar errors.",
+  "recipesSha256": "63a8309b78036ea6fa27cb954e91ed4150c84bce08586bf26810d8d47d14d0f8",
+  "uncompressedRecipesSha256": "d219d308616d23ae668904d71ab719b11387848a284cdc5f6a0df30a147f9532"
+}

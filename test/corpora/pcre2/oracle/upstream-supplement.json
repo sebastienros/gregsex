@@ -1,0 +1,1363 @@
+{
+  "nativeSource": "doc/pcre2api.3:3343\u20133347,3370\u20133380",
+  "records": [
+    {
+      "id": "UP-SUP-0",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-2.jsonl",
+      "eventIndex": 14677,
+      "inputEnd": 88332,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        65,
+        0,
+        98
+      ]
+    },
+    {
+      "id": "UP-SUP-1",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-2.jsonl",
+      "eventIndex": 14686,
+      "inputEnd": 88370,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        65,
+        0,
+        98
+      ]
+    },
+    {
+      "id": "UP-SUP-2",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-2.jsonl",
+      "eventIndex": 14695,
+      "inputEnd": 88422,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        65,
+        0,
+        98
+      ]
+    },
+    {
+      "id": "UP-SUP-3",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-2.jsonl",
+      "eventIndex": 17681,
+      "inputEnd": 109598,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        62,
+        0,
+        60
+      ]
+    },
+    {
+      "id": "UP-SUP-4",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-2.jsonl",
+      "eventIndex": 17685,
+      "inputEnd": 109609,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": -2,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        62,
+        0,
+        60
+      ]
+    },
+    {
+      "id": "UP-SUP-5",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-2.jsonl",
+      "eventIndex": 17690,
+      "inputEnd": 109634,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": -1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        62,
+        0,
+        60
+      ]
+    },
+    {
+      "id": "UP-SUP-6",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-2.jsonl",
+      "eventIndex": 17700,
+      "inputEnd": 109696,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        62,
+        0,
+        60
+      ]
+    },
+    {
+      "id": "UP-SUP-7",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 43,
+      "inputEnd": 336,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-8",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 47,
+      "inputEnd": 347,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -4,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-9",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 51,
+      "inputEnd": 363,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 3,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-10",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 55,
+      "inputEnd": 373,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -5,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-11",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 59,
+      "inputEnd": 388,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -4,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-12",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 63,
+      "inputEnd": 408,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 3,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-13",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 67,
+      "inputEnd": 417,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -6,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-14",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 71,
+      "inputEnd": 430,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -5,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-15",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 75,
+      "inputEnd": 447,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -4,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-16",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 79,
+      "inputEnd": 468,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-17",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 83,
+      "inputEnd": 477,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -7,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-18",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 87,
+      "inputEnd": 490,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -6,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-19",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 91,
+      "inputEnd": 507,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -5,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-20",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 95,
+      "inputEnd": 528,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -4,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-21",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 99,
+      "inputEnd": 553,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-22",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 103,
+      "inputEnd": 566,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-23",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 107,
+      "inputEnd": 583,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-24",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 111,
+      "inputEnd": 600,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -9,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-25",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 115,
+      "inputEnd": 621,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-26",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 119,
+      "inputEnd": 642,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -9,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-27",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 123,
+      "inputEnd": 663,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -10,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-28",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 127,
+      "inputEnd": 688,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-29",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 131,
+      "inputEnd": 713,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -9,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-30",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 135,
+      "inputEnd": 738,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -10,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-31",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 139,
+      "inputEnd": 763,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -11,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-32",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 143,
+      "inputEnd": 792,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-33",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 147,
+      "inputEnd": 821,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -9,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-34",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 151,
+      "inputEnd": 850,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -10,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-35",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 155,
+      "inputEnd": 879,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -11,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-36",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 159,
+      "inputEnd": 908,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -12,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-37",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 163,
+      "inputEnd": 925,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -16,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-38",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 167,
+      "inputEnd": 938,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -17,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-39",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 171,
+      "inputEnd": 955,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -18,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-40",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 175,
+      "inputEnd": 976,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -19,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-41",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 179,
+      "inputEnd": 1001,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -20,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-42",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 183,
+      "inputEnd": 1030,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -21,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-43",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 187,
+      "inputEnd": 1039,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -22,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-44",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 191,
+      "inputEnd": 1048,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -23,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-45",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 195,
+      "inputEnd": 1057,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -23,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-46",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 205,
+      "inputEnd": 1120,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -13,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-47",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 209,
+      "inputEnd": 1151,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -14,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-48",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 213,
+      "inputEnd": 1174,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -15,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-49",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 223,
+      "inputEnd": 1227,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-50",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 227,
+      "inputEnd": 1242,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -4,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-51",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 231,
+      "inputEnd": 1261,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-52",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 235,
+      "inputEnd": 1274,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -5,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-53",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 239,
+      "inputEnd": 1291,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -4,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-54",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 243,
+      "inputEnd": 1312,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-55",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 247,
+      "inputEnd": 1325,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -6,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-56",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 251,
+      "inputEnd": 1342,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -5,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-57",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 255,
+      "inputEnd": 1363,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -4,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-58",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 259,
+      "inputEnd": 1388,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-59",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 263,
+      "inputEnd": 1401,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -7,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-60",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 267,
+      "inputEnd": 1418,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -6,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-61",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 271,
+      "inputEnd": 1439,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -5,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-62",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 275,
+      "inputEnd": 1464,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -4,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-63",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 279,
+      "inputEnd": 1493,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-64",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 289,
+      "inputEnd": 1545,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -17,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-65",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 293,
+      "inputEnd": 1560,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -17,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-66",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 297,
+      "inputEnd": 1580,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -18,
+      "observedErrorOffset": 3,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-67",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 301,
+      "inputEnd": 1601,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -19,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-68",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 305,
+      "inputEnd": 1626,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -20,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-69",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 309,
+      "inputEnd": 1655,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -21,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-70",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 313,
+      "inputEnd": 1684,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -23,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-71",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 317,
+      "inputEnd": 1713,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -23,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-72",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 321,
+      "inputEnd": 1738,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -13,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-73",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 325,
+      "inputEnd": 1763,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -13,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-74",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 329,
+      "inputEnd": 1792,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -14,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-75",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 333,
+      "inputEnd": 1821,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -14,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-76",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 382,
+      "inputEnd": 2177,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-77",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 386,
+      "inputEnd": 2201,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-78",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 401,
+      "inputEnd": 2300,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-79",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 405,
+      "inputEnd": 2324,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-80",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 409,
+      "inputEnd": 2348,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-81",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 413,
+      "inputEnd": 2376,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 6,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-82",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 428,
+      "inputEnd": 2476,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-83",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 432,
+      "inputEnd": 2500,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-84",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 436,
+      "inputEnd": 2524,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-85",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 440,
+      "inputEnd": 2548,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-86",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 450,
+      "inputEnd": 2607,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-87",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 454,
+      "inputEnd": 2631,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-88",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 458,
+      "inputEnd": 2655,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-89",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 462,
+      "inputEnd": 2679,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -8,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-90",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 466,
+      "inputEnd": 2706,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -3,
+      "observedErrorOffset": 5,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-91",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 709,
+      "inputEnd": 3779,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -16,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-92",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 713,
+      "inputEnd": 3792,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -16,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-93",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 717,
+      "inputEnd": 3805,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -16,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-94",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 721,
+      "inputEnd": 3820,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -15,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-95",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 725,
+      "inputEnd": 3836,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -13,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-96",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 729,
+      "inputEnd": 3853,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -14,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-97",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 1074,
+      "inputEnd": 5430,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -14,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-98",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 1355,
+      "inputEnd": 6831,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -22,
+      "observedErrorOffset": 1,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-99",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 1827,
+      "inputEnd": 9983,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -22,
+      "observedErrorOffset": 0,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-100",
+      "trace": "test/corpora/pcre2/oracle/indexed/8-10.jsonl",
+      "eventIndex": 1831,
+      "inputEnd": 10006,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -22,
+      "observedErrorOffset": 3,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-101",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-2.jsonl",
+      "eventIndex": 14677,
+      "inputEnd": 88332,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        65,
+        0,
+        98
+      ]
+    },
+    {
+      "id": "UP-SUP-102",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-2.jsonl",
+      "eventIndex": 14686,
+      "inputEnd": 88370,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        65,
+        0,
+        98
+      ]
+    },
+    {
+      "id": "UP-SUP-103",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-2.jsonl",
+      "eventIndex": 14695,
+      "inputEnd": 88422,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        65,
+        0,
+        98
+      ]
+    },
+    {
+      "id": "UP-SUP-104",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-2.jsonl",
+      "eventIndex": 17681,
+      "inputEnd": 109598,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        62,
+        0,
+        60
+      ]
+    },
+    {
+      "id": "UP-SUP-105",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-2.jsonl",
+      "eventIndex": 17685,
+      "inputEnd": 109609,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": -2,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        62,
+        0,
+        60
+      ]
+    },
+    {
+      "id": "UP-SUP-106",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-2.jsonl",
+      "eventIndex": 17690,
+      "inputEnd": 109634,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": -1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        62,
+        0,
+        60
+      ]
+    },
+    {
+      "id": "UP-SUP-107",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-2.jsonl",
+      "eventIndex": 17700,
+      "inputEnd": 109696,
+      "utfError": false,
+      "binaryMark": true,
+      "originalReturn": 1,
+      "observedErrorOffset": null,
+      "observedMarkUnits": [
+        62,
+        0,
+        60
+      ]
+    },
+    {
+      "id": "UP-SUP-108",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-12.jsonl",
+      "eventIndex": 276,
+      "inputEnd": 1422,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -24,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-109",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-12.jsonl",
+      "eventIndex": 280,
+      "inputEnd": 1437,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -24,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-110",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-12.jsonl",
+      "eventIndex": 284,
+      "inputEnd": 1452,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -26,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-111",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-12.jsonl",
+      "eventIndex": 288,
+      "inputEnd": 1467,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -26,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-112",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-12.jsonl",
+      "eventIndex": 292,
+      "inputEnd": 1482,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -26,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-113",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-12.jsonl",
+      "eventIndex": 298,
+      "inputEnd": 1522,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -25,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    },
+    {
+      "id": "UP-SUP-114",
+      "trace": "test/corpora/pcre2/oracle/indexed/16-12.jsonl",
+      "eventIndex": 312,
+      "inputEnd": 1609,
+      "utfError": true,
+      "binaryMark": false,
+      "originalReturn": -24,
+      "observedErrorOffset": 2,
+      "observedMarkUnits": null
+    }
+  ],
+  "identities": [
+    {
+      "width": 8,
+      "argv": [
+        "clang",
+        "-O2",
+        "-DPCRE2_CODE_UNIT_WIDTH=8",
+        "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/source/src",
+        "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/upstream-supplement-8",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/observe.c",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/libpcre2-8.a",
+        "-o",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/upstream-supplement-8/observe"
+      ],
+      "exeSha256": "cfce4f5c93138c82bded85f51277d25144a5e8c524c820c9be4e2da7671b82bb",
+      "headerSha256": "48918e299953116e9100d56f28fff20cc76e48fe3a43d8681cbab1e0e4bfb0d5",
+      "outputSha256": "d67608341d38fc2fd5d33e812f32e94c4d98a46465e25a40d13b812debc7e9b4"
+    },
+    {
+      "width": 16,
+      "argv": [
+        "clang",
+        "-O2",
+        "-DPCRE2_CODE_UNIT_WIDTH=16",
+        "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/source/src",
+        "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/upstream-supplement-16",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/observe.c",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/libpcre2-16.a",
+        "-o",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/upstream-supplement-16/observe"
+      ],
+      "exeSha256": "7884fcb4a00da7eb612455dabe6feb81627a2bf8351030b591bbeeca79f9f930",
+      "headerSha256": "4e1d6dda2e188b65c124512f702e549a4a2ac77c68557061af14c2dbc548127d",
+      "outputSha256": "73840ace3cf321da2de5dac2607051c48631d5f67ffe530fb9369b1f38dc563c"
+    }
+  ],
+  "scope": "Only source-defined getter observations; original raw trace retained; no full family/matrix/build rerun."
+}

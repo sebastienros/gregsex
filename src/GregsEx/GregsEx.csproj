@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <IsAotCompatible>true</IsAotCompatible>
+    <Description>Bounded RegularCore-1-experimental, ECMAScript2025, XSD 1.1 (2012-04-05 Appendix G) regex and XPath/XQuery F&amp;O 3.1 (2017-03-21 sections 5.6/C.1) named POSIX Issue 7/2018 C/POSIX byte BRE/ERE, and PCRE2-10.46-ManagedStandard8_16-v1 interpreters for .NET 10, with span searches, reusable workspaces and typed host functions. ECMAScript and XML select Unicode 16.0.0 (default) or 17.0.0. XML uses strict UTF-16/UTF-8 and XML 1.0 Fifth Edition; ECMAScript is UTF-16-only; RegularCore also admits raw bytes.</Description>
+    <Authors>Sébastien Ros</Authors>
+    <PackageTags>regex;regular-expressions;performance</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/sebastienros/gregsex</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sebastienros/gregsex</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FastExpressionCompiler.Internal.src" PrivateAssets="all" />
+  </ItemGroup>
+  <Target Name="BuildGeneratorForPack"
+          BeforeTargets="GenerateNuspec"
+          Condition="'$(NoBuild)' != 'true' or !Exists('../GregsEx.Generator/bin/$(Configuration)/netstandard2.0/GregsEx.Generator.dll')">
+    <MSBuild Projects="../GregsEx.Generator/GregsEx.Generator.csproj"
+             Targets="Build"
+             Properties="Configuration=$(Configuration)"
+             RemoveProperties="NoBuild;PublishAot;PublishTrimmed;PublishSingleFile;SelfContained;RuntimeIdentifier;TargetFramework;OutputPath;OutDir;PublishDir" />
+  </Target>
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../assets/icon.png" Pack="true" PackagePath="/" />
+    <None Include="buildTransitive/GregsEx.targets" Pack="true" PackagePath="build/GregsEx.targets" />
+    <None Include="buildTransitive/GregsEx.targets" Pack="true" PackagePath="buildTransitive/GregsEx.targets" />
+    <None Include="../GregsEx.Generator/bin/$(Configuration)/netstandard2.0/GregsEx.Generator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Update="Flavors/EcmaScript/Unicode/Unicode-LICENSE.txt" Pack="true" PackagePath="licenses/Unicode-LICENSE.txt" />
+    <None Update="Flavors/EcmaScript/Integration/Unicode-NOTICE.txt" Pack="true" PackagePath="licenses/Unicode-NOTICE.txt" />
+    <None Update="Flavors/XmlShared/Unicode-LICENSE.txt" Pack="true" PackagePath="licenses/XML-Unicode-LICENSE.txt" />
+    <None Include="../../THIRD-PARTY-NOTICES.txt" Pack="true" PackagePath="licenses/THIRD-PARTY-NOTICES.txt" />
+    <None Update="Flavors/XmlShared/XML-DATA-NOTICE.txt" Pack="true" PackagePath="licenses/XML-DATA-NOTICE.txt" />
+    <None Update="Public/Pcre2/PCRE2-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-NOTICE.txt" />
+    <None Update="Flavors/Pcre2/Tables/PCRE2-DATA-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-DATA-NOTICE.txt" />
+    <None Update="Flavors/Pcre2/Tables/Unicode-DATA-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-Unicode-DATA-NOTICE.txt" />
+    <None Update="Flavors/Pcre2/Tables/Unicode-LICENSE.txt" Pack="true" PackagePath="licenses/PCRE2-Unicode-LICENSE.txt" />
+    <None Update="Flavors/Pcre2/Parsing/Syntax/PCRE2-SYNTAX-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-SYNTAX-NOTICE.txt" />
+    <None Update="Flavors/Pcre2/Parsing/Lowering/PCRE2-LOWERING-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-LOWERING-NOTICE.txt" />
+    <None Update="Flavors/Pcre2/Runtime/Host/PCRE2-HOST-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-HOST-NOTICE.txt" />
+    <InternalsVisibleTo Include="GregsEx.Tests" />
+    <InternalsVisibleTo Include="GregsEx.AotSmoke" />
+    <InternalsVisibleTo Include="GregsEx.Benchmarks" />
+    <InternalsVisibleTo Include="GregsEx.Generator" />
+  </ItemGroup>
+</Project>

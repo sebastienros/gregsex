@@ -1,0 +1,4085 @@
+{
+  "XP-0001": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0002": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0003": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0004": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0005": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0006": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0007": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0008": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0009": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0010": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0011": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0012": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0013": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0014": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0015": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0016": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0017": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0018": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0019": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0020": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0021": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0022": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0023": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0024": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0025": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0026": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0027": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0028": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0029": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0030": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0031": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0032": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0033": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0034": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0035": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0036": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0037": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0038": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0039": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0040": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0041": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0042": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0043": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0044": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0045": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0046": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree"
+  },
+  "XP-0047": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree"
+  },
+  "XP-0048": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree"
+  },
+  "XP-0049": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "native-find"
+  },
+  "XP-0050": {
+    "role": "negative",
+    "oracle": null,
+    "comparison": "source-domain",
+    "reason": "Saxon XML strings cannot represent NUL; GregsEx full-subject validation policy",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0051": {
+    "role": "boundary",
+    "oracle": null,
+    "comparison": "source-domain",
+    "reason": "Strict scalar UTF16 policy rejects lone surrogate; no lossy XML serialization",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0052": {
+    "role": "negative",
+    "oracle": null,
+    "comparison": "source-domain",
+    "reason": "Strict XML1.0 full-subject encoding/domain precedence; native failing unit preserved",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0053": {
+    "role": "negative",
+    "oracle": null,
+    "comparison": "source-domain",
+    "reason": "Strict XML1.0 full-subject encoding/domain precedence; native failing unit preserved",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0054": {
+    "role": "negative",
+    "oracle": null,
+    "comparison": "source-domain",
+    "reason": "Strict XML1.0 full-subject encoding/domain precedence; native failing unit preserved",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0055": {
+    "role": "negative",
+    "oracle": null,
+    "comparison": "source-domain",
+    "reason": "Strict XML1.0 full-subject encoding/domain precedence; native failing unit preserved",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0056": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0057": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0058": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0059": {
+    "role": "boundary",
+    "oracle": null,
+    "comparison": "source-policy",
+    "reason": "Ratified owned-output ceiling; external processor has no GregsEx host budget",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0060": {
+    "role": "boundary",
+    "oracle": null,
+    "comparison": "source-policy",
+    "reason": "Ratified owned-output ceiling; external processor has no GregsEx host budget",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0061": {
+    "role": "boundary",
+    "oracle": null,
+    "comparison": "source-policy",
+    "reason": "Ratified owned-output ceiling; external processor has no GregsEx host budget",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0062": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0063": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0064": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0065": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0066": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0067": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0068": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0069": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0070": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0071": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0072": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0073": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0074": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0075": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0076": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0077": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0078": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0079": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0080": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0081": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0082": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0083": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0084": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0085": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0086": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0087": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0088": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0089": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0090": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0091": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0092": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0093": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0094": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0095": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0096": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0097": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0098": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0099": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0100": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0101": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0102": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0103": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0104": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0105": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0106": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0107": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0108": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0109": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0110": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0111": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0112": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0113": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0114": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0115": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0116": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0117": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0118": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0119": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0120": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0121": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0122": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0123": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0124": {
+    "role": "positive",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0125": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0126": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0127": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0128": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0129": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0130": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0131": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0132": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0133": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0134": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0135": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0136": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0137": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0138": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0139": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0140": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0141": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0142": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0143": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0144": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0145": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0146": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0147": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0148": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0149": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0150": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0151": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0152": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0153": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0154": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0155": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0156": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0157": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0158": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0159": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0160": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0161": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0162": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0163": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0164": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0165": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0166": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0167": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0168": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0169": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0170": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0171": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0172": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0173": {
+    "role": "negative",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "XP-0174": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-source-overrides-older-oracle"
+  },
+  "XP-0175": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-source-overrides-older-oracle"
+  },
+  "XP-0176": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-source-overrides-older-oracle"
+  },
+  "XP-0177": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-source-overrides-older-oracle"
+  },
+  "XP-0178": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-full-default-lower-or-upper-without-transitive-closure"
+  },
+  "XP-0179": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-full-default-lower-or-upper-without-transitive-closure"
+  },
+  "XP-0180": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-full-default-lower-or-upper-without-transitive-closure"
+  },
+  "XP-0181": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-full-default-lower-or-upper-without-transitive-closure"
+  },
+  "XP-0182": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-full-default-lower-or-upper-without-transitive-closure"
+  },
+  "XP-0183": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-full-default-lower-or-upper-without-transitive-closure"
+  },
+  "XP-0184": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "dataDisposition": "Unicode16-full-default-lower-or-upper-without-transitive-closure"
+  },
+  "XP-0185": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0186": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0187": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0188": {
+    "role": "boundary",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XP-0189": {
+    "role": "negative",
+    "oracle": null,
+    "comparison": "source-policy",
+    "reason": "Ratified XML character patterns/strict scalar subjects reject byte patterns and raw subjects; XDM only accepts strings",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "XP-0190": {
+    "role": "negative",
+    "oracle": null,
+    "comparison": "source-policy",
+    "reason": "Ratified XML character patterns/strict scalar subjects reject byte patterns and raw subjects; XDM only accepts strings",
+    "diagnosticPolicy": "exact-source-derived-domain-or-policy-span"
+  },
+  "QT3-matches-fn-matches2args-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches2args-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches2args-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches2args-4": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches2args-5": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matchesErr-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matchesErr-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matchesErr-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matchesErr-4": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matchesErr-5": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matches-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-6": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-7": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-8": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-9": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-10": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-11": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-12": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-13": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-14": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-15": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-16": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-17": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-18": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-19": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-20": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-21": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-22": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-23": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-24": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-25": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matches-27": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-28": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-29": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-30": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-35": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matches-36": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-37": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matches-38": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matches-39": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matches-40": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-fn-matches-48": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-49": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-51": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-52": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-53": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-fn-matches-54": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch01": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch02": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch03": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch08": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch09": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch10": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch11": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch12": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch13": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch14": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-caselessmatch15": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-K-MatchesFunc-5": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K-MatchesFunc-6": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-K2-MatchesFunc-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-K2-MatchesFunc-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-K2-MatchesFunc-4": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-K2-MatchesFunc-5": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-K2-MatchesFunc-6": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-K2-MatchesFunc-7": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-8": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-9": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-10": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-11": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-12": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-13": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-14": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-K2-MatchesFunc-17": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-001": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-002": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-003": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-005": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-007": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-008": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-009": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-010": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-011": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-012": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-013": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-014": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-015": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-016": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-017": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-018": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-019": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-020": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-021": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-022": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-023": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-024": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-025": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-026": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-027": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-028": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-029": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-030": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-031": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-032": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-033": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-034": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-035": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches-cbcl-matches-036": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-037": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-038": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-039": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-040": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-042": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-043": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-044": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-045": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-046": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-048": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-049": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-050": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-051": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-052": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches-cbcl-matches-053": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00016": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00017": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00018": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00019": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00021": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00022": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00032": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00033": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00037": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00038": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00039": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00040": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00041": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00042": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00043": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00044": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00045": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00046": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00048": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00071": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00072": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00087": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00088": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00090": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00093": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00097": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00212": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00214": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00215": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00216": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00521": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00541": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00556": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00558": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00561": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00562": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00563": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00564": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00566": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00567": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00568": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00569": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00570": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00571": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00572": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00573": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00574": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00583": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00584": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00585": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00586": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00587": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00588": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00589": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00590": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00591": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00592": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00593": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00594": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00595": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00596": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00597": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00598": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00600": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00609": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00610": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00613": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00614": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00615": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00616": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00618": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00619": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00620": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00621": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00622": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00623": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00624": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00625": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00626": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00627": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00628": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00629": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00630": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00631": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00632": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00633": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00634": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00635": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00636": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00637": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00638": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00642": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00646": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00647": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00648": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00649": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00650": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00651": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00652": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00653": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00654": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00674": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00675": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00676": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00677": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00678": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00679": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00680": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00681": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00682": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00683": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00684": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00685": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00686": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00687": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00688": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00741": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00742": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00743": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00744": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00745": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00746": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00750": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00751": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00754": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00755": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00756": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00757": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00761": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00762": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00763": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00764": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00765": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00766": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00767": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00768": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00769": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00784": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00785": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00786": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00787": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00791": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00792": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00801": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00802": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00803": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00804": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00805": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00806": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00807": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00808": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00809": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00810": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00811": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00812": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00813": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00814": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00815": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00816": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00817": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00819": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00820": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00821": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00822": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00823": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00824": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00826": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00827": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00828": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00829": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00830": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00845": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00846": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00847": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00848": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00849": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00850": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00851": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00852": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00853": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00854": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00855": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00856": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00857": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00858": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00859": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00860": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00861": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00862": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00863": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00864": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00865": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00866": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00867": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00868": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00869": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00870": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00871": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00872": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00873": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00874": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00875": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00876": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00877": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00878": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00879": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00880": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00881": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00882": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00883": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00884": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00885": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00886": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00887": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00888": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00889": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00890": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00891": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00892": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00893": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00894": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00895": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00896": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00897": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00898": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00899": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00900": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00901": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00902": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00903": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00904": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00905": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00906": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00907": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00908": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00909": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00910": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00911": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00912": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00913": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00914": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00915": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00916": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00917": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00918": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00919": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00920": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00921": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00922": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00923": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00924": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00925": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00926": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00927": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00928": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00929": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00930": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00931": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00937": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00938": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00939": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00940": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00941": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00942": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00943": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00944": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00945": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00946": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00947": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00948": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00949": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00950": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00951": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00952": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00953": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00954": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00955": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00956": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00958": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00959": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00960": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00961": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00962": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00963": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00964": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00965": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00966": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00967": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00968": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00969": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00970": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00971": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00972": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00973": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00974": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00975": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00976a": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00976b": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00977": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00978": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00988": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00989": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00992": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00993": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00994": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00995": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00996": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00997": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-matches.re-re00998": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re00999": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re01001": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-matches.re-re01002": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace3args-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace3args-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace3args-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace3args-4": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace3args-5": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace3args-6": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replaceErr-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-fn-replaceErr-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-fn-replaceErr-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-fn-replace-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-4": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-5": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-6": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-fn-replace-7": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-8": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-9": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-10": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-12": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-13": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-14": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-15": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-16": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-17": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-18": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-19": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-20": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-21": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-22": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-23": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-24": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-25": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-26": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-27": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-28": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-29": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-30": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-31": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-32": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-33": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-37": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-38": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-39": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-40": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-41": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-42": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-54": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-55": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-56": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-57": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-fn-replace-59": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "QT3-replace-K-ReplaceFunc-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K-ReplaceFunc-4": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K-ReplaceFunc-6": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K-ReplaceFunc-7": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K-ReplaceFunc-8": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K-ReplaceFunc-9": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K2-ReplaceFunc-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K2-ReplaceFunc-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K2-ReplaceFunc-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K2-ReplaceFunc-4": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K2-ReplaceFunc-5": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K2-ReplaceFunc-6": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-K2-ReplaceFunc-7": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-replace-cbcl-fn-replace-002": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-tokenize-fn-tokenize-1": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-tokenize-fn-tokenize-2": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-tokenize-K-TokenizeFunc-3": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-tokenize-K-TokenizeFunc-4": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "code-namespace-argument-domain-original-native-units-valid-real-span; fixture range is whole argument, not processor pinpoint"
+  },
+  "QT3-tokenize-K2-TokenizeFunc-6": {
+    "role": "imported",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C037": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C038": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "native-find"
+  },
+  "XML-C039": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C040": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C041": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C042": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "native-find"
+  },
+  "XML-C043": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "native-find"
+  },
+  "XML-C044": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C045": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "parse",
+    "diagnosticPolicy": "exact-frozen-contract-span"
+  },
+  "XML-C046": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "parse",
+    "diagnosticPolicy": "exact-frozen-contract-span"
+  },
+  "XML-C047": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C048": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C049": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C050": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "exact-frozen-contract-span"
+  },
+  "XML-C051": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C052": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C053": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C054": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C055": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C056": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C057": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C058": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C059": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C060": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C061": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C062": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "exact-frozen-contract-span"
+  },
+  "XML-C063": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C064": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C065": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value"
+  },
+  "XML-C066": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "exact-frozen-contract-span"
+  },
+  "XML-C067": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "function-value",
+    "diagnosticPolicy": "exact-frozen-contract-span"
+  },
+  "XML-C068": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree",
+    "diagnosticPolicy": "exact-frozen-contract-span"
+  },
+  "XML-C069": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree"
+  },
+  "XML-C070": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "analyze-tree"
+  },
+  "XML-C071": {
+    "role": "contract-seed",
+    "oracle": "Saxon-HE-12.5",
+    "comparison": "native-find"
+  },
+  "XML-C072": {
+    "role": "contract-seed",
+    "oracle": null,
+    "comparison": "source-policy",
+    "diagnosticPolicy": "exact-frozen-contract-span",
+    "reason": "GregsEx subject/budget/representation policy outside XDM function result"
+  }
+}

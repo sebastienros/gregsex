@@ -1,0 +1,460 @@
+{
+  "$schema": "CoreFixtures.schema.json",
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "id": "RC-ASCII",
+      "requirements": [
+        "API-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        97
+      ],
+      "input": [
+        98,
+        97
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "Match",
+      "expectedRange": {
+        "index": 1,
+        "length": 1
+      },
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-SUPPLEMENTARY-16",
+      "requirements": [
+        "API-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        46
+      ],
+      "input": [
+        55357,
+        56832
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "Match",
+      "expectedRange": {
+        "index": 0,
+        "length": 2
+      },
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-SUPPLEMENTARY-8",
+      "requirements": [
+        "API-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf8",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        46
+      ],
+      "input": [
+        240,
+        159,
+        152,
+        128
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "Match",
+      "expectedRange": {
+        "index": 0,
+        "length": 4
+      },
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-LONE-SCALAR",
+      "requirements": [
+        "API-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        46
+      ],
+      "input": [
+        55296
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "InvalidInput",
+      "expectedRange": null,
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": "InvalidEncoding",
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": 0,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-LONE-UNIT",
+      "requirements": [
+        "API-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "Utf16CodeUnits",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        46
+      ],
+      "input": [
+        55296
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "Match",
+      "expectedRange": {
+        "index": 0,
+        "length": 1
+      },
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-RAW-FF",
+      "requirements": [
+        "API-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "RawBytes",
+      "inputKind": "Bytes",
+      "patternUnit": "Bytes",
+      "pattern": [
+        255
+      ],
+      "input": [
+        0,
+        255
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "Match",
+      "expectedRange": {
+        "index": 1,
+        "length": 1
+      },
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-UTF8-BAD-TAIL",
+      "requirements": [
+        "API-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf8",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        97
+      ],
+      "input": [
+        97,
+        255
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "InvalidInput",
+      "expectedRange": null,
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": "InvalidEncoding",
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": 1,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-ASCII-DIGIT",
+      "requirements": [
+        "API-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        92,
+        100
+      ],
+      "input": [
+        1633
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "NoMatch",
+      "expectedRange": null,
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-ALT-PRIORITY",
+      "requirements": [
+        "ARCH-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        97,
+        124,
+        97,
+        97
+      ],
+      "input": [
+        97,
+        97
+      ],
+      "operation": "Range",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": "Match",
+      "expectedRange": {
+        "index": 0,
+        "length": 1
+      },
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-EMPTY-CAPTURES",
+      "requirements": [
+        "API-02"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        40,
+        97,
+        63,
+        41,
+        40,
+        98,
+        41,
+        63
+      ],
+      "input": [],
+      "operation": "Captures",
+      "startAt": 0,
+      "destinationLength": 3,
+      "expectedStatus": "Match",
+      "expectedRange": {
+        "index": 0,
+        "length": 0
+      },
+      "expectedGroups": [
+        {
+          "participated": true,
+          "index": 0,
+          "length": 0
+        },
+        {
+          "participated": true,
+          "index": 0,
+          "length": 0
+        },
+        {
+          "participated": false,
+          "index": 0,
+          "length": 0
+        }
+      ],
+      "expectedDiagnostic": null,
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-UNSUPPORTED-PROPERTY",
+      "requirements": [
+        "ARCH-03"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        92,
+        112,
+        123,
+        76,
+        125
+      ],
+      "input": [],
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "expectedStatus": null,
+      "expectedRange": null,
+      "expectedGroups": null,
+      "expectedDiagnostic": "UnsupportedFeature",
+      "expectedFailure": null,
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": 0,
+      "expectedDiagnosticLength": 5,
+      "expectedFailureOffset": null,
+      "expectedRequiredCapacity": null
+    },
+    {
+      "id": "RC-DESTINATION-FIRST",
+      "requirements": [
+        "API-02"
+      ],
+      "provenance": "docs/specs/regular-core.md",
+      "license": "MIT",
+      "oracle": "hand-authored-contract-v1",
+      "mode": "UnicodeScalars",
+      "inputKind": "Utf16",
+      "patternUnit": "Utf16CodeUnits",
+      "pattern": [
+        40,
+        97,
+        41
+      ],
+      "input": [
+        55296
+      ],
+      "operation": "Captures",
+      "startAt": 0,
+      "destinationLength": 0,
+      "expectedStatus": "DestinationTooSmall",
+      "expectedRange": null,
+      "expectedGroups": null,
+      "expectedDiagnostic": null,
+      "expectedFailure": "DestinationTooSmall",
+      "profileId": "RegularCore-1-experimental",
+      "dataId": "GregsEx-ASCII-1",
+      "flags": "None",
+      "expectedDiagnosticOffset": null,
+      "expectedDiagnosticLength": null,
+      "expectedFailureOffset": 0,
+      "expectedRequiredCapacity": 2
+    }
+  ]
+}

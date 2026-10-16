@@ -1,0 +1,94 @@
+{
+  "files": {
+    "LICENSE.txt": {
+      "length": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    "ecma-property-tables.json": {
+      "length": 8232,
+      "sha256": "17845818f0779d0fe6b677c669a31b82c69bc318f020529b034f61c92d499993"
+    },
+    "emoji-ReadMe.txt": {
+      "length": 590,
+      "sha256": "d5cd31db8caf71a1bc2bb25a9eefbc154bd5df9528d8cb9481585e068c45257d"
+    },
+    "emoji-sequences.txt": {
+      "length": 192618,
+      "sha256": "3fe3c77e72e8f26df302dc7d99b106c5d08fd808ef7246fb5d4502d659fe659c"
+    },
+    "emoji-zwj-sequences.txt": {
+      "length": 251607,
+      "sha256": "9423ec235474356f970a696506737e2d5d65453a67f45df66b8bbe920c3fab83"
+    },
+    "ucd/CaseFolding.txt": {
+      "length": 86092,
+      "sha256": "6f1f9c588eb4a5c718d9e8f93b782685e5c7fec872cf05e8e6878053599e09bb"
+    },
+    "ucd/DerivedCoreProperties.txt": {
+      "length": 1115959,
+      "sha256": "39d35161f2954497f69e08bdb9e701493f476a3d30222de20028feda36c1dabd"
+    },
+    "ucd/DerivedNormalizationProps.txt": {
+      "length": 1372269,
+      "sha256": "4d4c03892dea9146d674b686e495df2d55a28d071ac474041d73518f887abddc"
+    },
+    "ucd/PropList.txt": {
+      "length": 144253,
+      "sha256": "53d614508e2a0b2305a8aa21cd60d993de9326cdf65993660dfcce4503548583"
+    },
+    "ucd/PropertyAliases.txt": {
+      "length": 9389,
+      "sha256": "33a9f2266ad6b8e8de05c0ea3dfac411ac62cf8839ff1c94057471e4c5f6a2b3"
+    },
+    "ucd/PropertyValueAliases.txt": {
+      "length": 80773,
+      "sha256": "440fd3e5460b9bfe31da67b6f923992e1989d31fe2ed91e091c4b8f8e2620bf9"
+    },
+    "ucd/ReadMe.txt": {
+      "length": 693,
+      "sha256": "14cafa23788d3a20dd21d6b0cdcb8d6dab520781fcd9ad9392f3b88ea607e633"
+    },
+    "ucd/ScriptExtensions.txt": {
+      "length": 20576,
+      "sha256": "049117ce26b9769fe2749b06eef51a50a89faef4a97764dd2d81daa715980700"
+    },
+    "ucd/Scripts.txt": {
+      "length": 189588,
+      "sha256": "9e88f0a677df47311106340be8ede2ecdacd9c1c931831218d2be6d5508e0039"
+    },
+    "ucd/SpecialCasing.txt": {
+      "length": 16809,
+      "sha256": "8d5de354eef79f2395a54c9c7dcebbaf3d30fc962d0f85611ea97aa973a0c451"
+    },
+    "ucd/UnicodeData.txt": {
+      "length": 2175362,
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f"
+    },
+    "ucd/emoji/emoji-data.txt": {
+      "length": 113024,
+      "sha256": "f1365a5173eee18e1f98b240cdc492e84a25f1ce7e0c9d1094eb29c41a22696a"
+    },
+    "ucd/extracted/DerivedBinaryProperties.txt": {
+      "length": 17476,
+      "sha256": "1ed4d4791c0e34fcad4dfcb5dd4c4122e16428241b75452f05d780ffa661f89d"
+    },
+    "ucd/extracted/DerivedGeneralCategory.txt": {
+      "length": 274423,
+      "sha256": "7676ab755a41ef82108460238569e60ad65c191ddafe61b36c6765ec1353f293"
+    }
+  },
+  "sources": {
+    "LICENSE.txt": "https://www.unicode.org/license.txt",
+    "ecma-property-tables.json": "https://tc39.es/ecma262/2025/multipage/text-processing.html (tables69-71 exact code cells)",
+    "emoji-ReadMe.txt": "https://www.unicode.org/Public/emoji/16.0/ReadMe.txt",
+    "emoji-sequences.txt": "https://www.unicode.org/Public/emoji/16.0/emoji-sequences.txt",
+    "emoji-zwj-sequences.txt": "https://www.unicode.org/Public/emoji/16.0/emoji-zwj-sequences.txt",
+    "ucd/": "https://www.unicode.org/Public/16.0.0/ucd/"
+  },
+  "ucd_delivery": {
+    "length": 9020779,
+    "sha256": "c86dd81f2b14a43b0cc064aa5f89aa7241386801e35c59c7984e579832634eb2",
+    "url": "https://www.unicode.org/Public/zipped/16.0.0/UCD.zip",
+    "verified": "Every retained ucd file exactly matches its archive member bytes."
+  }
+}

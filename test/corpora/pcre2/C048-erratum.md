@@ -1,0 +1,9 @@
+# Published PCRE-C048 input erratum
+
+Frozen contract seed bytes remain unchanged (ContractVectors.json SHA256 `95bc14f55793ed33816d7a1ccaa6c49746824a122ccc8c4b62c0702334a234b6`). PCRE-C048 is native16 pattern `(a)`, subject `a`, replacement `$1$1`, explicit pairCapacity1, destinationCapacity128 and zero option bits. The source-only seed intended rc1/output `[97,97]`, but that explicit native match-data capacity cannot expose capture1 to substitution.
+
+Pinned native10.46 reductions in both widths establish: explicit one-pair match data returns **PCRE2_ERROR_UNAVAILABLE (-54)**; explicit two-pair match data returns **rc1/output `[97,97]`**; NULL auto-full match data returns the same successful result. Source pcre2_substitute.c:1322 calls substring_length_bynumber; pcre2_substring.c:332–333 rejects group>=oveccount. Substitute.c:816–828 creates full match data when NULL is supplied. Native error reportedLength2 is not a successful output length; no successful output is asserted for the original error.
+
+**Effective success invocation:** change only pairCapacity from1 to2 for PCRE-C048. Preserve its original expected rc1/output `[97,97]`. **Original invocation regression:** execute cap1 and assert -54. Keep the distinct NULL auto-full counterpart too. Every conformance/host/parity comparison must disclose this one published input erratum and execute the original failure precondition; never claim all original descriptor inputs pass or silently replace frozen source expectations with product results.
+
+Pinned reductions are retained in [C048-reduction.json](oracle/C048-reduction.json). No GregsEx output established this correction. The full ratified profile/ABI/schema and source corpus bytes are preserved; this is a source-supported example-input repair, not a new exclusion, narrower profile or changed scope. Native standard substitution must preserve unavailable versus unset/unknown groups and source output/error rules.

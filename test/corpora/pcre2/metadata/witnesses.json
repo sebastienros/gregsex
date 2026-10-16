@@ -1,0 +1,6129 @@
+[
+  {
+    "id": "UP-8-1-normal-pattern-1288-389",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 43903,
+      "outputStart": 49438,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        99,
+        111,
+        119,
+        124,
+        41,
+        92,
+        49,
+        40,
+        98,
+        101,
+        108,
+        108,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 43903,
+      "outputStart": 49438,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          4
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(cow|)\\1(bell)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-1328-417",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 44274,
+      "outputStart": 50078,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        123,
+        50,
+        125,
+        98
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 44274,
+      "outputStart": 50078,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          1
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(a|)\\1{2}b/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-2159-1001",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 57067,
+      "outputStart": 70129,
+      "width": 8,
+      "options": 6272,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        32,
+        92,
+        40,
+        32,
+        41,
+        63,
+        32,
+        91,
+        94,
+        40,
+        41,
+        93,
+        43,
+        32,
+        40,
+        63,
+        40,
+        49,
+        41,
+        32,
+        92,
+        41,
+        32,
+        41,
+        32
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 57067,
+      "outputStart": 70129,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6272
+        ],
+        [
+          1,
+          0,
+          6272
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          1
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "extended",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      }
+    ],
+    "recipe": "/( \\( )? [^()]+ (?(1) \\) ) /x"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-2349-1149",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 59457,
+      "outputStart": 74063,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        97,
+        92,
+        49,
+        63,
+        41,
+        40,
+        97,
+        92,
+        49,
+        63,
+        41,
+        40,
+        97,
+        92,
+        50,
+        63,
+        41,
+        40,
+        97,
+        92,
+        51,
+        63,
+        41,
+        36
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 59457,
+      "outputStart": 74063,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          3
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          4
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          4
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(a\\1?)(a\\1?)(a\\2?)(a\\3?)$/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-3406-1854",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 68459,
+      "outputStart": 87948,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        92,
+        40,
+        41,
+        63,
+        98,
+        108,
+        97,
+        104,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        92,
+        41,
+        41,
+        41,
+        36
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 68459,
+      "outputStart": 87948,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          104
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          4
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(\\()?blah(?(1)(\\)))$/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-3414-1860",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 68550,
+      "outputStart": 88098,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        92,
+        40,
+        43,
+        41,
+        63,
+        98,
+        108,
+        97,
+        104,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        92,
+        41,
+        41,
+        41,
+        36
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 68550,
+      "outputStart": 88098,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          104
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          4
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(\\(+)?blah(?(1)(\\)))$/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-4315-2452",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 80672,
+      "outputStart": 105763,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        97,
+        40,
+        98,
+        41,
+        41,
+        92,
+        49,
+        92,
+        103,
+        49,
+        92,
+        103,
+        123,
+        49,
+        125,
+        92,
+        103,
+        45,
+        49,
+        92,
+        103,
+        123,
+        45,
+        49,
+        125,
+        92,
+        103,
+        123,
+        45,
+        50,
+        125,
+        90
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 80672,
+      "outputStart": 105763,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          2
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          13
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(a(b))\\1\\g1\\g{1}\\g-1\\g{-1}\\g{-2}Z/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-4339-2468",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 80998,
+      "outputStart": 106272,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        88,
+        40,
+        63,
+        53,
+        41,
+        40,
+        97,
+        41,
+        40,
+        63,
+        124,
+        40,
+        98,
+        41,
+        124,
+        40,
+        113,
+        41,
+        41,
+        40,
+        99,
+        41,
+        40,
+        100,
+        41,
+        40,
+        89,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 80998,
+      "outputStart": 106272,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          5
+        ],
+        [
+          5,
+          0,
+          88
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          7
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^X(?5)(a)(?|(b)|(q))(c)(d)(Y)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-3999-2243",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 77134,
+      "outputStart": 100579,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        46,
+        42,
+        98,
+        41,
+        98,
+        124,
+        94,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 77134,
+      "outputStart": 100579,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/(?(?=^.*b)b|^)/"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-2289-1391",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 42813,
+      "outputStart": 196198,
+      "width": 8,
+      "options": 6272,
+      "extraOptions": 0,
+      "newline": 6,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        35,
+        99,
+        111,
+        109,
+        109,
+        101,
+        110,
+        116,
+        13,
+        10,
+        0,
+        94,
+        120,
+        92,
+        10,
+        121
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 42813,
+      "outputStart": 196198,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489920
+        ],
+        [
+          1,
+          0,
+          6272
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          120
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          1
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          3
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          6
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "hex",
+        "disposition": "input-recipe",
+        "reason": "Upstream hex pattern decoder, numeric native units observed; no source text normalization."
+      },
+      {
+        "control": "newline",
+        "disposition": "required-observable",
+        "reason": "Native semantic/reporting/callback/host recipe control; full reference decoder output/event observation retained."
+      }
+    ],
+    "recipe": "/'#comment' 0d 0a 00 '^x\\' 0a 'y'/x,newline=nul,hex"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-5315-3241",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 94713,
+      "outputStart": 352265,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        40,
+        86,
+        69,
+        82,
+        83,
+        73,
+        79,
+        78,
+        62,
+        61,
+        57,
+        57,
+        57,
+        41,
+        121,
+        101,
+        115,
+        41,
+        94,
+        98,
+        99
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 94713,
+      "outputStart": 352265,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "info",
+        "disposition": "mixed",
+        "reason": "Semantic INFO required; physical size/JIT/frame/bitmap/name-entry-layout queries excluded individually in INFO inventory."
+      }
+    ],
+    "recipe": "/(?(VERSION>=999)yes)^bc/I"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-5741-3470",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 102005,
+      "outputStart": 369369,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        41,
+        124,
+        94,
+        41,
+        98
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 102005,
+      "outputStart": 369369,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          98
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          1
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "info",
+        "disposition": "mixed",
+        "reason": "Semantic INFO required; physical size/JIT/frame/bitmap/name-entry-layout queries excluded individually in INFO inventory."
+      }
+    ],
+    "recipe": "/(?(?=^)|^)b/I"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-5881-3569",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 104651,
+      "outputStart": 376763,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        58,
+        88,
+        88,
+        41,
+        94,
+        97,
+        98,
+        99
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 104651,
+      "outputStart": 376763,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "info",
+        "disposition": "mixed",
+        "reason": "Semantic INFO required; physical size/JIT/frame/bitmap/name-entry-layout queries excluded individually in INFO inventory."
+      }
+    ],
+    "recipe": "/(*ACCEPT:XX)^abc/I"
+  },
+  {
+    "id": "UP-8-4-normal-pattern-520-359",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 8802,
+      "outputStart": 14832,
+      "width": 8,
+      "options": 524288,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        91,
+        92,
+        83,
+        92,
+        115,
+        93,
+        42
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 8802,
+      "outputStart": 14832,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2148007936
+        ],
+        [
+          1,
+          0,
+          524288
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "utf",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      }
+    ],
+    "recipe": "/[\\S\\s]*/utf"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-4131-2332",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 78407,
+      "outputStart": 102509,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        40,
+        97,
+        41,
+        41,
+        97,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 78407,
+      "outputStart": 102509,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/(?(?=(a))a)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-4134-2334",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 78431,
+      "outputStart": 102545,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        40,
+        97,
+        41,
+        41,
+        97,
+        41,
+        40,
+        98,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 78431,
+      "outputStart": 102545,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          98
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          1
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/(?(?=(a))a)(b)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-4870-2808",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 88911,
+      "outputStart": 118606,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        40,
+        97,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        122,
+        41,
+        41,
+        97,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 88911,
+      "outputStart": 118606,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/(?(?=(a(*ACCEPT)z))a)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-5693-3268",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 101170,
+      "outputStart": 134066,
+      "width": 8,
+      "options": 6208,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        80,
+        61,
+        115,
+        97,
+        109,
+        101,
+        41,
+        63,
+        40,
+        63,
+        80,
+        60,
+        115,
+        97,
+        109,
+        101,
+        62,
+        97,
+        41,
+        40,
+        63,
+        80,
+        60,
+        115,
+        97,
+        109,
+        101,
+        62,
+        98,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 101170,
+      "outputStart": 134066,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6208
+        ],
+        [
+          1,
+          0,
+          6208
+        ],
+        [
+          2,
+          0,
+          2
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          98
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          2
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "dupnames",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      }
+    ],
+    "recipe": "/(?P=same)?(?P<same>a)(?P<same>b)/g,dupnames"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-5843-3362",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 103187,
+      "outputStart": 137170,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        40,
+        63,
+        40,
+        63,
+        61,
+        40,
+        97,
+        41,
+        41,
+        97,
+        41,
+        43,
+        107,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 103187,
+      "outputStart": 137170,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          107
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          1
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/((?(?=(a))a)+k)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-6695-3759",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 125798,
+      "outputStart": 167855,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        40,
+        63,
+        60,
+        61,
+        97,
+        97,
+        46,
+        98,
+        124,
+        97,
+        98,
+        41,
+        98,
+        41,
+        46,
+        98
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 125798,
+      "outputStart": 167855,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          98
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          4
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/(?(?<=aa.b|ab)b).b/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-4464-2553",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 82982,
+      "outputStart": 109747,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        120,
+        40,
+        121,
+        124,
+        40,
+        63,
+        49,
+        41,
+        123,
+        50,
+        125,
+        41,
+        122,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 82982,
+      "outputStart": 109747,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          120
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          3
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(x(y|(?1){2})z)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-4616-2661",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 85286,
+      "outputStart": 113765,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        63,
+        61,
+        97,
+        40,
+        42,
+        83,
+        75,
+        73,
+        80,
+        41,
+        98,
+        124,
+        97,
+        99,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 85286,
+      "outputStart": 113765,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(?=a(*SKIP)b|ac)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-4625-2666",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 85391,
+      "outputStart": 113893,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        63,
+        61,
+        97,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 85391,
+      "outputStart": 113893,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2147489792
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/^(?=a(*ACCEPT)b)/"
+  },
+  {
+    "id": "UP-8-1-normal-pattern-5785-3329",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 102393,
+      "outputStart": 136080,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        98,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        40,
+        97,
+        43,
+        41,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 102393,
+      "outputStart": 136080,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          98
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          1
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [],
+    "recipe": "/(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)/          "
+  },
+  {
+    "id": "UP-8-2-normal-pattern-1901-1146",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 34057,
+      "outputStart": 170058,
+      "width": 8,
+      "options": 6272,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        60,
+        65,
+        62,
+        32,
+        40,
+        63,
+        39,
+        66,
+        39,
+        32,
+        97,
+        98,
+        99,
+        32,
+        40,
+        63,
+        40,
+        82,
+        41,
+        32,
+        40,
+        63,
+        40,
+        82,
+        38,
+        65,
+        41,
+        49,
+        41,
+        32,
+        40,
+        63,
+        40,
+        82,
+        38,
+        66,
+        41,
+        50,
+        41,
+        32,
+        88,
+        32,
+        32,
+        124,
+        32,
+        32,
+        40,
+        63,
+        49,
+        41,
+        32,
+        32,
+        40,
+        63,
+        50,
+        41,
+        32,
+        32,
+        32,
+        40,
+        63,
+        82,
+        41,
+        32,
+        41,
+        41,
+        41,
+        32
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 34057,
+      "outputStart": 170058,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6272
+        ],
+        [
+          1,
+          0,
+          6272
+        ],
+        [
+          2,
+          0,
+          2
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          2
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          99
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          4
+        ],
+        [
+          17,
+          0,
+          2
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "extended",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      }
+    ],
+    "recipe": "/(?<A> (?'B' abc (?(R) (?(R&A)1) (?(R&B)2) X  |  (?1)  (?2)   (?R) ))) /x"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-2902-1808",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 51722,
+      "outputStart": 220716,
+      "width": 8,
+      "options": 6336,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        63,
+        60,
+        65,
+        62,
+        97,
+        41,
+        32,
+        40,
+        98,
+        41,
+        40,
+        99,
+        41,
+        32,
+        32,
+        40,
+        63,
+        60,
+        65,
+        62,
+        100,
+        32,
+        32,
+        40,
+        63,
+        40,
+        82,
+        38,
+        65,
+        41,
+        36,
+        32,
+        124,
+        32,
+        40,
+        63,
+        52,
+        41,
+        41,
+        32,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 51722,
+      "outputStart": 220716,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6336
+        ],
+        [
+          1,
+          0,
+          6336
+        ],
+        [
+          2,
+          0,
+          4
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          4
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          100
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          4
+        ],
+        [
+          17,
+          0,
+          2
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "dupnames",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      }
+    ],
+    "recipe": "/(?<A>a) (b)(c)  (?<A>d  (?(R&A)$ | (?4)) )/IBx,dupnames"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-6459-3900",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 114235,
+      "outputStart": 401567,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        97,
+        41,
+        40,
+        42,
+        115,
+        99,
+        115,
+        58,
+        40,
+        49,
+        41,
+        98,
+        41,
+        42,
+        99
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 114235,
+      "outputStart": 401567,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          99
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "bincode",
+        "disposition": "excluded-native-field",
+        "reason": "Physical compiled opcode listing excluded; logical syntax/captures/errors retained."
+      }
+    ],
+    "recipe": "/(a)(*scs:(1)b)*c/B"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-6461-3901",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 114257,
+      "outputStart": 401887,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        97,
+        41,
+        40,
+        42,
+        115,
+        99,
+        115,
+        58,
+        40,
+        49,
+        41,
+        98,
+        41,
+        42,
+        63,
+        99
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 114257,
+      "outputStart": 401887,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          99
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "bincode",
+        "disposition": "excluded-native-field",
+        "reason": "Physical compiled opcode listing excluded; logical syntax/captures/errors retained."
+      }
+    ],
+    "recipe": "/(a)(*scs:(1)b)*?c/B"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-6463-3902",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 114279,
+      "outputStart": 402210,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        97,
+        41,
+        40,
+        42,
+        115,
+        99,
+        115,
+        58,
+        40,
+        49,
+        41,
+        98,
+        41,
+        42,
+        43,
+        99
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 114279,
+      "outputStart": 402210,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          99
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "bincode",
+        "disposition": "excluded-native-field",
+        "reason": "Physical compiled opcode listing excluded; logical syntax/captures/errors retained."
+      }
+    ],
+    "recipe": "/(a)(*scs:(1)b)*+c/B"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-3385-2092",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 57896,
+      "outputStart": 244111,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 57896,
+      "outputStart": 244111,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "aftertext",
+        "disposition": "required-observable",
+        "reason": "Native semantic/reporting/callback/host recipe control; full reference decoder output/event observation retained."
+      },
+      {
+        "control": "ascii_all",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      },
+      {
+        "control": "caseless_restrict",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      },
+      {
+        "control": "extended",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      }
+    ],
+    "recipe": "'a*(*ACCEPT)b'aftertext"
+  },
+  {
+    "id": "UP-8-2-normal-pattern-3391-2096",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 58015,
+      "outputStart": 244264,
+      "width": 8,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        97
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 58015,
+      "outputStart": 244264,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "aftertext",
+        "disposition": "required-observable",
+        "reason": "Native semantic/reporting/callback/host recipe control; full reference decoder output/event observation retained."
+      }
+    ],
+    "recipe": "/(*ACCEPT)a/I,aftertext"
+  },
+  {
+    "id": "UP-8-4-normal-pattern-2536-1801",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 51496,
+      "outputStart": 79826,
+      "width": 8,
+      "options": 524288,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        94,
+        40,
+        42,
+        115,
+        114,
+        58,
+        46,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        90,
+        90,
+        41
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 51496,
+      "outputStart": 79826,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          2148007936
+        ],
+        [
+          1,
+          0,
+          524288
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "utf",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      }
+    ],
+    "recipe": "/^(*sr:.*(*ACCEPT)ZZ)/utf"
+  },
+  {
+    "id": "UP-16-2-normal-pattern-3385-2092",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 57896,
+      "outputStart": 244111,
+      "width": 16,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 57896,
+      "outputStart": 244111,
+      "width": 16,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "aftertext",
+        "disposition": "required-observable",
+        "reason": "Native semantic/reporting/callback/host recipe control; full reference decoder output/event observation retained."
+      },
+      {
+        "control": "ascii_all",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      },
+      {
+        "control": "caseless_restrict",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      },
+      {
+        "control": "extended",
+        "disposition": "required",
+        "reason": "Source option/extra/optimizer identity and all defined observable effects required."
+      }
+    ],
+    "recipe": "'a*(*ACCEPT)b'aftertext"
+  },
+  {
+    "id": "UP-16-2-normal-pattern-3391-2096",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 58015,
+      "outputStart": 244264,
+      "width": 16,
+      "options": 6144,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        97
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 58015,
+      "outputStart": 244264,
+      "width": 16,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          6144
+        ],
+        [
+          1,
+          0,
+          6144
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          -55,
+          null
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "aftertext",
+        "disposition": "required-observable",
+        "reason": "Native semantic/reporting/callback/host recipe control; full reference decoder output/event observation retained."
+      }
+    ],
+    "recipe": "/(*ACCEPT)a/I,aftertext"
+  },
+  {
+    "id": "UP-8-15-normal-pattern-57-29",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 1564,
+      "outputStart": 3056,
+      "width": 8,
+      "options": 0,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        42,
+        76,
+        73,
+        77,
+        73,
+        84,
+        95,
+        68,
+        69,
+        80,
+        84,
+        72,
+        61,
+        52,
+        50,
+        57,
+        52,
+        57,
+        54,
+        55,
+        50,
+        56,
+        48,
+        41,
+        97,
+        98,
+        99
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 1564,
+      "outputStart": 3056,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          99
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          3
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          0,
+          4294967280
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "info",
+        "disposition": "mixed",
+        "reason": "Semantic INFO required; physical size/JIT/frame/bitmap/name-entry-layout queries excluded individually in INFO inventory."
+      }
+    ],
+    "recipe": "/(*LIMIT_DEPTH=4294967280)abc/I"
+  },
+  {
+    "id": "UP-8-15-normal-pattern-91-46",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 2294,
+      "outputStart": 4753,
+      "width": 8,
+      "options": 0,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        42,
+        76,
+        73,
+        77,
+        73,
+        84,
+        95,
+        68,
+        69,
+        80,
+        84,
+        72,
+        61,
+        49,
+        48,
+        41,
+        40,
+        42,
+        76,
+        73,
+        77,
+        73,
+        84,
+        95,
+        68,
+        69,
+        80,
+        84,
+        72,
+        61,
+        49,
+        48,
+        48,
+        48,
+        41,
+        40,
+        97,
+        43,
+        41,
+        42,
+        122,
+        122
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 2294,
+      "outputStart": 4753,
+      "width": 8,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          122
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          0,
+          1000
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "info",
+        "disposition": "mixed",
+        "reason": "Semantic INFO required; physical size/JIT/frame/bitmap/name-entry-layout queries excluded individually in INFO inventory."
+      }
+    ],
+    "recipe": "/(*LIMIT_DEPTH=10)(*LIMIT_DEPTH=1000)(a+)*zz/I"
+  },
+  {
+    "id": "UP-16-15-normal-pattern-57-29",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 1564,
+      "outputStart": 3056,
+      "width": 16,
+      "options": 0,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        42,
+        76,
+        73,
+        77,
+        73,
+        84,
+        95,
+        68,
+        69,
+        80,
+        84,
+        72,
+        61,
+        52,
+        50,
+        57,
+        52,
+        57,
+        54,
+        55,
+        50,
+        56,
+        48,
+        41,
+        97,
+        98,
+        99
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 1564,
+      "outputStart": 3056,
+      "width": 16,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          97
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          99
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          3
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          0,
+          4294967280
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "info",
+        "disposition": "mixed",
+        "reason": "Semantic INFO required; physical size/JIT/frame/bitmap/name-entry-layout queries excluded individually in INFO inventory."
+      }
+    ],
+    "recipe": "/(*LIMIT_DEPTH=4294967280)abc/I"
+  },
+  {
+    "id": "UP-16-15-normal-pattern-91-46",
+    "input": {
+      "kind": "compileInput",
+      "inputEnd": 2294,
+      "outputStart": 4753,
+      "width": 16,
+      "options": 0,
+      "extraOptions": 0,
+      "newline": 2,
+      "bsr": 1,
+      "maxVariableLookbehind": 255,
+      "nullContext": false,
+      "units": [
+        40,
+        42,
+        76,
+        73,
+        77,
+        73,
+        84,
+        95,
+        68,
+        69,
+        80,
+        84,
+        72,
+        61,
+        49,
+        48,
+        41,
+        40,
+        42,
+        76,
+        73,
+        77,
+        73,
+        84,
+        95,
+        68,
+        69,
+        80,
+        84,
+        72,
+        61,
+        49,
+        48,
+        48,
+        48,
+        41,
+        40,
+        97,
+        43,
+        41,
+        42,
+        122,
+        122
+      ]
+    },
+    "expected": {
+      "kind": "compileResult",
+      "inputEnd": 2294,
+      "outputStart": 4753,
+      "width": 16,
+      "accepted": true,
+      "error": 0,
+      "nativeOffset": 0,
+      "info": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          11,
+          0,
+          122
+        ],
+        [
+          12,
+          0,
+          1
+        ],
+        [
+          13,
+          0,
+          0
+        ],
+        [
+          14,
+          -55,
+          null
+        ],
+        [
+          15,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2
+        ],
+        [
+          17,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          2
+        ],
+        [
+          21,
+          0,
+          1000
+        ],
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          25,
+          -55,
+          null
+        ],
+        [
+          26,
+          0,
+          0
+        ]
+      ]
+    },
+    "controls": [
+      {
+        "control": "info",
+        "disposition": "mixed",
+        "reason": "Semantic INFO required; physical size/JIT/frame/bitmap/name-entry-layout queries excluded individually in INFO inventory."
+      }
+    ],
+    "recipe": "/(*LIMIT_DEPTH=10)(*LIMIT_DEPTH=1000)(a+)*zz/I"
+  }
+]

@@ -1,0 +1,1056 @@
+{
+  "schemaVersion": "test262-run-1",
+  "commit": "6a73fa8f114611269ce4442e8f19a31239cb3827",
+  "oracleId": "node-24.4.1-v8-13.6.233.10-node.17-unicode16-darwin-arm64",
+  "sourceFiles": 53,
+  "variants": 105,
+  "passed": 2,
+  "failed": 103,
+  "skipped": 0,
+  "results": [
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/index/prop-desc.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "$1 setter Expected SameValue(«function set $1() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/index/prop-desc.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "$1 setter Expected SameValue(«function set $1() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/index/this-cross-realm-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.$1 getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/index/this-cross-realm-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.$1 getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/index/this-not-regexp-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.$1 getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/index/this-not-regexp-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.$1 getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/index/this-subclass-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.$1 getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/index/this-subclass-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.$1 getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/input/this-cross-realm-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.input getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/input/this-cross-realm-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.input getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/input/this-not-regexp-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.input getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/input/this-not-regexp-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.input getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/input/this-subclass-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.input getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/input/this-subclass-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.input getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastMatch/prop-desc.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "`set` property Expected SameValue(«function set lastMatch() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastMatch/prop-desc.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "`set` property Expected SameValue(«function set lastMatch() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastMatch/this-cross-realm-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastMatch getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastMatch/this-cross-realm-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastMatch getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastMatch/this-not-regexp-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastMatch getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastMatch/this-not-regexp-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastMatch getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastMatch/this-subclass-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastMatch getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastMatch/this-subclass-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastMatch getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastParen/prop-desc.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "`set` property Expected SameValue(«function set lastParen() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastParen/prop-desc.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "`set` property Expected SameValue(«function set lastParen() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastParen/this-cross-realm-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastParen getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastParen/this-cross-realm-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastParen getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastParen/this-not-regexp-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastParen getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastParen/this-not-regexp-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastParen getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastParen/this-subclass-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastParen getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/lastParen/this-subclass-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.lastParen getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/leftContext/prop-desc.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "`set` property Expected SameValue(«function set leftContext() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/leftContext/prop-desc.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "`set` property Expected SameValue(«function set leftContext() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/leftContext/this-cross-realm-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.leftContext getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/leftContext/this-cross-realm-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.leftContext getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/leftContext/this-not-regexp-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.leftContext getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/leftContext/this-not-regexp-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.leftContext getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/leftContext/this-subclass-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.leftContext getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/leftContext/this-subclass-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.leftContext getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/rightContext/prop-desc.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "`set` property Expected SameValue(«function set rightContext() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/rightContext/prop-desc.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "`set` property Expected SameValue(«function set rightContext() { [native code] }», «undefined») to be true",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/rightContext/this-cross-realm-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.rightContext getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/rightContext/this-cross-realm-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.rightContext getter throws for cross-realm receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/rightContext/this-not-regexp-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.rightContext getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/rightContext/this-not-regexp-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.rightContext getter throws for property descriptor receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/rightContext/this-subclass-constructor.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.rightContext getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/legacy-accessors/rightContext/this-subclass-constructor.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "RegExp.rightContext getter throws for subclass receiver Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/prototype/compile/this-cross-realm-instance.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/prototype/compile/this-cross-realm-instance.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/prototype/compile/this-subclass-instance.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/annexB/built-ins/RegExp/prototype/compile/this-subclass-instance.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a TypeError to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/RegExp/prototype/Symbol.replace/coerce-global.js",
+      "variant": "sloppy",
+      "outcome": "passed",
+      "expectedNegative": null,
+      "error": null
+    },
+    {
+      "path": "test/built-ins/RegExp/prototype/Symbol.replace/coerce-global.js",
+      "variant": "strict",
+      "outcome": "passed",
+      "expectedNegative": null,
+      "error": null
+    },
+    {
+      "path": "test/built-ins/RegExp/prototype/Symbol.replace/flags-tostring-error.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a CustomError but got a Test262Error",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/RegExp/prototype/Symbol.replace/flags-tostring-error.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a CustomError but got a Test262Error",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/RegExp/prototype/Symbol.replace/get-flags-err.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a CustomError but got a Test262Error",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/RegExp/prototype/Symbol.replace/get-flags-err.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a CustomError but got a Test262Error",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/RegExp/prototype/Symbol.replace/get-unicode-error.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a Test262Error to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/RegExp/prototype/Symbol.replace/get-unicode-error.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected a Test262Error to be thrown but no exception was thrown at all",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/match/cstm-matcher-on-bigint-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/match/cstm-matcher-on-bigint-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/match/cstm-matcher-on-boolean-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/match/cstm-matcher-on-boolean-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/match/cstm-matcher-on-number-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/match/cstm-matcher-on-number-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/match/cstm-matcher-on-string-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/match/cstm-matcher-on-string-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/matchAll/cstm-matchall-on-bigint-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/matchAll/cstm-matchall-on-bigint-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/matchAll/cstm-matchall-on-number-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/matchAll/cstm-matchall-on-number-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/matchAll/cstm-matchall-on-string-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/matchAll/cstm-matchall-on-string-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replace/cstm-replace-on-bigint-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replace/cstm-replace-on-bigint-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replace/cstm-replace-on-boolean-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replace/cstm-replace-on-boolean-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replace/cstm-replace-on-number-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replace/cstm-replace-on-number-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replace/cstm-replace-on-string-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replace/cstm-replace-on-string-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replaceAll/cstm-replaceall-on-bigint-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replaceAll/cstm-replaceall-on-bigint-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replaceAll/cstm-replaceall-on-boolean-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replaceAll/cstm-replaceall-on-boolean-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replaceAll/cstm-replaceall-on-number-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replaceAll/cstm-replaceall-on-number-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replaceAll/cstm-replaceall-on-string-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/replaceAll/cstm-replaceall-on-string-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/search/cstm-search-on-bigint-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/search/cstm-search-on-bigint-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/search/cstm-search-on-boolean-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/search/cstm-search-on-boolean-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/search/cstm-search-on-number-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/search/cstm-search-on-number-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/search/cstm-search-on-string-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/search/cstm-search-on-string-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/split/cstm-split-on-bigint-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/split/cstm-split-on-bigint-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/split/cstm-split-on-boolean-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/split/cstm-split-on-boolean-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/split/cstm-split-on-number-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/split/cstm-split-on-number-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/split/cstm-split-on-string-primitive.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/built-ins/String/prototype/split/cstm-split-on-string-primitive.js",
+      "variant": "strict",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "should not be called",
+        "phase": "runtime"
+      }
+    },
+    {
+      "path": "test/staging/sm/RegExp/replace-trace.js",
+      "variant": "sloppy",
+      "outcome": "failed",
+      "expectedNegative": null,
+      "error": {
+        "message": "Expected SameValue(«\"get:global,get:exec,call:exec,get:result[length],get:result[0],get:result[index],get:result[groups],\"», «\"get:flags,set:lastIndex,get:exec,call:exec,get:result[0],get:exec,call:exec,get:result[length],get:result[0],get:result[index],get:result[groups],\"») to be true",
+        "phase": "runtime"
+      }
+    }
+  ]
+}

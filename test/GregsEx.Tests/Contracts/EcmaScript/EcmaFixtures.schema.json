@@ -1,0 +1,491 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gregsex.invalid/ecmascript-fixtures-1",
+  "title": "Nonshipping ECMAScript fixture interchange v1",
+  "type": "object",
+  "properties": {
+    "contractVersion": {
+      "const": "ecmascript-fixtures-1"
+    },
+    "profileId": {
+      "const": "EcmaScript2025"
+    },
+    "dataId": {
+      "const": "Unicode-16.0.0+Emoji-16.0"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fixture"
+      }
+    }
+  },
+  "required": [
+    "contractVersion",
+    "profileId",
+    "dataId",
+    "cases"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "capture": {
+      "type": "object",
+      "properties": {
+        "participated": {
+          "type": "boolean"
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "participated",
+        "index",
+        "length"
+      ],
+      "additionalProperties": false
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "capture": {
+          "$ref": "#/$defs/capture"
+        }
+      },
+      "required": [
+        "name",
+        "groupIds",
+        "capture"
+      ],
+      "additionalProperties": false
+    },
+    "match": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "captures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/capture"
+          }
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/name"
+          }
+        },
+        "hasIndices": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "index",
+        "length",
+        "captures",
+        "names",
+        "hasIndices"
+      ],
+      "additionalProperties": false
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "featureId": {
+          "type": "string"
+        },
+        "location": {
+          "enum": [
+            "Pattern",
+            "Flags",
+            "Host",
+            "Input"
+          ]
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "offsetUnit": {
+          "const": "Utf16CodeUnits"
+        },
+        "workConsumed": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "requiredCapacity": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "code",
+        "featureId",
+        "location",
+        "offset",
+        "length",
+        "offsetUnit",
+        "workConsumed",
+        "requiredCapacity"
+      ],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "Specification",
+            "Imported",
+            "Discovery"
+          ]
+        },
+        "uri": {
+          "type": "string"
+        },
+        "clause": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "oracleId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "uri",
+        "clause",
+        "license",
+        "oracleId"
+      ],
+      "additionalProperties": false
+    },
+    "expected": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "ParseSuccess",
+            "InvalidSyntax",
+            "Match",
+            "NoMatch",
+            "HostArgumentError",
+            "InvalidInput",
+            "DestinationTooSmall",
+            "LimitExceeded",
+            "Cancelled",
+            "TimedOut",
+            "HostLimitExceeded"
+          ]
+        },
+        "lastIndexAfter": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/match"
+          }
+        },
+        "texts": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 65535
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/error"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "lastIndexAfter",
+        "matches",
+        "texts",
+        "error"
+      ],
+      "additionalProperties": false
+    },
+    "fixture": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ES-[0-9]{3}$"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "patternUnits": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535
+          }
+        },
+        "inputUnits": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535
+          }
+        },
+        "flags": {
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "Parse",
+            "Boolean",
+            "Range",
+            "Captures",
+            "Exec",
+            "Test",
+            "ExecNext",
+            "Match",
+            "MatchAll",
+            "Search",
+            "Replace",
+            "ReplaceAll",
+            "Split"
+          ]
+        },
+        "lastIndexBefore": {
+          "type": "string"
+        },
+        "replacementUnits": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 65535
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "splitLimit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected": {
+          "$ref": "#/$defs/expected"
+        },
+        "startAt": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "destinationLength": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "limits": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/limits"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "capabilities",
+        "provenance",
+        "patternUnits",
+        "inputUnits",
+        "flags",
+        "operation",
+        "lastIndexBefore",
+        "replacementUnits",
+        "splitLimit",
+        "expected",
+        "startAt",
+        "destinationLength",
+        "limits"
+      ],
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "maxPatternUnits": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "maxCompileWork": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "maxWork": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "maxWorkspaceBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "frameCapacity": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "maxResults": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "maxOutputUnits": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "maxHostMemoryBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "timeoutTicks": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "cancelled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "maxPatternUnits",
+        "maxCompileWork",
+        "maxWork",
+        "maxWorkspaceBytes",
+        "frameCapacity",
+        "maxResults",
+        "maxOutputUnits",
+        "maxHostMemoryBytes",
+        "timeoutTicks",
+        "cancelled"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

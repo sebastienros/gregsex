@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <!-- Fixture loaders use CallerFilePath to locate files in the checkout. -->
+    <DeterministicSourcePaths>false</DeterministicSourcePaths>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" />
+    <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" />
+    <ProjectReference Include="../../src/GregsEx.Generator/GregsEx.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <!-- Driver tests load the generator by path, so it is copied beside the test assembly instead of referenced. -->
+    <None Include="../../src/GregsEx.Generator/bin/$(Configuration)/netstandard2.0/GregsEx.Generator.dll" Link="generator/GregsEx.Generator.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <EmbeddedResource Include="Contracts/CoreFixtures.json" LogicalName="GregsEx.CoreFixtures.json" />
+    <Compile Include="../GregsEx.AotSmoke/UnicodeVersionSmoke.cs" Link="Contracts/UnicodeVersionSmoke.cs" />
+  </ItemGroup>
+</Project>

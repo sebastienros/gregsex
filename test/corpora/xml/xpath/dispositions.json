@@ -1,0 +1,319 @@
+{
+  "XP-0045": {
+    "category": "ratified-validation-order-versus-host-optimization",
+    "reason": "F&O3.1 1.4 error precedence and XPath2.3.4 optimization allow processor to short-circuit empty input. GregsEx contract freezes eager FORX0003 before input handling; retain error expected, do not claim Saxon nonconformance.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": []
+    },
+    "retainedExpectation": [
+      {
+        "status": "FunctionError",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "FORX0003",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 2,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": "http://www.w3.org/2005/xqt-errors"
+        }
+      }
+    ],
+    "source": "sources/functions-31.html#func-signatures"
+  },
+  "XP-0164": {
+    "category": "ratified-validation-order-versus-host-optimization",
+    "reason": "F&O3.1 1.4 error precedence and XPath2.3.4 optimization allow processor to short-circuit empty input. GregsEx contract freezes eager FORX0003 before input handling; retain error expected, do not claim Saxon nonconformance.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": []
+    },
+    "retainedExpectation": [
+      {
+        "status": "FunctionError",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "FORX0003",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": "http://www.w3.org/2005/xqt-errors"
+        }
+      }
+    ],
+    "source": "sources/functions-31.html#func-signatures"
+  },
+  "XP-0165": {
+    "category": "ratified-validation-order-versus-host-optimization",
+    "reason": "F&O3.1 1.4 error precedence and XPath2.3.4 optimization allow processor to short-circuit empty input. GregsEx contract freezes eager FORX0003 before input handling; retain error expected, do not claim Saxon nonconformance.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": []
+    },
+    "retainedExpectation": [
+      {
+        "status": "FunctionError",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "FORX0003",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 2,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": "http://www.w3.org/2005/xqt-errors"
+        }
+      }
+    ],
+    "source": "sources/functions-31.html#func-signatures"
+  },
+  "XP-0166": {
+    "category": "ratified-validation-order-versus-host-optimization",
+    "reason": "F&O3.1 1.4 error precedence and XPath2.3.4 optimization allow processor to short-circuit empty input. GregsEx contract freezes eager FORX0003 before input handling; retain error expected, do not claim Saxon nonconformance.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": []
+    },
+    "retainedExpectation": [
+      {
+        "status": "FunctionError",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "FORX0003",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 2,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": "http://www.w3.org/2005/xqt-errors"
+        }
+      }
+    ],
+    "source": "sources/functions-31.html#func-signatures"
+  },
+  "XP-0167": {
+    "category": "ratified-validation-order-versus-host-optimization",
+    "reason": "F&O3.1 1.4 error precedence and XPath2.3.4 optimization allow processor to short-circuit empty input. GregsEx contract freezes eager FORX0003 before input handling; retain error expected, do not claim Saxon nonconformance.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": []
+    },
+    "retainedExpectation": [
+      {
+        "status": "FunctionError",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "FORX0003",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 4,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": "http://www.w3.org/2005/xqt-errors"
+        }
+      }
+    ],
+    "source": "sources/functions-31.html#func-signatures"
+  },
+  "XP-0168": {
+    "category": "ratified-validation-order-versus-host-optimization",
+    "reason": "F&O3.1 1.4 error precedence and XPath2.3.4 optimization allow processor to short-circuit empty input. GregsEx contract freezes eager FORX0003 before input handling; retain error expected, do not claim Saxon nonconformance.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": []
+    },
+    "retainedExpectation": [
+      {
+        "status": "FunctionError",
+        "boolean": null,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": {
+          "code": "FORX0003",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 3,
+          "offsetUnit": "Utf16CodeUnits",
+          "namespace": "http://www.w3.org/2005/xqt-errors"
+        }
+      }
+    ],
+    "source": "sources/functions-31.html#func-signatures"
+  },
+  "XP-0174": {
+    "category": "oracle-Unicode-data-version",
+    "reason": "Ratified Unicode16 category/block assignment overrides actual older Saxon resource tables. Kawi U+11F02 Lo, Nag Mundari U+1E4F0 Nd/U+1E4D0 Lo and Kawi block are verified against retained Unicode16 originals. No target feature is excluded.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": [
+        {
+          "type": "boolean",
+          "units": [
+            102,
+            97,
+            108,
+            115,
+            101
+          ]
+        }
+      ]
+    },
+    "retainedExpectation": [
+      {
+        "status": "Match",
+        "boolean": true,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      }
+    ],
+    "source": "sources/UnicodeData-16.txt and sources/Blocks-16.txt"
+  },
+  "XP-0175": {
+    "category": "oracle-Unicode-data-version",
+    "reason": "Ratified Unicode16 category/block assignment overrides actual older Saxon resource tables. Kawi U+11F02 Lo, Nag Mundari U+1E4F0 Nd/U+1E4D0 Lo and Kawi block are verified against retained Unicode16 originals. No target feature is excluded.",
+    "observed": {
+      "status": "error",
+      "error": "FORX0002",
+      "namespace": "http://www.w3.org/2005/xqt-errors",
+      "items": []
+    },
+    "retainedExpectation": [
+      {
+        "status": "Match",
+        "boolean": true,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      }
+    ],
+    "source": "sources/UnicodeData-16.txt and sources/Blocks-16.txt"
+  },
+  "XP-0176": {
+    "category": "oracle-Unicode-data-version",
+    "reason": "Ratified Unicode16 category/block assignment overrides actual older Saxon resource tables. Kawi U+11F02 Lo, Nag Mundari U+1E4F0 Nd/U+1E4D0 Lo and Kawi block are verified against retained Unicode16 originals. No target feature is excluded.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": [
+        {
+          "type": "boolean",
+          "units": [
+            102,
+            97,
+            108,
+            115,
+            101
+          ]
+        }
+      ]
+    },
+    "retainedExpectation": [
+      {
+        "status": "Match",
+        "boolean": true,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      }
+    ],
+    "source": "sources/UnicodeData-16.txt and sources/Blocks-16.txt"
+  },
+  "XP-0177": {
+    "category": "oracle-Unicode-data-version",
+    "reason": "Ratified Unicode16 category/block assignment overrides actual older Saxon resource tables. Kawi U+11F02 Lo, Nag Mundari U+1E4F0 Nd/U+1E4D0 Lo and Kawi block are verified against retained Unicode16 originals. No target feature is excluded.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": [
+        {
+          "type": "boolean",
+          "units": [
+            102,
+            97,
+            108,
+            115,
+            101
+          ]
+        }
+      ]
+    },
+    "retainedExpectation": [
+      {
+        "status": "Match",
+        "boolean": true,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      }
+    ],
+    "source": "sources/UnicodeData-16.txt and sources/Blocks-16.txt"
+  },
+  "XP-0182": {
+    "category": "oracle-case-variant-table-policy",
+    "reason": "Ratified full default lower-or-upper equality includes U+00DF/U+1E9E because U+1E9E lowercase is U+00DF. Saxon embedded simple-case variant table omits this pair. Actual lower/upper Unicode16 rows and Saxon resource are independently audited; retain target true without treating processor table as Unicode16.",
+    "observed": {
+      "status": "returned",
+      "error": null,
+      "namespace": null,
+      "items": [
+        {
+          "type": "boolean",
+          "units": [
+            102,
+            97,
+            108,
+            115,
+            101
+          ]
+        }
+      ]
+    },
+    "retainedExpectation": [
+      {
+        "status": "Match",
+        "boolean": true,
+        "matches": [],
+        "texts": null,
+        "tree": [],
+        "error": null
+      }
+    ],
+    "source": "sources/UnicodeData-16.txt; full default uppercase U+00DF from SpecialCasing-16.txt"
+  }
+}

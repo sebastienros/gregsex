@@ -1,0 +1,5 @@
+// Must fail CS8345: a heap object cannot retain a caller's borrowed span.
+public sealed class EscapedSubject
+{
+    public System.ReadOnlySpan<char> Subject;
+}

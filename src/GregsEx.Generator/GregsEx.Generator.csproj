@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Build-time C# source generator for [GeneratedPattern] methods. It targets netstandard2.0 so any Roslyn host loads it
+       (dotnet build, msbuild, and .NET Framework-hosted IDE analyzer hosts). It does not reference GregsEx.dll: it compiles
+       the engine's parser, compilers and kernel-plan analysis straight from src/GregsEx (see SourcePlanner) and runs them in
+       the compiler process. The executors, runtimes and everything needing newer-than-netstandard2.0 runtime features are
+       excluded below; the engine sources carry #if NETSTANDARD2_0 seams for the few shared files that mix both.
+       Netstandard2Polyfills.cs and explicitly allowlisted Meziantou.Polyfill APIs supply the missing BCL APIs. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>GregsEx.Generator</AssemblyName>
+    <RootNamespace>GregsEx.Generator</RootNamespace>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <IsPackable>false</IsPackable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <MeziantouPolyfill_IncludedPolyfills>T:System.Threading.Lock|T:System.Buffers.SearchValues|M:System.Array.Fill|T:System.Index|T:System.Range</MeziantouPolyfill_IncludedPolyfills>
+    <MeziantouPolyfill_IncludedPolyfills>$(MeziantouPolyfill_IncludedPolyfills)|M:System.ArgumentNullException.ThrowIfNull|M:System.ArgumentException.ThrowIfNullOrEmpty|M:System.ArgumentOutOfRangeException.ThrowIf</MeziantouPolyfill_IncludedPolyfills>
+    <MeziantouPolyfill_IncludedPolyfills>$(MeziantouPolyfill_IncludedPolyfills)|T:System.Diagnostics.CodeAnalysis.|T:System.Runtime.CompilerServices.IsExternalInit|T:System.Runtime.CompilerServices.RequiredMemberAttribute|T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute|T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute|T:System.Runtime.CompilerServices.DefaultInterpolatedStringHandler|T:System.Runtime.CompilerServices.InterpolatedStringHandler</MeziantouPolyfill_IncludedPolyfills>
+    <MeziantouPolyfill_IncludedPolyfills>$(MeziantouPolyfill_IncludedPolyfills)|M:System.MemoryExtensions.IndexOfAny|M:System.MemoryExtensions.Contains|M:System.MemoryExtensions.StartsWith|M:System.MemoryExtensions.EndsWith|M:System.String.TryCopyTo|M:System.String.CopyTo</MeziantouPolyfill_IncludedPolyfills>
+    <!-- The '(' restricts this prefix to synchronous HashData overloads, excluding HashDataAsync. -->
+    <MeziantouPolyfill_IncludedPolyfills>$(MeziantouPolyfill_IncludedPolyfills)|M:System.Enum.IsDefined|M:System.Convert.ToHexStringLower|M:System.Security.Cryptography.SHA256.HashData(|M:System.Math.Clamp</MeziantouPolyfill_IncludedPolyfills>
+    <NoWarn>$(NoWarn);RS1035;RS1041;RS2008;CS1591;CS1573;CS1587;CS1570;CS1574;CS1584;CS1658;CS8632;CS0436;CS8601;CS8602;CS0414;NU1701</NoWarn>
+    <Engine>$(MSBuildThisFileDirectory)..\GregsEx\</Engine>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+    <PackageReference Include="Meziantou.Polyfill" PrivateAssets="all" />
+    <PackageReference Include="System.Memory" />
+    <InternalsVisibleTo Include="GregsEx.Tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="$(Engine)**\*.cs" />
+    <Compile Remove="$(Engine)obj\**;$(Engine)bin\**" />
+    <!-- Executor-bound public surface and the runtimes. -->
+    <Compile Remove="$(Engine)Public\Pcre2\Pcre2Pattern.cs;$(Engine)Public\Pcre2\Pcre2Workspace.cs;$(Engine)Public\Pcre2\Pcre2Functions.cs;$(Engine)Public\Pcre2\Pcre2Iteration.cs" />
+    <Compile Remove="$(Engine)Public\EcmaScript\EcmaScriptFactory.cs;$(Engine)Public\EcmaScript\EcmaScriptMatcher.cs" />
+    <Compile Remove="$(Engine)Public\Posix\PosixFunctions.cs;$(Engine)Public\Xml\XmlFunctions.cs" />
+    <Compile Remove="$(Engine)Public\RegexPattern.cs;$(Engine)Public\Compilation\RegexPattern.Compile.cs;$(Engine)Public\ExecutionModes\ExecutionModePolicy.cs" />
+    <Compile Remove="$(Engine)Execution\**;$(Engine)Runtime\**;$(Engine)Flavors\*\Runtime\**;$(Engine)Flavors\*\Integration\**" />
+    <Compile Remove="$(Engine)Flavors\XmlIntegration\**;$(Engine)Flavors\XPath\Execution\**;$(Engine)Flavors\XPath\Host\**" />
+    <Compile Remove="$(Engine)Text\ByteTextReader.cs;$(Engine)Text\CharTextReader.cs;$(Engine)Flavors\XmlShared\XmlTextReaders.cs;$(Engine)Flavors\Xsd\XsdExecutor.cs" />
+    <!-- The analysis-only subset of the excluded executor folders: kernel plans, fast-path classifiers, character tables. -->
+    <Compile Include="$(Engine)Execution\Compiled\*Plan.cs;$(Engine)Execution\Compiled\SourcePlanner.cs" />
+    <Compile Include="$(Engine)Execution\Accelerated\**\*.cs;$(Engine)Execution\Backtracking\EcmaAccelerator.cs" />
+    <Compile Include="$(Engine)Execution\Pcre2\Kernel\Pcre2CharacterOps.cs;$(Engine)Flavors\Pcre2\Runtime\Composition\Pcre2Accelerator.cs" />
+  </ItemGroup>
+</Project>

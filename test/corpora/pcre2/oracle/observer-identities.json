@@ -1,0 +1,42 @@
+[
+  {
+    "width": 8,
+    "argv": [
+      "/usr/bin/clang",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-DPCRE2_CODE_UNIT_WIDTH=8",
+      "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/source/src",
+      "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/observer-8",
+      "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/observe.c",
+      "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/libpcre2-8.a",
+      "-o",
+      "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/observer-8/observe"
+    ],
+    "executableSha256": "289c49c2e24a31036cf0a54d656dd2779ee5850b2a68a08022a30decf60136ee",
+    "headerSha256": "b907e7314d1eb0810219d9350dc954bb2067369954e8cbfbd12b5905576308db",
+    "outputSha256": "67caff53bbc7a7ccbd9f3a422e37a45ee69a1208e8f061b46ba3609068861f52",
+    "tablesSha256": "40bfdd1a0c1e45c7c85c799dfefa098d30ea58e832d813d00f6dfc6bed167513"
+  },
+  {
+    "width": 16,
+    "argv": [
+      "/usr/bin/clang",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-DPCRE2_CODE_UNIT_WIDTH=16",
+      "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/source/src",
+      "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/observer-16",
+      "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/observe.c",
+      "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/libpcre2-16.a",
+      "-o",
+      "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/observer-16/observe"
+    ],
+    "executableSha256": "b428616e1e4cca52aeaaa1636561706a85f222c7a7b76150fb95142dc4b951ce",
+    "headerSha256": "175a7d35c8c58a231296c08e7f6d5e8b4ddf7ffb726b0091ca4311dbaa6e14cc",
+    "outputSha256": "8456fb7856875b252ebae4ae29ad32583b348dfdd7b5e59149ce50fb1618e7f2",
+    "tablesSha256": "40bfdd1a0c1e45c7c85c799dfefa098d30ea58e832d813d00f6dfc6bed167513"
+  }
+]

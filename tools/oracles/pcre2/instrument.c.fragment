@@ -1,0 +1,56 @@
+/* Native-only diagnostic observers; no subject decoding or matching changes. */
+static FILE *oracle_trace;
+static FILE *oracle_open(void)
+{
+ if (!oracle_trace) { const char *path=getenv("GREGSEX_ORACLE_TRACE");
+  if (!path) return NULL;oracle_trace=fopen(path,"w");if(!oracle_trace)exit(71); }
+ return oracle_trace;
+}
+static FILE *oracle_event(const char *kind)
+{
+ FILE *f=oracle_open();if(!f)return NULL;
+ fprintf(f,"{\"kind\":\"%s\",\"inputEnd\":%ld,\"outputStart\":%ld,\"width\":%d",kind,ftell(infile),ftell(outfile),test_mode);return f;
+}
+static void oracle_index(const char *kind){FILE *f=oracle_event(kind);if(f){fprintf(f,"}\n");fflush(f);}}
+static uint32_t oracle_unit(const void *p,size_t i){return test_mode==8?((const uint8_t *)p)[i]:test_mode==16?((const uint16_t *)p)[i]:((const uint32_t *)p)[i];}
+static void oracle_units(FILE *f,const void *p,size_t n){fprintf(f,"[");if(p)for(size_t i=0;i<n;i++)fprintf(f,"%s%u",i?",":"",oracle_unit(p,i));fprintf(f,"]");}
+static void oracle_zunits(FILE *f,const void *p){if(!p){fprintf(f,"null");return;}size_t n=test_mode==8?((const uint8_t *)p)[-1]:test_mode==16?((const uint16_t *)p)[-1]:((const uint32_t *)p)[-1];oracle_units(f,p,n);}
+static void oracle_num(FILE *f,size_t n){if(n==PCRE2_UNSET)fprintf(f,"null");else fprintf(f,"%zu",n);}
+static void oracle_pairs(FILE *f,const size_t *v,size_t n,int skip0){fprintf(f,"[");for(size_t i=0;i<n;i++){if(i)fprintf(f,",");if(!i&&skip0){fprintf(f,"null");continue;}fprintf(f,"[");oracle_num(f,v[2*i]);fprintf(f,",");oracle_num(f,v[2*i+1]);fprintf(f,"]");}fprintf(f,"]");}
+static void oracle_tables(const uint8_t *p)
+{
+ if(!p)return;const char *dir=getenv("GREGSEX_TABLE_DIR");if(!dir)return;char name[4096];snprintf(name,sizeof(name),"%s/%ld.bin",dir,ftell(infile));FILE *f=fopen(name,"wb");if(!f)exit(72);if(fwrite(p,1,1088,f)!=1088)exit(73);fclose(f);
+}
+static void oracle_compile_input(const void *p,size_t n,uint32_t options)
+{
+ FILE *f=oracle_event("compileInput");if(!f)return;fprintf(f,",\"options\":%u,\"extraOptions\":%u,\"newline\":%u,\"bsr\":%u,\"maxVariableLookbehind\":%u,\"nullContext\":%s,\"units\":",options,FLD(pat_context,extra_options),FLD(pat_context,newline_convention),FLD(pat_context,bsr_convention),FLD(pat_context,max_varlookbehind),(pat_patctl.control&CTL_NULLCONTEXT)?"true":"false");
+ if(n==PCRE2_ZERO_TERMINATED){n=0;if(p)while(oracle_unit(p,n))n++;}oracle_units(f,p,n);fprintf(f,"}\n");
+}
+static void oracle_compile_result(int error,size_t offset)
+{
+ FILE *f=oracle_event("compileResult");if(!f)return;BOOL accepted=TEST(compiled_code,!=,NULL);fprintf(f,",\"accepted\":%s,\"error\":%d,\"nativeOffset\":%zu",accepted?"true":"false",accepted?0:error,offset);
+ if(accepted){const uint32_t ids[]={0,1,2,3,4,5,6,8,9,11,12,13,14,15,16,17,20,21,23,25,26};fprintf(f,",\"info\":[");for(size_t i=0;i<sizeof(ids)/sizeof(*ids);i++){uint32_t value=0;int rc=0;PCRE2_PATTERN_INFO(rc,compiled_code,ids[i],&value);fprintf(f,"%s[%u,%d,",i?",":"",ids[i],rc);if(!rc)fprintf(f,"%u",value);else fprintf(f,"null");fprintf(f,"]");}fprintf(f,"]");}fprintf(f,"}\n");
+}
+static int oracle_callout(pcre2_callout_block_8 *cb,int rc)
+{
+ FILE *f=oracle_event("callout");if(!f)return rc;
+ fprintf(f,",\"returnCode\":%d,\"version\":%u,\"number\":%u,\"isString\":%s,\"subjectLength\":%zu,\"captureTop\":%u,\"captureLast\":%u,\"startMatch\":%zu,\"currentPosition\":%zu,\"patternPosition\":%zu,\"nextItemLength\":%zu,\"stringOffset\":%zu,\"flags\":%u,\"subjectUnits\":",rc,cb->version,cb->callout_number,cb->callout_string?"true":"false",cb->subject_length,cb->capture_top,cb->capture_last,cb->start_match,cb->current_position,cb->pattern_position,cb->next_item_length,cb->callout_string_offset,cb->callout_flags);oracle_units(f,cb->subject,cb->subject_length);fprintf(f,",\"stringUnits\":");oracle_units(f,cb->callout_string,cb->callout_string_length);fprintf(f,",\"markUnits\":");oracle_zunits(f,cb->mark);fprintf(f,",\"captures\":");oracle_pairs(f,cb->offset_vector,cb->capture_top,1);fprintf(f,"}\n");return rc;
+}
+static int oracle_subcall(pcre2_substitute_callout_block_8 *c,int rc)
+{
+ FILE *f=oracle_event("substituteCallout");if(!f)return rc;fprintf(f,",\"returnCode\":%d,\"version\":%u,\"count\":%u,\"outputStart\":%zu,\"outputEnd\":%zu,\"proposedOutput\":",rc,c->version,c->subscount,c->output_offsets[0],c->output_offsets[1]);oracle_units(f,c->output,c->output_offsets[1]);fprintf(f,",\"captures\":");oracle_pairs(f,c->ovector,c->oveccount,0);fprintf(f,"}\n");return rc;
+}
+static void oracle_casecall(const void *in,size_t n,const void *out,size_t cap,int mode,size_t required,int written)
+{
+ FILE *f=oracle_event(written?"caseCalloutOutput":"caseCalloutInput");if(!f)return;fprintf(f,",\"mode\":%d,\"outputCapacity\":%zu,\"overlap\":%s",mode,cap,((uintptr_t)out<(uintptr_t)in+n*code_unit_size&&(uintptr_t)in<(uintptr_t)out+cap*code_unit_size)?"true":"false");
+ if(!written){fprintf(f,",\"inputUnits\":");oracle_units(f,in,n);}else{fprintf(f,",\"requiredUnits\":");oracle_num(f,required);fprintf(f,",\"outputUnits\":");if(required<=cap)oracle_units(f,out,required);else fprintf(f,"null");}fprintf(f,"}\n");
+}
+static void oracle_match_input(const void *p,size_t n,uint32_t options)
+{
+ FILE *f=oracle_event("matchInput");if(!f)return;fprintf(f,",\"options\":%u,\"startAt\":%u,\"pairCapacity\":%u,\"dfa\":%s,\"units\":",options,dat_datctl.offset,dat_datctl.oveccount,(dat_datctl.control&CTL_DFA)?"true":"false");if(n==PCRE2_ZERO_TERMINATED){n=0;if(p)while(oracle_unit(p,n))n++;}oracle_units(f,p,n);fprintf(f,"}\n");
+}
+static void oracle_match_result(int rc)
+{
+ FILE *f=oracle_event("matchResult");if(!f)return;fprintf(f,",\"returnCode\":%d,\"pairs\":",rc);const size_t *v=FLD(match_data,ovector);size_t cap=FLD(match_data,oveccount),count=FLD(compiled_code,top_bracket)+1;if(count>cap)count=cap;
+ if(rc>=0)oracle_pairs(f,v,count,0);else if(rc==PCRE2_ERROR_PARTIAL)oracle_pairs(f,v,1,0);else fprintf(f,"[]");fprintf(f,",\"startChar\":");if(rc>=0||rc==-2||(rc<=-3&&rc>=-26))oracle_num(f,FLD(match_data,startchar));else fprintf(f,"null");fprintf(f,",\"errorOffset\":");if(rc<=-3&&rc>=-26)oracle_num(f,FLD(match_data,startchar));else fprintf(f,"null");fprintf(f,",\"markDefined\":%s,\"markUnits\":",(rc>=0||rc==-1||rc==-2)?"true":"false");if(rc>=0||rc==-1||rc==-2)oracle_zunits(f,test_mode==8?(const void *)match_data8->mark:(const void *)match_data16->mark);else fprintf(f,"null");fprintf(f,"}\n");
+}

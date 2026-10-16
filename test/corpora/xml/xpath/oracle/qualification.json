@@ -1,0 +1,441 @@
+{
+  "processorLock": {
+    "format": "xpath-processor-lock-1",
+    "id": "Saxon-HE-12.5",
+    "processor": "SaxonJ-HE 12.5",
+    "language": "XQuery3.1/F&O3.1",
+    "xmlVersion": "1.0",
+    "xsdVersion": "1.1",
+    "regex": "Saxon XPath regex implementation; no !j flag or native Java Pattern",
+    "artifacts": [
+      {
+        "name": "Saxon-HE-12.5.jar",
+        "url": "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/12.5/Saxon-HE-12.5.jar",
+        "bytes": 5597291,
+        "sha256": "98c3a91e6e5aaf9b3e2b37601e04b214a6e67098493cdd8232fcb705fddcb674",
+        "license": "MPL-2.0"
+      },
+      {
+        "name": "Saxon-HE-12.5-sources.jar",
+        "url": "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/12.5/Saxon-HE-12.5-sources.jar",
+        "bytes": 4665040,
+        "sha256": "f1500b3f8be4a3c0257d77e43752fe0cce0913a215924256b2a29877b05b6323",
+        "license": "MPL-2.0"
+      },
+      {
+        "name": "xmlresolver-5.2.2.jar",
+        "url": "https://repo.maven.apache.org/maven2/org/xmlresolver/xmlresolver/5.2.2/xmlresolver-5.2.2.jar",
+        "bytes": 165689,
+        "sha256": "efc92bd7ed32b3e57095e0b3e872051ccfbbdcc980831ef33e89e38161a85222",
+        "license": "Apache-2.0"
+      },
+      {
+        "name": "xmlresolver-5.2.2-data.jar",
+        "url": "https://repo.maven.apache.org/maven2/org/xmlresolver/xmlresolver/5.2.2/xmlresolver-5.2.2-data.jar",
+        "bytes": 1027801,
+        "sha256": "173904bdbd783ba0fac92c5bcc05da5d09f0ce7eed24346666ea0a239461f9b4",
+        "license": "Apache-2.0"
+      }
+    ]
+  },
+  "sourceLock": {
+    "format": "xpath-source-lock-1",
+    "qt3Revision": "201a6e466940cdfc727f4babfedcde5332b9f578",
+    "qt3Repository": "https://github.com/w3c/qt3tests.git",
+    "license": "BSD-3-Clause development subset; no W3C branded conformance claim",
+    "files": [
+      {
+        "path": "qt3/README.md",
+        "bytes": 691,
+        "sha256": "f3b23cb8480bafd70dd167669b656e2f8d29845074faa1711c417d764afac35d"
+      },
+      {
+        "path": "qt3/bsd-license.html",
+        "bytes": 25079,
+        "sha256": "6fb7bb1dd66b7307f2cf8694929a6a45c79a746d5ba4d25c450ebcdbed5889a8"
+      },
+      {
+        "path": "qt3/fn/analyze-string/analyze-string.xsd",
+        "bytes": 1230,
+        "sha256": "321ad02670be46ef0c6e3c833a5e5da36a085f2e26176e4e5a1ae3313c38dfb0"
+      },
+      {
+        "path": "qt3/fn/analyze-string.xml",
+        "bytes": 24186,
+        "sha256": "da37450bf7b42cf1100b22cc1d159100903af67643fdd62dd8eaac5de7c18e48"
+      },
+      {
+        "path": "qt3/fn/matches.re.xml",
+        "bytes": 733071,
+        "sha256": "f4544a43a1e6224e92c2f5c9503a267fb24178a32f5aee2d026d4e4b1868cbbd"
+      },
+      {
+        "path": "qt3/fn/matches.xml",
+        "bytes": 60982,
+        "sha256": "c18dcf29d39eadd128eb9a9bccd8d4037ca13e4d0d8ac2d50d874b38637727a0"
+      },
+      {
+        "path": "qt3/fn/replace.xml",
+        "bytes": 37495,
+        "sha256": "d1ac1bdccecee49fb89b30825fc1b1bb26f7cf173df42668187e6c9947b1db16"
+      },
+      {
+        "path": "qt3/fn/tokenize.xml",
+        "bytes": 26887,
+        "sha256": "3061292a186e1785aef45a91d70436bf8eba573a8ef9efca4d307968ef31738a"
+      },
+      {
+        "path": "qt3/guide/running.html",
+        "bytes": 28667,
+        "sha256": "b4933f1d675035d7bf2d5507ceb78c26766f2586701b29c151ee3e7b04c927f8"
+      },
+      {
+        "path": "qt3/guide/submitting.html",
+        "bytes": 8015,
+        "sha256": "7db2c4b481683fc93414c901435855fb725db5aaaa76d7b3fad3520e7fa25377"
+      },
+      {
+        "path": "qt3/license.html",
+        "bytes": 29572,
+        "sha256": "4534f8fa5519fa372134a81c6442b40ff58a6feee74737f67d7df93f91bcbfb0"
+      },
+      {
+        "path": "sources/Blocks-16.txt",
+        "bytes": 11397,
+        "sha256": "f3907b395d410f1b97342292ca6bc83dd12eb4b205f2a0c48efdef99e517d7b0"
+      },
+      {
+        "path": "sources/SpecialCasing-16.txt",
+        "bytes": 16809,
+        "sha256": "8d5de354eef79f2395a54c9c7dcebbaf3d30fc962d0f85611ea97aa973a0c451"
+      },
+      {
+        "path": "sources/UnicodeData-16.txt",
+        "bytes": 2175362,
+        "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f"
+      },
+      {
+        "path": "sources/functions-31.html",
+        "bytes": 2650378,
+        "sha256": "b5bdcfb2e8b6edbe5a997f8971b0829da124bcd6d071c7f651ee71be99b2a988"
+      },
+      {
+        "path": "sources/unicode-license.txt",
+        "bytes": 1995,
+        "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+      },
+      {
+        "path": "sources/xpath-31.html",
+        "bytes": 1107652,
+        "sha256": "ca1f8b00f9626e3e73589a371d702acf6bf0f4708c96a2cb0e87ca7a5ad3b88c"
+      }
+    ]
+  },
+  "javaVersion": "openjdk version \"25.0.2\" 2026-01-20 LTS\nOpenJDK Runtime Environment Temurin-25.0.2+10 (build 25.0.2+10-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.2+10 (build 25.0.2+10-LTS, mixed mode, sharing)\n",
+  "javaBinarySha256": "7c809be6b69f3fcc388afdacbcafae4e5a7f380a27483ff27c722e5e44521ed6",
+  "os": "Darwin Mac.lan 24.6.0 Darwin Kernel Version 24.6.0: Sun Aug 23 20:37:18 PDT 2026; root:xnu-11417.140.69.712.69~1/RELEASE_ARM64_T6041 arm64",
+  "resources": [
+    {
+      "name": "net/sf/saxon/data/categories.xml",
+      "bytes": 85535,
+      "sha256": "03f8ec7531ac999e77e6c3819c986e2c394120d4401686edeefb9a481b58b28e"
+    },
+    {
+      "name": "net/sf/saxon/data/unicodeBlocks.xml",
+      "bytes": 23048,
+      "sha256": "54c36079c2c9b6ddb760c670d6f3792cc1d201f518824b33cea03213d83cd54b"
+    },
+    {
+      "name": "net/sf/saxon/data/casevariants.xml",
+      "bytes": 48623,
+      "sha256": "3303daa9eba112041eeeeed30d5ea248559944620fd630e56f95e6d2431d60dc"
+    }
+  ],
+  "inspectedSourceFiles": [
+    {
+      "name": "net/sf/saxon/functions/Tokenize_3.java",
+      "bytes": 2454,
+      "sha256": "62dab48cc651759807c3a066b7d2bb8478305454e4f44100c3d1e9130518c3ad"
+    },
+    {
+      "name": "net/sf/saxon/functions/RegexFunction.java",
+      "bytes": 7447,
+      "sha256": "625cfbde42849f9aa2a928c9b976a5efb3e6d6f02e06010a47d94119766c2601"
+    },
+    {
+      "name": "net/sf/saxon/regex/CaseVariants.java",
+      "bytes": 5696,
+      "sha256": "6f135ee588d99dbb7b3beb3e7a4fdf7f8c92a6b0373e7a15ec7a332b772e8833"
+    },
+    {
+      "name": "net/sf/saxon/regex/UnicodeBlocks.java",
+      "bytes": 5096,
+      "sha256": "d522432a878a64da68422c86517119857883952115040d27a979037c5915c680"
+    }
+  ],
+  "unicodeProbes": [
+    {
+      "scalar": "U+11F02",
+      "unicode16": [
+        "11F02",
+        "KAWI SIGN REPHA",
+        "Lo",
+        "0",
+        "L",
+        "",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "saxonResourceCategory": "Cn"
+    },
+    {
+      "scalar": "U+1E4F0",
+      "unicode16": [
+        "1E4F0",
+        "NAG MUNDARI DIGIT ZERO",
+        "Nd",
+        "0",
+        "L",
+        "",
+        "0",
+        "0",
+        "0",
+        "N",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "saxonResourceCategory": "Cn"
+    },
+    {
+      "scalar": "U+1E4D0",
+      "unicode16": [
+        "1E4D0",
+        "NAG MUNDARI LETTER O",
+        "Lo",
+        "0",
+        "L",
+        "",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "saxonResourceCategory": "Cn"
+    }
+  ],
+  "caseRelations": [
+    {
+      "first": "U+03D1",
+      "second": "U+0398",
+      "equalFullLowerOrUpper": true,
+      "unicode16First": [
+        "03D1",
+        "GREEK THETA SYMBOL",
+        "Ll",
+        "0",
+        "L",
+        "<compat> 03B8",
+        "",
+        "",
+        "",
+        "N",
+        "GREEK SMALL LETTER SCRIPT THETA",
+        "",
+        "0398",
+        "",
+        "0398"
+      ],
+      "unicode16Second": [
+        "0398",
+        "GREEK CAPITAL LETTER THETA",
+        "Lu",
+        "0",
+        "L",
+        "",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "",
+        "03B8",
+        ""
+      ]
+    },
+    {
+      "first": "U+0398",
+      "second": "U+03F4",
+      "equalFullLowerOrUpper": true,
+      "unicode16First": [
+        "0398",
+        "GREEK CAPITAL LETTER THETA",
+        "Lu",
+        "0",
+        "L",
+        "",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "",
+        "03B8",
+        ""
+      ],
+      "unicode16Second": [
+        "03F4",
+        "GREEK CAPITAL THETA SYMBOL",
+        "Lu",
+        "0",
+        "L",
+        "<compat> 0398",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "",
+        "03B8",
+        ""
+      ]
+    },
+    {
+      "first": "U+03D1",
+      "second": "U+03F4",
+      "equalFullLowerOrUpper": false,
+      "unicode16First": [
+        "03D1",
+        "GREEK THETA SYMBOL",
+        "Ll",
+        "0",
+        "L",
+        "<compat> 03B8",
+        "",
+        "",
+        "",
+        "N",
+        "GREEK SMALL LETTER SCRIPT THETA",
+        "",
+        "0398",
+        "",
+        "0398"
+      ],
+      "unicode16Second": [
+        "03F4",
+        "GREEK CAPITAL THETA SYMBOL",
+        "Lu",
+        "0",
+        "L",
+        "<compat> 0398",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "",
+        "03B8",
+        ""
+      ]
+    },
+    {
+      "first": "U+0069",
+      "second": "U+0131",
+      "equalFullLowerOrUpper": true,
+      "unicode16First": [
+        "0069",
+        "LATIN SMALL LETTER I",
+        "Ll",
+        "0",
+        "L",
+        "",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "0049",
+        "",
+        "0049"
+      ],
+      "unicode16Second": [
+        "0131",
+        "LATIN SMALL LETTER DOTLESS I",
+        "Ll",
+        "0",
+        "L",
+        "",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "0049",
+        "",
+        "0049"
+      ]
+    },
+    {
+      "first": "U+00DF",
+      "second": "U+1E9E",
+      "equalFullLowerOrUpper": true,
+      "unicode16First": [
+        "00DF",
+        "LATIN SMALL LETTER SHARP S",
+        "Ll",
+        "0",
+        "L",
+        "",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "unicode16Second": [
+        "1E9E",
+        "LATIN CAPITAL LETTER SHARP S",
+        "Lu",
+        "0",
+        "L",
+        "",
+        "",
+        "",
+        "",
+        "N",
+        "",
+        "",
+        "",
+        "00DF",
+        ""
+      ]
+    }
+  ],
+  "xmlPolicy": "Explicit Saxon XML1.0; exact fifth-edition NameChar/Char boundary probes retained in source corpus; no claim of processor Unicode16 identity",
+  "casePolicy": "Saxon embedded casevariants.xml, not Java Pattern/ambient runtime Unicode; ratified full default Unicode16 lower/upper remains target",
+  "tokenizePolicy": "Tokenize_3.call returns on absent/empty input before getRegularExpression; F&O1.4 prioritizes errors while XPath2.3.4 allows skipped argument error evaluation; GregsEx ratified deterministic eager validation retained"
+}

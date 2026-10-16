@@ -1,0 +1,17 @@
+GregsEx ECMAScript profiles select Unicode 16.0.0/Emoji 16.0 or
+Unicode 17.0.0/Emoji 17.0 data, independently of host data.
+The generated classification, identifier, simple case folding, legacy uppercase
+and emoji sequence tables derive from the following official data sources:
+https://www.unicode.org/Public/16.0.0/ucd/UCD.zip
+https://www.unicode.org/Public/emoji/16.0/emoji-sequences.txt
+https://www.unicode.org/Public/emoji/16.0/emoji-zwj-sequences.txt
+https://www.unicode.org/Public/17.0.0/ucd/UCD.zip
+https://www.unicode.org/Public/17.0.0/emoji/emoji-sequences.txt
+https://www.unicode.org/Public/17.0.0/emoji/emoji-zwj-sequences.txt
+Their retained input identities and generation audit are recorded in
+tools/unicode/ecmascript/inputs.sha256.json and outputs.json for Unicode16,
+and tools/unicode/ecmascript/17.0.0/inputs.sha256.json and outputs.json for
+Unicode17, in this repository. The Unicode17 source UCD archive is retained
+at tools/unicode/ecmascript/17.0.0/UCD.zip with its identity in the manifest.
+The accompanying Unicode-LICENSE.txt contains Unicode License V3.
+The profile data identity is Unicode-16.0.0+Emoji-16.0 or Unicode-17.0.0+Emoji-17.0.

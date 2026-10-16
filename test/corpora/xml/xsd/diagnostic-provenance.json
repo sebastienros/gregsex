@@ -1,0 +1,1733 @@
+{
+  "format": "xsd-diagnostic-provenance-1",
+  "cases": [
+    {
+      "id": "XSD-invalid-0",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-1",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 3,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        94,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-2",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 3,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        122,
+        45,
+        97,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-3",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 2,
+        "length": 3,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        97,
+        45,
+        92,
+        100,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-4",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 8,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        97,
+        45,
+        122,
+        45,
+        91,
+        98,
+        93,
+        99,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-5",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 4,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        97,
+        38,
+        38,
+        91,
+        98,
+        93,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-6",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 7,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        97,
+        45,
+        91,
+        98,
+        93,
+        45,
+        91,
+        99,
+        93,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-7",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 5,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        123,
+        51,
+        44,
+        50,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-8",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 4,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        123,
+        44,
+        50,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-9",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 7,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        123,
+        49,
+        44,
+        50,
+        44,
+        51,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-10",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        42
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-11",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 2,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        42,
+        42
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-12",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 2,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        43,
+        63
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-13",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 2,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        43,
+        43
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-14",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 4,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        123,
+        49,
+        125,
+        63
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-15",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        40,
+        63,
+        58,
+        97,
+        41
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-16",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        40,
+        63,
+        61,
+        97,
+        41
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-17",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 3,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        40,
+        63,
+        60,
+        110,
+        62,
+        97,
+        41
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-18",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 3,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        40,
+        97,
+        41,
+        92,
+        49
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-19",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        120,
+        52,
+        49
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-20",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        117,
+        48,
+        48,
+        52,
+        49
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-21",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        48
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-22",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        97
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-23",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        98
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-24",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-25",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        40
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-26",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        41
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-27",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 3,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        112,
+        123,
+        67,
+        115,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-28",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 3,
+        "length": 6,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        112,
+        123,
+        76,
+        101,
+        116,
+        116,
+        101,
+        114,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-29",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 3,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-30",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 10,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        66,
+        97,
+        115,
+        105,
+        99,
+        95,
+        76,
+        97,
+        116,
+        105,
+        110,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-31",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 3,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        112,
+        123,
+        108,
+        117,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-32",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 3,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        112,
+        123,
+        76,
+        120,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-33",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 10,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        66,
+        97,
+        115,
+        105,
+        99,
+        32,
+        76,
+        97,
+        116,
+        105,
+        110,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-34",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        92,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-35",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 3,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        97,
+        45,
+        92,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-invalid-36",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        112,
+        76
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "SEED-XML-C030",
+      "coordinateAuthority": "FrozenExactContract",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "UnsupportedRepresentation",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 0,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "SEED-XML-C031",
+      "coordinateAuthority": "FrozenExactContract",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 2,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        92,
+        120,
+        52,
+        49
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "SEED-XML-C032",
+      "coordinateAuthority": "FrozenExactContract",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidSyntax",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 3,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        91,
+        92,
+        93
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "SEED-XML-C034",
+      "coordinateAuthority": "FrozenExactContract",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "Cancelled",
+        "location": "Input",
+        "offset": 0,
+        "length": 0,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "SEED-XML-C035",
+      "coordinateAuthority": "FrozenExactContract",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        0
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "SEED-XML-C036",
+      "coordinateAuthority": "FrozenExactContract",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        55296
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "SEED-XML-C073",
+      "coordinateAuthority": "FrozenExactContract",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "UnsupportedRepresentation",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 0,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "SEED-XML-C074",
+      "coordinateAuthority": "FrozenExactContract",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        240,
+        128,
+        128,
+        128
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-0",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        0
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-1",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        1
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-8",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        8
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-11",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        11
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-12",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        12
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-14",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        14
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-31",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        31
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-65534",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        65534
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf16-65535",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        65535
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-malformed-Utf16-4590",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        55296
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-malformed-Utf16-4591",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        56320
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-malformed-Utf16-4592",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        56319
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-raw-Utf16",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "UnsupportedRepresentation",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-0",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        0
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-1",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        1
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-8",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        8
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-11",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        11
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-12",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        12
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-14",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        14
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-31",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        31
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-65534",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        239,
+        191,
+        190
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-domain-Utf8-65535",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidInputDomain",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        239,
+        191,
+        191
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-malformed-Utf8-4614",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        128
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-malformed-Utf8-4615",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        192,
+        175
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-malformed-Utf8-4616",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        237,
+        160,
+        128
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-malformed-Utf8-4617",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        244,
+        144,
+        128,
+        128
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-malformed-Utf8-4618",
+      "coordinateAuthority": "FirstOffendingNativeOffset",
+      "offsetUnit": "Bytes",
+      "sourceWitness": {
+        "code": "InvalidEncoding",
+        "location": "Input",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Bytes",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        240,
+        159
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-raw-Utf8",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "UnsupportedRepresentation",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-compile-limit",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "CompileWorkLimitExceeded",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 0,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        123,
+        49,
+        48,
+        48,
+        48,
+        125
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-work-limit",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "WorkLimitExceeded",
+        "location": "Input",
+        "offset": 0,
+        "length": 0,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97,
+        97
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-cancel-empty",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "Cancelled",
+        "location": "Input",
+        "offset": 0,
+        "length": 0,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-pattern-domain-0",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidPatternEncoding",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        0
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-pattern-domain-1",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidPatternEncoding",
+        "location": "Pattern",
+        "offset": 0,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        55296
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    },
+    {
+      "id": "XSD-pattern-domain-2",
+      "coordinateAuthority": "SourceArgumentWitness",
+      "offsetUnit": "Utf16CodeUnits",
+      "sourceWitness": {
+        "code": "InvalidPatternEncoding",
+        "location": "Pattern",
+        "offset": 1,
+        "length": 1,
+        "offsetUnit": "Utf16CodeUnits",
+        "namespace": null
+      },
+      "implicatedArgumentUnits": [
+        97,
+        65534
+      ],
+      "oracleDerivedCoordinate": false,
+      "productCoordinateValidation": "Required: compare frozen seed exactly; native failures require first offending offset. Other new witnesses identify implicated source spans, not a specification-mandated parser cursor/length; integration must add exact product-coordinate tests."
+    }
+  ]
+}

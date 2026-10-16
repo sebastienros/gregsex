@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>GregsEx.Tests</AssemblyName>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../src/GregsEx/GregsEx.csproj" />
+    <Compile Include="../../../../benchmarks/GregsEx.Benchmarks/Xml/XmlProbe.cs" Link="XmlProbe.cs" />
+  </ItemGroup>
+</Project>

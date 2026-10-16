@@ -1,0 +1,45 @@
+{
+  "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "sourceArchiveSha256": "ffde0c6ead457c4f8edcd8f9ce490bbabd30adabdfd179ecaddd320946cf3872",
+  "method": "bounded selected C probes, retained native libraries (no rebuild/suite)",
+  "libraries": {
+    "8": "460a19b179518523bc5cbf2162b5f0263c6f5a5113ae7fd0ad61c1f53ab4c531",
+    "16": "e0bbe10f169a236b10f5d5a939a10bd0a617466c2359226de847317235f84bed"
+  },
+  "compileCommands": [
+    "clang -O2 -I/tmp/gregsex-m5-unicode-native tools/oracles/pcre2/unicode/native-8.c /tmp/gregsex-m5-unicode-native/libpcre2-8.a -o /tmp/gregsex-m5-unicode-native/probe-8",
+    "clang -O2 -I/tmp/gregsex-m5-unicode-native tools/oracles/pcre2/unicode/native-16.c /tmp/gregsex-m5-unicode-native/libpcre2-16.a -o /tmp/gregsex-m5-unicode-native/probe-16"
+  ],
+  "runCommands": [
+    "/tmp/gregsex-m5-unicode-native/probe-8",
+    "/tmp/gregsex-m5-unicode-native/probe-16"
+  ],
+  "probes": 51,
+  "files": [
+    {
+      "path": "test/corpora/pcre2/unicode/native-inputs.json",
+      "sha256": "8918928f6fa3eb5ef477ba6fe627723c3b68ef79ce7c35f4bbc79e76cab0cd6b",
+      "bytes": 10597
+    },
+    {
+      "path": "tools/oracles/pcre2/unicode/native-8.c",
+      "sha256": "8651d067ca29bea5394215b8218ccd60eea04a009fa8ac5311f64772d6d0aef0",
+      "bytes": 14157
+    },
+    {
+      "path": "tools/oracles/pcre2/unicode/native-16.c",
+      "sha256": "5618b9f4706833712dc80aa545aff1ccabbeeefa7cd480529d9ae2cb0fe853f2",
+      "bytes": 14539
+    },
+    {
+      "path": "test/corpora/pcre2/unicode/native-8.log",
+      "sha256": "5018c911f30c1412a88b6d67e715a46509a49453e99c9f30ff90e87fb9214e97",
+      "bytes": 458
+    },
+    {
+      "path": "test/corpora/pcre2/unicode/native-16.log",
+      "sha256": "160d12f7fca219420e3eb37ed4fb1ed5358ab9094816f63b4f3eb47aa09fcc2b",
+      "bytes": 501
+    }
+  ]
+}

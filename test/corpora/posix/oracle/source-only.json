@@ -1,0 +1,23 @@
+{
+  "POSIX-C104": "Generic original-subject lower-bound is not native regexec ABI; never slice or add NOTBOL to fabricate it.",
+  "POSIX-C105": "Generic original-subject lower-bound is not native regexec ABI; never slice or add NOTBOL to fabricate it.",
+  "POSIX-C110": "Managed whole-span domain rule differs from C NUL-terminated interface.",
+  "POSIX-C111": "Managed whole-span domain rule differs from C NUL-terminated interface.",
+  "POSIX-C113": "Managed whole-span domain rule differs from C NUL-terminated interface.",
+  "POSIX-C114": "Managed representation exclusion has no libc counterpart.",
+  "POSIX-C115": "Managed representation exclusion has no libc counterpart.",
+  "POSIX-C116": "Named provider excludes other locales; native process remains C.",
+  "POSIX-C123": "Generic complete-destination/NoSub exception is a managed adapter obligation.",
+  "POSIX-C124": "Generic complete-destination/NoSub exception is a managed adapter obligation.",
+  "POSIX-C125": "Managed finite budget/cancellation has no libc equivalent.",
+  "POSIX-C126": "Managed finite budget/cancellation has no libc equivalent.",
+  "POSIX-C127": "Managed finite budget/cancellation has no libc equivalent.",
+  "POSIX-C128": "Managed finite budget/cancellation has no libc equivalent.",
+  "POSIX-C129": "Managed finite budget/cancellation has no libc equivalent.",
+  "POSIX-C130": "Managed finite budget/cancellation has no libc equivalent.",
+  "POSIX-C131": "Managed stable ASCII message; native wording is unspecified, independently probed for every native result.",
+  "POSIX-C132": "Managed stable ASCII message; native wording is unspecified, independently probed for every native result.",
+  "POSIX-C133": "Managed stable ASCII message; native wording is unspecified, independently probed for every native result.",
+  "POSIX-C134": "Managed stable ASCII message; native wording is unspecified, independently probed for every native result.",
+  "POSIX-C135": "Managed stable ASCII message; native wording is unspecified, independently probed for every native result."
+}

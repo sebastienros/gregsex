@@ -1,0 +1,565 @@
+Notices from the13 actual release Unicode input members (UnicodeData.txt has no header).
+
+# BidiMirroring-16.0.0.txt
+# BidiMirroring-16.0.0.txt
+# Date: 2024-01-30
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+# For documentation, see https://www.unicode.org/reports/tr44/
+#
+# Bidi_Mirroring_Glyph Property
+#
+# This file is an informative contributory data file in the
+# Unicode Character Database.
+#
+# This data file lists characters that have the Bidi_Mirrored=Yes property
+# value, for which there is another Unicode character that typically has a glyph
+# that is the mirror image of the original character's glyph.
+#
+# The repertoire covered by the file is Unicode 16.0.0.
+#
+# The file contains a list of lines with mappings from one code point
+# to another one for character-based mirroring.
+# Note that for "real" mirroring, a rendering engine needs to select
+# appropriate alternative glyphs, and that many Unicode characters do not
+# have a mirror-image Unicode character.
+#
+# Each mapping line contains two fields, separated by a semicolon (';').
+# Each of the two fields contains a code point represented as a
+# variable-length hexadecimal value with 4 to 6 digits.
+# A comment indicates where the characters are "BEST FIT" mirroring.
+#
+# Code points for which Bidi_Mirrored=Yes, but for which no appropriate
+# characters exist with mirrored glyphs, are
+# listed as comments at the end of the file.
+#
+# Formally, the default value of the Bidi_Mirroring_Glyph property
+# for each code point is <none>, unless a mapping to
+# some other character is specified in this data file. When a code
+# point has the default value for the Bidi_Mirroring_Glyph property,
+# that means that no other character exists whose glyph is suitable
+# for character-based mirroring.
+#
+# For information on bidi mirroring, see UAX #9: Unicode Bidirectional Algorithm,
+# at https://www.unicode.org/reports/tr9/
+#
+
+# CaseFolding-16.0.0.txt
+# CaseFolding-16.0.0.txt
+# Date: 2024-04-30, 21:48:11 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+#
+# Case Folding Properties
+#
+# This file is a supplement to the UnicodeData file.
+# It provides a case folding mapping generated from the Unicode Character Database.
+# If all characters are mapped according to the full mapping below, then
+# case differences (according to UnicodeData.txt and SpecialCasing.txt)
+# are eliminated.
+#
+# The data supports both implementations that require simple case foldings
+# (where string lengths don't change), and implementations that allow full case folding
+# (where string lengths may grow). Note that where they can be supported, the
+# full case foldings are superior: for example, they allow "MASSE" and "Maße" to match.
+#
+# All code points not listed in this file map to themselves.
+#
+# NOTE: case folding does not preserve normalization formats!
+#
+# For information on case folding, including how to have case folding
+# preserve normalization formats, see Section 3.13 Default Case Algorithms in
+# The Unicode Standard.
+#
+# ================================================================================
+# Format
+# ================================================================================
+# The entries in this file are in the following machine-readable format:
+#
+# <code>; <status>; <mapping>; # <name>
+#
+# The status field is:
+# C: common case folding, common mappings shared by both simple and full mappings.
+# F: full case folding, mappings that cause strings to grow in length. Multiple characters are separated by spaces.
+# S: simple case folding, mappings to single characters where different from F.
+# T: special case for uppercase I and dotted uppercase I
+#    - For non-Turkic languages, this mapping is normally not used.
+#    - For Turkic languages (tr, az), this mapping can be used instead of the normal mapping for these characters.
+#      Note that the Turkic mappings do not maintain canonical equivalence without additional processing.
+
+# DerivedBidiClass-16.0.0.txt
+# DerivedBidiClass-16.0.0.txt
+# Date: 2024-04-30, 21:48:13 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+
+# ================================================
+
+# Bidi Class (listing UnicodeData.txt, field 4: see UAX #44: https://www.unicode.org/reports/tr44/)
+# Unlike other properties, unassigned code points in blocks
+# reserved for right-to-left scripts are given either values R or AL,
+# and unassigned code points in the Currency Symbols block are given the value ET.
+# For details see the @missing lines below.
+#
+# The unassigned code points that default to BN have one of the following properties:
+#     Default_Ignorable_Code_Point
+#     Noncharacter_Code_Point
+#
+# For all other cases:
+
+#  All code points not explicitly listed for Bidi_Class
+#  have the value Left_To_Right (L).
+
+# @missing: 0000..10FFFF; Left_To_Right
+
+# 0590..05FF Hebrew
+# @missing: 0590..05FF; Right_To_Left
+
+# 0600..06FF Arabic
+# 0700..074F Syriac
+# 0750..077F Arabic_Supplement
+# 0780..07BF Thaana
+# @missing: 0600..07BF; Arabic_Letter
+
+# 07C0..07FF NKo
+# 0800..083F Samaritan
+# 0840..085F Mandaic
+# @missing: 07C0..085F; Right_To_Left
+
+# 0860..086F Syriac_Supplement
+# 0870..089F Arabic_Extended_B
+# 08A0..08FF Arabic_Extended_A
+
+# DerivedCoreProperties-16.0.0.txt
+# DerivedCoreProperties-16.0.0.txt
+# Date: 2024-05-31, 18:09:32 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+
+# ================================================
+
+# Derived Property: Math
+#  Generated from: Sm + Other_Math
+
+002B          ; Math # Sm       PLUS SIGN
+003C..003E    ; Math # Sm   [3] LESS-THAN SIGN..GREATER-THAN SIGN
+005E          ; Math # Sk       CIRCUMFLEX ACCENT
+007C          ; Math # Sm       VERTICAL LINE
+007E          ; Math # Sm       TILDE
+00AC          ; Math # Sm       NOT SIGN
+00B1          ; Math # Sm       PLUS-MINUS SIGN
+00D7          ; Math # Sm       MULTIPLICATION SIGN
+00F7          ; Math # Sm       DIVISION SIGN
+03D0..03D2    ; Math # L&   [3] GREEK BETA SYMBOL..GREEK UPSILON WITH HOOK SYMBOL
+03D5          ; Math # L&       GREEK PHI SYMBOL
+03F0..03F1    ; Math # L&   [2] GREEK KAPPA SYMBOL..GREEK RHO SYMBOL
+03F4..03F5    ; Math # L&   [2] GREEK CAPITAL THETA SYMBOL..GREEK LUNATE EPSILON SYMBOL
+03F6          ; Math # Sm       GREEK REVERSED LUNATE EPSILON SYMBOL
+0606..0608    ; Math # Sm   [3] ARABIC-INDIC CUBE ROOT..ARABIC RAY
+2016          ; Math # Po       DOUBLE VERTICAL LINE
+2032..2034    ; Math # Po   [3] PRIME..TRIPLE PRIME
+2040          ; Math # Pc       CHARACTER TIE
+2044          ; Math # Sm       FRACTION SLASH
+2052          ; Math # Sm       COMMERCIAL MINUS SIGN
+2061..2064    ; Math # Cf   [4] FUNCTION APPLICATION..INVISIBLE PLUS
+207A..207C    ; Math # Sm   [3] SUPERSCRIPT PLUS SIGN..SUPERSCRIPT EQUALS SIGN
+207D          ; Math # Ps       SUPERSCRIPT LEFT PARENTHESIS
+207E          ; Math # Pe       SUPERSCRIPT RIGHT PARENTHESIS
+208A..208C    ; Math # Sm   [3] SUBSCRIPT PLUS SIGN..SUBSCRIPT EQUALS SIGN
+208D          ; Math # Ps       SUBSCRIPT LEFT PARENTHESIS
+208E          ; Math # Pe       SUBSCRIPT RIGHT PARENTHESIS
+20D0..20DC    ; Math # Mn  [13] COMBINING LEFT HARPOON ABOVE..COMBINING FOUR DOTS ABOVE
+20E1          ; Math # Mn       COMBINING LEFT RIGHT ARROW ABOVE
+20E5..20E6    ; Math # Mn   [2] COMBINING REVERSE SOLIDUS OVERLAY..COMBINING DOUBLE VERTICAL STROKE OVERLAY
+20EB..20EF    ; Math # Mn   [5] COMBINING LONG DOUBLE SOLIDUS OVERLAY..COMBINING RIGHT ARROW BELOW
+
+# DerivedGeneralCategory-16.0.0.txt
+# DerivedGeneralCategory-16.0.0.txt
+# Date: 2024-04-30, 21:48:17 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+
+# ================================================
+
+# Property:	General_Category
+
+# ================================================
+
+# General_Category=Unassigned
+
+0378..0379    ; Cn #   [2] <reserved-0378>..<reserved-0379>
+0380..0383    ; Cn #   [4] <reserved-0380>..<reserved-0383>
+038B          ; Cn #       <reserved-038B>
+038D          ; Cn #       <reserved-038D>
+03A2          ; Cn #       <reserved-03A2>
+0530          ; Cn #       <reserved-0530>
+0557..0558    ; Cn #   [2] <reserved-0557>..<reserved-0558>
+058B..058C    ; Cn #   [2] <reserved-058B>..<reserved-058C>
+0590          ; Cn #       <reserved-0590>
+05C8..05CF    ; Cn #   [8] <reserved-05C8>..<reserved-05CF>
+05EB..05EE    ; Cn #   [4] <reserved-05EB>..<reserved-05EE>
+05F5..05FF    ; Cn #  [11] <reserved-05F5>..<reserved-05FF>
+070E          ; Cn #       <reserved-070E>
+074B..074C    ; Cn #   [2] <reserved-074B>..<reserved-074C>
+07B2..07BF    ; Cn #  [14] <reserved-07B2>..<reserved-07BF>
+07FB..07FC    ; Cn #   [2] <reserved-07FB>..<reserved-07FC>
+082E..082F    ; Cn #   [2] <reserved-082E>..<reserved-082F>
+083F          ; Cn #       <reserved-083F>
+085C..085D    ; Cn #   [2] <reserved-085C>..<reserved-085D>
+085F          ; Cn #       <reserved-085F>
+086B..086F    ; Cn #   [5] <reserved-086B>..<reserved-086F>
+088F          ; Cn #       <reserved-088F>
+0892..0896    ; Cn #   [5] <reserved-0892>..<reserved-0896>
+0984          ; Cn #       <reserved-0984>
+098D..098E    ; Cn #   [2] <reserved-098D>..<reserved-098E>
+0991..0992    ; Cn #   [2] <reserved-0991>..<reserved-0992>
+09A9          ; Cn #       <reserved-09A9>
+09B1          ; Cn #       <reserved-09B1>
+
+# GraphemeBreakProperty-16.0.0.txt
+# GraphemeBreakProperty-16.0.0.txt
+# Date: 2024-05-31, 18:09:38 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+
+# ================================================
+
+# Property:	Grapheme_Cluster_Break
+
+#  All code points not explicitly listed for Grapheme_Cluster_Break
+#  have the value Other (XX).
+
+# @missing: 0000..10FFFF; Other
+
+# ================================================
+
+0600..0605    ; Prepend # Cf   [6] ARABIC NUMBER SIGN..ARABIC NUMBER MARK ABOVE
+06DD          ; Prepend # Cf       ARABIC END OF AYAH
+070F          ; Prepend # Cf       SYRIAC ABBREVIATION MARK
+0890..0891    ; Prepend # Cf   [2] ARABIC POUND MARK ABOVE..ARABIC PIASTRE MARK ABOVE
+08E2          ; Prepend # Cf       ARABIC DISPUTED END OF AYAH
+0D4E          ; Prepend # Lo       MALAYALAM LETTER DOT REPH
+110BD         ; Prepend # Cf       KAITHI NUMBER SIGN
+110CD         ; Prepend # Cf       KAITHI NUMBER SIGN ABOVE
+111C2..111C3  ; Prepend # Lo   [2] SHARADA SIGN JIHVAMULIYA..SHARADA SIGN UPADHMANIYA
+113D1         ; Prepend # Lo       TULU-TIGALARI REPHA
+1193F         ; Prepend # Lo       DIVES AKURU PREFIXED NASAL SIGN
+11941         ; Prepend # Lo       DIVES AKURU INITIAL RA
+11A3A         ; Prepend # Lo       ZANABAZAR SQUARE CLUSTER-INITIAL LETTER RA
+11A84..11A89  ; Prepend # Lo   [6] SOYOMBO SIGN JIHVAMULIYA..SOYOMBO CLUSTER-INITIAL LETTER SA
+11D46         ; Prepend # Lo       MASARAM GONDI REPHA
+11F02         ; Prepend # Lo       KAWI SIGN REPHA
+
+# Total code points: 28
+
+# ================================================
+
+000D          ; CR # Cc       <control-000D>
+
+# Total code points: 1
+
+
+# PropList-16.0.0.txt
+# PropList-16.0.0.txt
+# Date: 2024-05-31, 18:09:48 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+
+# ================================================
+
+0009..000D    ; White_Space # Cc   [5] <control-0009>..<control-000D>
+0020          ; White_Space # Zs       SPACE
+0085          ; White_Space # Cc       <control-0085>
+00A0          ; White_Space # Zs       NO-BREAK SPACE
+1680          ; White_Space # Zs       OGHAM SPACE MARK
+2000..200A    ; White_Space # Zs  [11] EN QUAD..HAIR SPACE
+2028          ; White_Space # Zl       LINE SEPARATOR
+2029          ; White_Space # Zp       PARAGRAPH SEPARATOR
+202F          ; White_Space # Zs       NARROW NO-BREAK SPACE
+205F          ; White_Space # Zs       MEDIUM MATHEMATICAL SPACE
+3000          ; White_Space # Zs       IDEOGRAPHIC SPACE
+
+# Total code points: 25
+
+# ================================================
+
+061C          ; Bidi_Control # Cf       ARABIC LETTER MARK
+200E..200F    ; Bidi_Control # Cf   [2] LEFT-TO-RIGHT MARK..RIGHT-TO-LEFT MARK
+202A..202E    ; Bidi_Control # Cf   [5] LEFT-TO-RIGHT EMBEDDING..RIGHT-TO-LEFT OVERRIDE
+2066..2069    ; Bidi_Control # Cf   [4] LEFT-TO-RIGHT ISOLATE..POP DIRECTIONAL ISOLATE
+
+# Total code points: 12
+
+# ================================================
+
+200C..200D    ; Join_Control # Cf   [2] ZERO WIDTH NON-JOINER..ZERO WIDTH JOINER
+
+# Total code points: 2
+
+# ================================================
+
+002D          ; Dash # Pd       HYPHEN-MINUS
+058A          ; Dash # Pd       ARMENIAN HYPHEN
+05BE          ; Dash # Pd       HEBREW PUNCTUATION MAQAF
+
+# PropertyAliases-16.0.0.txt
+# PropertyAliases-16.0.0.txt
+# Date: 2024-06-06, 21:52:48 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+#
+# This file contains aliases for properties used in the UCD.
+# These names can be used for XML formats of UCD data, for regular-expression
+# property tests, and other programmatic textual descriptions of Unicode data.
+#
+# The names may be translated in appropriate environments, and additional
+# aliases may be useful.
+#
+# FORMAT
+#
+# Each line has two or more fields, separated by semicolons.
+#
+# First Field: The first field is the short name for the property.
+# It is typically an abbreviation, but in a number of cases it is simply
+# a duplicate of the "long name" in the second field.
+# For Unihan database tags, the short name is actually a longer string than
+# the tag specified in the second field.
+#
+# Second Field: The second field is the long name for the property,
+# typically the formal name used in documentation about the property.
+#
+# The above are the preferred aliases. Other aliases may be listed in additional fields.
+#
+# Loose matching should be applied to all property names and property values, with
+# the exception of String Property values. With loose matching of property names and
+# values, the case distinctions, whitespace, and '_' are ignored. For Numeric Property
+# values, numeric equivalencies are applied: thus "01.00" is equivalent to "1".
+#
+# NOTE: Property value names are NOT unique across properties. For example:
+#
+#   AL means Arabic Letter for the Bidi_Class property, and
+#   AL means Above_Left for the Combining_Class property, and
+#   AL means Alphabetic for the Line_Break property.
+#
+# In addition, some property names may be the same as some property value names.
+# For example:
+#
+
+# PropertyValueAliases-16.0.0.txt
+# PropertyValueAliases-16.0.0.txt
+# Date: 2024-07-30, 19:59:00 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+#
+# This file contains aliases for property values used in the UCD.
+# These names can be used for XML formats of UCD data, for regular-expression
+# property tests, and other programmatic textual descriptions of Unicode data.
+#
+# The names may be translated in appropriate environments, and additional
+# aliases may be useful.
+#
+# FORMAT
+#
+# Each line describes a property value name.
+# This consists of three or more fields, separated by semicolons.
+#
+# First Field: The first field describes the property for which that
+# property value name is used.
+#
+# Second Field: The second field is the short name for the property value.
+# It is typically an abbreviation, but in a number of cases it is simply
+# a duplicate of the "long name" in the third field.
+#
+# Third Field: The third field is the long name for the property value, 
+# typically the formal name used in documentation about the property value.
+#
+# In the case of Canonical_Combining_Class (ccc), there are 4 fields: 
+# The second field is numeric, the third is the short name, and the fourth is the long name.
+#
+# The above are the preferred aliases. Other aliases may be listed in additional fields.
+#
+# Loose matching should be applied to all property names and property values, with
+# the exception of String Property values. With loose matching of property names and
+# values, the case distinctions, whitespace, hyphens, and '_' are ignored.
+# For Numeric Property values, numeric equivalence is applied: thus "01.00"
+# is equivalent to "1".
+#
+# NOTE: Property value names are NOT unique across properties. For example:
+#
+#   AL means Arabic Letter for the Bidi_Class property, and
+
+# ScriptExtensions-16.0.0.txt
+# ScriptExtensions-16.0.0.txt
+# Date: 2024-07-30, 19:38:00 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+#
+# The Script_Extensions property indicates which characters are commonly used
+# with more than one script, but with a limited number of scripts.
+# For each code point, there is one or more property values.  Each such value is a Script property value.
+# For more information, see:
+#   UAX #24, Unicode Script Property: https://www.unicode.org/reports/tr24/
+#     Especially the sections:
+#       https://www.unicode.org/reports/tr24/#Assignment_Script_Values
+#       https://www.unicode.org/reports/tr24/#Assignment_ScriptX_Values
+#
+# Each Script_Extensions value in this file consists of a set
+# of one or more abbreviated Script property values. The ordering of the
+# values in that set is not material, but for stability in presentation
+# it is given here as alphabetical.
+#
+# All code points not explicitly listed for Script_Extensions
+# have as their value the corresponding Script property value.
+#
+# @missing: 0000..10FFFF; <script>
+00B7          ; Avst Cari Copt Dupl Elba Geor Glag Gong Goth Grek Hani Latn Lydi Mahj Perm Shaw #Po MIDDLE DOT
+02BC          ; Beng Cyrl Deva Latn Lisu Thai Toto #Lm   MODIFIER LETTER APOSTROPHE
+02C7          ; Bopo Latn                      # Lm      CARON
+02C9..02CB    ; Bopo Latn                      # Lm  [3] MODIFIER LETTER MACRON..MODIFIER LETTER GRAVE ACCENT
+02CD          ; Latn Lisu                      # Lm      MODIFIER LETTER LOW MACRON
+02D7          ; Latn Thai                      # Sk      MODIFIER LETTER MINUS SIGN
+02D9          ; Bopo Latn                      # Sk      DOT ABOVE
+0300          ; Cher Copt Cyrl Grek Latn Perm Sunu Tale #Mn COMBINING GRAVE ACCENT
+0301          ; Cher Cyrl Grek Latn Osge Sunu Tale Todr #Mn COMBINING ACUTE ACCENT
+0302          ; Cher Cyrl Latn Tfng            # Mn      COMBINING CIRCUMFLEX ACCENT
+0303          ; Glag Latn Sunu Syrc Thai       # Mn      COMBINING TILDE
+0304          ; Aghb Cher Copt Cyrl Goth Grek Latn Osge Syrc Tfng Todr #Mn COMBINING MACRON
+0305          ; Copt Elba Glag Goth Kana Latn  # Mn      COMBINING OVERLINE
+0306          ; Cyrl Grek Latn Perm            # Mn      COMBINING BREVE
+0307          ; Copt Dupl Hebr Latn Perm Syrc Tale Tfng Todr #Mn COMBINING DOT ABOVE
+0308          ; Armn Cyrl Dupl Goth Grek Hebr Latn Perm Syrc Tale #Mn COMBINING DIAERESIS
+0309          ; Latn Tfng                      # Mn      COMBINING HOOK ABOVE
+030A          ; Dupl Latn Syrc                 # Mn      COMBINING RING ABOVE
+
+# Scripts-16.0.0.txt
+# Scripts-16.0.0.txt
+# Date: 2024-04-30, 21:48:40 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+# For more information, see:
+#   UAX #24, Unicode Script Property: https://www.unicode.org/reports/tr24/
+#     Especially the sections:
+#       https://www.unicode.org/reports/tr24/#Assignment_Script_Values
+#       https://www.unicode.org/reports/tr24/#Assignment_ScriptX_Values
+#
+
+# ================================================
+
+# Property:	Script
+
+#  All code points not explicitly listed for Script
+#  have the value Unknown (Zzzz).
+
+# @missing: 0000..10FFFF; Unknown
+
+# ================================================
+
+0000..001F    ; Common # Cc  [32] <control-0000>..<control-001F>
+0020          ; Common # Zs       SPACE
+0021..0023    ; Common # Po   [3] EXCLAMATION MARK..NUMBER SIGN
+0024          ; Common # Sc       DOLLAR SIGN
+0025..0027    ; Common # Po   [3] PERCENT SIGN..APOSTROPHE
+0028          ; Common # Ps       LEFT PARENTHESIS
+0029          ; Common # Pe       RIGHT PARENTHESIS
+002A          ; Common # Po       ASTERISK
+002B          ; Common # Sm       PLUS SIGN
+002C          ; Common # Po       COMMA
+002D          ; Common # Pd       HYPHEN-MINUS
+002E..002F    ; Common # Po   [2] FULL STOP..SOLIDUS
+0030..0039    ; Common # Nd  [10] DIGIT ZERO..DIGIT NINE
+003A..003B    ; Common # Po   [2] COLON..SEMICOLON
+003C..003E    ; Common # Sm   [3] LESS-THAN SIGN..GREATER-THAN SIGN
+003F..0040    ; Common # Po   [2] QUESTION MARK..COMMERCIAL AT
+005B          ; Common # Ps       LEFT SQUARE BRACKET
+005C          ; Common # Po       REVERSE SOLIDUS
+005D          ; Common # Pe       RIGHT SQUARE BRACKET
+
+# emoji-data.txt
+# emoji-data.txt
+# Date: 2024-05-01, 21:25:24 GMT
+# © 2024 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Emoji Data for UTS #51
+# Used with Emoji Version 16.0 and subsequent minor revisions (if any)
+#
+# For documentation and usage, see https://www.unicode.org/reports/tr51
+#
+# Format: 
+# <codepoint(s)> ; <property> # <comments> 
+# Note: there is no guarantee as to the structure of whitespace or comments
+#
+# Characters and sequences are listed in code point order. Users should be shown a more natural order.
+# See the CLDR collation order for Emoji.
+
+
+# ================================================
+
+# All omitted code points have Emoji=No
+
+0023          ; Emoji                # E0.0   [1] (#️)       hash sign
+002A          ; Emoji                # E0.0   [1] (*️)       asterisk
+0030..0039    ; Emoji                # E0.0  [10] (0️..9️)    digit zero..digit nine
+00A9          ; Emoji                # E0.6   [1] (©️)       copyright
+00AE          ; Emoji                # E0.6   [1] (®️)       registered
+203C          ; Emoji                # E0.6   [1] (‼️)       double exclamation mark
+2049          ; Emoji                # E0.6   [1] (⁉️)       exclamation question mark
+2122          ; Emoji                # E0.6   [1] (™️)       trade mark
+2139          ; Emoji                # E0.6   [1] (ℹ️)       information
+2194..2199    ; Emoji                # E0.6   [6] (↔️..↙️)    left-right arrow..down-left arrow
+21A9..21AA    ; Emoji                # E0.6   [2] (↩️..↪️)    right arrow curving left..left arrow curving right
+231A..231B    ; Emoji                # E0.6   [2] (⌚..⌛)    watch..hourglass done
+2328          ; Emoji                # E1.0   [1] (⌨️)       keyboard
+23CF          ; Emoji                # E1.0   [1] (⏏️)       eject button
+23E9..23EC    ; Emoji                # E0.6   [4] (⏩..⏬)    fast-forward button..fast down button
+23ED..23EE    ; Emoji                # E0.7   [2] (⏭️..⏮️)    next track button..last track button
+23EF          ; Emoji                # E1.0   [1] (⏯️)       play or pause button
+23F0          ; Emoji                # E0.6   [1] (⏰)       alarm clock
+23F1..23F2    ; Emoji                # E1.0   [2] (⏱️..⏲️)    stopwatch..timer clock
+23F3          ; Emoji                # E0.6   [1] (⏳)       hourglass not done
+23F8..23FA    ; Emoji                # E0.7   [3] (⏸️..⏺️)    pause button..record button
+24C2          ; Emoji                # E0.6   [1] (Ⓜ️)       circled M

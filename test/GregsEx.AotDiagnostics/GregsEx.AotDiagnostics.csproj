@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../src/GregsEx/buildTransitive/GregsEx.targets" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <DiagnosticMode Condition="'$(DiagnosticMode)' == ''">RuntimeGuard</DiagnosticMode>
+    <DefineConstants Condition="'$(DiagnosticMode)' == 'Unsuppressed'">$(DefineConstants);UNSUPPRESSED_AOT_DIAGNOSTICS</DefineConstants>
+    <TreatWarningsAsErrors Condition="'$(DiagnosticMode)' == 'Unsuppressed'">false</TreatWarningsAsErrors>
+    <IlcTreatWarningsAsErrors Condition="'$(DiagnosticMode)' == 'Unsuppressed'">false</IlcTreatWarningsAsErrors>
+    <TrimmerSingleWarn Condition="'$(DiagnosticMode)' == 'Unsuppressed'">false</TrimmerSingleWarn>
+    <EnableAotAnalyzer>true</EnableAotAnalyzer>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" />
+  </ItemGroup>
+</Project>

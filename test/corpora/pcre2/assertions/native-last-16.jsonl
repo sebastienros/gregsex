@@ -1,0 +1,4 @@
+{"id":"last-positive-predicate","width":16,"rc":2,"pairs":[[0,1],[0,1]],"captureLast":0}
+{"id":"last-negative-predicate","width":16,"rc":2,"pairs":[[0,1],[0,1]],"captureLast":0}
+{"id":"last-positive-ahead","width":16,"rc":2,"pairs":[[0,1],[0,1]],"captureLast":1}
+{"id":"last-scan","width":16,"rc":3,"pairs":[[0,1],[0,1],[0,1]],"captureLast":2}

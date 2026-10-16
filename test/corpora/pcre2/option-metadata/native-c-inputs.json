@@ -1,0 +1,1142 @@
+[
+  {
+    "id": "c-8-raw",
+    "width": 8,
+    "pattern": "\\C",
+    "units": [
+      92,
+      67
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-zero-8-raw",
+    "width": 8,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-scoped-zero-8-raw",
+    "width": 8,
+    "pattern": "(?:\\C){0}a",
+    "units": [
+      40,
+      63,
+      58,
+      92,
+      67,
+      41,
+      123,
+      48,
+      125,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-define-8-raw",
+    "width": 8,
+    "pattern": "(?(DEFINE)(?<x>\\C))a",
+    "units": [
+      40,
+      63,
+      40,
+      68,
+      69,
+      70,
+      73,
+      78,
+      69,
+      41,
+      40,
+      63,
+      60,
+      120,
+      62,
+      92,
+      67,
+      41,
+      41,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-unreachable-8-raw",
+    "width": 8,
+    "pattern": "(?!)\\C",
+    "units": [
+      40,
+      63,
+      33,
+      41,
+      92,
+      67
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-alternative-8-raw",
+    "width": 8,
+    "pattern": "a|\\C",
+    "units": [
+      97,
+      124,
+      92,
+      67
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-mixed-j-8-raw",
+    "width": 8,
+    "pattern": "(?J:\\C{0})",
+    "units": [
+      40,
+      63,
+      74,
+      58,
+      92,
+      67,
+      123,
+      48,
+      125,
+      41
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-mixed-unset-j-8-raw",
+    "width": 8,
+    "pattern": "(?-J:\\C{0})",
+    "units": [
+      40,
+      63,
+      45,
+      74,
+      58,
+      92,
+      67,
+      123,
+      48,
+      125,
+      41
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-quoted-8-raw",
+    "width": 8,
+    "pattern": "\\Q\\C\\E",
+    "units": [
+      92,
+      81,
+      92,
+      67,
+      92,
+      69
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-escaped-8-raw",
+    "width": 8,
+    "pattern": "\\\\C",
+    "units": [
+      92,
+      92,
+      67
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-comment-8-raw",
+    "width": 8,
+    "pattern": "(?#\\C)a",
+    "units": [
+      40,
+      63,
+      35,
+      92,
+      67,
+      41,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-extended-comment-8-raw",
+    "width": 8,
+    "pattern": "(?x)# \\C\na",
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      35,
+      32,
+      92,
+      67,
+      10,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-callout-8-raw",
+    "width": 8,
+    "pattern": "(?C'\\C')a",
+    "units": [
+      40,
+      63,
+      67,
+      39,
+      92,
+      67,
+      39,
+      41,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-mark-8-raw",
+    "width": 8,
+    "pattern": "(*MARK:\\C)a",
+    "units": [
+      40,
+      42,
+      77,
+      65,
+      82,
+      75,
+      58,
+      92,
+      67,
+      41,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-literal-8-raw",
+    "width": 8,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 33554432
+  },
+  {
+    "id": "c-class-invalid-8-raw",
+    "width": 8,
+    "pattern": "[\\C]",
+    "units": [
+      91,
+      92,
+      67,
+      93
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-never-invalid-8-raw",
+    "width": 8,
+    "pattern": "\\C",
+    "units": [
+      92,
+      67
+    ],
+    "flags": 1048576
+  },
+  {
+    "id": "c-never-zero-invalid-8-raw",
+    "width": 8,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 1048576
+  },
+  {
+    "id": "c-following-invalid-8-raw",
+    "width": 8,
+    "pattern": "\\C(",
+    "units": [
+      92,
+      67,
+      40
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-8-utf",
+    "width": 8,
+    "pattern": "\\C",
+    "units": [
+      92,
+      67
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-zero-8-utf",
+    "width": 8,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-scoped-zero-8-utf",
+    "width": 8,
+    "pattern": "(?:\\C){0}a",
+    "units": [
+      40,
+      63,
+      58,
+      92,
+      67,
+      41,
+      123,
+      48,
+      125,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-define-8-utf",
+    "width": 8,
+    "pattern": "(?(DEFINE)(?<x>\\C))a",
+    "units": [
+      40,
+      63,
+      40,
+      68,
+      69,
+      70,
+      73,
+      78,
+      69,
+      41,
+      40,
+      63,
+      60,
+      120,
+      62,
+      92,
+      67,
+      41,
+      41,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-unreachable-8-utf",
+    "width": 8,
+    "pattern": "(?!)\\C",
+    "units": [
+      40,
+      63,
+      33,
+      41,
+      92,
+      67
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-alternative-8-utf",
+    "width": 8,
+    "pattern": "a|\\C",
+    "units": [
+      97,
+      124,
+      92,
+      67
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-mixed-j-8-utf",
+    "width": 8,
+    "pattern": "(?J:\\C{0})",
+    "units": [
+      40,
+      63,
+      74,
+      58,
+      92,
+      67,
+      123,
+      48,
+      125,
+      41
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-mixed-unset-j-8-utf",
+    "width": 8,
+    "pattern": "(?-J:\\C{0})",
+    "units": [
+      40,
+      63,
+      45,
+      74,
+      58,
+      92,
+      67,
+      123,
+      48,
+      125,
+      41
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-quoted-8-utf",
+    "width": 8,
+    "pattern": "\\Q\\C\\E",
+    "units": [
+      92,
+      81,
+      92,
+      67,
+      92,
+      69
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-escaped-8-utf",
+    "width": 8,
+    "pattern": "\\\\C",
+    "units": [
+      92,
+      92,
+      67
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-comment-8-utf",
+    "width": 8,
+    "pattern": "(?#\\C)a",
+    "units": [
+      40,
+      63,
+      35,
+      92,
+      67,
+      41,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-extended-comment-8-utf",
+    "width": 8,
+    "pattern": "(?x)# \\C\na",
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      35,
+      32,
+      92,
+      67,
+      10,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-callout-8-utf",
+    "width": 8,
+    "pattern": "(?C'\\C')a",
+    "units": [
+      40,
+      63,
+      67,
+      39,
+      92,
+      67,
+      39,
+      41,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-mark-8-utf",
+    "width": 8,
+    "pattern": "(*MARK:\\C)a",
+    "units": [
+      40,
+      42,
+      77,
+      65,
+      82,
+      75,
+      58,
+      92,
+      67,
+      41,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-literal-8-utf",
+    "width": 8,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 34078720
+  },
+  {
+    "id": "c-class-invalid-8-utf",
+    "width": 8,
+    "pattern": "[\\C]",
+    "units": [
+      91,
+      92,
+      67,
+      93
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-never-invalid-8-utf",
+    "width": 8,
+    "pattern": "\\C",
+    "units": [
+      92,
+      67
+    ],
+    "flags": 1572864
+  },
+  {
+    "id": "c-never-zero-invalid-8-utf",
+    "width": 8,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 1572864
+  },
+  {
+    "id": "c-following-invalid-8-utf",
+    "width": 8,
+    "pattern": "\\C(",
+    "units": [
+      92,
+      67,
+      40
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-16-raw",
+    "width": 16,
+    "pattern": "\\C",
+    "units": [
+      92,
+      67
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-zero-16-raw",
+    "width": 16,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-scoped-zero-16-raw",
+    "width": 16,
+    "pattern": "(?:\\C){0}a",
+    "units": [
+      40,
+      63,
+      58,
+      92,
+      67,
+      41,
+      123,
+      48,
+      125,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-define-16-raw",
+    "width": 16,
+    "pattern": "(?(DEFINE)(?<x>\\C))a",
+    "units": [
+      40,
+      63,
+      40,
+      68,
+      69,
+      70,
+      73,
+      78,
+      69,
+      41,
+      40,
+      63,
+      60,
+      120,
+      62,
+      92,
+      67,
+      41,
+      41,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-unreachable-16-raw",
+    "width": 16,
+    "pattern": "(?!)\\C",
+    "units": [
+      40,
+      63,
+      33,
+      41,
+      92,
+      67
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-alternative-16-raw",
+    "width": 16,
+    "pattern": "a|\\C",
+    "units": [
+      97,
+      124,
+      92,
+      67
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-mixed-j-16-raw",
+    "width": 16,
+    "pattern": "(?J:\\C{0})",
+    "units": [
+      40,
+      63,
+      74,
+      58,
+      92,
+      67,
+      123,
+      48,
+      125,
+      41
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-mixed-unset-j-16-raw",
+    "width": 16,
+    "pattern": "(?-J:\\C{0})",
+    "units": [
+      40,
+      63,
+      45,
+      74,
+      58,
+      92,
+      67,
+      123,
+      48,
+      125,
+      41
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-quoted-16-raw",
+    "width": 16,
+    "pattern": "\\Q\\C\\E",
+    "units": [
+      92,
+      81,
+      92,
+      67,
+      92,
+      69
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-escaped-16-raw",
+    "width": 16,
+    "pattern": "\\\\C",
+    "units": [
+      92,
+      92,
+      67
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-comment-16-raw",
+    "width": 16,
+    "pattern": "(?#\\C)a",
+    "units": [
+      40,
+      63,
+      35,
+      92,
+      67,
+      41,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-extended-comment-16-raw",
+    "width": 16,
+    "pattern": "(?x)# \\C\na",
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      35,
+      32,
+      92,
+      67,
+      10,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-callout-16-raw",
+    "width": 16,
+    "pattern": "(?C'\\C')a",
+    "units": [
+      40,
+      63,
+      67,
+      39,
+      92,
+      67,
+      39,
+      41,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-mark-16-raw",
+    "width": 16,
+    "pattern": "(*MARK:\\C)a",
+    "units": [
+      40,
+      42,
+      77,
+      65,
+      82,
+      75,
+      58,
+      92,
+      67,
+      41,
+      97
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-literal-16-raw",
+    "width": 16,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 33554432
+  },
+  {
+    "id": "c-class-invalid-16-raw",
+    "width": 16,
+    "pattern": "[\\C]",
+    "units": [
+      91,
+      92,
+      67,
+      93
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-never-invalid-16-raw",
+    "width": 16,
+    "pattern": "\\C",
+    "units": [
+      92,
+      67
+    ],
+    "flags": 1048576
+  },
+  {
+    "id": "c-never-zero-invalid-16-raw",
+    "width": 16,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 1048576
+  },
+  {
+    "id": "c-following-invalid-16-raw",
+    "width": 16,
+    "pattern": "\\C(",
+    "units": [
+      92,
+      67,
+      40
+    ],
+    "flags": 0
+  },
+  {
+    "id": "c-16-utf",
+    "width": 16,
+    "pattern": "\\C",
+    "units": [
+      92,
+      67
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-zero-16-utf",
+    "width": 16,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-scoped-zero-16-utf",
+    "width": 16,
+    "pattern": "(?:\\C){0}a",
+    "units": [
+      40,
+      63,
+      58,
+      92,
+      67,
+      41,
+      123,
+      48,
+      125,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-define-16-utf",
+    "width": 16,
+    "pattern": "(?(DEFINE)(?<x>\\C))a",
+    "units": [
+      40,
+      63,
+      40,
+      68,
+      69,
+      70,
+      73,
+      78,
+      69,
+      41,
+      40,
+      63,
+      60,
+      120,
+      62,
+      92,
+      67,
+      41,
+      41,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-unreachable-16-utf",
+    "width": 16,
+    "pattern": "(?!)\\C",
+    "units": [
+      40,
+      63,
+      33,
+      41,
+      92,
+      67
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-alternative-16-utf",
+    "width": 16,
+    "pattern": "a|\\C",
+    "units": [
+      97,
+      124,
+      92,
+      67
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-mixed-j-16-utf",
+    "width": 16,
+    "pattern": "(?J:\\C{0})",
+    "units": [
+      40,
+      63,
+      74,
+      58,
+      92,
+      67,
+      123,
+      48,
+      125,
+      41
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-mixed-unset-j-16-utf",
+    "width": 16,
+    "pattern": "(?-J:\\C{0})",
+    "units": [
+      40,
+      63,
+      45,
+      74,
+      58,
+      92,
+      67,
+      123,
+      48,
+      125,
+      41
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-quoted-16-utf",
+    "width": 16,
+    "pattern": "\\Q\\C\\E",
+    "units": [
+      92,
+      81,
+      92,
+      67,
+      92,
+      69
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-escaped-16-utf",
+    "width": 16,
+    "pattern": "\\\\C",
+    "units": [
+      92,
+      92,
+      67
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-comment-16-utf",
+    "width": 16,
+    "pattern": "(?#\\C)a",
+    "units": [
+      40,
+      63,
+      35,
+      92,
+      67,
+      41,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-extended-comment-16-utf",
+    "width": 16,
+    "pattern": "(?x)# \\C\na",
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      35,
+      32,
+      92,
+      67,
+      10,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-callout-16-utf",
+    "width": 16,
+    "pattern": "(?C'\\C')a",
+    "units": [
+      40,
+      63,
+      67,
+      39,
+      92,
+      67,
+      39,
+      41,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-mark-16-utf",
+    "width": 16,
+    "pattern": "(*MARK:\\C)a",
+    "units": [
+      40,
+      42,
+      77,
+      65,
+      82,
+      75,
+      58,
+      92,
+      67,
+      41,
+      97
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-literal-16-utf",
+    "width": 16,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 34078720
+  },
+  {
+    "id": "c-class-invalid-16-utf",
+    "width": 16,
+    "pattern": "[\\C]",
+    "units": [
+      91,
+      92,
+      67,
+      93
+    ],
+    "flags": 524288
+  },
+  {
+    "id": "c-never-invalid-16-utf",
+    "width": 16,
+    "pattern": "\\C",
+    "units": [
+      92,
+      67
+    ],
+    "flags": 1572864
+  },
+  {
+    "id": "c-never-zero-invalid-16-utf",
+    "width": 16,
+    "pattern": "\\C{0}",
+    "units": [
+      92,
+      67,
+      123,
+      48,
+      125
+    ],
+    "flags": 1572864
+  },
+  {
+    "id": "c-following-invalid-16-utf",
+    "width": 16,
+    "pattern": "\\C(",
+    "units": [
+      92,
+      67,
+      40
+    ],
+    "flags": 524288
+  }
+]

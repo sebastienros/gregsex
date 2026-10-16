@@ -1,0 +1,559 @@
+{
+  "contractVersion": "ecmascript-fixtures-1",
+  "profileId": "EcmaScript2025",
+  "dataId": "Unicode-16.0.0+Emoji-16.0",
+  "cases": [
+    {
+      "id": "ES-L-output",
+      "capabilities": [
+        "ES-019"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "g",
+      "operation": "Replace",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": 2,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": [
+        120,
+        120,
+        120
+      ],
+      "splitLimit": null,
+      "expected": {
+        "status": "HostLimitExceeded",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "OutputLimitExceeded",
+          "featureId": "ES-019",
+          "location": "Host",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 3
+        }
+      }
+    },
+    {
+      "id": "ES-L-results",
+      "capabilities": [
+        "ES-019"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [],
+      "inputUnits": [
+        97,
+        98
+      ],
+      "flags": "g",
+      "operation": "MatchAll",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": 1,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "HostLimitExceeded",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "ResultLimitExceeded",
+          "featureId": "ES-019",
+          "location": "Host",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 2
+        }
+      }
+    },
+    {
+      "id": "ES-L-output-boundary",
+      "capabilities": [
+        "ES-019"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "g",
+      "operation": "Replace",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": 3,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": [
+        120,
+        120,
+        120
+      ],
+      "splitLimit": null,
+      "expected": {
+        "status": "Match",
+        "lastIndexAfter": "0",
+        "matches": [],
+        "texts": [
+          [
+            120,
+            120,
+            120
+          ]
+        ],
+        "error": null
+      }
+    },
+    {
+      "id": "ES-L-pattern",
+      "capabilities": [
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        97
+      ],
+      "inputUnits": [],
+      "flags": "g",
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": 1,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "LimitExceeded",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "PatternLimitExceeded",
+          "featureId": "ES-020",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "ES-L-compile-work",
+      "capabilities": [
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        97,
+        124,
+        98,
+        41,
+        42
+      ],
+      "inputUnits": [],
+      "flags": "g",
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": 1,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "LimitExceeded",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "CompileWorkLimitExceeded",
+          "featureId": "ES-020",
+          "location": "Pattern",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "ES-L-match-work",
+      "capabilities": [
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "g",
+      "operation": "Exec",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": 1,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "LimitExceeded",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "WorkLimitExceeded",
+          "featureId": "ES-020",
+          "location": "Input",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "ES-L-workspace",
+      "capabilities": [
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [
+        97
+      ],
+      "flags": "g",
+      "operation": "Exec",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": 1,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "LimitExceeded",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "WorkspaceLimitExceeded",
+          "featureId": "ES-020",
+          "location": "Input",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "ES-L-frames",
+      "capabilities": [
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        42,
+        98
+      ],
+      "inputUnits": [
+        97,
+        97,
+        97,
+        97
+      ],
+      "flags": "g",
+      "operation": "Exec",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": 1,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "LimitExceeded",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "WorkspaceCapacityExceeded",
+          "featureId": "ES-020",
+          "location": "Input",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "ES-L-cancelled",
+      "capabilities": [
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [],
+      "flags": "g",
+      "operation": "Exec",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": true,
+        "timeoutTicks": null
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "Cancelled",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "Cancelled",
+          "featureId": "ES-020",
+          "location": "Input",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "ES-L-deadline",
+      "capabilities": [
+        "ES-020"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://github.com/sebastienros/gregsex",
+        "clause": "GregsEx ECMAScript contract v1 resource policy; API-05/PERF-004/VERIFY-03",
+        "license": "GregsEx repository license",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputUnits": [],
+      "flags": "g",
+      "operation": "Exec",
+      "startAt": 0,
+      "destinationLength": null,
+      "limits": {
+        "maxPatternUnits": null,
+        "maxCompileWork": null,
+        "maxWork": null,
+        "maxWorkspaceBytes": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": false,
+        "timeoutTicks": 1
+      },
+      "lastIndexBefore": "0",
+      "replacementUnits": null,
+      "splitLimit": null,
+      "expected": {
+        "status": "TimedOut",
+        "lastIndexAfter": null,
+        "matches": [],
+        "texts": null,
+        "error": {
+          "code": "TimedOut",
+          "featureId": "ES-020",
+          "location": "Input",
+          "offset": 0,
+          "length": 0,
+          "offsetUnit": "Utf16CodeUnits",
+          "workConsumed": null,
+          "requiredCapacity": 0
+        }
+      }
+    }
+  ]
+}

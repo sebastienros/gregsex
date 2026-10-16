@@ -1,0 +1,40 @@
+{
+  "format": "xpath-input-lock-1",
+  "files": [
+    {
+      "path": "Corpus.json",
+      "bytes": 945927,
+      "sha256": "079395b0a46fe8378a80d7d538dac8dbc29f351b9d3280dcd5a1d2ed134a4059"
+    },
+    {
+      "path": "annotations.json",
+      "bytes": 148764,
+      "sha256": "df84d94180ba3dfa82a95ca81087e5a622b412be196747a4f1abc633ad0d01f1"
+    },
+    {
+      "path": "jobs.xml",
+      "bytes": 112409,
+      "sha256": "1685710fb059352641eec9e56e62e11c7e589b0f3f882f825a52ec6e7d649d1a"
+    },
+    {
+      "path": "inventory.json",
+      "bytes": 30646,
+      "sha256": "642e32ffc7f91de7a4fffe0820333c9a5a6d553d4da1566609142608ae93a1a0"
+    },
+    {
+      "path": "dispositions.json",
+      "bytes": 9868,
+      "sha256": "2d204d6a78f9d390a5243bb1ead172faf4b1ae4b4008509b7016e8c0c0943c79"
+    },
+    {
+      "path": "processor-lock.json",
+      "bytes": 1467,
+      "sha256": "f5988306f96b57251612b52e2b15b2d14c3120c89eb9da394aec1ed0ac19b95f"
+    },
+    {
+      "path": "source-lock.json",
+      "bytes": 2955,
+      "sha256": "030005ea9f321d584707f2b26f4e6ed3351e96b1b13e263087236516e16f62ce"
+    }
+  ]
+}

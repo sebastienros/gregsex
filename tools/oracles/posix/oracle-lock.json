@@ -1,0 +1,61 @@
+{
+  "format": "posix-oracle-lock-1",
+  "buildPlatform": "Linux/aarch64",
+  "host": "macOS15.8.1/24H32 arm64; Docker28.0.4/LinuxKit6.10.14",
+  "image": {
+    "Id": "sha256:5cb918ae6077d0d575f45bd12847517e6c60f89745230eb43401be7928fc043f",
+    "RepoDigests": [
+      "gregsex-m4-posix-oracles@sha256:5cb918ae6077d0d575f45bd12847517e6c60f89745230eb43401be7928fc043f"
+    ],
+    "Architecture": "arm64",
+    "Os": "linux"
+  },
+  "compiler": "GCC12.2.0 (Debian12.2.0-14+deb12u1)",
+  "helperFlags": [
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "families": [
+    {
+      "id": "glibc-debian-bookworm",
+      "version": "2.36-9+deb12u14",
+      "intake": "Debian independently built libc6:arm64 and libc6-dev:arm64; helper built locally. Exact dpkg-source version unpacked with Debian patch set; no matching source adaptation. Distribution binary intake, not a claim of rebuilding all of glibc.",
+      "sources": [
+        {
+          "url": "https://deb.debian.org/debian/pool/main/g/glibc/glibc_2.36-9+deb12u14.dsc",
+          "sha256": "cfe1f0b8dc1fa211ce5a45b3725cc38b29f88667f1140ebdca6de35cf9c6f1fd"
+        },
+        {
+          "url": "https://deb.debian.org/debian/pool/main/g/glibc/glibc_2.36.orig.tar.xz",
+          "sha256": "a543c02070d46ccaf866957efd13f10c924daa74c86a90a0254db09a92a708ee"
+        },
+        {
+          "url": "https://deb.debian.org/debian/pool/main/g/glibc/glibc_2.36-9+deb12u14.debian.tar.xz",
+          "sha256": "cf4ac9cd98185452cae3ef34e2e4ee12753e3d93fd0c62c61396d4a47eec902f"
+        }
+      ],
+      "helperSha256": "af8674fd6f1a72803ded114d21be10420010dad05baa1332bd355d6451168db8",
+      "librarySha256": "e4ac8ae1d81e4865e3aadedb962879cf9415903b3f2ba81ec75e9962b86ab8b0",
+      "license": "GNU LGPL2.1+ source notices in source-audit.tar.gz; no glibc binary shipped."
+    },
+    {
+      "id": "musl-1.2.5",
+      "version": "1.2.5",
+      "intake": "Unmodified upstream complete libc built locally with ./configure --prefix=/opt/musl; make -j2; make install. Helper statically linked using /opt/musl/bin/musl-gcc; no adaptation of regex or locale.",
+      "sources": [
+        {
+          "url": "https://musl.libc.org/releases/musl-1.2.5.tar.gz",
+          "sha256": "a9a118bbe84d8764da0ea0d28b3ab3fae8477fc7e4085d90102b8596fc7c75e4"
+        }
+      ],
+      "helperSha256": "73a8fcee048761f327c4a5d223c3b981a01e55f7fa39d1f205d88077d2dbe0a2",
+      "librarySha256": "58848f6b7e6d8884487c98c449f960c487eec118eabaa05127913d9e66c304f4",
+      "license": "MIT libc; modified TRE regex BSD2clause; notices/source included in source-audit.tar.gz; no musl binary shipped."
+    }
+  ],
+  "nativeFlags": "Request flags0..7/eflags0..3 map by symbolic REG_* constants for each family, observed actual numeric values in the raw identity row. ERE/BRE explicit. LC_ALL=C; native C strings contain exact nonNUL bytes.",
+  "semanticOnly": "No performance/allocation result; no native work-counter parity; watchdog and finite external caps only."
+}

@@ -1,0 +1,67 @@
+{
+  "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "archiveSha256": "339344898646d67a24c61e244a46ddf345ac8f55c6aacf9b7b32b7c34645bb71",
+  "retainedMembers": [
+    {
+      "path": "native-build/libpcre2-8.a",
+      "bytes": 413096,
+      "sha256": "460a19b179518523bc5cbf2162b5f0263c6f5a5113ae7fd0ad61c1f53ab4c531"
+    },
+    {
+      "path": "native-build/libpcre2-16.a",
+      "bytes": 384968,
+      "sha256": "e0bbe10f169a236b10f5d5a939a10bd0a617466c2359226de847317235f84bed"
+    },
+    {
+      "path": "native-build/pcre2.h",
+      "bytes": 51313,
+      "sha256": "a75457e8b140a246aade9c8b36b44fbe241dfa253fce4545524b27d7d7e9b5c2"
+    }
+  ],
+  "clientSha256": "6a65bb7a21cf6f4f87b72a5b256e12d0ff0f86478dbef2587926eaa068fd2ccd",
+  "inputsSha256": "dcc4c538bf7abfcefeb3425f5658c244c8a4121cb7769f5a0e7801d66538ea21",
+  "commands": [
+    {
+      "command": [
+        "clang",
+        "-O2",
+        "-DPCRE2_CODE_UNIT_WIDTH=8",
+        "-I",
+        "/private/tmp/gregsex-m5-parity-fuzz",
+        "/private/tmp/gregsex-m5-parity-fuzz/8/observe.c",
+        "/private/tmp/gregsex-m5-parity-fuzz/libpcre2-8.a",
+        "-o",
+        "/private/tmp/gregsex-m5-parity-fuzz/8/observe"
+      ],
+      "exitCode": 0,
+      "executableSha256": "32b5f84bc8c7772a2afd8ebf3ecc61a358d5d673fac2cf70dfca7af5eb2dda60",
+      "headerSha256": "578442b170b317a057963a5dc562467568b4ac66098253c601d4fd593f920557",
+      "stdoutSha256": "5f7c9bd9cd3144fb1d3c00ff4080d7b87b75d7c2aaf749bd76859b3f9b1dbed6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runExitCode": 0
+    },
+    {
+      "command": [
+        "clang",
+        "-O2",
+        "-DPCRE2_CODE_UNIT_WIDTH=16",
+        "-I",
+        "/private/tmp/gregsex-m5-parity-fuzz",
+        "/private/tmp/gregsex-m5-parity-fuzz/16/observe.c",
+        "/private/tmp/gregsex-m5-parity-fuzz/libpcre2-16.a",
+        "-o",
+        "/private/tmp/gregsex-m5-parity-fuzz/16/observe"
+      ],
+      "exitCode": 0,
+      "executableSha256": "635e15a43bd65964cbbf117d81a7e2e9a15d0f5241b77f78f399e03bb5d6995f",
+      "headerSha256": "138585763b93551eed3f085a615218ae5029520bf5c9f20472c11076100c36b2",
+      "stdoutSha256": "e90377b0859ef7c3ad522dc6b1a38c318aecd642280dfc8fada73b2edb8a7392",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runExitCode": 0
+    }
+  ],
+  "seed": 380930,
+  "cases": 256,
+  "limits": "100000nativework/1024depth/64MiB; not managed counter equality",
+  "scope": "New bounded independent correctness witnesses only; no upstream/native library rebuild/replay, performance or platform-support claim."
+}

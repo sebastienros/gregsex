@@ -1,0 +1,29 @@
+* text=auto
+*.sh text eol=lf
+*.yml text eol=lf
+
+# Unicode audits pin the exact generated source bytes.
+/src/GregsEx/Flavors/EcmaScript/Unicode/GeneratedUnicode*Tables.cs text eol=lf
+/src/GregsEx/Flavors/XmlShared/GeneratedXml*Tables.g.cs text eol=lf
+/test/GregsEx.Tests/Flavors/EcmaScript/Unicode/Unicode*Inventory.g.cs text eol=lf
+
+# Corpus integrity checks hash the original LF bytes on every platform.
+/LICENSE text eol=lf
+/docs/specs/xml.md text eol=lf
+/test/GregsEx.Tests/Contracts/Xml/*.json text eol=lf
+/test/corpora/xml/** text=auto eol=lf
+/tools/oracles/xml/** text=auto eol=lf
+/test/GregsEx.Tests/Contracts/Posix/*.json text eol=lf
+/test/GregsEx.Tests/Contracts/Posix/*.cs text eol=lf
+/src/GregsEx/Contracts/Posix/*.cs text eol=lf
+/src/GregsEx/Public/Posix/*.cs text eol=lf
+/test/corpora/posix/** text=auto eol=lf
+/tools/oracles/posix/** text=auto eol=lf
+/test/corpora/ecmascript/*.json text eol=lf
+/test/corpora/ecmascript/README.md text eol=lf
+/test/GregsEx.Tests/Contracts/EcmaScript/*.json text eol=lf
+/test/GregsEx.Tests/Contracts/EcmaScript/EcmaFixture.cs text eol=lf
+/test/GregsEx.Tests/Conformance/EcmaScript/CorpusTests.cs text eol=lf
+/src/GregsEx/Flavors/EcmaScript/Unicode/Unicode-LICENSE.txt text eol=lf
+/tools/oracles/ecmascript/** text=auto eol=lf
+/tools/unicode/ecmascript/** text=auto eol=lf

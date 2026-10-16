@@ -1,0 +1,4 @@
+4975:             case CHAR_J:  /* Record that it changed in the external options */
+4976:             *optset |= PCRE2_DUPNAMES;
+4977:             cb->external_flags |= PCRE2_JCHANGED;
+4978:             break;

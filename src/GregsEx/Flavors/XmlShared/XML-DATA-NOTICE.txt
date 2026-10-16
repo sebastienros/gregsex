@@ -1,0 +1,42 @@
+GregsEx XML regex data notice
+
+The Xsd11 and XPath31 profiles select the frozen data identity
+Unicode-16.0.0+XML-1.0-5e or Unicode-17.0.0+XML-1.0-5e, independently of
+host Unicode/culture data. GeneratedXmlTables.g.cs and GeneratedXml17Tables.g.cs
+derive category, block and full default lower/upper mapping data from the
+corresponding Unicode 16.0.0 or 17.0.0 UnicodeData.txt, Blocks.txt and unconditional
+SpecialCasing.txt. The accompanying XML-Unicode-LICENSE.txt contains the full
+Unicode License V3 copyright and permission notice.
+
+Official Unicode source files:
+https://www.unicode.org/Public/16.0.0/ucd/UnicodeData.txt
+https://www.unicode.org/Public/16.0.0/ucd/Blocks.txt
+https://www.unicode.org/Public/16.0.0/ucd/SpecialCasing.txt
+https://www.unicode.org/Public/17.0.0/ucd/UnicodeData.txt
+https://www.unicode.org/Public/17.0.0/ucd/Blocks.txt
+https://www.unicode.org/Public/17.0.0/ucd/SpecialCasing.txt
+
+XML character/name ranges derive from XML 1.0 Fifth Edition, productions
+[2], [4] and [4a], Recommendation 26 November 2008:
+https://www.w3.org/TR/2008/REC-xml-20081126/
+Copyright © 2008 W3C® (MIT, ERCIM, Keio), All Rights Reserved.
+W3C document use rules: https://www.w3.org/Consortium/Legal/copyright-documents
+Source manifest license reference: https://www.w3.org/copyright/document-license/
+The generated range tables are GregsEx data; they are not a reproduction of
+the Recommendation or an assertion of W3C endorsement.
+
+Repository provenance and reproducible offline generation/audit:
+tools/unicode/xml/inputs.json, outputs.json, generate.py and audit.py.
+Unicode17 originals and generated identities are retained under
+tools/unicode/xml/17.0.0/inputs.json and outputs.json; the same generation
+and independent audit commands validate both supported versions.
+The generated runtime source SHA256 is
+22a577dfb229c5cfd103cad951b99ff8639a7d311071f5f4af017d064f4aeeac.
+The pinned reference texts are XSD 1.1 Part 2 (2012-04-05), Appendix G,
+and XPath/XQuery F&O 3.1 (2017-03-21), sections 5.6 and C.1. Unicode version
+selection is GregsEx policy, not a claim that those Recommendations mandate it.
+
+GregsEx-approved interpretations of production 82 (class backslash), scalar
+w/W and final AnalyzeString capture containment are documented in
+README.md and docs/specs/xml.md. These are not W3C-approved
+errata. Archived W3C issues 29443 and 30268 remained NEW at the retained audit.

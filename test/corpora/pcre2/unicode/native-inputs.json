@@ -1,0 +1,735 @@
+[
+  {
+    "id": "g-combine-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      97,
+      204,
+      129,
+      98
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-zwj-positive-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      240,
+      159,
+      145,
+      169,
+      204,
+      129,
+      226,
+      128,
+      141,
+      240,
+      159,
+      146,
+      187,
+      88
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-zwj-negative-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      97,
+      226,
+      128,
+      141,
+      226,
+      152,
+      128
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-ri-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      240,
+      159,
+      135,
+      166,
+      240,
+      159,
+      135,
+      167,
+      240,
+      159,
+      135,
+      168
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-hangul-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      225,
+      132,
+      128,
+      225,
+      133,
+      161,
+      225,
+      134,
+      168,
+      88
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-nul-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      0,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-hard-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      97
+    ],
+    "utf": true,
+    "hard": true,
+    "start": 0
+  },
+  {
+    "id": "s-positive-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      97,
+      204,
+      129
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-negative-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      97,
+      206,
+      177
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-unknown-one-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      205,
+      184
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-unknown-two-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      205,
+      184,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-extensions-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      227,
+      131,
+      188,
+      227,
+      129,
+      130
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-extensions-negative-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      227,
+      131,
+      188,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-han-hangul-hira-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      230,
+      188,
+      162,
+      234,
+      176,
+      128,
+      227,
+      129,
+      130
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-hangul-han-hira-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      234,
+      176,
+      128,
+      230,
+      188,
+      162,
+      227,
+      129,
+      130
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-digits-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      217,
+      161,
+      219,
+      178
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-math-digits-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      240,
+      157,
+      159,
+      142,
+      240,
+      157,
+      159,
+      152
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-wide-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      240,
+      144,
+      144,
+      128,
+      240,
+      144,
+      144,
+      168
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-k-8",
+    "width": 8,
+    "pattern": "(*sr:a\\K\\x{3b1})",
+    "subjectUnits": [
+      97,
+      206,
+      177
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-retry-8",
+    "width": 8,
+    "pattern": "(*sr:(a{1,2}))a\\z",
+    "subjectUnits": [
+      97,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-atomic-8",
+    "width": 8,
+    "pattern": "(*asr:(a{1,2}))a\\z",
+    "subjectUnits": [
+      97,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-raw-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      13,
+      10,
+      97
+    ],
+    "utf": false,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-raw-8",
+    "width": 8,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      97,
+      0
+    ],
+    "utf": false,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-ri-start1-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      240,
+      159,
+      135,
+      166,
+      240,
+      159,
+      135,
+      167,
+      240,
+      159,
+      135,
+      168
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 4
+  },
+  {
+    "id": "g-ri-start2-8",
+    "width": 8,
+    "pattern": "\\X",
+    "subjectUnits": [
+      240,
+      159,
+      135,
+      166,
+      240,
+      159,
+      135,
+      167,
+      240,
+      159,
+      135,
+      168
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 8
+  },
+  {
+    "id": "g-combine-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      97,
+      769,
+      98
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-zwj-positive-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      55357,
+      56425,
+      769,
+      8205,
+      55357,
+      56507,
+      88
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-zwj-negative-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      97,
+      8205,
+      9728
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-ri-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      55356,
+      56806,
+      55356,
+      56807,
+      55356,
+      56808
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-hangul-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      4352,
+      4449,
+      4520,
+      88
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-nul-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      0,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-hard-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      97
+    ],
+    "utf": true,
+    "hard": true,
+    "start": 0
+  },
+  {
+    "id": "s-positive-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      97,
+      769
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-negative-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      97,
+      945
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-unknown-one-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      888
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-unknown-two-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      888,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-extensions-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      12540,
+      12354
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-extensions-negative-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      12540,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-han-hangul-hira-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      28450,
+      44032,
+      12354
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-hangul-han-hira-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      44032,
+      28450,
+      12354
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-digits-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      1633,
+      1778
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-math-digits-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      55349,
+      57294,
+      55349,
+      57304
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-wide-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      55297,
+      56320,
+      55297,
+      56360
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-k-16",
+    "width": 16,
+    "pattern": "(*sr:a\\K\\x{3b1})",
+    "subjectUnits": [
+      97,
+      945
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-retry-16",
+    "width": 16,
+    "pattern": "(*sr:(a{1,2}))a\\z",
+    "subjectUnits": [
+      97,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-atomic-16",
+    "width": 16,
+    "pattern": "(*asr:(a{1,2}))a\\z",
+    "subjectUnits": [
+      97,
+      97
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-raw-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      13,
+      10,
+      97
+    ],
+    "utf": false,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-raw-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      97,
+      0
+    ],
+    "utf": false,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "s-raw-unknown-16",
+    "width": 16,
+    "pattern": "(*sr:.*)\\z",
+    "subjectUnits": [
+      97,
+      55296
+    ],
+    "utf": false,
+    "hard": false,
+    "start": 0
+  },
+  {
+    "id": "g-ri-start1-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      55356,
+      56806,
+      55356,
+      56807,
+      55356,
+      56808
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 2
+  },
+  {
+    "id": "g-ri-start2-16",
+    "width": 16,
+    "pattern": "\\X",
+    "subjectUnits": [
+      55356,
+      56806,
+      55356,
+      56807,
+      55356,
+      56808
+    ],
+    "utf": true,
+    "hard": false,
+    "start": 4
+  }
+]

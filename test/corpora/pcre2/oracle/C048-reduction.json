@@ -1,0 +1,66 @@
+{
+  "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "invocations": [
+    {
+      "width": 8,
+      "matchData": "NULL-auto-full",
+      "pairCapacity": 0,
+      "returnCode": 1,
+      "reportedLength": 2,
+      "outputUnits": [
+        97,
+        97
+      ]
+    },
+    {
+      "width": 8,
+      "matchData": "explicit",
+      "pairCapacity": 1,
+      "returnCode": -54,
+      "reportedLength": 2,
+      "outputUnits": []
+    },
+    {
+      "width": 8,
+      "matchData": "explicit",
+      "pairCapacity": 2,
+      "returnCode": 1,
+      "reportedLength": 2,
+      "outputUnits": [
+        97,
+        97
+      ]
+    },
+    {
+      "width": 16,
+      "matchData": "NULL-auto-full",
+      "pairCapacity": 0,
+      "returnCode": 1,
+      "reportedLength": 2,
+      "outputUnits": [
+        97,
+        97
+      ]
+    },
+    {
+      "width": 16,
+      "matchData": "explicit",
+      "pairCapacity": 1,
+      "returnCode": -54,
+      "reportedLength": 2,
+      "outputUnits": []
+    },
+    {
+      "width": 16,
+      "matchData": "explicit",
+      "pairCapacity": 2,
+      "returnCode": 1,
+      "reportedLength": 2,
+      "outputUnits": [
+        97,
+        97
+      ]
+    }
+  ],
+  "source": "tools/oracles/pcre2/reduce-c048.c"
+}

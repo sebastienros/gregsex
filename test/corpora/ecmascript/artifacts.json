@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "ecma-artifacts-1",
+  "unicodeVerifiedRevision": "97741fe2943726c3bb2a0eb79859234c9ffb33d1",
+  "files": [
+    {
+      "path": "test/corpora/ecmascript/README.md",
+      "length": 5903,
+      "sha256": "e2a2c424307d99510017ed5a9979880414941174e60ee0727b362145bdbfdd2d"
+    },
+    {
+      "path": "test/corpora/ecmascript/contract-corpus.json",
+      "length": 34468,
+      "sha256": "fa2b370869a0bdf4f5d58a4632701a4a1e80224046716fb7cf4cfc6e244b25c8"
+    },
+    {
+      "path": "test/corpora/ecmascript/coverage.json",
+      "length": 49287,
+      "sha256": "003b1120d54558e049c042a73c0b782cdc220313aaf3743c78c926ea1dad5516"
+    },
+    {
+      "path": "test/corpora/ecmascript/imported-corpus.json",
+      "length": 2467656,
+      "sha256": "e0b13b4f3c71469227e2eadf582b7a444b48510bc6af8977a3fdbc4a5f32f68b"
+    },
+    {
+      "path": "test/corpora/ecmascript/oracle-corpus.json",
+      "length": 1068899,
+      "sha256": "b58b94b7d036efc0774fa8659f29db80bf35810f22f26225ddb9ae70d2c75c02"
+    },
+    {
+      "path": "test/corpora/ecmascript/oracle-pin.json",
+      "length": 6905,
+      "sha256": "fbb28a0adf59cf1cdb9c475e496c6743abadc9418922be260e24959e138d71e5"
+    },
+    {
+      "path": "test/corpora/ecmascript/raw-flag-boundary.json",
+      "length": 1194,
+      "sha256": "c6a3f8a41d1b8321d6411c7f5a9140d7d1100cbc291124cd5b5404a3b83a2b55"
+    },
+    {
+      "path": "test/corpora/ecmascript/recipes.json",
+      "length": 477189,
+      "sha256": "1c3bd15417d8a898066b0f1a43112699a74a3ed9093c5b73509d720fe1a036e3"
+    },
+    {
+      "path": "test/corpora/ecmascript/resource-corpus.json",
+      "length": 14336,
+      "sha256": "d5821ad62b462d92aef1623ae70c9de982b386a61dea2ca36ef29e19c25eaa20"
+    },
+    {
+      "path": "test/corpora/ecmascript/test262-dispositions.json",
+      "length": 1732277,
+      "sha256": "ebe0210b137e2aab5887c74b619b5b9a54f68aee6a9263a9b6cd4e81b6fb936a"
+    },
+    {
+      "path": "test/corpora/ecmascript/test262-intake.json",
+      "length": 3623082,
+      "sha256": "1b1c5300afd36a5c5dc68171e8f89c787ea66d4513a088feeb69c59d15866c10"
+    },
+    {
+      "path": "src/GregsEx/Flavors/EcmaScript/Unicode/GeneratedUnicodeTables.cs",
+      "length": 592544,
+      "sha256": "346664d6fb97dc1df4dcbcf27f899e43e157afbe13264865aa160bd4c06153e9"
+    },
+    {
+      "path": "src/GregsEx/Flavors/EcmaScript/Unicode/Unicode-LICENSE.txt",
+      "length": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    {
+      "path": "test/GregsEx.Tests/Conformance/EcmaScript/CorpusTests.cs",
+      "length": 10383,
+      "sha256": "0e16896ae5542c177c8bfc1b17a8047a0489671d2b9eb16b035ee722d5fcdb5f"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/EcmaScript/ContractVectors.json",
+      "length": 34468,
+      "sha256": "fa2b370869a0bdf4f5d58a4632701a4a1e80224046716fb7cf4cfc6e244b25c8"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/EcmaScript/EcmaFixture.cs",
+      "length": 10539,
+      "sha256": "2832c7824ca992a171491fc87187f6fc5928c955d7f4996f808e4ec879dbfa11"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/EcmaScript/EcmaFixtures.schema.json",
+      "length": 10005,
+      "sha256": "107323b8ac2f00b37054fbc77f2bfb16b9d5da8faa52645d44941610c2f2bcca"
+    },
+    {
+      "path": "test/GregsEx.Tests/Flavors/EcmaScript/Unicode/UnicodeInventory.g.cs",
+      "length": 63696,
+      "sha256": "50f435f1548628282d4c556622f76e61883e59cc876019e953dba46a7d054e01"
+    },
+    {
+      "path": "tools/oracles/ecmascript/README.md",
+      "length": 2750,
+      "sha256": "107ba0a540ebe26280e197363f2fcca01109bcf667837d7d0d364aa5eafbc585"
+    },
+    {
+      "path": "tools/oracles/ecmascript/adapter.mjs",
+      "length": 6027,
+      "sha256": "9bebaae811d45b2ee8e452bce33e544b011098ecaa5a330cd372ac4cec3d7f11"
+    },
+    {
+      "path": "tools/oracles/ecmascript/corpus.mjs",
+      "length": 2792,
+      "sha256": "65f8d592d77319a376863840a2cfb9404d95c32eaed78f4654ac788f3f189e7a"
+    },
+    {
+      "path": "tools/oracles/ecmascript/dispositions.py",
+      "length": 3396,
+      "sha256": "cbc2f438b055381988210a6cd32f5852c1eda9dcdb06cc158cc3fd083cebb355"
+    },
+    {
+      "path": "tools/oracles/ecmascript/freeze.py",
+      "length": 4123,
+      "sha256": "7e2f17f9440a38eafb449d9b747c9697f49fbf42827e7a09c9fd36f2a735388f"
+    },
+    {
+      "path": "tools/oracles/ecmascript/guard.mjs",
+      "length": 648,
+      "sha256": "48e5d6a207561c1ad3932b12cce8068475261f3292baa555768b537c5115acaa"
+    },
+    {
+      "path": "tools/oracles/ecmascript/import.mjs",
+      "length": 5030,
+      "sha256": "d1e8f52ee42b694e9fcb5df6bbb5988504143e420e23f04e21fddfdedd61f98f"
+    },
+    {
+      "path": "tools/oracles/ecmascript/intake.py",
+      "length": 3195,
+      "sha256": "70b85ba89bda63b8dc0a485f00a32e620ee85a12198073241c4e723cfbf2cc06"
+    },
+    {
+      "path": "tools/oracles/ecmascript/minimize.mjs",
+      "length": 2069,
+      "sha256": "549f1d5ab1a2f565b2a15c038e9071d45341a4515d9e23dc0f99b8a42f5e59b4"
+    },
+    {
+      "path": "tools/oracles/ecmascript/portable.py",
+      "length": 3364,
+      "sha256": "8115e91c1f95e0644adf018e94ce7c4197b590fa7dd5dd129368ad8cd6371daa"
+    },
+    {
+      "path": "tools/oracles/ecmascript/qualify.mjs",
+      "length": 3796,
+      "sha256": "49b150f4b7437e6111171b71fc35adbe31ac85026d26d3c280ae90437a7cf9d5"
+    },
+    {
+      "path": "tools/oracles/ecmascript/recheck.mjs",
+      "length": 143,
+      "sha256": "b6523e12d22e5a3607704bc60e14f02a2e1f69cab4d46b8d9426259818ecda39"
+    },
+    {
+      "path": "tools/oracles/ecmascript/recipes.py",
+      "length": 10465,
+      "sha256": "f67b9598f3e1cea3ab83ce78c1bd8eea91b071c86c8219a2488949a85803db6c"
+    },
+    {
+      "path": "tools/oracles/ecmascript/replay.mjs",
+      "length": 2675,
+      "sha256": "6402dc0eba958b8b5b0eb08a277fddc358ebcd1fead18350b8d948cbc5d9600d"
+    },
+    {
+      "path": "tools/oracles/ecmascript/test262.mjs",
+      "length": 3927,
+      "sha256": "d4fd07d57ae446d69294a5a8b643c8469603c51370891e1e4f2ebb60d631dbfc"
+    },
+    {
+      "path": "tools/unicode/ecmascript/generate.py",
+      "length": 12196,
+      "sha256": "2d4c653f8c5e6ee8a5a88cb27f654ee2f2ab2e8914c42363d920d5c52c7b31f6"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/LICENSE.txt",
+      "length": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ecma-property-tables.json",
+      "length": 8232,
+      "sha256": "17845818f0779d0fe6b677c669a31b82c69bc318f020529b034f61c92d499993"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/emoji-ReadMe.txt",
+      "length": 590,
+      "sha256": "d5cd31db8caf71a1bc2bb25a9eefbc154bd5df9528d8cb9481585e068c45257d"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/emoji-sequences.txt",
+      "length": 192618,
+      "sha256": "3fe3c77e72e8f26df302dc7d99b106c5d08fd808ef7246fb5d4502d659fe659c"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/emoji-zwj-sequences.txt",
+      "length": 251607,
+      "sha256": "9423ec235474356f970a696506737e2d5d65453a67f45df66b8bbe920c3fab83"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/CaseFolding.txt",
+      "length": 86092,
+      "sha256": "6f1f9c588eb4a5c718d9e8f93b782685e5c7fec872cf05e8e6878053599e09bb"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/DerivedCoreProperties.txt",
+      "length": 1115959,
+      "sha256": "39d35161f2954497f69e08bdb9e701493f476a3d30222de20028feda36c1dabd"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/DerivedNormalizationProps.txt",
+      "length": 1372269,
+      "sha256": "4d4c03892dea9146d674b686e495df2d55a28d071ac474041d73518f887abddc"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/PropList.txt",
+      "length": 144253,
+      "sha256": "53d614508e2a0b2305a8aa21cd60d993de9326cdf65993660dfcce4503548583"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/PropertyAliases.txt",
+      "length": 9389,
+      "sha256": "33a9f2266ad6b8e8de05c0ea3dfac411ac62cf8839ff1c94057471e4c5f6a2b3"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/PropertyValueAliases.txt",
+      "length": 80773,
+      "sha256": "440fd3e5460b9bfe31da67b6f923992e1989d31fe2ed91e091c4b8f8e2620bf9"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/ReadMe.txt",
+      "length": 693,
+      "sha256": "14cafa23788d3a20dd21d6b0cdcb8d6dab520781fcd9ad9392f3b88ea607e633"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/ScriptExtensions.txt",
+      "length": 20576,
+      "sha256": "049117ce26b9769fe2749b06eef51a50a89faef4a97764dd2d81daa715980700"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/Scripts.txt",
+      "length": 189588,
+      "sha256": "9e88f0a677df47311106340be8ede2ecdacd9c1c931831218d2be6d5508e0039"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/SpecialCasing.txt",
+      "length": 16809,
+      "sha256": "8d5de354eef79f2395a54c9c7dcebbaf3d30fc962d0f85611ea97aa973a0c451"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/UnicodeData.txt",
+      "length": 2175362,
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/emoji/emoji-data.txt",
+      "length": 113024,
+      "sha256": "f1365a5173eee18e1f98b240cdc492e84a25f1ce7e0c9d1094eb29c41a22696a"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/extracted/DerivedBinaryProperties.txt",
+      "length": 17476,
+      "sha256": "1ed4d4791c0e34fcad4dfcb5dd4c4122e16428241b75452f05d780ffa661f89d"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs/ucd/extracted/DerivedGeneralCategory.txt",
+      "length": 274423,
+      "sha256": "7676ab755a41ef82108460238569e60ad65c191ddafe61b36c6765ec1353f293"
+    },
+    {
+      "path": "tools/unicode/ecmascript/inputs.sha256.json",
+      "length": 3617,
+      "sha256": "36369f26ed6a9d45fe8270d3bc74e7f0e1fad44de0c434f6639d85a8193f45e7"
+    },
+    {
+      "path": "tools/unicode/ecmascript/outputs.json",
+      "length": 1425,
+      "sha256": "c862ea54b1cac4510b855954ed5d4ac0bebd8479efb4a4be812c7fd6e23bfe9a"
+    }
+  ]
+}

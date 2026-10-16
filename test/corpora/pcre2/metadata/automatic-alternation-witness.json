@@ -1,0 +1,2146 @@
+{
+  "testedRevision": "20eab6d41db0a5421bb29c60aa53189ccefce60c",
+  "cases": [
+    {
+      "input": {
+        "id": "call-254-8-raw",
+        "requirements": [
+          "PC-020",
+          "PH-007"
+        ],
+        "operation": "Match",
+        "width": 8,
+        "patternUnits": [
+          97,
+          40,
+          63,
+          67,
+          49,
+          41,
+          98,
+          124,
+          97,
+          98
+        ],
+        "subjectUnits": [
+          97,
+          98
+        ],
+        "replacementUnits": [],
+        "compileFlags": 4,
+        "extraFlags": 0,
+        "matchFlags": 0,
+        "substituteFlags": 0,
+        "newline": 2,
+        "bsr": 1,
+        "optimization": [
+          true,
+          true,
+          true
+        ],
+        "optimizerDirective": -1,
+        "maxVariableLookbehind": 255,
+        "startAt": 0,
+        "offsetLimit": null,
+        "pairCapacity": 1,
+        "destinationCapacity": 128,
+        "characterTables": null,
+        "workLimit": null,
+        "depthLimit": null,
+        "heapBytes": null,
+        "callbackReturns": [
+          0
+        ],
+        "substituteCallbackReturns": [],
+        "caseCallbackOutputs": [],
+        "caseCallbackMode": -1,
+        "callbackEnabled": true,
+        "substituteCallbackEnabled": false,
+        "initialPairs": [],
+        "nameQueryUnits": [
+          110
+        ],
+        "provenance": {
+          "kind": "SourceDerivedNativeInput",
+          "source": "doc/pcre2api.3",
+          "line": 1,
+          "license": "BSD-3-Clause WITH PCRE2-exception",
+          "note": "Independent protocol observation; not GregsEx generated."
+        },
+        "pairCapacityRole": "explicit-native-match-data-and-publication-capacity",
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "native": {
+        "id": "call-254-8-raw",
+        "inputId": "call-254-8-raw",
+        "events": [
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "compile",
+            "accepted": true,
+            "error": 0,
+            "nativeOffset": 0,
+            "sourceOffset": null
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "info",
+            "values": [
+              {
+                "query": 0,
+                "returnCode": 0,
+                "value": 4
+              },
+              {
+                "query": 1,
+                "returnCode": 0,
+                "value": 4
+              },
+              {
+                "query": 2,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 3,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 4,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 5,
+                "returnCode": 0,
+                "value": 97
+              },
+              {
+                "query": 6,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 8,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 9,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 11,
+                "returnCode": 0,
+                "value": 98
+              },
+              {
+                "query": 12,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 13,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 14,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 15,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 16,
+                "returnCode": 0,
+                "value": 2
+              },
+              {
+                "query": 17,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 20,
+                "returnCode": 0,
+                "value": 2
+              },
+              {
+                "query": 21,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 23,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 25,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 26,
+                "returnCode": 0,
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "names",
+            "entries": [],
+            "nameQuery": [
+              110
+            ],
+            "nameNumberReturn": -49,
+            "scanReturn": -49,
+            "nameNumbers": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 0,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 1,
+            "isString": false,
+            "patternPosition": 6,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 7,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 8,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 9,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 10,
+            "nextItemLength": 0,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "callout",
+            "version": 2,
+            "number": 255,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 0,
+            "patternPosition": 0,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 1,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "callout",
+            "version": 2,
+            "number": 1,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 1,
+            "patternPosition": 6,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 0,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "callout",
+            "version": 2,
+            "number": 255,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 2,
+            "patternPosition": 7,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 0,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "match",
+            "iteration": 0,
+            "returnCode": 1,
+            "pairs": [
+              [
+                0,
+                2
+              ]
+            ],
+            "startChar": 0,
+            "markUnits": null,
+            "callerVector": [
+              [
+                0,
+                2
+              ]
+            ],
+            "markDefined": true,
+            "errorOffset": null
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "substring",
+            "group": 0,
+            "lengthReturn": 0,
+            "length": 2,
+            "copyReturn": 0,
+            "reportedLength": 2,
+            "outputUnits": [
+              97,
+              98
+            ]
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "substring",
+            "group": 1,
+            "lengthReturn": -49,
+            "length": null,
+            "copyReturn": -49,
+            "reportedLength": 128,
+            "outputUnits": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "substring",
+            "group": 2,
+            "lengthReturn": -49,
+            "length": null,
+            "copyReturn": -49,
+            "reportedLength": 128,
+            "outputUnits": []
+          },
+          {
+            "id": "call-254-8-raw",
+            "width": 8,
+            "event": "substringName",
+            "lengthReturn": -49,
+            "length": null,
+            "getReturn": -49,
+            "units": []
+          }
+        ],
+        "provenance": {
+          "kind": "ExecutedPinnedNativeInterpreter",
+          "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+          "buildIdentity": "test/corpora/pcre2/oracle/build-identity.json",
+          "observerIdentity": "test/corpora/pcre2/oracle/observer-identities.json"
+        },
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "managed": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 6,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 7,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 10,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "id": "call-449-8-utf",
+        "requirements": [
+          "PC-020",
+          "PH-007"
+        ],
+        "operation": "Match",
+        "width": 8,
+        "patternUnits": [
+          97,
+          40,
+          63,
+          67,
+          49,
+          41,
+          98,
+          124,
+          97,
+          98
+        ],
+        "subjectUnits": [
+          97,
+          98
+        ],
+        "replacementUnits": [],
+        "compileFlags": 524292,
+        "extraFlags": 0,
+        "matchFlags": 0,
+        "substituteFlags": 0,
+        "newline": 2,
+        "bsr": 1,
+        "optimization": [
+          true,
+          true,
+          true
+        ],
+        "optimizerDirective": -1,
+        "maxVariableLookbehind": 255,
+        "startAt": 0,
+        "offsetLimit": null,
+        "pairCapacity": 1,
+        "destinationCapacity": 128,
+        "characterTables": null,
+        "workLimit": null,
+        "depthLimit": null,
+        "heapBytes": null,
+        "callbackReturns": [
+          0
+        ],
+        "substituteCallbackReturns": [],
+        "caseCallbackOutputs": [],
+        "caseCallbackMode": -1,
+        "callbackEnabled": true,
+        "substituteCallbackEnabled": false,
+        "initialPairs": [],
+        "nameQueryUnits": [
+          110
+        ],
+        "provenance": {
+          "kind": "SourceDerivedNativeInput",
+          "source": "doc/pcre2api.3",
+          "line": 1,
+          "license": "BSD-3-Clause WITH PCRE2-exception",
+          "note": "Independent protocol observation; not GregsEx generated."
+        },
+        "pairCapacityRole": "explicit-native-match-data-and-publication-capacity",
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "native": {
+        "id": "call-449-8-utf",
+        "inputId": "call-449-8-utf",
+        "events": [
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "compile",
+            "accepted": true,
+            "error": 0,
+            "nativeOffset": 0,
+            "sourceOffset": null
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "info",
+            "values": [
+              {
+                "query": 0,
+                "returnCode": 0,
+                "value": 524292
+              },
+              {
+                "query": 1,
+                "returnCode": 0,
+                "value": 524292
+              },
+              {
+                "query": 2,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 3,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 4,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 5,
+                "returnCode": 0,
+                "value": 97
+              },
+              {
+                "query": 6,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 8,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 9,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 11,
+                "returnCode": 0,
+                "value": 98
+              },
+              {
+                "query": 12,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 13,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 14,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 15,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 16,
+                "returnCode": 0,
+                "value": 2
+              },
+              {
+                "query": 17,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 20,
+                "returnCode": 0,
+                "value": 2
+              },
+              {
+                "query": 21,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 23,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 25,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 26,
+                "returnCode": 0,
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "names",
+            "entries": [],
+            "nameQuery": [
+              110
+            ],
+            "nameNumberReturn": -49,
+            "scanReturn": -49,
+            "nameNumbers": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 0,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 1,
+            "isString": false,
+            "patternPosition": 6,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 7,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 8,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 9,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 10,
+            "nextItemLength": 0,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "callout",
+            "version": 2,
+            "number": 255,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 0,
+            "patternPosition": 0,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 1,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "callout",
+            "version": 2,
+            "number": 1,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 1,
+            "patternPosition": 6,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 0,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "callout",
+            "version": 2,
+            "number": 255,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 2,
+            "patternPosition": 7,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 0,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "match",
+            "iteration": 0,
+            "returnCode": 1,
+            "pairs": [
+              [
+                0,
+                2
+              ]
+            ],
+            "startChar": 0,
+            "markUnits": null,
+            "callerVector": [
+              [
+                0,
+                2
+              ]
+            ],
+            "markDefined": true,
+            "errorOffset": null
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "substring",
+            "group": 0,
+            "lengthReturn": 0,
+            "length": 2,
+            "copyReturn": 0,
+            "reportedLength": 2,
+            "outputUnits": [
+              97,
+              98
+            ]
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "substring",
+            "group": 1,
+            "lengthReturn": -49,
+            "length": null,
+            "copyReturn": -49,
+            "reportedLength": 128,
+            "outputUnits": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "substring",
+            "group": 2,
+            "lengthReturn": -49,
+            "length": null,
+            "copyReturn": -49,
+            "reportedLength": 128,
+            "outputUnits": []
+          },
+          {
+            "id": "call-449-8-utf",
+            "width": 8,
+            "event": "substringName",
+            "lengthReturn": -49,
+            "length": null,
+            "getReturn": -49,
+            "units": []
+          }
+        ],
+        "provenance": {
+          "kind": "ExecutedPinnedNativeInterpreter",
+          "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+          "buildIdentity": "test/corpora/pcre2/oracle/build-identity.json",
+          "observerIdentity": "test/corpora/pcre2/oracle/observer-identities.json"
+        },
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "managed": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 6,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 7,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 10,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "id": "call-644-16-raw",
+        "requirements": [
+          "PC-020",
+          "PH-007"
+        ],
+        "operation": "Match",
+        "width": 16,
+        "patternUnits": [
+          97,
+          40,
+          63,
+          67,
+          49,
+          41,
+          98,
+          124,
+          97,
+          98
+        ],
+        "subjectUnits": [
+          97,
+          98
+        ],
+        "replacementUnits": [],
+        "compileFlags": 4,
+        "extraFlags": 0,
+        "matchFlags": 0,
+        "substituteFlags": 0,
+        "newline": 2,
+        "bsr": 1,
+        "optimization": [
+          true,
+          true,
+          true
+        ],
+        "optimizerDirective": -1,
+        "maxVariableLookbehind": 255,
+        "startAt": 0,
+        "offsetLimit": null,
+        "pairCapacity": 1,
+        "destinationCapacity": 128,
+        "characterTables": null,
+        "workLimit": null,
+        "depthLimit": null,
+        "heapBytes": null,
+        "callbackReturns": [
+          0
+        ],
+        "substituteCallbackReturns": [],
+        "caseCallbackOutputs": [],
+        "caseCallbackMode": -1,
+        "callbackEnabled": true,
+        "substituteCallbackEnabled": false,
+        "initialPairs": [],
+        "nameQueryUnits": [
+          110
+        ],
+        "provenance": {
+          "kind": "SourceDerivedNativeInput",
+          "source": "doc/pcre2api.3",
+          "line": 1,
+          "license": "BSD-3-Clause WITH PCRE2-exception",
+          "note": "Independent protocol observation; not GregsEx generated."
+        },
+        "pairCapacityRole": "explicit-native-match-data-and-publication-capacity",
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "native": {
+        "id": "call-644-16-raw",
+        "inputId": "call-644-16-raw",
+        "events": [
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "compile",
+            "accepted": true,
+            "error": 0,
+            "nativeOffset": 0,
+            "sourceOffset": null
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "info",
+            "values": [
+              {
+                "query": 0,
+                "returnCode": 0,
+                "value": 4
+              },
+              {
+                "query": 1,
+                "returnCode": 0,
+                "value": 4
+              },
+              {
+                "query": 2,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 3,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 4,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 5,
+                "returnCode": 0,
+                "value": 97
+              },
+              {
+                "query": 6,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 8,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 9,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 11,
+                "returnCode": 0,
+                "value": 98
+              },
+              {
+                "query": 12,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 13,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 14,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 15,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 16,
+                "returnCode": 0,
+                "value": 2
+              },
+              {
+                "query": 17,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 20,
+                "returnCode": 0,
+                "value": 2
+              },
+              {
+                "query": 21,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 23,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 25,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 26,
+                "returnCode": 0,
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "names",
+            "entries": [],
+            "nameQuery": [
+              110
+            ],
+            "nameNumberReturn": -49,
+            "scanReturn": -49,
+            "nameNumbers": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 0,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 1,
+            "isString": false,
+            "patternPosition": 6,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 7,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 8,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 9,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 10,
+            "nextItemLength": 0,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "callout",
+            "version": 2,
+            "number": 255,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 0,
+            "patternPosition": 0,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 1,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "callout",
+            "version": 2,
+            "number": 1,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 1,
+            "patternPosition": 6,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 0,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "callout",
+            "version": 2,
+            "number": 255,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 2,
+            "patternPosition": 7,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 0,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "match",
+            "iteration": 0,
+            "returnCode": 1,
+            "pairs": [
+              [
+                0,
+                2
+              ]
+            ],
+            "startChar": 0,
+            "markUnits": null,
+            "callerVector": [
+              [
+                0,
+                2
+              ]
+            ],
+            "markDefined": true,
+            "errorOffset": null
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "substring",
+            "group": 0,
+            "lengthReturn": 0,
+            "length": 2,
+            "copyReturn": 0,
+            "reportedLength": 2,
+            "outputUnits": [
+              97,
+              98
+            ]
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "substring",
+            "group": 1,
+            "lengthReturn": -49,
+            "length": null,
+            "copyReturn": -49,
+            "reportedLength": 128,
+            "outputUnits": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "substring",
+            "group": 2,
+            "lengthReturn": -49,
+            "length": null,
+            "copyReturn": -49,
+            "reportedLength": 128,
+            "outputUnits": []
+          },
+          {
+            "id": "call-644-16-raw",
+            "width": 16,
+            "event": "substringName",
+            "lengthReturn": -49,
+            "length": null,
+            "getReturn": -49,
+            "units": []
+          }
+        ],
+        "provenance": {
+          "kind": "ExecutedPinnedNativeInterpreter",
+          "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+          "buildIdentity": "test/corpora/pcre2/oracle/build-identity.json",
+          "observerIdentity": "test/corpora/pcre2/oracle/observer-identities.json"
+        },
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "managed": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 6,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 7,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 10,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "id": "call-839-16-utf",
+        "requirements": [
+          "PC-020",
+          "PH-007"
+        ],
+        "operation": "Match",
+        "width": 16,
+        "patternUnits": [
+          97,
+          40,
+          63,
+          67,
+          49,
+          41,
+          98,
+          124,
+          97,
+          98
+        ],
+        "subjectUnits": [
+          97,
+          98
+        ],
+        "replacementUnits": [],
+        "compileFlags": 524292,
+        "extraFlags": 0,
+        "matchFlags": 0,
+        "substituteFlags": 0,
+        "newline": 2,
+        "bsr": 1,
+        "optimization": [
+          true,
+          true,
+          true
+        ],
+        "optimizerDirective": -1,
+        "maxVariableLookbehind": 255,
+        "startAt": 0,
+        "offsetLimit": null,
+        "pairCapacity": 1,
+        "destinationCapacity": 128,
+        "characterTables": null,
+        "workLimit": null,
+        "depthLimit": null,
+        "heapBytes": null,
+        "callbackReturns": [
+          0
+        ],
+        "substituteCallbackReturns": [],
+        "caseCallbackOutputs": [],
+        "caseCallbackMode": -1,
+        "callbackEnabled": true,
+        "substituteCallbackEnabled": false,
+        "initialPairs": [],
+        "nameQueryUnits": [
+          110
+        ],
+        "provenance": {
+          "kind": "SourceDerivedNativeInput",
+          "source": "doc/pcre2api.3",
+          "line": 1,
+          "license": "BSD-3-Clause WITH PCRE2-exception",
+          "note": "Independent protocol observation; not GregsEx generated."
+        },
+        "pairCapacityRole": "explicit-native-match-data-and-publication-capacity",
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "native": {
+        "id": "call-839-16-utf",
+        "inputId": "call-839-16-utf",
+        "events": [
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "compile",
+            "accepted": true,
+            "error": 0,
+            "nativeOffset": 0,
+            "sourceOffset": null
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "info",
+            "values": [
+              {
+                "query": 0,
+                "returnCode": 0,
+                "value": 524292
+              },
+              {
+                "query": 1,
+                "returnCode": 0,
+                "value": 524292
+              },
+              {
+                "query": 2,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 3,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 4,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 5,
+                "returnCode": 0,
+                "value": 97
+              },
+              {
+                "query": 6,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 8,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 9,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 11,
+                "returnCode": 0,
+                "value": 98
+              },
+              {
+                "query": 12,
+                "returnCode": 0,
+                "value": 1
+              },
+              {
+                "query": 13,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 14,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 15,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 16,
+                "returnCode": 0,
+                "value": 2
+              },
+              {
+                "query": 17,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 20,
+                "returnCode": 0,
+                "value": 2
+              },
+              {
+                "query": 21,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 23,
+                "returnCode": 0,
+                "value": 0
+              },
+              {
+                "query": 25,
+                "returnCode": -55,
+                "value": null
+              },
+              {
+                "query": 26,
+                "returnCode": 0,
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "names",
+            "entries": [],
+            "nameQuery": [
+              110
+            ],
+            "nameNumberReturn": -49,
+            "scanReturn": -49,
+            "nameNumbers": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 0,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 1,
+            "isString": false,
+            "patternPosition": 6,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 7,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 8,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 9,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "calloutSite",
+            "version": 0,
+            "number": 255,
+            "isString": false,
+            "patternPosition": 10,
+            "nextItemLength": 0,
+            "stringOffset": 0,
+            "stringUnits": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "callout",
+            "version": 2,
+            "number": 255,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 0,
+            "patternPosition": 0,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 1,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "callout",
+            "version": 2,
+            "number": 1,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 1,
+            "patternPosition": 6,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 0,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "callout",
+            "version": 2,
+            "number": 255,
+            "isString": false,
+            "subjectLength": 2,
+            "captureTop": 1,
+            "captureLast": 0,
+            "startMatch": 0,
+            "currentPosition": 2,
+            "patternPosition": 7,
+            "nextItemLength": 1,
+            "stringOffset": 0,
+            "flags": 0,
+            "returnCode": 0,
+            "subjectUnits": [
+              97,
+              98
+            ],
+            "stringUnits": [],
+            "markUnits": null,
+            "captures": [
+              null
+            ]
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "match",
+            "iteration": 0,
+            "returnCode": 1,
+            "pairs": [
+              [
+                0,
+                2
+              ]
+            ],
+            "startChar": 0,
+            "markUnits": null,
+            "callerVector": [
+              [
+                0,
+                2
+              ]
+            ],
+            "markDefined": true,
+            "errorOffset": null
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "substring",
+            "group": 0,
+            "lengthReturn": 0,
+            "length": 2,
+            "copyReturn": 0,
+            "reportedLength": 2,
+            "outputUnits": [
+              97,
+              98
+            ]
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "substring",
+            "group": 1,
+            "lengthReturn": -49,
+            "length": null,
+            "copyReturn": -49,
+            "reportedLength": 128,
+            "outputUnits": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "substring",
+            "group": 2,
+            "lengthReturn": -49,
+            "length": null,
+            "copyReturn": -49,
+            "reportedLength": 128,
+            "outputUnits": []
+          },
+          {
+            "id": "call-839-16-utf",
+            "width": 16,
+            "event": "substringName",
+            "lengthReturn": -49,
+            "length": null,
+            "getReturn": -49,
+            "units": []
+          }
+        ],
+        "provenance": {
+          "kind": "ExecutedPinnedNativeInterpreter",
+          "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+          "buildIdentity": "test/corpora/pcre2/oracle/build-identity.json",
+          "observerIdentity": "test/corpora/pcre2/oracle/observer-identities.json"
+        },
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "managed": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 6,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 7,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 10,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ]
+    }
+  ],
+  "finding": "AutoCallout a(?C1)b|ab subject ab returns expectedmatch but extra managed255 callout patternPosition10 nextItemLength0 after successful first top-level branch; native ends trace at position7 nextItemLength1. All4domains."
+}

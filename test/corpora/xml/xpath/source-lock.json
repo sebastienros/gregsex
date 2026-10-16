@@ -1,0 +1,93 @@
+{
+  "format": "xpath-source-lock-1",
+  "qt3Revision": "201a6e466940cdfc727f4babfedcde5332b9f578",
+  "qt3Repository": "https://github.com/w3c/qt3tests.git",
+  "license": "BSD-3-Clause development subset; no W3C branded conformance claim",
+  "files": [
+    {
+      "path": "qt3/README.md",
+      "bytes": 691,
+      "sha256": "f3b23cb8480bafd70dd167669b656e2f8d29845074faa1711c417d764afac35d"
+    },
+    {
+      "path": "qt3/bsd-license.html",
+      "bytes": 25079,
+      "sha256": "6fb7bb1dd66b7307f2cf8694929a6a45c79a746d5ba4d25c450ebcdbed5889a8"
+    },
+    {
+      "path": "qt3/fn/analyze-string/analyze-string.xsd",
+      "bytes": 1230,
+      "sha256": "321ad02670be46ef0c6e3c833a5e5da36a085f2e26176e4e5a1ae3313c38dfb0"
+    },
+    {
+      "path": "qt3/fn/analyze-string.xml",
+      "bytes": 24186,
+      "sha256": "da37450bf7b42cf1100b22cc1d159100903af67643fdd62dd8eaac5de7c18e48"
+    },
+    {
+      "path": "qt3/fn/matches.re.xml",
+      "bytes": 733071,
+      "sha256": "f4544a43a1e6224e92c2f5c9503a267fb24178a32f5aee2d026d4e4b1868cbbd"
+    },
+    {
+      "path": "qt3/fn/matches.xml",
+      "bytes": 60982,
+      "sha256": "c18dcf29d39eadd128eb9a9bccd8d4037ca13e4d0d8ac2d50d874b38637727a0"
+    },
+    {
+      "path": "qt3/fn/replace.xml",
+      "bytes": 37495,
+      "sha256": "d1ac1bdccecee49fb89b30825fc1b1bb26f7cf173df42668187e6c9947b1db16"
+    },
+    {
+      "path": "qt3/fn/tokenize.xml",
+      "bytes": 26887,
+      "sha256": "3061292a186e1785aef45a91d70436bf8eba573a8ef9efca4d307968ef31738a"
+    },
+    {
+      "path": "qt3/guide/running.html",
+      "bytes": 28667,
+      "sha256": "b4933f1d675035d7bf2d5507ceb78c26766f2586701b29c151ee3e7b04c927f8"
+    },
+    {
+      "path": "qt3/guide/submitting.html",
+      "bytes": 8015,
+      "sha256": "7db2c4b481683fc93414c901435855fb725db5aaaa76d7b3fad3520e7fa25377"
+    },
+    {
+      "path": "qt3/license.html",
+      "bytes": 29572,
+      "sha256": "4534f8fa5519fa372134a81c6442b40ff58a6feee74737f67d7df93f91bcbfb0"
+    },
+    {
+      "path": "sources/Blocks-16.txt",
+      "bytes": 11397,
+      "sha256": "f3907b395d410f1b97342292ca6bc83dd12eb4b205f2a0c48efdef99e517d7b0"
+    },
+    {
+      "path": "sources/SpecialCasing-16.txt",
+      "bytes": 16809,
+      "sha256": "8d5de354eef79f2395a54c9c7dcebbaf3d30fc962d0f85611ea97aa973a0c451"
+    },
+    {
+      "path": "sources/UnicodeData-16.txt",
+      "bytes": 2175362,
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f"
+    },
+    {
+      "path": "sources/functions-31.html",
+      "bytes": 2650378,
+      "sha256": "b5bdcfb2e8b6edbe5a997f8971b0829da124bcd6d071c7f651ee71be99b2a988"
+    },
+    {
+      "path": "sources/unicode-license.txt",
+      "bytes": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    {
+      "path": "sources/xpath-31.html",
+      "bytes": 1107652,
+      "sha256": "ca1f8b00f9626e3e73589a371d702acf6bf0f4708c96a2cb0e87ca7a5ad3b88c"
+    }
+  ]
+}

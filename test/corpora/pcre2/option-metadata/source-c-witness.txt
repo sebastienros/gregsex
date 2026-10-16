@@ -1,0 +1,18 @@
+8106:     In non-UTF mode, and for both 32-bit modes, we turn \C into OP_ALLANY
+8107:     instead of OP_ANYBYTE so that it works in DFA mode and in lookbehinds.
+8108:     There are special UCP codes for \B and \b which are used in UCP mode unless
+8109:     "word" matching is being forced to ASCII.
+8110: 
+8111:     Note that \b and \B do a one-character lookbehind, and \A also behaves as
+8112:     if it does. */
+8113: 
+8114:     switch(meta_arg)
+8115:       {
+8116:       case ESC_C:
+8117:       cb->external_flags |= PCRE2_HASBKC;  /* Record */
+8118: #if PCRE2_CODE_UNIT_WIDTH == 32
+8119:       meta_arg = OP_ALLANY;
+8120: #else
+8121:       if (!utf) meta_arg = OP_ALLANY;
+8122: #endif
+8123:       break;

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- Optional Jint (QuickJS-derived) comparator compiled in from source. -->
+    <JintRoot Condition="'$(JintRoot)' == ''">$(HOME)/github/jint</JintRoot>
+  </PropertyGroup>
+  <PropertyGroup Condition="Exists('$(JintRoot)/Jint/Runtime/RegExp/JintRegExpEngine.cs')">
+    <DefineConstants>$(DefineConstants);JINT_QUICKJS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="Exists('$(JintRoot)/Jint/Runtime/RegExp/JintRegExpEngine.cs')">
+    <Compile Include="$(JintRoot)/Jint/Runtime/RegExp/**/*.cs" LinkBase="ThirdParty/JintRegExp" />
+    <Compile Include="$(JintRoot)/Jint/Extensions/Character.cs" LinkBase="ThirdParty/JintRegExp" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" />
+    <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" />
+    <ProjectReference Include="../../src/GregsEx.Generator/GregsEx.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+</Project>

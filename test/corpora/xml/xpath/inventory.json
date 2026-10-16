@@ -1,0 +1,1131 @@
+[
+  {
+    "capability": "XP-001",
+    "clause": "5.6.1",
+    "witnesses": {
+      "positive": [
+        "XP-0001",
+        "XP-0062",
+        "XP-0064",
+        "XP-0066",
+        "XP-0068",
+        "XP-0070",
+        "XP-0072",
+        "XP-0074",
+        "XP-0076",
+        "XP-0078",
+        "XP-0080",
+        "XP-0082"
+      ],
+      "negative": [
+        "XP-0002",
+        "XP-0063",
+        "XP-0065",
+        "XP-0067",
+        "XP-0069",
+        "XP-0071",
+        "XP-0073",
+        "XP-0075",
+        "XP-0077",
+        "XP-0079",
+        "XP-0081",
+        "XP-0083"
+      ],
+      "boundary": [
+        "XP-0003"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C037",
+        "XML-C038"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-002",
+    "clause": "5.6.1",
+    "witnesses": {
+      "positive": [
+        "XP-0004"
+      ],
+      "negative": [
+        "XP-0005"
+      ],
+      "boundary": [
+        "XP-0006",
+        "XP-0131",
+        "XP-0132",
+        "XP-0133",
+        "XP-0134",
+        "XP-0135",
+        "XP-0136",
+        "XP-0137",
+        "XP-0138",
+        "XP-0139",
+        "XP-0140",
+        "XP-0141"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C039",
+        "XML-C040",
+        "XML-C041"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-003",
+    "clause": "5.6.1",
+    "witnesses": {
+      "positive": [
+        "XP-0007",
+        "XP-0084",
+        "XP-0086",
+        "XP-0088",
+        "XP-0090",
+        "XP-0092",
+        "XP-0094",
+        "XP-0096",
+        "XP-0098",
+        "XP-0100",
+        "XP-0102"
+      ],
+      "negative": [
+        "XP-0008",
+        "XP-0085",
+        "XP-0087",
+        "XP-0089",
+        "XP-0091",
+        "XP-0093",
+        "XP-0095",
+        "XP-0097",
+        "XP-0099",
+        "XP-0101",
+        "XP-0103"
+      ],
+      "boundary": [
+        "XP-0009"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C042"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-004",
+    "clause": "5.6.1",
+    "witnesses": {
+      "positive": [
+        "XP-0010"
+      ],
+      "negative": [
+        "XP-0011"
+      ],
+      "boundary": [
+        "XP-0012"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C043"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-005",
+    "clause": "5.6.1",
+    "witnesses": {
+      "positive": [
+        "XP-0013"
+      ],
+      "negative": [
+        "XP-0014",
+        "XP-0104",
+        "XP-0105",
+        "XP-0106",
+        "XP-0107",
+        "XP-0108",
+        "XP-0109",
+        "XP-0110",
+        "XP-0111",
+        "XP-0112",
+        "XP-0113",
+        "XP-0114",
+        "XP-0115"
+      ],
+      "boundary": [
+        "XP-0015"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C044",
+        "XML-C045"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-006",
+    "clause": "5.6.1",
+    "witnesses": {
+      "positive": [
+        "XP-0016"
+      ],
+      "negative": [
+        "XP-0017"
+      ],
+      "boundary": [
+        "XP-0018"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C046"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-007",
+    "clause": "5.6.2",
+    "witnesses": {
+      "positive": [
+        "XP-0019"
+      ],
+      "negative": [
+        "XP-0020"
+      ],
+      "boundary": [
+        "XP-0021"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C047",
+        "XML-C048"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-008",
+    "clause": "5.6.2",
+    "witnesses": {
+      "positive": [
+        "XP-0022",
+        "XP-0116",
+        "XP-0117",
+        "XP-0118",
+        "XP-0119",
+        "XP-0120",
+        "XP-0121",
+        "XP-0122",
+        "XP-0123",
+        "XP-0124"
+      ],
+      "negative": [
+        "XP-0023",
+        "XP-0125",
+        "XP-0126",
+        "XP-0127",
+        "XP-0128",
+        "XP-0129",
+        "XP-0130"
+      ],
+      "boundary": [
+        "XP-0024"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C049",
+        "XML-C050"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-009",
+    "clause": "5.6.2",
+    "witnesses": {
+      "positive": [
+        "XP-0025"
+      ],
+      "negative": [
+        "XP-0026"
+      ],
+      "boundary": [
+        "XP-0027",
+        "XP-0174",
+        "XP-0175",
+        "XP-0176",
+        "XP-0177",
+        "XP-0178",
+        "XP-0179",
+        "XP-0180",
+        "XP-0181",
+        "XP-0182",
+        "XP-0183",
+        "XP-0184"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C051",
+        "XML-C052",
+        "XML-C053"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-010",
+    "clause": "5.6.2",
+    "witnesses": {
+      "positive": [
+        "XP-0028"
+      ],
+      "negative": [
+        "XP-0029"
+      ],
+      "boundary": [
+        "XP-0030"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C054",
+        "XML-C055"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-011",
+    "clause": "5.6.2",
+    "witnesses": {
+      "positive": [
+        "XP-0031"
+      ],
+      "negative": [
+        "XP-0032"
+      ],
+      "boundary": [
+        "XP-0033"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C056",
+        "XML-C057"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-012",
+    "clause": "5.6.3",
+    "witnesses": {
+      "positive": [
+        "XP-0034"
+      ],
+      "negative": [
+        "XP-0035"
+      ],
+      "boundary": [
+        "XP-0036"
+      ],
+      "imported": [
+        "QT3-matches-fn-matches2args-1",
+        "QT3-matches-fn-matches2args-2",
+        "QT3-matches-fn-matches2args-3",
+        "QT3-matches-fn-matches2args-4",
+        "QT3-matches-fn-matches2args-5",
+        "QT3-matches-fn-matchesErr-1",
+        "QT3-matches-fn-matchesErr-2",
+        "QT3-matches-fn-matchesErr-3",
+        "QT3-matches-fn-matchesErr-4",
+        "QT3-matches-fn-matchesErr-5",
+        "QT3-matches-fn-matches-1",
+        "QT3-matches-fn-matches-2",
+        "QT3-matches-fn-matches-3",
+        "QT3-matches-fn-matches-6",
+        "QT3-matches-fn-matches-7",
+        "QT3-matches-fn-matches-8",
+        "QT3-matches-fn-matches-9",
+        "QT3-matches-fn-matches-10",
+        "QT3-matches-fn-matches-11",
+        "QT3-matches-fn-matches-12",
+        "QT3-matches-fn-matches-13",
+        "QT3-matches-fn-matches-14",
+        "QT3-matches-fn-matches-15",
+        "QT3-matches-fn-matches-16",
+        "QT3-matches-fn-matches-17",
+        "QT3-matches-fn-matches-18",
+        "QT3-matches-fn-matches-19",
+        "QT3-matches-fn-matches-20",
+        "QT3-matches-fn-matches-21",
+        "QT3-matches-fn-matches-22",
+        "QT3-matches-fn-matches-23",
+        "QT3-matches-fn-matches-24",
+        "QT3-matches-fn-matches-25",
+        "QT3-matches-fn-matches-27",
+        "QT3-matches-fn-matches-28",
+        "QT3-matches-fn-matches-29",
+        "QT3-matches-fn-matches-30",
+        "QT3-matches-fn-matches-35",
+        "QT3-matches-fn-matches-36",
+        "QT3-matches-fn-matches-37",
+        "QT3-matches-fn-matches-38",
+        "QT3-matches-fn-matches-39",
+        "QT3-matches-fn-matches-40",
+        "QT3-matches-fn-matches-48",
+        "QT3-matches-fn-matches-49",
+        "QT3-matches-fn-matches-51",
+        "QT3-matches-fn-matches-52",
+        "QT3-matches-fn-matches-53",
+        "QT3-matches-fn-matches-54",
+        "QT3-matches-caselessmatch01",
+        "QT3-matches-caselessmatch02",
+        "QT3-matches-caselessmatch03",
+        "QT3-matches-caselessmatch08",
+        "QT3-matches-caselessmatch09",
+        "QT3-matches-caselessmatch10",
+        "QT3-matches-caselessmatch11",
+        "QT3-matches-caselessmatch12",
+        "QT3-matches-caselessmatch13",
+        "QT3-matches-caselessmatch14",
+        "QT3-matches-caselessmatch15",
+        "QT3-matches-K-MatchesFunc-5",
+        "QT3-matches-K-MatchesFunc-6",
+        "QT3-matches-K2-MatchesFunc-1",
+        "QT3-matches-K2-MatchesFunc-2",
+        "QT3-matches-K2-MatchesFunc-3",
+        "QT3-matches-K2-MatchesFunc-4",
+        "QT3-matches-K2-MatchesFunc-5",
+        "QT3-matches-K2-MatchesFunc-6",
+        "QT3-matches-K2-MatchesFunc-7",
+        "QT3-matches-K2-MatchesFunc-8",
+        "QT3-matches-K2-MatchesFunc-9",
+        "QT3-matches-K2-MatchesFunc-10",
+        "QT3-matches-K2-MatchesFunc-11",
+        "QT3-matches-K2-MatchesFunc-12",
+        "QT3-matches-K2-MatchesFunc-13",
+        "QT3-matches-K2-MatchesFunc-14",
+        "QT3-matches-K2-MatchesFunc-17",
+        "QT3-matches-cbcl-matches-001",
+        "QT3-matches-cbcl-matches-002",
+        "QT3-matches-cbcl-matches-003",
+        "QT3-matches-cbcl-matches-005",
+        "QT3-matches-cbcl-matches-007",
+        "QT3-matches-cbcl-matches-008",
+        "QT3-matches-cbcl-matches-009",
+        "QT3-matches-cbcl-matches-010",
+        "QT3-matches-cbcl-matches-011",
+        "QT3-matches-cbcl-matches-012",
+        "QT3-matches-cbcl-matches-013",
+        "QT3-matches-cbcl-matches-014",
+        "QT3-matches-cbcl-matches-015",
+        "QT3-matches-cbcl-matches-016",
+        "QT3-matches-cbcl-matches-017",
+        "QT3-matches-cbcl-matches-018",
+        "QT3-matches-cbcl-matches-019",
+        "QT3-matches-cbcl-matches-020",
+        "QT3-matches-cbcl-matches-021",
+        "QT3-matches-cbcl-matches-022",
+        "QT3-matches-cbcl-matches-023",
+        "QT3-matches-cbcl-matches-024",
+        "QT3-matches-cbcl-matches-025",
+        "QT3-matches-cbcl-matches-026",
+        "QT3-matches-cbcl-matches-027",
+        "QT3-matches-cbcl-matches-028",
+        "QT3-matches-cbcl-matches-029",
+        "QT3-matches-cbcl-matches-030",
+        "QT3-matches-cbcl-matches-031",
+        "QT3-matches-cbcl-matches-032",
+        "QT3-matches-cbcl-matches-033",
+        "QT3-matches-cbcl-matches-034",
+        "QT3-matches-cbcl-matches-035",
+        "QT3-matches-cbcl-matches-036",
+        "QT3-matches-cbcl-matches-037",
+        "QT3-matches-cbcl-matches-038",
+        "QT3-matches-cbcl-matches-039",
+        "QT3-matches-cbcl-matches-040",
+        "QT3-matches-cbcl-matches-042",
+        "QT3-matches-cbcl-matches-043",
+        "QT3-matches-cbcl-matches-044",
+        "QT3-matches-cbcl-matches-045",
+        "QT3-matches-cbcl-matches-046",
+        "QT3-matches-cbcl-matches-048",
+        "QT3-matches-cbcl-matches-049",
+        "QT3-matches-cbcl-matches-050",
+        "QT3-matches-cbcl-matches-051",
+        "QT3-matches-cbcl-matches-052",
+        "QT3-matches-cbcl-matches-053",
+        "QT3-matches.re-re00016",
+        "QT3-matches.re-re00017",
+        "QT3-matches.re-re00018",
+        "QT3-matches.re-re00019",
+        "QT3-matches.re-re00021",
+        "QT3-matches.re-re00022",
+        "QT3-matches.re-re00032",
+        "QT3-matches.re-re00033",
+        "QT3-matches.re-re00037",
+        "QT3-matches.re-re00038",
+        "QT3-matches.re-re00039",
+        "QT3-matches.re-re00040",
+        "QT3-matches.re-re00041",
+        "QT3-matches.re-re00042",
+        "QT3-matches.re-re00043",
+        "QT3-matches.re-re00044",
+        "QT3-matches.re-re00045",
+        "QT3-matches.re-re00046",
+        "QT3-matches.re-re00048",
+        "QT3-matches.re-re00071",
+        "QT3-matches.re-re00072",
+        "QT3-matches.re-re00087",
+        "QT3-matches.re-re00088",
+        "QT3-matches.re-re00090",
+        "QT3-matches.re-re00093",
+        "QT3-matches.re-re00097",
+        "QT3-matches.re-re00212",
+        "QT3-matches.re-re00214",
+        "QT3-matches.re-re00215",
+        "QT3-matches.re-re00216",
+        "QT3-matches.re-re00521",
+        "QT3-matches.re-re00541",
+        "QT3-matches.re-re00556",
+        "QT3-matches.re-re00558",
+        "QT3-matches.re-re00561",
+        "QT3-matches.re-re00562",
+        "QT3-matches.re-re00563",
+        "QT3-matches.re-re00564",
+        "QT3-matches.re-re00566",
+        "QT3-matches.re-re00567",
+        "QT3-matches.re-re00568",
+        "QT3-matches.re-re00569",
+        "QT3-matches.re-re00570",
+        "QT3-matches.re-re00571",
+        "QT3-matches.re-re00572",
+        "QT3-matches.re-re00573",
+        "QT3-matches.re-re00574",
+        "QT3-matches.re-re00583",
+        "QT3-matches.re-re00584",
+        "QT3-matches.re-re00585",
+        "QT3-matches.re-re00586",
+        "QT3-matches.re-re00587",
+        "QT3-matches.re-re00588",
+        "QT3-matches.re-re00589",
+        "QT3-matches.re-re00590",
+        "QT3-matches.re-re00591",
+        "QT3-matches.re-re00592",
+        "QT3-matches.re-re00593",
+        "QT3-matches.re-re00594",
+        "QT3-matches.re-re00595",
+        "QT3-matches.re-re00596",
+        "QT3-matches.re-re00597",
+        "QT3-matches.re-re00598",
+        "QT3-matches.re-re00600",
+        "QT3-matches.re-re00609",
+        "QT3-matches.re-re00610",
+        "QT3-matches.re-re00613",
+        "QT3-matches.re-re00614",
+        "QT3-matches.re-re00615",
+        "QT3-matches.re-re00616",
+        "QT3-matches.re-re00618",
+        "QT3-matches.re-re00619",
+        "QT3-matches.re-re00620",
+        "QT3-matches.re-re00621",
+        "QT3-matches.re-re00622",
+        "QT3-matches.re-re00623",
+        "QT3-matches.re-re00624",
+        "QT3-matches.re-re00625",
+        "QT3-matches.re-re00626",
+        "QT3-matches.re-re00627",
+        "QT3-matches.re-re00628",
+        "QT3-matches.re-re00629",
+        "QT3-matches.re-re00630",
+        "QT3-matches.re-re00631",
+        "QT3-matches.re-re00632",
+        "QT3-matches.re-re00633",
+        "QT3-matches.re-re00634",
+        "QT3-matches.re-re00635",
+        "QT3-matches.re-re00636",
+        "QT3-matches.re-re00637",
+        "QT3-matches.re-re00638",
+        "QT3-matches.re-re00642",
+        "QT3-matches.re-re00646",
+        "QT3-matches.re-re00647",
+        "QT3-matches.re-re00648",
+        "QT3-matches.re-re00649",
+        "QT3-matches.re-re00650",
+        "QT3-matches.re-re00651",
+        "QT3-matches.re-re00652",
+        "QT3-matches.re-re00653",
+        "QT3-matches.re-re00654",
+        "QT3-matches.re-re00674",
+        "QT3-matches.re-re00675",
+        "QT3-matches.re-re00676",
+        "QT3-matches.re-re00677",
+        "QT3-matches.re-re00678",
+        "QT3-matches.re-re00679",
+        "QT3-matches.re-re00680",
+        "QT3-matches.re-re00681",
+        "QT3-matches.re-re00682",
+        "QT3-matches.re-re00683",
+        "QT3-matches.re-re00684",
+        "QT3-matches.re-re00685",
+        "QT3-matches.re-re00686",
+        "QT3-matches.re-re00687",
+        "QT3-matches.re-re00688",
+        "QT3-matches.re-re00741",
+        "QT3-matches.re-re00742",
+        "QT3-matches.re-re00743",
+        "QT3-matches.re-re00744",
+        "QT3-matches.re-re00745",
+        "QT3-matches.re-re00746",
+        "QT3-matches.re-re00750",
+        "QT3-matches.re-re00751",
+        "QT3-matches.re-re00754",
+        "QT3-matches.re-re00755",
+        "QT3-matches.re-re00756",
+        "QT3-matches.re-re00757",
+        "QT3-matches.re-re00761",
+        "QT3-matches.re-re00762",
+        "QT3-matches.re-re00763",
+        "QT3-matches.re-re00764",
+        "QT3-matches.re-re00765",
+        "QT3-matches.re-re00766",
+        "QT3-matches.re-re00767",
+        "QT3-matches.re-re00768",
+        "QT3-matches.re-re00769",
+        "QT3-matches.re-re00784",
+        "QT3-matches.re-re00785",
+        "QT3-matches.re-re00786",
+        "QT3-matches.re-re00787",
+        "QT3-matches.re-re00791",
+        "QT3-matches.re-re00792",
+        "QT3-matches.re-re00801",
+        "QT3-matches.re-re00802",
+        "QT3-matches.re-re00803",
+        "QT3-matches.re-re00804",
+        "QT3-matches.re-re00805",
+        "QT3-matches.re-re00806",
+        "QT3-matches.re-re00807",
+        "QT3-matches.re-re00808",
+        "QT3-matches.re-re00809",
+        "QT3-matches.re-re00810",
+        "QT3-matches.re-re00811",
+        "QT3-matches.re-re00812",
+        "QT3-matches.re-re00813",
+        "QT3-matches.re-re00814",
+        "QT3-matches.re-re00815",
+        "QT3-matches.re-re00816",
+        "QT3-matches.re-re00817",
+        "QT3-matches.re-re00819",
+        "QT3-matches.re-re00820",
+        "QT3-matches.re-re00821",
+        "QT3-matches.re-re00822",
+        "QT3-matches.re-re00823",
+        "QT3-matches.re-re00824",
+        "QT3-matches.re-re00826",
+        "QT3-matches.re-re00827",
+        "QT3-matches.re-re00828",
+        "QT3-matches.re-re00829",
+        "QT3-matches.re-re00830",
+        "QT3-matches.re-re00845",
+        "QT3-matches.re-re00846",
+        "QT3-matches.re-re00847",
+        "QT3-matches.re-re00848",
+        "QT3-matches.re-re00849",
+        "QT3-matches.re-re00850",
+        "QT3-matches.re-re00851",
+        "QT3-matches.re-re00852",
+        "QT3-matches.re-re00853",
+        "QT3-matches.re-re00854",
+        "QT3-matches.re-re00855",
+        "QT3-matches.re-re00856",
+        "QT3-matches.re-re00857",
+        "QT3-matches.re-re00858",
+        "QT3-matches.re-re00859",
+        "QT3-matches.re-re00860",
+        "QT3-matches.re-re00861",
+        "QT3-matches.re-re00862",
+        "QT3-matches.re-re00863",
+        "QT3-matches.re-re00864",
+        "QT3-matches.re-re00865",
+        "QT3-matches.re-re00866",
+        "QT3-matches.re-re00867",
+        "QT3-matches.re-re00868",
+        "QT3-matches.re-re00869",
+        "QT3-matches.re-re00870",
+        "QT3-matches.re-re00871",
+        "QT3-matches.re-re00872",
+        "QT3-matches.re-re00873",
+        "QT3-matches.re-re00874",
+        "QT3-matches.re-re00875",
+        "QT3-matches.re-re00876",
+        "QT3-matches.re-re00877",
+        "QT3-matches.re-re00878",
+        "QT3-matches.re-re00879",
+        "QT3-matches.re-re00880",
+        "QT3-matches.re-re00881",
+        "QT3-matches.re-re00882",
+        "QT3-matches.re-re00883",
+        "QT3-matches.re-re00884",
+        "QT3-matches.re-re00885",
+        "QT3-matches.re-re00886",
+        "QT3-matches.re-re00887",
+        "QT3-matches.re-re00888",
+        "QT3-matches.re-re00889",
+        "QT3-matches.re-re00890",
+        "QT3-matches.re-re00891",
+        "QT3-matches.re-re00892",
+        "QT3-matches.re-re00893",
+        "QT3-matches.re-re00894",
+        "QT3-matches.re-re00895",
+        "QT3-matches.re-re00896",
+        "QT3-matches.re-re00897",
+        "QT3-matches.re-re00898",
+        "QT3-matches.re-re00899",
+        "QT3-matches.re-re00900",
+        "QT3-matches.re-re00901",
+        "QT3-matches.re-re00902",
+        "QT3-matches.re-re00903",
+        "QT3-matches.re-re00904",
+        "QT3-matches.re-re00905",
+        "QT3-matches.re-re00906",
+        "QT3-matches.re-re00907",
+        "QT3-matches.re-re00908",
+        "QT3-matches.re-re00909",
+        "QT3-matches.re-re00910",
+        "QT3-matches.re-re00911",
+        "QT3-matches.re-re00912",
+        "QT3-matches.re-re00913",
+        "QT3-matches.re-re00914",
+        "QT3-matches.re-re00915",
+        "QT3-matches.re-re00916",
+        "QT3-matches.re-re00917",
+        "QT3-matches.re-re00918",
+        "QT3-matches.re-re00919",
+        "QT3-matches.re-re00920",
+        "QT3-matches.re-re00921",
+        "QT3-matches.re-re00922",
+        "QT3-matches.re-re00923",
+        "QT3-matches.re-re00924",
+        "QT3-matches.re-re00925",
+        "QT3-matches.re-re00926",
+        "QT3-matches.re-re00927",
+        "QT3-matches.re-re00928",
+        "QT3-matches.re-re00929",
+        "QT3-matches.re-re00930",
+        "QT3-matches.re-re00931",
+        "QT3-matches.re-re00937",
+        "QT3-matches.re-re00938",
+        "QT3-matches.re-re00939",
+        "QT3-matches.re-re00940",
+        "QT3-matches.re-re00941",
+        "QT3-matches.re-re00942",
+        "QT3-matches.re-re00943",
+        "QT3-matches.re-re00944",
+        "QT3-matches.re-re00945",
+        "QT3-matches.re-re00946",
+        "QT3-matches.re-re00947",
+        "QT3-matches.re-re00948",
+        "QT3-matches.re-re00949",
+        "QT3-matches.re-re00950",
+        "QT3-matches.re-re00951",
+        "QT3-matches.re-re00952",
+        "QT3-matches.re-re00953",
+        "QT3-matches.re-re00954",
+        "QT3-matches.re-re00955",
+        "QT3-matches.re-re00956",
+        "QT3-matches.re-re00958",
+        "QT3-matches.re-re00959",
+        "QT3-matches.re-re00960",
+        "QT3-matches.re-re00961",
+        "QT3-matches.re-re00962",
+        "QT3-matches.re-re00963",
+        "QT3-matches.re-re00964",
+        "QT3-matches.re-re00965",
+        "QT3-matches.re-re00966",
+        "QT3-matches.re-re00967",
+        "QT3-matches.re-re00968",
+        "QT3-matches.re-re00969",
+        "QT3-matches.re-re00970",
+        "QT3-matches.re-re00971",
+        "QT3-matches.re-re00972",
+        "QT3-matches.re-re00973",
+        "QT3-matches.re-re00974",
+        "QT3-matches.re-re00975",
+        "QT3-matches.re-re00976a",
+        "QT3-matches.re-re00976b",
+        "QT3-matches.re-re00977",
+        "QT3-matches.re-re00978",
+        "QT3-matches.re-re00988",
+        "QT3-matches.re-re00989",
+        "QT3-matches.re-re00992",
+        "QT3-matches.re-re00993",
+        "QT3-matches.re-re00994",
+        "QT3-matches.re-re00995",
+        "QT3-matches.re-re00996",
+        "QT3-matches.re-re00997",
+        "QT3-matches.re-re00998",
+        "QT3-matches.re-re00999",
+        "QT3-matches.re-re01001",
+        "QT3-matches.re-re01002"
+      ],
+      "contract-seed": [
+        "XML-C058"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-013",
+    "clause": "5.6.4",
+    "witnesses": {
+      "positive": [
+        "XP-0037"
+      ],
+      "negative": [
+        "XP-0038",
+        "XP-0148",
+        "XP-0149",
+        "XP-0150",
+        "XP-0151"
+      ],
+      "boundary": [
+        "XP-0039",
+        "XP-0142",
+        "XP-0143",
+        "XP-0144",
+        "XP-0145",
+        "XP-0146",
+        "XP-0147"
+      ],
+      "imported": [
+        "QT3-replace-fn-replace3args-1",
+        "QT3-replace-fn-replace3args-2",
+        "QT3-replace-fn-replace3args-3",
+        "QT3-replace-fn-replace3args-4",
+        "QT3-replace-fn-replace3args-5",
+        "QT3-replace-fn-replace3args-6",
+        "QT3-replace-fn-replaceErr-1",
+        "QT3-replace-fn-replaceErr-2",
+        "QT3-replace-fn-replaceErr-3",
+        "QT3-replace-fn-replace-1",
+        "QT3-replace-fn-replace-2",
+        "QT3-replace-fn-replace-3",
+        "QT3-replace-fn-replace-4",
+        "QT3-replace-fn-replace-5",
+        "QT3-replace-fn-replace-6",
+        "QT3-replace-fn-replace-7",
+        "QT3-replace-fn-replace-8",
+        "QT3-replace-fn-replace-9",
+        "QT3-replace-fn-replace-10",
+        "QT3-replace-fn-replace-12",
+        "QT3-replace-fn-replace-13",
+        "QT3-replace-fn-replace-14",
+        "QT3-replace-fn-replace-15",
+        "QT3-replace-fn-replace-16",
+        "QT3-replace-fn-replace-17",
+        "QT3-replace-fn-replace-18",
+        "QT3-replace-fn-replace-19",
+        "QT3-replace-fn-replace-20",
+        "QT3-replace-fn-replace-21",
+        "QT3-replace-fn-replace-22",
+        "QT3-replace-fn-replace-23",
+        "QT3-replace-fn-replace-24",
+        "QT3-replace-fn-replace-25",
+        "QT3-replace-fn-replace-26",
+        "QT3-replace-fn-replace-27",
+        "QT3-replace-fn-replace-28",
+        "QT3-replace-fn-replace-29",
+        "QT3-replace-fn-replace-30",
+        "QT3-replace-fn-replace-31",
+        "QT3-replace-fn-replace-32",
+        "QT3-replace-fn-replace-33",
+        "QT3-replace-fn-replace-37",
+        "QT3-replace-fn-replace-38",
+        "QT3-replace-fn-replace-39",
+        "QT3-replace-fn-replace-40",
+        "QT3-replace-fn-replace-41",
+        "QT3-replace-fn-replace-42",
+        "QT3-replace-fn-replace-54",
+        "QT3-replace-fn-replace-55",
+        "QT3-replace-fn-replace-56",
+        "QT3-replace-fn-replace-57",
+        "QT3-replace-fn-replace-59",
+        "QT3-replace-K-ReplaceFunc-1",
+        "QT3-replace-K-ReplaceFunc-4",
+        "QT3-replace-K-ReplaceFunc-6",
+        "QT3-replace-K-ReplaceFunc-7",
+        "QT3-replace-K-ReplaceFunc-8",
+        "QT3-replace-K-ReplaceFunc-9",
+        "QT3-replace-K2-ReplaceFunc-1",
+        "QT3-replace-K2-ReplaceFunc-2",
+        "QT3-replace-K2-ReplaceFunc-3",
+        "QT3-replace-K2-ReplaceFunc-4",
+        "QT3-replace-K2-ReplaceFunc-5",
+        "QT3-replace-K2-ReplaceFunc-6",
+        "QT3-replace-K2-ReplaceFunc-7",
+        "QT3-replace-cbcl-fn-replace-002",
+        "QT3-tokenize-K2-TokenizeFunc-6"
+      ],
+      "contract-seed": [
+        "XML-C059",
+        "XML-C060",
+        "XML-C061",
+        "XML-C062"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-014",
+    "clause": "5.6.5",
+    "witnesses": {
+      "positive": [
+        "XP-0040"
+      ],
+      "negative": [
+        "XP-0041"
+      ],
+      "boundary": [
+        "XP-0042",
+        "XP-0152",
+        "XP-0153",
+        "XP-0154",
+        "XP-0155",
+        "XP-0156",
+        "XP-0157",
+        "XP-0158"
+      ],
+      "imported": [
+        "QT3-tokenize-fn-tokenize-1",
+        "QT3-tokenize-fn-tokenize-2",
+        "QT3-tokenize-K-TokenizeFunc-3",
+        "QT3-tokenize-K-TokenizeFunc-4"
+      ],
+      "contract-seed": [
+        "XML-C063",
+        "XML-C064",
+        "XML-C065"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-015",
+    "clause": "5.6.4-6",
+    "witnesses": {
+      "positive": [
+        "XP-0043"
+      ],
+      "negative": [
+        "XP-0044",
+        "XP-0159",
+        "XP-0160",
+        "XP-0161",
+        "XP-0162",
+        "XP-0163",
+        "XP-0164",
+        "XP-0165",
+        "XP-0166",
+        "XP-0167",
+        "XP-0168",
+        "XP-0169",
+        "XP-0170",
+        "XP-0171",
+        "XP-0172",
+        "XP-0173"
+      ],
+      "boundary": [
+        "XP-0045"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C066",
+        "XML-C067",
+        "XML-C068"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-016",
+    "clause": "5.6.6/C.1",
+    "witnesses": {
+      "positive": [
+        "XP-0046"
+      ],
+      "negative": [
+        "XP-0047"
+      ],
+      "boundary": [
+        "XP-0048"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C069",
+        "XML-C070"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  },
+  {
+    "capability": "XP-017",
+    "clause": "GregsEx XML domain/native offsets/resource policy",
+    "witnesses": {
+      "positive": [
+        "XP-0049",
+        "XP-0056",
+        "XP-0057",
+        "XP-0058"
+      ],
+      "negative": [
+        "XP-0050",
+        "XP-0052",
+        "XP-0053",
+        "XP-0054",
+        "XP-0055",
+        "XP-0189",
+        "XP-0190"
+      ],
+      "boundary": [
+        "XP-0051",
+        "XP-0059",
+        "XP-0060",
+        "XP-0061",
+        "XP-0185",
+        "XP-0186",
+        "XP-0187",
+        "XP-0188"
+      ],
+      "imported": [],
+      "contract-seed": [
+        "XML-C071",
+        "XML-C072"
+      ]
+    },
+    "qt3Suites": [
+      "matches",
+      "matches.re",
+      "replace",
+      "tokenize",
+      "analyze-string"
+    ],
+    "executionBoundary": "Independent processor or source-policy evidence only; GregsEx engine execution is product verification"
+  }
+]

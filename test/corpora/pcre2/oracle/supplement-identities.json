@@ -1,0 +1,46 @@
+{
+  "source": "doc/pcre2api.3:3343\u20133347,3370\u20133380",
+  "selectedExisting": 7,
+  "newCases": 16,
+  "identities": [
+    {
+      "width": 8,
+      "argv": [
+        "clang",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-DPCRE2_CODE_UNIT_WIDTH=8",
+        "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/source/src",
+        "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/supplement-8",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/observe.c",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/libpcre2-8.a",
+        "-o",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/supplement-8/observe"
+      ],
+      "exeSha256": "871a061987b5698b37bc35b0777dca38325c2ede8a01be586e93f4cbc5db9638",
+      "headerSha256": "4096b48399fb94f6901427677a9b89ccd421363741554e889c6cf5e683abb066",
+      "outputSha256": "542305d63c101bdc681c3f3abcf1a286eef186c5951eef19ad1588d5d671b310"
+    },
+    {
+      "width": 16,
+      "argv": [
+        "clang",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-DPCRE2_CODE_UNIT_WIDTH=16",
+        "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/source/src",
+        "-I/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/supplement-16",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/observe.c",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/libpcre2-16.a",
+        "-o",
+        "/Users/sebastienros/.codex/worktrees/ce68/gregsex/tools/oracles/pcre2/.artifacts/build/supplement-16/observe"
+      ],
+      "exeSha256": "d4c2facac3fd8555f4930e7fcf8fd6fc05c11d85bdc7fbb42ee253383c32e7ba",
+      "headerSha256": "5eb10818a1f4fbc7e4bc724a939c19b7269ac87dd4f7da7dad380ea8938a6490",
+      "outputSha256": "eb2a0416a11ea862434a5d5b6d265afd0c8fac6875abc8d7760ea1d878554ba3"
+    }
+  ],
+  "note": "Only missing source-defined UTF-error offsets and length-prefixed binary mark/callout observations; no full matrix/build/trace rerun."
+}

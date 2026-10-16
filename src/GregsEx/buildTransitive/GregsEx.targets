@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <GregsExEnableAutoCompilation Condition="'$(GregsExEnableAutoCompilation)' == '' and ('$(PublishTrimmed)' == 'true' or '$(PublishAot)' == 'true')">false</GregsExEnableAutoCompilation>
+    <GregsExEnableAutoCompilation Condition="'$(GregsExEnableAutoCompilation)' == ''">true</GregsExEnableAutoCompilation>
+  </PropertyGroup>
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="GregsEx.RuntimeCompilation.Auto"
+                                     Value="$(GregsExEnableAutoCompilation)"
+                                     Trim="true" />
+  </ItemGroup>
+</Project>

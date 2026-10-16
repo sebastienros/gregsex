@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IlcGenerateMapFile>true</IlcGenerateMapFile>
+  </PropertyGroup>
+  <Import Project="../../src/GregsEx/buildTransitive/GregsEx.targets" />
+  <Target Name="EnsureGeneratorBuilt" BeforeTargets="ResolveReferences;CoreCompile">
+    <MSBuild Projects="../../src/GregsEx.Generator/GregsEx.Generator.csproj"
+             Targets="Restore;Build"
+             Properties="Configuration=$(Configuration)"
+             RemoveProperties="PublishAot;PublishTrimmed;PublishSingleFile;SelfContained;RuntimeIdentifier;TargetFramework;OutputPath;OutDir;PublishDir" />
+  </Target>
+  <ItemGroup>
+    <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" />
+    <Analyzer Include="../../src/GregsEx.Generator/bin/$(Configuration)/netstandard2.0/GregsEx.Generator.dll" />
+    <PackageReference Include="System.CommandLine" />
+    <Compile Include="../GregsEx.Tests/Integration/EcmaScript/ProductCorpusRunner.cs" Link="ProductCorpusRunner.cs" />
+    <Compile Include="../GregsEx.Tests/Integration/EcmaScript/EcmaSmoke.cs" Link="EcmaSmoke.cs" />
+    <Content Include="../../test/corpora/ecmascript/*-corpus.json" Link="corpora/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../test/corpora/ecmascript/raw-flag-boundary.json" Link="corpora/raw-flag-boundary.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

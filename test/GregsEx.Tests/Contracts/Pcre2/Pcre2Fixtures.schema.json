@@ -1,0 +1,735 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contractVersion",
+    "profileId",
+    "sourceCommit",
+    "origin",
+    "cases"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "Pcre2Fixtures.schema.json"
+    },
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "contractVersion": {
+      "const": "pcre2-fixtures-1"
+    },
+    "profileId": {
+      "const": "Pcre2-10.46-ManagedStandard8_16-v1"
+    },
+    "sourceCommit": {
+      "const": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff"
+    },
+    "origin": {
+      "const": "source-before-implementation"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "requirements",
+          "operation",
+          "patternKind",
+          "patternUnits",
+          "subjectUnits",
+          "replacementUnits",
+          "width",
+          "compileFlags",
+          "extraFlags",
+          "matchFlags",
+          "substituteFlags",
+          "newline",
+          "bsr",
+          "optimization",
+          "maxVariableLookbehind",
+          "startAt",
+          "offsetLimit",
+          "pairCapacity",
+          "destinationCapacity",
+          "characterTables",
+          "workLimit",
+          "depthLimit",
+          "heapBytes",
+          "callbackReturns",
+          "substituteCallbackReturns",
+          "caseCallbackOutputs",
+          "initialPairs",
+          "provenance",
+          "expected"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "operation": {
+            "enum": [
+              "Match",
+              "Compile",
+              "Iterate",
+              "Substitute",
+              "Projection",
+              "ExcludedHost"
+            ]
+          },
+          "patternKind": {
+            "enum": [
+              "Chars",
+              "Bytes"
+            ]
+          },
+          "patternUnits": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "subjectUnits": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "replacementUnits": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "width": {
+            "enum": [
+              8,
+              16
+            ]
+          },
+          "compileFlags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "extraFlags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "matchFlags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "substituteFlags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "newline": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "bsr": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "optimization": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "maxVariableLookbehind": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "startAt": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "offsetLimit": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pairCapacity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "destinationCapacity": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "characterTables": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                },
+                "minItems": 1088,
+                "maxItems": 1088
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "workLimit": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "depthLimit": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "heapBytes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "callbackReturns": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "substituteCallbackReturns": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "caseCallbackOutputs": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "initialPairs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "participated",
+                "start",
+                "end"
+              ],
+              "properties": {
+                "participated": {
+                  "type": "boolean"
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "source",
+              "line",
+              "license",
+              "note"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "SourceRule"
+                ]
+              },
+              "source": {
+                "type": "string"
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "license": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "outcome",
+              "nativeReturn",
+              "pairs",
+              "iterations",
+              "outputUnits",
+              "markUnits",
+              "callouts",
+              "diagnosticKind",
+              "substituteCallouts",
+              "caseCallouts",
+              "nameQuery",
+              "nameNumbers",
+              "nativeOffset",
+              "sourceOffset",
+              "requiredCapacity"
+            ],
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "Match",
+                  "NoMatch",
+                  "Partial",
+                  "Error",
+                  "CompileAccepted",
+                  "CompileError",
+                  "Iterate",
+                  "Substitute",
+                  "CapabilityError",
+                  "LimitExceeded"
+                ]
+              },
+              "nativeReturn": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "pairs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "participated",
+                    "start",
+                    "end"
+                  ],
+                  "properties": {
+                    "participated": {
+                      "type": "boolean"
+                    },
+                    "start": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "end": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  }
+                }
+              },
+              "iterations": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "participated",
+                      "start",
+                      "end"
+                    ],
+                    "properties": {
+                      "participated": {
+                        "type": "boolean"
+                      },
+                      "start": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "end": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "outputUnits": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "markUnits": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "callouts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "number",
+                    "isString",
+                    "captureTop",
+                    "captureLast",
+                    "startMatch",
+                    "currentPosition",
+                    "patternPosition",
+                    "nextItemLength",
+                    "stringOffset",
+                    "stringUnits",
+                    "flags",
+                    "returnCode",
+                    "version",
+                    "subjectLength",
+                    "markUnits",
+                    "captures"
+                  ],
+                  "properties": {
+                    "number": {
+                      "type": "integer"
+                    },
+                    "isString": {
+                      "type": "boolean"
+                    },
+                    "captureTop": {
+                      "type": "integer"
+                    },
+                    "captureLast": {
+                      "type": "integer"
+                    },
+                    "startMatch": {
+                      "type": "integer"
+                    },
+                    "currentPosition": {
+                      "type": "integer"
+                    },
+                    "patternPosition": {
+                      "type": "integer"
+                    },
+                    "nextItemLength": {
+                      "type": "integer"
+                    },
+                    "stringOffset": {
+                      "type": "integer"
+                    },
+                    "stringUnits": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    },
+                    "flags": {
+                      "type": "integer"
+                    },
+                    "returnCode": {
+                      "type": "integer"
+                    },
+                    "version": {
+                      "type": "integer"
+                    },
+                    "subjectLength": {
+                      "type": "integer"
+                    },
+                    "markUnits": {
+                      "anyOf": [
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "captures": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "participated",
+                          "start",
+                          "end"
+                        ],
+                        "properties": {
+                          "participated": {
+                            "type": "boolean"
+                          },
+                          "start": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "end": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "diagnosticKind": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "substituteCallouts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "version",
+                    "count",
+                    "outputStart",
+                    "outputEnd",
+                    "proposedOutput",
+                    "captures",
+                    "returnCode"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "count": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "outputStart": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "outputEnd": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "proposedOutput": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    },
+                    "captures": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "participated",
+                          "start",
+                          "end"
+                        ],
+                        "properties": {
+                          "participated": {
+                            "type": "boolean"
+                          },
+                          "start": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "end": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    },
+                    "returnCode": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "caseCallouts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "mode",
+                    "inputUnits",
+                    "outputUnits",
+                    "outputCapacity",
+                    "requiredUnits",
+                    "overlap"
+                  ],
+                  "properties": {
+                    "mode": {
+                      "enum": [
+                        1,
+                        2,
+                        3
+                      ]
+                    },
+                    "inputUnits": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    },
+                    "outputUnits": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    },
+                    "outputCapacity": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "requiredUnits": {
+                      "type": "integer"
+                    },
+                    "overlap": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "nameQuery": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "nameNumbers": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "nativeOffset": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sourceOffset": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "requiredCapacity": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PCRE2 native observation fixture v1"
+}

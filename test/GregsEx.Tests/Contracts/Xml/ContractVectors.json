@@ -1,0 +1,3781 @@
+{
+  "contractVersion": "xml-fixtures-1",
+  "dataId": "Unicode-16.0.0+XML-1.0-5e",
+  "cases": [
+    {
+      "id": "XML-C001",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-001"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C002",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-001"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        98,
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C003",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-001"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 0
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C004",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-002"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        124,
+        97,
+        98
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        98
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C005",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-002"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        97,
+        98,
+        41,
+        123,
+        49,
+        44,
+        50,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        98,
+        97,
+        98
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C006",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-002"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        123,
+        48,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 0
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C007",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-003"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        94,
+        97,
+        36
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        94,
+        97,
+        36
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 3
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 3
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C008",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-003"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        94,
+        97,
+        36
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C009",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-004"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        97,
+        45,
+        122,
+        45,
+        91,
+        97,
+        101,
+        105,
+        111,
+        117,
+        93,
+        93,
+        43
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        98,
+        99,
+        100,
+        102
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C010",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-004"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        97,
+        45,
+        122,
+        45,
+        91,
+        97,
+        101,
+        105,
+        111,
+        117,
+        93,
+        93,
+        43
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        98,
+        101
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C011",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-004"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        97,
+        45,
+        122,
+        45,
+        91,
+        98,
+        45,
+        100,
+        45,
+        91,
+        99,
+        93,
+        93,
+        93
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        99
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C012",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-005"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        115,
+        43
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        9,
+        10,
+        13,
+        32
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C013",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-005"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        13
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C014",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-005"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        100
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        1633
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C015",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-005"
+      ],
+      "provenance": {
+        "kind": "GregsExInterpretation",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        119
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C016",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-005"
+      ],
+      "provenance": {
+        "kind": "GregsExInterpretation",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        119
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        45,
+        98
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C017",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-005"
+      ],
+      "provenance": {
+        "kind": "GregsExInterpretation",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        119
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        95
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C018",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-005"
+      ],
+      "provenance": {
+        "kind": "GregsExInterpretation",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        119
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        55357,
+        56832
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C019",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-005"
+      ],
+      "provenance": {
+        "kind": "GregsExInterpretation",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        119
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        888
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C020",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-006"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        67,
+        110,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        888
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C021",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-006"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        71,
+        114,
+        101,
+        101,
+        107,
+        97,
+        110,
+        100,
+        67,
+        111,
+        112,
+        116,
+        105,
+        99,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        945
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C022",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-006"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        71,
+        114,
+        101,
+        101,
+        107,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        945
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C023",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-006"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        80,
+        114,
+        105,
+        118,
+        97,
+        116,
+        101,
+        85,
+        115,
+        101,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        56192,
+        56320
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C024",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-007"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        105,
+        92,
+        99,
+        42
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        55296,
+        56320,
+        58,
+        48
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C025",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-007"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        105
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        56192,
+        56320
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C026",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-008"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        66,
+        97,
+        100,
+        66,
+        108,
+        111,
+        99,
+        107,
+        78,
+        97,
+        109,
+        101,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        10
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C027",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-008"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        80,
+        123,
+        73,
+        115,
+        66,
+        97,
+        100,
+        66,
+        108,
+        111,
+        99,
+        107,
+        78,
+        97,
+        109,
+        101,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C028",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf8",
+      "inputUnits": [
+        240,
+        159,
+        152,
+        128
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C029",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        55357,
+        56832
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C030",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Bytes",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "UnsupportedRepresentation",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "UnsupportedRepresentation",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 0,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C031",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-010"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        120,
+        52,
+        49
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "InvalidSyntax",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C032",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-010"
+      ],
+      "provenance": {
+        "kind": "GregsExInterpretation",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        92,
+        93
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "InvalidSyntax",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 3,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C033",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-010"
+      ],
+      "provenance": {
+        "kind": "GregsExInterpretation",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        91,
+        92,
+        92,
+        93
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        92
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C034",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-011",
+        "XS-012"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": {
+        "maxWork": null,
+        "maxCompileWork": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": true
+      },
+      "permitted": [
+        {
+          "status": "Cancelled",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "Cancelled",
+            "location": "Input",
+            "offset": 0,
+            "length": 0,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C035",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        0
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "InvalidInput",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "InvalidInputDomain",
+            "location": "Input",
+            "offset": 0,
+            "length": 1,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C036",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        55296
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "InvalidInput",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "InvalidEncoding",
+            "location": "Input",
+            "offset": 0,
+            "length": 1,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C037",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-001"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        98,
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C038",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-001"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        124,
+        97,
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Find",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C039",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-002"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        36
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        10
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C040",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-002"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        36
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        10
+      ],
+      "absentInput": false,
+      "flags": "m",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C041",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-002"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        94,
+        36
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        10
+      ],
+      "absentInput": false,
+      "flags": "m",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C042",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-003"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        43,
+        63
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        97,
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Find",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C043",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-004"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        97,
+        42,
+        41,
+        43
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        97,
+        97,
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "FindCaptures",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                },
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        },
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                },
+                {
+                  "participated": true,
+                  "index": 4,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C044",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-005"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        97,
+        124,
+        40,
+        98,
+        41,
+        41,
+        92,
+        50
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C045",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-005"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        49,
+        40,
+        97,
+        41
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "FunctionError",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "FORX0002",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": "http://www.w3.org/2005/xqt-errors"
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C046",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-006"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        73,
+        115,
+        66,
+        97,
+        100,
+        66,
+        108,
+        111,
+        99,
+        107,
+        78,
+        97,
+        109,
+        101,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "FunctionError",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "FORX0002",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 18,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": "http://www.w3.org/2005/xqt-errors"
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C047",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-007"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        10
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C048",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-007"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        10
+      ],
+      "absentInput": false,
+      "flags": "s",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C049",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-008"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "iiii",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C050",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-008"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "z",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "FunctionError",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "FORX0001",
+            "location": "Flags",
+            "offset": 0,
+            "length": 1,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": "http://www.w3.org/2005/xqt-errors"
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C051",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        92,
+        112,
+        123,
+        76,
+        117,
+        125
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "i",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C052",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        105
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        305
+      ],
+      "absentInput": false,
+      "flags": "i",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C053",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        115
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        223
+      ],
+      "absentInput": false,
+      "flags": "i",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C054",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-010"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        32,
+        98
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        98
+      ],
+      "absentInput": false,
+      "flags": "x",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C055",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-010"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        91,
+        32,
+        93,
+        98
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        98
+      ],
+      "absentInput": false,
+      "flags": "x",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "NoMatch",
+          "boolean": false,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C056",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-011"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        32,
+        98
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97,
+        32,
+        98
+      ],
+      "absentInput": false,
+      "flags": "qmxs",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C057",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-011"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        120
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        120
+      ],
+      "absentInput": false,
+      "flags": "q",
+      "operation": "Replace",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": [
+        36
+      ],
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": [
+            [
+              36
+            ]
+          ],
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C058",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-012"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        42
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": true,
+      "flags": "",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": true,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C059",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-013"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        122,
+        41
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        122
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Replace",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": [
+        36,
+        49,
+        50
+      ],
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": [
+            [
+              122,
+              50
+            ]
+          ],
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C060",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-013"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        122,
+        41
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        122
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Replace",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": [
+        36,
+        48
+      ],
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": [
+            [
+              122
+            ]
+          ],
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C061",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-013"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        122,
+        41
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        122
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Replace",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": [
+        36,
+        57
+      ],
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": [
+            []
+          ],
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C062",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-013"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        120
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        120
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Replace",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": [
+        36
+      ],
+      "limits": null,
+      "permitted": [
+        {
+          "status": "FunctionError",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "FORX0004",
+            "location": "Replacement",
+            "offset": 0,
+            "length": 1,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": "http://www.w3.org/2005/xqt-errors"
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C063",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-014"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        44
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        44,
+        97,
+        44
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Tokenize",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": [
+            [],
+            [
+              97
+            ],
+            []
+          ],
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C064",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-014"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        44
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Tokenize",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": [],
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C065",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-014"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        32,
+        9,
+        97,
+        32,
+        32,
+        98,
+        10
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "TokenizeOne",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": [
+            [
+              97
+            ],
+            [
+              98
+            ]
+          ],
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C066",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-015"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        42
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        122
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Replace",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": [
+        120
+      ],
+      "limits": null,
+      "permitted": [
+        {
+          "status": "FunctionError",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "FORX0003",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 0,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": "http://www.w3.org/2005/xqt-errors"
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C067",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-015"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        42
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        122
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Tokenize",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "FunctionError",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "FORX0003",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 0,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": "http://www.w3.org/2005/xqt-errors"
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C068",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-015"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97,
+        42
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        122
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "AnalyzeString",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "FunctionError",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "FORX0003",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 0,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": "http://www.w3.org/2005/xqt-errors"
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C069",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-016"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        40,
+        97,
+        40,
+        98,
+        41,
+        41
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        120,
+        97,
+        98
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "AnalyzeString",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [
+            {
+              "kind": 1,
+              "parentIndex": -1,
+              "groupNumber": 0,
+              "range": {
+                "index": 0,
+                "length": 1
+              }
+            },
+            {
+              "kind": 0,
+              "parentIndex": -1,
+              "groupNumber": 0,
+              "range": {
+                "index": 1,
+                "length": 2
+              }
+            },
+            {
+              "kind": 2,
+              "parentIndex": 1,
+              "groupNumber": 1,
+              "range": {
+                "index": 1,
+                "length": 2
+              }
+            },
+            {
+              "kind": 3,
+              "parentIndex": 2,
+              "groupNumber": 0,
+              "range": {
+                "index": 1,
+                "length": 1
+              }
+            },
+            {
+              "kind": 2,
+              "parentIndex": 2,
+              "groupNumber": 2,
+              "range": {
+                "index": 2,
+                "length": 1
+              }
+            },
+            {
+              "kind": 3,
+              "parentIndex": 4,
+              "groupNumber": 0,
+              "range": {
+                "index": 2,
+                "length": 1
+              }
+            }
+          ],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C070",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-016"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [],
+      "absentInput": true,
+      "flags": "",
+      "operation": "AnalyzeString",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C071",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-017"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf8",
+      "inputUnits": [
+        240,
+        159,
+        152,
+        128
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Find",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                }
+              ]
+            }
+          ],
+          "texts": null,
+          "tree": [],
+          "error": null
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C072",
+      "profileId": "XPath31",
+      "capabilities": [
+        "XP-017"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+        "clause": "5.6",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Matches",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": {
+        "maxWork": null,
+        "maxCompileWork": null,
+        "frameCapacity": null,
+        "maxResults": null,
+        "maxOutputUnits": null,
+        "maxHostMemoryBytes": null,
+        "cancelled": true
+      },
+      "permitted": [
+        {
+          "status": "Cancelled",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "Cancelled",
+            "location": "Input",
+            "offset": 0,
+            "length": 0,
+            "offsetUnit": "Utf16CodeUnits",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    },
+    {
+      "id": "XML-C073",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        97
+      ],
+      "inputKind": "Utf16",
+      "inputUnits": [
+        97
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Parse",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "UnsupportedRepresentation",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "UnsupportedRepresentation",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 0,
+            "offsetUnit": "Bytes",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Bytes"
+    },
+    {
+      "id": "XML-C074",
+      "profileId": "Xsd11",
+      "capabilities": [
+        "XS-009"
+      ],
+      "provenance": {
+        "kind": "Specification",
+        "uri": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+        "clause": "G",
+        "license": "https://www.w3.org/copyright/document-license/",
+        "oracleId": null
+      },
+      "patternUnits": [
+        46
+      ],
+      "inputKind": "Utf8",
+      "inputUnits": [
+        240,
+        128,
+        128,
+        128
+      ],
+      "absentInput": false,
+      "flags": "",
+      "operation": "Membership",
+      "startAt": 0,
+      "destinationLength": null,
+      "replacementUnits": null,
+      "limits": null,
+      "permitted": [
+        {
+          "status": "InvalidInput",
+          "boolean": null,
+          "matches": [],
+          "texts": null,
+          "tree": [],
+          "error": {
+            "code": "InvalidEncoding",
+            "location": "Input",
+            "offset": 0,
+            "length": 1,
+            "offsetUnit": "Bytes",
+            "namespace": null
+          }
+        }
+      ],
+      "patternKind": "Utf16"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "source_commit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "artifacts": {
+    "tools/oracles/pcre2/source/pcre2-10.46-source.tar.gz": "ffde0c6ead457c4f8edcd8f9ce490bbabd30adabdfd179ecaddd320946cf3872",
+    "test/corpora/pcre2/oracle/native-evidence.tar.gz": "339344898646d67a24c61e244a46ddf345ac8f55c6aacf9b7b32b7c34645bb71",
+    "tools/oracles/pcre2/lowering/native-selected.c": "5fe37fbc8b018bc8d33e721dbf601115ac34547d66cab99d304a7414958bb617",
+    "test/corpora/pcre2/lowering/native-selected.jsonl": "87f28fe6c9974dfef0148d823e5dbe87ec1b7815340b764cbbda8ca3babb5f0a",
+    "test/corpora/pcre2/lowering/optimizer.native": "3e96ae3f89cf8a14c0ebc0f43b58eca76fbd5b6fe6b1c157ee5e023b2e0f79e2",
+    "test/corpora/pcre2/lowering/optimizer-native.log": "839703df49cb7f7f6f8cf2b7f2e0933140ddd39067469f494d145ffca7875d80",
+    "test/corpora/pcre2/lowering/optimizer-more.native": "462c530cceab9e0860e2af2bb4989d21c82771337d2ab7c4e309ec05efbd373b",
+    "test/corpora/pcre2/lowering/optimizer-more-native.log": "be8a1ed37641cccab03fbfe5708853c68a56ba2d5b4f2433fa241db40ac68cb8",
+    "test/corpora/pcre2/syntax/upstream-compile-inputs.jsonl.gz": "58d2c0fc71085b37454e915624691d78a59ff5521ab7303a39c42c6a76ef5921",
+    "test/corpora/pcre2/lowering/class-algebra.native": "783c4f653c3f5178a96561668706f3172c64d9621fcc0d7e71306ad99496ce1f",
+    "test/corpora/pcre2/lowering/class-algebra-native.log": "4402a8d860cf3f3660f107d954f1dcd276b50985dea93578f75658caf6ba6083",
+    "test/corpora/pcre2/lowering/hascrorlf-inputs.json": "8482622ec3e5b26d44c44742110888438fc14415041f51eb25330999e0d76161"
+  },
+  "native_helper": "clang -O2 -I /private/tmp/gregsex-m5-lowering-source/native-build tools/oracles/pcre2/lowering/native-selected.c /private/tmp/gregsex-m5-lowering-source/native-build/libpcre2-8.a -o /private/tmp/gregsex-m5-lowering-source/native-selected",
+  "purpose": "Bounded correctness observations, not a performance measurement. Library and pcre2test extracted from immutable verified native-evidence archive. Production code has no native forwarding. Native outputs generated independently before assertions.",
+  "scope": "49 selected native probes plus reduced source opcode dumps; retained standalone/upstream compile corpora are prerequisites, not regenerated."
+}

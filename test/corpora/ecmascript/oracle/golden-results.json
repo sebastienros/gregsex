@@ -1,0 +1,6581 @@
+{
+  "oracleId": "node-24.4.1-v8-13.6.233.10-node.17-unicode16-darwin-arm64",
+  "cases": 939,
+  "goldenAssertions": 296,
+  "observations": [
+    {
+      "id": "ES-R-ordered::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ordered::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ordered::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ordered::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ordered::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ordered::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ordered::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ordered::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ordered::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-concat::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-branch::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dot::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-anchors::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::positive::m",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::empty-input::m",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::negative-input::m",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::positive::mu",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::empty-input::mu",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::negative-input::mu",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::positive::mv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::empty-input::mv",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-multiline::negative-input::mv",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::positive::s",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::empty-input::s",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::negative-input::s",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::positive::su",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::empty-input::su",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::negative-input::su",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::positive::sv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::empty-input::sv",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-dotall::negative-input::sv",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-dotall::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scoped-multiline::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-greedy::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lazy::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bounded::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nullable::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-capture-reset::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-groups::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-capture::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-name::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-duplicate-name::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-numeric-ref::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-named-ref::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-forward-ref::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unmatched-ref::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-rollback::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lookahead::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-ahead::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-behind::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-reverse-captures::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-behind::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-assertion-atomic::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negative-assertion-capture::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-control::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-hex::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-unicode-escape::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-null::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-pair::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-pair::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-pair::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-lone::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-digit::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notdigit::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-word::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notword::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-space::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-notspace::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-boundary::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-nonboundary::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-range::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-set::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-negated-empty-class::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-category::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-category::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-category::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-category::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-category::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-category::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-script::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-script::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-script::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-script::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-script::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-script::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scx::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scx::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scx::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scx::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scx::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-scx::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-binary::positive::u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-binary::empty-input::u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-binary::negative-input::u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-binary::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-binary::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-binary::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-intersection::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-intersection::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-intersection::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-subtraction::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-subtraction::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-subtraction::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-longest::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-longest::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-longest::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-empty::positive::v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-empty::empty-input::v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-empty::negative-input::v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ascii-fold::positive::i",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ascii-fold::empty-input::i",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ascii-fold::negative-input::i",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-kelvin-u::positive::iu",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-kelvin-u::empty-input::iu",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-kelvin-u::negative-input::iu",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-kelvin-legacy::positive::i",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-kelvin-legacy::empty-input::i",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-kelvin-legacy::negative-input::i",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-long-s::positive::iu",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-long-s::empty-input::iu",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-long-s::negative-input::iu",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-complement-u::positive::iu",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-complement-u::empty-input::iu",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-complement-u::negative-input::iu",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-complement-v::positive::iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-complement-v::empty-input::iv",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-complement-v::negative-input::iv",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-fold::positive::iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-fold::empty-input::iv",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-q-fold::negative-input::iv",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-octal::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-octal::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-octal::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-identity::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-identity::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-identity::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-brace::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-brace::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-brace::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-quantified-ahead::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-quantified-ahead::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-quantified-ahead::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-class-control::positive::legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-class-control::empty-input::legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-class-control::negative-input::legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Basic_Emoji-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Basic_Emoji-miss-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Basic_Emoji-empty-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Basic_Emoji-iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Basic_Emoji-miss-iv",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Basic_Emoji-empty-iv",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Emoji_Keycap_Sequence-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Emoji_Keycap_Sequence-miss-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Emoji_Keycap_Sequence-empty-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Emoji_Keycap_Sequence-iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Emoji_Keycap_Sequence-miss-iv",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Emoji_Keycap_Sequence-empty-iv",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Modifier_Sequence-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Modifier_Sequence-miss-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Modifier_Sequence-empty-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Modifier_Sequence-iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Modifier_Sequence-miss-iv",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Modifier_Sequence-empty-iv",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Flag_Sequence-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Flag_Sequence-miss-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Flag_Sequence-empty-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Flag_Sequence-iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Flag_Sequence-miss-iv",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Flag_Sequence-empty-iv",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Tag_Sequence-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Tag_Sequence-miss-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Tag_Sequence-empty-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Tag_Sequence-iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Tag_Sequence-miss-iv",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_Tag_Sequence-empty-iv",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_ZWJ_Sequence-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_ZWJ_Sequence-miss-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_ZWJ_Sequence-empty-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_ZWJ_Sequence-iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_ZWJ_Sequence-miss-iv",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji_ZWJ_Sequence-empty-iv",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji-miss-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji-empty-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji-iv",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji-miss-iv",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-RGI_Emoji-empty-iv",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-none",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-d",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-g",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-i",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-m",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-s",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-y",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-dgimsuy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-flag-dgimsvy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bad-flag-563",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bad-flag-564",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bad-flag-565",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bad-flag-566",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-bad-flag-567",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-0",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-1",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-2",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-3",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-4",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-5",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-6",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-7",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-8",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-9",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-10",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-11",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-12",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-13",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-14",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-15",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-16",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-17",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-18",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-19",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-20",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-21",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-22",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-23",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-invalid-24",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "whole-pattern-category-only",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-success-Exec-legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-failure-Exec-legacy",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-success-Test-legacy",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-failure-Test-legacy",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-597",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-598",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-599",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-600",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-601",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-602",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-603",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-604",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-605",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-606",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-607",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-608",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-609",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-610",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-611",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-612",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-613",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-614",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-615",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-616",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-exec-legacy",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-legacy-0",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-legacy-1",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-legacy-2",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-legacy-3",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-legacy-10",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-legacy-10",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-legacy-13",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-legacy-13",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-legacy-8232",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-legacy-8232",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-legacy-8233",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-legacy-8233",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-legacy",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-empty-legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-miss-legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-legacy",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-empty-legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-miss-legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-legacy",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-empty-legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-miss-legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-639",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-640",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-641",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-642",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-643",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-644",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-645",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-646",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-647",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-648",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-649",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-650",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-empty-legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-miss-legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-653",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-654",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-655",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-656",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-657",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-658",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-659",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-660",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-661",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-662",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-663",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-664",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-empty-legacy",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-miss-legacy",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-667",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-668",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-669",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-670",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-671",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-672",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-673",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-674",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-675",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-676",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-677",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-678",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-679",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-680",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-681",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-682",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-683",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-684",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-685",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-686",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-687",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-688",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-689",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-690",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-691",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-692",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-693",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-694",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-695",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-696",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-697",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-698",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-699",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-700",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-701",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-702",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-703",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-704",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-705",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-706",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-success-Exec-u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-failure-Exec-u",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-success-Test-u",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-failure-Test-u",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-711",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-712",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-713",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-714",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-715",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-716",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-717",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-718",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-719",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-720",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-721",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-722",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-723",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-724",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-725",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-726",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-727",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-728",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-729",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-730",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-exec-u",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-u-0",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-u-1",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-u-2",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-u-3",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-u-10",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-u-10",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-u-13",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-u-13",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-u-8232",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-u-8232",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-u-8233",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-u-8233",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-inside-pair-u",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-u",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-empty-u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-miss-u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-u",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-empty-u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-miss-u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-u",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-empty-u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-miss-u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-754",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-755",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-756",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-757",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-758",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-759",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-760",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-761",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-762",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-763",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-764",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-765",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-empty-u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-miss-u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-768",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-769",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-770",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-771",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-772",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-773",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-774",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-775",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-776",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-777",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-778",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-779",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-empty-u",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-miss-u",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-782",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-783",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-784",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-785",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-786",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-787",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-788",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-789",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-790",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-791",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-792",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-793",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-794",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-795",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-796",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-797",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-798",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-799",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-800",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-801",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-802",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-803",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-804",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-805",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-806",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-807",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-808",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-809",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-810",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-811",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-812",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-813",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-814",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-815",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-816",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-817",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-818",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-819",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-820",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-821",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-success-Exec-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-failure-Exec-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-success-Test-v",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-failure-Test-v",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-826",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-827",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-828",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-829",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-830",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-831",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-832",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-833",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-834",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-835",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-836",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-837",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-838",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-839",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-840",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-841",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-842",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-843",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-844",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-state-845",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-exec-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-v-0",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-v-1",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-v-2",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-empty-next-v-3",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-v-10",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-v-10",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-v-13",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-v-13",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-v-8232",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-v-8232",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dot-v-8233",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-line-dotall-v-8233",
+      "kind": "positive",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-inside-pair-v",
+      "kind": "boundary",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-v",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-empty-v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Match-miss-v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-v",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-empty-v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-miss-v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-v",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-empty-v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Search-miss-v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-869",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-870",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-871",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-872",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-873",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-874",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-875",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-876",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-877",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-878",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-879",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-880",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-empty-v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-Replace-miss-v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-883",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-884",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-885",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-886",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-887",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-888",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-889",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-890",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-891",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-892",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-893",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-894",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-empty-v",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-miss-v",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-897",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-898",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-899",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-900",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-901",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-902",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-903",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-904",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-905",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-906",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-907",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-908",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-909",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-910",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-911",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-912",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-913",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-914",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-915",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-916",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-917",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-918",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-919",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-920",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-921",
+      "kind": "positive",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-922",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-923",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-924",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-925",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-926",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-927",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-928",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-929",
+      "kind": "negative",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-930",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-931",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-932",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-933",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-934",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-935",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-split-936",
+      "kind": "boundary",
+      "independentGolden": false,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-MatchAll-requires-global",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    },
+    {
+      "id": "ES-R-ReplaceAll-requires-global",
+      "kind": "negative",
+      "independentGolden": true,
+      "diagnosticSpan": "exact",
+      "outcome": "passed"
+    }
+  ],
+  "failures": []
+}

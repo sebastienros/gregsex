@@ -1,0 +1,627 @@
+{
+  "testedRevision": "a498bae",
+  "cases": [
+    {
+      "id": "PCRE-C023",
+      "field": "info.value.2",
+      "expected": 1,
+      "actual": 0,
+      "input": {
+        "id": "PCRE-C023",
+        "requirements": [
+          "PC-014"
+        ],
+        "operation": "Match",
+        "width": 16,
+        "patternUnits": [
+          40,
+          97,
+          114,
+          104,
+          41,
+          40,
+          42,
+          115,
+          99,
+          115,
+          58,
+          40,
+          49,
+          41,
+          46,
+          43,
+          114,
+          104,
+          41
+        ],
+        "subjectUnits": [
+          97,
+          114,
+          104
+        ],
+        "replacementUnits": [],
+        "compileFlags": 0,
+        "extraFlags": 0,
+        "matchFlags": 0,
+        "substituteFlags": 0,
+        "newline": 2,
+        "bsr": 1,
+        "optimization": [
+          true,
+          true,
+          true
+        ],
+        "optimizerDirective": -1,
+        "maxVariableLookbehind": 255,
+        "startAt": 0,
+        "offsetLimit": null,
+        "pairCapacity": 2,
+        "destinationCapacity": 128,
+        "characterTables": null,
+        "workLimit": null,
+        "depthLimit": null,
+        "heapBytes": null,
+        "callbackReturns": [],
+        "substituteCallbackReturns": [],
+        "caseCallbackOutputs": [],
+        "caseCallbackMode": -1,
+        "callbackEnabled": true,
+        "substituteCallbackEnabled": false,
+        "initialPairs": [],
+        "nameQueryUnits": [
+          110
+        ],
+        "provenance": {
+          "kind": "SourceRule",
+          "source": "doc/pcre2pattern.3",
+          "line": 2886,
+          "license": "BSD-3-Clause WITH PCRE2-exception",
+          "note": "Hand-constructed from pinned source rules before implementation; not an executed observation."
+        },
+        "patternKind": "Chars",
+        "sourceExpectationId": "PCRE-C023",
+        "pairCapacityRole": "explicit-native-match-data-and-publication-capacity",
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "nativeEvents": [
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "compile",
+          "accepted": true,
+          "error": 0,
+          "nativeOffset": 0,
+          "sourceOffset": null
+        },
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "info",
+          "values": [
+            {
+              "query": 0,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 1,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 2,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 3,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 4,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 5,
+              "returnCode": 0,
+              "value": 97
+            },
+            {
+              "query": 6,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 8,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 9,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 11,
+              "returnCode": 0,
+              "value": 104
+            },
+            {
+              "query": 12,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 13,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 14,
+              "returnCode": -55,
+              "value": null
+            },
+            {
+              "query": 15,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 16,
+              "returnCode": 0,
+              "value": 3
+            },
+            {
+              "query": 17,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 20,
+              "returnCode": 0,
+              "value": 2
+            },
+            {
+              "query": 21,
+              "returnCode": -55,
+              "value": null
+            },
+            {
+              "query": 23,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 25,
+              "returnCode": -55,
+              "value": null
+            },
+            {
+              "query": 26,
+              "returnCode": 0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "names",
+          "entries": [],
+          "nameQuery": [
+            110
+          ],
+          "nameNumberReturn": -49,
+          "scanReturn": -49,
+          "nameNumbers": []
+        },
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "match",
+          "iteration": 0,
+          "returnCode": 2,
+          "pairs": [
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "startChar": 0,
+          "markUnits": null,
+          "callerVector": [
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "markDefined": true,
+          "errorOffset": null
+        },
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "substring",
+          "group": 0,
+          "lengthReturn": 0,
+          "length": 3,
+          "copyReturn": 0,
+          "reportedLength": 3,
+          "outputUnits": [
+            97,
+            114,
+            104
+          ]
+        },
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "substring",
+          "group": 1,
+          "lengthReturn": 0,
+          "length": 3,
+          "copyReturn": 0,
+          "reportedLength": 3,
+          "outputUnits": [
+            97,
+            114,
+            104
+          ]
+        },
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "substring",
+          "group": 2,
+          "lengthReturn": -49,
+          "length": null,
+          "copyReturn": -49,
+          "reportedLength": 128,
+          "outputUnits": []
+        },
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "substring",
+          "group": 3,
+          "lengthReturn": -49,
+          "length": null,
+          "copyReturn": -49,
+          "reportedLength": 128,
+          "outputUnits": []
+        },
+        {
+          "id": "PCRE-C023",
+          "width": 16,
+          "event": "substringName",
+          "lengthReturn": -49,
+          "length": null,
+          "getReturn": -49,
+          "units": []
+        }
+      ]
+    },
+    {
+      "id": "PCRE-C023-cross",
+      "field": "info.value.2",
+      "expected": 1,
+      "actual": 0,
+      "input": {
+        "id": "PCRE-C023-cross",
+        "requirements": [
+          "PC-014"
+        ],
+        "operation": "Match",
+        "width": 8,
+        "patternUnits": [
+          40,
+          97,
+          114,
+          104,
+          41,
+          40,
+          42,
+          115,
+          99,
+          115,
+          58,
+          40,
+          49,
+          41,
+          46,
+          43,
+          114,
+          104,
+          41
+        ],
+        "subjectUnits": [
+          97,
+          114,
+          104
+        ],
+        "replacementUnits": [],
+        "compileFlags": 0,
+        "extraFlags": 0,
+        "matchFlags": 0,
+        "substituteFlags": 0,
+        "newline": 2,
+        "bsr": 1,
+        "optimization": [
+          true,
+          true,
+          true
+        ],
+        "optimizerDirective": -1,
+        "maxVariableLookbehind": 255,
+        "startAt": 0,
+        "offsetLimit": null,
+        "pairCapacity": 2,
+        "destinationCapacity": 128,
+        "characterTables": null,
+        "workLimit": null,
+        "depthLimit": null,
+        "heapBytes": null,
+        "callbackReturns": [],
+        "substituteCallbackReturns": [],
+        "caseCallbackOutputs": [],
+        "caseCallbackMode": -1,
+        "callbackEnabled": true,
+        "substituteCallbackEnabled": false,
+        "initialPairs": [],
+        "nameQueryUnits": [
+          110
+        ],
+        "provenance": {
+          "kind": "SourceRule",
+          "source": "doc/pcre2pattern.3",
+          "line": 2886,
+          "license": "BSD-3-Clause WITH PCRE2-exception",
+          "note": "Hand-constructed from pinned source rules before implementation; not an executed observation."
+        },
+        "patternKind": "Chars",
+        "sourceExpectationId": "PCRE-C023",
+        "pairCapacityRole": "explicit-native-match-data-and-publication-capacity",
+        "nativeDisposition": "DefinedNativeInvocation"
+      },
+      "nativeEvents": [
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "compile",
+          "accepted": true,
+          "error": 0,
+          "nativeOffset": 0,
+          "sourceOffset": null
+        },
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "info",
+          "values": [
+            {
+              "query": 0,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 1,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 2,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 3,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 4,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 5,
+              "returnCode": 0,
+              "value": 97
+            },
+            {
+              "query": 6,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 8,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 9,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 11,
+              "returnCode": 0,
+              "value": 104
+            },
+            {
+              "query": 12,
+              "returnCode": 0,
+              "value": 1
+            },
+            {
+              "query": 13,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 14,
+              "returnCode": -55,
+              "value": null
+            },
+            {
+              "query": 15,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 16,
+              "returnCode": 0,
+              "value": 3
+            },
+            {
+              "query": 17,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 20,
+              "returnCode": 0,
+              "value": 2
+            },
+            {
+              "query": 21,
+              "returnCode": -55,
+              "value": null
+            },
+            {
+              "query": 23,
+              "returnCode": 0,
+              "value": 0
+            },
+            {
+              "query": 25,
+              "returnCode": -55,
+              "value": null
+            },
+            {
+              "query": 26,
+              "returnCode": 0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "names",
+          "entries": [],
+          "nameQuery": [
+            110
+          ],
+          "nameNumberReturn": -49,
+          "scanReturn": -49,
+          "nameNumbers": []
+        },
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "match",
+          "iteration": 0,
+          "returnCode": 2,
+          "pairs": [
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "startChar": 0,
+          "markUnits": null,
+          "callerVector": [
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "markDefined": true,
+          "errorOffset": null
+        },
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "substring",
+          "group": 0,
+          "lengthReturn": 0,
+          "length": 3,
+          "copyReturn": 0,
+          "reportedLength": 3,
+          "outputUnits": [
+            97,
+            114,
+            104
+          ]
+        },
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "substring",
+          "group": 1,
+          "lengthReturn": 0,
+          "length": 3,
+          "copyReturn": 0,
+          "reportedLength": 3,
+          "outputUnits": [
+            97,
+            114,
+            104
+          ]
+        },
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "substring",
+          "group": 2,
+          "lengthReturn": -49,
+          "length": null,
+          "copyReturn": -49,
+          "reportedLength": 128,
+          "outputUnits": []
+        },
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "substring",
+          "group": 3,
+          "lengthReturn": -49,
+          "length": null,
+          "copyReturn": -49,
+          "reportedLength": 128,
+          "outputUnits": []
+        },
+        {
+          "id": "PCRE-C023-cross",
+          "width": 8,
+          "event": "substringName",
+          "lengthReturn": -49,
+          "length": null,
+          "getReturn": -49,
+          "units": []
+        }
+      ]
+    }
+  ],
+  "sourcePointer": "pcre2api.3 BACKREFMAX and pcre2_compile.c capture-condition/subroutine bookkeeping",
+  "smallestCorrection": "Report source max numeric reference for script-run subroutine calls as required by native metadata."
+}

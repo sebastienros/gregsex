@@ -1,0 +1,69 @@
+{
+  "format": "xml-contract-sources-1",
+  "retrieved": "2026-10-11 America/Los_Angeles",
+  "sources": [
+    {
+      "id": "xsd-rec",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "license": "https://www.w3.org/copyright/document-license/"
+    },
+    {
+      "id": "fo-rec",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/",
+      "sha256": "b5bdcfb2e8b6edbe5a997f8971b0829da124bcd6d071c7f651ee71be99b2a988",
+      "bytes": 2650378,
+      "license": "https://www.w3.org/copyright/document-license/"
+    },
+    {
+      "id": "xml-rec",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926,
+      "license": "https://www.w3.org/copyright/document-license/"
+    },
+    {
+      "id": "xsd-errata",
+      "url": "https://www.w3.org/XML/XMLSchema/v1.1/1e/errata.html",
+      "sha256": "f6c6f04205eb440859c8cfdbfb33c324c9892f1bbcb390995b34fc811cf04f26",
+      "bytes": 8716,
+      "license": "https://www.w3.org/copyright/document-license/"
+    },
+    {
+      "id": "fo-draft-errata",
+      "url": "https://www.w3.org/XML/2017/qt-errata/xpath-functions-31-errata.html",
+      "sha256": "435c9399d11fbf66e5647da016c59257a97a69427bf0decf64eacbe5c7e6c6e3",
+      "bytes": 18522,
+      "license": "https://www.w3.org/copyright/document-license/"
+    },
+    {
+      "id": "ucd-readme",
+      "url": "https://www.unicode.org/Public/16.0.0/ucd/ReadMe.txt",
+      "sha256": "14cafa23788d3a20dd21d6b0cdcb8d6dab520781fcd9ad9392f3b88ea607e633",
+      "bytes": 693,
+      "license": "https://www.unicode.org/license.txt"
+    },
+    {
+      "id": "ucd-blocks",
+      "url": "https://www.unicode.org/Public/16.0.0/ucd/Blocks.txt",
+      "sha256": "f3907b395d410f1b97342292ca6bc83dd12eb4b205f2a0c48efdef99e517d7b0",
+      "bytes": 11397,
+      "license": "https://www.unicode.org/license.txt"
+    },
+    {
+      "id": "ucd-specialcasing",
+      "url": "https://www.unicode.org/Public/16.0.0/ucd/SpecialCasing.txt",
+      "sha256": "8d5de354eef79f2395a54c9c7dcebbaf3d30fc962d0f85611ea97aa973a0c451",
+      "bytes": 16809,
+      "license": "https://www.unicode.org/license.txt"
+    },
+    {
+      "id": "ucd-unicodedata",
+      "url": "https://www.unicode.org/Public/16.0.0/ucd/UnicodeData.txt",
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f",
+      "bytes": 2175362,
+      "license": "https://www.unicode.org/license.txt"
+    }
+  ]
+}

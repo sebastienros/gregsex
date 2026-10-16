@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nonshipping RegularCore fixture manifest v1",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "const": "CoreFixtures.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provenance": {
+            "type": "string",
+            "minLength": 1
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oracle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "profileId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dataId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requirements": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "mode": {
+            "enum": [
+              "UnicodeScalars",
+              "Utf16CodeUnits",
+              "RawBytes"
+            ]
+          },
+          "flags": {
+            "enum": [
+              "None",
+              "DotAll"
+            ]
+          },
+          "inputKind": {
+            "enum": [
+              "Utf16",
+              "Utf8",
+              "Bytes"
+            ]
+          },
+          "patternUnit": {
+            "enum": [
+              "Utf16CodeUnits",
+              "Bytes"
+            ]
+          },
+          "pattern": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            }
+          },
+          "input": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            }
+          },
+          "operation": {
+            "enum": [
+              "Parse",
+              "Boolean",
+              "Range",
+              "Captures"
+            ]
+          },
+          "startAt": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "destinationLength": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedStatus": {
+            "anyOf": [
+              {
+                "enum": [
+                  "Match",
+                  "NoMatch",
+                  "InvalidInput",
+                  "DestinationTooSmall",
+                  "LimitExceeded",
+                  "Cancelled",
+                  "TimedOut"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedRange": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "length": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "index",
+                  "length"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedGroups": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "participated": {
+                      "type": "boolean"
+                    },
+                    "index": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "length": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  },
+                  "required": [
+                    "participated",
+                    "index",
+                    "length"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedDiagnostic": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedFailure": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedDiagnosticOffset": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedDiagnosticLength": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedFailureOffset": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedRequiredCapacity": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "provenance",
+          "license",
+          "oracle",
+          "profileId",
+          "dataId",
+          "requirements",
+          "mode",
+          "flags",
+          "inputKind",
+          "patternUnit",
+          "pattern",
+          "input",
+          "operation",
+          "startAt",
+          "destinationLength",
+          "expectedStatus",
+          "expectedRange",
+          "expectedGroups",
+          "expectedDiagnostic",
+          "expectedFailure",
+          "expectedDiagnosticOffset",
+          "expectedDiagnosticLength",
+          "expectedFailureOffset",
+          "expectedRequiredCapacity"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "inputKind": {
+                  "enum": [
+                    "Utf8",
+                    "Bytes"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "input": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "patternUnit": {
+                  "const": "Bytes"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "pattern": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "schema_version",
+    "cases"
+  ],
+  "additionalProperties": false
+}

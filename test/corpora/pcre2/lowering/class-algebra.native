@@ -1,0 +1,12 @@
+/(?[ [a] - [a] ])/debug,auto_callout
+
+/(?[ [a-z] - [aeiou] ])+b/debug,auto_callout
+
+/(?[ [a] & [b] ])/debug,auto_callout
+
+/(?[ ![a] ])/debug,auto_callout
+
+/(?[ [a] | [b] ])/debug,auto_callout
+
+/[^a]+[aa]/debug,auto_callout
+

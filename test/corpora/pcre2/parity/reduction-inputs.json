@@ -1,0 +1,5390 @@
+{
+  "schemaVersion": "pcre2-parity-reductions-1",
+  "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "cases": [
+    {
+      "id": "REDUCE-backref-required-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        98
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-backref-required-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        98
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-backref-required-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        98
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-backref-required-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        98
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-backref-required-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        98
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-backref-required-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        98
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-backref-required-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        98
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-backref-required-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        124,
+        41,
+        92,
+        49,
+        98
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-required-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        99,
+        41
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-required-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        99,
+        41
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-required-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        99,
+        41
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-required-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        99,
+        41
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-required-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        99,
+        41
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-required-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        99,
+        41
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-required-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        99,
+        41
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-required-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        99,
+        41
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-group-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        99,
+        41,
+        41,
+        36
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-group-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        99,
+        41,
+        41,
+        36
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-group-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        99,
+        41,
+        41,
+        36
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-group-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        99,
+        41,
+        41,
+        36
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-group-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        99,
+        41,
+        41,
+        36
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-group-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        99,
+        41,
+        41,
+        36
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-group-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        99,
+        41,
+        41,
+        36
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-conditional-group-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        94,
+        40,
+        97,
+        41,
+        63,
+        98,
+        40,
+        63,
+        40,
+        49,
+        41,
+        40,
+        99,
+        41,
+        41,
+        36
+      ],
+      "subjectUnits": [
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-positive-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-positive-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-positive-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-positive-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-positive-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-positive-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-positive-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-positive-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-negative-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-negative-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-negative-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-negative-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-negative-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-negative-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-negative-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-DEFINE-negative-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        60,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        62,
+        97,
+        41,
+        40,
+        63,
+        40,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41,
+        98,
+        41,
+        40,
+        63,
+        38,
+        68,
+        69,
+        70,
+        73,
+        78,
+        69,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-automatic-alternative-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        124,
+        98
+      ],
+      "subjectUnits": [
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-automatic-alternative-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        124,
+        98
+      ],
+      "subjectUnits": [
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-automatic-alternative-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        124,
+        98
+      ],
+      "subjectUnits": [
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-automatic-alternative-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        124,
+        98
+      ],
+      "subjectUnits": [
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-automatic-alternative-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        124,
+        98
+      ],
+      "subjectUnits": [
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-automatic-alternative-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        124,
+        98
+      ],
+      "subjectUnits": [
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-automatic-alternative-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        124,
+        98
+      ],
+      "subjectUnits": [
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-automatic-alternative-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        124,
+        98
+      ],
+      "subjectUnits": [
+        97
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-accept-empty-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-accept-empty-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-accept-empty-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-accept-empty-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-accept-empty-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-accept-empty-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-accept-empty-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-accept-empty-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        42,
+        40,
+        42,
+        65,
+        67,
+        67,
+        69,
+        80,
+        84,
+        41,
+        98
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-auto-anchored-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        97,
+        41,
+        97,
+        124,
+        94,
+        41
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-auto-anchored-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        97,
+        41,
+        97,
+        124,
+        94,
+        41
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-auto-anchored-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        97,
+        41,
+        97,
+        124,
+        94,
+        41
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-auto-anchored-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        97,
+        41,
+        97,
+        124,
+        94,
+        41
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-auto-anchored-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        97,
+        41,
+        97,
+        124,
+        94,
+        41
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-auto-anchored-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        97,
+        41,
+        97,
+        124,
+        94,
+        41
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-auto-anchored-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        97,
+        41,
+        97,
+        124,
+        94,
+        41
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-auto-anchored-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        40,
+        63,
+        40,
+        63,
+        61,
+        94,
+        97,
+        41,
+        97,
+        124,
+        94,
+        41
+      ],
+      "subjectUnits": [],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-greedy-flags-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-greedy-flags-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-greedy-flags-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-greedy-flags-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-greedy-flags-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-greedy-flags-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-greedy-flags-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-greedy-flags-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-8-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [
+        1
+      ],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-8-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [
+        1
+      ],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-8-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [
+        1
+      ],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-8-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 8,
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [
+        1
+      ],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-16-raw-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [
+        1
+      ],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-16-raw-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "replacementUnits": [],
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [
+        1
+      ],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-16-utf-full",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [
+        1
+      ],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-16-utf-none",
+      "requirements": [
+        "PC-021"
+      ],
+      "operation": "Match",
+      "width": 16,
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "replacementUnits": [],
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "substituteFlags": 0,
+      "newline": 2,
+      "bsr": 1,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "optimizerDirective": -1,
+      "maxVariableLookbehind": 255,
+      "startAt": 0,
+      "offsetLimit": null,
+      "pairCapacity": 8,
+      "destinationCapacity": 128,
+      "characterTables": null,
+      "workLimit": 100000,
+      "depthLimit": 1024,
+      "heapBytes": 67108864,
+      "callbackReturns": [
+        1
+      ],
+      "substituteCallbackReturns": [],
+      "caseCallbackOutputs": [],
+      "caseCallbackMode": -1,
+      "callbackEnabled": true,
+      "substituteCallbackEnabled": false,
+      "initialPairs": [],
+      "nameQueryUnits": [
+        110
+      ],
+      "provenance": {
+        "kind": "BoundedSourceDisagreementReduction",
+        "source": "test/corpora/pcre2/metadata/witnesses.json",
+        "license": "BSD-3-Clause WITH PCRE2-exception",
+        "note": "Fixed source-derived reductions; original retained observations and inputs unchanged. Both full/none native optimizer inputs observed independently."
+      },
+      "nativeDisposition": "DefinedNativeInvocation"
+    }
+  ]
+}

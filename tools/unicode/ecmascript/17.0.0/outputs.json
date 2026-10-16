@@ -1,0 +1,38 @@
+{
+  "counts": {
+    "aliases": 877,
+    "binary_properties": 53,
+    "category_values": 38,
+    "finite_strings": 5520,
+    "intervals": 23205,
+    "legacy_uppercase": 1169,
+    "literal_bytes": 25042,
+    "properties": 450,
+    "script_values": 176,
+    "static_image_bytes": 340816,
+    "string_codepoints": 22392,
+    "string_properties": {
+      "Basic_Emoji": 1400,
+      "Emoji_Keycap_Sequence": 12,
+      "RGI_Emoji": 3953,
+      "RGI_Emoji_Flag_Sequence": 259,
+      "RGI_Emoji_Modifier_Sequence": 665,
+      "RGI_Emoji_Tag_Sequence": 3,
+      "RGI_Emoji_ZWJ_Sequence": 1614
+    },
+    "unicode_fold": 1512
+  },
+  "data_id": "Unicode-17.0.0+Emoji-17.0",
+  "generator_sha256": "2d4c653f8c5e6ee8a5a88cb27f654ee2f2ab2e8914c42363d920d5c52c7b31f6",
+  "input_manifest_sha256": "e60fede3f74ab4570ec857178d277874aeeb63f0f42210ba81c8bf6940472f43",
+  "outputs": {
+    "src/GregsEx/Flavors/EcmaScript/Unicode/GeneratedUnicode17Tables.cs": {
+      "length": 615210,
+      "sha256": "a1108fac7f599681848838077001529a47c8f779d4829127b532243ae9707227"
+    },
+    "test/GregsEx.Tests/Flavors/EcmaScript/Unicode/Unicode17Inventory.g.cs": {
+      "length": 64840,
+      "sha256": "82b90a50800d4a50d9aba3ec21c1273d188ac31a64c77e1276d60b8e9584ad27"
+    }
+  }
+}

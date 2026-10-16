@@ -1,0 +1,2896 @@
+{
+  "testedRevision": "e2b7e8c3fb1dfe66b69d3b1caf7c8f82ff4fd3ec",
+  "sourceInputArtifact": "test/corpora/pcre2/parity/reduction-inputs.json",
+  "nativeArtifacts": [
+    "test/corpora/pcre2/parity/reduction-native-8.jsonl.gz",
+    "test/corpora/pcre2/parity/reduction-native-16.jsonl.gz"
+  ],
+  "nativeSource": "pcre2callout.3 version2 STARTMATCH/BACKTRACK and pcre2_match.c callout_flags",
+  "finding": "Normal greedy termination adds managed BACKTRACK2 before the next callback; native flags remain0 orSTARTMATCH1. No native reference backtracking occurs in these minimal fixed examples. Full andnone optimizer policies are independently observed, not assumed equivalent.",
+  "cases": [
+    {
+      "id": "REDUCE-greedy-flags-8-raw-full",
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "width": 8,
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "callbackReturns": [],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-greedy-flags-8-raw-full",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-8-raw-full",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-8-raw-full",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.1.flags",
+        "expected": 0,
+        "actual": 2
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 1,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-greedy-flags-8-raw-none",
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "width": 8,
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "callbackReturns": [],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-greedy-flags-8-raw-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-8-raw-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-8-raw-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.1.flags",
+        "expected": 0,
+        "actual": 2
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 1,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-greedy-flags-8-utf-full",
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "width": 8,
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "callbackReturns": [],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-greedy-flags-8-utf-full",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-8-utf-full",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-8-utf-full",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.1.flags",
+        "expected": 0,
+        "actual": 2
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 1,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-greedy-flags-8-utf-none",
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "width": 8,
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "callbackReturns": [],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-greedy-flags-8-utf-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-8-utf-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-8-utf-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.1.flags",
+        "expected": 0,
+        "actual": 2
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 1,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-greedy-flags-16-raw-full",
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "width": 16,
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "callbackReturns": [],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-greedy-flags-16-raw-full",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-16-raw-full",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-16-raw-full",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.1.flags",
+        "expected": 0,
+        "actual": 2
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 1,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-greedy-flags-16-raw-none",
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "width": 16,
+      "compileFlags": 4,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "callbackReturns": [],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-greedy-flags-16-raw-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-16-raw-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-16-raw-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.1.flags",
+        "expected": 0,
+        "actual": 2
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 1,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-greedy-flags-16-utf-full",
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "width": 16,
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "callbackReturns": [],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-greedy-flags-16-utf-full",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-16-utf-full",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-16-utf-full",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.1.flags",
+        "expected": 0,
+        "actual": 2
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 1,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-greedy-flags-16-utf-none",
+      "patternUnits": [
+        97,
+        42,
+        98
+      ],
+      "subjectUnits": [
+        97,
+        98
+      ],
+      "width": 16,
+      "compileFlags": 524292,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "callbackReturns": [],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-greedy-flags-16-utf-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-16-utf-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "id": "REDUCE-greedy-flags-16-utf-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 0,
+          "patternPosition": 0,
+          "nextItemLength": 2,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 1,
+          "patternPosition": 2,
+          "nextItemLength": 1,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        },
+        {
+          "version": 2,
+          "number": 255,
+          "isString": false,
+          "subjectLength": 2,
+          "captureTop": 1,
+          "captureLast": 0,
+          "startMatch": 0,
+          "currentPosition": 2,
+          "patternPosition": 3,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 0,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.1.flags",
+        "expected": 0,
+        "actual": 2
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 1,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-8-raw-full",
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "width": 8,
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "callbackReturns": [
+        1
+      ],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-capture-greedy-flags-8-raw-full",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 3,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.0.flags",
+        "expected": 1,
+        "actual": 3
+      },
+      "managedResult": {
+        "Status": 1,
+        "NativeReturnCode": -1,
+        "StartChar": 4,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-8-raw-none",
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "width": 8,
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "callbackReturns": [
+        1
+      ],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-capture-greedy-flags-8-raw-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "id": "REDUCE-capture-greedy-flags-8-raw-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 3,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 3,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 3,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.0.flags",
+        "expected": 1,
+        "actual": 3
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 3,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-8-utf-full",
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "width": 8,
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "callbackReturns": [
+        1
+      ],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-capture-greedy-flags-8-utf-full",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 3,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.0.flags",
+        "expected": 1,
+        "actual": 3
+      },
+      "managedResult": {
+        "Status": 1,
+        "NativeReturnCode": -1,
+        "StartChar": 4,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-8-utf-none",
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "width": 8,
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "callbackReturns": [
+        1
+      ],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-capture-greedy-flags-8-utf-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "id": "REDUCE-capture-greedy-flags-8-utf-none",
+          "width": 8,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 3,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 3,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 3,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.0.flags",
+        "expected": 1,
+        "actual": 3
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 3,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-16-raw-full",
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "width": 16,
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "callbackReturns": [
+        1
+      ],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-capture-greedy-flags-16-raw-full",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 3,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.0.flags",
+        "expected": 1,
+        "actual": 3
+      },
+      "managedResult": {
+        "Status": 1,
+        "NativeReturnCode": -1,
+        "StartChar": 4,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-16-raw-none",
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "width": 16,
+      "compileFlags": 0,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "callbackReturns": [
+        1
+      ],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-capture-greedy-flags-16-raw-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "id": "REDUCE-capture-greedy-flags-16-raw-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 3,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 3,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 3,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.0.flags",
+        "expected": 1,
+        "actual": 3
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 3,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-16-utf-full",
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "width": 16,
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        true,
+        true,
+        true
+      ],
+      "callbackReturns": [
+        1
+      ],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-capture-greedy-flags-16-utf-full",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 3,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.0.flags",
+        "expected": 1,
+        "actual": 3
+      },
+      "managedResult": {
+        "Status": 1,
+        "NativeReturnCode": -1,
+        "StartChar": 4,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    },
+    {
+      "id": "REDUCE-capture-greedy-flags-16-utf-none",
+      "patternUnits": [
+        97,
+        40,
+        98,
+        43,
+        41,
+        40,
+        99,
+        42,
+        41,
+        40,
+        63,
+        67,
+        49,
+        41
+      ],
+      "subjectUnits": [
+        97,
+        98,
+        98,
+        99
+      ],
+      "width": 16,
+      "compileFlags": 524288,
+      "extraFlags": 0,
+      "matchFlags": 0,
+      "optimization": [
+        false,
+        false,
+        false
+      ],
+      "callbackReturns": [
+        1
+      ],
+      "nativeCalls": [
+        {
+          "id": "REDUCE-capture-greedy-flags-16-utf-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 1,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "id": "REDUCE-capture-greedy-flags-16-utf-none",
+          "width": 16,
+          "event": "callout",
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 3,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ]
+        }
+      ],
+      "managedCalls": [
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 4,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 3,
+          "returnCode": 1,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "version": 2,
+          "number": 1,
+          "isString": false,
+          "subjectLength": 4,
+          "captureTop": 3,
+          "captureLast": 2,
+          "startMatch": 0,
+          "currentPosition": 3,
+          "patternPosition": 14,
+          "nextItemLength": 0,
+          "stringOffset": 0,
+          "flags": 2,
+          "returnCode": 0,
+          "subjectUnits": [
+            97,
+            98,
+            98,
+            99
+          ],
+          "stringUnits": [],
+          "markUnits": null,
+          "captures": [
+            null,
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ]
+        }
+      ],
+      "nativeToManagedFlagDifference": {
+        "field": "callout.0.flags",
+        "expected": 1,
+        "actual": 3
+      },
+      "managedResult": {
+        "Status": 0,
+        "NativeReturnCode": 3,
+        "StartChar": 0,
+        "MarkIndex": -1,
+        "Failure": {
+          "Code": 0,
+          "Offset": 0,
+          "WorkConsumed": 0,
+          "RequiredCapacity": 0
+        }
+      }
+    }
+  ]
+}

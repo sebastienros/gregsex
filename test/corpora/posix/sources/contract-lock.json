@@ -1,0 +1,51 @@
+{
+  "contractVersion": "posix-contract-1",
+  "corpusVersion": "posix-fixtures-1",
+  "files": [
+    {
+      "path": "src/GregsEx/Contracts/Posix/LaneContracts.cs",
+      "bytes": 4220,
+      "sha256": "7c88dbae2a7d2414a14312c5579c6f8f77443577d2cddecb1869233cacea8bfa"
+    },
+    {
+      "path": "src/GregsEx/Contracts/Posix/PosixProgram.cs",
+      "bytes": 10997,
+      "sha256": "4b1083c38ddb055f49494f94dd60126a7e68979b5d9ae45f9b304e06b010f2f4"
+    },
+    {
+      "path": "src/GregsEx/Public/Posix/PosixProfile.cs",
+      "bytes": 4725,
+      "sha256": "1993514fe929651df8fba609230e64fc0826f0b655e6a14e4923cde6050cc300"
+    },
+    {
+      "path": "src/GregsEx/Public/Posix/PosixDiagnostics.cs",
+      "bytes": 4161,
+      "sha256": "c52d40b288e2d2554cf3fcdee38d41aa6205b366d304dcf35a0b48cdab4e467d"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Posix/PosixFixture.cs",
+      "bytes": 10651,
+      "sha256": "357007d32ce497377438b1e90c34f01a219eb27a5b9ea0fe98358ad4ac39698d"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Posix/ApiDeclarations.cs",
+      "bytes": 2984,
+      "sha256": "61884430d4b2ef50770f9acdedcad17c4381a8f25362c200b4f563e9bb602e4a"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Posix/PosixFixtures.schema.json",
+      "bytes": 14040,
+      "sha256": "01756ac24a71277d8a1eeb16ee092cba7fd371a0afde7aa155947ea7948b8a85"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Posix/ContractVectors.json",
+      "bytes": 211961,
+      "sha256": "c69a59e4909e884650a6e425b4ec4931e4ed241c8fe990dffa1a7b6c5058e575"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Posix/LocaleTable.json",
+      "bytes": 14254,
+      "sha256": "b7f1f895c3e9ffa0d5ab2a1f4df2f97c11c4af6f58677afce995c7d4b3df1a55"
+    }
+  ]
+}

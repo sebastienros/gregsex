@@ -1,0 +1,41 @@
+{
+  "format": "xml-unicode-inputs-1",
+  "files": {
+    "Blocks.txt": {
+      "bytes": 11397,
+      "sha256": "f3907b395d410f1b97342292ca6bc83dd12eb4b205f2a0c48efdef99e517d7b0",
+      "url": "https://www.unicode.org/Public/16.0.0/ucd/Blocks.txt",
+      "license": "https://www.unicode.org/license.txt"
+    },
+    "LICENSE.txt": {
+      "bytes": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "url": "https://www.unicode.org/license.txt",
+      "license": "Unicode License V3"
+    },
+    "ReadMe.txt": {
+      "bytes": 693,
+      "sha256": "14cafa23788d3a20dd21d6b0cdcb8d6dab520781fcd9ad9392f3b88ea607e633",
+      "url": "https://www.unicode.org/Public/16.0.0/ucd/ReadMe.txt",
+      "license": "https://www.unicode.org/license.txt"
+    },
+    "SpecialCasing.txt": {
+      "bytes": 16809,
+      "sha256": "8d5de354eef79f2395a54c9c7dcebbaf3d30fc962d0f85611ea97aa973a0c451",
+      "url": "https://www.unicode.org/Public/16.0.0/ucd/SpecialCasing.txt",
+      "license": "https://www.unicode.org/license.txt"
+    },
+    "UnicodeData.txt": {
+      "bytes": 2175362,
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f",
+      "url": "https://www.unicode.org/Public/16.0.0/ucd/UnicodeData.txt",
+      "license": "https://www.unicode.org/license.txt"
+    },
+    "XML-1.0-5e.html": {
+      "bytes": 219926,
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "license": "https://www.w3.org/copyright/document-license/"
+    }
+  }
+}

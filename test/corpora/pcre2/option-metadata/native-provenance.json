@@ -1,0 +1,54 @@
+{
+  "source_commit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "scope": "160 bounded correctness-only compilations; cached libraries; no matcher, native rebuild or measurements.",
+  "commands": [
+    [
+      "clang",
+      "-O2",
+      "-DPCRE2_CODE_UNIT_WIDTH=8",
+      "-I",
+      "/private/tmp/gregsex-m5-option-metadata-native/native-build",
+      "-I",
+      "/Users/sebastienros/.codex/worktrees/d4d1/gregsex/test/corpora/pcre2/option-metadata",
+      "/Users/sebastienros/.codex/worktrees/d4d1/gregsex/tools/oracles/pcre2/option-metadata/native-probe.c",
+      "/private/tmp/gregsex-m5-option-metadata-native/native-build/libpcre2-8.a",
+      "-o",
+      "/private/tmp/gregsex-m5-option-metadata-native/probe-8"
+    ],
+    [
+      "/private/tmp/gregsex-m5-option-metadata-native/probe-8"
+    ],
+    [
+      "clang",
+      "-O2",
+      "-DPCRE2_CODE_UNIT_WIDTH=16",
+      "-I",
+      "/private/tmp/gregsex-m5-option-metadata-native/native-build",
+      "-I",
+      "/Users/sebastienros/.codex/worktrees/d4d1/gregsex/test/corpora/pcre2/option-metadata",
+      "/Users/sebastienros/.codex/worktrees/d4d1/gregsex/tools/oracles/pcre2/option-metadata/native-probe.c",
+      "/private/tmp/gregsex-m5-option-metadata-native/native-build/libpcre2-16.a",
+      "-o",
+      "/private/tmp/gregsex-m5-option-metadata-native/probe-16"
+    ],
+    [
+      "/private/tmp/gregsex-m5-option-metadata-native/probe-16"
+    ]
+  ],
+  "sha256": {
+    "test/corpora/pcre2/oracle/native-evidence.tar.gz": "339344898646d67a24c61e244a46ddf345ac8f55c6aacf9b7b32b7c34645bb71",
+    "native-build/pcre2.h": "a75457e8b140a246aade9c8b36b44fbe241dfa253fce4545524b27d7d7e9b5c2",
+    "native-build/libpcre2-8.a": "460a19b179518523bc5cbf2162b5f0263c6f5a5113ae7fd0ad61c1f53ab4c531",
+    "native-build/libpcre2-16.a": "e0bbe10f169a236b10f5d5a939a10bd0a617466c2359226de847317235f84bed",
+    "tools/oracles/pcre2/source/pcre2-10.46-source.tar.gz": "ffde0c6ead457c4f8edcd8f9ce490bbabd30adabdfd179ecaddd320946cf3872",
+    "pcre2-pcre2-10.46/src/pcre2_compile.c": "54a8fb643749f0a7753f68d65f4e9e0dbc4728ed04461b580a0fba3b35d57b7d",
+    "tools/oracles/pcre2/option-metadata/native-cases-8.h": "006068b4f83d37796c9b40b4f79058c5dd566affe2e99565cc754d65743a4e1c",
+    "test/corpora/pcre2/option-metadata/native-inputs.json": "ed60e0c58baab5ca7026bbe123c2ac9536aaaea797fc7f33c25ad78cc7b6a8ec",
+    "test/corpora/pcre2/option-metadata/native-16.jsonl": "0c9b86f8ea22c9abe78035d415221715bcb2324835ec2a3df485d8eb1c813895",
+    "test/corpora/pcre2/option-metadata/source-witness.txt": "d8ac851d824623a77e4da6d87f188c16cf87d7fdcc44b111ba0f636b502e069e",
+    "tools/oracles/pcre2/option-metadata/probe.py": "1ec47efa815a21d80a2e85c7fa75cbefb8c734804ae366c3b0c6badf6083dc22",
+    "test/corpora/pcre2/option-metadata/native-8.jsonl": "26925129f2300ddf8547902294c716b1e275125fb4acf507ee79691ec0b6e782",
+    "tools/oracles/pcre2/option-metadata/native-probe.c": "d843aa1c294a36a474caed62e66b7a70668f8bb487f49ae2f60f8f809bc41c1a",
+    "tools/oracles/pcre2/option-metadata/native-cases-16.h": "4e4a7ef515c7531cb9e9cb9312d3bababde0fbc704be4bfea88a3d70ec923325"
+  }
+}

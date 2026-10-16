@@ -1,0 +1,22 @@
+{
+  "archive": "test/corpora/pcre2/oracle/native-evidence.tar.gz",
+  "archiveSha256": "339344898646d67a24c61e244a46ddf345ac8f55c6aacf9b7b32b7c34645bb71",
+  "members": [
+    {
+      "member": "native-build/pcre2.h",
+      "sha256": "a75457e8b140a246aade9c8b36b44fbe241dfa253fce4545524b27d7d7e9b5c2",
+      "bytes": 51313
+    },
+    {
+      "member": "native-build/libpcre2-8.a",
+      "sha256": "460a19b179518523bc5cbf2162b5f0263c6f5a5113ae7fd0ad61c1f53ab4c531",
+      "bytes": 413096
+    },
+    {
+      "member": "native-build/libpcre2-16.a",
+      "sha256": "e0bbe10f169a236b10f5d5a939a10bd0a617466c2359226de847317235f84bed",
+      "bytes": 384968
+    }
+  ],
+  "scope": "Cached verified static libraries; no native library rebuild. Initial window phase8calls; extended window/ACCEPT phase12calls (12unique inputs overall), plus two independent THEN-behind calls. Defined-field raw outputs retained."
+}

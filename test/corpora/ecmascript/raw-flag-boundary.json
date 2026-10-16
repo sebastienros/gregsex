@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "ecma-raw-flag-boundary-1",
+  "id": "ES-FLAG-SURROGATE",
+  "capabilities": [
+    "ES-001"
+  ],
+  "profileId": "EcmaScript2025",
+  "dataId": "Unicode-16.0.0+Emoji-16.0",
+  "patternUnits": [
+    97
+  ],
+  "rawFlagUnits": [
+    55296
+  ],
+  "inputUnits": [
+    97
+  ],
+  "operation": "Parse",
+  "expected": {
+    "status": "InvalidSyntax",
+    "location": "Flags",
+    "offset": 0,
+    "length": 1,
+    "featureId": "ES-001"
+  },
+  "provenance": {
+    "kind": "Specification",
+    "uri": "https://tc39.es/ecma262/2025/multipage/text-processing.html#sec-regexpinitialize",
+    "clause": "ECMAScript2025 22.2.3.2; ECMAScript flag-source diagnostic contract",
+    "license": "GregsEx repository license; independent recipe",
+    "oracleId": null
+  },
+  "oracleCorroboration": "node-24.4.1-v8-13.6.233.10-node.17-unicode16-darwin-arm64: SyntaxError",
+  "reason": "The frozen EcmaCorpus v1 Flags field is a JSON string; System.Text.Json rejects an unpaired surrogate before the fixture reaches the parser. Preserve exact numeric units separately, reconstruct a char flag span and assert the actual descriptor negative boundary. No shared-schema change or skipped flag semantic."
+}

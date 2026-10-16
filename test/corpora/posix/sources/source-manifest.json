@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "m4-source-intake-1",
+  "sources": [
+    {
+      "id": "issue7-ch09",
+      "url": "https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html",
+      "retrieved": "2026-10-13",
+      "bytes": 53160,
+      "sha256": "8c3dac77b7f8a458581a94a251d1807a4324315849440b94b0cabbfed8f272af",
+      "use": "Primary normative audit; original independently authored vectors, no copied standard text.",
+      "license": "The Open Group/IEEE copyrighted specification; not redistributed."
+    },
+    {
+      "id": "issue7-regcomp",
+      "url": "https://pubs.opengroup.org/onlinepubs/9699919799/functions/regcomp.html",
+      "retrieved": "2026-10-13",
+      "bytes": 30923,
+      "sha256": "128d835b0d93c9ad4ddbcc1c22b1dfcb38c09dd42acf8ad014e3c6b49ebbdd26",
+      "use": "Primary normative audit; original independently authored vectors, no copied standard text.",
+      "license": "The Open Group/IEEE copyrighted specification; not redistributed."
+    },
+    {
+      "id": "issue7-locale",
+      "url": "https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap07.html",
+      "retrieved": "2026-10-13",
+      "bytes": 158512,
+      "sha256": "6fd150359de697f6d91f698e53ed8c6a010f6fb875ce0c716944f6c41f5af922",
+      "use": "Primary normative audit; original independently authored vectors, no copied standard text.",
+      "license": "The Open Group/IEEE copyrighted specification; not redistributed."
+    },
+    {
+      "id": "issue8-ch09",
+      "url": "https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap09.html",
+      "retrieved": "2026-10-13",
+      "bytes": 60438,
+      "sha256": "2f5f60e9fe2954fe09dc0991f5c03b7c1de771b0ae2104e4a8a5745187c64e24",
+      "use": "Primary normative audit; original independently authored vectors, no copied standard text.",
+      "license": "The Open Group/IEEE copyrighted specification; not redistributed."
+    },
+    {
+      "id": "issue8-regcomp",
+      "url": "https://pubs.opengroup.org/onlinepubs/9799919799/functions/regcomp.html",
+      "retrieved": "2026-10-13",
+      "bytes": 32280,
+      "sha256": "544ff826004bbfa6436bb8b18d9ee38a4a12cd3473290ed530887648eab94874",
+      "use": "Primary normative audit; original independently authored vectors, no copied standard text.",
+      "license": "The Open Group/IEEE copyrighted specification; not redistributed."
+    }
+  ]
+}

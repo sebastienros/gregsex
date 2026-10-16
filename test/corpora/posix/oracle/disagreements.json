@@ -1,0 +1,5926 @@
+{
+  "format": "posix-disagreement-audit-1",
+  "rules": {
+    "undefined-strict-policy": {
+      "clause": "XBD9.1/9.3/9.4; POSIX profile classification register",
+      "classification": "Undefined",
+      "resolution": "The ratified named profile rejects this undefined spelling. Native extensions/acceptance/error-detection choices neither weaken the profile nor establish universal POSIX invalidity."
+    },
+    "unspecified-strict-policy": {
+      "clause": "XBD9.3.5; POSIX profile classification register",
+      "classification": "Unspecified",
+      "resolution": "The ratified strict disposition selects rejection where Issue7 leaves behavior unspecified. Native acceptance or another symbolic category is recorded, not a product golden result."
+    },
+    "normative-subpattern-priority": {
+      "clause": "XBD9.1 left-to-right longest subpatterns consistent with whole",
+      "classification": "Defined",
+      "resolution": "Keep the normative longest preceding subpattern; glibc final registers select the shorter left alternative. Native source set_regs/proceed_next_node recovers one admissible path; it is not the contract priority reference."
+    },
+    "normative-report-parent-scope": {
+      "clause": "XSH regexec nested subexpression in last containing match",
+      "classification": "Defined",
+      "resolution": "Keep nested group absent if absent in the last reported parent iteration. glibc retains an earlier nested register; regexec.c update_regs refreshes visited group slots without clearing all absent descendants."
+    },
+    "normative-reference-parent-scope": {
+      "clause": "XBD9.3.6 contained backreference within last containing match",
+      "classification": "Defined",
+      "resolution": "NoMatch remains mandatory even when both native families disagree. In abab, the purported final reference needs b from outside its final containing match; an unparticipated reference cannot fabricate the empty acceptance musl reports. Reduced exact pattern/subject and both observations retained."
+    },
+    "normative-unmatched-reference": {
+      "clause": "XBD9.3.6 explicit repeated-a-reference example",
+      "classification": "Defined",
+      "resolution": "NoMatch on a is stated by the source example. musl backreference computes eo-so=0 for absent(-1,-1) and strncmp length0 succeeds instead of rejecting absence."
+    },
+    "normative-reference-case": {
+      "clause": "XBD9.2 case-insensitive each-character counterparts;9.3.6",
+      "classification": "Defined",
+      "resolution": "REG_ICASE applies to reference equality. musl backreference path regexec.c uses raw strncmp without counterpart comparison; preserve Match and full byte endpoints under the frozen ASCII provider."
+    },
+    "native-singleton-collation-gap": {
+      "clause": "XBD9.3.5 single-character collating symbols/equivalence;C provider",
+      "classification": "Defined",
+      "resolution": "Singleton symbols and singleton primary equivalence remain admitted. musl regcomp.c parse_bracket_terms explicitly returns REG_ECOLLATE for both constructs. This is an oracle capability gap, not an approved GregsEx exclusion."
+    },
+    "provider-high-byte-disposition": {
+      "clause": "Ratified GregsEx.Posix.C.Byte-v1 opaque-byte provider",
+      "classification": "GregsEx",
+      "resolution": "Raw high-byte singleton collation is the ratified named-provider choice. musl does not implement this bracket syntax. No portable C codeset or unrestricted locale claim is made."
+    }
+  },
+  "cases": [
+    {
+      "id": "POSIX-C002",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 3,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 2,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C002",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C006",
+      "family": "glibc",
+      "rule": "normative-report-parent-scope",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        41,
+        124,
+        98,
+        41,
+        43
+      ],
+      "inputUnits": [
+        97,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 3,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 1,
+                  "length": 1
+                },
+                {
+                  "participated": false,
+                  "index": 0,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C006",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C013",
+      "family": "musl",
+      "rule": "normative-unmatched-reference",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        92,
+        41,
+        42,
+        92,
+        49
+      ],
+      "inputUnits": [
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Find",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "NoMatch",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C013",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            0
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C017",
+      "family": "glibc",
+      "rule": "normative-reference-parent-scope",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        92,
+        40,
+        98,
+        92,
+        41,
+        42,
+        92,
+        41,
+        42,
+        92,
+        50
+      ],
+      "inputUnits": [
+        97,
+        98,
+        97,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Find",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "NoMatch",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C017",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            4
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C017",
+      "family": "musl",
+      "rule": "normative-reference-parent-scope",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        92,
+        40,
+        98,
+        92,
+        41,
+        42,
+        92,
+        41,
+        42,
+        92,
+        50
+      ],
+      "inputUnits": [
+        97,
+        98,
+        97,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Find",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "NoMatch",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C017",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            0
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C018",
+      "family": "musl",
+      "rule": "normative-reference-case",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        92,
+        41,
+        92,
+        49
+      ],
+      "inputUnits": [
+        97,
+        65
+      ],
+      "compileFlags": 1,
+      "executionFlags": 0,
+      "operation": "Find",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C018",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "NoMatch",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "NoMatch",
+        "regerrorRequired": 9,
+        "regerrorShortRequired": 9,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C020",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        40,
+        97,
+        41,
+        92,
+        49
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 3,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C020",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C020",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        40,
+        97,
+        41,
+        92,
+        49
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 3,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C020",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C025",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        92,
+        43
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C025",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C025",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        92,
+        43
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C025",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C026",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        92,
+        100
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C026",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C026",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        92,
+        100
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C026",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C027",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        92,
+        110
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C027",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C027",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        92,
+        110
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C027",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C028",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        92,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C028",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C028",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        92,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C028",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C029",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        92,
+        125
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C029",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C029",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        92,
+        125
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C029",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C036",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        97,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Find",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C036",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C037",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        97,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Find",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C037",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C076",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        123,
+        50,
+        53,
+        54,
+        125
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadInterval",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 5,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C076",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C078",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        42,
+        42
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadRepeat",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C078",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C078",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        42,
+        42
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadRepeat",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C078",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C080",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        43,
+        63
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadRepeat",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C080",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C080",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        43,
+        63
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadRepeat",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C080",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C081",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        40,
+        41
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C081",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C081",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        40,
+        41
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C081",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C082",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        124
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 1,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C082",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C082",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        124
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 1,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C082",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C083",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        124,
+        97
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C083",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C083",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        124,
+        97
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 2,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C083",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C084",
+      "family": "glibc",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        41
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 3,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C084",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C084",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        41
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 3,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C084",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C085",
+      "family": "musl",
+      "rule": "undefined-strict-policy",
+      "patternUnits": [
+        97,
+        123
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "UnbalancedBrace",
+            "disposition": "UndefinedRejected",
+            "location": "Pattern",
+            "offset": 1,
+            "length": 1,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C085",
+        "compile": "BadInterval",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "BadInterval",
+        "regerrorRequired": 23,
+        "regerrorShortRequired": 23,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C089",
+      "family": "musl",
+      "rule": "unspecified-strict-policy",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        97,
+        61,
+        93,
+        45,
+        122,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "InvalidRange",
+            "disposition": "UnspecifiedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 9,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C089",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C091",
+      "family": "glibc",
+      "rule": "unspecified-strict-policy",
+      "patternUnits": [
+        91,
+        46,
+        120,
+        46,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UnspecifiedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 5,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C091",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C091",
+      "family": "musl",
+      "rule": "unspecified-strict-policy",
+      "patternUnits": [
+        91,
+        46,
+        120,
+        46,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UnspecifiedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 5,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C091",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C092",
+      "family": "glibc",
+      "rule": "unspecified-strict-policy",
+      "patternUnits": [
+        91,
+        61,
+        120,
+        61,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UnspecifiedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 5,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C092",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C092",
+      "family": "musl",
+      "rule": "unspecified-strict-policy",
+      "patternUnits": [
+        91,
+        61,
+        120,
+        61,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UnspecifiedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 5,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C092",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C093",
+      "family": "glibc",
+      "rule": "unspecified-strict-policy",
+      "patternUnits": [
+        91,
+        58,
+        120,
+        58,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UnspecifiedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 5,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C093",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C093",
+      "family": "musl",
+      "rule": "unspecified-strict-policy",
+      "patternUnits": [
+        91,
+        58,
+        120,
+        58,
+        93
+      ],
+      "inputUnits": [],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "Parse",
+      "destinationLength": null,
+      "expected": [
+        {
+          "status": "InvalidSyntax",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": {
+            "code": "InvalidSyntax",
+            "posixCode": "BadPattern",
+            "disposition": "UnspecifiedRejected",
+            "location": "Pattern",
+            "offset": 0,
+            "length": 5,
+            "offsetUnit": "Bytes"
+          },
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C093",
+        "compile": "None",
+        "groupCount": 1,
+        "status": "ParseSuccess",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C119",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 2,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C119",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-C120",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 4,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 2,
+              "end": 2
+            },
+            {
+              "start": -1,
+              "end": -1
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-C120",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            -1,
+            -1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-capture-choice-reversed",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 3,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 2,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-capture-choice-reversed",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-choice-reversed-2",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 2,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-choice-reversed-2",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-choice-reversed-3",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 3,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 2,
+              "end": 2
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-choice-reversed-3",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-choice-reversed-5",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 5,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 2,
+              "end": 2
+            },
+            {
+              "start": -1,
+              "end": -1
+            },
+            {
+              "start": -1,
+              "end": -1
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-choice-reversed-5",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-capture-outer",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 4,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 2,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-capture-outer",
+        "compile": "None",
+        "groupCount": 4,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-outer-4",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 4,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 2,
+              "end": 2
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-outer-4",
+        "compile": "None",
+        "groupCount": 4,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-outer-6",
+      "family": "glibc",
+      "rule": "normative-subpattern-priority",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        124,
+        97,
+        97,
+        41,
+        40,
+        97,
+        63,
+        41,
+        41
+      ],
+      "inputUnits": [
+        97,
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 6,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 2,
+              "end": 2
+            },
+            {
+              "start": -1,
+              "end": -1
+            },
+            {
+              "start": -1,
+              "end": -1
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-outer-6",
+        "compile": "None",
+        "groupCount": 4,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-capture-scoped",
+      "family": "glibc",
+      "rule": "normative-report-parent-scope",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        41,
+        124,
+        98,
+        41,
+        43
+      ],
+      "inputUnits": [
+        97,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 3,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 2
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                },
+                {
+                  "participated": true,
+                  "index": 1,
+                  "length": 1
+                },
+                {
+                  "participated": false,
+                  "index": 0,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-capture-scoped",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-scoped-3",
+      "family": "glibc",
+      "rule": "normative-report-parent-scope",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        41,
+        124,
+        98,
+        41,
+        43
+      ],
+      "inputUnits": [
+        97,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 3,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": -1,
+              "end": -1
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-scoped-3",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-scoped-5",
+      "family": "glibc",
+      "rule": "normative-report-parent-scope",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        41,
+        124,
+        98,
+        41,
+        43
+      ],
+      "inputUnits": [
+        97,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 5,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": -1,
+              "end": -1
+            },
+            {
+              "start": -1,
+              "end": -1
+            },
+            {
+              "start": -1,
+              "end": -1
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-scoped-5",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-capture-scoped-option",
+      "family": "glibc",
+      "rule": "normative-report-parent-scope",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        41,
+        63,
+        98,
+        41,
+        43
+      ],
+      "inputUnits": [
+        97,
+        98,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 3,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 3
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 3
+                },
+                {
+                  "participated": true,
+                  "index": 2,
+                  "length": 1
+                },
+                {
+                  "participated": false,
+                  "index": 0,
+                  "length": 0
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-capture-scoped-option",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            3
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-scoped-option-3",
+      "family": "glibc",
+      "rule": "normative-report-parent-scope",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        41,
+        63,
+        98,
+        41,
+        43
+      ],
+      "inputUnits": [
+        97,
+        98,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 3,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 3
+            },
+            {
+              "start": 2,
+              "end": 3
+            },
+            {
+              "start": -1,
+              "end": -1
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-scoped-option-3",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            3
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-nmatch-scoped-option-5",
+      "family": "glibc",
+      "rule": "normative-report-parent-scope",
+      "patternUnits": [
+        40,
+        40,
+        97,
+        41,
+        63,
+        98,
+        41,
+        43
+      ],
+      "inputUnits": [
+        97,
+        98,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 5,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 3
+            },
+            {
+              "start": 2,
+              "end": 3
+            },
+            {
+              "start": -1,
+              "end": -1
+            },
+            {
+              "start": -1,
+              "end": -1
+            },
+            {
+              "start": -1,
+              "end": -1
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-nmatch-scoped-option-5",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            3
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-bre-fold",
+      "family": "musl",
+      "rule": "normative-reference-case",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        98,
+        92,
+        41,
+        92,
+        49
+      ],
+      "inputUnits": [
+        97,
+        98,
+        65,
+        66
+      ],
+      "compileFlags": 1,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 2,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 4
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 4
+                },
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 2
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-bre-fold",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "NoMatch",
+        "matches": [
+          [
+            -777,
+            -888
+          ],
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "NoMatch",
+        "regerrorRequired": 9,
+        "regerrorShortRequired": 9,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-bre-nmatch-fold-0",
+      "family": "musl",
+      "rule": "normative-reference-case",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        98,
+        92,
+        41,
+        92,
+        49
+      ],
+      "inputUnits": [
+        97,
+        98,
+        65,
+        66
+      ],
+      "compileFlags": 1,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 0,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": true,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-bre-nmatch-fold-0",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "NoMatch",
+        "matches": [],
+        "errorCode": "NoMatch",
+        "regerrorRequired": 9,
+        "regerrorShortRequired": 9,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-bre-nmatch-fold-1",
+      "family": "musl",
+      "rule": "normative-reference-case",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        98,
+        92,
+        41,
+        92,
+        49
+      ],
+      "inputUnits": [
+        97,
+        98,
+        65,
+        66
+      ],
+      "compileFlags": 1,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 4
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-bre-nmatch-fold-1",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "NoMatch",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "NoMatch",
+        "regerrorRequired": 9,
+        "regerrorShortRequired": 9,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-bre-nmatch-fold-2",
+      "family": "musl",
+      "rule": "normative-reference-case",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        98,
+        92,
+        41,
+        92,
+        49
+      ],
+      "inputUnits": [
+        97,
+        98,
+        65,
+        66
+      ],
+      "compileFlags": 1,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 2,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 4
+            },
+            {
+              "start": 0,
+              "end": 2
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-bre-nmatch-fold-2",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "NoMatch",
+        "matches": [
+          [
+            -777,
+            -888
+          ],
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "NoMatch",
+        "regerrorRequired": 9,
+        "regerrorShortRequired": 9,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-bre-nmatch-fold-4",
+      "family": "musl",
+      "rule": "normative-reference-case",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        98,
+        92,
+        41,
+        92,
+        49
+      ],
+      "inputUnits": [
+        97,
+        98,
+        65,
+        66
+      ],
+      "compileFlags": 1,
+      "executionFlags": 0,
+      "operation": "RegExec",
+      "destinationLength": 4,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [
+            {
+              "start": 0,
+              "end": 4
+            },
+            {
+              "start": 0,
+              "end": 2
+            },
+            {
+              "start": -1,
+              "end": -1
+            },
+            {
+              "start": -1,
+              "end": -1
+            }
+          ],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-bre-nmatch-fold-4",
+        "compile": "None",
+        "groupCount": 2,
+        "status": "NoMatch",
+        "matches": [
+          [
+            -777,
+            -888
+          ],
+          [
+            -777,
+            -888
+          ],
+          [
+            -777,
+            -888
+          ],
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "NoMatch",
+        "regerrorRequired": 9,
+        "regerrorShortRequired": 9,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-bre-parent",
+      "family": "glibc",
+      "rule": "normative-reference-parent-scope",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        92,
+        40,
+        98,
+        92,
+        41,
+        42,
+        92,
+        41,
+        42,
+        92,
+        50
+      ],
+      "inputUnits": [
+        97,
+        98,
+        97,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "NoMatch",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-bre-parent",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            4
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 27,
+        "regerrorShortRequired": 27,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-bre-parent",
+      "family": "musl",
+      "rule": "normative-reference-parent-scope",
+      "patternUnits": [
+        92,
+        40,
+        97,
+        92,
+        40,
+        98,
+        92,
+        41,
+        42,
+        92,
+        41,
+        42,
+        92,
+        50
+      ],
+      "inputUnits": [
+        97,
+        98,
+        97,
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "NoMatch",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-bre-parent",
+        "compile": "None",
+        "groupCount": 3,
+        "status": "Match",
+        "matches": [
+          [
+            0,
+            0
+          ]
+        ],
+        "errorCode": "None",
+        "regerrorRequired": 15,
+        "regerrorShortRequired": 15,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-001",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        1,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        1
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-001",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-001",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        1,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        1
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-001",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-009",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        9,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        9
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-009",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-009",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        9,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        9
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-009",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-010",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        10,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        10
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-010",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-010",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        10,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        10
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-010",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-032",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        32,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        32
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-032",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-032",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        32,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        32
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-032",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-045",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        45,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        45
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-045",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-045",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        45,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        45
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-045",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-065",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        65,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        65
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-065",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-065",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        65,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        65
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-065",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-093",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        93,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        93
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-093",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-093",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        93,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        93
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-093",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-097",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        97,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-097",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-097",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        97,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-097",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-127",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        127,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        127
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-127",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-127",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        127,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        127
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-127",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-128",
+      "family": "musl",
+      "rule": "provider-high-byte-disposition",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        128,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        128
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-128",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-128",
+      "family": "musl",
+      "rule": "provider-high-byte-disposition",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        128,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        128
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-128",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-46-255",
+      "family": "musl",
+      "rule": "provider-high-byte-disposition",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        255,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        255
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-46-255",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-collating-61-255",
+      "family": "musl",
+      "rule": "provider-high-byte-disposition",
+      "patternUnits": [
+        91,
+        91,
+        61,
+        255,
+        61,
+        93,
+        93
+      ],
+      "inputUnits": [
+        255
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-collating-61-255",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-range-13-96",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        97,
+        46,
+        93,
+        45,
+        91,
+        46,
+        99,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        96
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "NoMatch",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-range-13-96",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-range-13-97",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        97,
+        46,
+        93,
+        45,
+        91,
+        46,
+        99,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        97
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-range-13-97",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-range-13-98",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        97,
+        46,
+        93,
+        45,
+        91,
+        46,
+        99,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        98
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-range-13-98",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-range-13-99",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        97,
+        46,
+        93,
+        45,
+        91,
+        46,
+        99,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        99
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "Match",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [
+            {
+              "range": {
+                "index": 0,
+                "length": 1
+              },
+              "captures": [
+                {
+                  "participated": true,
+                  "index": 0,
+                  "length": 1
+                }
+              ]
+            }
+          ],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-range-13-99",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    },
+    {
+      "id": "POSIX-E-range-13-100",
+      "family": "musl",
+      "rule": "native-singleton-collation-gap",
+      "patternUnits": [
+        91,
+        91,
+        46,
+        97,
+        46,
+        93,
+        45,
+        91,
+        46,
+        99,
+        46,
+        93,
+        93
+      ],
+      "inputUnits": [
+        100
+      ],
+      "compileFlags": 0,
+      "executionFlags": 0,
+      "operation": "FindCaptures",
+      "destinationLength": 1,
+      "expected": [
+        {
+          "status": "NoMatch",
+          "boolean": null,
+          "groupCount": null,
+          "matches": [],
+          "nativeMatches": [],
+          "destinationUnchanged": false,
+          "error": null,
+          "requiredBytes": null,
+          "errorBytes": null
+        }
+      ],
+      "observed": {
+        "kind": "result",
+        "id": "POSIX-E-range-13-100",
+        "compile": "InvalidCollatingElement",
+        "groupCount": 0,
+        "status": "CompileError",
+        "matches": [
+          [
+            -777,
+            -888
+          ]
+        ],
+        "errorCode": "InvalidCollatingElement",
+        "regerrorRequired": 26,
+        "regerrorShortRequired": 26,
+        "regerrorTerminated": true,
+        "regerrorTailUntouched": true
+      }
+    }
+  ]
+}

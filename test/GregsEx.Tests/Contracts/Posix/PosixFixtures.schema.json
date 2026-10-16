@@ -1,0 +1,672 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "dataId",
+    "dataDigest",
+    "cases"
+  ],
+  "properties": {
+    "contractVersion": {
+      "const": "posix-fixtures-1"
+    },
+    "dataId": {
+      "const": "GregsEx.Posix.C.Byte-v1"
+    },
+    "dataDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/case"
+      },
+      "minItems": 1
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gregsex:posix-fixtures:1",
+  "$defs": {
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "uri",
+        "clause",
+        "license",
+        "oracleId"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Specification",
+            "GregsExDisposition",
+            "Imported",
+            "Discovery"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "clause": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "oracleId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "participated",
+        "index",
+        "length"
+      ],
+      "properties": {
+        "participated": {
+          "type": "boolean"
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "length"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "range",
+        "captures"
+      ],
+      "properties": {
+        "range": {
+          "$ref": "#/$defs/range"
+        },
+        "captures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/capture"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "nativeMatch": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "const": -1
+            },
+            "end": {
+              "const": -1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "end": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      ]
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "posixCode",
+        "disposition",
+        "location",
+        "offset",
+        "length",
+        "offsetUnit"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "posixCode": {
+          "type": "string",
+          "enum": [
+            "None",
+            "BadPattern",
+            "BadInterval",
+            "BadRepeat",
+            "UnbalancedBrace",
+            "UnbalancedBracket",
+            "InvalidCollatingElement",
+            "InvalidCharacterClass",
+            "TrailingEscape",
+            "UnbalancedParenthesis",
+            "InvalidRange",
+            "InvalidBackreference",
+            "NoMemory",
+            "NoMatch"
+          ]
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Invalid",
+            "UndefinedRejected",
+            "UnspecifiedRejected",
+            "ExtensionRejected",
+            "PatternDomain",
+            "ProfileExclusion"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "enum": [
+            "Pattern",
+            "Input",
+            "Locale",
+            "Options"
+          ]
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "offsetUnit": {
+          "type": "string",
+          "enum": [
+            "Bytes",
+            "Utf16CodeUnits"
+          ]
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxWork",
+        "maxCompileWork",
+        "maxPatternUnits",
+        "maxPlanBytes",
+        "maxCompileMemoryBytes",
+        "maxWorkspaceBytes",
+        "frameCapacity",
+        "historyCapacity",
+        "cancelled"
+      ],
+      "properties": {
+        "maxWork": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maxCompileWork": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maxPatternUnits": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maxPlanBytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maxCompileMemoryBytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maxWorkspaceBytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "frameCapacity": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "historyCapacity": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cancelled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "boolean",
+        "groupCount",
+        "matches",
+        "nativeMatches",
+        "destinationUnchanged",
+        "error",
+        "requiredBytes",
+        "errorBytes"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "ParseSuccess",
+            "InvalidSyntax",
+            "InvalidPatternEncoding",
+            "UnsupportedFeature",
+            "UnsupportedRepresentation",
+            "Match",
+            "NoMatch",
+            "InvalidInput",
+            "DestinationTooSmall",
+            "LimitExceeded",
+            "Cancelled",
+            "TimedOut",
+            "OperationRejected",
+            "Formatted"
+          ]
+        },
+        "boolean": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "groupCount": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/match"
+          }
+        },
+        "nativeMatches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nativeMatch"
+          }
+        },
+        "destinationUnchanged": {
+          "type": "boolean"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/error"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "requiredBytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorBytes": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "profileId",
+        "locale",
+        "capabilities",
+        "provenance",
+        "classification",
+        "patternKind",
+        "patternUnits",
+        "inputKind",
+        "inputUnits",
+        "compileFlags",
+        "executionFlags",
+        "operation",
+        "startAt",
+        "destinationLength",
+        "errorCode",
+        "limits",
+        "permitted"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profileId": {
+          "type": "string",
+          "enum": [
+            "PosixBre2018-CByte",
+            "PosixEre2018-CByte"
+          ]
+        },
+        "locale": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^PX-0(0[1-9]|1[0-9]|20)$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "classification": {
+          "type": "string",
+          "enum": [
+            "Defined",
+            "Invalid",
+            "Undefined",
+            "Unspecified",
+            "Optional",
+            "GregsEx",
+            "Extension"
+          ]
+        },
+        "patternKind": {
+          "type": "string",
+          "enum": [
+            "Bytes",
+            "Utf16"
+          ]
+        },
+        "patternUnits": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535
+          }
+        },
+        "inputKind": {
+          "type": "string",
+          "enum": [
+            "Bytes",
+            "Utf8",
+            "Utf16"
+          ]
+        },
+        "inputUnits": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535
+          }
+        },
+        "compileFlags": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "executionFlags": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "Parse",
+            "Boolean",
+            "Find",
+            "FindCaptures",
+            "RegExec",
+            "RegError"
+          ]
+        },
+        "startAt": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "destinationLength": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limits": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/limits"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "permitted": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/expected"
+          },
+          "minItems": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "patternKind": {
+                "const": "Bytes"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "patternUnits": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "inputKind": {
+                "enum": [
+                  "Bytes",
+                  "Utf8"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "inputUnits": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

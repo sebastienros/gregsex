@@ -1,0 +1,8 @@
+{
+  "Id": "sha256:5cb918ae6077d0d575f45bd12847517e6c60f89745230eb43401be7928fc043f",
+  "RepoDigests": [
+    "gregsex-m4-posix-oracles@sha256:5cb918ae6077d0d575f45bd12847517e6c60f89745230eb43401be7928fc043f"
+  ],
+  "Architecture": "arm64",
+  "Os": "linux"
+}

@@ -1,0 +1,39 @@
+{
+  "format": "xpath-processor-lock-1",
+  "id": "Saxon-HE-12.5",
+  "processor": "SaxonJ-HE 12.5",
+  "language": "XQuery3.1/F&O3.1",
+  "xmlVersion": "1.0",
+  "xsdVersion": "1.1",
+  "regex": "Saxon XPath regex implementation; no !j flag or native Java Pattern",
+  "artifacts": [
+    {
+      "name": "Saxon-HE-12.5.jar",
+      "url": "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/12.5/Saxon-HE-12.5.jar",
+      "bytes": 5597291,
+      "sha256": "98c3a91e6e5aaf9b3e2b37601e04b214a6e67098493cdd8232fcb705fddcb674",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "Saxon-HE-12.5-sources.jar",
+      "url": "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/12.5/Saxon-HE-12.5-sources.jar",
+      "bytes": 4665040,
+      "sha256": "f1500b3f8be4a3c0257d77e43752fe0cce0913a215924256b2a29877b05b6323",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "xmlresolver-5.2.2.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/xmlresolver/xmlresolver/5.2.2/xmlresolver-5.2.2.jar",
+      "bytes": 165689,
+      "sha256": "efc92bd7ed32b3e57095e0b3e872051ccfbbdcc980831ef33e89e38161a85222",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "xmlresolver-5.2.2-data.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/xmlresolver/xmlresolver/5.2.2/xmlresolver-5.2.2-data.jar",
+      "bytes": 1027801,
+      "sha256": "173904bdbd783ba0fac92c5bcc05da5d09f0ce7eed24346666ea0a239461f9b4",
+      "license": "Apache-2.0"
+    }
+  ]
+}

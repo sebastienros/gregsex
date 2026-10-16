@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/GregsEx.Benchmarks/GregsEx.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/GregsEx/GregsEx.csproj" />
+    <Project Path="src/GregsEx.Generator/GregsEx.Generator.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/GregsEx.AotSmoke/GregsEx.AotSmoke.csproj" />
+    <Project Path="test/GregsEx.Tests/GregsEx.Tests.csproj" />
+  </Folder>
+</Solution>

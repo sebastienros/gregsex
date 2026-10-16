@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "ecma-acquisition-1",
+  "archiveUrl": "https://codeload.github.com/tc39/test262/tar.gz/6a73fa8f114611269ce4442e8f19a31239cb3827",
+  "archiveRetained": "Selected files, harness and notices retained with per-file hashes in repository; complete source archive retrieval is reproducible from pinned URL. Local acquisition archive is temporary, not release evidence.",
+  "archiveLength": 8897887,
+  "archiveSha256": "ddb791c40a84abb50cf96c4a43a4095bd23bc05fbf6955b5506331c46fe220d6",
+  "commitDiscoveryUrl": "https://api.github.com/repos/tc39/test262/commits?until=2025-06-25T23:59:59Z&per_page=1",
+  "commitDiscoverySha256": "3a1a41a22d11e7ae43ff900ea8a4cfc5a22b7189308142d27ba3eb7d8fc2d675",
+  "commit": "6a73fa8f114611269ce4442e8f19a31239cb3827",
+  "commitDate": "2025-06-09T13:45:43Z"
+}

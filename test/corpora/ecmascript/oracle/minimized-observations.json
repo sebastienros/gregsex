@@ -1,0 +1,53 @@
+{
+  "oracleId": "node-24.4.1-v8-13.6.233.10-node.17-unicode16-darwin-arm64",
+  "cases": [
+    {
+      "id": "C018",
+      "procedure": "new RegExp(\".\",\"uy\") on [55357,56832], lastIndex=1",
+      "observed": {
+        "index": 0,
+        "length": 2,
+        "units": [
+          55357,
+          56832
+        ],
+        "lastIndexAfter": 2
+      }
+    },
+    {
+      "id": "static-setter",
+      "procedure": "descriptor RegExp.$1 setter absent in pending legacy-regexp tests",
+      "observed": {
+        "setter": "function"
+      }
+    },
+    {
+      "id": "static-receiver",
+      "procedure": "RegExp.$1 getter with plain object receiver",
+      "observed": ""
+    },
+    {
+      "id": "compile-subclass",
+      "procedure": "RegExp.prototype.compile on subclass instance",
+      "observed": "b"
+    },
+    {
+      "id": "replace-flags-getter",
+      "procedure": "Symbol.replace receiver has throwing flags and global accessors",
+      "observed": {
+        "error": "Error",
+        "constructor": "GlobalError",
+        "message": ""
+      }
+    },
+    {
+      "id": "primitive-symbol-getter",
+      "procedure": "String.match number primitive with Symbol.match getter on Number.prototype",
+      "observed": {
+        "error": "Error",
+        "constructor": "DispatchError",
+        "message": ""
+      }
+    }
+  ]
+}

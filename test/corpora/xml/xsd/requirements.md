@@ -1,0 +1,28 @@
+# XSD requirement mapping and verification
+
+The machine-readable coverage inventory is the primary case join. This narrative preserves semantic boundaries that an XSD processor cannot validate about a managed library.
+
+| Capability | Corpus obligation | Independent authority / oracle boundary |
+| --- | --- | --- |
+| XS-001 | Empty/nonempty whole language, prefixes/suffixes/finalLF, alternatives/concatenation | G.1; direct single pattern facet |
+| XS-002 | Every quantifier, exact/lower/upper/zero boundaries, leading zero digits, malformed syntax, grouping | G.2 productions64–72; finite implementation limits source-only |
+| XS-003 | Ordinary caret/dollar, repetitions, no imported anchors | G.3 production73; processor anchorsFalse |
+| XS-004 | Positive/negative/singleton/scalar ranges, hyphen/caret cases, final/nested/empty subtraction, supplementary endpoints | G.4.1 productions75–82 plus prose; complements relative to XML alphabet |
+| XS-005 | DotCR/LF, XML whitespace, Nd, w/W every category and singleton/empty witnesses, inside/outside classes | Productions97/98; source results override audited Python shortcuts; ratifiedD2 |
+| XS-006 | All36 category spellings, both polarities, implicitCn/FirstLast/new16 assignments, all338blocks/3legacy aliases and endpoints | Productions85–96; original Unicode16 sources, no loose aliases/Cs |
+| XS-007 | Every XML name interval endpoint/neighbor, colon/combining/digits, positive and inverse, supplementary limits | XML4/4a and XSD97; source overrides BMP-only oracle shortcuts |
+| XS-008 | Both polarities of valid unknown name, lowercase unknown, extraNoBlock, empty/multiple characters/U+10FFFF | G.4.2.4; no strict unknown option; defaultall required |
+| XS-009 | Exact scalar UTF16/UTF8 units/native ranges, malformed/overlong/surrogate/out-of-range/truncated input, full-subject violation after early literal, illegal pattern domain, byte-pattern/raw rejection | XML2 plus contract/native interface; diagnostics source-only |
+| XS-010 | Every single escape; backslash distinction; unsupported lookaround/group/backreference/lazy/possessive/numeric/codepoint escape, invalid category/name/syntax | Productions64–98, ratifiedD1; source coordinates preserved, oracle error messages not copied |
+| XS-011 | Finite successful/empty checks, cancellation, tiny compile-work and match-work recipes | Contract safety policy; no native processor instruction-count equivalence |
+| XS-012 | Direct supplied lexical value, whole range/group0 only, empty group/value, no schema/entity/whitespace host | Contract/AppendixG; separate actual host audit demonstrates difference |
+
+FL-XSD-001 maps XS-001/003/012; FL-XSD-002 maps XS-002/004/005/006/007/008/010; FL-XSD-003 maps XS-009/012 plus the host audit. FL-ORACLE-001 maps frozen fixture interchange, per-case provenance and retained source/wheel/input/runtime identities; FL-ORACLE-002 maps actual XMLSchema11 qualification/execution/dispositions. VERIFY-01 maps every capability's three witness roles and real oracle execution where applicable; complete product execution belongs to integration.
+
+For budgets not represented in `xml-fixtures-1` override fields, engine/integration tests must prepare independent minimal witnesses and assert the existing typed APIs without expanding this shared schema. Compile policy: pattern-size, AST-depth, program-size, class-interval-count, compile-work, peak and retained memory each require exact boundary success and just-over-bound failure before publication, including repeated/empty constructs. Runtime policy: fixed public 4096 logical frames, exact state/capture/scratch capacities and spare-capacity prevention; insufficient reserved space/no-growth and memory admission; small-work failure, initial cancellation/deadline even for immediate/empty result; cumulative full-input charge before membership; clean workspace reuse on failure. Preserve lifecycle→destination→capacity→initial cancellation/deadline→full input→scalar-start precedence. XSD nonzero startAt is an argument error, not a search extension.
+
+Test immutable-plan sharing with separate workspaces and exclusive mutable workspace ownership. Test Find/FindCaptures group0, short destination untouched and logical clearing on failure, no-growth warm calls and representation overload rejection. Direct IsValid must agree with actual borrowed execution while preserving its documented convenience allocations. Measure allocations separately with BenchmarkDotNet MemoryDiagnoser. Verify the single-assembly NativeAOT boundary and packaged license notices.
+
+The source-only fixture error offsets are independent reduced recipe coordinates. Oracle compilation errors are retained as observed text without pretending they carry GregsEx native offsets or budgets. Integration reviews actual failure locations against the frozen contract rather than inferring a pass from an accepted schema or this coverage inventory. All oracle divergences remain mandatory product witnesses; none is quarantined away.
+
+`diagnostic-provenance.json` annotates every error recipe: frozen contract seed fields remain exact and are checked by an executed owned equality test; native malformed/domain rows assert the first offending native offset under the contract; other newly authored syntax/resource spans identify the implicated source argument/witness. Those spans are not purported normative parser cursors or external-processor pinpoint positions. The sidecar requires actual exact product-coordinate tests at integration. External errors supply grammar admission only; their observed text is never converted to fabricated UTF16 offsets.

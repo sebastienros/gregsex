@@ -1,0 +1,1250 @@
+[
+  {
+    "id": 0,
+    "domain": 0,
+    "pattern": "^(cow|)\\1(bell)",
+    "subject": "bell",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 1,
+    "domain": 0,
+    "pattern": "(?(?=(a))a)(b)",
+    "subject": "b",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 2,
+    "domain": 0,
+    "pattern": "a*(*ACCEPT)b",
+    "subject": "",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 3,
+    "domain": 0,
+    "pattern": "(?(?=^.*b)b|^)",
+    "subject": "b",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 4,
+    "domain": 0,
+    "pattern": "(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)",
+    "subject": "bbbb",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 5,
+    "domain": 0,
+    "pattern": "(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 6,
+    "domain": 0,
+    "pattern": "(?<DEFINE>b)(?(<DEFINE>)(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 7,
+    "domain": 0,
+    "pattern": "(?<DEFINE>b)(?('DEFINE')(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 8,
+    "domain": 0,
+    "pattern": "(a)(*scs:(1)b)*c",
+    "subject": "ac",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 9,
+    "domain": 0,
+    "pattern": "(?<x>a)(*scs:(<x>)b)*c",
+    "subject": "ac",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 10,
+    "domain": 0,
+    "pattern": "(?<x>a)(?(R&x)b|c)",
+    "subject": "ac",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 11,
+    "domain": 0,
+    "pattern": "(?J)(?<x>a)(?<x>b)(?(R&x)c|d)",
+    "subject": "abd",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 12,
+    "domain": 0,
+    "pattern": "^(a\\1?)(a\\1?)(a\\2?)(a\\3?)$",
+    "subject": "aaaa",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 13,
+    "domain": 0,
+    "pattern": "^(a|)\\1*b",
+    "subject": "b",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 14,
+    "domain": 0,
+    "pattern": "^(aa(bb)?)+$",
+    "subject": "aaaa",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 15,
+    "domain": 0,
+    "pattern": "^(a){2,}+(\\w)",
+    "subject": "aab",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 16,
+    "domain": 0,
+    "pattern": "^(a)(?1)+ab",
+    "subject": "aaaab",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 17,
+    "domain": 0,
+    "pattern": "^(x(y|(?1){2})z)",
+    "subject": "xyz",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 18,
+    "domain": 0,
+    "pattern": "(?>(*ACCEPT)b)c",
+    "subject": "",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 19,
+    "domain": 0,
+    "pattern": "[\\S\\s]*",
+    "subject": "abc",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 20,
+    "domain": 0,
+    "pattern": "(?P=same)?(?P<same>a)(?P<same>b)",
+    "subject": "ab",
+    "flags": 64,
+    "width": 8
+  },
+  {
+    "id": 21,
+    "domain": 0,
+    "pattern": "(*LIMIT_DEPTH=4294967280)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 22,
+    "domain": 0,
+    "pattern": "(*LIMIT_DEPTH=10)(*LIMIT_DEPTH=1000)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 23,
+    "domain": 0,
+    "pattern": "(*LIMIT_MATCH=10)(*LIMIT_MATCH=1000)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 24,
+    "domain": 0,
+    "pattern": "(*LIMIT_HEAP=10)(*LIMIT_HEAP=1000)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 25,
+    "domain": 0,
+    "pattern": "(*LIMIT_DEPTH=4294967289)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 26,
+    "domain": 0,
+    "pattern": "(?(VERSION>=999)yes)^bc",
+    "subject": "bc",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 27,
+    "domain": 0,
+    "pattern": "^a\\Rb",
+    "subject": "a\nb",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 28,
+    "domain": 0,
+    "pattern": "^a\\X41z",
+    "subject": "aa41z",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 29,
+    "domain": 0,
+    "pattern": "^\\P{Any}?X",
+    "subject": "X",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 30,
+    "domain": 0,
+    "pattern": "(?(DEFINE)(?<x>a?))^(?&x)a$",
+    "subject": "a",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 31,
+    "domain": 0,
+    "pattern": "(*scs:(1)a)?(a)",
+    "subject": "a",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 32,
+    "domain": 0,
+    "pattern": "(?(1)^()|^)*b",
+    "subject": "b",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 33,
+    "domain": 0,
+    "pattern": "^(?=a(*PRUNE)b)",
+    "subject": "ab",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 34,
+    "domain": 0,
+    "pattern": "^(?=a(*SKIP)b|ac)",
+    "subject": "ac",
+    "flags": 0,
+    "width": 8
+  },
+  {
+    "id": 35,
+    "domain": 0,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(*scs:(<x>)b)",
+    "subject": "ab",
+    "flags": 32,
+    "width": 8
+  },
+  {
+    "id": 36,
+    "domain": 0,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(?(R&x)b|c)",
+    "subject": "ac",
+    "flags": 32,
+    "width": 8
+  },
+  {
+    "id": 37,
+    "domain": 0,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(?(x)b|c)",
+    "subject": "ab",
+    "flags": 32,
+    "width": 8
+  },
+  {
+    "id": 38,
+    "domain": 0,
+    "pattern": "(?<x>.*)(*scs:(<x>)b)",
+    "subject": "ab",
+    "flags": 32,
+    "width": 8
+  },
+  {
+    "id": 39,
+    "domain": 1,
+    "pattern": "^(cow|)\\1(bell)",
+    "subject": "bell",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 40,
+    "domain": 1,
+    "pattern": "(?(?=(a))a)(b)",
+    "subject": "b",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 41,
+    "domain": 1,
+    "pattern": "a*(*ACCEPT)b",
+    "subject": "",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 42,
+    "domain": 1,
+    "pattern": "(?(?=^.*b)b|^)",
+    "subject": "b",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 43,
+    "domain": 1,
+    "pattern": "(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)",
+    "subject": "bbbb",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 44,
+    "domain": 1,
+    "pattern": "(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 45,
+    "domain": 1,
+    "pattern": "(?<DEFINE>b)(?(<DEFINE>)(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 46,
+    "domain": 1,
+    "pattern": "(?<DEFINE>b)(?('DEFINE')(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 47,
+    "domain": 1,
+    "pattern": "(a)(*scs:(1)b)*c",
+    "subject": "ac",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 48,
+    "domain": 1,
+    "pattern": "(?<x>a)(*scs:(<x>)b)*c",
+    "subject": "ac",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 49,
+    "domain": 1,
+    "pattern": "(?<x>a)(?(R&x)b|c)",
+    "subject": "ac",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 50,
+    "domain": 1,
+    "pattern": "(?J)(?<x>a)(?<x>b)(?(R&x)c|d)",
+    "subject": "abd",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 51,
+    "domain": 1,
+    "pattern": "^(a\\1?)(a\\1?)(a\\2?)(a\\3?)$",
+    "subject": "aaaa",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 52,
+    "domain": 1,
+    "pattern": "^(a|)\\1*b",
+    "subject": "b",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 53,
+    "domain": 1,
+    "pattern": "^(aa(bb)?)+$",
+    "subject": "aaaa",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 54,
+    "domain": 1,
+    "pattern": "^(a){2,}+(\\w)",
+    "subject": "aab",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 55,
+    "domain": 1,
+    "pattern": "^(a)(?1)+ab",
+    "subject": "aaaab",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 56,
+    "domain": 1,
+    "pattern": "^(x(y|(?1){2})z)",
+    "subject": "xyz",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 57,
+    "domain": 1,
+    "pattern": "(?>(*ACCEPT)b)c",
+    "subject": "",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 58,
+    "domain": 1,
+    "pattern": "[\\S\\s]*",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 59,
+    "domain": 1,
+    "pattern": "(?P=same)?(?P<same>a)(?P<same>b)",
+    "subject": "ab",
+    "flags": 524352,
+    "width": 8
+  },
+  {
+    "id": 60,
+    "domain": 1,
+    "pattern": "(*LIMIT_DEPTH=4294967280)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 61,
+    "domain": 1,
+    "pattern": "(*LIMIT_DEPTH=10)(*LIMIT_DEPTH=1000)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 62,
+    "domain": 1,
+    "pattern": "(*LIMIT_MATCH=10)(*LIMIT_MATCH=1000)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 63,
+    "domain": 1,
+    "pattern": "(*LIMIT_HEAP=10)(*LIMIT_HEAP=1000)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 64,
+    "domain": 1,
+    "pattern": "(*LIMIT_DEPTH=4294967289)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 65,
+    "domain": 1,
+    "pattern": "(?(VERSION>=999)yes)^bc",
+    "subject": "bc",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 66,
+    "domain": 1,
+    "pattern": "^a\\Rb",
+    "subject": "a\nb",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 67,
+    "domain": 1,
+    "pattern": "^a\\X41z",
+    "subject": "aa41z",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 68,
+    "domain": 1,
+    "pattern": "^\\P{Any}?X",
+    "subject": "X",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 69,
+    "domain": 1,
+    "pattern": "(?(DEFINE)(?<x>a?))^(?&x)a$",
+    "subject": "a",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 70,
+    "domain": 1,
+    "pattern": "(*scs:(1)a)?(a)",
+    "subject": "a",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 71,
+    "domain": 1,
+    "pattern": "(?(1)^()|^)*b",
+    "subject": "b",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 72,
+    "domain": 1,
+    "pattern": "^(?=a(*PRUNE)b)",
+    "subject": "ab",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 73,
+    "domain": 1,
+    "pattern": "^(?=a(*SKIP)b|ac)",
+    "subject": "ac",
+    "flags": 524288,
+    "width": 8
+  },
+  {
+    "id": 74,
+    "domain": 1,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(*scs:(<x>)b)",
+    "subject": "ab",
+    "flags": 524320,
+    "width": 8
+  },
+  {
+    "id": 75,
+    "domain": 1,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(?(R&x)b|c)",
+    "subject": "ac",
+    "flags": 524320,
+    "width": 8
+  },
+  {
+    "id": 76,
+    "domain": 1,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(?(x)b|c)",
+    "subject": "ab",
+    "flags": 524320,
+    "width": 8
+  },
+  {
+    "id": 77,
+    "domain": 1,
+    "pattern": "(?<x>.*)(*scs:(<x>)b)",
+    "subject": "ab",
+    "flags": 524320,
+    "width": 8
+  },
+  {
+    "id": 0,
+    "domain": 2,
+    "pattern": "^(cow|)\\1(bell)",
+    "subject": "bell",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 1,
+    "domain": 2,
+    "pattern": "(?(?=(a))a)(b)",
+    "subject": "b",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 2,
+    "domain": 2,
+    "pattern": "a*(*ACCEPT)b",
+    "subject": "",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 3,
+    "domain": 2,
+    "pattern": "(?(?=^.*b)b|^)",
+    "subject": "b",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 4,
+    "domain": 2,
+    "pattern": "(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)",
+    "subject": "bbbb",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 5,
+    "domain": 2,
+    "pattern": "(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 6,
+    "domain": 2,
+    "pattern": "(?<DEFINE>b)(?(<DEFINE>)(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 7,
+    "domain": 2,
+    "pattern": "(?<DEFINE>b)(?('DEFINE')(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 8,
+    "domain": 2,
+    "pattern": "(a)(*scs:(1)b)*c",
+    "subject": "ac",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 9,
+    "domain": 2,
+    "pattern": "(?<x>a)(*scs:(<x>)b)*c",
+    "subject": "ac",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 10,
+    "domain": 2,
+    "pattern": "(?<x>a)(?(R&x)b|c)",
+    "subject": "ac",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 11,
+    "domain": 2,
+    "pattern": "(?J)(?<x>a)(?<x>b)(?(R&x)c|d)",
+    "subject": "abd",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 12,
+    "domain": 2,
+    "pattern": "^(a\\1?)(a\\1?)(a\\2?)(a\\3?)$",
+    "subject": "aaaa",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 13,
+    "domain": 2,
+    "pattern": "^(a|)\\1*b",
+    "subject": "b",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 14,
+    "domain": 2,
+    "pattern": "^(aa(bb)?)+$",
+    "subject": "aaaa",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 15,
+    "domain": 2,
+    "pattern": "^(a){2,}+(\\w)",
+    "subject": "aab",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 16,
+    "domain": 2,
+    "pattern": "^(a)(?1)+ab",
+    "subject": "aaaab",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 17,
+    "domain": 2,
+    "pattern": "^(x(y|(?1){2})z)",
+    "subject": "xyz",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 18,
+    "domain": 2,
+    "pattern": "(?>(*ACCEPT)b)c",
+    "subject": "",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 19,
+    "domain": 2,
+    "pattern": "[\\S\\s]*",
+    "subject": "abc",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 20,
+    "domain": 2,
+    "pattern": "(?P=same)?(?P<same>a)(?P<same>b)",
+    "subject": "ab",
+    "flags": 64,
+    "width": 16
+  },
+  {
+    "id": 21,
+    "domain": 2,
+    "pattern": "(*LIMIT_DEPTH=4294967280)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 22,
+    "domain": 2,
+    "pattern": "(*LIMIT_DEPTH=10)(*LIMIT_DEPTH=1000)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 23,
+    "domain": 2,
+    "pattern": "(*LIMIT_MATCH=10)(*LIMIT_MATCH=1000)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 24,
+    "domain": 2,
+    "pattern": "(*LIMIT_HEAP=10)(*LIMIT_HEAP=1000)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 25,
+    "domain": 2,
+    "pattern": "(*LIMIT_DEPTH=4294967289)abc",
+    "subject": "abc",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 26,
+    "domain": 2,
+    "pattern": "(?(VERSION>=999)yes)^bc",
+    "subject": "bc",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 27,
+    "domain": 2,
+    "pattern": "^a\\Rb",
+    "subject": "a\nb",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 28,
+    "domain": 2,
+    "pattern": "^a\\X41z",
+    "subject": "aa41z",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 29,
+    "domain": 2,
+    "pattern": "^\\P{Any}?X",
+    "subject": "X",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 30,
+    "domain": 2,
+    "pattern": "(?(DEFINE)(?<x>a?))^(?&x)a$",
+    "subject": "a",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 31,
+    "domain": 2,
+    "pattern": "(*scs:(1)a)?(a)",
+    "subject": "a",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 32,
+    "domain": 2,
+    "pattern": "(?(1)^()|^)*b",
+    "subject": "b",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 33,
+    "domain": 2,
+    "pattern": "^(?=a(*PRUNE)b)",
+    "subject": "ab",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 34,
+    "domain": 2,
+    "pattern": "^(?=a(*SKIP)b|ac)",
+    "subject": "ac",
+    "flags": 0,
+    "width": 16
+  },
+  {
+    "id": 35,
+    "domain": 2,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(*scs:(<x>)b)",
+    "subject": "ab",
+    "flags": 32,
+    "width": 16
+  },
+  {
+    "id": 36,
+    "domain": 2,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(?(R&x)b|c)",
+    "subject": "ac",
+    "flags": 32,
+    "width": 16
+  },
+  {
+    "id": 37,
+    "domain": 2,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(?(x)b|c)",
+    "subject": "ab",
+    "flags": 32,
+    "width": 16
+  },
+  {
+    "id": 38,
+    "domain": 2,
+    "pattern": "(?<x>.*)(*scs:(<x>)b)",
+    "subject": "ab",
+    "flags": 32,
+    "width": 16
+  },
+  {
+    "id": 39,
+    "domain": 3,
+    "pattern": "^(cow|)\\1(bell)",
+    "subject": "bell",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 40,
+    "domain": 3,
+    "pattern": "(?(?=(a))a)(b)",
+    "subject": "b",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 41,
+    "domain": 3,
+    "pattern": "a*(*ACCEPT)b",
+    "subject": "",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 42,
+    "domain": 3,
+    "pattern": "(?(?=^.*b)b|^)",
+    "subject": "b",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 43,
+    "domain": 3,
+    "pattern": "(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)",
+    "subject": "bbbb",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 44,
+    "domain": 3,
+    "pattern": "(?<DEFINE>b)(?(DEFINE)(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 45,
+    "domain": 3,
+    "pattern": "(?<DEFINE>b)(?(<DEFINE>)(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 46,
+    "domain": 3,
+    "pattern": "(?<DEFINE>b)(?('DEFINE')(a+))(?&DEFINE)",
+    "subject": "baaab",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 47,
+    "domain": 3,
+    "pattern": "(a)(*scs:(1)b)*c",
+    "subject": "ac",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 48,
+    "domain": 3,
+    "pattern": "(?<x>a)(*scs:(<x>)b)*c",
+    "subject": "ac",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 49,
+    "domain": 3,
+    "pattern": "(?<x>a)(?(R&x)b|c)",
+    "subject": "ac",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 50,
+    "domain": 3,
+    "pattern": "(?J)(?<x>a)(?<x>b)(?(R&x)c|d)",
+    "subject": "abd",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 51,
+    "domain": 3,
+    "pattern": "^(a\\1?)(a\\1?)(a\\2?)(a\\3?)$",
+    "subject": "aaaa",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 52,
+    "domain": 3,
+    "pattern": "^(a|)\\1*b",
+    "subject": "b",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 53,
+    "domain": 3,
+    "pattern": "^(aa(bb)?)+$",
+    "subject": "aaaa",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 54,
+    "domain": 3,
+    "pattern": "^(a){2,}+(\\w)",
+    "subject": "aab",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 55,
+    "domain": 3,
+    "pattern": "^(a)(?1)+ab",
+    "subject": "aaaab",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 56,
+    "domain": 3,
+    "pattern": "^(x(y|(?1){2})z)",
+    "subject": "xyz",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 57,
+    "domain": 3,
+    "pattern": "(?>(*ACCEPT)b)c",
+    "subject": "",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 58,
+    "domain": 3,
+    "pattern": "[\\S\\s]*",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 59,
+    "domain": 3,
+    "pattern": "(?P=same)?(?P<same>a)(?P<same>b)",
+    "subject": "ab",
+    "flags": 524352,
+    "width": 16
+  },
+  {
+    "id": 60,
+    "domain": 3,
+    "pattern": "(*LIMIT_DEPTH=4294967280)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 61,
+    "domain": 3,
+    "pattern": "(*LIMIT_DEPTH=10)(*LIMIT_DEPTH=1000)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 62,
+    "domain": 3,
+    "pattern": "(*LIMIT_MATCH=10)(*LIMIT_MATCH=1000)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 63,
+    "domain": 3,
+    "pattern": "(*LIMIT_HEAP=10)(*LIMIT_HEAP=1000)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 64,
+    "domain": 3,
+    "pattern": "(*LIMIT_DEPTH=4294967289)abc",
+    "subject": "abc",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 65,
+    "domain": 3,
+    "pattern": "(?(VERSION>=999)yes)^bc",
+    "subject": "bc",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 66,
+    "domain": 3,
+    "pattern": "^a\\Rb",
+    "subject": "a\nb",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 67,
+    "domain": 3,
+    "pattern": "^a\\X41z",
+    "subject": "aa41z",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 68,
+    "domain": 3,
+    "pattern": "^\\P{Any}?X",
+    "subject": "X",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 69,
+    "domain": 3,
+    "pattern": "(?(DEFINE)(?<x>a?))^(?&x)a$",
+    "subject": "a",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 70,
+    "domain": 3,
+    "pattern": "(*scs:(1)a)?(a)",
+    "subject": "a",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 71,
+    "domain": 3,
+    "pattern": "(?(1)^()|^)*b",
+    "subject": "b",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 72,
+    "domain": 3,
+    "pattern": "^(?=a(*PRUNE)b)",
+    "subject": "ab",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 73,
+    "domain": 3,
+    "pattern": "^(?=a(*SKIP)b|ac)",
+    "subject": "ac",
+    "flags": 524288,
+    "width": 16
+  },
+  {
+    "id": 74,
+    "domain": 3,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(*scs:(<x>)b)",
+    "subject": "ab",
+    "flags": 524320,
+    "width": 16
+  },
+  {
+    "id": 75,
+    "domain": 3,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(?(R&x)b|c)",
+    "subject": "ac",
+    "flags": 524320,
+    "width": 16
+  },
+  {
+    "id": 76,
+    "domain": 3,
+    "pattern": "(?J)(?<x>.*)(?<x>a)(?(x)b|c)",
+    "subject": "ab",
+    "flags": 524320,
+    "width": 16
+  },
+  {
+    "id": 77,
+    "domain": 3,
+    "pattern": "(?<x>.*)(*scs:(<x>)b)",
+    "subject": "ab",
+    "flags": 524320,
+    "width": 16
+  }
+]

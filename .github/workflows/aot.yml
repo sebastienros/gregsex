@@ -1,0 +1,80 @@
+name: NativeAOT and Trimming Qualification
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  aot-matrix:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            rid: linux-x64
+          - os: ubuntu-24.04-arm
+            rid: linux-arm64
+          - os: windows-latest
+            rid: win-x64
+          - os: macos-15-intel
+            rid: osx-x64
+          - os: macos-latest
+            rid: osx-arm64
+
+    runs-on: ${{ matrix.os }}
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5.4.0
+        with:
+          dotnet-version: |
+            10.0.x
+          global-json-file: global.json
+          check-latest: false
+
+      - name: Publish and run NativeAOT smoke (all profiles + Auto + GeneratedPattern)
+        shell: bash
+        run: |
+          set -euo pipefail
+          dotnet publish test/GregsEx.AotSmoke/GregsEx.AotSmoke.csproj -c Release -r ${{ matrix.rid }} -p:PublishAot=true -p:TreatWarningsAsErrors=true -p:IlcTreatWarningsAsErrors=true -o artifacts/aot-smoke
+          ./artifacts/aot-smoke/GregsEx.AotSmoke
+
+      - name: Verify explicit Compile() surfaces IL3050 and IL2026 when unsuppressed
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          dotnet build test/GregsEx.AotDiagnostics/GregsEx.AotDiagnostics.csproj -c Release -t:Rebuild -r ${{ matrix.rid }} -p:DiagnosticMode=Unsuppressed -p:PublishAot=true 2>&1 | tee artifacts/aot-diag.log
+          grep -q "warning IL3050" artifacts/aot-diag.log
+          grep -q "warning IL2026" artifacts/aot-diag.log
+
+      - name: Publish and run NativeAOT negative runtime guard fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          dotnet publish test/GregsEx.AotDiagnostics/GregsEx.AotDiagnostics.csproj -c Release -r ${{ matrix.rid }} -p:PublishAot=true -p:TreatWarningsAsErrors=true -p:IlcTreatWarningsAsErrors=true -o artifacts/aot-diagnostics
+          ./artifacts/aot-diagnostics/GregsEx.AotDiagnostics
+
+      - name: Publish and run trimmed JIT smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          dotnet publish test/GregsEx.TrimSmoke/GregsEx.TrimSmoke.csproj -c Release -r ${{ matrix.rid }} -p:PublishTrimmed=true -p:TreatWarningsAsErrors=true -o artifacts/trim-smoke
+          ./artifacts/trim-smoke/GregsEx.TrimSmoke

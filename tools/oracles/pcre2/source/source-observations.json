@@ -1,0 +1,5002 @@
+{
+  "schema_version": "1.0",
+  "status": "source_observation_before_implementation",
+  "commit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "definitions": [
+    {
+      "name": "PCRE2_H_IDEMPOTENT_GUARD",
+      "value": "",
+      "source_line": 40,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_MAJOR",
+      "value": "10",
+      "source_line": 44,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_MINOR",
+      "value": "46",
+      "source_line": 45,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_PRERELEASE",
+      "value": "",
+      "source_line": 46,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_DATE",
+      "value": "2025-08-27",
+      "source_line": 47,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CALL_CONVENTION",
+      "value": "",
+      "source_line": 81,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_ANCHORED",
+      "value": "0x80000000u",
+      "source_line": 105,
+      "category": "common_compile_match",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_NO_UTF_CHECK",
+      "value": "0x40000000u",
+      "source_line": 106,
+      "category": "common_compile_match",
+      "recommended_disposition": "admit-defined-valid-input-domain; checked error beyond native defined domain",
+      "inventory_id": "PC-023"
+    },
+    {
+      "name": "PCRE2_ENDANCHORED",
+      "value": "0x20000000u",
+      "source_line": 107,
+      "category": "common_compile_match",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_ALLOW_EMPTY_CLASS",
+      "value": "0x00000001u  /* C       */",
+      "source_line": 119,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_ALT_BSUX",
+      "value": "0x00000002u  /* C       */",
+      "source_line": 120,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_AUTO_CALLOUT",
+      "value": "0x00000004u  /* C       */",
+      "source_line": 121,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_CASELESS",
+      "value": "0x00000008u  /* C       */",
+      "source_line": 122,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_DOLLAR_ENDONLY",
+      "value": "0x00000010u  /*   J M D */",
+      "source_line": 123,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_DOTALL",
+      "value": "0x00000020u  /* C       */",
+      "source_line": 124,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_DUPNAMES",
+      "value": "0x00000040u  /* C       */",
+      "source_line": 125,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTENDED",
+      "value": "0x00000080u  /* C       */",
+      "source_line": 126,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_FIRSTLINE",
+      "value": "0x00000100u  /*   J M D */",
+      "source_line": 127,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_MATCH_UNSET_BACKREF",
+      "value": "0x00000200u  /* C J M   */",
+      "source_line": 128,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_MULTILINE",
+      "value": "0x00000400u  /* C       */",
+      "source_line": 129,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_NEVER_UCP",
+      "value": "0x00000800u  /* C       */",
+      "source_line": 130,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_NEVER_UTF",
+      "value": "0x00001000u  /* C       */",
+      "source_line": 131,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_NO_AUTO_CAPTURE",
+      "value": "0x00002000u  /* C       */",
+      "source_line": 132,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_NO_AUTO_POSSESS",
+      "value": "0x00004000u  /* C       */",
+      "source_line": 133,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_NO_DOTSTAR_ANCHOR",
+      "value": "0x00008000u  /* C       */",
+      "source_line": 134,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_NO_START_OPTIMIZE",
+      "value": "0x00010000u  /*   J M D */",
+      "source_line": 135,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_UCP",
+      "value": "0x00020000u  /* C J M D */",
+      "source_line": 136,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_UNGREEDY",
+      "value": "0x00040000u  /* C       */",
+      "source_line": 137,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_UTF",
+      "value": "0x00080000u  /* C J M D */",
+      "source_line": 138,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_NEVER_BACKSLASH_C",
+      "value": "0x00100000u  /* C       */",
+      "source_line": 139,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_ALT_CIRCUMFLEX",
+      "value": "0x00200000u  /*   J M D */",
+      "source_line": 140,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_ALT_VERBNAMES",
+      "value": "0x00400000u  /* C       */",
+      "source_line": 141,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_USE_OFFSET_LIMIT",
+      "value": "0x00800000u  /*   J M D */",
+      "source_line": 142,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTENDED_MORE",
+      "value": "0x01000000u  /* C       */",
+      "source_line": 143,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_LITERAL",
+      "value": "0x02000000u  /* C       */",
+      "source_line": 144,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_MATCH_INVALID_UTF",
+      "value": "0x04000000u  /*   J M D */",
+      "source_line": 145,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_ALT_EXTENDED_CLASS",
+      "value": "0x08000000u  /* C       */",
+      "source_line": 146,
+      "category": "compile",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ALLOW_SURROGATE_ESCAPES",
+      "value": "0x00000001u  /* C */",
+      "source_line": 150,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_BAD_ESCAPE_IS_LITERAL",
+      "value": "0x00000002u  /* C */",
+      "source_line": 151,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_MATCH_WORD",
+      "value": "0x00000004u  /* C */",
+      "source_line": 152,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_MATCH_LINE",
+      "value": "0x00000008u  /* C */",
+      "source_line": 153,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ESCAPED_CR_IS_LF",
+      "value": "0x00000010u  /* C */",
+      "source_line": 154,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ALT_BSUX",
+      "value": "0x00000020u  /* C */",
+      "source_line": 155,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ALLOW_LOOKAROUND_BSK",
+      "value": "0x00000040u  /* C */",
+      "source_line": 156,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_CASELESS_RESTRICT",
+      "value": "0x00000080u  /* C */",
+      "source_line": 157,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ASCII_BSD",
+      "value": "0x00000100u  /* C */",
+      "source_line": 158,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ASCII_BSS",
+      "value": "0x00000200u  /* C */",
+      "source_line": 159,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ASCII_BSW",
+      "value": "0x00000400u  /* C */",
+      "source_line": 160,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ASCII_POSIX",
+      "value": "0x00000800u  /* C */",
+      "source_line": 161,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_ASCII_DIGIT",
+      "value": "0x00001000u  /* C */",
+      "source_line": 162,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_PYTHON_OCTAL",
+      "value": "0x00002000u  /* C */",
+      "source_line": 163,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_NO_BS0",
+      "value": "0x00004000u  /* C */",
+      "source_line": 164,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_NEVER_CALLOUT",
+      "value": "0x00008000u  /* C */",
+      "source_line": 165,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_EXTRA_TURKISH_CASING",
+      "value": "0x00010000u  /* C */",
+      "source_line": 166,
+      "category": "compile_extra",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-021"
+    },
+    {
+      "name": "PCRE2_JIT_COMPLETE",
+      "value": "0x00000001u  /* For full matching */",
+      "source_line": 170,
+      "category": "native_jit_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_JIT_PARTIAL_SOFT",
+      "value": "0x00000002u",
+      "source_line": 171,
+      "category": "native_jit_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_JIT_PARTIAL_HARD",
+      "value": "0x00000004u",
+      "source_line": 172,
+      "category": "native_jit_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_JIT_INVALID_UTF",
+      "value": "0x00000100u",
+      "source_line": 173,
+      "category": "native_jit_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_JIT_TEST_ALLOC",
+      "value": "0x00000200u",
+      "source_line": 174,
+      "category": "native_jit_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_NOTBOL",
+      "value": "0x00000001u",
+      "source_line": 182,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_NOTEOL",
+      "value": "0x00000002u",
+      "source_line": 183,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_NOTEMPTY",
+      "value": "0x00000004u  /* ) These two must be kept */",
+      "source_line": 184,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_NOTEMPTY_ATSTART",
+      "value": "0x00000008u  /* ) adjacent to each other. */",
+      "source_line": 185,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_PARTIAL_SOFT",
+      "value": "0x00000010u",
+      "source_line": 186,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_PARTIAL_HARD",
+      "value": "0x00000020u",
+      "source_line": 187,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_DFA_RESTART",
+      "value": "0x00000040u  /* pcre2_dfa_match() only */",
+      "source_line": 188,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "excluded-DFA",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_DFA_SHORTEST",
+      "value": "0x00000080u  /* pcre2_dfa_match() only */",
+      "source_line": 189,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "excluded-DFA",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_GLOBAL",
+      "value": "0x00000100u  /* pcre2_substitute() only */",
+      "source_line": 190,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-typed-substitution",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_EXTENDED",
+      "value": "0x00000200u  /* pcre2_substitute() only */",
+      "source_line": 191,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-typed-substitution",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_UNSET_EMPTY",
+      "value": "0x00000400u  /* pcre2_substitute() only */",
+      "source_line": 192,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-typed-substitution",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_UNKNOWN_UNSET",
+      "value": "0x00000800u  /* pcre2_substitute() only */",
+      "source_line": 193,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-typed-substitution",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_OVERFLOW_LENGTH",
+      "value": "0x00001000u  /* pcre2_substitute() only */",
+      "source_line": 194,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-typed-substitution",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_NO_JIT",
+      "value": "0x00002000u  /* not for pcre2_dfa_match() */",
+      "source_line": 195,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_COPY_MATCHED_SUBJECT",
+      "value": "0x00004000u",
+      "source_line": 196,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_LITERAL",
+      "value": "0x00008000u  /* pcre2_substitute() only */",
+      "source_line": 197,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-typed-substitution",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_MATCHED",
+      "value": "0x00010000u  /* pcre2_substitute() only */",
+      "source_line": 198,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-typed-substitution",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_REPLACEMENT_ONLY",
+      "value": "0x00020000u  /* pcre2_substitute() only */",
+      "source_line": 199,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-typed-substitution",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_DISABLE_RECURSELOOP_CHECK",
+      "value": "0x00040000u  /* not for pcre2_dfa_match() or pcre2_jit_match() */",
+      "source_line": 200,
+      "category": "match_substitute_dfa",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "PCRE2_CONVERT_UTF",
+      "value": "0x00000001u",
+      "source_line": 204,
+      "category": "conversion_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CONVERT_NO_UTF_CHECK",
+      "value": "0x00000002u",
+      "source_line": 205,
+      "category": "conversion_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CONVERT_POSIX_BASIC",
+      "value": "0x00000004u",
+      "source_line": 206,
+      "category": "conversion_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CONVERT_POSIX_EXTENDED",
+      "value": "0x00000008u",
+      "source_line": 207,
+      "category": "conversion_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CONVERT_GLOB",
+      "value": "0x00000010u",
+      "source_line": 208,
+      "category": "conversion_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CONVERT_GLOB_NO_WILD_SEPARATOR",
+      "value": "0x00000030u",
+      "source_line": 209,
+      "category": "conversion_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CONVERT_GLOB_NO_STARSTAR",
+      "value": "0x00000050u",
+      "source_line": 210,
+      "category": "conversion_excluded",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_NEWLINE_CR",
+      "value": "1",
+      "source_line": 216,
+      "category": "newline_bsr",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-003"
+    },
+    {
+      "name": "PCRE2_NEWLINE_LF",
+      "value": "2",
+      "source_line": 217,
+      "category": "newline_bsr",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-003"
+    },
+    {
+      "name": "PCRE2_NEWLINE_CRLF",
+      "value": "3",
+      "source_line": 218,
+      "category": "newline_bsr",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-003"
+    },
+    {
+      "name": "PCRE2_NEWLINE_ANY",
+      "value": "4",
+      "source_line": 219,
+      "category": "newline_bsr",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-003"
+    },
+    {
+      "name": "PCRE2_NEWLINE_ANYCRLF",
+      "value": "5",
+      "source_line": 220,
+      "category": "newline_bsr",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-003"
+    },
+    {
+      "name": "PCRE2_NEWLINE_NUL",
+      "value": "6",
+      "source_line": 221,
+      "category": "newline_bsr",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-003"
+    },
+    {
+      "name": "PCRE2_BSR_UNICODE",
+      "value": "1",
+      "source_line": 223,
+      "category": "newline_bsr",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-003"
+    },
+    {
+      "name": "PCRE2_BSR_ANYCRLF",
+      "value": "2",
+      "source_line": 224,
+      "category": "newline_bsr",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-003"
+    },
+    {
+      "name": "PCRE2_ERROR_END_BACKSLASH",
+      "value": "101",
+      "source_line": 229,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_END_BACKSLASH_C",
+      "value": "102",
+      "source_line": 230,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNKNOWN_ESCAPE",
+      "value": "103",
+      "source_line": 231,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_QUANTIFIER_OUT_OF_ORDER",
+      "value": "104",
+      "source_line": 232,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_QUANTIFIER_TOO_BIG",
+      "value": "105",
+      "source_line": 233,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MISSING_SQUARE_BRACKET",
+      "value": "106",
+      "source_line": 234,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ESCAPE_INVALID_IN_CLASS",
+      "value": "107",
+      "source_line": 235,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CLASS_RANGE_ORDER",
+      "value": "108",
+      "source_line": 236,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_QUANTIFIER_INVALID",
+      "value": "109",
+      "source_line": 237,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_UNEXPECTED_REPEAT",
+      "value": "110",
+      "source_line": 238,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INVALID_AFTER_PARENS_QUERY",
+      "value": "111",
+      "source_line": 239,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_POSIX_CLASS_NOT_IN_CLASS",
+      "value": "112",
+      "source_line": 240,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_POSIX_NO_SUPPORT_COLLATING",
+      "value": "113",
+      "source_line": 241,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MISSING_CLOSING_PARENTHESIS",
+      "value": "114",
+      "source_line": 242,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BAD_SUBPATTERN_REFERENCE",
+      "value": "115",
+      "source_line": 243,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_NULL_PATTERN",
+      "value": "116",
+      "source_line": 244,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BAD_OPTIONS",
+      "value": "117",
+      "source_line": 245,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MISSING_COMMENT_CLOSING",
+      "value": "118",
+      "source_line": 246,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PARENTHESES_NEST_TOO_DEEP",
+      "value": "119",
+      "source_line": 247,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PATTERN_TOO_LARGE",
+      "value": "120",
+      "source_line": 248,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_HEAP_FAILED",
+      "value": "121",
+      "source_line": 249,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNMATCHED_CLOSING_PARENTHESIS",
+      "value": "122",
+      "source_line": 250,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_CODE_OVERFLOW",
+      "value": "123",
+      "source_line": 251,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MISSING_CONDITION_CLOSING",
+      "value": "124",
+      "source_line": 252,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_LOOKBEHIND_NOT_FIXED_LENGTH",
+      "value": "125",
+      "source_line": 253,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ZERO_RELATIVE_REFERENCE",
+      "value": "126",
+      "source_line": 254,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_TOO_MANY_CONDITION_BRANCHES",
+      "value": "127",
+      "source_line": 255,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CONDITION_ASSERTION_EXPECTED",
+      "value": "128",
+      "source_line": 256,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BAD_RELATIVE_REFERENCE",
+      "value": "129",
+      "source_line": 257,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNKNOWN_POSIX_CLASS",
+      "value": "130",
+      "source_line": 258,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_STUDY_ERROR",
+      "value": "131",
+      "source_line": 259,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNICODE_NOT_SUPPORTED",
+      "value": "132",
+      "source_line": 260,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PARENTHESES_STACK_CHECK",
+      "value": "133",
+      "source_line": 261,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CODE_POINT_TOO_BIG",
+      "value": "134",
+      "source_line": 262,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_LOOKBEHIND_TOO_COMPLICATED",
+      "value": "135",
+      "source_line": 263,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_LOOKBEHIND_INVALID_BACKSLASH_C",
+      "value": "136",
+      "source_line": 264,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNSUPPORTED_ESCAPE_SEQUENCE",
+      "value": "137",
+      "source_line": 265,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CALLOUT_NUMBER_TOO_BIG",
+      "value": "138",
+      "source_line": 266,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MISSING_CALLOUT_CLOSING",
+      "value": "139",
+      "source_line": 267,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ESCAPE_INVALID_IN_VERB",
+      "value": "140",
+      "source_line": 268,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNRECOGNIZED_AFTER_QUERY_P",
+      "value": "141",
+      "source_line": 269,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MISSING_NAME_TERMINATOR",
+      "value": "142",
+      "source_line": 270,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DUPLICATE_SUBPATTERN_NAME",
+      "value": "143",
+      "source_line": 271,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INVALID_SUBPATTERN_NAME",
+      "value": "144",
+      "source_line": 272,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNICODE_PROPERTIES_UNAVAILABLE",
+      "value": "145",
+      "source_line": 273,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MALFORMED_UNICODE_PROPERTY",
+      "value": "146",
+      "source_line": 274,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNKNOWN_UNICODE_PROPERTY",
+      "value": "147",
+      "source_line": 275,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_SUBPATTERN_NAME_TOO_LONG",
+      "value": "148",
+      "source_line": 276,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_TOO_MANY_NAMED_SUBPATTERNS",
+      "value": "149",
+      "source_line": 277,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CLASS_INVALID_RANGE",
+      "value": "150",
+      "source_line": 278,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_OCTAL_BYTE_TOO_BIG",
+      "value": "151",
+      "source_line": 279,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_OVERRAN_WORKSPACE",
+      "value": "152",
+      "source_line": 280,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_MISSING_SUBPATTERN",
+      "value": "153",
+      "source_line": 281,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DEFINE_TOO_MANY_BRANCHES",
+      "value": "154",
+      "source_line": 282,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_O_MISSING_BRACE",
+      "value": "155",
+      "source_line": 283,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_UNKNOWN_NEWLINE",
+      "value": "156",
+      "source_line": 284,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_G_SYNTAX",
+      "value": "157",
+      "source_line": 285,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PARENS_QUERY_R_MISSING_CLOSING",
+      "value": "158",
+      "source_line": 286,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_VERB_ARGUMENT_NOT_ALLOWED",
+      "value": "159",
+      "source_line": 288,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_VERB_UNKNOWN",
+      "value": "160",
+      "source_line": 289,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_SUBPATTERN_NUMBER_TOO_BIG",
+      "value": "161",
+      "source_line": 290,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_SUBPATTERN_NAME_EXPECTED",
+      "value": "162",
+      "source_line": 291,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_PARSED_OVERFLOW",
+      "value": "163",
+      "source_line": 292,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INVALID_OCTAL",
+      "value": "164",
+      "source_line": 293,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_SUBPATTERN_NAMES_MISMATCH",
+      "value": "165",
+      "source_line": 294,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MARK_MISSING_ARGUMENT",
+      "value": "166",
+      "source_line": 295,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INVALID_HEXADECIMAL",
+      "value": "167",
+      "source_line": 296,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_C_SYNTAX",
+      "value": "168",
+      "source_line": 297,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_K_SYNTAX",
+      "value": "169",
+      "source_line": 298,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_BAD_CODE_LOOKBEHINDS",
+      "value": "170",
+      "source_line": 299,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_N_IN_CLASS",
+      "value": "171",
+      "source_line": 300,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CALLOUT_STRING_TOO_LONG",
+      "value": "172",
+      "source_line": 301,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNICODE_DISALLOWED_CODE_POINT",
+      "value": "173",
+      "source_line": 302,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF_IS_DISABLED",
+      "value": "174",
+      "source_line": 303,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UCP_IS_DISABLED",
+      "value": "175",
+      "source_line": 304,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_VERB_NAME_TOO_LONG",
+      "value": "176",
+      "source_line": 305,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_U_CODE_POINT_TOO_BIG",
+      "value": "177",
+      "source_line": 306,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MISSING_OCTAL_OR_HEX_DIGITS",
+      "value": "178",
+      "source_line": 307,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_VERSION_CONDITION_SYNTAX",
+      "value": "179",
+      "source_line": 308,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_BAD_CODE_AUTO_POSSESS",
+      "value": "180",
+      "source_line": 309,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CALLOUT_NO_STRING_DELIMITER",
+      "value": "181",
+      "source_line": 310,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CALLOUT_BAD_STRING_DELIMITER",
+      "value": "182",
+      "source_line": 311,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_C_CALLER_DISABLED",
+      "value": "183",
+      "source_line": 312,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_QUERY_BARJX_NEST_TOO_DEEP",
+      "value": "184",
+      "source_line": 313,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_C_LIBRARY_DISABLED",
+      "value": "185",
+      "source_line": 314,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PATTERN_TOO_COMPLICATED",
+      "value": "186",
+      "source_line": 315,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_LOOKBEHIND_TOO_LONG",
+      "value": "187",
+      "source_line": 316,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PATTERN_STRING_TOO_LONG",
+      "value": "188",
+      "source_line": 317,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_BAD_CODE",
+      "value": "189",
+      "source_line": 318,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_BAD_CODE_IN_SKIP",
+      "value": "190",
+      "source_line": 319,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_NO_SURROGATES_IN_UTF16",
+      "value": "191",
+      "source_line": 320,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BAD_LITERAL_OPTIONS",
+      "value": "192",
+      "source_line": 321,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_SUPPORTED_ONLY_IN_UNICODE",
+      "value": "193",
+      "source_line": 322,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INVALID_HYPHEN_IN_OPTIONS",
+      "value": "194",
+      "source_line": 323,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ALPHA_ASSERTION_UNKNOWN",
+      "value": "195",
+      "source_line": 324,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_SCRIPT_RUN_NOT_AVAILABLE",
+      "value": "196",
+      "source_line": 325,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_TOO_MANY_CAPTURES",
+      "value": "197",
+      "source_line": 326,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MISSING_OCTAL_DIGIT",
+      "value": "198",
+      "source_line": 327,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BACKSLASH_K_IN_LOOKAROUND",
+      "value": "199",
+      "source_line": 328,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MAX_VAR_LOOKBEHIND_EXCEEDED",
+      "value": "200",
+      "source_line": 329,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PATTERN_COMPILED_SIZE_TOO_BIG",
+      "value": "201",
+      "source_line": 330,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_OVERSIZE_PYTHON_OCTAL",
+      "value": "202",
+      "source_line": 331,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CALLOUT_CALLER_DISABLED",
+      "value": "203",
+      "source_line": 332,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_EXTRA_CASING_REQUIRES_UNICODE",
+      "value": "204",
+      "source_line": 333,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_TURKISH_CASING_REQUIRES_UTF",
+      "value": "205",
+      "source_line": 334,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_EXTRA_CASING_INCOMPATIBLE",
+      "value": "206",
+      "source_line": 335,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ECLASS_NEST_TOO_DEEP",
+      "value": "207",
+      "source_line": 336,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ECLASS_INVALID_OPERATOR",
+      "value": "208",
+      "source_line": 337,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ECLASS_UNEXPECTED_OPERATOR",
+      "value": "209",
+      "source_line": 338,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ECLASS_EXPECTED_OPERAND",
+      "value": "210",
+      "source_line": 339,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ECLASS_MIXED_OPERATORS",
+      "value": "211",
+      "source_line": 340,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_ECLASS_HINT_SQUARE_BRACKET",
+      "value": "212",
+      "source_line": 341,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PERL_ECLASS_UNEXPECTED_EXPR",
+      "value": "213",
+      "source_line": 342,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PERL_ECLASS_EMPTY_EXPR",
+      "value": "214",
+      "source_line": 343,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PERL_ECLASS_MISSING_CLOSE",
+      "value": "215",
+      "source_line": 344,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PERL_ECLASS_UNEXPECTED_CHAR",
+      "value": "216",
+      "source_line": 345,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_NOMATCH",
+      "value": "(-1)",
+      "source_line": 349,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_PARTIAL",
+      "value": "(-2)",
+      "source_line": 350,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR1",
+      "value": "(-3)",
+      "source_line": 354,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR2",
+      "value": "(-4)",
+      "source_line": 355,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR3",
+      "value": "(-5)",
+      "source_line": 356,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR4",
+      "value": "(-6)",
+      "source_line": 357,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR5",
+      "value": "(-7)",
+      "source_line": 358,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR6",
+      "value": "(-8)",
+      "source_line": 359,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR7",
+      "value": "(-9)",
+      "source_line": 360,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR8",
+      "value": "(-10)",
+      "source_line": 361,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR9",
+      "value": "(-11)",
+      "source_line": 362,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR10",
+      "value": "(-12)",
+      "source_line": 363,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR11",
+      "value": "(-13)",
+      "source_line": 364,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR12",
+      "value": "(-14)",
+      "source_line": 365,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR13",
+      "value": "(-15)",
+      "source_line": 366,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR14",
+      "value": "(-16)",
+      "source_line": 367,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR15",
+      "value": "(-17)",
+      "source_line": 368,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR16",
+      "value": "(-18)",
+      "source_line": 369,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR17",
+      "value": "(-19)",
+      "source_line": 370,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR18",
+      "value": "(-20)",
+      "source_line": 371,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR19",
+      "value": "(-21)",
+      "source_line": 372,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR20",
+      "value": "(-22)",
+      "source_line": 373,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF8_ERR21",
+      "value": "(-23)",
+      "source_line": 374,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF16_ERR1",
+      "value": "(-24)",
+      "source_line": 378,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF16_ERR2",
+      "value": "(-25)",
+      "source_line": 379,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF16_ERR3",
+      "value": "(-26)",
+      "source_line": 380,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF32_ERR1",
+      "value": "(-27)",
+      "source_line": 384,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UTF32_ERR2",
+      "value": "(-28)",
+      "source_line": 385,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADDATA",
+      "value": "(-29)",
+      "source_line": 392,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MIXEDTABLES",
+      "value": "(-30)  /* Name was changed */",
+      "source_line": 393,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADMAGIC",
+      "value": "(-31)",
+      "source_line": 394,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADMODE",
+      "value": "(-32)",
+      "source_line": 395,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADOFFSET",
+      "value": "(-33)",
+      "source_line": 396,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADOPTION",
+      "value": "(-34)",
+      "source_line": 397,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADREPLACEMENT",
+      "value": "(-35)",
+      "source_line": 398,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADUTFOFFSET",
+      "value": "(-36)",
+      "source_line": 399,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CALLOUT",
+      "value": "(-37)  /* Never used by PCRE2 itself */",
+      "source_line": 400,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DFA_BADRESTART",
+      "value": "(-38)",
+      "source_line": 401,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DFA_RECURSE",
+      "value": "(-39)",
+      "source_line": 402,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DFA_UCOND",
+      "value": "(-40)",
+      "source_line": 403,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DFA_UFUNC",
+      "value": "(-41)",
+      "source_line": 404,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DFA_UITEM",
+      "value": "(-42)",
+      "source_line": 405,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DFA_WSSIZE",
+      "value": "(-43)",
+      "source_line": 406,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL",
+      "value": "(-44)",
+      "source_line": 407,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_JIT_BADOPTION",
+      "value": "(-45)",
+      "source_line": 408,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_JIT_STACKLIMIT",
+      "value": "(-46)",
+      "source_line": 409,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_MATCHLIMIT",
+      "value": "(-47)",
+      "source_line": 410,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_NOMEMORY",
+      "value": "(-48)",
+      "source_line": 411,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_NOSUBSTRING",
+      "value": "(-49)",
+      "source_line": 412,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_NOUNIQUESUBSTRING",
+      "value": "(-50)",
+      "source_line": 413,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_NULL",
+      "value": "(-51)",
+      "source_line": 414,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_RECURSELOOP",
+      "value": "(-52)",
+      "source_line": 415,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DEPTHLIMIT",
+      "value": "(-53)",
+      "source_line": 416,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_RECURSIONLIMIT",
+      "value": "(-53)  /* Obsolete synonym */",
+      "source_line": 417,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNAVAILABLE",
+      "value": "(-54)",
+      "source_line": 418,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_UNSET",
+      "value": "(-55)",
+      "source_line": 419,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADOFFSETLIMIT",
+      "value": "(-56)",
+      "source_line": 420,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADREPESCAPE",
+      "value": "(-57)",
+      "source_line": 421,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_REPMISSINGBRACE",
+      "value": "(-58)",
+      "source_line": 422,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADSUBSTITUTION",
+      "value": "(-59)",
+      "source_line": 423,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADSUBSPATTERN",
+      "value": "(-60)",
+      "source_line": 424,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_TOOMANYREPLACE",
+      "value": "(-61)",
+      "source_line": 425,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_BADSERIALIZEDDATA",
+      "value": "(-62)",
+      "source_line": 426,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_HEAPLIMIT",
+      "value": "(-63)",
+      "source_line": 427,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_CONVERT_SYNTAX",
+      "value": "(-64)",
+      "source_line": 428,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INTERNAL_DUPMATCH",
+      "value": "(-65)",
+      "source_line": 429,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_DFA_UINVALID_UTF",
+      "value": "(-66)",
+      "source_line": 430,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_INVALIDOFFSET",
+      "value": "(-67)",
+      "source_line": 431,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_JIT_UNSUPPORTED",
+      "value": "(-68)",
+      "source_line": 432,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_REPLACECASE",
+      "value": "(-69)",
+      "source_line": 433,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_ERROR_TOOLARGEREPLACE",
+      "value": "(-70)",
+      "source_line": 434,
+      "category": "error_identity",
+      "recommended_disposition": "source-error-identity; meaningful source errors mapped; excluded families/internal corruption not emulated",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "PCRE2_INFO_ALLOPTIONS",
+      "value": "0",
+      "source_line": 439,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_ARGOPTIONS",
+      "value": "1",
+      "source_line": 440,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_BACKREFMAX",
+      "value": "2",
+      "source_line": 441,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_BSR",
+      "value": "3",
+      "source_line": 442,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_CAPTURECOUNT",
+      "value": "4",
+      "source_line": 443,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_FIRSTCODEUNIT",
+      "value": "5",
+      "source_line": 444,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_FIRSTCODETYPE",
+      "value": "6",
+      "source_line": 445,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_FIRSTBITMAP",
+      "value": "7",
+      "source_line": 446,
+      "category": "pattern_info",
+      "recommended_disposition": "excluded-native-physical-metadata",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_HASCRORLF",
+      "value": "8",
+      "source_line": 447,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_JCHANGED",
+      "value": "9",
+      "source_line": 448,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_JITSIZE",
+      "value": "10",
+      "source_line": 449,
+      "category": "pattern_info",
+      "recommended_disposition": "excluded-native-physical-metadata",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_LASTCODEUNIT",
+      "value": "11",
+      "source_line": 450,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_LASTCODETYPE",
+      "value": "12",
+      "source_line": 451,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_MATCHEMPTY",
+      "value": "13",
+      "source_line": 452,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_MATCHLIMIT",
+      "value": "14",
+      "source_line": 453,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_MAXLOOKBEHIND",
+      "value": "15",
+      "source_line": 454,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_MINLENGTH",
+      "value": "16",
+      "source_line": 455,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_NAMECOUNT",
+      "value": "17",
+      "source_line": 456,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_NAMEENTRYSIZE",
+      "value": "18",
+      "source_line": 457,
+      "category": "pattern_info",
+      "recommended_disposition": "excluded-native-physical-metadata",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_NAMETABLE",
+      "value": "19",
+      "source_line": 458,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_NEWLINE",
+      "value": "20",
+      "source_line": 459,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_DEPTHLIMIT",
+      "value": "21",
+      "source_line": 460,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_RECURSIONLIMIT",
+      "value": "21  /* Obsolete synonym */",
+      "source_line": 461,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_SIZE",
+      "value": "22",
+      "source_line": 462,
+      "category": "pattern_info",
+      "recommended_disposition": "excluded-native-physical-metadata",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_HASBACKSLASHC",
+      "value": "23",
+      "source_line": 463,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_FRAMESIZE",
+      "value": "24",
+      "source_line": 464,
+      "category": "pattern_info",
+      "recommended_disposition": "excluded-native-physical-metadata",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_HEAPLIMIT",
+      "value": "25",
+      "source_line": 465,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_INFO_EXTRAOPTIONS",
+      "value": "26",
+      "source_line": 466,
+      "category": "pattern_info",
+      "recommended_disposition": "admit-semantic-metadata-in-managed-shape",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_BSR",
+      "value": "0",
+      "source_line": 470,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_JIT",
+      "value": "1",
+      "source_line": 471,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_JITTARGET",
+      "value": "2",
+      "source_line": 472,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_LINKSIZE",
+      "value": "3",
+      "source_line": 473,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_MATCHLIMIT",
+      "value": "4",
+      "source_line": 474,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_NEWLINE",
+      "value": "5",
+      "source_line": 475,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_PARENSLIMIT",
+      "value": "6",
+      "source_line": 476,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_DEPTHLIMIT",
+      "value": "7",
+      "source_line": 477,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_RECURSIONLIMIT",
+      "value": "7  /* Obsolete synonym */",
+      "source_line": 478,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_STACKRECURSE",
+      "value": "8  /* Obsolete */",
+      "source_line": 479,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_UNICODE",
+      "value": "9",
+      "source_line": 480,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_UNICODE_VERSION",
+      "value": "10",
+      "source_line": 481,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_VERSION",
+      "value": "11",
+      "source_line": 482,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_HEAPLIMIT",
+      "value": "12",
+      "source_line": 483,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_NEVER_BACKSLASH_C",
+      "value": "13",
+      "source_line": 484,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_COMPILED_WIDTHS",
+      "value": "14",
+      "source_line": 485,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_CONFIG_TABLES_LENGTH",
+      "value": "15",
+      "source_line": 486,
+      "category": "native_config",
+      "recommended_disposition": "semantic managed profile metadata only; native build/physical queries excluded",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "PCRE2_OPTIMIZATION_NONE",
+      "value": "0",
+      "source_line": 491,
+      "category": "optimization",
+      "recommended_disposition": "admit-observable-source-optimizer-policy; no speed claim",
+      "inventory_id": "PC-024"
+    },
+    {
+      "name": "PCRE2_OPTIMIZATION_FULL",
+      "value": "1",
+      "source_line": 492,
+      "category": "optimization",
+      "recommended_disposition": "admit-observable-source-optimizer-policy; no speed claim",
+      "inventory_id": "PC-024"
+    },
+    {
+      "name": "PCRE2_AUTO_POSSESS",
+      "value": "64",
+      "source_line": 494,
+      "category": "optimization",
+      "recommended_disposition": "admit-observable-source-optimizer-policy; no speed claim",
+      "inventory_id": "PC-024"
+    },
+    {
+      "name": "PCRE2_AUTO_POSSESS_OFF",
+      "value": "65",
+      "source_line": 495,
+      "category": "optimization",
+      "recommended_disposition": "admit-observable-source-optimizer-policy; no speed claim",
+      "inventory_id": "PC-024"
+    },
+    {
+      "name": "PCRE2_DOTSTAR_ANCHOR",
+      "value": "66",
+      "source_line": 496,
+      "category": "optimization",
+      "recommended_disposition": "admit-observable-source-optimizer-policy; no speed claim",
+      "inventory_id": "PC-024"
+    },
+    {
+      "name": "PCRE2_DOTSTAR_ANCHOR_OFF",
+      "value": "67",
+      "source_line": 497,
+      "category": "optimization",
+      "recommended_disposition": "admit-observable-source-optimizer-policy; no speed claim",
+      "inventory_id": "PC-024"
+    },
+    {
+      "name": "PCRE2_START_OPTIMIZE",
+      "value": "68",
+      "source_line": 498,
+      "category": "optimization",
+      "recommended_disposition": "admit-observable-source-optimizer-policy; no speed claim",
+      "inventory_id": "PC-024"
+    },
+    {
+      "name": "PCRE2_START_OPTIMIZE_OFF",
+      "value": "69",
+      "source_line": 499,
+      "category": "optimization",
+      "recommended_disposition": "admit-observable-source-optimizer-policy; no speed claim",
+      "inventory_id": "PC-024"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_CASE_LOWER",
+      "value": "1",
+      "source_line": 509,
+      "category": "substitute_case",
+      "recommended_disposition": "admit-substitution-case-callback-mode",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_CASE_UPPER",
+      "value": "2",
+      "source_line": 510,
+      "category": "substitute_case",
+      "recommended_disposition": "admit-substitution-case-callback-mode",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_CASE_TITLE_FIRST",
+      "value": "3",
+      "source_line": 511,
+      "category": "substitute_case",
+      "recommended_disposition": "admit-substitution-case-callback-mode",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "PCRE2_SIZE",
+      "value": "size_t",
+      "source_line": 528,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_SIZE_MAX",
+      "value": "SIZE_MAX",
+      "source_line": 529,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_ZERO_TERMINATED",
+      "value": "(~(PCRE2_SIZE)0)",
+      "source_line": 530,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_UNSET",
+      "value": "(~(PCRE2_SIZE)0)",
+      "source_line": 531,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_TYPES_LIST",
+      "value": "\\",
+      "source_line": 536,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CALLOUT_STARTMATCH",
+      "value": "0x00000001u  /* Set for each bumpalong */",
+      "source_line": 569,
+      "category": "callout_flags",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-020"
+    },
+    {
+      "name": "PCRE2_CALLOUT_BACKTRACK",
+      "value": "0x00000002u  /* Set after a backtrack */",
+      "source_line": 570,
+      "category": "callout_flags",
+      "recommended_disposition": "admit-source-valid-combinations",
+      "inventory_id": "PC-020"
+    },
+    {
+      "name": "PCRE2_STRUCTURE_LIST",
+      "value": "\\",
+      "source_line": 572,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_GENERAL_INFO_FUNCTIONS",
+      "value": "\\",
+      "source_line": 625,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_GENERAL_CONTEXT_FUNCTIONS",
+      "value": "\\",
+      "source_line": 631,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "value": "\\",
+      "source_line": 640,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "value": "\\",
+      "source_line": 669,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CONVERT_CONTEXT_FUNCTIONS",
+      "value": "\\",
+      "source_line": 701,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_COMPILE_FUNCTIONS",
+      "value": "\\",
+      "source_line": 716,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_PATTERN_INFO_FUNCTIONS",
+      "value": "\\",
+      "source_line": 730,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_MATCH_FUNCTIONS",
+      "value": "\\",
+      "source_line": 740,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_SUBSTRING_FUNCTIONS",
+      "value": "\\",
+      "source_line": 770,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_SERIALIZE_FUNCTIONS",
+      "value": "\\",
+      "source_line": 802,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_SUBSTITUTE_FUNCTION",
+      "value": "\\",
+      "source_line": 817,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_CONVERT_FUNCTIONS",
+      "value": "\\",
+      "source_line": 826,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_JIT_FUNCTIONS",
+      "value": "\\",
+      "source_line": 836,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_OTHER_FUNCTIONS",
+      "value": "\\",
+      "source_line": 854,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_UCHAR",
+      "value": "PCRE2_SUFFIX(PCRE2_UCHAR)",
+      "source_line": 876,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_SPTR",
+      "value": "PCRE2_SUFFIX(PCRE2_SPTR)",
+      "source_line": 877,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_TYPES_STRUCTURES_AND_FUNCTIONS",
+      "value": "\\",
+      "source_line": 992,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_LOCAL_WIDTH",
+      "value": "8",
+      "source_line": 1010,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_LOCAL_WIDTH",
+      "value": "16",
+      "source_line": 1014,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "PCRE2_LOCAL_WIDTH",
+      "value": "32",
+      "source_line": 1018,
+      "category": "native_abi_build",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    }
+  ],
+  "functions": [
+    {
+      "name": "pcre2_config",
+      "source_line": 626,
+      "group": "PCRE2_GENERAL_INFO_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_general_context_copy",
+      "source_line": 633,
+      "group": "PCRE2_GENERAL_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_general_context_create",
+      "source_line": 635,
+      "group": "PCRE2_GENERAL_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_general_context_free",
+      "source_line": 638,
+      "group": "PCRE2_GENERAL_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_compile_context_copy",
+      "source_line": 642,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_compile_context_create",
+      "source_line": 644,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_compile_context_free",
+      "source_line": 646,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_set_bsr",
+      "source_line": 648,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_character_tables",
+      "source_line": 650,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-immutable-provider",
+      "inventory_id": "PH-008"
+    },
+    {
+      "name": "pcre2_set_compile_extra_options",
+      "source_line": 652,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_max_pattern_length",
+      "source_line": 654,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_max_pattern_compiled_length",
+      "source_line": 656,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-implementation-control; managed logical budgets instead",
+      "inventory_id": "PH-009"
+    },
+    {
+      "name": "pcre2_set_max_varlookbehind",
+      "source_line": 658,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_newline",
+      "source_line": 660,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_parens_nest_limit",
+      "source_line": 662,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_compile_recursion_guard",
+      "source_line": 664,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-implementation-control; managed logical budgets instead",
+      "inventory_id": "PH-009"
+    },
+    {
+      "name": "pcre2_set_optimize",
+      "source_line": 667,
+      "group": "PCRE2_COMPILE_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_match_context_copy",
+      "source_line": 671,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_match_context_create",
+      "source_line": 673,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_match_context_free",
+      "source_line": 675,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_set_callout",
+      "source_line": 677,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-callout-or-enumeration",
+      "inventory_id": "PH-007"
+    },
+    {
+      "name": "pcre2_set_substitute_callout",
+      "source_line": 680,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-substitution-or-callback",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "pcre2_set_substitute_case_callout",
+      "source_line": 683,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-substitution-or-callback",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "pcre2_set_depth_limit",
+      "source_line": 688,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_heap_limit",
+      "source_line": 690,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_match_limit",
+      "source_line": 692,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_offset_limit",
+      "source_line": 694,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_recursion_limit",
+      "source_line": 696,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "admit-typed-option/limit; native counters explicitly excluded",
+      "inventory_id": "PH-009/PH-010/PC-021/PC-024"
+    },
+    {
+      "name": "pcre2_set_recursion_memory_management",
+      "source_line": 698,
+      "group": "PCRE2_MATCH_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-implementation-control; managed logical budgets instead",
+      "inventory_id": "PH-009"
+    },
+    {
+      "name": "pcre2_convert_context_copy",
+      "source_line": 703,
+      "group": "PCRE2_CONVERT_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_convert_context_create",
+      "source_line": 705,
+      "group": "PCRE2_CONVERT_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_convert_context_free",
+      "source_line": 707,
+      "group": "PCRE2_CONVERT_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_set_glob_escape",
+      "source_line": 709,
+      "group": "PCRE2_CONVERT_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_set_glob_separator",
+      "source_line": 711,
+      "group": "PCRE2_CONVERT_CONTEXT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_compile",
+      "source_line": 718,
+      "group": "PCRE2_COMPILE_FUNCTIONS",
+      "recommended_disposition": "admit-native-width-parse-contract",
+      "inventory_id": "PH-001"
+    },
+    {
+      "name": "pcre2_code_free",
+      "source_line": 721,
+      "group": "PCRE2_COMPILE_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_code_copy",
+      "source_line": 723,
+      "group": "PCRE2_COMPILE_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_code_copy_with_tables",
+      "source_line": 725,
+      "group": "PCRE2_COMPILE_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_pattern_info",
+      "source_line": 732,
+      "group": "PCRE2_PATTERN_INFO_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_callout_enumerate",
+      "source_line": 734,
+      "group": "PCRE2_PATTERN_INFO_FUNCTIONS",
+      "recommended_disposition": "admit-typed-callout-or-enumeration",
+      "inventory_id": "PH-007"
+    },
+    {
+      "name": "pcre2_match_data_create",
+      "source_line": 742,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_match_data_create_from_pattern",
+      "source_line": 744,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_dfa_match",
+      "source_line": 747,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_match",
+      "source_line": 750,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "admit-typed-native-pair/result-semantics; no native pointers",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "pcre2_match_data_free",
+      "source_line": 753,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_get_mark",
+      "source_line": 755,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_get_match_data_size",
+      "source_line": 757,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "excluded-native-physical-storage-query",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_get_match_data_heapframes_size",
+      "source_line": 759,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "excluded-native-physical-storage-query",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_get_ovector_count",
+      "source_line": 761,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "admit-typed-native-pair/result-semantics; no native pointers",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "pcre2_get_ovector_pointer",
+      "source_line": 763,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "admit-typed-native-pair/result-semantics; no native pointers",
+      "inventory_id": "PH-002"
+    },
+    {
+      "name": "pcre2_get_startchar",
+      "source_line": 765,
+      "group": "PCRE2_MATCH_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_copy_byname",
+      "source_line": 772,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_copy_bynumber",
+      "source_line": 775,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_free",
+      "source_line": 778,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_substring_get_byname",
+      "source_line": 780,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_get_bynumber",
+      "source_line": 783,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_length_byname",
+      "source_line": 786,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_length_bynumber",
+      "source_line": 788,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_nametable_scan",
+      "source_line": 790,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_number_from_name",
+      "source_line": 793,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_substring_list_free",
+      "source_line": 795,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "excluded-C-lifecycle; managed immutable pattern/exclusive workspace/owned results equivalent",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_substring_list_get",
+      "source_line": 797,
+      "group": "PCRE2_SUBSTRING_FUNCTIONS",
+      "recommended_disposition": "admit-managed-semantic-query/output; excluded native pointers/layout separately",
+      "inventory_id": "PH-004"
+    },
+    {
+      "name": "pcre2_serialize_encode",
+      "source_line": 804,
+      "group": "PCRE2_SERIALIZE_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_serialize_decode",
+      "source_line": 807,
+      "group": "PCRE2_SERIALIZE_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_serialize_get_number_of_codes",
+      "source_line": 810,
+      "group": "PCRE2_SERIALIZE_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_serialize_free",
+      "source_line": 812,
+      "group": "PCRE2_SERIALIZE_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_substitute",
+      "source_line": 819,
+      "group": "PCRE2_SUBSTITUTE_FUNCTION",
+      "recommended_disposition": "admit-typed-substitution-or-callback",
+      "inventory_id": "PH-006"
+    },
+    {
+      "name": "pcre2_pattern_convert",
+      "source_line": 828,
+      "group": "PCRE2_CONVERT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_converted_pattern_free",
+      "source_line": 831,
+      "group": "PCRE2_CONVERT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_jit_compile",
+      "source_line": 838,
+      "group": "PCRE2_JIT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_jit_match",
+      "source_line": 840,
+      "group": "PCRE2_JIT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_jit_free_unused_memory",
+      "source_line": 843,
+      "group": "PCRE2_JIT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_jit_stack_create",
+      "source_line": 845,
+      "group": "PCRE2_JIT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_jit_stack_assign",
+      "source_line": 847,
+      "group": "PCRE2_JIT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_jit_stack_free",
+      "source_line": 849,
+      "group": "PCRE2_JIT_FUNCTIONS",
+      "recommended_disposition": "excluded-native-family",
+      "inventory_id": "PH-012"
+    },
+    {
+      "name": "pcre2_get_error_message",
+      "source_line": 856,
+      "group": "PCRE2_OTHER_FUNCTIONS",
+      "recommended_disposition": "admit-diagnostic-code/category/owned-text; exact native prose excluded",
+      "inventory_id": "PH-011"
+    },
+    {
+      "name": "pcre2_maketables",
+      "source_line": 858,
+      "group": "PCRE2_OTHER_FUNCTIONS",
+      "recommended_disposition": "excluded-native-locale-generator; development-only intake and immutable managed tables",
+      "inventory_id": "PH-008"
+    },
+    {
+      "name": "pcre2_maketables_free",
+      "source_line": 860,
+      "group": "PCRE2_OTHER_FUNCTIONS",
+      "recommended_disposition": "excluded-native-locale-generator; development-only intake and immutable managed tables",
+      "inventory_id": "PH-008"
+    }
+  ],
+  "sections": {
+    "doc/pcre2pattern.3": [
+      {
+        "source_line": 2,
+        "heading": "NAME"
+      },
+      {
+        "source_line": 4,
+        "heading": "\"PCRE2 REGULAR EXPRESSION DETAILS\""
+      },
+      {
+        "source_line": 38,
+        "heading": "\"EBCDIC CHARACTER CODES\""
+      },
+      {
+        "source_line": 55,
+        "heading": "\"SPECIAL START-OF-PATTERN ITEMS\""
+      },
+      {
+        "source_line": 66,
+        "heading": "\"UTF support\""
+      },
+      {
+        "source_line": 90,
+        "heading": "\"Unicode property support\""
+      },
+      {
+        "source_line": 112,
+        "heading": "\"Locking out empty string matching\""
+      },
+      {
+        "source_line": 122,
+        "heading": "\"Disabling auto-possessification\""
+      },
+      {
+        "source_line": 136,
+        "heading": "\"Disabling start-up optimizations\""
+      },
+      {
+        "source_line": 149,
+        "heading": "\"Disabling automatic anchoring\""
+      },
+      {
+        "source_line": 163,
+        "heading": "\"Disabling JIT compilation\""
+      },
+      {
+        "source_line": 171,
+        "heading": "\"Setting match resource limits\""
+      },
+      {
+        "source_line": 212,
+        "heading": "\"Newline conventions\""
+      },
+      {
+        "source_line": 264,
+        "heading": "\"Specifying what \\eR matches\""
+      },
+      {
+        "source_line": 274,
+        "heading": "\"CHARACTERS AND METACHARACTERS\""
+      },
+      {
+        "source_line": 355,
+        "heading": "BACKSLASH"
+      },
+      {
+        "source_line": 409,
+        "heading": "\"Non-printing characters\""
+      },
+      {
+        "source_line": 501,
+        "heading": "\"Octal escapes and back references\""
+      },
+      {
+        "source_line": 531,
+        "heading": "\"Perl rules for non-class backslash 1-9\""
+      },
+      {
+        "source_line": 563,
+        "heading": "\"Python rules for non_class backslash 1-9\""
+      },
+      {
+        "source_line": 576,
+        "heading": "\"Constraints on character values\""
+      },
+      {
+        "source_line": 594,
+        "heading": "\"Escape sequences in character classes\""
+      },
+      {
+        "source_line": 607,
+        "heading": "\"Unsupported escape sequences\""
+      },
+      {
+        "source_line": 618,
+        "heading": "\"Absolute and relative backreferences\""
+      },
+      {
+        "source_line": 635,
+        "heading": "\"Absolute and relative subroutine calls\""
+      },
+      {
+        "source_line": 655,
+        "heading": "\"Generic character types\""
+      },
+      {
+        "source_line": 787,
+        "heading": "\"Newline sequences\""
+      },
+      {
+        "source_line": 836,
+        "heading": "Unicode character properties"
+      },
+      {
+        "source_line": 894,
+        "heading": "\"Script properties for \\ep and \\eP\""
+      },
+      {
+        "source_line": 920,
+        "heading": "\"The general category property for \\ep and \\eP\""
+      },
+      {
+        "source_line": 1007,
+        "heading": "\"Binary (yes/no) properties for \\ep and \\eP\""
+      },
+      {
+        "source_line": 1018,
+        "heading": "\"The Bidi_Class property for \\ep and \\eP\""
+      },
+      {
+        "source_line": 1055,
+        "heading": "Extended grapheme clusters"
+      },
+      {
+        "source_line": 1104,
+        "heading": "PCRE2's additional properties"
+      },
+      {
+        "source_line": 1137,
+        "heading": "\"Resetting the match start\""
+      },
+      {
+        "source_line": 1189,
+        "heading": "\"Simple assertions\""
+      },
+      {
+        "source_line": 1254,
+        "heading": "\"CIRCUMFLEX AND DOLLAR\""
+      },
+      {
+        "source_line": 1329,
+        "heading": "\"FULL STOP (PERIOD, DOT) AND \\eN\""
+      },
+      {
+        "source_line": 1371,
+        "heading": "\"MATCHING A SINGLE CODE UNIT\""
+      },
+      {
+        "source_line": 1430,
+        "heading": "\"SQUARE BRACKETS AND CHARACTER CLASSES\""
+      },
+      {
+        "source_line": 1558,
+        "heading": "\"PERL EXTENDED CHARACTER CLASSES\""
+      },
+      {
+        "source_line": 1595,
+        "heading": "\"UTS#18 EXTENDED CHARACTER CLASSES\""
+      },
+      {
+        "source_line": 1660,
+        "heading": "\"POSIX CHARACTER CLASSES\""
+      },
+      {
+        "source_line": 1758,
+        "heading": "\"COMPATIBILITY FEATURE FOR WORD BOUNDARIES\""
+      },
+      {
+        "source_line": 1784,
+        "heading": "\"VERTICAL BAR\""
+      },
+      {
+        "source_line": 1805,
+        "heading": "\"INTERNAL OPTION SETTING\""
+      },
+      {
+        "source_line": 1904,
+        "heading": "GROUPS"
+      },
+      {
+        "source_line": 1958,
+        "heading": "\"DUPLICATE GROUP NUMBERS\""
+      },
+      {
+        "source_line": 2007,
+        "heading": "\"NAMED CAPTURE GROUPS\""
+      },
+      {
+        "source_line": 2137,
+        "heading": "REPETITION"
+      },
+      {
+        "source_line": 2315,
+        "heading": "\"ATOMIC GROUPING AND POSSESSIVE QUANTIFIERS\""
+      },
+      {
+        "source_line": 2421,
+        "heading": "\"BACKREFERENCES\""
+      },
+      {
+        "source_line": 2538,
+        "heading": "\"Recursive backreferences\""
+      },
+      {
+        "source_line": 2565,
+        "heading": "ASSERTIONS"
+      },
+      {
+        "source_line": 2648,
+        "heading": "\"Alphabetic assertion names\""
+      },
+      {
+        "source_line": 2667,
+        "heading": "\"Lookahead assertions\""
+      },
+      {
+        "source_line": 2697,
+        "heading": "\"Lookbehind assertions\""
+      },
+      {
+        "source_line": 2790,
+        "heading": "\"Using multiple assertions\""
+      },
+      {
+        "source_line": 2825,
+        "heading": "\"NON-ATOMIC ASSERTIONS\""
+      },
+      {
+        "source_line": 2886,
+        "heading": "\"SCAN SUBSTRING ASSERTIONS\""
+      },
+      {
+        "source_line": 2944,
+        "heading": "\"SCRIPT RUNS\""
+      },
+      {
+        "source_line": 3012,
+        "heading": "\"CONDITIONAL GROUPS\""
+      },
+      {
+        "source_line": 3038,
+        "heading": "\"Checking for a used capture group by number\""
+      },
+      {
+        "source_line": 3082,
+        "heading": "\"Checking for a used capture group by name\""
+      },
+      {
+        "source_line": 3099,
+        "heading": "\"Checking for pattern recursion\""
+      },
+      {
+        "source_line": 3146,
+        "heading": "\"Defining capture groups for use by reference only\""
+      },
+      {
+        "source_line": 3173,
+        "heading": "\"Checking the PCRE2 version\""
+      },
+      {
+        "source_line": 3191,
+        "heading": "\"Assertion conditions\""
+      },
+      {
+        "source_line": 3223,
+        "heading": "COMMENTS"
+      },
+      {
+        "source_line": 3258,
+        "heading": "\"RECURSIVE PATTERNS\""
+      },
+      {
+        "source_line": 3392,
+        "heading": "\"Differences in recursion processing between PCRE2 and Perl\""
+      },
+      {
+        "source_line": 3445,
+        "heading": "\"GROUPS AS SUBROUTINES\""
+      },
+      {
+        "source_line": 3499,
+        "heading": "\"ONIGURUMA SUBROUTINE SYNTAX\""
+      },
+      {
+        "source_line": 3519,
+        "heading": "CALLOUTS"
+      },
+      {
+        "source_line": 3561,
+        "heading": "\"Callouts with numerical arguments\""
+      },
+      {
+        "source_line": 3583,
+        "heading": "\"Callouts with string arguments\""
+      },
+      {
+        "source_line": 3598,
+        "heading": "\"BACKTRACKING CONTROL\""
+      },
+      {
+        "source_line": 3656,
+        "heading": "\"Optimizations that affect backtracking verbs\""
+      },
+      {
+        "source_line": 3684,
+        "heading": "\"Verbs that act immediately\""
+      },
+      {
+        "source_line": 3738,
+        "heading": "\"Recording which path was taken\""
+      },
+      {
+        "source_line": 3809,
+        "heading": "\"Verbs that act after backtracking\""
+      },
+      {
+        "source_line": 4007,
+        "heading": "\"More than one backtracking verb\""
+      },
+      {
+        "source_line": 4031,
+        "heading": "\"Backtracking verbs in repeated groups\""
+      },
+      {
+        "source_line": 4045,
+        "heading": "\"Backtracking verbs in assertions\""
+      },
+      {
+        "source_line": 4100,
+        "heading": "\"Backtracking verbs in subroutines\""
+      },
+      {
+        "source_line": 4124,
+        "heading": "\"EBCDIC ENVIRONMENTS\""
+      },
+      {
+        "source_line": 4131,
+        "heading": "\"Escape sequences\""
+      },
+      {
+        "source_line": 4156,
+        "heading": "\"Character classes\""
+      },
+      {
+        "source_line": 4168,
+        "heading": "\"SEE ALSO\""
+      },
+      {
+        "source_line": 4175,
+        "heading": "AUTHOR"
+      },
+      {
+        "source_line": 4185,
+        "heading": "REVISION"
+      }
+    ],
+    "doc/pcre2api.3": [
+      {
+        "source_line": 2,
+        "heading": "NAME"
+      },
+      {
+        "source_line": 15,
+        "heading": "\"PCRE2 NATIVE API BASIC FUNCTIONS\""
+      },
+      {
+        "source_line": 46,
+        "heading": "\"PCRE2 NATIVE API AUXILIARY MATCH FUNCTIONS\""
+      },
+      {
+        "source_line": 65,
+        "heading": "\"PCRE2 NATIVE API GENERAL CONTEXT FUNCTIONS\""
+      },
+      {
+        "source_line": 80,
+        "heading": "\"PCRE2 NATIVE API COMPILE CONTEXT FUNCTIONS\""
+      },
+      {
+        "source_line": 124,
+        "heading": "\"PCRE2 NATIVE API MATCH CONTEXT FUNCTIONS\""
+      },
+      {
+        "source_line": 164,
+        "heading": "\"PCRE2 NATIVE API STRING EXTRACTION FUNCTIONS\""
+      },
+      {
+        "source_line": 203,
+        "heading": "\"PCRE2 NATIVE API STRING SUBSTITUTION FUNCTION\""
+      },
+      {
+        "source_line": 216,
+        "heading": "\"PCRE2 NATIVE API JIT FUNCTIONS\""
+      },
+      {
+        "source_line": 239,
+        "heading": "\"PCRE2 NATIVE API SERIALIZATION FUNCTIONS\""
+      },
+      {
+        "source_line": 257,
+        "heading": "\"PCRE2 NATIVE API AUXILIARY FUNCTIONS\""
+      },
+      {
+        "source_line": 284,
+        "heading": "\"PCRE2 NATIVE API OBSOLETE FUNCTIONS\""
+      },
+      {
+        "source_line": 303,
+        "heading": "\"PCRE2 EXPERIMENTAL PATTERN CONVERSION FUNCTIONS\""
+      },
+      {
+        "source_line": 338,
+        "heading": "\"PCRE2 8-BIT, 16-BIT, AND 32-BIT LIBRARIES\""
+      },
+      {
+        "source_line": 398,
+        "heading": "\"PCRE2 API OVERVIEW\""
+      },
+      {
+        "source_line": 507,
+        "heading": "\"STRING LENGTHS AND OFFSETS\""
+      },
+      {
+        "source_line": 521,
+        "heading": "NEWLINES"
+      },
+      {
+        "source_line": 560,
+        "heading": "MULTITHREADING"
+      },
+      {
+        "source_line": 573,
+        "heading": "\"The compiled pattern\""
+      },
+      {
+        "source_line": 643,
+        "heading": "\"Context blocks\""
+      },
+      {
+        "source_line": 660,
+        "heading": "\"Match blocks\""
+      },
+      {
+        "source_line": 669,
+        "heading": "\"PCRE2 CONTEXTS\""
+      },
+      {
+        "source_line": 685,
+        "heading": "\"The general context\""
+      },
+      {
+        "source_line": 737,
+        "heading": "\"The compile context\""
+      },
+      {
+        "source_line": 996,
+        "heading": "\"The match context\""
+      },
+      {
+        "source_line": 1222,
+        "heading": "\"CHECKING BUILD-TIME OPTIONS\""
+      },
+      {
+        "source_line": 1392,
+        "heading": "\"COMPILING A PATTERN\""
+      },
+      {
+        "source_line": 1550,
+        "heading": "\"Main compile options\""
+      },
+      {
+        "source_line": 2059,
+        "heading": "\"Extra compile options\""
+      },
+      {
+        "source_line": 2223,
+        "heading": "\"JUST-IN-TIME (JIT) COMPILATION\""
+      },
+      {
+        "source_line": 2261,
+        "heading": "\"LOCALE SUPPORT\""
+      },
+      {
+        "source_line": 2334,
+        "heading": "\"Saving locale tables\""
+      },
+      {
+        "source_line": 2355,
+        "heading": "\"INFORMATION ABOUT A COMPILED PATTERN\""
+      },
+      {
+        "source_line": 2702,
+        "heading": "\"INFORMATION ABOUT A PATTERN'S CALLOUTS\""
+      },
+      {
+        "source_line": 2726,
+        "heading": "\"SERIALIZATION AND PRECOMPILING\""
+      },
+      {
+        "source_line": 2745,
+        "heading": "\"THE MATCH DATA BLOCK\""
+      },
+      {
+        "source_line": 2835,
+        "heading": "\"MEMORY USE FOR MATCH DATA BLOCKS\""
+      },
+      {
+        "source_line": 2874,
+        "heading": "\"MATCHING A PATTERN: THE TRADITIONAL FUNCTION\""
+      },
+      {
+        "source_line": 2921,
+        "heading": "\"The string to be matched by \\fBpcre2_match()\\fP\""
+      },
+      {
+        "source_line": 2982,
+        "heading": "\"Option bits for \\fBpcre2_match()\\fP\""
+      },
+      {
+        "source_line": 3176,
+        "heading": "\"NEWLINE HANDLING WHEN MATCHING\""
+      },
+      {
+        "source_line": 3223,
+        "heading": "\"HOW PCRE2_MATCH() RETURNS A STRING AND CAPTURED SUBSTRINGS\""
+      },
+      {
+        "source_line": 3323,
+        "heading": "\"OTHER INFORMATION ABOUT A MATCH\""
+      },
+      {
+        "source_line": 3386,
+        "heading": "\"ERROR RETURNS FROM \\fBpcre2_match()\\fP\""
+      },
+      {
+        "source_line": 3507,
+        "heading": "\"OBTAINING A TEXTUAL ERROR MESSAGE\""
+      },
+      {
+        "source_line": 3531,
+        "heading": "\"EXTRACTING CAPTURED SUBSTRINGS BY NUMBER\""
+      },
+      {
+        "source_line": 3624,
+        "heading": "\"EXTRACTING A LIST OF ALL CAPTURED SUBSTRINGS\""
+      },
+      {
+        "source_line": 3663,
+        "heading": "\"EXTRACTING CAPTURED SUBSTRINGS BY NAME\""
+      },
+      {
+        "source_line": 3725,
+        "heading": "\"CREATING A NEW STRING WITH SUBSTITUTIONS\""
+      },
+      {
+        "source_line": 3991,
+        "heading": "\"Substitution errors\""
+      },
+      {
+        "source_line": 4033,
+        "heading": "\"Substitution callouts\""
+      },
+      {
+        "source_line": 4099,
+        "heading": "\"Substitution case callouts\""
+      },
+      {
+        "source_line": 4190,
+        "heading": "\"DUPLICATE CAPTURE GROUP NAMES\""
+      },
+      {
+        "source_line": 4239,
+        "heading": "\"FINDING ALL POSSIBLE MATCHES AT ONE POSITION\""
+      },
+      {
+        "source_line": 4261,
+        "heading": "\"MATCHING A PATTERN: THE ALTERNATIVE FUNCTION\""
+      },
+      {
+        "source_line": 4312,
+        "heading": "\"Option bits for \\fBpcre2_dfa_match()\\fP\""
+      },
+      {
+        "source_line": 4364,
+        "heading": "\"Successful returns from \\fBpcre2_dfa_match()\\fP\""
+      },
+      {
+        "source_line": 4408,
+        "heading": "\"Error returns from \\fBpcre2_dfa_match()\\fP\""
+      },
+      {
+        "source_line": 4458,
+        "heading": "\"SEE ALSO\""
+      },
+      {
+        "source_line": 4466,
+        "heading": "AUTHOR"
+      },
+      {
+        "source_line": 4476,
+        "heading": "REVISION"
+      }
+    ],
+    "doc/pcre2unicode.3": [
+      {
+        "source_line": 2,
+        "heading": "NAME"
+      },
+      {
+        "source_line": 4,
+        "heading": "\"UNICODE AND UTF SUPPORT\""
+      },
+      {
+        "source_line": 38,
+        "heading": "\"UNICODE PROPERTY SUPPORT\""
+      },
+      {
+        "source_line": 63,
+        "heading": "\"WIDE CHARACTERS AND UTF MODES\""
+      },
+      {
+        "source_line": 133,
+        "heading": "\"UNICODE CASE-EQUIVALENCE\""
+      },
+      {
+        "source_line": 182,
+        "heading": "\"SCRIPT RUNS\""
+      },
+      {
+        "source_line": 225,
+        "heading": "\"Basic script run rules\""
+      },
+      {
+        "source_line": 257,
+        "heading": "\"The Chinese Han script\""
+      },
+      {
+        "source_line": 272,
+        "heading": "\"Decimal digits\""
+      },
+      {
+        "source_line": 283,
+        "heading": "\"VALIDITY OF UTF STRINGS\""
+      },
+      {
+        "source_line": 349,
+        "heading": "\"Errors in UTF-8 strings\""
+      },
+      {
+        "source_line": 418,
+        "heading": "\"Errors in UTF-16 strings\""
+      },
+      {
+        "source_line": 430,
+        "heading": "\"Errors in UTF-32 strings\""
+      },
+      {
+        "source_line": 441,
+        "heading": "\"MATCHING IN INVALID UTF STRINGS\""
+      },
+      {
+        "source_line": 498,
+        "heading": "AUTHOR"
+      },
+      {
+        "source_line": 508,
+        "heading": "REVISION"
+      }
+    ],
+    "doc/pcre2callout.3": [
+      {
+        "source_line": 2,
+        "heading": "NAME"
+      },
+      {
+        "source_line": 4,
+        "heading": "SYNOPSIS"
+      },
+      {
+        "source_line": 18,
+        "heading": "DESCRIPTION"
+      },
+      {
+        "source_line": 89,
+        "heading": "\"MISSING CALLOUTS\""
+      },
+      {
+        "source_line": 97,
+        "heading": "\"Auto-possessification\""
+      },
+      {
+        "source_line": 129,
+        "heading": "\"Automatic .* anchoring\""
+      },
+      {
+        "source_line": 174,
+        "heading": "\"Other optimizations\""
+      },
+      {
+        "source_line": 199,
+        "heading": "\"THE CALLOUT INTERFACE\""
+      },
+      {
+        "source_line": 240,
+        "heading": "\"Fields for numerical callouts\""
+      },
+      {
+        "source_line": 249,
+        "heading": "\"Fields for string callouts\""
+      },
+      {
+        "source_line": 269,
+        "heading": "\"Fields for all callouts\""
+      },
+      {
+        "source_line": 377,
+        "heading": "\"RETURN VALUES FROM CALLOUTS\""
+      },
+      {
+        "source_line": 393,
+        "heading": "\"CALLOUT ENUMERATION\""
+      },
+      {
+        "source_line": 441,
+        "heading": "AUTHOR"
+      },
+      {
+        "source_line": 451,
+        "heading": "REVISION"
+      }
+    ],
+    "doc/pcre2partial.3": [
+      {
+        "source_line": 2,
+        "heading": "NAME"
+      },
+      {
+        "source_line": 4,
+        "heading": "\"PARTIAL MATCHING IN PCRE2\""
+      },
+      {
+        "source_line": 48,
+        "heading": "\"REQUIREMENTS FOR A PARTIAL MATCH\""
+      },
+      {
+        "source_line": 90,
+        "heading": "\"PARTIAL MATCHING USING pcre2_match()\""
+      },
+      {
+        "source_line": 132,
+        "heading": "\"How a partial match is processed by pcre2_match()\""
+      },
+      {
+        "source_line": 178,
+        "heading": "\"Example of partial matching using pcre2test\""
+      },
+      {
+        "source_line": 211,
+        "heading": "\"MULTI-SEGMENT MATCHING WITH pcre2_match()\""
+      },
+      {
+        "source_line": 286,
+        "heading": "\"PARTIAL MATCHING USING pcre2_dfa_match()\""
+      },
+      {
+        "source_line": 312,
+        "heading": "\"MULTI-SEGMENT MATCHING WITH pcre2_dfa_match()\""
+      },
+      {
+        "source_line": 357,
+        "heading": "AUTHOR"
+      },
+      {
+        "source_line": 367,
+        "heading": "REVISION"
+      }
+    ],
+    "doc/pcre2syntax.3": [
+      {
+        "source_line": 2,
+        "heading": "NAME"
+      },
+      {
+        "source_line": 4,
+        "heading": "\"PCRE2 REGULAR EXPRESSION SYNTAX SUMMARY\""
+      },
+      {
+        "source_line": 20,
+        "heading": "\"QUOTING\""
+      },
+      {
+        "source_line": 35,
+        "heading": "\"BRACED ITEMS\""
+      },
+      {
+        "source_line": 47,
+        "heading": "\"ESCAPED CHARACTERS\""
+      },
+      {
+        "source_line": 99,
+        "heading": "\"CHARACTER TYPES\""
+      },
+      {
+        "source_line": 140,
+        "heading": "\"GENERAL CATEGORY PROPERTIES FOR \\ep and \\eP\""
+      },
+      {
+        "source_line": 193,
+        "heading": "\"PCRE2 SPECIAL CATEGORY PROPERTIES FOR \\ep and \\eP\""
+      },
+      {
+        "source_line": 207,
+        "heading": "\"BINARY PROPERTIES FOR \\ep AND \\eP\""
+      },
+      {
+        "source_line": 218,
+        "heading": "\"SCRIPT MATCHING WITH \\ep AND \\eP\""
+      },
+      {
+        "source_line": 229,
+        "heading": "\"THE BIDI_CLASS PROPERTY FOR \\ep AND \\eP\""
+      },
+      {
+        "source_line": 262,
+        "heading": "\"CHARACTER CLASSES\""
+      },
+      {
+        "source_line": 302,
+        "heading": "\"PERL EXTENDED CHARACTER CLASSES\""
+      },
+      {
+        "source_line": 328,
+        "heading": "\"QUANTIFIERS\""
+      },
+      {
+        "source_line": 352,
+        "heading": "\"ANCHORS AND SIMPLE ASSERTIONS\""
+      },
+      {
+        "source_line": 370,
+        "heading": "\"REPORTED MATCH POINT SETTING\""
+      },
+      {
+        "source_line": 381,
+        "heading": "\"ALTERNATION\""
+      },
+      {
+        "source_line": 387,
+        "heading": "\"CAPTURING\""
+      },
+      {
+        "source_line": 403,
+        "heading": "\"ATOMIC GROUPS\""
+      },
+      {
+        "source_line": 410,
+        "heading": "\"COMMENT\""
+      },
+      {
+        "source_line": 416,
+        "heading": "\"OPTION SETTING\""
+      },
+      {
+        "source_line": 474,
+        "heading": "\"NEWLINE CONVENTION\""
+      },
+      {
+        "source_line": 488,
+        "heading": "\"WHAT \\eR MATCHES\""
+      },
+      {
+        "source_line": 498,
+        "heading": "\"LOOKAHEAD AND LOOKBEHIND ASSERTIONS\""
+      },
+      {
+        "source_line": 525,
+        "heading": "\"NON-ATOMIC LOOKAROUND ASSERTIONS\""
+      },
+      {
+        "source_line": 539,
+        "heading": "\"SUBSTRING SCAN ASSERTION\""
+      },
+      {
+        "source_line": 556,
+        "heading": "\"SCRIPT RUNS\""
+      },
+      {
+        "source_line": 566,
+        "heading": "\"BACKREFERENCES\""
+      },
+      {
+        "source_line": 583,
+        "heading": "\"SUBROUTINE REFERENCES (POSSIBLY RECURSIVE)\""
+      },
+      {
+        "source_line": 602,
+        "heading": "\"CONDITIONAL PATTERNS\""
+      },
+      {
+        "source_line": 626,
+        "heading": "\"BACKTRACKING CONTROL\""
+      },
+      {
+        "source_line": 655,
+        "heading": "\"CALLOUTS\""
+      },
+      {
+        "source_line": 667,
+        "heading": "\"REPLACEMENT STRINGS\""
+      },
+      {
+        "source_line": 713,
+        "heading": "\"SEE ALSO\""
+      },
+      {
+        "source_line": 720,
+        "heading": "AUTHOR"
+      },
+      {
+        "source_line": 730,
+        "heading": "REVISION"
+      }
+    ]
+  },
+  "upstream_testdata": [
+    {
+      "path": "testdata/grepbinary",
+      "bytes": 45,
+      "sha256": "78d42d2c9093d8c56e4eb0112335a6a217643717c61fccad7162b13c15e77d06"
+    },
+    {
+      "path": "testdata/grepfilelist",
+      "bytes": 41,
+      "sha256": "382bb3164be8bbf23c14944149d80855698e41d4fbd8cfd4376ee395045a718c"
+    },
+    {
+      "path": "testdata/grepinput",
+      "bytes": 37455,
+      "sha256": "d8da54988d87f6aa83462f990ec2e756bc7def817ab74552c70c3332da67e77a"
+    },
+    {
+      "path": "testdata/grepinput3",
+      "bytes": 813,
+      "sha256": "b144557418ed2bb88932569ad95462d12a3abd987c227893118b1ef8779c6f40"
+    },
+    {
+      "path": "testdata/grepinput8",
+      "bytes": 228,
+      "sha256": "828889f9ceb0d0e022d996f36bd2fec117ea4a08859df0e07620327f4b30afc7"
+    },
+    {
+      "path": "testdata/grepinputBad8",
+      "bytes": 12,
+      "sha256": "2ad01e06316f85e7cc6533f5ce544169a84914d1548caddf80eacee133823053"
+    },
+    {
+      "path": "testdata/grepinputBad8_Trail",
+      "bytes": 4,
+      "sha256": "f07e4dc2549f502a4f25b960d9243e0316feaa5c830c6b7ae2efe5810fd5f755"
+    },
+    {
+      "path": "testdata/grepinputC.bz2",
+      "bytes": 315,
+      "sha256": "66bb4e0e0409dd56d7d7e878071ea87b7b8989d8b90aaec8e7d420c3722b5143"
+    },
+    {
+      "path": "testdata/grepinputC.gz",
+      "bytes": 313,
+      "sha256": "903f141de3edd6d257463a3af9992096cadde852f1734be9d396be6ddef01f46"
+    },
+    {
+      "path": "testdata/grepinputM",
+      "bytes": 275,
+      "sha256": "7fc6280992bc3e503d5582ed70f239712902e55d3fe1d5fb83071181f7573da2"
+    },
+    {
+      "path": "testdata/grepinputUN",
+      "bytes": 13,
+      "sha256": "543fed129419d39eb80896b8aa1e6d4dadf2059bf2ba01757314e38024e6e507"
+    },
+    {
+      "path": "testdata/grepinputv",
+      "bytes": 279,
+      "sha256": "7ae57940a21a46616b63a61e1f76baffe5967d34b5fefa336e1d54eb9425824c"
+    },
+    {
+      "path": "testdata/grepinputx",
+      "bytes": 551,
+      "sha256": "c40bc6166c768651a1a5bf546d191551c71507fc37647f65864cd7fac38e8b47"
+    },
+    {
+      "path": "testdata/greplist",
+      "bytes": 211,
+      "sha256": "d27e331bfab8217367cb7cdbfc6330f4b754d1b8cac0c132cfa5fbe0a3a64dce"
+    },
+    {
+      "path": "testdata/grepnot.bz2",
+      "bytes": 551,
+      "sha256": "c40bc6166c768651a1a5bf546d191551c71507fc37647f65864cd7fac38e8b47"
+    },
+    {
+      "path": "testdata/grepoutput",
+      "bytes": 35546,
+      "sha256": "b9088edfc6943ecf649064d338361e5f48c1dd7b4149629dcffa486bf90c89ea"
+    },
+    {
+      "path": "testdata/grepoutput8",
+      "bytes": 1221,
+      "sha256": "fccdd7dfd85ee2148217ce3afbe410e949cf54ca5c886454f67e7bb7de28c8ea"
+    },
+    {
+      "path": "testdata/grepoutputC",
+      "bytes": 1345,
+      "sha256": "ad48ea06827f6dd69549e11839ac0ab6c60cdb913eecd50c80900f68b0f390c7"
+    },
+    {
+      "path": "testdata/grepoutputCN",
+      "bytes": 979,
+      "sha256": "17b298a606678a8e7155784774074ce6438134c56369ecd3a6fa880025b012ef"
+    },
+    {
+      "path": "testdata/grepoutputCNU",
+      "bytes": 470,
+      "sha256": "0ba2910dc7eb06dd55ddaef83082784729ffe500864c0d312fdd0b50d7f12565"
+    },
+    {
+      "path": "testdata/grepoutputCU",
+      "bytes": 506,
+      "sha256": "4503b29d54f40b664cf118869597c215684cc24b38bce18ec8faa6599057c85b"
+    },
+    {
+      "path": "testdata/grepoutputCbz2",
+      "bytes": 26,
+      "sha256": "8fa103ecdc1e5e722098abd8771a01eb3e20719120eb386268b72f8d7f473c7e"
+    },
+    {
+      "path": "testdata/grepoutputCgz",
+      "bytes": 13,
+      "sha256": "028d853ad3aa1d89eb4ad3a97c57aa1b8dd509f195c39d2173fcc3f11744c594"
+    },
+    {
+      "path": "testdata/grepoutputN",
+      "bytes": 826,
+      "sha256": "d7e533bd2f59091c79005e522e8e793d4aec8eb9987597fe745e1a38509d23e5"
+    },
+    {
+      "path": "testdata/grepoutputUN",
+      "bytes": 83,
+      "sha256": "6ee2ef555be36603de721f393797ac2c515fbe2577a07a7145227fe1658e100c"
+    },
+    {
+      "path": "testdata/greppatN4",
+      "bytes": 8,
+      "sha256": "ac7695762dd9f8984053aa3f8c86350741ae2592eb1cd25eb0a57fe58e11d832"
+    },
+    {
+      "path": "testdata/testbtables",
+      "bytes": 1088,
+      "sha256": "7c50a01ad9fc0306e2f0b0d875e713a6ccdcd6e777864dea53a3c3e22b71328a"
+    },
+    {
+      "path": "testdata/testinput1",
+      "bytes": 129760,
+      "sha256": "9106baab22e2eb22f4a7eac9912655afaf2747e8d59380a6ebb6f1c0c6e88123"
+    },
+    {
+      "path": "testdata/testinput10",
+      "bytes": 11780,
+      "sha256": "1c27787a19c1a26b7f7e00b45fe32212f8537da7e0d2cbbab06c824bd7c9160c"
+    },
+    {
+      "path": "testdata/testinput11",
+      "bytes": 17727,
+      "sha256": "7c4e80bc8770b3df25565fd32269a630759018592eed43f6f1937f2b0421e4e9"
+    },
+    {
+      "path": "testdata/testinput12",
+      "bytes": 11635,
+      "sha256": "4f682fff941c98768e4fd17fb11c078ee2bc1924d0060687e4c6ed0702d06c53"
+    },
+    {
+      "path": "testdata/testinput13",
+      "bytes": 318,
+      "sha256": "f9363858cd85ed2bd3b3d40018afd628ba2dcadc66406afef2cd1a7db436355b"
+    },
+    {
+      "path": "testdata/testinput14",
+      "bytes": 2340,
+      "sha256": "1b95aa7b915215355f67fd7f64a4949f499dd083514e217bbad7f9369ee3477f"
+    },
+    {
+      "path": "testdata/testinput15",
+      "bytes": 4642,
+      "sha256": "8607cba821e94c913a8f445c2ab29fc84911f1993cab0a478708a568d3139ddd"
+    },
+    {
+      "path": "testdata/testinput16",
+      "bytes": 231,
+      "sha256": "599b1c4ade9c06e3d3dbe9b08b720930cfee002779703443cdda2fd75448d1eb"
+    },
+    {
+      "path": "testdata/testinput17",
+      "bytes": 22861,
+      "sha256": "06310310afcdd63cfef5b1c39effcd9fced5c8792ce2da83ee49fb712de0cf6c"
+    },
+    {
+      "path": "testdata/testinput18",
+      "bytes": 2039,
+      "sha256": "7041c636b15fdc4cbc5e6ca208f291fac0575ff4c728808bbc70ee29240bd797"
+    },
+    {
+      "path": "testdata/testinput19",
+      "bytes": 501,
+      "sha256": "cdf299a41dcb0d9281f8d8068ef3a18f0a9f4da2c16b667e6317fff191ee59d2"
+    },
+    {
+      "path": "testdata/testinput2",
+      "bytes": 139271,
+      "sha256": "6776323f32ace765e111fa5dc6c0b13181f41e7a32d0ba015980ad2564bba0df"
+    },
+    {
+      "path": "testdata/testinput20",
+      "bytes": 1404,
+      "sha256": "cfee37bae687fe9b8e41620a24e1f1fccae2370469d544f721233da03ce55a45"
+    },
+    {
+      "path": "testdata/testinput21",
+      "bytes": 432,
+      "sha256": "e573f25c6ef0729752b796275ec4a0dcc8e9597beb27890f9a4a16235f86ad1e"
+    },
+    {
+      "path": "testdata/testinput22",
+      "bytes": 1900,
+      "sha256": "8f69b11f4901d27941e5b8ca6ac845b4d0d393f9fad1148577626ade0e68eb1a"
+    },
+    {
+      "path": "testdata/testinput23",
+      "bytes": 217,
+      "sha256": "dd86ee879256064046a5a06f9eeab3513d080af4f463b6bb279d5936c4200ceb"
+    },
+    {
+      "path": "testdata/testinput24",
+      "bytes": 4168,
+      "sha256": "a728c2b6efabb5819bbf1b7dbc9f2d23bb6e032e465a09360ab9b8240217c5a6"
+    },
+    {
+      "path": "testdata/testinput25",
+      "bytes": 676,
+      "sha256": "d00c4502d72b33be7747a7852aa7e0249129d33b905bd64e48735dbf6d25eee8"
+    },
+    {
+      "path": "testdata/testinput26",
+      "bytes": 38786,
+      "sha256": "914551819426ac042b4cbe441871fb6fc076378c84ff3e18615d32d933539456"
+    },
+    {
+      "path": "testdata/testinput27",
+      "bytes": 45688,
+      "sha256": "38df4f6d518534158ff27a60b13e51e24c02bbe9e3f4e0f8267234ae0d7194b9"
+    },
+    {
+      "path": "testdata/testinput3",
+      "bytes": 1503,
+      "sha256": "531011feca3e868f3367e88af40e68831851562d2f4b9464d934918a7e1c87e8"
+    },
+    {
+      "path": "testdata/testinput4",
+      "bytes": 62164,
+      "sha256": "2e31ff0e9010713f974e14a58290cf51f4b7a2fa57a1b682019cef4eb4606cc3"
+    },
+    {
+      "path": "testdata/testinput5",
+      "bytes": 68837,
+      "sha256": "b96a31200d93ab929bf8052ddd6e06eb0c15229828a54a19f386dea157e140fb"
+    },
+    {
+      "path": "testdata/testinput6",
+      "bytes": 92983,
+      "sha256": "0917b790b430ad2a8a645a9f7d42320fbf2f2cd89b35e32710dd65f02649cc51"
+    },
+    {
+      "path": "testdata/testinput7",
+      "bytes": 45119,
+      "sha256": "360982803f7aa02dbfd4f9fa40669b3fdb53927ad9cac3e3d84303c5e90b04eb"
+    },
+    {
+      "path": "testdata/testinput8",
+      "bytes": 7236,
+      "sha256": "f4cc7cdd0bae81a9da3b1fa5febd2400375bcc441bd3b1997f3a6b5140ffd86f"
+    },
+    {
+      "path": "testdata/testinput9",
+      "bytes": 12712,
+      "sha256": "414bd19d0046093c841403a748cf86498fe14dcaad3de277bd21e8c39c6c01f8"
+    },
+    {
+      "path": "testdata/testinputEBC",
+      "bytes": 2019,
+      "sha256": "3bfb2bf7d062e14db85f29bd212b11e985f1c353042bc763c40bee710ed8b78f"
+    },
+    {
+      "path": "testdata/testinputheap",
+      "bytes": 909,
+      "sha256": "c6cd7affee2a64219905494f4ca72cbd18b30351e3200763e45b91ac61d0adf7"
+    },
+    {
+      "path": "testdata/testoutput1",
+      "bytes": 173393,
+      "sha256": "3ba0da1116c96f04692b5a62928c083d5c3ed11ae16c1c50739f1114edd30a59"
+    },
+    {
+      "path": "testdata/testoutput10",
+      "bytes": 52813,
+      "sha256": "3f9fad7d7e7707ab130457ad92b6561d3481b4efeb3a778bbd6d6884a787d48e"
+    },
+    {
+      "path": "testdata/testoutput11-16",
+      "bytes": 32231,
+      "sha256": "38216feab267027bbe9f1449be349d1c00b966b799cda5a60f8c84c294885f47"
+    },
+    {
+      "path": "testdata/testoutput11-32",
+      "bytes": 35207,
+      "sha256": "b3951fbfd34275fad4f0ddb1d235ec57448f71faf9b373ea7b36e304fa2c0be1"
+    },
+    {
+      "path": "testdata/testoutput12-16",
+      "bytes": 51965,
+      "sha256": "5666c06a730a3a1d48a641899161721e52a0d234ea9f8f8c695fe1e9d358082c"
+    },
+    {
+      "path": "testdata/testoutput12-32",
+      "bytes": 50623,
+      "sha256": "312172e1591fd862743f28fcb7d6298e621594e460b1b55c2a953f41b72f672a"
+    },
+    {
+      "path": "testdata/testoutput13",
+      "bytes": 399,
+      "sha256": "001aba2750de919b025f01d2f9c655dbff4ba970c9e44ce533050fc68a34f811"
+    },
+    {
+      "path": "testdata/testoutput14-16",
+      "bytes": 4127,
+      "sha256": "62a66a9e6950fcda2763ff1dce33579ca8d66bc48258d5fd9524480bbb9a4d66"
+    },
+    {
+      "path": "testdata/testoutput14-32",
+      "bytes": 3556,
+      "sha256": "fbfc3ed9ed14ffe552c1913e7370ea2d9e728e42c12dce6227aa21de66124e42"
+    },
+    {
+      "path": "testdata/testoutput14-8",
+      "bytes": 5441,
+      "sha256": "04a4d47c669b0f4f5215364c23861d76066d0efc4880e7df79a53728b65d86a3"
+    },
+    {
+      "path": "testdata/testoutput15",
+      "bytes": 11949,
+      "sha256": "1a6690454afca5cc28b4c80a33acf5de5c857a527fe10b83680b9dbce4c22f5b"
+    },
+    {
+      "path": "testdata/testoutput16",
+      "bytes": 513,
+      "sha256": "68db67c7ed21f2b93673def9d05d275c92683ad7731104414fa8bcc548306621"
+    },
+    {
+      "path": "testdata/testoutput17",
+      "bytes": 29144,
+      "sha256": "f4af9b242d4f7d7ed606bdeea6c9a095b32aa4d46933be755619b11969fe9d6c"
+    },
+    {
+      "path": "testdata/testoutput18",
+      "bytes": 3836,
+      "sha256": "131ffde0dabcca2873658fe11c2a2ad0a4247332418cbb1d089333343fdf17a9"
+    },
+    {
+      "path": "testdata/testoutput19",
+      "bytes": 622,
+      "sha256": "70568fd08c0599775e463d48bdf23b4add49fde5b0b310ce4a9ae446e199a298"
+    },
+    {
+      "path": "testdata/testoutput2",
+      "bytes": 471182,
+      "sha256": "71abbff11b5071c5902ef970b7a425b9965c7f2916312c7094e079a01178c130"
+    },
+    {
+      "path": "testdata/testoutput20",
+      "bytes": 2438,
+      "sha256": "9d12cce5953b594b656bac7607c5a41afe5639f9ce51a053b5f0ffe9a1e6e17b"
+    },
+    {
+      "path": "testdata/testoutput21",
+      "bytes": 1863,
+      "sha256": "92e6eb07962a11c7c7edfe623a0056dae65caab36bd0ad60cf7929eebd8acd56"
+    },
+    {
+      "path": "testdata/testoutput22-16",
+      "bytes": 3243,
+      "sha256": "c91a14845d510b7836c28a40ad8611b788bc952ef43a616a956da2d7bc66c2ef"
+    },
+    {
+      "path": "testdata/testoutput22-32",
+      "bytes": 3100,
+      "sha256": "fb335fa06ecaf3c987183d18d53d289d5c11fb8bd57bd1fa23e79371afe0f16a"
+    },
+    {
+      "path": "testdata/testoutput22-8",
+      "bytes": 3343,
+      "sha256": "de6059d78252a4afbb71f8439baa34b444f8578065442cb7878afdb601316254"
+    },
+    {
+      "path": "testdata/testoutput23",
+      "bytes": 368,
+      "sha256": "8d9cb14c5298c70d3e73cebc9dbb64309928f7e55df3e12c5af1d65bdfeec80f"
+    },
+    {
+      "path": "testdata/testoutput24",
+      "bytes": 8059,
+      "sha256": "5f0b82dfce580efc81f58d9aa5b6df34c816d95b14820d5759283143246d85d3"
+    },
+    {
+      "path": "testdata/testoutput25",
+      "bytes": 262896,
+      "sha256": "c9b7b268f772a325ed87b6bc723c0433f5bbbca67cc54e83d8484672e1e49bdd"
+    },
+    {
+      "path": "testdata/testoutput26",
+      "bytes": 47855,
+      "sha256": "3ecad393ffd2584dd836678040b3123a77633c72f88bee54516e8cbf5de83da1"
+    },
+    {
+      "path": "testdata/testoutput27",
+      "bytes": 56324,
+      "sha256": "b345ec7ef2afb805f6df183cad5b279060538506e0be3ff5cb79fe9e469882b6"
+    },
+    {
+      "path": "testdata/testoutput3",
+      "bytes": 2983,
+      "sha256": "b746c2cce94f9c8fd6d303543b5573fee07a8942f072c2c2d13f95f8216771ce"
+    },
+    {
+      "path": "testdata/testoutput3A",
+      "bytes": 2991,
+      "sha256": "bab7bf612b64698b7f29243b913e06d420e5cd236e4654ac20a53c7d97a3e540"
+    },
+    {
+      "path": "testdata/testoutput3B",
+      "bytes": 3055,
+      "sha256": "8aa00434215c55f0f1388285ccaa3c19de7ca08ce7c46382cf42feb25940c535"
+    },
+    {
+      "path": "testdata/testoutput4",
+      "bytes": 94380,
+      "sha256": "01a8ad4f059a705f449592dd0cca53bc7c2d515a0e2d0946e883e6a914a20233"
+    },
+    {
+      "path": "testdata/testoutput5",
+      "bytes": 178059,
+      "sha256": "f76400b1b31069f146a653a1d02c519539228d11e236c8299887d641eb922502"
+    },
+    {
+      "path": "testdata/testoutput6",
+      "bytes": 131383,
+      "sha256": "43d4f559d04fe445d0c34d60523f2c8696c62fed4481d4fa6f9f5ad119210af7"
+    },
+    {
+      "path": "testdata/testoutput7",
+      "bytes": 105389,
+      "sha256": "322f34a8534faf858737e7784ffdf687aed90a89e822dbcdeb2b071441d7fa2c"
+    },
+    {
+      "path": "testdata/testoutput8-16-2",
+      "bytes": 29004,
+      "sha256": "21404b7c9993d35e4a0db4db751b66c94c50483c9c9c3e9c515845d9da516206"
+    },
+    {
+      "path": "testdata/testoutput8-16-3",
+      "bytes": 28845,
+      "sha256": "330ebe37385974b99a23e83fe6cf62876c1b90af39f60d5cf13439ffba16bc50"
+    },
+    {
+      "path": "testdata/testoutput8-16-4",
+      "bytes": 28845,
+      "sha256": "330ebe37385974b99a23e83fe6cf62876c1b90af39f60d5cf13439ffba16bc50"
+    },
+    {
+      "path": "testdata/testoutput8-32-2",
+      "bytes": 28852,
+      "sha256": "2d14d53f63b986a85e89e4dd717f28a351cdaff2a076042d2dde7c98a4ce79cd"
+    },
+    {
+      "path": "testdata/testoutput8-32-3",
+      "bytes": 28852,
+      "sha256": "2d14d53f63b986a85e89e4dd717f28a351cdaff2a076042d2dde7c98a4ce79cd"
+    },
+    {
+      "path": "testdata/testoutput8-32-4",
+      "bytes": 28852,
+      "sha256": "2d14d53f63b986a85e89e4dd717f28a351cdaff2a076042d2dde7c98a4ce79cd"
+    },
+    {
+      "path": "testdata/testoutput8-8-2",
+      "bytes": 28976,
+      "sha256": "90d9d745e32fc181e185769c44b2b8b7b4b25b62fa521ead995ce613d98a854b"
+    },
+    {
+      "path": "testdata/testoutput8-8-3",
+      "bytes": 28825,
+      "sha256": "50ecb88dd8e16f69cedc6e6b503e38b0c6ffdca182a69b659e316b5cd8012170"
+    },
+    {
+      "path": "testdata/testoutput8-8-4",
+      "bytes": 28826,
+      "sha256": "a702aeda260a12927f6ef8d4ce0e2da99a0de2b1f4f0005f85db8a8d704eda54"
+    },
+    {
+      "path": "testdata/testoutput9",
+      "bytes": 17883,
+      "sha256": "fd502f351b1541210558aa2950b0b059ad486fc8ce71d9ba87b6a96304f4fe03"
+    },
+    {
+      "path": "testdata/testoutputEBC",
+      "bytes": 2880,
+      "sha256": "3d0cd00be979f797bb7e2f57c4b4554ceb79404820787756e3eb99da168d6144"
+    },
+    {
+      "path": "testdata/testoutputheap-16",
+      "bytes": 4315,
+      "sha256": "9c5947f83178f30e9bea01cedc36e084beff7e31dfb7b547df086d29e54cf591"
+    },
+    {
+      "path": "testdata/testoutputheap-32",
+      "bytes": 4315,
+      "sha256": "d5e6917454acaf514dec331703ced3cfe8e6dfb80235d4bfa4627ba6ab314f89"
+    },
+    {
+      "path": "testdata/testoutputheap-8",
+      "bytes": 4313,
+      "sha256": "350e9f0a57b4c665305d870978060e3cd2fd22ff1e0c805e074b8f9ca5d9ca05"
+    },
+    {
+      "path": "testdata/valgrind-jit.supp",
+      "bytes": 127,
+      "sha256": "8ce751a9e20f7967bd85b8a44cb1410baa6ed79c70e498ed39c372a715c47072"
+    },
+    {
+      "path": "testdata/wintestinput3",
+      "bytes": 1516,
+      "sha256": "bccdfe0dcb319c6eb2fea60ef9ad25637d3a3eeca7527d41489977d1d9b0c999"
+    },
+    {
+      "path": "testdata/wintestoutput3",
+      "bytes": 3108,
+      "sha256": "259e023e0d44cbcc5ea87c6c3713196c639a423e032716a7a634ff00a1074804"
+    }
+  ],
+  "unicode_inputs": [
+    {
+      "path": "maint/Unicode.tables/BidiMirroring.txt",
+      "bytes": 26827,
+      "sha256": "d7afdadd1bbd66f5a663ac0e8f7958f18fd9491fc0bc59ec5877cb82db71db7d"
+    },
+    {
+      "path": "maint/Unicode.tables/CaseFolding.txt",
+      "bytes": 86092,
+      "sha256": "6f1f9c588eb4a5c718d9e8f93b782685e5c7fec872cf05e8e6878053599e09bb"
+    },
+    {
+      "path": "maint/Unicode.tables/DerivedBidiClass.txt",
+      "bytes": 171034,
+      "sha256": "71ed943a49c58568d8d92e80ecc2ba2f06e62aee9c8ebb0e6e8bd2c3ed8b180e"
+    },
+    {
+      "path": "maint/Unicode.tables/DerivedCoreProperties.txt",
+      "bytes": 1115959,
+      "sha256": "39d35161f2954497f69e08bdb9e701493f476a3d30222de20028feda36c1dabd"
+    },
+    {
+      "path": "maint/Unicode.tables/DerivedGeneralCategory.txt",
+      "bytes": 274423,
+      "sha256": "7676ab755a41ef82108460238569e60ad65c191ddafe61b36c6765ec1353f293"
+    },
+    {
+      "path": "maint/Unicode.tables/GraphemeBreakProperty.txt",
+      "bytes": 98751,
+      "sha256": "c29360bd6f7132811d701d29069541e827eb44bfc4c8fbde8c370d6982689dc1"
+    },
+    {
+      "path": "maint/Unicode.tables/PropList.txt",
+      "bytes": 144253,
+      "sha256": "53d614508e2a0b2305a8aa21cd60d993de9326cdf65993660dfcce4503548583"
+    },
+    {
+      "path": "maint/Unicode.tables/PropertyAliases.txt",
+      "bytes": 9389,
+      "sha256": "33a9f2266ad6b8e8de05c0ea3dfac411ac62cf8839ff1c94057471e4c5f6a2b3"
+    },
+    {
+      "path": "maint/Unicode.tables/PropertyValueAliases.txt",
+      "bytes": 80773,
+      "sha256": "440fd3e5460b9bfe31da67b6f923992e1989d31fe2ed91e091c4b8f8e2620bf9"
+    },
+    {
+      "path": "maint/Unicode.tables/ScriptExtensions.txt",
+      "bytes": 20576,
+      "sha256": "049117ce26b9769fe2749b06eef51a50a89faef4a97764dd2d81daa715980700"
+    },
+    {
+      "path": "maint/Unicode.tables/Scripts.txt",
+      "bytes": 189588,
+      "sha256": "9e88f0a677df47311106340be8ede2ecdacd9c1c931831218d2be6d5508e0039"
+    },
+    {
+      "path": "maint/Unicode.tables/UnicodeData.txt",
+      "bytes": 2175362,
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f"
+    },
+    {
+      "path": "maint/Unicode.tables/emoji-data.txt",
+      "bytes": 113024,
+      "sha256": "f1365a5173eee18e1f98b240cdc492e84a25f1ce7e0c9d1094eb29c41a22696a"
+    }
+  ],
+  "unicode_version": "16.0.0",
+  "classification_note": "Lexical coverage only; recommendation.md supplies semantic dispositions. No oracle executed, cases imported or engine verified."
+}

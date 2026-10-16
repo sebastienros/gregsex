@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>GregsEx.Tests</AssemblyName>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../src/GregsEx/GregsEx.csproj" />
+    <Compile Include="../../../../test/GregsEx.Tests/Flavors/EcmaScript/Unicode/UnicodeChecks.cs" Link="UnicodeChecks.cs" />
+    <Compile Include="../../../../test/GregsEx.Tests/Flavors/EcmaScript/Unicode/UnicodeInventory.g.cs" Link="UnicodeInventory.g.cs" />
+  </ItemGroup>
+</Project>

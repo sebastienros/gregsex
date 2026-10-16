@@ -1,0 +1,61 @@
+{
+  "sourceCommit": "b2bd4254b379b9d7dc9a3dda060a7e27009ccdff",
+  "archiveSha256": "339344898646d67a24c61e244a46ddf345ac8f55c6aacf9b7b32b7c34645bb71",
+  "retainedMembers": [
+    {
+      "path": "native-build/libpcre2-8.a",
+      "bytes": 413096,
+      "sha256": "460a19b179518523bc5cbf2162b5f0263c6f5a5113ae7fd0ad61c1f53ab4c531"
+    },
+    {
+      "path": "native-build/libpcre2-16.a",
+      "bytes": 384968,
+      "sha256": "e0bbe10f169a236b10f5d5a939a10bd0a617466c2359226de847317235f84bed"
+    },
+    {
+      "path": "native-build/pcre2.h",
+      "bytes": 51313,
+      "sha256": "a75457e8b140a246aade9c8b36b44fbe241dfa253fce4545524b27d7d7e9b5c2"
+    }
+  ],
+  "clientSha256": "6a65bb7a21cf6f4f87b72a5b256e12d0ff0f86478dbef2587926eaa068fd2ccd",
+  "inputsSha256": "57e50783f79eb3b95dbbb11b6bf7120f7bcf6ff396cc8f13415837078568c298",
+  "commands": [
+    {
+      "command": [
+        "clang",
+        "-O2",
+        "-DPCRE2_CODE_UNIT_WIDTH=8",
+        "-I",
+        "/private/tmp/gregsex-m5-parity-fuzz",
+        "/private/tmp/gregsex-m5-parity-fuzz/reductions-8/observe.c",
+        "/private/tmp/gregsex-m5-parity-fuzz/libpcre2-8.a",
+        "-o",
+        "/private/tmp/gregsex-m5-parity-fuzz/reductions-8/observe"
+      ],
+      "buildExitCode": 0,
+      "runExitCode": 0,
+      "stdoutSha256": "7d25d1fa79d7ced746eb67a9a0442b20183097a1650414e32c54084540334f7f",
+      "executableSha256": "bd60eedad97f555bf995ad7c12f33584a4a9bd76e3be4168c621dac5c657dd76"
+    },
+    {
+      "command": [
+        "clang",
+        "-O2",
+        "-DPCRE2_CODE_UNIT_WIDTH=16",
+        "-I",
+        "/private/tmp/gregsex-m5-parity-fuzz",
+        "/private/tmp/gregsex-m5-parity-fuzz/reductions-16/observe.c",
+        "/private/tmp/gregsex-m5-parity-fuzz/libpcre2-16.a",
+        "-o",
+        "/private/tmp/gregsex-m5-parity-fuzz/reductions-16/observe"
+      ],
+      "buildExitCode": 0,
+      "runExitCode": 0,
+      "stdoutSha256": "5c44284e4dbcebbd49b31cabefaf00b03ad2b477cc8cbe598393edf3e12bb9d6",
+      "executableSha256": "5694812d6de438e5bed606234f8a862ed350cbc11bf541f92d683fd3420a899f"
+    }
+  ],
+  "cases": 80,
+  "scope": "80 finite reductions in four domains and independently observed full/none policies. No native engine rebuild/broad upstream replay/performance claim."
+}

@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "pcre2-parity-native-field-overlay-1",
+  "patches": [
+    {
+      "traceMember": "indexed/8-2.jsonl",
+      "eventIndex": 17699,
+      "inputEnd": 109696,
+      "original": {
+        "kind": "callout",
+        "inputEnd": 109696,
+        "outputStart": 391020,
+        "width": 8,
+        "returnCode": 0,
+        "version": 2,
+        "number": 1,
+        "isString": false,
+        "subjectLength": 2,
+        "captureTop": 1,
+        "captureLast": 0,
+        "startMatch": 0,
+        "currentPosition": 1,
+        "patternPosition": 17,
+        "nextItemLength": 1,
+        "stringOffset": 0,
+        "flags": 1,
+        "subjectUnits": [
+          65,
+          66
+        ],
+        "stringUnits": [],
+        "markUnits": [
+          62
+        ],
+        "captures": [
+          null
+        ]
+      },
+      "observed": {
+        "id": "UP-SUP-6",
+        "width": 8,
+        "event": "callout",
+        "version": 2,
+        "number": 1,
+        "isString": false,
+        "subjectLength": 2,
+        "captureTop": 1,
+        "captureLast": 0,
+        "startMatch": 0,
+        "currentPosition": 1,
+        "patternPosition": 17,
+        "nextItemLength": 1,
+        "stringOffset": 0,
+        "flags": 1,
+        "returnCode": 0,
+        "subjectUnits": [
+          65,
+          66
+        ],
+        "stringUnits": [],
+        "markUnits": [
+          62,
+          0,
+          60
+        ],
+        "captures": [
+          null
+        ]
+      },
+      "source": "doc/pcre2api.3:3343\u20133347; test/corpora/pcre2/oracle/upstream-supplement.json",
+      "observerArtifact": "test/corpora/pcre2/oracle/upstream-supplement-8.jsonl",
+      "observerInputId": "UP-SUP-6",
+      "note": "Only callout binary mark length fixed from independent observed supplemental pointer[-1] payload. All other defined callback fields are verified equal. Original archived bytes unchanged."
+    },
+    {
+      "traceMember": "indexed/16-2.jsonl",
+      "eventIndex": 17699,
+      "inputEnd": 109696,
+      "original": {
+        "kind": "callout",
+        "inputEnd": 109696,
+        "outputStart": 391020,
+        "width": 16,
+        "returnCode": 0,
+        "version": 2,
+        "number": 1,
+        "isString": false,
+        "subjectLength": 2,
+        "captureTop": 1,
+        "captureLast": 0,
+        "startMatch": 0,
+        "currentPosition": 1,
+        "patternPosition": 17,
+        "nextItemLength": 1,
+        "stringOffset": 0,
+        "flags": 1,
+        "subjectUnits": [
+          65,
+          66
+        ],
+        "stringUnits": [],
+        "markUnits": [
+          62
+        ],
+        "captures": [
+          null
+        ]
+      },
+      "observed": {
+        "id": "UP-SUP-107",
+        "width": 16,
+        "event": "callout",
+        "version": 2,
+        "number": 1,
+        "isString": false,
+        "subjectLength": 2,
+        "captureTop": 1,
+        "captureLast": 0,
+        "startMatch": 0,
+        "currentPosition": 1,
+        "patternPosition": 17,
+        "nextItemLength": 1,
+        "stringOffset": 0,
+        "flags": 1,
+        "returnCode": 0,
+        "subjectUnits": [
+          65,
+          66
+        ],
+        "stringUnits": [],
+        "markUnits": [
+          62,
+          0,
+          60
+        ],
+        "captures": [
+          null
+        ]
+      },
+      "source": "doc/pcre2api.3:3343\u20133347; test/corpora/pcre2/oracle/upstream-supplement.json",
+      "observerArtifact": "test/corpora/pcre2/oracle/upstream-supplement-16.jsonl",
+      "observerInputId": "UP-SUP-107",
+      "note": "Only callout binary mark length fixed from independent observed supplemental pointer[-1] payload. All other defined callback fields are verified equal. Original archived bytes unchanged."
+    }
+  ]
+}

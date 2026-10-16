@@ -1,0 +1,6196 @@
+[
+  {
+    "id": "empty/8/0",
+    "pattern": "",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [],
+    "imported": false
+  },
+  {
+    "id": "literal-lf/8/0",
+    "pattern": "\n",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-cr/8/0",
+    "pattern": "\r",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      13
+    ],
+    "imported": false
+  },
+  {
+    "id": "hex-lf/8/0",
+    "pattern": "\\x0a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      120,
+      48,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "octal-cr/8/0",
+    "pattern": "\\015",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      48,
+      49,
+      53
+    ],
+    "imported": false
+  },
+  {
+    "id": "control-lf/8/0",
+    "pattern": "\\cJ",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      99,
+      74
+    ],
+    "imported": false
+  },
+  {
+    "id": "braced-lf/8/0",
+    "pattern": "\\x{a}",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      120,
+      123,
+      97,
+      125
+    ],
+    "imported": false
+  },
+  {
+    "id": "vertical/8/0",
+    "pattern": "\\v",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      118
+    ],
+    "imported": false
+  },
+  {
+    "id": "space/8/0",
+    "pattern": "\\s",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      115
+    ],
+    "imported": false
+  },
+  {
+    "id": "newline/8/0",
+    "pattern": "\\R",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      82
+    ],
+    "imported": false
+  },
+  {
+    "id": "dot/8/0",
+    "pattern": ".",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      46
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-single/8/0",
+    "pattern": "[\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-single/8/0",
+    "pattern": "[^\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-cr/8/0",
+    "pattern": "[^\\r]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      114,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-duplicate/8/0",
+    "pattern": "[\\n\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-duplicate/8/0",
+    "pattern": "[^\\n\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-multiple/8/0",
+    "pattern": "[^\\na]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-equal-range/8/0",
+    "pattern": "[\\n-\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-equal-range/8/0",
+    "pattern": "[^\\n-\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-equal-repeat/8/0",
+    "pattern": "[^\\n-\\n]{0}a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "inside-range/8/0",
+    "pattern": "[\\x09-\\x0e]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "start-endpoint/8/0",
+    "pattern": "[\\x0a-\\x0e]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      97,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "end-endpoint/8/0",
+    "pattern": "[\\x09-\\x0d]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      100,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-inside-range/8/0",
+    "pattern": "[^\\x09-\\x0e]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-start-endpoint/8/0",
+    "pattern": "[^\\x0a-\\x0e]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      120,
+      48,
+      97,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-vertical/8/0",
+    "pattern": "[\\v]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      118,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-space/8/0",
+    "pattern": "[\\s]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      115,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-posix-space/8/0",
+    "pattern": "[[:space:]]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      58,
+      115,
+      112,
+      97,
+      99,
+      101,
+      58,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-posix-blank/8/0",
+    "pattern": "[[:blank:]]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      58,
+      98,
+      108,
+      97,
+      110,
+      107,
+      58,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-properties/8/0",
+    "pattern": "[\\p{Z}]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      112,
+      123,
+      90,
+      125,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "zero-literal/8/0",
+    "pattern": "\\n{0}a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      110,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "zero-group/8/0",
+    "pattern": "(\\n){0}a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      92,
+      110,
+      41,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "define/8/0",
+    "pattern": "(?(DEFINE)(a\\n))a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      40,
+      68,
+      69,
+      70,
+      73,
+      78,
+      69,
+      41,
+      40,
+      97,
+      92,
+      110,
+      41,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "unreachable/8/0",
+    "pattern": "a(*ACCEPT)|\\n",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      97,
+      40,
+      42,
+      65,
+      67,
+      67,
+      69,
+      80,
+      84,
+      41,
+      124,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "assertion/8/0",
+    "pattern": "(?=\\n)a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      61,
+      92,
+      110,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "comment/8/0",
+    "pattern": "(?#\n)a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      35,
+      10,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "quoted-escape/8/0",
+    "pattern": "\\Q\\n\\E",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      81,
+      92,
+      110,
+      92,
+      69
+    ],
+    "imported": false
+  },
+  {
+    "id": "quoted-literal/8/0",
+    "pattern": "\\Q\n\\E",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      81,
+      10,
+      92,
+      69
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-quoted-escape/8/0",
+    "pattern": "[\\Q\\n\\E]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      81,
+      92,
+      110,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-quoted-literal/8/0",
+    "pattern": "[^\\Q\n\\E]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      81,
+      10,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-quoted-duplicate/8/0",
+    "pattern": "[^\\Q\n\n\\E]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      81,
+      10,
+      10,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-whitespace/8/0",
+    "pattern": "(?x)\na",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      10,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-comment/8/0",
+    "pattern": "(?x)# hello\r\na",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      35,
+      32,
+      104,
+      101,
+      108,
+      108,
+      111,
+      13,
+      10,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-escaped/8/0",
+    "pattern": "(?x)\\n",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-class/8/0",
+    "pattern": "(?xx)[\n ]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      120,
+      41,
+      91,
+      10,
+      32,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "mark-string/8/0",
+    "pattern": "(*MARK:\n)a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      77,
+      65,
+      82,
+      75,
+      58,
+      10,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "callout-string/8/0",
+    "pattern": "(?C'\n')a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      67,
+      39,
+      10,
+      39,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "newline-directive/8/0",
+    "pattern": "(*CRLF)a",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      67,
+      82,
+      76,
+      70,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-leaf/8/0",
+    "pattern": "(?[ [\\n] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-negative-leaf/8/0",
+    "pattern": "(?[ [^\\n] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      94,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-negation/8/0",
+    "pattern": "(?[ !\\n ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      33,
+      92,
+      110,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-double-negation/8/0",
+    "pattern": "(?[ !!\\n ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      33,
+      33,
+      92,
+      110,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-subtract/8/0",
+    "pattern": "(?[ [\\n] - [\\n] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      45,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-intersection/8/0",
+    "pattern": "(?[ [\\n] & [a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      38,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-vertical/8/0",
+    "pattern": "(?[ [\\v] | [a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      118,
+      93,
+      32,
+      124,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-range/8/0",
+    "pattern": "(?[ [\\x09-\\x0e] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-raw-whitespace/8/0",
+    "pattern": "(?[\n [a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      10,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-space/8/0",
+    "pattern": "(?[  [a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-tab/8/0",
+    "pattern": "(?[\t [a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      9,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-vtab/8/0",
+    "pattern": "(?[\u000b [a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      11,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-formfeed/8/0",
+    "pattern": "(?[\f [a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      12,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-carriage/8/0",
+    "pattern": "(?[\r [a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      13,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "bad-literal-escape/8/0",
+    "pattern": "\\\n",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-32/8/0",
+    "pattern": "(?[ [ a] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      32,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-9/8/0",
+    "pattern": "(?[ [\ta] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      9,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-10/8/0",
+    "pattern": "(?[ [\na] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      10,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-11/8/0",
+    "pattern": "(?[ [\u000ba] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      11,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-12/8/0",
+    "pattern": "(?[ [\fa] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      12,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-13/8/0",
+    "pattern": "(?[ [\ra] ])",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      13,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-spelling/8/0",
+    "pattern": "\\n",
+    "width": 8,
+    "flags": 33554432,
+    "extra": 0,
+    "units": [
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-real/8/0",
+    "pattern": "\n",
+    "width": 8,
+    "flags": 33554432,
+    "extra": 0,
+    "units": [
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "normalize-cr/8/0",
+    "pattern": "\\r",
+    "width": 8,
+    "flags": 0,
+    "extra": 16,
+    "units": [
+      92,
+      114
+    ],
+    "imported": false
+  },
+  {
+    "id": "normalize-negative-cr/8/0",
+    "pattern": "[^\\r]",
+    "width": 8,
+    "flags": 0,
+    "extra": 16,
+    "units": [
+      91,
+      94,
+      92,
+      114,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-plain-negative/8/0",
+    "pattern": "[^\\n]",
+    "width": 8,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-nested-negative/8/0",
+    "pattern": "[[^\\n]]",
+    "width": 8,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      94,
+      92,
+      110,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-subtraction/8/0",
+    "pattern": "[\\n--\\n]",
+    "width": 8,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      45,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-vertical/8/0",
+    "pattern": "[[\\v]]",
+    "width": 8,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      92,
+      118,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-negative-outer/8/0",
+    "pattern": "[^\\n--a]",
+    "width": 8,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      45,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-union/8/0",
+    "pattern": "[\\n||a]",
+    "width": 8,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      124,
+      124,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-u-lf/8/0",
+    "pattern": "\\u000a",
+    "width": 8,
+    "flags": 2,
+    "extra": 0,
+    "units": [
+      92,
+      117,
+      48,
+      48,
+      48,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "bad-escape-literal/8/0",
+    "pattern": "\\q\\n",
+    "width": 8,
+    "flags": 0,
+    "extra": 2,
+    "units": [
+      92,
+      113,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "imported-first/8/0",
+    "pattern": "[a\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-second/8/0",
+    "pattern": "[\\na]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      97,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-duplicate/8/0",
+    "pattern": "[aa\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      97,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-negative/8/0",
+    "pattern": "[^a\\n]",
+    "width": 8,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "empty/8/1",
+    "pattern": "",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [],
+    "imported": false
+  },
+  {
+    "id": "literal-lf/8/1",
+    "pattern": "\n",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-cr/8/1",
+    "pattern": "\r",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      13
+    ],
+    "imported": false
+  },
+  {
+    "id": "hex-lf/8/1",
+    "pattern": "\\x0a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      120,
+      48,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "octal-cr/8/1",
+    "pattern": "\\015",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      48,
+      49,
+      53
+    ],
+    "imported": false
+  },
+  {
+    "id": "control-lf/8/1",
+    "pattern": "\\cJ",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      99,
+      74
+    ],
+    "imported": false
+  },
+  {
+    "id": "braced-lf/8/1",
+    "pattern": "\\x{a}",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      120,
+      123,
+      97,
+      125
+    ],
+    "imported": false
+  },
+  {
+    "id": "vertical/8/1",
+    "pattern": "\\v",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      118
+    ],
+    "imported": false
+  },
+  {
+    "id": "space/8/1",
+    "pattern": "\\s",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      115
+    ],
+    "imported": false
+  },
+  {
+    "id": "newline/8/1",
+    "pattern": "\\R",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      82
+    ],
+    "imported": false
+  },
+  {
+    "id": "dot/8/1",
+    "pattern": ".",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      46
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-single/8/1",
+    "pattern": "[\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-single/8/1",
+    "pattern": "[^\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-cr/8/1",
+    "pattern": "[^\\r]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      114,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-duplicate/8/1",
+    "pattern": "[\\n\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-duplicate/8/1",
+    "pattern": "[^\\n\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-multiple/8/1",
+    "pattern": "[^\\na]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-equal-range/8/1",
+    "pattern": "[\\n-\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-equal-range/8/1",
+    "pattern": "[^\\n-\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-equal-repeat/8/1",
+    "pattern": "[^\\n-\\n]{0}a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "inside-range/8/1",
+    "pattern": "[\\x09-\\x0e]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "start-endpoint/8/1",
+    "pattern": "[\\x0a-\\x0e]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      97,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "end-endpoint/8/1",
+    "pattern": "[\\x09-\\x0d]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      100,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-inside-range/8/1",
+    "pattern": "[^\\x09-\\x0e]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-start-endpoint/8/1",
+    "pattern": "[^\\x0a-\\x0e]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      120,
+      48,
+      97,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-vertical/8/1",
+    "pattern": "[\\v]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      118,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-space/8/1",
+    "pattern": "[\\s]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      115,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-posix-space/8/1",
+    "pattern": "[[:space:]]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      58,
+      115,
+      112,
+      97,
+      99,
+      101,
+      58,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-posix-blank/8/1",
+    "pattern": "[[:blank:]]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      58,
+      98,
+      108,
+      97,
+      110,
+      107,
+      58,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-properties/8/1",
+    "pattern": "[\\p{Z}]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      112,
+      123,
+      90,
+      125,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "zero-literal/8/1",
+    "pattern": "\\n{0}a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      110,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "zero-group/8/1",
+    "pattern": "(\\n){0}a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      92,
+      110,
+      41,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "define/8/1",
+    "pattern": "(?(DEFINE)(a\\n))a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      40,
+      68,
+      69,
+      70,
+      73,
+      78,
+      69,
+      41,
+      40,
+      97,
+      92,
+      110,
+      41,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "unreachable/8/1",
+    "pattern": "a(*ACCEPT)|\\n",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      97,
+      40,
+      42,
+      65,
+      67,
+      67,
+      69,
+      80,
+      84,
+      41,
+      124,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "assertion/8/1",
+    "pattern": "(?=\\n)a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      61,
+      92,
+      110,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "comment/8/1",
+    "pattern": "(?#\n)a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      35,
+      10,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "quoted-escape/8/1",
+    "pattern": "\\Q\\n\\E",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      81,
+      92,
+      110,
+      92,
+      69
+    ],
+    "imported": false
+  },
+  {
+    "id": "quoted-literal/8/1",
+    "pattern": "\\Q\n\\E",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      81,
+      10,
+      92,
+      69
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-quoted-escape/8/1",
+    "pattern": "[\\Q\\n\\E]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      81,
+      92,
+      110,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-quoted-literal/8/1",
+    "pattern": "[^\\Q\n\\E]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      81,
+      10,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-quoted-duplicate/8/1",
+    "pattern": "[^\\Q\n\n\\E]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      81,
+      10,
+      10,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-whitespace/8/1",
+    "pattern": "(?x)\na",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      10,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-comment/8/1",
+    "pattern": "(?x)# hello\r\na",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      35,
+      32,
+      104,
+      101,
+      108,
+      108,
+      111,
+      13,
+      10,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-escaped/8/1",
+    "pattern": "(?x)\\n",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-class/8/1",
+    "pattern": "(?xx)[\n ]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      120,
+      41,
+      91,
+      10,
+      32,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "mark-string/8/1",
+    "pattern": "(*MARK:\n)a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      77,
+      65,
+      82,
+      75,
+      58,
+      10,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "callout-string/8/1",
+    "pattern": "(?C'\n')a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      67,
+      39,
+      10,
+      39,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "newline-directive/8/1",
+    "pattern": "(*CRLF)a",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      67,
+      82,
+      76,
+      70,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-leaf/8/1",
+    "pattern": "(?[ [\\n] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-negative-leaf/8/1",
+    "pattern": "(?[ [^\\n] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      94,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-negation/8/1",
+    "pattern": "(?[ !\\n ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      33,
+      92,
+      110,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-double-negation/8/1",
+    "pattern": "(?[ !!\\n ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      33,
+      33,
+      92,
+      110,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-subtract/8/1",
+    "pattern": "(?[ [\\n] - [\\n] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      45,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-intersection/8/1",
+    "pattern": "(?[ [\\n] & [a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      38,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-vertical/8/1",
+    "pattern": "(?[ [\\v] | [a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      118,
+      93,
+      32,
+      124,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-range/8/1",
+    "pattern": "(?[ [\\x09-\\x0e] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-raw-whitespace/8/1",
+    "pattern": "(?[\n [a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      10,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-space/8/1",
+    "pattern": "(?[  [a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-tab/8/1",
+    "pattern": "(?[\t [a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      9,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-vtab/8/1",
+    "pattern": "(?[\u000b [a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      11,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-formfeed/8/1",
+    "pattern": "(?[\f [a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      12,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-carriage/8/1",
+    "pattern": "(?[\r [a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      13,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "bad-literal-escape/8/1",
+    "pattern": "\\\n",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-32/8/1",
+    "pattern": "(?[ [ a] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      32,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-9/8/1",
+    "pattern": "(?[ [\ta] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      9,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-10/8/1",
+    "pattern": "(?[ [\na] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      10,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-11/8/1",
+    "pattern": "(?[ [\u000ba] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      11,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-12/8/1",
+    "pattern": "(?[ [\fa] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      12,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-13/8/1",
+    "pattern": "(?[ [\ra] ])",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      13,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-spelling/8/1",
+    "pattern": "\\n",
+    "width": 8,
+    "flags": 34078720,
+    "extra": 0,
+    "units": [
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-real/8/1",
+    "pattern": "\n",
+    "width": 8,
+    "flags": 34078720,
+    "extra": 0,
+    "units": [
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "normalize-cr/8/1",
+    "pattern": "\\r",
+    "width": 8,
+    "flags": 524288,
+    "extra": 16,
+    "units": [
+      92,
+      114
+    ],
+    "imported": false
+  },
+  {
+    "id": "normalize-negative-cr/8/1",
+    "pattern": "[^\\r]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 16,
+    "units": [
+      91,
+      94,
+      92,
+      114,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-plain-negative/8/1",
+    "pattern": "[^\\n]",
+    "width": 8,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-nested-negative/8/1",
+    "pattern": "[[^\\n]]",
+    "width": 8,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      94,
+      92,
+      110,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-subtraction/8/1",
+    "pattern": "[\\n--\\n]",
+    "width": 8,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      45,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-vertical/8/1",
+    "pattern": "[[\\v]]",
+    "width": 8,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      92,
+      118,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-negative-outer/8/1",
+    "pattern": "[^\\n--a]",
+    "width": 8,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      45,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-union/8/1",
+    "pattern": "[\\n||a]",
+    "width": 8,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      124,
+      124,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-u-lf/8/1",
+    "pattern": "\\u000a",
+    "width": 8,
+    "flags": 524290,
+    "extra": 0,
+    "units": [
+      92,
+      117,
+      48,
+      48,
+      48,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "bad-escape-literal/8/1",
+    "pattern": "\\q\\n",
+    "width": 8,
+    "flags": 524288,
+    "extra": 2,
+    "units": [
+      92,
+      113,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "imported-first/8/1",
+    "pattern": "[a\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-second/8/1",
+    "pattern": "[\\na]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      97,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-duplicate/8/1",
+    "pattern": "[aa\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      97,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-negative/8/1",
+    "pattern": "[^a\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "empty/16/0",
+    "pattern": "",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [],
+    "imported": false
+  },
+  {
+    "id": "literal-lf/16/0",
+    "pattern": "\n",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-cr/16/0",
+    "pattern": "\r",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      13
+    ],
+    "imported": false
+  },
+  {
+    "id": "hex-lf/16/0",
+    "pattern": "\\x0a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      120,
+      48,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "octal-cr/16/0",
+    "pattern": "\\015",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      48,
+      49,
+      53
+    ],
+    "imported": false
+  },
+  {
+    "id": "control-lf/16/0",
+    "pattern": "\\cJ",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      99,
+      74
+    ],
+    "imported": false
+  },
+  {
+    "id": "braced-lf/16/0",
+    "pattern": "\\x{a}",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      120,
+      123,
+      97,
+      125
+    ],
+    "imported": false
+  },
+  {
+    "id": "vertical/16/0",
+    "pattern": "\\v",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      118
+    ],
+    "imported": false
+  },
+  {
+    "id": "space/16/0",
+    "pattern": "\\s",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      115
+    ],
+    "imported": false
+  },
+  {
+    "id": "newline/16/0",
+    "pattern": "\\R",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      82
+    ],
+    "imported": false
+  },
+  {
+    "id": "dot/16/0",
+    "pattern": ".",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      46
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-single/16/0",
+    "pattern": "[\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-single/16/0",
+    "pattern": "[^\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-cr/16/0",
+    "pattern": "[^\\r]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      114,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-duplicate/16/0",
+    "pattern": "[\\n\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-duplicate/16/0",
+    "pattern": "[^\\n\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-multiple/16/0",
+    "pattern": "[^\\na]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-equal-range/16/0",
+    "pattern": "[\\n-\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-equal-range/16/0",
+    "pattern": "[^\\n-\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-equal-repeat/16/0",
+    "pattern": "[^\\n-\\n]{0}a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "inside-range/16/0",
+    "pattern": "[\\x09-\\x0e]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "start-endpoint/16/0",
+    "pattern": "[\\x0a-\\x0e]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      97,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "end-endpoint/16/0",
+    "pattern": "[\\x09-\\x0d]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      100,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-inside-range/16/0",
+    "pattern": "[^\\x09-\\x0e]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-start-endpoint/16/0",
+    "pattern": "[^\\x0a-\\x0e]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      120,
+      48,
+      97,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-vertical/16/0",
+    "pattern": "[\\v]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      118,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-space/16/0",
+    "pattern": "[\\s]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      115,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-posix-space/16/0",
+    "pattern": "[[:space:]]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      58,
+      115,
+      112,
+      97,
+      99,
+      101,
+      58,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-posix-blank/16/0",
+    "pattern": "[[:blank:]]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      58,
+      98,
+      108,
+      97,
+      110,
+      107,
+      58,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-properties/16/0",
+    "pattern": "[\\p{Z}]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      112,
+      123,
+      90,
+      125,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "zero-literal/16/0",
+    "pattern": "\\n{0}a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      110,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "zero-group/16/0",
+    "pattern": "(\\n){0}a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      92,
+      110,
+      41,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "define/16/0",
+    "pattern": "(?(DEFINE)(a\\n))a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      40,
+      68,
+      69,
+      70,
+      73,
+      78,
+      69,
+      41,
+      40,
+      97,
+      92,
+      110,
+      41,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "unreachable/16/0",
+    "pattern": "a(*ACCEPT)|\\n",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      97,
+      40,
+      42,
+      65,
+      67,
+      67,
+      69,
+      80,
+      84,
+      41,
+      124,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "assertion/16/0",
+    "pattern": "(?=\\n)a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      61,
+      92,
+      110,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "comment/16/0",
+    "pattern": "(?#\n)a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      35,
+      10,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "quoted-escape/16/0",
+    "pattern": "\\Q\\n\\E",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      81,
+      92,
+      110,
+      92,
+      69
+    ],
+    "imported": false
+  },
+  {
+    "id": "quoted-literal/16/0",
+    "pattern": "\\Q\n\\E",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      81,
+      10,
+      92,
+      69
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-quoted-escape/16/0",
+    "pattern": "[\\Q\\n\\E]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      81,
+      92,
+      110,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-quoted-literal/16/0",
+    "pattern": "[^\\Q\n\\E]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      81,
+      10,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-quoted-duplicate/16/0",
+    "pattern": "[^\\Q\n\n\\E]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      81,
+      10,
+      10,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-whitespace/16/0",
+    "pattern": "(?x)\na",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      10,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-comment/16/0",
+    "pattern": "(?x)# hello\r\na",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      35,
+      32,
+      104,
+      101,
+      108,
+      108,
+      111,
+      13,
+      10,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-escaped/16/0",
+    "pattern": "(?x)\\n",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-class/16/0",
+    "pattern": "(?xx)[\n ]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      120,
+      41,
+      91,
+      10,
+      32,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "mark-string/16/0",
+    "pattern": "(*MARK:\n)a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      77,
+      65,
+      82,
+      75,
+      58,
+      10,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "callout-string/16/0",
+    "pattern": "(?C'\n')a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      67,
+      39,
+      10,
+      39,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "newline-directive/16/0",
+    "pattern": "(*CRLF)a",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      67,
+      82,
+      76,
+      70,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-leaf/16/0",
+    "pattern": "(?[ [\\n] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-negative-leaf/16/0",
+    "pattern": "(?[ [^\\n] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      94,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-negation/16/0",
+    "pattern": "(?[ !\\n ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      33,
+      92,
+      110,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-double-negation/16/0",
+    "pattern": "(?[ !!\\n ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      33,
+      33,
+      92,
+      110,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-subtract/16/0",
+    "pattern": "(?[ [\\n] - [\\n] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      45,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-intersection/16/0",
+    "pattern": "(?[ [\\n] & [a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      38,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-vertical/16/0",
+    "pattern": "(?[ [\\v] | [a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      118,
+      93,
+      32,
+      124,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-range/16/0",
+    "pattern": "(?[ [\\x09-\\x0e] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-raw-whitespace/16/0",
+    "pattern": "(?[\n [a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      10,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-space/16/0",
+    "pattern": "(?[  [a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-tab/16/0",
+    "pattern": "(?[\t [a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      9,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-vtab/16/0",
+    "pattern": "(?[\u000b [a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      11,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-formfeed/16/0",
+    "pattern": "(?[\f [a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      12,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-carriage/16/0",
+    "pattern": "(?[\r [a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      13,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "bad-literal-escape/16/0",
+    "pattern": "\\\n",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      92,
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-32/16/0",
+    "pattern": "(?[ [ a] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      32,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-9/16/0",
+    "pattern": "(?[ [\ta] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      9,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-10/16/0",
+    "pattern": "(?[ [\na] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      10,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-11/16/0",
+    "pattern": "(?[ [\u000ba] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      11,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-12/16/0",
+    "pattern": "(?[ [\fa] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      12,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-13/16/0",
+    "pattern": "(?[ [\ra] ])",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      13,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-spelling/16/0",
+    "pattern": "\\n",
+    "width": 16,
+    "flags": 33554432,
+    "extra": 0,
+    "units": [
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-real/16/0",
+    "pattern": "\n",
+    "width": 16,
+    "flags": 33554432,
+    "extra": 0,
+    "units": [
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "normalize-cr/16/0",
+    "pattern": "\\r",
+    "width": 16,
+    "flags": 0,
+    "extra": 16,
+    "units": [
+      92,
+      114
+    ],
+    "imported": false
+  },
+  {
+    "id": "normalize-negative-cr/16/0",
+    "pattern": "[^\\r]",
+    "width": 16,
+    "flags": 0,
+    "extra": 16,
+    "units": [
+      91,
+      94,
+      92,
+      114,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-plain-negative/16/0",
+    "pattern": "[^\\n]",
+    "width": 16,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-nested-negative/16/0",
+    "pattern": "[[^\\n]]",
+    "width": 16,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      94,
+      92,
+      110,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-subtraction/16/0",
+    "pattern": "[\\n--\\n]",
+    "width": 16,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      45,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-vertical/16/0",
+    "pattern": "[[\\v]]",
+    "width": 16,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      92,
+      118,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-negative-outer/16/0",
+    "pattern": "[^\\n--a]",
+    "width": 16,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      45,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-union/16/0",
+    "pattern": "[\\n||a]",
+    "width": 16,
+    "flags": 134217728,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      124,
+      124,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-u-lf/16/0",
+    "pattern": "\\u000a",
+    "width": 16,
+    "flags": 2,
+    "extra": 0,
+    "units": [
+      92,
+      117,
+      48,
+      48,
+      48,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "bad-escape-literal/16/0",
+    "pattern": "\\q\\n",
+    "width": 16,
+    "flags": 0,
+    "extra": 2,
+    "units": [
+      92,
+      113,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "imported-first/16/0",
+    "pattern": "[a\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-second/16/0",
+    "pattern": "[\\na]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      97,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-duplicate/16/0",
+    "pattern": "[aa\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      97,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-negative/16/0",
+    "pattern": "[^a\\n]",
+    "width": 16,
+    "flags": 0,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "empty/16/1",
+    "pattern": "",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [],
+    "imported": false
+  },
+  {
+    "id": "literal-lf/16/1",
+    "pattern": "\n",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-cr/16/1",
+    "pattern": "\r",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      13
+    ],
+    "imported": false
+  },
+  {
+    "id": "hex-lf/16/1",
+    "pattern": "\\x0a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      120,
+      48,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "octal-cr/16/1",
+    "pattern": "\\015",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      48,
+      49,
+      53
+    ],
+    "imported": false
+  },
+  {
+    "id": "control-lf/16/1",
+    "pattern": "\\cJ",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      99,
+      74
+    ],
+    "imported": false
+  },
+  {
+    "id": "braced-lf/16/1",
+    "pattern": "\\x{a}",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      120,
+      123,
+      97,
+      125
+    ],
+    "imported": false
+  },
+  {
+    "id": "vertical/16/1",
+    "pattern": "\\v",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      118
+    ],
+    "imported": false
+  },
+  {
+    "id": "space/16/1",
+    "pattern": "\\s",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      115
+    ],
+    "imported": false
+  },
+  {
+    "id": "newline/16/1",
+    "pattern": "\\R",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      82
+    ],
+    "imported": false
+  },
+  {
+    "id": "dot/16/1",
+    "pattern": ".",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      46
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-single/16/1",
+    "pattern": "[\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-single/16/1",
+    "pattern": "[^\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-cr/16/1",
+    "pattern": "[^\\r]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      114,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-duplicate/16/1",
+    "pattern": "[\\n\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-duplicate/16/1",
+    "pattern": "[^\\n\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-multiple/16/1",
+    "pattern": "[^\\na]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "positive-equal-range/16/1",
+    "pattern": "[\\n-\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-equal-range/16/1",
+    "pattern": "[^\\n-\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-equal-repeat/16/1",
+    "pattern": "[^\\n-\\n]{0}a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      92,
+      110,
+      93,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "inside-range/16/1",
+    "pattern": "[\\x09-\\x0e]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "start-endpoint/16/1",
+    "pattern": "[\\x0a-\\x0e]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      97,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "end-endpoint/16/1",
+    "pattern": "[\\x09-\\x0d]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      100,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-inside-range/16/1",
+    "pattern": "[^\\x09-\\x0e]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-start-endpoint/16/1",
+    "pattern": "[^\\x0a-\\x0e]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      120,
+      48,
+      97,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-vertical/16/1",
+    "pattern": "[\\v]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      118,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-space/16/1",
+    "pattern": "[\\s]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      115,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-posix-space/16/1",
+    "pattern": "[[:space:]]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      58,
+      115,
+      112,
+      97,
+      99,
+      101,
+      58,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-posix-blank/16/1",
+    "pattern": "[[:blank:]]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      58,
+      98,
+      108,
+      97,
+      110,
+      107,
+      58,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-properties/16/1",
+    "pattern": "[\\p{Z}]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      112,
+      123,
+      90,
+      125,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "zero-literal/16/1",
+    "pattern": "\\n{0}a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      110,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "zero-group/16/1",
+    "pattern": "(\\n){0}a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      92,
+      110,
+      41,
+      123,
+      48,
+      125,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "define/16/1",
+    "pattern": "(?(DEFINE)(a\\n))a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      40,
+      68,
+      69,
+      70,
+      73,
+      78,
+      69,
+      41,
+      40,
+      97,
+      92,
+      110,
+      41,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "unreachable/16/1",
+    "pattern": "a(*ACCEPT)|\\n",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      97,
+      40,
+      42,
+      65,
+      67,
+      67,
+      69,
+      80,
+      84,
+      41,
+      124,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "assertion/16/1",
+    "pattern": "(?=\\n)a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      61,
+      92,
+      110,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "comment/16/1",
+    "pattern": "(?#\n)a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      35,
+      10,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "quoted-escape/16/1",
+    "pattern": "\\Q\\n\\E",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      81,
+      92,
+      110,
+      92,
+      69
+    ],
+    "imported": false
+  },
+  {
+    "id": "quoted-literal/16/1",
+    "pattern": "\\Q\n\\E",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      81,
+      10,
+      92,
+      69
+    ],
+    "imported": false
+  },
+  {
+    "id": "class-quoted-escape/16/1",
+    "pattern": "[\\Q\\n\\E]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      81,
+      92,
+      110,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-quoted-literal/16/1",
+    "pattern": "[^\\Q\n\\E]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      81,
+      10,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "negative-quoted-duplicate/16/1",
+    "pattern": "[^\\Q\n\n\\E]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      81,
+      10,
+      10,
+      92,
+      69,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-whitespace/16/1",
+    "pattern": "(?x)\na",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      10,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-comment/16/1",
+    "pattern": "(?x)# hello\r\na",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      35,
+      32,
+      104,
+      101,
+      108,
+      108,
+      111,
+      13,
+      10,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-escaped/16/1",
+    "pattern": "(?x)\\n",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      41,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "extended-class/16/1",
+    "pattern": "(?xx)[\n ]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      120,
+      120,
+      41,
+      91,
+      10,
+      32,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "mark-string/16/1",
+    "pattern": "(*MARK:\n)a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      77,
+      65,
+      82,
+      75,
+      58,
+      10,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "callout-string/16/1",
+    "pattern": "(?C'\n')a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      67,
+      39,
+      10,
+      39,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "newline-directive/16/1",
+    "pattern": "(*CRLF)a",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      67,
+      82,
+      76,
+      70,
+      41,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-leaf/16/1",
+    "pattern": "(?[ [\\n] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-negative-leaf/16/1",
+    "pattern": "(?[ [^\\n] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      94,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-negation/16/1",
+    "pattern": "(?[ !\\n ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      33,
+      92,
+      110,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-double-negation/16/1",
+    "pattern": "(?[ !!\\n ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      33,
+      33,
+      92,
+      110,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-subtract/16/1",
+    "pattern": "(?[ [\\n] - [\\n] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      45,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-intersection/16/1",
+    "pattern": "(?[ [\\n] & [a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      110,
+      93,
+      32,
+      38,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-vertical/16/1",
+    "pattern": "(?[ [\\v] | [a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      118,
+      93,
+      32,
+      124,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-range/16/1",
+    "pattern": "(?[ [\\x09-\\x0e] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      92,
+      120,
+      48,
+      57,
+      45,
+      92,
+      120,
+      48,
+      101,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-raw-whitespace/16/1",
+    "pattern": "(?[\n [a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      10,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-space/16/1",
+    "pattern": "(?[  [a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-tab/16/1",
+    "pattern": "(?[\t [a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      9,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-vtab/16/1",
+    "pattern": "(?[\u000b [a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      11,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-formfeed/16/1",
+    "pattern": "(?[\f [a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      12,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-carriage/16/1",
+    "pattern": "(?[\r [a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      13,
+      32,
+      91,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "bad-literal-escape/16/1",
+    "pattern": "\\\n",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-32/16/1",
+    "pattern": "(?[ [ a] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      32,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-9/16/1",
+    "pattern": "(?[ [\ta] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      9,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-10/16/1",
+    "pattern": "(?[ [\na] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      10,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-11/16/1",
+    "pattern": "(?[ [\u000ba] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      11,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-12/16/1",
+    "pattern": "(?[ [\fa] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      12,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "perl-nested-unit-13/16/1",
+    "pattern": "(?[ [\ra] ])",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      63,
+      91,
+      32,
+      91,
+      13,
+      97,
+      93,
+      32,
+      93,
+      41
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-spelling/16/1",
+    "pattern": "\\n",
+    "width": 16,
+    "flags": 34078720,
+    "extra": 0,
+    "units": [
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "literal-real/16/1",
+    "pattern": "\n",
+    "width": 16,
+    "flags": 34078720,
+    "extra": 0,
+    "units": [
+      10
+    ],
+    "imported": false
+  },
+  {
+    "id": "normalize-cr/16/1",
+    "pattern": "\\r",
+    "width": 16,
+    "flags": 524288,
+    "extra": 16,
+    "units": [
+      92,
+      114
+    ],
+    "imported": false
+  },
+  {
+    "id": "normalize-negative-cr/16/1",
+    "pattern": "[^\\r]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 16,
+    "units": [
+      91,
+      94,
+      92,
+      114,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-plain-negative/16/1",
+    "pattern": "[^\\n]",
+    "width": 16,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-nested-negative/16/1",
+    "pattern": "[[^\\n]]",
+    "width": 16,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      94,
+      92,
+      110,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-subtraction/16/1",
+    "pattern": "[\\n--\\n]",
+    "width": 16,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      45,
+      45,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-vertical/16/1",
+    "pattern": "[[\\v]]",
+    "width": 16,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      91,
+      92,
+      118,
+      93,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-negative-outer/16/1",
+    "pattern": "[^\\n--a]",
+    "width": 16,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      92,
+      110,
+      45,
+      45,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-union/16/1",
+    "pattern": "[\\n||a]",
+    "width": 16,
+    "flags": 134742016,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      124,
+      124,
+      97,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "alt-u-lf/16/1",
+    "pattern": "\\u000a",
+    "width": 16,
+    "flags": 524290,
+    "extra": 0,
+    "units": [
+      92,
+      117,
+      48,
+      48,
+      48,
+      97
+    ],
+    "imported": false
+  },
+  {
+    "id": "bad-escape-literal/16/1",
+    "pattern": "\\q\\n",
+    "width": 16,
+    "flags": 524288,
+    "extra": 2,
+    "units": [
+      92,
+      113,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "imported-first/16/1",
+    "pattern": "[a\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-second/16/1",
+    "pattern": "[\\na]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      92,
+      110,
+      97,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-duplicate/16/1",
+    "pattern": "[aa\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      97,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "imported-negative/16/1",
+    "pattern": "[^a\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      91,
+      94,
+      97,
+      92,
+      110,
+      93
+    ],
+    "imported": true
+  },
+  {
+    "id": "mapped/340",
+    "pattern": "\ud83d\ude00\\n",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      240,
+      159,
+      152,
+      128,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "mapped/341",
+    "pattern": "\ud83d\ude00[^\\n]",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      240,
+      159,
+      152,
+      128,
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "mapped/342",
+    "pattern": "\\N{U+000a}",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      78,
+      123,
+      85,
+      43,
+      48,
+      48,
+      48,
+      97,
+      125
+    ],
+    "imported": false
+  },
+  {
+    "id": "mapped/343",
+    "pattern": "(*UTF)\\n",
+    "width": 8,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      85,
+      84,
+      70,
+      41,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "mapped/344",
+    "pattern": "\ud83d\ude00\\n",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      55357,
+      56832,
+      92,
+      110
+    ],
+    "imported": false
+  },
+  {
+    "id": "mapped/345",
+    "pattern": "\ud83d\ude00[^\\n]",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      55357,
+      56832,
+      91,
+      94,
+      92,
+      110,
+      93
+    ],
+    "imported": false
+  },
+  {
+    "id": "mapped/346",
+    "pattern": "\\N{U+000a}",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      92,
+      78,
+      123,
+      85,
+      43,
+      48,
+      48,
+      48,
+      97,
+      125
+    ],
+    "imported": false
+  },
+  {
+    "id": "mapped/347",
+    "pattern": "(*UTF)\\n",
+    "width": 16,
+    "flags": 524288,
+    "extra": 0,
+    "units": [
+      40,
+      42,
+      85,
+      84,
+      70,
+      41,
+      92,
+      110
+    ],
+    "imported": false
+  }
+]

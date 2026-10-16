@@ -1,0 +1,134 @@
+{
+  "format": "posix-conformance-manifest-1",
+  "contractVersion": "posix-fixtures-1",
+  "dataId": "GregsEx.Posix.C.Byte-v1",
+  "dataDigest": "9ecb7646317a4fe07c42c908c4a27598e152225194fa59ff436af9c74fcab7ae",
+  "fixtureCount": 7265,
+  "lanes": [
+    {
+      "id": "seeds",
+      "corpus": "test/GregsEx.Tests/Contracts/Posix/ContractVectors.json",
+      "count": 138
+    },
+    {
+      "id": "expanded",
+      "corpus": "test/corpora/posix/expanded.json",
+      "count": 7127
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "test/GregsEx.Tests/Contracts/Posix/ContractVectors.json",
+      "bytes": 211961,
+      "sha256": "c69a59e4909e884650a6e425b4ec4931e4ed241c8fe990dffa1a7b6c5058e575"
+    },
+    {
+      "path": "test/corpora/posix/expanded.json",
+      "bytes": 6000111,
+      "sha256": "2f09fd0ad21ce95a204bf76ebb016a37040445e50bca9d9d6ab77b27982b7072"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Posix/LocaleTable.json",
+      "bytes": 14254,
+      "sha256": "b7f1f895c3e9ffa0d5ab2a1f4df2f97c11c4af6f58677afce995c7d4b3df1a55"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Posix/PosixFixtures.schema.json",
+      "bytes": 14040,
+      "sha256": "01756ac24a71277d8a1eeb16ee092cba7fd371a0afde7aa155947ea7948b8a85"
+    },
+    {
+      "path": "test/corpora/posix/index.json",
+      "bytes": 1579358,
+      "sha256": "0933c4c3d5dc1a4438887e503ac22f0b30255519295d1d0567e5c0b2369eb9cc"
+    },
+    {
+      "path": "test/corpora/posix/oracle/disagreements.json",
+      "bytes": 135575,
+      "sha256": "f2d9ce1f11c6061b3dd1eb171db86f2522f38104afb4dba028fe8139e6e80b56"
+    },
+    {
+      "path": "test/corpora/posix/oracle/native-requests.txt.gz",
+      "bytes": 38091,
+      "sha256": "93808c1bb221b4572ad99a6a61332744e40c17a4307405caf9c44280b1b17195"
+    },
+    {
+      "path": "test/corpora/posix/oracle/glibc-results.jsonl.gz",
+      "bytes": 25373,
+      "sha256": "f99b4a20a70265635e2934d6a2d0089e38235275fc79377d3b15aac92eb596b5"
+    },
+    {
+      "path": "test/corpora/posix/oracle/musl-results.jsonl.gz",
+      "bytes": 25443,
+      "sha256": "860b5823e6dc26838d7c462db538efd5d0af4d6a3b3e87990b4fe6bc48f21579"
+    },
+    {
+      "path": "test/corpora/posix/oracle/source-only.json",
+      "bytes": 2058,
+      "sha256": "b2babc8578ebb57c09375d7ad39927c048af1c001b9eba3564fa3abf2cbe960c"
+    },
+    {
+      "path": "test/corpora/posix/oracle/native-identity.txt",
+      "bytes": 7684,
+      "sha256": "8ee48333a7e33e6f2d4c1b0397b3070cb756760645f4617aa8c6889b67510fa6"
+    },
+    {
+      "path": "test/corpora/posix/oracle/image-identity.json",
+      "bytes": 257,
+      "sha256": "c4b1ef29ccc78a4293fbc9932ffb523399cbbe32e119d4604418779062bc5c53"
+    },
+    {
+      "path": "tools/oracles/posix/native/source-audit.tar.gz",
+      "bytes": 120517,
+      "sha256": "00a3149d90fd0ddbe67d047193973552bbaf0191a99e2aee431b1fcdd4a3d4a2"
+    },
+    {
+      "path": "tools/oracles/posix/native/oracle.c",
+      "bytes": 4016,
+      "sha256": "a9efcc06c06e697e53a101c876bf5f481b30e9dbf4b0093cf0215b61398538ab"
+    },
+    {
+      "path": "tools/oracles/posix/native/Dockerfile",
+      "bytes": 1568,
+      "sha256": "9d732ed5eebedaffa5ca30df593e6146e87c7b4e529862417ebea7a8dd3ba278"
+    },
+    {
+      "path": "tools/oracles/posix/oracle-lock.json",
+      "bytes": 3003,
+      "sha256": "5ddb42bf08c2e003f8bd98443d70abc413e690ceeb8102d05f6bd6abf95e5789"
+    },
+    {
+      "path": "test/corpora/posix/oracle/source-build-identity.txt",
+      "bytes": 12039,
+      "sha256": "80728191f42419df2acfce9ea49285449e215718045c13b5e1ba0d074242bdbc"
+    },
+    {
+      "path": "tools/oracles/posix/generate.py",
+      "bytes": 8585,
+      "sha256": "fe54cd751274c20d9757a4bdae3f131c88b05ac11bcb31fdaba06a0011116797"
+    }
+  ],
+  "native": {
+    "families": [
+      "glibc",
+      "musl"
+    ],
+    "requestCount": 7244,
+    "sourceOnlyCount": 21,
+    "platform": "Linux/aarch64 on Docker Desktop LinuxKit6.10.14",
+    "locale": "C",
+    "perCaseAlarmSeconds": 2,
+    "batchTimeoutSeconds": 180,
+    "addressSpaceBytes": 268435456,
+    "containerMemoryBytes": 536870912,
+    "patternUnitsMaximum": 4096,
+    "subjectUnitsMaximum": 8192,
+    "nmatchMaximum": 64,
+    "workCap": "Pattern/subject/nmatch/output bounds +2s per-case watchdog; native APIs expose no deterministic work counter. No managed-limit parity or timing claim."
+  },
+  "downstream": {
+    "productExecution": "Required: invoke real integration callback for all recipes, even native-source-only cases. No product engine result claimed.",
+    "allocation": "BDN MemoryDiagnoser is the allocation authority; no allocation counters in this audit.",
+    "nativeAot": "Native oracle comparisons do not establish .NET NativeAOT compatibility."
+  }
+}

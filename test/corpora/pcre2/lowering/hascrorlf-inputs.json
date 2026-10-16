@@ -1,0 +1,98 @@
+[
+  {
+    "id": "literal-lf",
+    "pattern": "\n",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "hex-lf",
+    "pattern": "\\x0a",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "space-type",
+    "pattern": "[\\s]",
+    "expected": false,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "negative-multiple",
+    "pattern": "[^\\na]",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "nested-explicit",
+    "pattern": "(?[ [\\n] | [a] ])",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "nested-vertical",
+    "pattern": "(?[ [\\v] | [a] ])",
+    "expected": false,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "zero-group-newline",
+    "pattern": "(\\n){0}a",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "define-newline",
+    "pattern": "(?(DEFINE)(a\\n))a",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "unreachable-newline",
+    "pattern": "a(*ACCEPT)|\\n",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "cr-literal",
+    "pattern": "\\r",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "lf-class",
+    "pattern": "[\\n]",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "vertical-type",
+    "pattern": "[\\v]",
+    "expected": false,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "newline-inside-range",
+    "pattern": "[\\x09-\\x0e]",
+    "expected": false,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "newline-endpoint",
+    "pattern": "[\\x0a-\\x0e]",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "negative-newline",
+    "pattern": "[^\\n]",
+    "expected": false,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  },
+  {
+    "id": "zero-newline",
+    "pattern": "\\n{0}a",
+    "expected": true,
+    "provenance": "native-selected.jsonl INFO_HASCRORLF, pinned PCRE2-10.46 native8; common producer source sites apply to 8/16."
+  }
+]

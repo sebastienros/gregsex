@@ -1,0 +1,478 @@
+{
+  "format": "xml-joined-manifest-1",
+  "contractVersion": "xml-fixtures-1",
+  "dataId": "Unicode-16.0.0+XML-1.0-5e",
+  "fixtureCount": 5546,
+  "lanes": [
+    {
+      "id": "xsd",
+      "profileId": "Xsd11",
+      "corpus": "test/corpora/xml/xsd/corpus.json",
+      "fixtureCount": 4811,
+      "integratedRevision": "0c5647fbf57bca9c782e7d04247bf8fbefda4ca4",
+      "counts": {
+        "agreement": 4722,
+        "reviewed-difference": 49,
+        "source-only": 40
+      },
+      "inventory": "test/corpora/xml/xsd/coverage.json",
+      "diagnostics": "test/corpora/xml/xsd/diagnostic-provenance.json",
+      "dispositions": "test/corpora/xml/xsd/disagreements.json",
+      "processor": "test/corpora/xml/xsd/processor-pin.json",
+      "results": "test/corpora/xml/xsd/processor-results.json"
+    },
+    {
+      "id": "xpath",
+      "profileId": "XPath31",
+      "corpus": "test/corpora/xml/xpath/Corpus.json",
+      "fixtureCount": 735,
+      "integratedRevision": "f6f218812a49b067894702e869aeed15b937710e",
+      "counts": {
+        "agreement": 712,
+        "reviewed-difference": 11,
+        "source-only": 12
+      },
+      "inventory": "test/corpora/xml/xpath/inventory.json",
+      "diagnostics": "test/corpora/xml/xpath/annotations.json",
+      "dispositions": "test/corpora/xml/xpath/dispositions.json",
+      "processor": "test/corpora/xml/xpath/processor-lock.json",
+      "results": "test/corpora/xml/xpath/oracle/oracle-results.xml"
+    }
+  ],
+  "index": {
+    "path": "tools/oracles/xml/integration/index.json",
+    "bytes": 986110,
+    "sha256": "4ef7300a9ff83a7c8ac6659f7f86747ad471db8d0e0fe41834768481e1aa3fe6"
+  },
+  "artifacts": [
+    {
+      "path": "LICENSE",
+      "bytes": 1071,
+      "sha256": "b65577f60d9a79a72eb1875c9fda56064c722d1a1555b6444ee54c6efb4cee12"
+    },
+    {
+      "path": "docs/specs/xml.md",
+      "bytes": 18231,
+      "sha256": "ed12fdcb60fb3d7a8fe38825cd908d43720738938afb57f952708b98f5883187"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Xml/ContractVectors.json",
+      "bytes": 85406,
+      "sha256": "c58cd62bcd4faf02fdcbbb4c6e05de187b8ca04811815b2b8012e3d6cc006b9c"
+    },
+    {
+      "path": "test/GregsEx.Tests/Contracts/Xml/XmlFixtures.schema.json",
+      "bytes": 10304,
+      "sha256": "d6493a072c5c1250c9c379f57d0196bf6cba1d7c442374728db91dffcf078f29"
+    },
+    {
+      "path": "test/corpora/xml/sources/source-manifest.json",
+      "bytes": 2625,
+      "sha256": "84f8aa3c5ca4edd0de011eb84a54f48763fe00deaff7beee29952935ec933f99"
+    },
+    {
+      "path": "test/corpora/xml/xpath/Corpus.json",
+      "bytes": 945927,
+      "sha256": "079395b0a46fe8378a80d7d538dac8dbc29f351b9d3280dcd5a1d2ed134a4059"
+    },
+    {
+      "path": "test/corpora/xml/xpath/README.md",
+      "bytes": 3891,
+      "sha256": "4932cba03227588f2513b8e032bfcce24e02be4bc509780a2913e4d8c0a41d54"
+    },
+    {
+      "path": "test/corpora/xml/xpath/annotations.json",
+      "bytes": 148764,
+      "sha256": "df84d94180ba3dfa82a95ca81087e5a622b412be196747a4f1abc633ad0d01f1"
+    },
+    {
+      "path": "test/corpora/xml/xpath/dispositions.json",
+      "bytes": 9868,
+      "sha256": "2d204d6a78f9d390a5243bb1ead172faf4b1ae4b4008509b7016e8c0c0943c79"
+    },
+    {
+      "path": "test/corpora/xml/xpath/input-lock.json",
+      "bytes": 1107,
+      "sha256": "7074ee9af41837061c3c0ccfccfab11ab1fed2d027a042c172e8d78428c1b402"
+    },
+    {
+      "path": "test/corpora/xml/xpath/inventory.json",
+      "bytes": 30697,
+      "sha256": "82f897dbfaece3af459671d7d30d4fb16978c3c5b739b3a71a138ce1ef3fda28"
+    },
+    {
+      "path": "test/corpora/xml/xpath/jobs.xml",
+      "bytes": 112409,
+      "sha256": "1685710fb059352641eec9e56e62e11c7e589b0f3f882f825a52ec6e7d649d1a"
+    },
+    {
+      "path": "test/corpora/xml/xpath/oracle/comparison.json",
+      "bytes": 283015,
+      "sha256": "4294c666044febfa0f55134278f5bc16de834cbf7711c002194461736c2c70d3"
+    },
+    {
+      "path": "test/corpora/xml/xpath/oracle/oracle-results.xml",
+      "bytes": 343452,
+      "sha256": "736aed6d809dac42e05f929ffbcbfb08d185308a68daef46a039ac6a94936f7f"
+    },
+    {
+      "path": "test/corpora/xml/xpath/oracle/qualification.json",
+      "bytes": 11127,
+      "sha256": "674fdb5ec9c00778f8d112854ef6721103d095507eabf548ea1b4c431606ffae"
+    },
+    {
+      "path": "test/corpora/xml/xpath/processor-lock.json",
+      "bytes": 1467,
+      "sha256": "f5988306f96b57251612b52e2b15b2d14c3120c89eb9da394aec1ed0ac19b95f"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/README.md",
+      "bytes": 691,
+      "sha256": "f3b23cb8480bafd70dd167669b656e2f8d29845074faa1711c417d764afac35d"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/bsd-license.html",
+      "bytes": 25079,
+      "sha256": "6fb7bb1dd66b7307f2cf8694929a6a45c79a746d5ba4d25c450ebcdbed5889a8"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/fn/analyze-string.xml",
+      "bytes": 24186,
+      "sha256": "da37450bf7b42cf1100b22cc1d159100903af67643fdd62dd8eaac5de7c18e48"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/fn/analyze-string/analyze-string.xsd",
+      "bytes": 1230,
+      "sha256": "321ad02670be46ef0c6e3c833a5e5da36a085f2e26176e4e5a1ae3313c38dfb0"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/fn/matches.re.xml",
+      "bytes": 733071,
+      "sha256": "f4544a43a1e6224e92c2f5c9503a267fb24178a32f5aee2d026d4e4b1868cbbd"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/fn/matches.xml",
+      "bytes": 60982,
+      "sha256": "c18dcf29d39eadd128eb9a9bccd8d4037ca13e4d0d8ac2d50d874b38637727a0"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/fn/replace.xml",
+      "bytes": 37495,
+      "sha256": "d1ac1bdccecee49fb89b30825fc1b1bb26f7cf173df42668187e6c9947b1db16"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/fn/tokenize.xml",
+      "bytes": 26887,
+      "sha256": "3061292a186e1785aef45a91d70436bf8eba573a8ef9efca4d307968ef31738a"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/guide/running.html",
+      "bytes": 28667,
+      "sha256": "b4933f1d675035d7bf2d5507ceb78c26766f2586701b29c151ee3e7b04c927f8"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/guide/submitting.html",
+      "bytes": 8015,
+      "sha256": "7db2c4b481683fc93414c901435855fb725db5aaaa76d7b3fad3520e7fa25377"
+    },
+    {
+      "path": "test/corpora/xml/xpath/qt3/license.html",
+      "bytes": 29572,
+      "sha256": "4534f8fa5519fa372134a81c6442b40ff58a6feee74737f67d7df93f91bcbfb0"
+    },
+    {
+      "path": "test/corpora/xml/xpath/source-lock.json",
+      "bytes": 2955,
+      "sha256": "030005ea9f321d584707f2b26f4e6ed3351e96b1b13e263087236516e16f62ce"
+    },
+    {
+      "path": "test/corpora/xml/xpath/sources/Blocks-16.txt",
+      "bytes": 11397,
+      "sha256": "f3907b395d410f1b97342292ca6bc83dd12eb4b205f2a0c48efdef99e517d7b0"
+    },
+    {
+      "path": "test/corpora/xml/xpath/sources/SpecialCasing-16.txt",
+      "bytes": 16809,
+      "sha256": "8d5de354eef79f2395a54c9c7dcebbaf3d30fc962d0f85611ea97aa973a0c451"
+    },
+    {
+      "path": "test/corpora/xml/xpath/sources/UnicodeData-16.txt",
+      "bytes": 2175362,
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f"
+    },
+    {
+      "path": "test/corpora/xml/xpath/sources/functions-31.html",
+      "bytes": 2650378,
+      "sha256": "b5bdcfb2e8b6edbe5a997f8971b0829da124bcd6d071c7f651ee71be99b2a988"
+    },
+    {
+      "path": "test/corpora/xml/xpath/sources/unicode-license.txt",
+      "bytes": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    {
+      "path": "test/corpora/xml/xpath/sources/xpath-31.html",
+      "bytes": 1107652,
+      "sha256": "ca1f8b00f9626e3e73589a371d702acf6bf0f4708c96a2cb0e87ca7a5ad3b88c"
+    },
+    {
+      "path": "test/corpora/xml/xsd/LICENSE",
+      "bytes": 1071,
+      "sha256": "b65577f60d9a79a72eb1875c9fda56064c722d1a1555b6444ee54c6efb4cee12"
+    },
+    {
+      "path": "test/corpora/xml/xsd/README.md",
+      "bytes": 6355,
+      "sha256": "5cb6586195401756e36b660eb93076faf16e373518b20d42da485af7020085bf"
+    },
+    {
+      "path": "test/corpora/xml/xsd/corpus.json",
+      "bytes": 6261941,
+      "sha256": "86d2b422b39225298d82fd1b954cf44fc12f7d12c9f642fb18852689c7a20f3e"
+    },
+    {
+      "path": "test/corpora/xml/xsd/coverage.json",
+      "bytes": 2857863,
+      "sha256": "5f5dcfa11b73b5e7c86775659db157aa8af02226e078ecb789fb46f4cbaa93f3"
+    },
+    {
+      "path": "test/corpora/xml/xsd/diagnostic-provenance.json",
+      "bytes": 60845,
+      "sha256": "9ae15d31fa13e7150d03ed1c817d9c2de12ba82d3b838d782a8c539bd45e06cb"
+    },
+    {
+      "path": "test/corpora/xml/xsd/disagreements.json",
+      "bytes": 64724,
+      "sha256": "93ca9851e7eaff4e80171bf75b3832c1e22980f8334f04cf597d0fb2f0f1af5f"
+    },
+    {
+      "path": "test/corpora/xml/xsd/inputs/Blocks.txt",
+      "bytes": 11397,
+      "sha256": "f3907b395d410f1b97342292ca6bc83dd12eb4b205f2a0c48efdef99e517d7b0"
+    },
+    {
+      "path": "test/corpora/xml/xsd/inputs/LICENSE.txt",
+      "bytes": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    {
+      "path": "test/corpora/xml/xsd/inputs/UnicodeData.txt",
+      "bytes": 2175362,
+      "sha256": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f"
+    },
+    {
+      "path": "test/corpora/xml/xsd/oracle/processor-replay.json",
+      "bytes": 3756134,
+      "sha256": "36886fd4ab44e5f94d0193a8cb4418cac40782d01497c0fafdb37abd5d73120b"
+    },
+    {
+      "path": "test/corpora/xml/xsd/processor-pin.json",
+      "bytes": 906,
+      "sha256": "5c1ac3fa3ee907f4e9b6b83c8d993aab0b9d429172ebf834a6738ff6e45d52b9"
+    },
+    {
+      "path": "test/corpora/xml/xsd/processor-results.json",
+      "bytes": 3756134,
+      "sha256": "36886fd4ab44e5f94d0193a8cb4418cac40782d01497c0fafdb37abd5d73120b"
+    },
+    {
+      "path": "test/corpora/xml/xsd/requirements.md",
+      "bytes": 5650,
+      "sha256": "896632269784ab6380ccde72116420c414ddba0fb5fb06b7ba80d28d7750b481"
+    },
+    {
+      "path": "tools/oracles/xml/xpath/README.md",
+      "bytes": 4641,
+      "sha256": "d0af6baaa3cf312c756f5e78e10f9d3a6ff30bfb550c6650c0cd4579b1bb9eef"
+    },
+    {
+      "path": "tools/oracles/xml/xpath/Replay.java",
+      "bytes": 10979,
+      "sha256": "4f10487274229bbd8e95817550b2fa92140c6e5ff44abe10c9141e87cdf1ff65"
+    },
+    {
+      "path": "tools/oracles/xml/xpath/SchemaCheck/Program.cs",
+      "bytes": 1101,
+      "sha256": "7eb52ef3fa432ac7dc2b4c7de0ae0ac541ed6ddfcee52eb4a73fbcd843efadf7"
+    },
+    {
+      "path": "tools/oracles/xml/xpath/SchemaCheck/SchemaCheck.csproj",
+      "bytes": 250,
+      "sha256": "f63b6afad20e8b6ca5d7b323b8d993fa9c726819bc38430506ac41880344e79a"
+    },
+    {
+      "path": "tools/oracles/xml/xpath/prepare.py",
+      "bytes": 18883,
+      "sha256": "4619da7ce95c97fa40b1fe50630b495b10fecb7aa285ff6c0cb6acead04d003f"
+    },
+    {
+      "path": "tools/oracles/xml/xpath/qualify.py",
+      "bytes": 4501,
+      "sha256": "aa14ed53cc3c4cf15e4fdf12d304a115934c6394d3aaea954c9de2c92a5263de"
+    },
+    {
+      "path": "tools/oracles/xml/xpath/replay.py",
+      "bytes": 1144,
+      "sha256": "b832258a47d6b4178d38764594a83e18cd15f84e4296a1de4de7c9d8a2ab1199"
+    },
+    {
+      "path": "tools/oracles/xml/xpath/verify.py",
+      "bytes": 5081,
+      "sha256": "af2f295a1f5ccdcd7226bb441cfeb0679264cbccb2c9ac615e8c608d670795a5"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/.gitignore",
+      "bytes": 31,
+      "sha256": "910cca841163c83d35e92dc7f3cdd6d8b2d6046384a1b7b8d9c79379bf1cbd41"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/Program.cs",
+      "bytes": 2086,
+      "sha256": "6d20a434cb89032e5ecd89d392e2c02fa62efe6e4f7b431a1a2ec9c63cc49c8d"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/README.md",
+      "bytes": 769,
+      "sha256": "c84469f36c48e9775ac6bdbaa6c4d08776774efd8b5cff38ff68bbd3223c0fb9"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/XsdOracle.csproj",
+      "bytes": 240,
+      "sha256": "a68b582a7d978bbd84cc2128607db264525b84685f4919660f89b1644a861d59"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/common.py",
+      "bytes": 1500,
+      "sha256": "73ca70547c84c5bfaafa57ea1194ea136109ab98ed7f864b316a3bc6fccf2201"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/generate.py",
+      "bytes": 16035,
+      "sha256": "1da1f2888bcfc52d3bbc949e8132b3c69cb56ebeb7427934d46dc1a241b0cdfc"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/run.py",
+      "bytes": 6307,
+      "sha256": "6345d1cd515d49a7acface063c73f47e5dbd1aa5cdf1d511277791b79aea1260"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/vendor/elementpath-5.1.3-py3-none-any.whl",
+      "bytes": 260297,
+      "sha256": "c46f5e0e36c149b892308843e1e394bdee17ceafbc18cfa39250403dd8475a4e"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/vendor/elementpath-LICENSE",
+      "bytes": 1131,
+      "sha256": "01a603b5de335fa4db21d918bfb868981e894b768d9b4e6a201488ae2ef3b9ea"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/vendor/test_regex.py",
+      "bytes": 49930,
+      "sha256": "0159f47f502468bbbee9366a38c45745acbd6baad741e5e05f7eac3a5cd5713f"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/vendor/xmlschema-4.3.2-py3-none-any.whl",
+      "bytes": 504613,
+      "sha256": "cf5c970a30f6ebcb3da35260e694704cc0b6794d8ace46125bb2a95e38ed9307"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/vendor/xmlschema-LICENSE",
+      "bytes": 1131,
+      "sha256": "de71695b2db6819ee4478ef39f5f202aab9f0c8750168c2986467ea8e5fa2997"
+    },
+    {
+      "path": "tools/oracles/xml/xsd/verify.py",
+      "bytes": 2408,
+      "sha256": "0ba3987c869a26f96b499e919fa337a86ccec5a00aa0711ed1069f1077da2ebf"
+    }
+  ],
+  "originalQt3": {
+    "total": 1367,
+    "passed": 1355,
+    "skipped": 12,
+    "skips": [
+      {
+        "id": "QT3/matches/fn-matches-50",
+        "outcome": "skipped",
+        "reason": "external query/schema environment outside typed function adapter",
+        "disposition": null
+      },
+      {
+        "id": "QT3/matches/K2-MatchesFunc-16a",
+        "outcome": "skipped",
+        "reason": "XSD1.0 dependency outside pinned XSD1.1 regex grammar",
+        "disposition": null
+      },
+      {
+        "id": "QT3/matches.re/re00056",
+        "outcome": "skipped",
+        "reason": "XSD1.0 dependency outside pinned XSD1.1 regex grammar",
+        "disposition": null
+      },
+      {
+        "id": "QT3/matches.re/re00086",
+        "outcome": "skipped",
+        "reason": "XSD1.0 dependency outside pinned XSD1.1 regex grammar",
+        "disposition": null
+      },
+      {
+        "id": "QT3/matches.re/re00102a",
+        "outcome": "skipped",
+        "reason": "XSD1.0 dependency outside pinned XSD1.1 regex grammar",
+        "disposition": null
+      },
+      {
+        "id": "QT3/tokenize/fn-tokenize-50",
+        "outcome": "skipped",
+        "reason": "XML1.1 outside ratified XML1.0 domain",
+        "disposition": null
+      },
+      {
+        "id": "QT3/tokenize/K-TokenizeFunc-1",
+        "outcome": "skipped",
+        "reason": "test restricted to earlier F&O edition",
+        "disposition": null
+      },
+      {
+        "id": "QT3/analyze-string/analyzeString-020",
+        "outcome": "skipped",
+        "reason": "schema-aware query outside regex profile and HE capability",
+        "disposition": null
+      },
+      {
+        "id": "QT3/analyze-string/analyzeString-021",
+        "outcome": "skipped",
+        "reason": "schema-aware query outside regex profile and HE capability",
+        "disposition": null
+      },
+      {
+        "id": "QT3/analyze-string/analyzeString-024",
+        "outcome": "skipped",
+        "reason": "external query/schema environment outside typed function adapter",
+        "disposition": null
+      },
+      {
+        "id": "QT3/analyze-string/analyzeString-025",
+        "outcome": "skipped",
+        "reason": "external query/schema environment outside typed function adapter",
+        "disposition": null
+      },
+      {
+        "id": "QT3/analyze-string/analyzeString-028",
+        "outcome": "skipped",
+        "reason": "external query/schema environment outside typed function adapter",
+        "disposition": null
+      }
+    ],
+    "normalizedImportedFixtures": 509,
+    "accounting": "Normalized calls overlap original query replay; do not add counts as distinct coverage."
+  },
+  "policy": {
+    "expectations": "Original source-derived permitted outcomes remain authoritative, including all oracle differences and both repeated-empty capture outcomes.",
+    "editions": "XSD1.1 REC2012-04-05 AppendixG; F&O3.1 REC2017-03-21 5.6/C.1; XML1.0 FifthEdition; Unicode16.0.0",
+    "errata": "Retain human-ratified production82 and scalar w/W interpretations. W3C archived29443/30268 remain NEW; no postREC approved regex correction identified.",
+    "tokenize": "Retain deterministic eager validation, including empty input. Saxon host short circuits are qualified observations, not target passes.",
+    "diagnostics": "Compare standard code/namespace/argument domain and actual native units/bounds. Exact frozen seeds and first-offending-native policies remain exact; source witnesses/whole-argument envelopes are not external processor pinpoints.",
+    "product": "Execute all 5546 recipes, every permitted set, parser source-coordinate tests, and encoding/domain/resource/lifetime/allocation/AOT checks. Preparing this join runs no product XML engine or measurements."
+  }
+}
