@@ -110,7 +110,7 @@ public class EcmaCompiledDifferentialTests
 
     public static IEnumerable<TheoryDataRow<string, EcmaScriptFlags>> CommonShapes()
     {
-        foreach (var pattern in new[] { "[a-z]+(ing|ed)", "(wi|ri)n[a-z]*", "\\b[a-z]+ing\\b", "(a|b)*c" })
+        foreach (var pattern in new[] { "[a-z]+(ing|ed)", "(wi|ri)n[a-z]*s", "\\b[a-z]+ing\\b", "(a|b)*c" })
         {
             foreach (var flags in new[] { EcmaScriptFlags.None, EcmaScriptFlags.IgnoreCase, EcmaScriptFlags.Unicode | EcmaScriptFlags.IgnoreCase })
             {
@@ -127,7 +127,7 @@ public class EcmaCompiledDifferentialTests
     [Fact]
     public void AcceleratedDirectPlansAreDeclined()
     {
-        foreach (var pattern in new[] { "(the|and|of) ([a-z]+)", "([a-z]+)=([a-z0-9]+)", "foo", "foo|bar|baz" })
+        foreach (var pattern in new[] { "(the|and|of) ([a-z]+)", "([a-z]+)=([a-z0-9]+)", "foo", "foo|bar|baz", "(wi|ri)n[a-z]*" })
         {
             Assert.Null(TryCompile(Parse(pattern, EcmaScriptFlags.None)));
         }

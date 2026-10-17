@@ -1,3 +1,4 @@
+using GregsEx.Contracts;
 using Xunit;
 
 namespace GregsEx.Tests.Integration.EcmaScript;
@@ -107,6 +108,104 @@ public sealed class JintRegressionTests
             var flags = pattern == "NEEDLE" ? EcmaScriptFlags.IgnoreCase : EcmaScriptFlags.None;
             Assert.Equal(Exec(pattern, flags, subject, out var untimed), Exec(pattern, flags, subject, out var timed, timeout: TimeSpan.FromSeconds(30)));
             Assert.Equal(untimed, timed);
+        }
+    }
+
+    [Theory]
+    // A nullable repeat runs on the atomic-sequence plan: last, or followed by a literal it cannot match.
+    [InlineData("\\s*,\\s*", "x  ,  y", 1, 5)]
+    [InlineData("\\s*,\\s*", "x y, z", 3, 2)]
+    [InlineData("\\s*,", "a , b", 1, 2)]
+    [InlineData("[a-c]*d", "xxabcabdz", 2, 6)]
+    [InlineData("x?y", "aaxyz", 2, 2)]
+    [InlineData("a\\s*,", "xa  ,", 1, 4)]
+    [InlineData(",\\s*", "a,", 1, 1)]
+    public void NullableRepeatsMatchAsTheyDidOnTheVm(string pattern, string input, int index, int length)
+    {
+        Assert.Equal(RegexSearchStatus.Match, Exec(pattern, EcmaScriptFlags.None, input, out var range));
+        Assert.Equal(new RegexMatchRange(index, length), range);
+    }
+
+    [Theory]
+    // Under legacy i a class has a folded BMP bitmap and a literal without case variants is planned as a plain one;
+    // Canonicalize's rules must survive both.
+    [InlineData("[a-z]", "K", RegexSearchStatus.Match)]
+    [InlineData("[a-z]", "\u212A", RegexSearchStatus.NoMatch)]
+    [InlineData("[\\u212A]", "k", RegexSearchStatus.NoMatch)]
+    [InlineData("[\\u017F]", "S", RegexSearchStatus.NoMatch)]
+    [InlineData("[s]", "\u017F", RegexSearchStatus.NoMatch)]
+    [InlineData("[\\u03c3]", "\u03c2", RegexSearchStatus.Match)]
+    [InlineData("[\\u0131]", "I", RegexSearchStatus.NoMatch)]
+    [InlineData("[i]", "\u0130", RegexSearchStatus.NoMatch)]
+    [InlineData("[\\u00df]", "\u1e9e", RegexSearchStatus.NoMatch)]
+    [InlineData("[a-z]+@[a-z0-9.]+\\.[a-z]{2,}", "sample-123-text", RegexSearchStatus.NoMatch)]
+    [InlineData("[a-z]+@[a-z0-9.]+\\.[a-z]{2,}", "mail Bob@Example.COM now", RegexSearchStatus.Match)]
+    [InlineData("[^a-z]+-", "abc-12Z", RegexSearchStatus.NoMatch)]
+    [InlineData("[^a-z]+", "abc-12Z", RegexSearchStatus.Match)]
+    public void CaseInsensitiveClassesKeepCanonicalize(string pattern, string input, RegexSearchStatus expected)
+    {
+        Assert.Equal(expected, Exec(pattern, EcmaScriptFlags.IgnoreCase, input, out _));
+    }
+
+    [Theory]
+    // The FIRST-character prefilter looks through groups, alternations and inner sequences.
+    [InlineData("(?:abc|def|ghi)+\\d*", "xx-defabc12-", 3, 8)]
+    [InlineData("(https?):\\/\\/([^\\/\\s]+)", "see https://host/x", 4, 12)]
+    [InlineData("(?:(?=b)|a)c", "xbac", 2, 2)]
+    [InlineData("(?:x?)+y", "aay", 2, 1)]
+    [InlineData("(?<=a)b", "cbab", 3, 1)]
+    [InlineData("(a)\\1|z", "qaa", 1, 2)]
+    public void FirstCharactersSeeThroughGroups(string pattern, string input, int index, int length)
+    {
+        Assert.Equal(RegexSearchStatus.Match, Exec(pattern, EcmaScriptFlags.None, input, out var range));
+        Assert.Equal(new RegexMatchRange(index, length), range);
+    }
+
+    [Theory]
+    // A dot run is measured by a range search for its line terminators, which falls back after a few false hits
+    // (tabs, CJK) to the exact search.
+    [InlineData("a.*a", "a\tb\ta\u2028a", EcmaScriptFlags.None, 0, 5)]
+    [InlineData("a.*a", "a\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2da\rza", EcmaScriptFlags.None, 0, 12)]
+    [InlineData("^.*$", "x\t\t\t\t\t\t\t\t\t\ty\u2029z", EcmaScriptFlags.Multiline, 0, 12)]
+    [InlineData(".*", "\U0001F600\t\U0001F600\nz", EcmaScriptFlags.Unicode, 0, 5)]
+    public void DotRunsStopAtEveryLineTerminator(string pattern, string input, EcmaScriptFlags flags, int index, int length)
+    {
+        Assert.Equal(RegexSearchStatus.Match, Exec(pattern, flags, input, out var range));
+        Assert.Equal(new RegexMatchRange(index, length), range);
+    }
+
+    [Fact]
+    public void AnAbsoluteDeadlineIsReadOncePerStrideEvenAtCheckpoints()
+    {
+        // The caller read the clock to compute the deadline, so the first stride, zero-unit checkpoints included, reads
+        // nothing; the first charge past it reads the clock and sees the deadline has passed.
+        var budget = new RunBudget(long.MaxValue, default, System.Diagnostics.Stopwatch.GetTimestamp() - 1);
+        Assert.True(budget.TryCharge(0, 0, out _));
+        Assert.True(budget.TryCharge(RunBudget.ClockStride - 1, 0, out _));
+        Assert.True(budget.TryCharge(0, 0, out _));
+        Assert.True(budget.TryCharge(1, 0, out _));
+        Assert.False(budget.TryCharge(1, 0, out var failure));
+        Assert.Equal(RegexExecutionFailureCode.TimedOut, failure.Code);
+    }
+
+    [Fact]
+    public void CaseVariantPrefiltersFollowTheProgramsUnicodeVersion()
+    {
+        // The inverse case folds behind the FIRST-character prefilter were cached per mode, not per Unicode version:
+        // after a Unicode 16 program built them, a Unicode 17 program's prefilter missed U+A7CF (new in 17.0).
+        foreach (var flags in new[] { EcmaScriptFlags.IgnoreCase, EcmaScriptFlags.IgnoreCase | EcmaScriptFlags.Unicode })
+        {
+            Assert.False(Matches("(\uA7CE|a)+x", new EcmaScriptProfile(flags, UnicodeVersion.Unicode16_0), "\uA7CFx"));
+            Assert.True(Matches("(\uA7CE|a)+x", new EcmaScriptProfile(flags, UnicodeVersion.Unicode17_0), "\uA7CFx"));
+        }
+
+        static bool Matches(string pattern, EcmaScriptProfile profile, string input)
+        {
+            Assert.True(EcmaScriptMatcher.TryParse(pattern, profile, out var matcher, out var diagnostic), diagnostic.ToString());
+            using (matcher)
+            {
+                return matcher!.Exec(input, new RegexCapture[4], out _) == RegexSearchStatus.Match;
+            }
         }
     }
 }
