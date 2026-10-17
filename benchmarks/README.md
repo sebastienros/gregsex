@@ -43,8 +43,6 @@ retired-method inventory are removed. XML primitive and PCRE2 data benchmarks
 also retain their original semantic checks. Historical diagnostic controls and
 developer-specific runners are not part of the maintained suite.
 
-The optional Jint comparator is enabled when `JintRoot` points at a checkout
-containing its regex engine sources; the project defaults to `~/github/jint`.
 Report missing comparators as gaps rather than comparing different case sets.
 
 Prepare Release builds and bounded case filters before measuring on a quiet

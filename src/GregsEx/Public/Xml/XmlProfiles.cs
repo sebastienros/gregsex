@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>XSD 1.1 Appendix G descriptor. It does not implement a schema validator.</summary>

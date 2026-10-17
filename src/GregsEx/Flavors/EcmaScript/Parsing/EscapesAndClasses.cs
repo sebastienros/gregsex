@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts.EcmaScript;
 
 namespace GregsEx.Flavors.EcmaScript.Parsing;

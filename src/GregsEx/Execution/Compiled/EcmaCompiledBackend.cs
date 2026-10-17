@@ -1,3 +1,4 @@
+#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using GregsEx.Flavors.EcmaScript.Integration;
 

@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>The pinned POSIX edition. This descriptor does not certify an engine.</summary>

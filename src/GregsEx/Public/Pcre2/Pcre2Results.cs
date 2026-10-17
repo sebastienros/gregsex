@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Independent native endpoints: a successful reset-start pair may be reversed.</summary>

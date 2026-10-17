@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts;
 using GregsEx.Contracts.Pcre2;
 using GregsEx.Execution.Pcre2.Assertions;

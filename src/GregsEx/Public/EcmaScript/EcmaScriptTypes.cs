@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Native UTF-16 source domains for ECMAScript diagnostics.</summary>

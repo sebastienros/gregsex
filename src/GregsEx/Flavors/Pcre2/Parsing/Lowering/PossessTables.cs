@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx.Flavors.Pcre2.Parsing.Lowering;
 
 // Exact pinned native auto_possess.c tables; see PCRE2-LOWERING-NOTICE.txt.

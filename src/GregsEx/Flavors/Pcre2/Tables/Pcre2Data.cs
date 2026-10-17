@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts.Pcre2;
 
 namespace GregsEx.Flavors.Pcre2.Tables;

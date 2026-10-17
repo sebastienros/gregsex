@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Original UTF-16 source carrying a flavor diagnostic.</summary>

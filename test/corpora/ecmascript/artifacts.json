@@ -59,8 +59,8 @@
     },
     {
       "path": "src/GregsEx/Flavors/EcmaScript/Unicode/GeneratedUnicodeTables.cs",
-      "length": 592544,
-      "sha256": "346664d6fb97dc1df4dcbcf27f899e43e157afbe13264865aa160bd4c06153e9"
+      "length": 592561,
+      "sha256": "0abcfb0f2f30a2eb1e46e11589638cc0ca3a693570d53473c614e9674c9da425"
     },
     {
       "path": "src/GregsEx/Flavors/EcmaScript/Unicode/Unicode-LICENSE.txt",
@@ -169,8 +169,8 @@
     },
     {
       "path": "tools/unicode/ecmascript/generate.py",
-      "length": 12196,
-      "sha256": "2d4c653f8c5e6ee8a5a88cb27f654ee2f2ab2e8914c42363d920d5c52c7b31f6"
+      "length": 12214,
+      "sha256": "ed400407a4c859ac90e8d9279df6b8fc376a455e5eabce81301cc223190edad3"
     },
     {
       "path": "tools/unicode/ecmascript/inputs/LICENSE.txt",
@@ -275,7 +275,7 @@
     {
       "path": "tools/unicode/ecmascript/outputs.json",
       "length": 1425,
-      "sha256": "c862ea54b1cac4510b855954ed5d4ac0bebd8479efb4a4be812c7fd6e23bfe9a"
+      "sha256": "d3e2eaab477c5f58c7905b8129a9f4f257f1afd303775c167a4f7ed99c72565e"
     }
   ]
 }

@@ -31,7 +31,7 @@ Unicode17 originals and generated identities are retained under
 tools/unicode/xml/17.0.0/inputs.json and outputs.json; the same generation
 and independent audit commands validate both supported versions.
 The generated runtime source SHA256 is
-22a577dfb229c5cfd103cad951b99ff8639a7d311071f5f4af017d064f4aeeac.
+6c08173bfa821e573d69b45e46f6a88cfbf86fc8486535215c2854f2817cd381.
 The pinned reference texts are XSD 1.1 Part 2 (2012-04-05), Appendix G,
 and XPath/XQuery F&O 3.1 (2017-03-21), sections 5.6 and C.1. Unicode version
 selection is GregsEx policy, not a claim that those Recommendations mandate it.

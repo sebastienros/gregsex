@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx.Flavors.Pcre2.Integration;
 
 internal static class Pcre2PatternFactory

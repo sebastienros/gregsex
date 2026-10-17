@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Edition 16 regular-expression flags, independent of .NET regex options.</summary>

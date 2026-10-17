@@ -69,6 +69,6 @@ cohort. Results between those bounds are informational.
 
 Use BenchmarkDotNet with `MemoryDiagnoser` and `ShortRunJob`. Compare equivalent
 operations against the interpreted baseline, BCL interpreted/compiled/generated
-variants, and Jint's QuickJS-derived engine on the shared ECMAScript subset.
+variants on the shared ECMAScript subset.
 Missing comparators are gaps, not fabricated results. Measure tree construction,
 delegate compilation, first use, warmed execution, and retained memory separately.

@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections;
 using GregsEx.Contracts;
 using GregsEx.Contracts.EcmaScript;

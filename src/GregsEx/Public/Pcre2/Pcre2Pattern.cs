@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Flavors.Pcre2.Runtime.Composition;
 
 namespace GregsEx;

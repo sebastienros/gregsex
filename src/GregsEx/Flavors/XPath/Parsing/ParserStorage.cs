@@ -1,3 +1,4 @@
+#nullable enable
 using System.Runtime.CompilerServices;
 using GregsEx.Contracts;
 using GregsEx.Contracts.Xml;

@@ -1,3 +1,4 @@
+#nullable enable
 // Pinned PCRE2 Unicode ID namespaces; BSD notice in Public/Pcre2/PCRE2-NOTICE.txt.
 namespace GregsEx.Contracts.Pcre2;
 
@@ -332,18 +333,18 @@ internal enum Pcre2Script
 
 internal static class Pcre2DataAbi
 {
-    internal const int BlockSize = 128;
-    internal const int ScriptWords = 6;
-    internal const int BooleanWords = 2;
-    internal const int LowerOffset = 0, FlipOffset = 256, ClassOffset = 512, TypeOffset = 832;
-    internal static bool IsValidProperty(Pcre2PropertyKey key) => key.Kind switch
+    internal const int BlockSize=128;
+    internal const int ScriptWords=6;
+    internal const int BooleanWords=2;
+    internal const int LowerOffset=0,FlipOffset=256,ClassOffset=512,TypeOffset=832;
+    internal static bool IsValidProperty(Pcre2PropertyKey key)=>key.Kind switch
     {
-        Pcre2PropertyKind.MajorCategory => key.Id is >= 0 and < 7,
-        Pcre2PropertyKind.ParticularCategory => key.Id is >= 0 and < 30,
-        Pcre2PropertyKind.Script or Pcre2PropertyKind.ScriptExtensions => key.Id is >= 0 and < 171,
-        Pcre2PropertyKind.Binary => key.Id is >= 0 and < 57,
-        Pcre2PropertyKind.BidiClass => key.Id is >= 0 and < 23,
-        Pcre2PropertyKind.Special => key.Id is 0 or 5 or 6 or 7 or 8 or 10 or 13 or 14 or 15 or 16 or 17,
-        _ => false
+        Pcre2PropertyKind.MajorCategory=>key.Id is>=0 and<7,
+        Pcre2PropertyKind.ParticularCategory=>key.Id is>=0 and<30,
+        Pcre2PropertyKind.Script or Pcre2PropertyKind.ScriptExtensions=>key.Id is>=0 and<171,
+        Pcre2PropertyKind.Binary=>key.Id is>=0 and<57,
+        Pcre2PropertyKind.BidiClass=>key.Id is>=0 and<23,
+        Pcre2PropertyKind.Special=>key.Id is 0 or 5 or 6 or 7 or 8 or 10 or 13 or 14 or 15 or 16 or 17,
+        _=>false
     };
 }

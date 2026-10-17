@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx.Execution.Pcre2.Controls;
 
 internal enum Pcre2ControlSignal { None, Commit, Prune, Skip, SkipArgument, Then }

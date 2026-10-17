@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>A named capture, resolved from all numbered aliases in source order.</summary>

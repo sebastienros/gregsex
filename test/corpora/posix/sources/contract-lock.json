@@ -4,23 +4,23 @@
   "files": [
     {
       "path": "src/GregsEx/Contracts/Posix/LaneContracts.cs",
-      "bytes": 4220,
-      "sha256": "7c88dbae2a7d2414a14312c5579c6f8f77443577d2cddecb1869233cacea8bfa"
+      "bytes": 4237,
+      "sha256": "192dd47d48818ae607ebb88cbd9da0fbf7bcd1632a204f0fa3c58aec7b173889"
     },
     {
       "path": "src/GregsEx/Contracts/Posix/PosixProgram.cs",
-      "bytes": 10997,
-      "sha256": "4b1083c38ddb055f49494f94dd60126a7e68979b5d9ae45f9b304e06b010f2f4"
+      "bytes": 11014,
+      "sha256": "2b9709d7313f38a488232de2c190c016283e28cc7e5bcde5006ac2566f346701"
     },
     {
       "path": "src/GregsEx/Public/Posix/PosixProfile.cs",
-      "bytes": 4725,
-      "sha256": "1993514fe929651df8fba609230e64fc0826f0b655e6a14e4923cde6050cc300"
+      "bytes": 4742,
+      "sha256": "8289a526525484317c0740ad984b8a6202b059b07ed3842c5e91eff910bdf956"
     },
     {
       "path": "src/GregsEx/Public/Posix/PosixDiagnostics.cs",
-      "bytes": 4161,
-      "sha256": "c52d40b288e2d2554cf3fcdee38d41aa6205b366d304dcf35a0b48cdab4e467d"
+      "bytes": 4178,
+      "sha256": "b907342e503513b34e44fa97a5a78721e530ed33b22a3aa47079c4a4310c956f"
     },
     {
       "path": "test/GregsEx.Tests/Contracts/Posix/PosixFixture.cs",

@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.IR;
 
 namespace GregsEx.Contracts.EcmaScript;

@@ -43,8 +43,7 @@
         "bcl-compiled",
         "bcl-sourcegen",
         "bcl-ecma-interpreted",
-        "bcl-ecma-compiled",
-        "jint-quickjs"
+        "bcl-ecma-compiled"
       ]
     },
     {
@@ -102,12 +101,6 @@
       "id": "bcl-ecma-compiled",
       "engine": "System.Text.RegularExpressions",
       "options": "RegexOptions.ECMAScript | RegexOptions.Compiled",
-      "kind": "in-process"
-    },
-    {
-      "id": "jint-quickjs",
-      "engine": "Jint.Runtime.RegExp (QuickJS libregexp port) compiled in-process, custom engine forced",
-      "source": "sebastienros/jint Jint/Runtime/RegExp; compiled in through the JINT_QUICKJS define",
       "kind": "in-process"
     }
   ],

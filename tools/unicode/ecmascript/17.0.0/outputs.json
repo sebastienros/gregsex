@@ -23,12 +23,12 @@
     "unicode_fold": 1512
   },
   "data_id": "Unicode-17.0.0+Emoji-17.0",
-  "generator_sha256": "2d4c653f8c5e6ee8a5a88cb27f654ee2f2ab2e8914c42363d920d5c52c7b31f6",
+  "generator_sha256": "ed400407a4c859ac90e8d9279df6b8fc376a455e5eabce81301cc223190edad3",
   "input_manifest_sha256": "e60fede3f74ab4570ec857178d277874aeeb63f0f42210ba81c8bf6940472f43",
   "outputs": {
     "src/GregsEx/Flavors/EcmaScript/Unicode/GeneratedUnicode17Tables.cs": {
-      "length": 615210,
-      "sha256": "a1108fac7f599681848838077001529a47c8f779d4829127b532243ae9707227"
+      "length": 615227,
+      "sha256": "8812e6439d2f8e8168daa685d11a3b32e94e09f842553802263e52003b26a439"
     },
     "test/GregsEx.Tests/Flavors/EcmaScript/Unicode/Unicode17Inventory.g.cs": {
       "length": 64840,

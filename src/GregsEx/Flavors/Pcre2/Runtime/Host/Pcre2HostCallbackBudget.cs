@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx.Flavors.Pcre2.Runtime.Host;
 
 // The operation/session owns this small counter. Match invocations have separate

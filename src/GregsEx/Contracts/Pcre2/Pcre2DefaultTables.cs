@@ -1,3 +1,4 @@
+#nullable enable
 // Pinned PCRE2 C-locale data; source BSD notice in Public/Pcre2/PCRE2-NOTICE.txt.
 namespace GregsEx.Contracts.Pcre2;
 

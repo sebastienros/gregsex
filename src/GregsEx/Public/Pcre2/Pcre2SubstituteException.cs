@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 /// <summary>Structured native/managed failure from an allocating substitution convenience.</summary>
 public sealed class Pcre2SubstituteException : InvalidOperationException

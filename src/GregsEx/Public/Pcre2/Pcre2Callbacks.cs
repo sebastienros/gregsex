@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Immutable native callout enumeration site, independent of invocation/capture state.</summary>

@@ -1,3 +1,4 @@
+#nullable enable
 using System.Runtime.InteropServices;
 using GregsEx.Contracts;
 using GregsEx.Flavors.Pcre2.Integration;

@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts;
 using GregsEx.Flavors.XmlShared;
 using GregsEx.Flavors.XPath.Integration;

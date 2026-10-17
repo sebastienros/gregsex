@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts;
 using GregsEx.Execution.Backtracking;
 using GregsEx.Flavors.EcmaScript.Parsing;

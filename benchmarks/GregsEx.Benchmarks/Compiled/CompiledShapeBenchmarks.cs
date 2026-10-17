@@ -14,7 +14,7 @@ public sealed record ShapeScenario(string Name, string Pattern, string Engine)
 
 /// <summary>
 /// End-to-end (through RegexWorkspace) comparison of the compiled RegularCore backend against the interpreted and Auto-accelerated
-/// GregsEx paths, System.Text.RegularExpressions (interpreted/compiled) and Jint. The shapes are the ones that have no hand-written
+/// GregsEx paths, System.Text.RegularExpressions (interpreted/compiled). The shapes are the ones that have no hand-written
 /// accelerated path, i.e. where the compiled backend can apply. Setup cross-checks every engine against BCL-interpreted.
 /// </summary>
 [MemoryDiagnoser]
@@ -36,9 +36,6 @@ public class CompiledShapeBenchmarks
     public static readonly string[] Engines =
     [
         "gregsex-core", "gregsex-core-auto", "gregsex-core-compiled", "gregsex-core-codegen", "bcl-interpreted", "bcl-compiled",
-#if JINT_QUICKJS
-        "jint-quickjs",
-#endif
     ];
 
     [ParamsSource(nameof(Scenarios))]
@@ -111,28 +108,6 @@ public class CompiledShapeBenchmarks
                 return sum;
             }, null);
         }
-#if JINT_QUICKJS
-        if (engine == "jint-quickjs")
-        {
-            var jint = Jint.Runtime.RegExp.JintRegExpEngine.Compile(pattern, Jint.Runtime.RegExp.RegExpFlags.None);
-            return (() =>
-            {
-                long sum = 0;
-                for (var at = 0; at <= text.Length;)
-                {
-                    var r = jint.Execute(text, at);
-                    if (!r.Success)
-                    {
-                        break;
-                    }
-
-                    sum += 1 + r.Index + r.Length;
-                    at = r.Length == 0 ? r.Index + 1 : r.Index + r.Length;
-                }
-                return sum;
-            }, null);
-        }
-#endif
         var mode = engine is "gregsex-core" or "gregsex-core-codegen" ? RegexExecutionMode.Interpreted : RegexExecutionMode.Auto;
         var limits = new RegexMatchLimits(20_000_000_000L, 1L << 30);
         var parsed = RegexPattern.Parse(pattern, new RegularCoreProfile(), new RegexCompileOptions(RegexInputKind.Utf16, mode, defaultMatchLimits: limits));

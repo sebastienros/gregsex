@@ -108,9 +108,10 @@ capture subtree clearing ranges, and numeric or named reference identity.
 FirstCapture/CaptureCount includes the node's own capture when applicable.
 The admission factory validates bottom-up contiguous source-order capture ranges,
 cycle prevention, source units, names/aliases, set slices and ordered finite string
-storage before defensive copying. Repeat counts beyond the admitted Int32
-representation fail ProgramLimitExceeded, never numeric wrap or InvalidSyntax;
-this finite resource policy also applies to valid very large decimal counts.
+storage before defensive copying. Repeat counts beyond Int32 are admitted, as ECMAScript requires of any
+DecimalDigits, and clamp without numeric wrap: a minimum above int.MaxValue is
+int.MaxValue (unsatisfiable by a non-empty atom over any UTF-16 subject) and a
+maximum above it is unbounded.
 Group zero is supplied by the executor, not a syntactic capture node. Names map
 to every numbered alias in source order; duplicate-name legality is a parser
 early-error obligation. Resolved sets contain ordered canonical intervals and

@@ -1,3 +1,4 @@
+#nullable enable
 using System.Buffers;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;

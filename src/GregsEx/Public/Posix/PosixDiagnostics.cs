@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Symbolic POSIX error identities; values are managed, not a native ABI.</summary>

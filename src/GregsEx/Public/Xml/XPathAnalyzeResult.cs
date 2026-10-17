@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Element or text identity in the typed analyze-string tree.</summary>

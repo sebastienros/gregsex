@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Flavors.XPath.Host;
 
 namespace GregsEx;
