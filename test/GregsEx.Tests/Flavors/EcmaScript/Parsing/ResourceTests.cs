@@ -1,4 +1,5 @@
 using GregsEx.Contracts;
+using GregsEx.Contracts.EcmaScript;
 using GregsEx.Flavors.EcmaScript.Parsing;
 using Xunit;
 
@@ -28,11 +29,17 @@ public sealed class ResourceTests
     [InlineData("a{999999999999999999999999}")]
     [InlineData("a{999999999999999999999999,}")]
     [InlineData("a{000002147483648,000009999999999999999999999}")]
-    public void ValidCountsBeyondInt32AreResourceFailures(string pattern)
+    public void ValidCountsBeyondInt32AreAdmittedAndClamped(string pattern)
     {
+        // ECMAScript admits any DecimalDigits. A minimum above int.MaxValue clamps to it (no UTF-16 subject can
+        // satisfy either with a non-empty atom) and a maximum above it is unbounded; nothing wraps.
         foreach (var flags in new[] { "", "u", "v" })
         {
-            GrammarTests.Reject(pattern, flags, RegexDiagnosticCode.ProgramLimitExceeded);
+            var program = GrammarTests.Compile(pattern, flags);
+            var repeat = program.Nodes.ToArray().Single(n => n.Kind == EcmaNodeKind.Repeat);
+            Assert.True(repeat.Min is 0 or int.MaxValue);
+            Assert.True(repeat.Max is -1 or int.MaxValue);
+            Assert.True(repeat.Max == -1 || repeat.Max >= repeat.Min);
         }
     }
     [Fact]

@@ -1,3 +1,4 @@
+#nullable enable
 using System.Buffers;
 using System.Runtime.CompilerServices;
 using GregsEx.Contracts;
@@ -456,6 +457,11 @@ internal sealed class EcmaAccelerator
     internal readonly string? PrefixLiteral;
     internal readonly EcmaFastSet? FirstSet;
     internal readonly bool StartAnchoredNonMultiline;
+    // A superset of the characters that can start a match whose first atom is case-insensitive, or that begins with
+    // nullable atoms, which neither PrefixLiteral nor FirstSet covers: without it /ZZQ/i over 64 KiB started the VM
+    // at every position.
+    internal readonly SearchValues<char>? FirstChars;
+    private SearchValues<string>? _literalSearchValues;
 
     internal EcmaAccelerator(EcmaProgram program, EcmaCaseTables caseTables)
     {
@@ -467,12 +473,22 @@ internal sealed class EcmaAccelerator
         var hasAmbiguousRepeat = new bool[nodes.Length];
 
         var hasBackref = false;
+        // A lone surrogate literal in a Unicode-aware pattern matches a lone surrogate code point only,
+        // but the plans below assemble literals into UTF-16 strings, where an escaped lead followed by a raw
+        // trail (/\uD83D\uDC38/u spelled with one escape) reads as a valid pair and matches U+1F438.
+        var loneSurrogateLiteral = false;
+        var unicodeAwareProgram = program.Profile.IsUnicodeAware;
         for (var i = 0; i < nodes.Length; i++)
         {
             var n = nodes[i];
             if (n.Kind == EcmaNodeKind.Backreference)
             {
                 hasBackref = true;
+            }
+
+            if (unicodeAwareProgram && n.Kind == EcmaNodeKind.Literal && n.Value is >= 0xD800 and <= 0xDFFF)
+            {
+                loneSurrogateLiteral = true;
             }
 
             if (n.Kind == EcmaNodeKind.Set)
@@ -505,6 +521,10 @@ internal sealed class EcmaAccelerator
             hasAmbiguousRepeat[i] = ambig;
         }
         HasBackreferences = hasBackref;
+        if (loneSurrogateLiteral)
+        {
+            return;
+        }
 
         // Try building direct whole-pattern plans
         if (TryBuildLiteralPlan(nodes, out _hasStartAnchor, out _startMultiline, out _hasEndAnchor, out _endMultiline,
@@ -557,6 +577,11 @@ internal sealed class EcmaAccelerator
             StartAnchoredNonMultiline = startNonMl;
             PrefixLiteral = prefixLit;
             FirstSet = firstSet;
+        }
+
+        if (!StartAnchoredNonMultiline && PrefixLiteral is null && FirstSet is null)
+        {
+            FirstChars = TryBuildFirstChars(nodes, root, caseTables);
         }
 
         if (TryExtractRequiredLiteral(nodes, root, minLengths, hasAmbiguousRepeat, out var reqLit, out var reqMinOffset))
@@ -1439,12 +1464,20 @@ internal sealed class EcmaAccelerator
             }
         }
 
-        var totalMin = 0;
+        var totalMinWide = 0L;
         for (var i = 0; i < parsed.Count; i++)
         {
-            totalMin += parsed[i].Min;
+            totalMinWide += parsed[i].Min;
         }
 
+        // The offsets below are int sums of step minimums; /.{2147483647}11/ wrapped them negative and
+        // the scan sliced past the input. No subject can satisfy such a length, so leave it to the VM.
+        if (totalMinWide > int.MaxValue / 2)
+        {
+            return false;
+        }
+
+        var totalMin = (int)totalMinWide;
         minTotalLength = totalMin;
 
         // Choose anchor strategy if not start-anchored
@@ -1649,6 +1682,200 @@ internal sealed class EcmaAccelerator
             }
         }
         return false;
+    }
+
+    private const int MaxFirstChars = 2048;
+    private static readonly Dictionary<int, List<int>>?[] InverseFolds = new Dictionary<int, List<int>>?[2];
+
+    private SearchValues<char>? TryBuildFirstChars(ReadOnlySpan<EcmaNode> nodes, int root, EcmaCaseTables caseTables)
+    {
+        var items = new List<int>();
+        FlattenSequence(nodes, root, items);
+        if (items.Count == 0)
+        {
+            return null;
+        }
+
+        var unicodeAware = _program.Profile.IsUnicodeAware;
+        var chars = new HashSet<char>();
+        var astral = false;
+        Dictionary<int, List<int>>? inverse = null;
+
+        bool Add(int point)
+        {
+            if (point > 0xFFFF)
+            {
+                astral = true;
+                return true;
+            }
+
+            chars.Add((char)point);
+            return chars.Count <= MaxFirstChars;
+        }
+
+        // Every point whose canonical form is one of the member's: the member itself, its own canonical form, and
+        // everything that folds to either. A superset is all a prefilter needs; the VM still verifies the match.
+        bool AddVariants(int member, bool ignoreCase)
+        {
+            if (!Add(member))
+            {
+                return false;
+            }
+
+            if (!ignoreCase)
+            {
+                return true;
+            }
+
+            inverse ??= GetInverseFolds(caseTables, unicodeAware);
+            var canonical = EcmaFastSet.Fold(member, unicodeAware, ignoreCase: true, caseTables);
+            if (!Add(canonical))
+            {
+                return false;
+            }
+
+            foreach (var key in canonical == member ? new[] { member } : new[] { member, canonical })
+            {
+                if (inverse.TryGetValue(key, out var sources))
+                {
+                    foreach (var source in sources)
+                    {
+                        if (!Add(source))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        bool AddAtom(EcmaNode atom)
+        {
+            var ignoreCase = (atom.EffectiveFlags & EcmaScriptFlags.IgnoreCase) != 0;
+            if (atom.Kind == EcmaNodeKind.Literal)
+            {
+                return AddVariants(atom.Value, ignoreCase);
+            }
+
+            var set = _program.Sets[atom.Value];
+            if (set.StringCount != 0)
+            {
+                return false;
+            }
+
+            foreach (var interval in _program.Intervals.Slice(set.IntervalOffset, set.IntervalCount))
+            {
+                if ((long)interval.Last - interval.First >= MaxFirstChars)
+                {
+                    return false;
+                }
+
+                for (var point = interval.First; point <= interval.Last; point++)
+                {
+                    if (!AddVariants(point, ignoreCase))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        // FIRST set of the sequence: the leading atoms' characters, through every item that can match empty, up to
+        // and including the first that cannot. Zero-width assertions only restrict where a match starts, so they add
+        // nothing to a superset and are stepped over. A pattern that can match empty has no FIRST set.
+        var mandatory = false;
+        foreach (var item in items)
+        {
+            var id = item;
+            while (nodes[id].Kind == EcmaNodeKind.Capture)
+            {
+                id = nodes[id].X;
+            }
+
+            var node = nodes[id];
+            if (node.Kind is EcmaNodeKind.Start or EcmaNodeKind.WordBoundary or EcmaNodeKind.NotWordBoundary or
+                EcmaNodeKind.Lookahead or EcmaNodeKind.NegativeLookahead or EcmaNodeKind.Lookbehind or EcmaNodeKind.NegativeLookbehind)
+            {
+                continue;
+            }
+
+            var atomId = id;
+            if (node.Kind == EcmaNodeKind.Repeat)
+            {
+                atomId = node.X;
+                while (nodes[atomId].Kind == EcmaNodeKind.Capture)
+                {
+                    atomId = nodes[atomId].X;
+                }
+            }
+
+            var atom = nodes[atomId];
+            if (atom.Kind is not (EcmaNodeKind.Literal or EcmaNodeKind.Set) || !AddAtom(atom))
+            {
+                return null;
+            }
+
+            if (NonNullable[item])
+            {
+                mandatory = true;
+                break;
+            }
+        }
+
+        if (!mandatory)
+        {
+            return null;
+        }
+
+        if (astral)
+        {
+            if (!unicodeAware)
+            {
+                return null;
+            }
+
+            // An astral member starts with one of its high surrogates; admitting them all keeps the superset cheap.
+            for (var c = 0xD800; c <= 0xDBFF; c++)
+            {
+                chars.Add((char)c);
+            }
+        }
+
+        if (chars.Count == 0)
+        {
+            return null;
+        }
+
+        var array = new char[chars.Count];
+        chars.CopyTo(array);
+        return System.Buffers.SearchValues.Create(array);
+    }
+
+    private static Dictionary<int, List<int>> GetInverseFolds(EcmaCaseTables caseTables, bool unicodeAware)
+    {
+        var slot = unicodeAware ? 1 : 0;
+        if (Volatile.Read(ref InverseFolds[slot]) is { } cached)
+        {
+            return cached;
+        }
+
+        var inverse = new Dictionary<int, List<int>>();
+        foreach (var mapping in unicodeAware ? caseTables.UnicodeFold : caseTables.LegacyUppercase)
+        {
+            if (!inverse.TryGetValue(mapping.Target, out var sources))
+            {
+                inverse[mapping.Target] = sources = [];
+            }
+
+            sources.Add(mapping.Source);
+        }
+
+        Interlocked.CompareExchange(ref InverseFolds[slot], inverse, null);
+        return InverseFolds[slot]!;
     }
 
     private bool TryExtractRequiredLiteral(
@@ -1883,7 +2110,10 @@ internal sealed class EcmaAccelerator
 
         while (searchPos <= maxStartPos)
         {
-            var rel = litLen == 0 ? 0 : litLen == 1 ? input.Slice(searchPos).IndexOf(lit[0]) : input.Slice(searchPos).IndexOf(lit);
+            // A single-string SearchValues picks rarer anchor characters than IndexOf(string)'s first/last pair, which
+            // is what .NET Regex searches with; IndexOf(string) took twice as long over common-letter text.
+            var rel = litLen == 0 ? 0 : litLen == 1 ? input.Slice(searchPos).IndexOf(lit[0])
+                : input.Slice(searchPos).IndexOfAny(_literalSearchValues ??= SearchValues.Create([_literal], StringComparison.Ordinal));
             if (rel < 0)
             {
                 if (!TryChargeFast(ref state, startAt, input.Length, Math.Max(1, input.Length - startAt)))
