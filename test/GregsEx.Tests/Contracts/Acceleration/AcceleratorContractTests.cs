@@ -127,7 +127,6 @@ public sealed class AcceleratorContractTests
         Assert.True(thresholds.GetProperty("win_ratio").GetDouble() < 1.0);
         Assert.True(thresholds.GetProperty("regression_ratio").GetDouble() > 1.0);
         Assert.True(thresholds.GetProperty("noise_multiplier").GetDouble() >= 1.0);
-        Assert.Contains(root.GetProperty("comparators").EnumerateArray().Select(c => c.GetProperty("id").GetString()), id => id == "jint-quickjs");
         Assert.Contains(root.GetProperty("comparators").EnumerateArray().Select(c => c.GetProperty("id").GetString()), id => id == "bcl-sourcegen");
         Assert.Equal("osx-arm64", root.GetProperty("host_policy").GetProperty("local_rid").GetString());
     }

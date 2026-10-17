@@ -10,7 +10,7 @@ public sealed record EcmaScenario(string Name, string Pattern, string Flags, str
 
 /// <summary>
 /// ECMAScript flavor: compiled backend against the ECMAScript interpreter (with and without its accelerator), BCL
-/// (RegexOptions.ECMAScript, interpreted and compiled) and Jint. Setup cross-checks every engine against BCL-interpreted.
+/// (RegexOptions.ECMAScript, interpreted and compiled). Setup cross-checks every engine against BCL-interpreted.
 /// </summary>
 [MemoryDiagnoser]
 [ShortRunJob]
@@ -33,9 +33,6 @@ public class CompiledEcmaBenchmarks
     public static readonly string[] Engines =
     [
         "gregsex-ecma", "gregsex-ecma-auto", "gregsex-ecma-compiled", "bcl-interpreted", "bcl-compiled",
-#if JINT_QUICKJS
-        "jint-quickjs",
-#endif
     ];
 
     [ParamsSource(nameof(Scenarios))]
@@ -94,28 +91,6 @@ public class CompiledEcmaBenchmarks
                 return sum;
             }, null);
         }
-#if JINT_QUICKJS
-        if (engine == "jint-quickjs")
-        {
-            var jint = Jint.Runtime.RegExp.JintRegExpEngine.Compile(pattern, ignoreCase ? Jint.Runtime.RegExp.RegExpFlags.IgnoreCase : Jint.Runtime.RegExp.RegExpFlags.None);
-            return (() =>
-            {
-                long sum = 0;
-                for (var at = 0; at <= text.Length;)
-                {
-                    var r = jint.Execute(text, at);
-                    if (!r.Success)
-                    {
-                        break;
-                    }
-
-                    sum += 1 + r.Index + r.Length;
-                    at = r.Length == 0 ? r.Index + 1 : r.Index + r.Length;
-                }
-                return sum;
-            }, null);
-        }
-#endif
         var mode = engine == "gregsex-ecma" ? RegexExecutionMode.Interpreted : RegexExecutionMode.Auto;
         var limits = new RegexMatchLimits(20_000_000_000L, 1L << 30);
         var profile = new EcmaScriptProfile(ignoreCase ? EcmaScriptFlags.IgnoreCase : EcmaScriptFlags.None);

@@ -43,7 +43,7 @@ Benchmarks have stable case IDs and persisted patterns/flags/input hashes or see
 
 Input sizes start with 0, 16, 256, 4096 and 1 Mi UTF-16 code units where the case is meaningful; analogous byte lengths are labeled separately. Capture and pattern counts are independent parameters. Do not convert UTF-16 units to UTF-8 bytes silently when reporting GB/s. Add larger scaling inputs only under an agreed time/memory limit.
 
-Compare only against System.Text.RegularExpressions (interpreted, compiled and `[GeneratedRegex]` source-generated) and Jint's QuickJS-derived regex engine, as BenchmarkDotNet cases on the shared semantic subset (Jint only for the ECMAScript cohort). Native/external comparators (Rust, Go, PCRE2 JIT, V8, RE2/Vectorscan, NonBacktracking) are out of scope. A faster boolean answer cannot be compared to full captures as the same task. Unsupported cases are labeled and excluded from pairwise summaries, with exclusions visible.
+Compare only against System.Text.RegularExpressions (interpreted, compiled and `[GeneratedRegex]` source-generated), as BenchmarkDotNet cases on the shared semantic subset. Jint's QuickJS-derived engine, an earlier comparator, is retired: Jint now runs this library's ECMAScript flavor. Native/external comparators (Rust, Go, PCRE2 JIT, V8, RE2/Vectorscan, NonBacktracking) are out of scope. A faster boolean answer cannot be compared to full captures as the same task. Unsupported cases are labeled and excluded from pairwise summaries, with exclusions visible.
 
 ## Reproducible measurements
 
@@ -87,8 +87,8 @@ where noise is baseline relative dispersion. Between those bounds is
 informational. Never promote an unmeasured optimization or claim universal
 superiority.
 
-Use BCL interpreted/compiled/source-generated comparators and Jint's
-QuickJS-derived engine on shared ECMAScript semantics. Missing comparators are
+Use BCL interpreted/compiled/source-generated comparators on shared ECMAScript
+semantics. Missing comparators are
 gaps, not placeholders. FEC's upstream Expression.Compile comparisons do not
 establish GregsEx speedups: measure tree construction, delegate compilation,
 first invocation/JIT, warmed matching, retained memory, and break-even reuse

@@ -11,7 +11,7 @@ public sealed record Scenario(string Case, string Operation, string Engine)
     public override string ToString() => $"{Case}:{Operation}:{Engine}";
 }
 
-/// <summary>Curated subset of the release manifest compared across GregsEx, System.Text.RegularExpressions and Jint.</summary>
+/// <summary>Curated subset of the release manifest compared across GregsEx, System.Text.RegularExpressions.</summary>
 public static class CuratedCases
 {
     /// <summary>Operation measured per case; categories cover literal, alternation, anchored, captures, Unicode/classes, backtracking-prone and large-input.</summary>
@@ -37,9 +37,6 @@ public static class CuratedCases
     [
         "gregsex-core", "gregsex-core-auto", "gregsex-core-compiled", "gregsex-ecma", "gregsex-pcre2", "gregsex-posix",
         "bcl-interpreted", "bcl-compiled", "bcl-sourcegen", "bcl-ecma-interpreted", "bcl-ecma-compiled",
-#if JINT_QUICKJS
-        "jint-quickjs",
-#endif
     ];
 
     private static readonly Lazy<Dictionary<string, CorpusCase>> Manifest = new(() =>

@@ -37,15 +37,12 @@ public static class CaseEngines
     [
         "gregsex-core", "gregsex-core-auto", "gregsex-core-compiled", "gregsex-ecma", "gregsex-pcre2", "gregsex-posix",
         "bcl-interpreted", "bcl-compiled", "bcl-sourcegen", "bcl-ecma-interpreted", "bcl-ecma-compiled",
-#if JINT_QUICKJS
-        "jint-quickjs",
-#endif
     ];
 
     public static string ManifestProfile(string engine) => engine switch
     {
         "gregsex-core" or "gregsex-core-auto" or "gregsex-core-compiled" => "RegularCore",
-        "gregsex-ecma" or "jint-quickjs" or "bcl-ecma-interpreted" or "bcl-ecma-compiled" => "ECMAScript",
+        "gregsex-ecma" or "bcl-ecma-interpreted" or "bcl-ecma-compiled" => "ECMAScript",
         "gregsex-pcre2" => "PCRE2",
         "gregsex-posix" => "POSIX",
         _ => "",
@@ -90,9 +87,6 @@ public static class CaseEngines
         "bcl-sourcegen" => new BclEngine(GeneratedPatterns.Get(c.Pattern), text),
         "bcl-ecma-interpreted" => new BclEngine(TryCreateBclEcma(c.Pattern, RegexOptions.ECMAScript)!, text),
         "bcl-ecma-compiled" => new BclEngine(TryCreateBclEcma(c.Pattern, RegexOptions.ECMAScript | RegexOptions.Compiled)!, text),
-#if JINT_QUICKJS
-        "jint-quickjs" => new JintEngine(c, text),
-#endif
         _ => throw new ArgumentOutOfRangeException(nameof(engine), engine, "Unknown in-process engine."),
     };
 
