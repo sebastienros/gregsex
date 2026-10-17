@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx.Contracts.Pcre2;
 
 // Sole serialized storage accessor shared by independently owned modules.

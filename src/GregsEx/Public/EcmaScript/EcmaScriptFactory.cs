@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Flavors.EcmaScript.Integration;
 
 namespace GregsEx;

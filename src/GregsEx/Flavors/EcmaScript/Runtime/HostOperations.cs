@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts;
 
 namespace GregsEx;

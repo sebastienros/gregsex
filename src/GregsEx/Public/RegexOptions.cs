@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Finite immutable compilation ceilings; pattern units are native pattern units.</summary>

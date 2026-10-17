@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts.Xml;
 
 namespace GregsEx.Flavors.XPath.Parsing;

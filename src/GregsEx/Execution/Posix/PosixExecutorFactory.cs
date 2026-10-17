@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts;
 using GregsEx.Contracts.Posix;
 using GregsEx.IR;

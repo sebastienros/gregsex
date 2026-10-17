@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Compilation.Core;
 using GregsEx.Contracts;
 using GregsEx.Execution.Thompson;

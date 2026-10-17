@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.IR;
 using GregsEx.Parsing.Core;
 

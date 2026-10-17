@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx.Contracts.Acceleration;
 
 /// <summary>Every optional execution strategy layered over a flavor's reference executor.</summary>

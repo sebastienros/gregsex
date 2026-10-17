@@ -1,7 +1,7 @@
 {
   "format": "xml-unicode-generation-1",
   "data_id": "Unicode-16.0.0+XML-1.0-Fifth-Edition",
-  "generator_sha256": "ae6eba3c56221511606fd7e79e31fc5a7fa5e5731c9970363902841cafa1b7be",
+  "generator_sha256": "60569fd13994cc6fe8b6b6b9ad9b8dc48334be4e37170ee7529d4fe5445fb301",
   "inputs_manifest_sha256": "8f747d52a8ecdc3b5613be6bd79de85c7053e88b130d7d1e22eba6ca6d2701a3",
   "counts": {
     "categories": 36,
@@ -14,8 +14,8 @@
   },
   "outputs": {
     "src/GregsEx/Flavors/XmlShared/GeneratedXmlTables.g.cs": {
-      "bytes": 208963,
-      "sha256": "22a577dfb229c5cfd103cad951b99ff8639a7d311071f5f4af017d064f4aeeac"
+      "bytes": 208980,
+      "sha256": "6c08173bfa821e573d69b45e46f6a88cfbf86fc8486535215c2854f2817cd381"
     },
     "tools/unicode/xml/emitted.json": {
       "bytes": 165534,

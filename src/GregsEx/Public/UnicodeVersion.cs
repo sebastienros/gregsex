@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Supported, explicitly versioned Unicode datasets. Members may be deprecated independently.</summary>

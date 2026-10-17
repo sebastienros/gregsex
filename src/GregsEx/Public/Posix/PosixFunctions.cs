@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Flavors.Posix.Integration;
 
 namespace GregsEx;

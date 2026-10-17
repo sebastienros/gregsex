@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>A closed, immutable profile identity. Only delivered library profiles can derive.</summary>

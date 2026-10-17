@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>Shared immutable profiles with pinned versions and fixed configurations.</summary>

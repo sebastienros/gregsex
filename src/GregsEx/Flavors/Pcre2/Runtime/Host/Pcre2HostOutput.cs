@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts;
 
 namespace GregsEx.Flavors.Pcre2.Runtime.Host;

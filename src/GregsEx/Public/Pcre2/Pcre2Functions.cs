@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts;
 using GregsEx.Flavors.Pcre2.Runtime.Composition;
 using GregsEx.Flavors.Pcre2.Runtime.Host;

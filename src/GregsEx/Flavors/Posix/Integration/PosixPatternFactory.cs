@@ -1,3 +1,4 @@
+#nullable enable
 using GregsEx.Contracts;
 using GregsEx.Execution.Posix;
 using GregsEx.Flavors.Posix.Locale;

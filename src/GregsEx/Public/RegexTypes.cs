@@ -1,3 +1,4 @@
+#nullable enable
 namespace GregsEx;
 
 /// <summary>The storage representation used for matching and native offsets.</summary>

@@ -1,3 +1,4 @@
+#nullable enable
 #if !NETSTANDARD2_0
 using GregsEx.Execution.Thompson;
 using GregsEx.Flavors.EcmaScript.Integration;
