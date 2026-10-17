@@ -76,6 +76,28 @@ public sealed class JintRegressionTests
         Assert.Equal(expected, Exec(pattern, flags, input, out _));
     }
 
+    [Theory]
+    // The string prefilter searches OrdinalIgnoreCase, which agrees with Canonicalize on ASCII only, and not on k/s
+    // under u/v (KELVIN SIGN, LONG S): those patterns must stay findable.
+    [InlineData("agggtaaa|tttaccct", EcmaScriptFlags.IgnoreCase, "xxAgGgTaAaxx", 2, 8)]
+    [InlineData("[cgt]gggtaaa|tttaccc[acg]", EcmaScriptFlags.IgnoreCase, "xxTTTACCCgx", 2, 8)]
+    [InlineData("kk", EcmaScriptFlags.IgnoreCase | EcmaScriptFlags.Unicode, "x\u212A\u212A", 1, 2)]
+    [InlineData("ss", EcmaScriptFlags.IgnoreCase | EcmaScriptFlags.Unicode, "x\u017Fs", 1, 2)]
+    [InlineData("(?:ab|cd)\\b", EcmaScriptFlags.IgnoreCase, "xx CD yy", 3, 2)]
+    public void StringPrefiltersFindEveryMatch(string pattern, EcmaScriptFlags flags, string input, int index, int length)
+    {
+        Assert.Equal(RegexSearchStatus.Match, Exec(pattern, flags, input, out var range));
+        Assert.Equal(new RegexMatchRange(index, length), range);
+    }
+
+    [Fact]
+    public void AUnicodeGreedyRunGivesBackWholeCodePoints()
+    {
+        Assert.Equal(RegexSearchStatus.Match, Exec("a.*a", EcmaScriptFlags.Unicode, "xa\U0001F600a\U0001F600b", out var range));
+        Assert.Equal(new RegexMatchRange(1, 4), range);
+        Assert.Equal(RegexSearchStatus.NoMatch, Exec(".*\\uDE00", EcmaScriptFlags.Unicode, "a\U0001F600b", out _));
+    }
+
     [Fact]
     public void ATimedSearchAnswersAsAnUntimedOne()
     {
