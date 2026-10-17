@@ -20,8 +20,10 @@ PCRE2 10.46 remains tied to its own Unicode 16.0 compatibility dataset.
 | `linux-x64` | Linux x86-64 | Supported | Supported | Supported |
 | `linux-arm64` | Linux ARM64 | Supported | Supported | Supported |
 | `win-x64` | Windows x86-64 | Supported | Supported | Supported |
-| `osx-x64` | macOS x86-64 | Supported | Supported | Supported |
+| `osx-x64` | macOS x86-64 | Supported | Expected to work, not CI-qualified | Expected to work, not CI-qualified |
 | `osx-arm64` | macOS Apple Silicon (ARM64) | Supported | Supported | Supported |
+
+`osx-x64` is not part of the NativeAOT and trimming qualification matrix. Its trimmed and NativeAOT builds use the same managed code and warning analysis as the qualified RIDs, but they are not published or run in CI. `linux-x64` and `win-x64` cover x86-64 code generation, and `osx-arm64` covers the macOS toolchain.
 
 ## Execution Modes Across Deployment Models
 
@@ -51,8 +53,8 @@ When `GregsEx.RuntimeCompilation.Auto` is `false` with `Trim="true"`, ILLink and
 The workflows follow [Parlot's automation](https://github.com/sebastienros/parlot/tree/main/.github/workflows), adapted for GregsEx's .NET 10 SDK, Microsoft.Testing.Platform runner, package feed, and deployment qualification.
 
 - [Build](../../.github/workflows/build.yml) restores, builds, and tests on Linux and Windows for pull requests, pushes to `main`, and manual runs. A push to `main` or a manual run on `main` also packs `preview.<run-number>` packages and publishes them to the [GregsEx Feedz feed](https://f.feedz.io/sebastienros/gregsex/nuget/index.json) when the `FEEDZ_IO_API_KEY` repository secret is configured. Pull requests and manual runs on other branches do not publish packages.
-- [NativeAOT and trimming qualification](../../.github/workflows/aot.yml) publishes and runs real consumers on all five RIDs above. Ordinary consumers treat warnings as errors; the dedicated unsuppressed diagnostic build must report both IL3050 and IL2026, and the negative runtime fixture must verify the explicit compilation guard. This workflow runs on pull requests and pushes to `main`, supports manual runs, and is reusable by the release workflow.
-- [Publish](../../.github/workflows/publish.yml) runs for `v<major>.<minor>.<patch>` tags, optionally followed by a SemVer prerelease suffix. All five deployment qualification jobs must pass before the release job starts. The tag must identify a commit contained in `origin/main`. The release job then builds, tests, packs the tagged version, attests package provenance, and publishes to NuGet.org using trusted publishing.
+- [NativeAOT and trimming qualification](../../.github/workflows/aot.yml) publishes and runs real consumers on `linux-x64`, `linux-arm64`, `win-x64`, and `osx-arm64`. Ordinary consumers treat warnings as errors; the dedicated unsuppressed diagnostic build must report both IL3050 and IL2026, and the negative runtime fixture must verify the explicit compilation guard. This workflow runs on pull requests and pushes to `main`, supports manual runs, and is reusable by the release workflow.
+- [Publish](../../.github/workflows/publish.yml) runs for `v<major>.<minor>.<patch>` tags, optionally followed by a SemVer prerelease suffix. All four deployment qualification jobs must pass before the release job starts. The tag must identify a commit contained in `origin/main`. The release job then builds, tests, packs the tagged version, attests package provenance, and publishes to NuGet.org using trusted publishing.
 
 Before publishing a release, maintainers must configure:
 

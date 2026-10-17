@@ -6,8 +6,13 @@
   </PropertyGroup>
   <Import Project="../../src/GregsEx/buildTransitive/GregsEx.targets" />
   <Target Name="EnsureGeneratorBuilt" BeforeTargets="ResolveReferences;CoreCompile">
+    <!-- Restore in its own evaluation (distinct global property) so Build sees the restored assets on a clean checkout. -->
     <MSBuild Projects="../../src/GregsEx.Generator/GregsEx.Generator.csproj"
-             Targets="Restore;Build"
+             Targets="Restore"
+             Properties="Configuration=$(Configuration);MSBuildRestoreSessionId=$([System.Guid]::NewGuid())"
+             RemoveProperties="PublishAot;PublishTrimmed;PublishSingleFile;SelfContained;RuntimeIdentifier;TargetFramework;OutputPath;OutDir;PublishDir" />
+    <MSBuild Projects="../../src/GregsEx.Generator/GregsEx.Generator.csproj"
+             Targets="Build"
              Properties="Configuration=$(Configuration)"
              RemoveProperties="PublishAot;PublishTrimmed;PublishSingleFile;SelfContained;RuntimeIdentifier;TargetFramework;OutputPath;OutDir;PublishDir" />
   </Target>
