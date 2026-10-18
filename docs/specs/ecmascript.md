@@ -143,9 +143,14 @@ The runtime reports prepared State/Capture/Scratch slot requirements using core
 RegexWorkspaceCapacity; all VM frame, rollback, assertion, repeat and set-string
 scratch live in those charged Int32 partitions. A deterministic caller-selected
 frame capacity is admitted before search; exhaustion is WorkspaceCapacityExceeded,
-never an allocating retry/no-match. The same RunState and cumulative RunBudget
+never an allocating retry/no-match. A choice frame does not copy the task stack or
+the registers: it trails only the tasks popped from under its height and the
+registers first written after it. Each admitted frame adds a fixed allowance to a
+task trail and a register trail shared by all frames, so the partitions stay affine
+in the frame capacity; running out of choice frames or of either trail is the same
+WorkspaceCapacityExceeded. The same RunState and cumulative RunBudget
 survive candidates, nested assertions, backreferences and host loops. Every
-native-unit inspection, node/VM visit, set comparison and register/frame copy is
+native-unit inspection, node/VM visit, set comparison and trail entry is
 charged before doing it. Poll even empty success; source-order budget precedence
 and transactional reserve preserve the core safety/lifecycle requirements. Per-host-call
 loops share one budget, including replacement/split matching. Output materialization
