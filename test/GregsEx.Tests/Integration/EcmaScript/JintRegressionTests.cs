@@ -1,4 +1,8 @@
 using GregsEx.Contracts;
+using GregsEx.Contracts.EcmaScript;
+using GregsEx.Execution.Backtracking;
+using GregsEx.Flavors.EcmaScript.Parsing;
+using GregsEx.Flavors.EcmaScript.Unicode;
 using Xunit;
 
 namespace GregsEx.Tests.Integration.EcmaScript;
@@ -207,5 +211,153 @@ public sealed class JintRegressionTests
                 return matcher!.Exec(input, new RegexCapture[4], out _) == RegexSearchStatus.Match;
             }
         }
+    }
+
+    private static EcmaProgram CompileProgram(string pattern, EcmaScriptProfile profile, out EcmaUnicodeData unicode,
+        out long work, RegexCompileLimits? limits = null)
+    {
+        var budget = new CompileBudget(limits ?? new RegexCompileLimits());
+        Assert.True(EcmaUnicodeData.TryCreate(profile.UnicodeVersion, ref budget, out var data, out _));
+        var before = budget.WorkConsumed;
+        Assert.True(new EcmaCompiler().TryCompile(pattern, profile, data!, ref budget, out var program, out var diagnostic),
+            diagnostic.ToString());
+        unicode = data!;
+        work = budget.WorkConsumed - before;
+        return program!;
+    }
+
+    [Theory]
+    // Compiling an i-flag class built its SearchValues by testing all 65,536 units and corrected its folded bitmap by
+    // testing each of ~1,400 legacy mappings; both now walk only what the class touches. Every unit must still be
+    // a member exactly when Canonicalize puts it in the class, in the bitmap, the ASCII masks and the SearchValues.
+    [InlineData("[a-z]")]
+    [InlineData("[À-ɏ]")]
+    [InlineData("[a-zͰ-Ͽ]")]
+    [InlineData("[^x]")]
+    [InlineData("[^k]")]
+    [InlineData("\\w")]
+    [InlineData("\\W")]
+    [InlineData("[\\u0130\\u0131]")]
+    [InlineData("[\\u212A\\u017F]")]
+    [InlineData("[^\\u03a3]")]
+    [InlineData("[\\u1e9e\\u00df]")]
+    [InlineData("[\\uA7CE]")]
+    [InlineData("[\\s\\S]")]
+    [InlineData("[\\uFF41-\\uFFFF]")]
+    public void FoldedClassMembershipFollowsCanonicalizeOnEveryCodeUnit(string pattern)
+    {
+        foreach (var version in new[] { UnicodeVersion.Unicode16_0, UnicodeVersion.Unicode17_0 })
+        {
+            foreach (var flags in new[] { EcmaScriptFlags.IgnoreCase, EcmaScriptFlags.None, EcmaScriptFlags.Unicode })
+            {
+                var program = CompileProgram(pattern, new EcmaScriptProfile(flags, version), out var unicode, out _);
+                var ignoreCase = (flags & EcmaScriptFlags.IgnoreCase) != 0;
+                var slice = program.Sets[0];
+                var intervals = program.Intervals.Slice(slice.IntervalOffset, slice.IntervalCount);
+                var set = new EcmaFastSet(program, slice, flags, unicode.CaseTables);
+                Assert.NotNull(set.BmpBits);
+                for (var c = 0; c <= 0xFFFF; c++)
+                {
+                    if (flags == EcmaScriptFlags.Unicode && c is >= 0xD800 and <= 0xDFFF)
+                    {
+                        continue;
+                    }
+
+                    var expected = EcmaFastSet.ContainsInterval(intervals,
+                        EcmaFastSet.Fold(c, unicodeAware: false, ignoreCase, unicode.CaseTables));
+                    Assert.True(expected == set.MatchesSingleChar((char)c), $"{pattern} {flags} {version} U+{c:X4}");
+                    if (set.BmpBitsIsExact && set.SearchValues is { } values)
+                    {
+                        Assert.True(expected == (values.Contains((char)c) != set.IsNegatedSearchValues),
+                            $"{pattern} {flags} {version} SearchValues U+{c:X4}");
+                    }
+                }
+            }
+        }
+    }
+
+    [Fact]
+    public void ClassesWithTheSameMembersAndCaseModeShareOneFastSet()
+    {
+        // Each Set node built its own 8 KiB bitmap and SearchValues, though patterns repeat their classes.
+        var profile = new EcmaScriptProfile(EcmaScriptFlags.IgnoreCase, UnicodeVersion.Unicode17_0);
+        var program = CompileProgram("[a-z]+@[a-z]+\\.[a-z]{2,}|[0-9]", profile, out var unicode, out _);
+        var sets = new EcmaAccelerator(program, unicode.CaseTables).FastSets.OfType<EcmaFastSet>().Distinct().ToArray();
+        Assert.Equal(2, sets.Length);
+
+        // The same members under another case mode are another set.
+        profile = new EcmaScriptProfile(EcmaScriptFlags.None, UnicodeVersion.Unicode17_0);
+        program = CompileProgram("[a-z](?i:[a-z])[a-z]", profile, out unicode, out _);
+        sets = new EcmaAccelerator(program, unicode.CaseTables).FastSets.OfType<EcmaFastSet>().Distinct().ToArray();
+        Assert.Equal(2, sets.Length);
+        Assert.Equal(RegexSearchStatus.Match, Exec("[a-z](?i:[a-z])[a-z]", EcmaScriptFlags.None, "aBc", out _));
+        Assert.Equal(RegexSearchStatus.NoMatch, Exec("[a-z](?i:[a-z])[a-z]", EcmaScriptFlags.None, "abC", out _));
+    }
+
+    [Fact]
+    public void CasedCodePointsAreBuiltOncePerCaseTables()
+    {
+        // The set of points with a case mapping, which decides whether an i-flag literal can be planned as a plain one,
+        // was rebuilt on every compile. It is cached per case-table instance, so each Unicode version keeps its own.
+        foreach (var version in new[] { UnicodeVersion.Unicode16_0, UnicodeVersion.Unicode17_0, UnicodeVersion.Unicode16_0 })
+        {
+            var budget = new CompileBudget(new RegexCompileLimits());
+            Assert.True(EcmaUnicodeData.TryCreate(version, ref budget, out var unicode, out _));
+            foreach (var unicodeAware in new[] { false, true })
+            {
+                var cased = EcmaAccelerator.GetCasedPoints(unicode!.CaseTables, unicodeAware);
+                Assert.Same(cased, EcmaAccelerator.GetCasedPoints(unicode.CaseTables, unicodeAware));
+                Assert.Equal(version == UnicodeVersion.Unicode17_0, cased.Contains(0xA7CF));
+            }
+
+            var flags = EcmaScriptFlags.IgnoreCase;
+            Assert.True(EcmaScriptMatcher.TryParse("꟎@", new EcmaScriptProfile(flags, version), out var matcher, out _));
+            using (matcher)
+            {
+                Assert.Equal(version == UnicodeVersion.Unicode17_0 ? RegexSearchStatus.Match : RegexSearchStatus.NoMatch,
+                    matcher!.Exec("x꟏@", new RegexCapture[1], out _));
+            }
+        }
+    }
+
+    [Theory]
+    // Each range added to a class was placed by a scan from its first range, so loading a property's sorted ranges was
+    // quadratic: \p{L} charged ~250,000 work units and took ~600 µs per compile.
+    [InlineData("\\p{L}", "General_Category", "L")]
+    [InlineData("\\p{Lu}", "General_Category", "Lu")]
+    [InlineData("\\p{Script=Greek}", "Script", "Greek")]
+    [InlineData("\\p{Alphabetic}", null, "Alphabetic")]
+    public void PropertyClassesLoadInLinearWork(string pattern, string? name, string value)
+    {
+        var profile = new EcmaScriptProfile(EcmaScriptFlags.Unicode, UnicodeVersion.Unicode17_0);
+        var program = CompileProgram(pattern, profile, out var unicode, out var work);
+        Assert.True(name is null
+            ? unicode.TryResolveProperty(value, default, false, out var property)
+            : unicode.TryResolveProperty(name, value, false, out property));
+        var expected = unicode.GetIntervals(property);
+        var slice = program.Sets[0];
+        Assert.True(expected.SequenceEqual(program.Intervals.Slice(slice.IntervalOffset, slice.IntervalCount)));
+        Assert.True(work < 16L * expected.Length + 1_000, $"{pattern}: {work} work units for {expected.Length} ranges");
+    }
+
+    [Theory]
+    // Ranges added out of order still merge with every neighbour they touch.
+    [InlineData("[zb-da-cA]", "Aa-dz")]
+    [InlineData("[x-zf-ha-c\\u0100d-ei]", "a-ix-zĀ")]
+    [InlineData("[a-cx-z\\u0100d-w]", "a-zĀ")]
+    public void OutOfOrderClassRangesMerge(string pattern, string members)
+    {
+        var program = CompileProgram(pattern, new EcmaScriptProfile(EcmaScriptFlags.Unicode), out _, out _);
+        var slice = program.Sets[0];
+        var actual = program.Intervals.Slice(slice.IntervalOffset, slice.IntervalCount).ToArray();
+        var expected = new List<EcmaInterval>();
+        for (var i = 0; i < members.Length; i++)
+        {
+            var last = i + 2 < members.Length && members[i + 1] == '-' ? members[i + 2] : members[i];
+            expected.Add(new(members[i], last));
+            i += last == members[i] ? 0 : 2;
+        }
+
+        Assert.Equal(expected.OrderBy(iv => iv.First), actual);
     }
 }
