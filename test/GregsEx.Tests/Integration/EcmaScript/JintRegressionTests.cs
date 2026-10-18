@@ -66,6 +66,59 @@ public sealed class JintRegressionTests
         Assert.Equal(new RegexMatchRange(0, subject.Length), range);
     }
 
+    [Fact]
+    public void AQuotedStringLiteralReservesItsTrailNotACopyOfTheStackPerFrame()
+    {
+        // A frame used to copy the whole task stack and every register: this pattern needed about 157 ints of workspace
+        // per character of a string literal, so Jint refused a 1 MB literal. A frame now keeps what it must undo.
+        const string pattern = "\"(?:[^\"\\\\]|\\\\.)*\"";
+        var body = string.Concat(Enumerable.Repeat("abc\\\"def\\\\gh ", 64 * 1024 / 14));
+        var subject = "\"" + body + "\"";
+        var frames = subject.Length * 8 / 5;
+        Assert.True(EcmaScriptMatcher.TryParse(pattern, new EcmaScriptProfile(EcmaScriptFlags.None, UnicodeVersion.Unicode17_0),
+            out var matcher, out var diagnostic, frameCapacity: frames), diagnostic.ToString());
+        using (matcher)
+        {
+            Assert.True(matcher!.ReservedBytes < 4L * 32 * subject.Length, $"{matcher.ReservedBytes / (4.0 * subject.Length):F1} ints per character");
+            Assert.Equal(RegexSearchStatus.Match, matcher.Exec(subject, new RegexCapture[1], out var range));
+            Assert.Equal(new RegexMatchRange(0, subject.Length), range);
+        }
+    }
+
+    [Theory]
+    // Captures a frame restores from its register trail, including ones set inside a positive lookahead whose own
+    // choices were dropped when it succeeded. Expected results from ECMAScript semantics (checked against Node 24.4, V8 13.6).
+    [InlineData("(?:(?=(a+))a)*b|(a)c", "aaac", "2,2|-|2,1")]
+    [InlineData("(?=(\\w+))(\\w)*!", "abc!", "0,4|0,3|2,1")]
+    [InlineData("((a)|b)+?c|(.)", "ababx", "0,1|-|-|0,1")]
+    [InlineData("(?!(a)b)(a)c", "ac", "0,2|-|0,1")]
+    [InlineData("^(?:(a)|(?=(b))b|c)+$", "abca", "0,4|3,1|-")]
+    [InlineData("(?:(a)|b)*(?=(a))ab", "bab", "0,3|-|1,1")]
+    [InlineData("(?:(?=(x|(y)))\\w)+z", "xyxz", "0,4|2,1|-")]
+    [InlineData("^(?:(?=(a)(b)?)\\w)+?c", "abac", null)]
+    [InlineData("(?=(a)(?=(b)))?a(c)?|(q)", "abq", "0,1|-|-|-|-")]
+    [InlineData("((?=(a)))+a(?!(b))", "aab", "0,1|0,0|0,1|-")]
+    public void TrailedCapturesRollBack(string pattern, string input, string? expected)
+    {
+        Assert.True(EcmaScriptMatcher.TryParse(pattern, new EcmaScriptProfile(EcmaScriptFlags.None, UnicodeVersion.Unicode17_0),
+            out var matcher, out var diagnostic, frameCapacity: 64), diagnostic.ToString());
+        using (matcher)
+        {
+            var groups = new RegexCapture[8];
+            var status = matcher!.Exec(input, groups, out _);
+            if (expected is null)
+            {
+                Assert.Equal(RegexSearchStatus.NoMatch, status);
+                return;
+            }
+
+            Assert.Equal(RegexSearchStatus.Match, status);
+            var actual = string.Join("|", groups.Take(expected.Split('|').Length)
+                .Select(g => g.Participated ? $"{g.Index},{g.Length}" : "-"));
+            Assert.Equal(expected, actual);
+        }
+    }
+
     [Theory]
     [InlineData("ZZQ", EcmaScriptFlags.IgnoreCase, "xxzZqxx", RegexSearchStatus.Match)]
     [InlineData("[k]", EcmaScriptFlags.IgnoreCase, "\u212A", RegexSearchStatus.NoMatch)] // legacy Canonicalize
