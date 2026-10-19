@@ -34,6 +34,25 @@ internal sealed class EcmaExecutor : IEcmaExecutor
     private const int MaxTrailedRegistersPerFrame = 4;
     public EcmaProgram Program { get; }
 
+    // Per node, the ASCII characters it can start with in the forward direction, and whether it may start with a
+    // non-ASCII unit or match empty; a node it says nothing about may start anywhere. An alternative skips a branch
+    // whose start excludes the current character instead of saving a choice for it, which is most of what a
+    // first-character-dispatched alternation (/"[^"]*"|true|false|null|-?\d+/) costs.
+    private readonly StartBits[] _startBits;
+
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Auto)]
+    private readonly record struct StartBits(ulong Low, ulong High, bool NonAscii, bool Empty)
+    {
+        public static readonly StartBits Any = new(ulong.MaxValue, ulong.MaxValue, true, true);
+        public static readonly StartBits EmptyOnly = new(0, 0, false, true);
+
+        public StartBits Union(StartBits other) => new(Low | other.Low, High | other.High, NonAscii || other.NonAscii, Empty || other.Empty);
+
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        public bool CanStartWith(char c)
+            => Empty || (c < 128 ? ((c < 64 ? Low : High) & (1UL << (c & 63))) != 0 : NonAscii);
+    }
+
     internal EcmaExecutor(EcmaProgram program, EcmaCaseTables tables, EcmaNode[] instructions, int taskCapacity)
     {
         Program = program;
@@ -51,6 +70,7 @@ internal sealed class EcmaExecutor : IEcmaExecutor
             _asciiCanonical[c] = (char) EcmaFastSet.Fold(c, program.Profile.IsUnicodeAware, ignoreCase: true, tables);
         }
 
+        _startBits = BuildStartBits(instructions, program.Profile.IsUnicodeAware, tables);
         _greedyRun = new bool[instructions.Length];
         for (var i = 0; i < instructions.Length; i++)
         {
@@ -62,6 +82,60 @@ internal sealed class EcmaExecutor : IEcmaExecutor
                     (atom.Kind == EcmaNodeKind.Set && _accelerator.FastSets[node.X] is { } fastSet && fastSet.Slice.StringCount == 0);
             }
         }
+    }
+
+    private StartBits[] BuildStartBits(EcmaNode[] instructions, bool unicodeAware, EcmaCaseTables tables)
+    {
+        // Children have lower ids than their parent, so one pass in id order sees every child first.
+        var bits = new StartBits[instructions.Length];
+        for (var i = 0; i < instructions.Length; i++)
+        {
+            var n = instructions[i];
+            bits[i] = n.Kind switch
+            {
+                EcmaNodeKind.Literal => LiteralStart(n),
+                EcmaNodeKind.Set => _accelerator.FastSets[i] is { Slice.StringCount: 0 } fastSet
+                    ? new StartBits(fastSet.AsciiLow, fastSet.AsciiHigh, true, false)
+                    : StartBits.Any,
+                EcmaNodeKind.Capture => bits[n.X],
+                EcmaNodeKind.Repeat => n.Max == 0 ? StartBits.EmptyOnly
+                    : n.Min == 0 ? bits[n.X].Union(StartBits.EmptyOnly) : bits[n.X],
+                EcmaNodeKind.Alternative => bits[n.X].Union(bits[n.Y]),
+                EcmaNodeKind.Sequence => bits[n.X].Empty
+                    ? new StartBits(bits[n.X].Low | bits[n.Y].Low, bits[n.X].High | bits[n.Y].High,
+                        bits[n.X].NonAscii || bits[n.Y].NonAscii, bits[n.Y].Empty)
+                    : bits[n.X],
+                EcmaNodeKind.Empty or EcmaNodeKind.Start or EcmaNodeKind.End or EcmaNodeKind.WordBoundary or
+                    EcmaNodeKind.NotWordBoundary or EcmaNodeKind.Lookahead or EcmaNodeKind.NegativeLookahead or
+                    EcmaNodeKind.Lookbehind or EcmaNodeKind.NegativeLookbehind => StartBits.EmptyOnly,
+                _ => StartBits.Any,
+            };
+        }
+
+        return bits;
+
+        StartBits LiteralStart(EcmaNode n)
+        {
+            if ((n.EffectiveFlags & EcmaScriptFlags.IgnoreCase) == 0)
+            {
+                return n.Value < 128 ? Bit(n.Value) : new StartBits(0, 0, true, false);
+            }
+
+            // Every ASCII unit whose canonical form is the literal's; anything non-ASCII may fold to it too.
+            var canonical = EcmaFastSet.Fold(n.Value, unicodeAware, ignoreCase: true, tables);
+            var result = new StartBits(0, 0, true, false);
+            for (var c = 0; c < 128; c++)
+            {
+                if (_asciiCanonical[c] == canonical)
+                {
+                    result = result.Union(Bit(c));
+                }
+            }
+
+            return result;
+        }
+
+        static StartBits Bit(int c) => c < 64 ? new StartBits(1UL << c, 0, false, false) : new StartBits(0, 1UL << (c - 64), false, false);
     }
 
     public RegexWorkspaceCapacity GetRequiredCapacity(SearchOperation operation, int frameCapacity)
@@ -274,7 +348,7 @@ internal sealed class EcmaExecutor : IEcmaExecutor
                         candidate += rel;
                     }
                 }
-                else if (_accelerator.FirstChars is { } firstChars)
+                else if (_accelerator.FirstChars is { } firstChars && (candidate > 0 || !_accelerator.FirstCharsTryStart))
                 {
                     // See EcmaAccelerator.FirstChars. A hit on the trail half of a surrogate pair is not a
                     // candidate under u/v, where the pair is one code point and matching never starts inside it.
@@ -558,6 +632,28 @@ internal sealed class EcmaExecutor : IEcmaExecutor
                                 evalNode = evalDir > 0 ? node.X : node.Y;
                                 goto EvaluateNode;
                             case EcmaNodeKind.Alternative:
+                                if (evalDir > 0)
+                                {
+                                    // A branch that cannot start here fails without being tried: skip it, and save no
+                                    // choice for a second branch that would fail the same way (see _startBits).
+                                    var startBits = _owner._startBits;
+                                    var atEnd = Position >= _input.Length;
+                                    var current = atEnd ? '\0' : _input[Position];
+                                    var left = startBits[node.X];
+                                    if (atEnd ? !left.Empty : !left.CanStartWith(current))
+                                    {
+                                        evalNode = node.Y;
+                                        goto EvaluateNode;
+                                    }
+
+                                    var right = startBits[node.Y];
+                                    if (atEnd ? !right.Empty : !right.CanStartWith(current))
+                                    {
+                                        evalNode = node.X;
+                                        goto EvaluateNode;
+                                    }
+                                }
+
                                 if (!Save(ChoiceKind.Branch, new(TaskKind.Evaluate, node.Y, 0, 0, evalDir), ref state))
                                 {
                                     return -1;

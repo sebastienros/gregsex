@@ -413,4 +413,35 @@ public sealed class JintRegressionTests
 
         Assert.Equal(expected.OrderBy(iv => iv.First), actual);
     }
+
+    [Theory]
+    // A non-multiline ^ inside an alternation no longer widens the FIRST set; the input's start is still tried.
+    [InlineData("(?:^|:|,)(?:\\s*\\[)+", EcmaScriptFlags.None, " [x", 0, 2)]
+    [InlineData("(?:^|:|,)(?:\\s*\\[)+", EcmaScriptFlags.None, "a:  [x", 1, 4)]
+    [InlineData("(?:^|:)\\[", EcmaScriptFlags.Multiline, "a\n[x", 2, 1)]
+    [InlineData("(?:^)?x", EcmaScriptFlags.None, "ax", 1, 1)]
+    // An alternative skips a branch whose start excludes the current character, without saving a choice for it.
+    [InlineData("\"[^\"\\\\\\n\\r]*\"|true|false|null|-?\\d+(?:\\.\\d*)?(:?[eE][+\\-]?\\d+)?", EcmaScriptFlags.None, " -1.5e3,", 1, 6)]
+    [InlineData("(?:x|\\b)y", EcmaScriptFlags.None, "a y", 2, 1)]
+    [InlineData("(?:a|$)", EcmaScriptFlags.None, "b", 1, 0)]
+    // \b around a literal, and \b\w+\b, run on their plans.
+    [InlineData("\\bab\\b", EcmaScriptFlags.None, "abc cab ab_ ab", 12, 2)]
+    [InlineData("\\b-", EcmaScriptFlags.None, " -a-", 3, 1)]
+    [InlineData("\\bk\\b", EcmaScriptFlags.IgnoreCase | EcmaScriptFlags.Unicode, "Kk k", 3, 1)]
+    [InlineData("\\b\\w+\\b", EcmaScriptFlags.None, "-- cd_e f", 3, 4)]
+    [InlineData("\\b\\w+\\b", EcmaScriptFlags.IgnoreCase | EcmaScriptFlags.Unicode, "-aſb", 1, 3)]
+    public void GatedShapesMatchAsBefore(string pattern, EcmaScriptFlags flags, string input, int index, int length)
+    {
+        Assert.Equal(RegexSearchStatus.Match, Exec(pattern, flags, input, out var range));
+        Assert.Equal(new RegexMatchRange(index, length), range);
+    }
+
+    [Theory]
+    [InlineData("(?:^|:)\\[", EcmaScriptFlags.None, "a\n[x")]
+    [InlineData("\\b\\w{1,2}\\b", EcmaScriptFlags.None, "abcd")]
+    [InlineData("\\bab\\b", EcmaScriptFlags.None, "abc cab ab_")]
+    public void GatedShapesFailAsBefore(string pattern, EcmaScriptFlags flags, string input)
+    {
+        Assert.Equal(RegexSearchStatus.NoMatch, Exec(pattern, flags, input, out _));
+    }
 }

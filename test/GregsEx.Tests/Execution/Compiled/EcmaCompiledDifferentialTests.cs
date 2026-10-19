@@ -144,15 +144,23 @@ public class EcmaCompiledDifferentialTests
             try
             { oracle = Parse(args.Data.Item1, args.Data.Item2); }
             catch (RegexParseException) { continue; }
-            total++;
-            if (TryCompile(oracle) is not null)
+            // A pattern an accelerated direct plan serves is declined by design (AcceleratedDirectPlansAreDeclined),
+            // so it says nothing about how much of the rest the kernel covers.
+            try
             {
+                oracle.Compile();
                 lowered++;
             }
-            else
+            catch (NotSupportedException ex) when (ex.Message.Contains("accelerated direct plan", StringComparison.Ordinal))
+            {
+                continue;
+            }
+            catch (NotSupportedException)
             {
                 skipped.Add(args.Data.Item1 + "/" + args.Data.Item2);
             }
+
+            total++;
         }
         Assert.True(lowered * 10 >= total * 7, lowered + "/" + total + " lowered; skipped: " + string.Join(", ", skipped));
     }
