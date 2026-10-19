@@ -93,6 +93,19 @@ internal sealed class EcmaFastSet
             return;
         }
 
+        if (hasBmp && SharedBmpSets.TryGetValue(new(_intervals, unicodeAware, foldedBmp ? caseTables : null), out var sharedBmp))
+        {
+            BmpBits = sharedBmp.Bits;
+            AsciiLow = sharedBmp.Bits[0];
+            AsciiHigh = sharedBmp.Bits[1];
+            BmpBitsIsExact = sharedBmp.Exact;
+            SearchValues = sharedBmp.Values;
+            IsNegatedSearchValues = sharedBmp.Negated;
+            UnicodeRunStops = sharedBmp.RunStops;
+            StopsAtLineTerminatorsOnly = sharedBmp.StopsAtLineTerminatorsOnly;
+            return;
+        }
+
         if (hasBmp)
         {
             var bmp = new ulong[1024];
@@ -263,6 +276,46 @@ internal sealed class EcmaFastSet
                     IsNegatedSearchValues = true;
                 }
             }
+
+            if (SharedBmpSets.Count < MaxSharedBmpSets)
+            {
+                SharedBmpSets.TryAdd(new(_intervals, unicodeAware, foldedBmp ? caseTables : null),
+                    new(bmp, BmpBitsIsExact, SearchValues, IsNegatedSearchValues, UnicodeRunStops, StopsAtLineTerminatorsOnly));
+            }
+        }
+    }
+
+    // Classes with non-ASCII members ([^"\\], ., \s) recur across patterns, and each built an 8 KiB bitmap and often a
+    // SearchValues per compile. Keyed by the exact intervals, the Unicode mode (which clears the surrogates) and, for a
+    // class folded under legacy i, the case tables it was folded with; bounded like SharedAsciiSets, and never written
+    // after construction.
+    private const int MaxSharedBmpSets = 1024;
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<IntervalsKey, BmpSet> SharedBmpSets = new();
+
+    private sealed record BmpSet(ulong[] Bits, bool Exact, SearchValues<char>? Values, bool Negated,
+        SearchValues<char>? RunStops, bool StopsAtLineTerminatorsOnly);
+
+    private readonly struct IntervalsKey(EcmaInterval[] intervals, bool unicodeAware, EcmaCaseTables? foldedWith) : IEquatable<IntervalsKey>
+    {
+        private readonly EcmaInterval[] _intervals = intervals;
+        private readonly bool _unicodeAware = unicodeAware;
+        private readonly EcmaCaseTables? _foldedWith = foldedWith;
+
+        public bool Equals(IntervalsKey other)
+            => _unicodeAware == other._unicodeAware && ReferenceEquals(_foldedWith, other._foldedWith) &&
+                _intervals.AsSpan().SequenceEqual(other._intervals);
+
+        public override bool Equals(object? obj) => obj is IntervalsKey other && Equals(other);
+
+        public override int GetHashCode()
+        {
+            var hash = _unicodeAware ? 1 : 0;
+            foreach (var iv in _intervals)
+            {
+                hash = unchecked(hash * 31 + iv.First) * 31 + iv.Last;
+            }
+
+            return hash;
         }
     }
 
@@ -702,6 +755,13 @@ internal sealed class EcmaAccelerator
     private readonly int _atomicMinAfterAnchor;
     private readonly int _atomicMinTotalLength;
 
+    // The position matcher replacing the VM for a pattern no plan takes (see EcmaPositionMatcher). Built on the first search
+    // rather than here: a pattern compiled and never searched, or refused after the build, costs its compile nothing.
+    private readonly EcmaCaseTables _caseTables;
+    private readonly bool _positionEligible;
+    private EcmaPositionMatcher? _position;
+    private int _positionState;
+
     // General VM prefilters
     internal readonly bool HasEndTerminalChar;
     internal readonly char EndTerminalChar;
@@ -806,6 +866,7 @@ internal sealed class EcmaAccelerator
     internal EcmaAccelerator(EcmaProgram program, EcmaCaseTables caseTables)
     {
         _program = program;
+        _caseTables = caseTables;
         var nodes = WithoutCaselessIgnoreCase(program.Nodes, program.Profile.IsUnicodeAware, caseTables);
         FastSets = new EcmaFastSet?[nodes.Length];
         NonNullable = new bool[nodes.Length];
@@ -932,6 +993,33 @@ internal sealed class EcmaAccelerator
             RequiredLiteral = reqLit;
             RequiredLiteralMinOffset = reqMinOffset;
         }
+
+        _positionEligible = EcmaPositionMatcher.MayApply(program, nodes);
+    }
+
+    internal EcmaPositionMatcher? PositionMatcher
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get
+        {
+            if (!_positionEligible)
+            {
+                return null;
+            }
+
+            var built = Volatile.Read(ref _positionState);
+            return built != 0 ? _position : BuildPositionMatcher();
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private EcmaPositionMatcher? BuildPositionMatcher()
+    {
+        // Deterministic, so threads racing here build equal matchers and either may win.
+        var nodes = WithoutCaselessIgnoreCase(_program.Nodes, _program.Profile.IsUnicodeAware, _caseTables);
+        _position = EcmaPositionMatcher.TryCreate(_program, nodes, FastSets, _caseTables);
+        Volatile.Write(ref _positionState, 1);
+        return _position;
     }
 
     private static int MinSetLength(EcmaProgram program, EcmaSetSlice slice)
