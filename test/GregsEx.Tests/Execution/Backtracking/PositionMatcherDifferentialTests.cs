@@ -32,6 +32,14 @@ public sealed class PositionMatcherDifferentialTests
         ("([a-c])([a-c]?)\\2", ""),
         ("(a+)+b", ""),
         ("[^ab]+|a{2}", ""),
+        // Greedy runs whose class overlaps what follows: one counted choice, given back a unit at a time.
+        ("a.*a", ""),
+        ("(a.*)(b|\\d)", ""),
+        ("x[^y]*y?:", ""),
+        ("(?:a|b)[a-c]*c", ""),
+        ("\\w+\\b", ""),
+        ("^.*b$", "m"),
+        ("([ab]*)(a|ab)\\1", "i"),
     ];
 
     public static TheoryData<string, string> Patterns()
@@ -85,6 +93,32 @@ public sealed class PositionMatcherDifferentialTests
                 }
             }
         }
+    }
+
+    // /a.*a/ over a long subject: the run is measured once and given back a unit at a time, as the VM's GreedyRun does,
+    // instead of keeping a choice per unit.
+    [Theory]
+    [InlineData("a.*a", "")]
+    [InlineData("(a.*)b", "")]
+    [InlineData("a[^\\n]*?z|a.*a", "")]
+    public void ALongGreedyRunAnswersAsTheVm(string pattern, string flags)
+    {
+        var executor = Compile(pattern, flags);
+        var capacity = executor.GetRequiredCapacity(SearchOperation.Captures, 4096);
+        var states = new int[capacity.StateSlots];
+        var captures = new int[capacity.CaptureSlots];
+        var scratch = new int[capacity.ScratchSlots];
+        var subject = "x" + string.Concat(Enumerable.Repeat("abcdefgh", 20_000)) + "yb";
+        foreach (var operation in new[] { SearchOperation.Captures, SearchOperation.Range })
+        {
+            var expected = Run(executor, subject, 0, false, operation, hostSized: false, states, captures, scratch, out var expectedMatch, out var expectedGroups);
+            var actual = Run(executor, subject, 0, false, operation, hostSized: true, states, captures, scratch, out var actualMatch, out var actualGroups);
+            Assert.Equal(expected, actual);
+            Assert.Equal(expectedMatch, actualMatch);
+            Assert.True(expectedGroups.AsSpan().SequenceEqual(actualGroups));
+        }
+
+        Assert.True(executor.UsesPositionMatcher);
     }
 
     [Fact]

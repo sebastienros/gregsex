@@ -48,6 +48,10 @@ internal sealed class EcmaPositionMatcher
     // to itself that carries no action, so a run of it can be measured in one call.
     private readonly int[] _stateItems;
     private readonly bool[] _selfRun;
+    // Whether the state's first item is the move back to itself with no action or guard, while a later item may take the
+    // same units: a run of its class is then measured in one call and kept as one counted choice that gives the run back
+    // a unit at a time (the VM's GreedyRun), where stepping it kept a choice per unit (/a.*a/ over 64 KiB: 60x slower).
+    private readonly bool[] _countedRun;
     // Whether the state's moves have pairwise disjoint classes: then only an acceptance can be a second choice.
     private readonly bool[] _deterministic;
     // Every state deterministic: MatchAt runs the lean one-pass loop, which keeps a single fallback acceptance.
@@ -100,6 +104,7 @@ internal sealed class EcmaPositionMatcher
 
         _stateItems = new int[lists.Length + 1];
         _selfRun = new bool[lists.Length];
+        _countedRun = new bool[lists.Length];
         _deterministic = new bool[lists.Length];
         _target = new int[itemCount];
         _guard = new byte[itemCount];
@@ -143,6 +148,8 @@ internal sealed class EcmaPositionMatcher
             var firstAccept = list.Count > 0 ? _laterAccept[first] : -1;
             _selfRun[s] = s > 0 && _deterministic[s] && list.Count > 0 && list[0].Target == s - 1 && list[0].Guard == 0 &&
                 list[0].Actions is null && _runSet[s - 1] is not null && (firstAccept < 0 || _guard[firstAccept] == 0);
+            _countedRun[s] = !_selfRun[s] && s > 0 && list.Count > 1 && list[0].Target == s - 1 && list[0].Guard == 0 &&
+                list[0].Actions is null && _runSet[s - 1] is not null;
         }
 
         _stateItems[lists.Length] = i;
@@ -783,6 +790,9 @@ internal sealed class EcmaPositionMatcher
     // The registers and the open positions, then the pending acceptance's copy of both: 8 ints per group.
     internal static int RegisterLength(int groupCount) => 8 * groupCount;
 
+    // An item below this on the stack is a counted run, CountedChoice minus its first position.
+    private const int CountedChoice = -2;
+
     internal const int NoMatch = -1;
     internal const int BudgetFailure = -2;
     // The choices outgrew the stack the matcher keeps; the VM takes the candidate.
@@ -974,6 +984,36 @@ internal sealed class EcmaPositionMatcher
                     }
                 }
             }
+            else if (_countedRun[state])
+            {
+                var run = Run(state, input, pos);
+                if (run > 0)
+                {
+                    // The choices each unit of the run would have kept, as one: at each position from the last unit
+                    // back to the first, the state's items after its move to itself.
+                    if (stack is null || sp + width > stack.Length)
+                    {
+                        stack = Grow(stack, sp + width);
+                        if (stack is null)
+                        {
+                            steps = count;
+                            return GiveUp;
+                        }
+                    }
+
+                    stack[sp] = state;
+                    stack[sp + 1] = CountedChoice - pos;
+                    stack[sp + 2] = pos + run - 1;
+                    if (saved > 0)
+                    {
+                        registers.CopyTo(stack.AsSpan(sp + 3));
+                    }
+
+                    sp += width;
+                    count += run;
+                    pos += run;
+                }
+            }
 
             var chosen = -1;
             var end = _stateItems[state + 1];
@@ -1031,6 +1071,27 @@ internal sealed class EcmaPositionMatcher
 
                 end = _stateItems[state + 1];
                 c = (uint) pos < (uint) input.Length ? input[pos] : -1;
+                if (chosen <= CountedChoice)
+                {
+                    // A counted run: give back one unit, staying armed down to its first unit, and try the state's other
+                    // items there. Its move to itself writes nothing, so the registers kept are every position's.
+                    if (pos > CountedChoice - chosen)
+                    {
+                        stack[sp + 2] = pos - 1;
+                        sp += width;
+                    }
+
+                    chosen = -1;
+                    count++;
+                    for (var i = _stateItems[state] + 1; i < end; i++)
+                    {
+                        if (Applies(i, c, input, pos))
+                        {
+                            chosen = i;
+                            break;
+                        }
+                    }
+                }
             }
 
             var target = _target[chosen];
