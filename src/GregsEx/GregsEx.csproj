@@ -2,7 +2,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <IsAotCompatible>true</IsAotCompatible>
-    <Description>Bounded RegularCore-1-experimental, ECMAScript2025, XSD 1.1 (2012-04-05 Appendix G) regex and XPath/XQuery F&amp;O 3.1 (2017-03-21 sections 5.6/C.1) named POSIX Issue 7/2018 C/POSIX byte BRE/ERE, and PCRE2-10.46-ManagedStandard8_16-v1 interpreters for .NET 10, with span searches, reusable workspaces and typed host functions. ECMAScript and XML select Unicode 16.0.0 (default) or 17.0.0. XML uses strict UTF-16/UTF-8 and XML 1.0 Fifth Edition; ECMAScript is UTF-16-only; RegularCore also admits raw bytes.</Description>
+    <Description>Bounded RegularCore-1-experimental, ECMAScript2025, XSD 1.1 (2012-04-05 Appendix G) regex and XPath/XQuery F&amp;O 3.1 (2017-03-21 sections 5.6/C.1) named POSIX Issue 7/2018 C/POSIX byte BRE/ERE, PCRE2-10.46-ManagedStandard8_16-v1 and Oniguruma-6.9.10 (TextMate grammar syntax) interpreters for .NET 10, with span searches, reusable workspaces and typed host functions. ECMAScript and XML select Unicode 16.0.0 (default) or 17.0.0. XML uses strict UTF-16/UTF-8 and XML 1.0 Fifth Edition; ECMAScript is UTF-16-only; RegularCore also admits raw bytes.</Description>
     <Authors>Sébastien Ros</Authors>
     <PackageTags>regex;regular-expressions;performance</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -45,6 +45,7 @@
     <None Update="Flavors/Pcre2/Tables/Unicode-LICENSE.txt" Pack="true" PackagePath="licenses/PCRE2-Unicode-LICENSE.txt" />
     <None Update="Flavors/Pcre2/Parsing/Syntax/PCRE2-SYNTAX-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-SYNTAX-NOTICE.txt" />
     <None Update="Flavors/Pcre2/Parsing/Lowering/PCRE2-LOWERING-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-LOWERING-NOTICE.txt" />
+    <None Update="Flavors/Oniguruma/ONIGURUMA-NOTICE.txt" Pack="true" PackagePath="licenses/ONIGURUMA-NOTICE.txt" />
     <None Update="Flavors/Pcre2/Runtime/Host/PCRE2-HOST-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-HOST-NOTICE.txt" />
     <InternalsVisibleTo Include="GregsEx.Tests" />
     <InternalsVisibleTo Include="GregsEx.AotSmoke" />

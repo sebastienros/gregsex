@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""Generates the Oniguruma flavor's Unicode tables from a pinned Oniguruma checkout.
+
+Usage: python3 -I generate.py <oniguruma-checkout> <output.cs>
+
+Reads src/unicode_property_data.c (code ranges and the property name list),
+src/unicode_fold_data.c (single code point case folds, normal and locale
+sections, and the folds to two and three code points) and
+src/unicode_egcb_data.c (Grapheme_Cluster_Break ranges). The checkout must be tag v6.9.10, commit
+4ef89209a239c1aea328cf13c05a2807e5c146d1; source digests are written into the
+output header so a table refresh is reviewable.
+"""
+import hashlib
+import re
+import sys
+
+PIN = "4ef89209a239c1aea328cf13c05a2807e5c146d1"
+
+
+def read(path):
+    with open(path, encoding="utf-8") as f:
+        return f.read()
+
+
+def digest(path):
+    with open(path, "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()
+
+
+def main():
+    root, output = sys.argv[1], sys.argv[2]
+    prop_path = f"{root}/src/unicode_property_data.c"
+    fold_path = f"{root}/src/unicode_fold_data.c"
+    prop = read(prop_path)
+
+    ranges = {}
+    for m in re.finditer(r"\nCR_(\w+)\[\] = \{ (\d+),\n(.*?)\}; /\* END of CR_\1 \*/", prop, re.S):
+        name, count, body = m.group(1), int(m.group(2)), m.group(3)
+        values = [int(v, 16) for v in re.findall(r"0x([0-9a-fA-F]+)", body)]
+        if len(values) != 2 * count:
+            raise SystemExit(f"CR_{name}: expected {count} ranges, found {len(values) // 2}")
+        ranges[name] = values
+    for alias, target in re.findall(r"#define CR_(\w+) CR_(\w+)", prop):
+        ranges[alias] = ranges[target]
+
+    table = re.search(r"const CodeRanges\[\] = \{(.*?)\};", prop, re.S).group(1)
+    slots = re.findall(r"CR_(\w+)", table)
+    declared = int(re.search(r"#define CODE_RANGES_NUM\s+(\d+)", prop).group(1))
+    if len(slots) != declared:
+        raise SystemExit(f"CodeRanges has {len(slots)} slots, CODE_RANGES_NUM is {declared}")
+
+    pool = dict(re.findall(r'char unicode_prop_name_pool_str(\d+)\[sizeof\("([^"]*)"\)\];', prop))
+    words = re.findall(r"\{pool_offset\((\d+)\),\s*(\d+)\}", prop)
+    keywords = int(re.search(r"#define TOTAL_KEYWORDS (\d+)", prop).group(1))
+    if len(words) != keywords:
+        raise SystemExit(f"found {len(words)} property names, TOTAL_KEYWORDS is {keywords}")
+    names = sorted((pool[i], int(c)) for i, c in words)
+
+    egcb_path = f"{root}/src/unicode_egcb_data.c"
+    egcb_types = {"Other": 0, "CR": 1, "LF": 2, "Control": 3, "Extend": 4, "Prepend": 5, "Regional_Indicator": 6,
+                  "SpacingMark": 7, "ZWJ": 8, "L": 13, "LV": 14, "LVT": 15, "T": 16, "V": 17}
+    egcb = [(int(a, 16), int(b, 16), egcb_types[t]) for a, b, t in
+            re.findall(r"\{0x([0-9a-fA-F]+), 0x([0-9a-fA-F]+), EGCB_(\w+) \}", read(egcb_path))]
+    declared_egcb = int(re.search(r"EGCB_RANGE_NUM = (\d+);", read(egcb_path)).group(1))
+    if len(egcb) != declared_egcb:
+        raise SystemExit(f"found {len(egcb)} EGCB ranges, EGCB_RANGE_NUM is {declared_egcb}")
+
+    fold = read(fold_path)
+    folds1 = re.search(r"OnigUnicodeFolds1\[\] = \{(.*?)#define FOLDS1_END_INDEX", fold, re.S).group(1)
+    folds1 = re.sub(r"/\*.*?\*/|#define.*", " ", folds1)
+    pairs = {}
+    i = 0
+    tokens = re.findall(r"0x[0-9a-fA-F]+|\b\d+\b", folds1)
+    while i < len(tokens):
+        target = int(tokens[i], 16)
+        n = int(tokens[i + 1])
+        for member in tokens[i + 2:i + 2 + n]:
+            pairs.setdefault(int(member, 16), target)
+        i += 2 + n
+
+    # Folds to several code points: [length, fold..., count, members...] per entry, normal sections only (the
+    # locale sections are Turkish dotted I forms).
+    multi = []
+    for width in (2, 3):
+        body = re.search(rf"OnigUnicodeFolds{width}\[\] = \{{(.*?)#define FOLDS{width}_NORMAL_END_INDEX", fold, re.S).group(1)
+        body = re.sub(r"/\*.*?\*/|#define.*", " ", body)
+        toks = re.findall(r"0x[0-9a-fA-F]+|\b\d+\b", body)
+        i = 0
+        while i < len(toks):
+            target = [int(t, 16) for t in toks[i:i + width]]
+            n = int(toks[i + width])
+            members = [int(t, 16) for t in toks[i + width + 1:i + width + 1 + n]]
+            multi.extend([width, *target, n, *members])
+            i += width + 1 + n
+
+    # Range storage: one flat pair array, one (offset, count) per distinct table, one table per slot.
+    order, starts, flat = {}, [], []
+    for name in slots:
+        key = id(ranges[name])
+        if key not in order:
+            order[key] = len(starts)
+            starts.append((len(flat) // 2, len(ranges[name]) // 2))
+            flat.extend(ranges[name])
+    slot_tables = [order[id(ranges[name])] for name in slots]
+
+    blob = "".join(n for n, _ in names)
+    offsets, at = [], 0
+    for n, _ in names:
+        offsets.append(at)
+        at += len(n)
+    offsets.append(at)
+
+    out = []
+    w = out.append
+    w("#nullable enable")
+    w(f"// Generated by tools/oracles/oniguruma/generate.py from Oniguruma v6.9.10 ({PIN[:8]}).")
+    w(f"// unicode_property_data.c sha256 {digest(prop_path)}")
+    w(f"// unicode_fold_data.c sha256 {digest(fold_path)}")
+    w(f"// unicode_egcb_data.c sha256 {digest(egcb_path)}")
+    w("// Source copyright and BSD-2-Clause terms: Flavors/Oniguruma/ONIGURUMA-NOTICE.txt.")
+    w("namespace GregsEx.Flavors.Oniguruma.Tables;")
+    w("")
+    w("internal static class OnigurumaUnicodeData")
+    w("{")
+    w("    internal const int UnicodeVersion = 160000;")
+    w(f"    internal const int PropertyCount = {len(slots)};")
+    w("")
+    w("    // Inclusive code point pairs of every distinct table.")
+    w("    internal static ReadOnlySpan<int> Ranges => [")
+    emit(w, flat)
+    w("    ];")
+    w("")
+    w("    // Pair offset and pair count per distinct table.")
+    w("    internal static ReadOnlySpan<int> Tables => [")
+    emit(w, [v for s in starts for v in s])
+    w("    ];")
+    w("")
+    w("    // Distinct table of each Oniguruma ctype (CodeRanges index).")
+    w("    internal static ReadOnlySpan<ushort> PropertyTables => [")
+    emit(w, slot_tables)
+    w("    ];")
+    w("")
+    w("    // Property names, lower case without ' ', '-' and '_', sorted ordinally.")
+    w(f"    internal const string NameBlob = \"{blob}\";")
+    w("")
+    w("    internal static ReadOnlySpan<ushort> NameOffsets => [")
+    emit(w, offsets)
+    w("    ];")
+    w("")
+    w("    internal static ReadOnlySpan<ushort> NameProperties => [")
+    emit(w, [c for _, c in names])
+    w("    ];")
+    w("")
+    w("    // Simple case folds (code point, fold target), sorted by code point.")
+    w("    internal static ReadOnlySpan<int> Folds => [")
+    emit(w, [v for k in sorted(pairs) for v in (k, pairs[k])])
+    w("    ];")
+    w("")
+    w("    // Folds to several code points: length, the fold, member count, the members that fold to it.")
+    w("    internal static ReadOnlySpan<int> MultiFolds => [")
+    emit(w, multi)
+    w("    ];")
+    w("")
+    w("    // Grapheme_Cluster_Break ranges (first, last, OnigGraphemeBreak value), sorted.")
+    w("    internal static ReadOnlySpan<int> GraphemeBreaks => [")
+    emit(w, [v for r in egcb for v in r])
+    w("    ];")
+    w("}")
+    with open(output, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(out) + "\n")
+
+
+def emit(w, values):
+    for i in range(0, len(values), 16):
+        w("        " + ", ".join(str(v) for v in values[i:i + 16]) + ",")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Development-only: records native Oniguruma 6.9.10 results (Onigwrap 1.0.11's libonigwrap). Not part of the
+       solution; it does not reference GregsEx. See ../README.md. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Onigwrap" />
+  </ItemGroup>
+</Project>

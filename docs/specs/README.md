@@ -10,6 +10,7 @@
 | [XML](xml.md) | XSD 1.1 and XPath/XQuery F&O 3.1 regex semantics |
 | [POSIX](posix.md) | Issue 7 C-byte BRE/ERE profiles and submatch selection |
 | [PCRE2](pcre2.md) | Managed 10.46 standard8/16 profile and native-width host operations |
+| [Oniguruma](oniguruma.md) | Oniguruma 6.9.10 default (Ruby) syntax over UTF-16, as TextMate grammars use it |
 | [Acceleration](acceleration.md) | Eligibility, dispatch, fallback, and lowering interfaces |
 | [Compilation](compilation.md) | Optional FEC compilation, annotations, trimming, and package boundaries |
 | [Performance](performance.md) | Workloads, controlled allocations, reproducibility, and thresholds |

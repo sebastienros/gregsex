@@ -9,7 +9,7 @@ public class ProfilePresetTests
     public void PresetsAreCentralizedGetOnlyAndConcretelyTyped()
     {
         var properties = typeof(RegexProfiles).GetProperties(BindingFlags.Public | BindingFlags.Static);
-        Assert.Equal(14, properties.Length);
+        Assert.Equal(16, properties.Length);
         foreach (var property in properties)
         {
             Assert.Null(property.SetMethod);
@@ -18,11 +18,20 @@ public class ProfilePresetTests
         }
 
         Type[] profileTypes = [typeof(RegexProfile), typeof(RegularCoreProfile), typeof(EcmaScriptProfile),
-            typeof(XsdProfile), typeof(XPathProfile), typeof(PosixProfile), typeof(Pcre2Profile)];
+            typeof(XsdProfile), typeof(XPathProfile), typeof(PosixProfile), typeof(Pcre2Profile), typeof(OnigurumaProfile)];
         foreach (var type in profileTypes)
         {
             Assert.Empty(type.GetProperties(BindingFlags.Public | BindingFlags.Static));
         }
+    }
+
+    [Fact]
+    public void OnigurumaPresetsDifferOnlyInGroupCapture()
+    {
+        Assert.Same(RegexProfiles.Oniguruma, RegexProfiles.Oniguruma);
+        Assert.Equal(OnigurumaOptions.None, RegexProfiles.Oniguruma.Options);
+        Assert.Equal(OnigurumaOptions.CaptureGroup, RegexProfiles.OnigurumaTextMate.Options);
+        Assert.Equal(RegexProfiles.Oniguruma.Id, RegexProfiles.OnigurumaTextMate.Id);
     }
 
     [Fact]

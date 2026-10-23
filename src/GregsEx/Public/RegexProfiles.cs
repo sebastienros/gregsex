@@ -45,4 +45,10 @@ public static class RegexProfiles
 
     /// <summary>PCRE2 10.46 UTF-16 profile with default options and only UTF enabled, not UCP.</summary>
     public static Pcre2Profile Pcre2Utf16 { get; } = new(flags: Pcre2CompileFlags.Utf);
+
+    /// <summary>Oniguruma 6.9.10 (ONIG_SYNTAX_ONIGURUMA, UTF-16) with ONIG_OPTION_NONE.</summary>
+    public static OnigurumaProfile Oniguruma { get; } = new();
+
+    /// <summary>Oniguruma 6.9.10 with ONIG_OPTION_CAPTURE_GROUP, the options TextMate hosts (vscode-oniguruma, Onigwrap) use.</summary>
+    public static OnigurumaProfile OnigurumaTextMate { get; } = new(OnigurumaOptions.CaptureGroup);
 }

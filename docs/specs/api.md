@@ -56,7 +56,7 @@ compilation boundaries; warmed matching uses the bound tables. Runtime
 compilation and `[GeneratedPattern(..., UnicodeVersion = ...)]` preserve the
 same selection, including interpreted generated-pattern fallback. Generated
 patterns diagnose unsupported versions/flavor combinations as `GREGEX005`.
-PCRE2 10.46, POSIX and RegularCore do not acquire an arbitrary Unicode override.
+PCRE2 10.46, Oniguruma 6.9.10, POSIX and RegularCore do not acquire an arbitrary Unicode override.
 
 Enum members may be marked obsolete individually in future releases, with a
 documented migration period before removal. No member is currently obsolete.
@@ -80,6 +80,7 @@ implicitly advancing "latest" version.
 | `XPathProfile` | `XPath`: F&O 3.1, flags `None`, Unicode 16.0.0, XML 1.0 Fifth Edition |
 | `PosixProfile` | `PosixBasic`, `PosixExtended`: corresponding dialect, flags `None`, `PosixLocale.C` |
 | `Pcre2Profile` | `Pcre2Raw8`, `Pcre2Raw16`: corresponding width, flags `None`; `Pcre2Utf8`, `Pcre2Utf16`: corresponding width, only `Utf` (not `Ucp`). All use extra flags `None`, LF newlines, Unicode BSR, default character tables, full optimization and maximum variable lookbehind 255 |
+| `OnigurumaProfile` | `Oniguruma`: `ONIG_OPTION_NONE`; `OnigurumaTextMate`: only `CaptureGroup` (`ONIG_OPTION_CAPTURE_GROUP`, TextMate's setting) |
 
 Presets may be shared across patterns and threads. They contain no matcher
 session or mutable workspace; those remain independently owned.
