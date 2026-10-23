@@ -1456,7 +1456,7 @@ internal sealed class OnigParser
             }
 
             first = false;
-            if (c == '-' && afterClass && Peek(1) != ']')
+            if (c == '-' && afterClass && Peek(1) != ']' && !(Peek(1) == '&' && Peek(2) == '&'))
             {
                 // A class (\w, [:alpha:], [..]) cannot start a range.
                 throw Error("unmatched range specifier in char-class", _pos, 1);
@@ -1484,7 +1484,7 @@ internal sealed class OnigParser
             }
 
             // A range: x-y, where y is a single character; otherwise '-' is literal.
-            if (Peek() == '-' && Peek(1) != ']' && HasAhead(2))
+            if (Peek() == '-' && Peek(1) != ']' && !(Peek(1) == '&' && Peek(2) == '&') && HasAhead(2))
             {
                 var saved = _pos;
                 _pos++;
