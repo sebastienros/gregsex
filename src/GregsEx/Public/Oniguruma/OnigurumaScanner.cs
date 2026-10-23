@@ -7,7 +7,8 @@ namespace GregsEx;
 /// <summary>
 /// Searches several patterns from one position and selects the match that starts first, the earliest pattern on a tie,
 /// as TextMate's scanners (vscode-oniguruma's OnigScanner.findNextMatchSync) do. For string-backed input, each pattern
-/// keeps its last result per string and position and reuses it while it remains valid, as Onigwrap's OnigRegExp does.
+/// keeps its last result per string and position and reuses it while it remains valid, as Onigwrap's OnigRegExp does,
+/// except for patterns using \G, whose results depend on the search start.
 /// One matcher and one capture buffer serve every pattern; searches allocate nothing once the stacks have grown.
 /// Not thread-safe.
 /// </summary>
@@ -97,7 +98,9 @@ public sealed class OnigurumaScanner
         {
             var captures = _lastCaptures[i]!;
             bool matched;
-            if (text is not null && ReferenceEquals(_lastText[i], text) && _lastStart[i] == textStart && _lastLength[i] == textLength
+            // A result found from an earlier offset stays the leftmost from a later one, unless \G ties it to the
+            // search start (Onigwrap's cache misses that case).
+            if (text is not null && !_patterns[i].Program.UsesSearchStart && ReferenceEquals(_lastText[i], text) && _lastStart[i] == textStart && _lastLength[i] == textLength
                 && _lastPosition[i] <= startAt && (!_lastMatched[i] || captures[0] >= startAt))
             {
                 matched = _lastMatched[i];

@@ -167,6 +167,7 @@ internal sealed class OnigCompiler
             NotRequiredAscii = notRequiredAscii,
             MinLength = MinLength(root),
             LeadingRun = leadingRun,
+            UsesSearchStart = compiler._code.Count > 0 && UsesAnchor(root, OnigAnchor.SearchStart),
             CallSaves = callSaves,
             CallSaveMax = callSaveMax,
             LoopGroups = compiler._loopGroups.ToArray(),
@@ -1103,6 +1104,9 @@ internal sealed class OnigCompiler
                 return Lengths(node).Min;
         }
     }
+
+    private static bool UsesAnchor(OnigNode node, OnigAnchor anchor)
+        => (node.Kind == OnigNodeKind.Anchor && (OnigAnchor)node.Value == anchor) || node.Children.Any(c => UsesAnchor(c, anchor));
 
     private static OnigNode LookOf(OnigNode look, OnigNode body)
     {

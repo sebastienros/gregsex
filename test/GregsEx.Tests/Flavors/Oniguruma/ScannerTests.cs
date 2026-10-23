@@ -58,6 +58,17 @@ public class ScannerTests
     }
 
     [Fact]
+    public void SearchStartPatternsAreNotReused()
+    {
+        // \Gb fails from 0 but matches from 1; a cached "no match" would hide that.
+        var scanner = Scanner("\\Gb");
+        const string line = "abc";
+        Assert.False(scanner.FindNextMatch(line, 0, out _));
+        Assert.True(scanner.FindNextMatch(line, 1, out var index));
+        Assert.Equal(0, index);
+    }
+
+    [Fact]
     public void WarmScansDoNotAllocate()
     {
         var scanner = Scanner("\\b(const|let|var)\\b", "//.*$", "\"", "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*(?=\\()", "[{}()\\[\\];,.]");
