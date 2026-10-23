@@ -1,0 +1,1331 @@
+#nullable enable
+using System.Globalization;
+
+namespace GregsEx.Flavors.Oniguruma;
+
+[Flags]
+internal enum OnigInlineOptions
+{
+    None = 0,
+    IgnoreCase = 1,
+    // Oniguruma's (?m): dot also matches newline.
+    DotAll = 2,
+    Extended = 4,
+    AsciiWord = 8,
+    AsciiDigit = 16,
+    AsciiSpace = 32,
+    AsciiPosix = 64,
+}
+
+internal sealed class OnigSyntaxException(RegexDiagnosticCode code, int offset, int length, string message) : Exception(message)
+{
+    internal RegexDiagnosticCode Code { get; } = code;
+    internal int Offset { get; } = offset;
+    internal int Length { get; } = length;
+}
+
+// A recursive descent parser for ONIG_SYNTAX_ONIGURUMA (Oniguruma 6.9.10 doc/RE) over UTF-16 patterns.
+internal sealed class OnigParser
+{
+    private readonly string _pattern;
+    private readonly RegexCompileLimits _limits;
+    private int _pos;
+    private int _depth;
+    private int _groupCount;
+    private readonly List<OnigNode> _captures = [null!];
+    private readonly List<OnigNode> _references = [];
+    private bool _hasNamed;
+
+    private OnigParser(string pattern, RegexCompileLimits limits)
+    {
+        _pattern = pattern;
+        _limits = limits;
+    }
+
+    internal int GroupCount => _groupCount + 1;
+
+    internal IReadOnlyList<OnigNode> Captures => _captures;
+
+    internal bool HasNamedGroups => _hasNamed;
+
+    // Backrefs, calls and conditions, resolved by name once every group is known.
+    internal IReadOnlyList<OnigNode> References => _references;
+
+    internal static OnigParser Parse(string pattern, OnigInlineOptions options, RegexCompileLimits limits, out OnigNode root)
+    {
+        if (pattern.Length > limits.MaxPatternUnits)
+        {
+            throw new OnigSyntaxException(RegexDiagnosticCode.PatternLimitExceeded, 0, pattern.Length, "pattern too long");
+        }
+
+        var parser = new OnigParser(pattern, limits);
+        root = parser.ParseAlternation(options);
+        if (parser._pos < pattern.Length)
+        {
+            throw parser.Error("unmatched close parenthesis", parser._pos, 1);
+        }
+
+        parser.Resolve();
+        return parser;
+    }
+
+    private OnigSyntaxException Error(string message, int offset, int length = 1)
+        => new(RegexDiagnosticCode.InvalidSyntax, offset, length, message);
+
+    private OnigSyntaxException Unsupported(string message, int offset, int length)
+        => new(RegexDiagnosticCode.UnsupportedFeature, offset, length, message);
+
+    private bool AtEnd => _pos >= _pattern.Length;
+
+    private char Peek(int ahead = 0) => _pos + ahead < _pattern.Length ? _pattern[_pos + ahead] : '\0';
+
+    private bool HasAhead(int count) => _pos + count <= _pattern.Length;
+
+    private OnigNode ParseAlternation(OnigInlineOptions options)
+    {
+        var start = _pos;
+        if (++_depth > _limits.MaxNestingDepth)
+        {
+            throw new OnigSyntaxException(RegexDiagnosticCode.NestingLimitExceeded, _pos, 1, "nesting too deep");
+        }
+
+        var first = ParseSequence(options);
+        if (AtEnd || Peek() != '|')
+        {
+            _depth--;
+            return first;
+        }
+
+        var alt = new OnigNode(OnigNodeKind.Alternation, start, 0);
+        alt.Children.Add(first);
+        while (!AtEnd && Peek() == '|')
+        {
+            _pos++;
+            alt.Children.Add(ParseSequence(options));
+        }
+        alt.Length = _pos - start;
+        _depth--;
+        return alt;
+    }
+
+    private OnigNode ParseSequence(OnigInlineOptions options)
+    {
+        var start = _pos;
+        var seq = new OnigNode(OnigNodeKind.Sequence, start, 0);
+        while (true)
+        {
+            SkipExtended(options);
+            if (AtEnd || Peek() is '|' or ')')
+            {
+                break;
+            }
+
+            // An isolated option, (?i), covers the rest of the enclosing group, alternatives included.
+            if (TryIsolatedOption(ref options))
+            {
+                seq.Children.Add(ParseAlternation(options));
+                break;
+            }
+
+            var atomStart = _pos;
+            var atom = ParseAtom(options);
+            if (atom is null)
+            {
+                continue;
+            }
+
+            atom = ParseQuantifiers(atom, atomStart, options);
+            seq.Children.Add(atom);
+        }
+        seq.Length = _pos - start;
+        return seq.Children.Count == 1 ? seq.Children[0] : seq;
+    }
+
+    private void SkipExtended(OnigInlineOptions options)
+    {
+        if ((options & OnigInlineOptions.Extended) == 0)
+        {
+            return;
+        }
+
+        while (!AtEnd)
+        {
+            var c = Peek();
+            if (c is ' ' or '\t' or '\n' or '\r' or '\f' or '\v')
+            {
+                _pos++;
+            }
+            else if (c == '#')
+            {
+                while (!AtEnd && Peek() != '\n')
+                {
+                    _pos++;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
+    private OnigNode ParseQuantifiers(OnigNode atom, int atomStart, OnigInlineOptions options)
+    {
+        while (true)
+        {
+            SkipExtended(options);
+            if (AtEnd)
+            {
+                return atom;
+            }
+
+            int min, max;
+            var c = Peek();
+            var interval = false;
+            var qStart = _pos;
+            if (c == '*')
+            {
+                (min, max) = (0, -1);
+                _pos++;
+            }
+            else if (c == '+')
+            {
+                (min, max) = (1, -1);
+                _pos++;
+            }
+            else if (c == '?')
+            {
+                (min, max) = (0, 1);
+                _pos++;
+            }
+            else if (c == '{' && TryInterval(out min, out max))
+            {
+                interval = true;
+            }
+            else
+            {
+                return atom;
+            }
+
+            if (atom.Kind is OnigNodeKind.Anchor or OnigNodeKind.Keep)
+            {
+                throw Error("target of repeat operator is invalid", qStart, _pos - qStart);
+            }
+
+            var mode = OnigRepeatMode.Greedy;
+            if (interval && min > max && max >= 0)
+            {
+                // {n,m} with n > m is possessive between m and n.
+                (min, max) = (max, min);
+                mode = OnigRepeatMode.Possessive;
+            }
+            else if (!AtEnd && Peek() == '?' && !(interval && min == max))
+            {
+                // {n}? is not reluctant in this syntax: it is (?:x{n})?.
+                mode = OnigRepeatMode.Lazy;
+                _pos++;
+            }
+            else if (!interval && !AtEnd && Peek() == '+')
+            {
+                mode = OnigRepeatMode.Possessive;
+                _pos++;
+            }
+
+            var repeat = new OnigNode(OnigNodeKind.Repeat, atomStart, _pos - atomStart)
+            {
+                Min = min,
+                Max = max,
+                Mode = mode,
+            };
+            repeat.Children.Add(atom);
+            atom = repeat;
+        }
+    }
+
+    // {n}, {n,}, {,m} and {n,m}; anything else leaves '{' a literal.
+    private bool TryInterval(out int min, out int max)
+    {
+        min = max = 0;
+        var p = _pos + 1;
+        var lowStart = p;
+        while (p < _pattern.Length && char.IsAsciiDigit(_pattern[p]))
+        {
+            p++;
+        }
+
+        var hasLow = p > lowStart;
+        var hasHigh = false;
+        var hasComma = false;
+        var highStart = 0;
+        if (p < _pattern.Length && _pattern[p] == ',')
+        {
+            hasComma = true;
+            p++;
+            highStart = p;
+            while (p < _pattern.Length && char.IsAsciiDigit(_pattern[p]))
+            {
+                p++;
+            }
+
+            hasHigh = p > highStart;
+        }
+        if (p >= _pattern.Length || _pattern[p] != '}' || (!hasLow && !hasHigh))
+        {
+            return false;
+        }
+
+        min = hasLow ? ParseCount(lowStart, hasComma ? highStart - 1 : p) : 0;
+        max = hasComma ? (hasHigh ? ParseCount(highStart, p) : -1) : min;
+        _pos = p + 1;
+        return true;
+    }
+
+    private int ParseCount(int start, int end)
+    {
+        if (!int.TryParse(_pattern.AsSpan(start, end - start), NumberStyles.None, CultureInfo.InvariantCulture, out var value) || value > 100000)
+        {
+            throw Error("too big number for repeat range", start, end - start);
+        }
+
+        return value;
+    }
+
+    private OnigNode? ParseAtom(OnigInlineOptions options)
+    {
+        var start = _pos;
+        var c = _pattern[_pos];
+        switch (c)
+        {
+            case '(':
+                return ParseGroup(options);
+            case '[':
+                {
+                    var set = ParseClass(options);
+                    return new OnigNode(OnigNodeKind.Set, start, _pos - start) { Set = set };
+                }
+            case '.':
+                _pos++;
+                return new OnigNode(OnigNodeKind.AnyChar, start, 1) { Flag = (options & OnigInlineOptions.DotAll) != 0 };
+            case '^':
+                _pos++;
+                return Anchor(OnigAnchor.LineStart, start);
+            case '$':
+                _pos++;
+                return Anchor(OnigAnchor.LineEnd, start);
+            case '*' or '+' or '?':
+                throw Error("target of repeat operator is not specified", start);
+            case '{':
+                {
+                    var saved = _pos;
+                    if (TryInterval(out _, out _))
+                    {
+                        throw Error("target of repeat operator is not specified", saved, _pos - saved);
+                    }
+
+                    _pos++;
+                    return CharNode('{', start, options);
+                }
+            case '\\':
+                return ParseEscape(options);
+            default:
+                return CharNode(ReadCodePoint(), start, options);
+        }
+    }
+
+    private int ReadCodePoint()
+    {
+        var c = _pattern[_pos++];
+        if (char.IsHighSurrogate(c) && _pos < _pattern.Length && char.IsLowSurrogate(_pattern[_pos]))
+        {
+            return char.ConvertToUtf32(c, _pattern[_pos++]);
+        }
+
+        return c;
+    }
+
+    private OnigNode Anchor(OnigAnchor anchor, int start)
+        => new(OnigNodeKind.Anchor, start, _pos - start) { Value = (int)anchor };
+
+    private OnigNode CharNode(int cp, int start, OnigInlineOptions options)
+        => new(OnigNodeKind.Char, start, _pos - start) { Value = cp, IgnoreCase = (options & OnigInlineOptions.IgnoreCase) != 0 };
+
+    private OnigNode SetNode(OnigCharSet set, int start)
+        => new(OnigNodeKind.Set, start, _pos - start) { Set = set };
+
+    private OnigNode? ParseGroup(OnigInlineOptions options)
+    {
+        var start = _pos++;
+        OnigNode node;
+        if (Peek() != '?')
+        {
+            node = OpenCapture(start, null);
+            node.Children.Add(ParseGroupBody(options, start));
+            node.Length = _pos - start;
+            return node;
+        }
+
+        _pos++;
+        var c = Peek();
+        switch (c)
+        {
+            case '#':
+                while (!AtEnd && Peek() != ')')
+                {
+                    _pos++;
+                }
+
+                if (AtEnd)
+                {
+                    throw Error("end pattern in group", start, _pos - start);
+                }
+
+                _pos++;
+                return null;
+            case ':':
+                _pos++;
+                node = new OnigNode(OnigNodeKind.Group, start, 0);
+                break;
+            case '=' or '!':
+                _pos++;
+                node = new OnigNode(OnigNodeKind.Look, start, 0) { Value = c == '!' ? 1 : 0 };
+                break;
+            case '>':
+                _pos++;
+                node = new OnigNode(OnigNodeKind.Atomic, start, 0);
+                break;
+            case '~':
+                return ParseAbsent(options, start);
+            case '(':
+                return ParseConditional(options, start);
+            case '<' when Peek(1) is '=' or '!':
+                node = new OnigNode(OnigNodeKind.Look, start, 0) { Value = Peek(1) == '!' ? 1 : 0, Flag = true };
+                _pos += 2;
+                break;
+            case '<' or '\'':
+                {
+                    _pos++;
+                    var name = ReadGroupName(c == '<' ? '>' : '\'');
+                    node = OpenCapture(start, name);
+                    break;
+                }
+            case '{' or '*':
+                throw Unsupported("callouts are not supported", start, 2);
+            default:
+                {
+                    var scoped = ParseOptionLetters(ref options, start, out var isolated);
+                    if (isolated)
+                    {
+                        // Only reached for an isolated option at the start of a sequence: see TryIsolatedOption.
+                        throw Error("invalid option", start, _pos - start);
+                    }
+
+                    node = new OnigNode(OnigNodeKind.Group, start, 0);
+                    _ = scoped;
+                    break;
+                }
+        }
+
+        node.Children.Add(ParseGroupBody(options, start));
+        node.Length = _pos - start;
+        return node;
+    }
+
+    private OnigNode ParseGroupBody(OnigInlineOptions options, int start)
+    {
+        var body = ParseAlternation(options);
+        if (AtEnd || Peek() != ')')
+        {
+            throw Error("end pattern with unmatched parenthesis", start, _pos - start);
+        }
+
+        _pos++;
+        return body;
+    }
+
+    private OnigNode OpenCapture(int start, string? name)
+    {
+        if (_groupCount + 1 >= _limits.MaxCaptureGroups)
+        {
+            throw new OnigSyntaxException(RegexDiagnosticCode.CaptureLimitExceeded, start, 1, "too many capture groups");
+        }
+
+        var node = new OnigNode(OnigNodeKind.Capture, start, 0) { Value = ++_groupCount, Name = name };
+        _captures.Add(node);
+        if (name is not null)
+        {
+            _hasNamed = true;
+        }
+
+        return node;
+    }
+
+    // As Oniguruma's fetch_name: the first character is a word character other than a digit; later characters are
+    // not checked (fetch_name records an error for them but returns success).
+    private string ReadGroupName(char close)
+    {
+        var start = _pos;
+        while (!AtEnd && Peek() != close && Peek() != ')')
+        {
+            _pos++;
+        }
+
+        if (AtEnd || Peek() != close || _pos == start)
+        {
+            throw Error("invalid group name", start, Math.Max(1, _pos - start));
+        }
+
+        var name = _pattern.Substring(start, _pos - start);
+        var first = char.IsHighSurrogate(name[0]) && name.Length > 1 ? char.ConvertToUtf32(name[0], name[1]) : name[0];
+        if (char.IsAsciiDigit(name[0]) || !OnigUnicode.Property(OnigUnicode.Word).Contains(first))
+        {
+            throw Error("invalid group name", start, name.Length);
+        }
+
+        _pos++;
+        return name;
+    }
+
+    private bool TryIsolatedOption(ref OnigInlineOptions options)
+    {
+        if (!(Peek() == '(' && Peek(1) == '?' && IsOptionLetter(Peek(2))))
+        {
+            return false;
+        }
+
+        var saved = _pos;
+        var copy = options;
+        _pos += 2;
+        ParseOptionLetters(ref copy, saved, out var isolated);
+        if (!isolated)
+        {
+            _pos = saved;
+            return false;
+        }
+
+        options = copy;
+        return true;
+    }
+
+    private static bool IsOptionLetter(char c) => c is 'i' or 'm' or 'x' or 'W' or 'D' or 'S' or 'P' or 'y' or 'C' or 'I' or 'L' or '-';
+
+    // Reads [imxWDSPy-imxWDSP] up to ':' (scoped, consumed) or ')' (isolated, consumed).
+    private bool ParseOptionLetters(ref OnigInlineOptions options, int start, out bool isolated)
+    {
+        var negative = false;
+        while (true)
+        {
+            if (AtEnd)
+            {
+                throw Error("end pattern in group", start, _pos - start);
+            }
+
+            var c = Peek();
+            _pos++;
+            OnigInlineOptions flag;
+            switch (c)
+            {
+                case ')':
+                    isolated = true;
+                    return true;
+                case ':':
+                    isolated = false;
+                    return true;
+                case '-':
+                    negative = true;
+                    continue;
+                case 'i': flag = OnigInlineOptions.IgnoreCase; break;
+                case 'm': flag = OnigInlineOptions.DotAll; break;
+                case 'x': flag = OnigInlineOptions.Extended; break;
+                case 'W': flag = OnigInlineOptions.AsciiWord; break;
+                case 'D': flag = OnigInlineOptions.AsciiDigit; break;
+                case 'S': flag = OnigInlineOptions.AsciiSpace; break;
+                case 'P': flag = OnigInlineOptions.AsciiPosix | OnigInlineOptions.AsciiWord | OnigInlineOptions.AsciiDigit | OnigInlineOptions.AsciiSpace; break;
+                case 'y':
+                    if (Peek() == '{' && Peek(1) == 'g' && Peek(2) == '}')
+                    {
+                        _pos += 3;
+                        continue;
+                    }
+
+                    throw Unsupported("text segment word mode is not supported", start, _pos - start);
+                case 'C' or 'I' or 'L':
+                    throw Unsupported("whole options are not supported", _pos - 1, 1);
+                default:
+                    throw Error("undefined group option", _pos - 1, 1);
+            }
+            options = negative ? options & ~flag : options | flag;
+        }
+    }
+
+    // (?~absent): the absent repeater, for a literal absent string.
+    private OnigNode ParseAbsent(OnigInlineOptions options, int start)
+    {
+        _pos++;
+        if (Peek() == '|')
+        {
+            throw Unsupported("absent expressions and stoppers are not supported", start, 3);
+        }
+
+        var body = ParseGroupBody(options, start);
+        var literal = new System.Text.StringBuilder();
+        if (!TryLiteral(body, literal, out var ignoreCase) || literal.Length == 0 || ignoreCase)
+        {
+            throw Unsupported("an absent repeater supports a case-sensitive literal only", start, _pos - start);
+        }
+
+        return new OnigNode(OnigNodeKind.Absent, start, _pos - start) { Literal = literal.ToString() };
+    }
+
+    private static bool TryLiteral(OnigNode node, System.Text.StringBuilder literal, out bool ignoreCase)
+    {
+        ignoreCase = false;
+        switch (node.Kind)
+        {
+            case OnigNodeKind.Char:
+                literal.Append(char.ConvertFromUtf32(node.Value));
+                ignoreCase = node.IgnoreCase;
+                return true;
+            case OnigNodeKind.Sequence:
+                foreach (var child in node.Children)
+                {
+                    if (!TryLiteral(child, literal, out var ic))
+                    {
+                        return false;
+                    }
+
+                    ignoreCase |= ic;
+                }
+                return true;
+            case OnigNodeKind.Group:
+                return TryLiteral(node.Child, literal, out ignoreCase);
+            default:
+                return false;
+        }
+    }
+
+    // (?(cond)yes|no): cond is a group number or name, or an expression.
+    private OnigNode ParseConditional(OnigInlineOptions options, int start)
+    {
+        _pos++;
+        OnigNode node;
+        var condStart = _pos;
+        if (TryConditionReference(out var reference))
+        {
+            node = new OnigNode(OnigNodeKind.CondRef, start, 0);
+            Reference(node, reference, condStart, isCall: false);
+        }
+        else
+        {
+            node = new OnigNode(OnigNodeKind.CondExpr, start, 0);
+            node.Children.Add(ParseAlternation(options));
+            if (AtEnd || Peek() != ')')
+            {
+                throw Error("invalid conditional pattern", start, _pos - start);
+            }
+
+            _pos++;
+        }
+
+        var body = ParseAlternation(options);
+        if (AtEnd || Peek() != ')')
+        {
+            throw Error("end pattern with unmatched parenthesis", start, _pos - start);
+        }
+
+        _pos++;
+        if (body.Kind == OnigNodeKind.Alternation)
+        {
+            if (body.Children.Count > 2)
+            {
+                throw Error("invalid conditional pattern", start, _pos - start);
+            }
+
+            node.Children.Add(body.Children[0]);
+            node.Children.Add(body.Children[1]);
+        }
+        else
+        {
+            node.Children.Add(body);
+        }
+        node.Length = _pos - start;
+        return node;
+    }
+
+    private bool TryConditionReference(out string reference)
+    {
+        reference = "";
+        var p = _pos;
+        char close;
+        if (Peek() is '<' or '\'')
+        {
+            close = Peek() == '<' ? '>' : '\'';
+            var end = _pattern.IndexOf(close, p + 1);
+            if (end < 0 || end + 1 >= _pattern.Length || _pattern[end + 1] != ')')
+            {
+                return false;
+            }
+
+            reference = _pattern.Substring(p + 1, end - p - 1);
+            _pos = end + 2;
+            return true;
+        }
+
+        while (p < _pattern.Length && (char.IsAsciiDigit(_pattern[p]) || (p == _pos && _pattern[p] is '+' or '-')))
+        {
+            p++;
+        }
+
+        if (p > _pos && p < _pattern.Length && _pattern[p] == ')' && char.IsAsciiDigit(_pattern[p - 1]))
+        {
+            reference = _pattern.Substring(_pos, p - _pos);
+            _pos = p + 1;
+            return true;
+        }
+        return false;
+    }
+
+    private OnigNode? ParseEscape(OnigInlineOptions options)
+    {
+        var start = _pos++;
+        if (AtEnd)
+        {
+            throw Error("end pattern at escape", start);
+        }
+
+        var c = _pattern[_pos++];
+        switch (c)
+        {
+            case 'w' or 'W' or 's' or 'S' or 'd' or 'D' or 'h' or 'H':
+                return SetNode(TypeSet(c, options), start);
+            case 'p' or 'P':
+                return SetNode(ParseProperty(c == 'P', start, options), start);
+            case 'b':
+                return Anchor((options & OnigInlineOptions.AsciiWord) != 0 ? OnigAnchor.AsciiWordBoundary : OnigAnchor.WordBoundary, start);
+            case 'B':
+                return Anchor((options & OnigInlineOptions.AsciiWord) != 0 ? OnigAnchor.AsciiNotWordBoundary : OnigAnchor.NotWordBoundary, start);
+            case 'A':
+                return Anchor(OnigAnchor.BufferStart, start);
+            case 'z':
+                return Anchor(OnigAnchor.BufferEnd, start);
+            case 'Z':
+                return Anchor(OnigAnchor.SemiEnd, start);
+            case 'G':
+                return Anchor(OnigAnchor.SearchStart, start);
+            case 'K':
+                return new OnigNode(OnigNodeKind.Keep, start, 2);
+            case 'N':
+                return new OnigNode(OnigNodeKind.AnyChar, start, 2);
+            case 'O':
+                return new OnigNode(OnigNodeKind.AnyChar, start, 2) { Flag = true };
+            case 'R':
+                return GeneralNewline(start);
+            case 'X':
+                return TextSegment(start);
+            case 'y' or 'Y':
+                throw Unsupported("text segment boundaries are not supported", start, 2);
+            case 'k':
+                if (Peek() is '<' or '\'')
+                {
+                    var node = new OnigNode(OnigNodeKind.Backref, start, 0) { IgnoreCase = (options & OnigInlineOptions.IgnoreCase) != 0 };
+                    var reference = ReadReference(start);
+                    Reference(node, reference, start, isCall: false);
+                    node.Length = _pos - start;
+                    return node;
+                }
+                return CharNode('k', start, options);
+            case 'g':
+                if (Peek() is '<' or '\'')
+                {
+                    var node = new OnigNode(OnigNodeKind.Call, start, 0);
+                    var reference = ReadReference(start);
+                    Reference(node, reference, start, isCall: true);
+                    node.Length = _pos - start;
+                    return node;
+                }
+                return CharNode('g', start, options);
+            case >= '1' and <= '9':
+                {
+                    _pos--;
+                    var numStart = _pos;
+                    while (!AtEnd && char.IsAsciiDigit(Peek()))
+                    {
+                        _pos++;
+                    }
+
+                    if (int.TryParse(_pattern.AsSpan(numStart, _pos - numStart), NumberStyles.None, CultureInfo.InvariantCulture, out var n)
+                        && (n <= _groupCount || n <= 9))
+                    {
+                        var node = new OnigNode(OnigNodeKind.Backref, start, _pos - start)
+                        {
+                            Groups = [n],
+                            IgnoreCase = (options & OnigInlineOptions.IgnoreCase) != 0,
+                        };
+                        _references.Add(node);
+                        return node;
+                    }
+
+                    _pos = numStart;
+                    if (Peek() is >= '8')
+                    {
+                        _pos++;
+                        return CharNode(_pattern[_pos - 1], start, options);
+                    }
+
+                    return CharNode(ReadOctal(3), start, options);
+                }
+            default:
+                _pos = start;
+                return CharNode(ReadEscapedChar(start, inClass: false), start, options);
+        }
+    }
+
+    private OnigNode GeneralNewline(int start)
+    {
+        // (?>\r\n|[\n\v\f\r\x85\u2028\u2029])
+        var builder = new OnigCharSet.Builder();
+        builder.Add(0x0A, 0x0D);
+        builder.Add(0x85);
+        builder.Add(0x2028, 0x2029);
+        var crlf = new OnigNode(OnigNodeKind.Sequence, start, 2);
+        crlf.Children.Add(new OnigNode(OnigNodeKind.Char, start, 2) { Value = '\r' });
+        crlf.Children.Add(new OnigNode(OnigNodeKind.Char, start, 2) { Value = '\n' });
+        var alt = new OnigNode(OnigNodeKind.Alternation, start, 2);
+        alt.Children.Add(crlf);
+        alt.Children.Add(SetNode(builder.Build(), start));
+        var atomic = new OnigNode(OnigNodeKind.Atomic, start, 2);
+        atomic.Children.Add(alt);
+        return atomic;
+    }
+
+    // \X approximated as (?>\r\n|\O[\p{M}\u200D]*): a base and its combining marks, not full UAX #29 clusters.
+    private OnigNode TextSegment(int start)
+    {
+        OnigUnicode.TryGetProperty("M", out var mark);
+        var marks = new OnigCharSet.Builder();
+        marks.Add(OnigUnicode.Property(mark));
+        marks.Add(0x200D);
+        var seq = new OnigNode(OnigNodeKind.Sequence, start, 2);
+        seq.Children.Add(new OnigNode(OnigNodeKind.AnyChar, start, 2) { Flag = true });
+        var rep = new OnigNode(OnigNodeKind.Repeat, start, 2) { Min = 0, Max = -1, Mode = OnigRepeatMode.Greedy };
+        rep.Children.Add(SetNode(marks.Build(), start));
+        seq.Children.Add(rep);
+        var crlf = new OnigNode(OnigNodeKind.Sequence, start, 2);
+        crlf.Children.Add(new OnigNode(OnigNodeKind.Char, start, 2) { Value = '\r' });
+        crlf.Children.Add(new OnigNode(OnigNodeKind.Char, start, 2) { Value = '\n' });
+        var alt = new OnigNode(OnigNodeKind.Alternation, start, 2);
+        alt.Children.Add(crlf);
+        alt.Children.Add(seq);
+        var atomic = new OnigNode(OnigNodeKind.Atomic, start, 2);
+        atomic.Children.Add(alt);
+        return atomic;
+    }
+
+    private string ReadReference(int start)
+    {
+        var close = Peek() == '<' ? '>' : '\'';
+        _pos++;
+        var end = _pattern.IndexOf(close, _pos);
+        if (end < 0 || end == _pos)
+        {
+            throw Error("invalid backref or call", start, _pattern.Length - start);
+        }
+
+        var reference = _pattern.Substring(_pos, end - _pos);
+        _pos = end + 1;
+        return reference;
+    }
+
+    private void Reference(OnigNode node, string reference, int start, bool isCall)
+    {
+        // A trailing +level or -level after a backreference's name or number selects a recursion level.
+        var levelAt = !isCall && reference.Length > 1 ? reference.IndexOfAny(['+', '-'], 1) : -1;
+        if (levelAt > 0 && levelAt + 1 < reference.Length && reference.AsSpan(levelAt + 1).IndexOfAnyExceptInRange('0', '9') < 0)
+        {
+            throw Unsupported("backreferences with a recursion level are not supported", start, _pos - start);
+        }
+
+        if (reference.Length > 0 && (char.IsAsciiDigit(reference[0]) || reference[0] is '+' or '-'))
+        {
+            if (!int.TryParse(reference, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out var n))
+            {
+                throw Error("invalid backref number", start, _pos - start);
+            }
+
+            if (reference[0] == '-')
+            {
+                n = _groupCount + 1 + n;
+            }
+            else if (reference[0] == '+')
+            {
+                n = _groupCount + n;
+            }
+
+            if (n < 0 || (n == 0 && !isCall))
+            {
+                throw Error("invalid backref number", start, _pos - start);
+            }
+
+            node.Groups = [n];
+            node.Value = n;
+        }
+        else
+        {
+            node.Name = reference;
+            node.Value = -1;
+        }
+        _references.Add(node);
+    }
+
+    private void Resolve()
+    {
+        foreach (var node in _references)
+        {
+            if (node.Name is not null)
+            {
+                var groups = new List<int>();
+                for (var g = 1; g < _captures.Count; g++)
+                {
+                    if (_captures[g].Name == node.Name)
+                    {
+                        groups.Add(g);
+                    }
+                }
+
+                if (groups.Count == 0)
+                {
+                    throw Error("undefined name reference", node.Offset, node.Length);
+                }
+
+                if (node.Kind == OnigNodeKind.Call && groups.Count > 1)
+                {
+                    throw Error("multiplex defined name call", node.Offset, node.Length);
+                }
+
+                node.Groups = groups.ToArray();
+                node.Value = groups[^1];
+            }
+            else
+            {
+                foreach (var g in node.Groups!)
+                {
+                    if (g > _groupCount)
+                    {
+                        throw Error("invalid backref number", node.Offset, node.Length);
+                    }
+                }
+            }
+        }
+    }
+
+    private OnigCharSet TypeSet(char c, OnigInlineOptions options)
+    {
+        var lower = char.ToLowerInvariant(c);
+        OnigCharSet set;
+        switch (lower)
+        {
+            case 'w':
+                set = Ascii(OnigUnicode.Property(OnigUnicode.Word), options, OnigInlineOptions.AsciiWord);
+                break;
+            case 's':
+                set = Ascii(OnigUnicode.Property(OnigUnicode.Space), options, OnigInlineOptions.AsciiSpace);
+                break;
+            case 'd':
+                set = Ascii(OnigUnicode.Property(OnigUnicode.Digit), options, OnigInlineOptions.AsciiDigit);
+                break;
+            default:
+                set = OnigUnicode.Property(OnigUnicode.XDigit);
+                break;
+        }
+        return char.IsUpper(c) ? set.Negate() : set;
+    }
+
+    private static OnigCharSet Ascii(OnigCharSet set, OnigInlineOptions options, OnigInlineOptions flag)
+        => (options & flag) != 0 ? set.Intersect(OnigUnicode.Property(OnigUnicode.Ascii)) : set;
+
+    private OnigCharSet ParseProperty(bool negative, int start, OnigInlineOptions options)
+    {
+        if (Peek() != '{')
+        {
+            throw Error("invalid character property name", start, _pos - start);
+        }
+
+        _pos++;
+        if (Peek() == '^')
+        {
+            negative = !negative;
+            _pos++;
+        }
+
+        var nameStart = _pos;
+        var end = _pattern.IndexOf('}', _pos);
+        if (end < 0)
+        {
+            throw Error("invalid character property name", start, _pattern.Length - start);
+        }
+
+        var name = _pattern.AsSpan(nameStart, end - nameStart);
+        _pos = end + 1;
+        if (!OnigUnicode.TryGetProperty(name, out var property))
+        {
+            throw Error("invalid character property name", start, _pos - start);
+        }
+
+        var set = OnigUnicode.Property(property);
+        if (property <= OnigUnicode.Ascii)
+        {
+            set = PosixAscii(set, property, options);
+        }
+
+        return negative ? set.Negate() : set;
+    }
+
+    // Under (?W), (?D), (?S) and (?P) the corresponding POSIX classes are restricted to ASCII.
+    private static OnigCharSet PosixAscii(OnigCharSet set, int property, OnigInlineOptions options)
+    {
+        var flag = property switch
+        {
+            OnigUnicode.Word => OnigInlineOptions.AsciiWord,
+            OnigUnicode.Digit => OnigInlineOptions.AsciiDigit,
+            OnigUnicode.Space => OnigInlineOptions.AsciiSpace,
+            _ => OnigInlineOptions.AsciiPosix,
+        };
+        return property != OnigUnicode.Ascii && property != OnigUnicode.Newline ? Ascii(set, options, flag) : set;
+    }
+
+    private int ReadOctal(int maxDigits)
+    {
+        var value = 0;
+        var digits = 0;
+        while (digits < maxDigits && !AtEnd && Peek() is >= '0' and <= '7')
+        {
+            value = value * 8 + (Peek() - '0');
+            _pos++;
+            digits++;
+        }
+        return value;
+    }
+
+    // Reads a single-character escape at _pos (the backslash), outside or inside a class.
+    private int ReadEscapedChar(int start, bool inClass)
+    {
+        _pos++;
+        var c = _pattern[_pos++];
+        switch (c)
+        {
+            case 't': return '\t';
+            case 'n': return '\n';
+            case 'r': return '\r';
+            case 'f': return '\f';
+            case 'v': return '\v';
+            case 'a': return '\a';
+            case 'e': return 0x1B;
+            case 'b' when inClass: return '\b';
+            case '0':
+                return ReadOctal(2);
+            case >= '1' and <= '7' when inClass:
+                _pos--;
+                return ReadOctal(3);
+            case 'x':
+                if (Peek() == '{')
+                {
+                    var end = _pattern.IndexOf('}', _pos);
+                    if (end < 0)
+                    {
+                        throw Error("invalid code point value", start, _pattern.Length - start);
+                    }
+
+                    var hex = _pattern.AsSpan(_pos + 1, end - _pos - 1).Trim();
+                    if (hex.Length == 0 || hex.Length > 8 || !int.TryParse(hex, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out var value)
+                        || (uint)value > OnigCharSet.MaxCodePoint)
+                    {
+                        throw Error("invalid code point value", start, end + 1 - start);
+                    }
+
+                    _pos = end + 1;
+                    return value;
+                }
+                else
+                {
+                    var value = 0;
+                    var digits = 0;
+                    while (digits < 2 && !AtEnd && char.IsAsciiHexDigit(Peek()))
+                    {
+                        value = value * 16 + HexValue(Peek());
+                        _pos++;
+                        digits++;
+                    }
+                    return value;
+                }
+            case 'u':
+                {
+                    if (!HasAhead(4))
+                    {
+                        throw Error("too short digits", start, _pos - start);
+                    }
+
+                    var value = 0;
+                    for (var i = 0; i < 4; i++)
+                    {
+                        if (!char.IsAsciiHexDigit(Peek()))
+                        {
+                            throw Error("too short digits", start, _pos - start);
+                        }
+
+                        value = value * 16 + HexValue(Peek());
+                        _pos++;
+                    }
+                    return value;
+                }
+            case 'o' when Peek() == '{':
+                {
+                    var end = _pattern.IndexOf('}', _pos);
+                    if (end < 0)
+                    {
+                        throw Error("invalid code point value", start, _pattern.Length - start);
+                    }
+
+                    var value = 0L;
+                    for (var i = _pos + 1; i < end; i++)
+                    {
+                        if (_pattern[i] is < '0' or > '7')
+                        {
+                            throw Error("invalid code point value", start, end + 1 - start);
+                        }
+
+                        value = value * 8 + (_pattern[i] - '0');
+                        if (value > OnigCharSet.MaxCodePoint)
+                        {
+                            throw Error("invalid code point value", start, end + 1 - start);
+                        }
+                    }
+                    _pos = end + 1;
+                    return (int)value;
+                }
+            case 'c':
+                return Control(start);
+            case 'C' when Peek() == '-':
+                _pos++;
+                return Control(start);
+            case 'M' when Peek() == '-':
+                {
+                    _pos++;
+                    var inner = Peek() == '\\' ? ReadEscapedChar(start, inClass) : ReadCodePoint();
+                    return (inner & 0xFF) | 0x80;
+                }
+            default:
+                if (char.IsHighSurrogate(c) && !AtEnd && char.IsLowSurrogate(Peek()))
+                {
+                    return char.ConvertToUtf32(c, _pattern[_pos++]);
+                }
+
+                return c;
+        }
+    }
+
+    private int Control(int start)
+    {
+        if (AtEnd)
+        {
+            throw Error("end pattern at control", start, _pos - start);
+        }
+
+        var inner = Peek() == '\\' ? ReadEscapedChar(start, inClass: false) : ReadCodePoint();
+        return inner == '?' ? 0x7F : inner & 0x9F;
+    }
+
+    private static int HexValue(char c) => c <= '9' ? c - '0' : (c | 0x20) - 'a' + 10;
+
+    // A bracket class at '[': nested classes union, && intersects (lowest precedence above ^), ^ negates last. As in
+    // Oniguruma's prs_cc, ignore-case folds the outermost class only, before its negation, and a nested negated class
+    // is merged as ranges by not_code_range_buf, which yields every code point when the class holds U+0000.
+    private OnigCharSet ParseClass(OnigInlineOptions options, bool nested = false)
+    {
+        var start = _pos++;
+        var negate = false;
+        if (Peek() == '^')
+        {
+            negate = true;
+            _pos++;
+        }
+
+        OnigCharSet? intersection = null;
+        var builder = new OnigCharSet.Builder();
+        var first = true;
+        while (true)
+        {
+            if (AtEnd)
+            {
+                throw Error("premature end of char-class", start, _pos - start);
+            }
+
+            var c = Peek();
+            if (c == ']' && !first)
+            {
+                _pos++;
+                break;
+            }
+
+            if (c == '&' && Peek(1) == '&')
+            {
+                _pos += 2;
+                var left = builder.Build();
+                intersection = intersection is null ? left : intersection.Intersect(left);
+                builder = new OnigCharSet.Builder();
+                first = false;
+                continue;
+            }
+
+            first = false;
+            if (c == '[')
+            {
+                if (Peek(1) == ':' && TryPosixBracket(builder, options))
+                {
+                    continue;
+                }
+
+                builder.Add(ParseClass(options, nested: true));
+                continue;
+            }
+
+            var itemStart = _pos;
+            if (!TryClassAtom(options, builder, out var low))
+            {
+                continue;
+            }
+
+            // A range: x-y, where y is a single character; otherwise '-' is literal.
+            if (Peek() == '-' && Peek(1) != ']' && HasAhead(2))
+            {
+                var saved = _pos;
+                _pos++;
+                if (Peek() == '[')
+                {
+                    _pos = saved;
+                    builder.Add(low);
+                    continue;
+                }
+
+                var highBuilder = new OnigCharSet.Builder();
+                if (TryClassAtom(options, highBuilder, out var high))
+                {
+                    if (high < low)
+                    {
+                        throw Error("empty range in char class", itemStart, _pos - itemStart);
+                    }
+
+                    builder.Add(low, high);
+                    continue;
+                }
+
+                // The range end was a class such as \w: keep '-' and the class as members.
+                builder.Add(low);
+                builder.Add('-');
+                builder.Add(highBuilder.Build());
+                continue;
+            }
+
+            builder.Add(low);
+        }
+
+        var set = builder.Build();
+        if (intersection is not null)
+        {
+            set = intersection.Intersect(set);
+        }
+
+        if (nested)
+        {
+            return !negate ? set : set.IsEmpty || set.Ranges[0] == 0 ? OnigCharSet.All : set.Negate();
+        }
+
+        if ((options & OnigInlineOptions.IgnoreCase) != 0)
+        {
+            set = OnigUnicode.CaseClose(set);
+        }
+
+        return negate ? set.Negate() : set;
+    }
+
+    // Reads one class member: returns true with a single code point, or false after adding a class (\w, \p{..}).
+    private bool TryClassAtom(OnigInlineOptions options, OnigCharSet.Builder builder, out int cp)
+    {
+        cp = -1;
+        var start = _pos;
+        if (Peek() != '\\')
+        {
+            cp = ReadCodePoint();
+            return true;
+        }
+
+        if (!HasAhead(2))
+        {
+            throw Error("end pattern at escape", start, 1);
+        }
+
+        var c = Peek(1);
+        switch (c)
+        {
+            case 'w' or 'W' or 's' or 'S' or 'd' or 'D' or 'h' or 'H':
+                _pos += 2;
+                builder.Add(TypeSet(c, options));
+                return false;
+            case 'p' or 'P':
+                _pos += 2;
+                builder.Add(ParseProperty(c == 'P', start, options));
+                return false;
+            case 'R' or 'X' or 'N' or 'O' or 'k' or 'g' or 'K' or 'G' or 'A' or 'z' or 'Z' or 'y' or 'Y':
+                // Oniguruma reads these as the letter inside a class.
+                _pos += 2;
+                cp = c;
+                return true;
+            default:
+                cp = ReadEscapedChar(start, inClass: true);
+                return true;
+        }
+    }
+
+    private bool TryPosixBracket(OnigCharSet.Builder builder, OnigInlineOptions options)
+    {
+        var p = _pos + 2;
+        var negate = false;
+        if (p < _pattern.Length && _pattern[p] == '^')
+        {
+            negate = true;
+            p++;
+        }
+
+        var nameStart = p;
+        while (p < _pattern.Length && char.IsAsciiLetter(_pattern[p]))
+        {
+            p++;
+        }
+
+        if (p + 1 >= _pattern.Length || _pattern[p] != ':' || _pattern[p + 1] != ']' || p == nameStart)
+        {
+            return false;
+        }
+
+        var property = _pattern.AsSpan(nameStart, p - nameStart) switch
+        {
+            "alnum" => OnigUnicode.Alnum,
+            "alpha" => OnigUnicode.Alpha,
+            "ascii" => OnigUnicode.Ascii,
+            "blank" => OnigUnicode.Blank,
+            "cntrl" => OnigUnicode.Cntrl,
+            "digit" => OnigUnicode.Digit,
+            "graph" => OnigUnicode.Graph,
+            "lower" => OnigUnicode.Lower,
+            "print" => OnigUnicode.Print,
+            "punct" => OnigUnicode.Punct,
+            "space" => OnigUnicode.Space,
+            "upper" => OnigUnicode.Upper,
+            "xdigit" => OnigUnicode.XDigit,
+            "word" => OnigUnicode.Word,
+            _ => throw Error("invalid POSIX bracket type", _pos, p + 2 - _pos),
+        };
+        var set = PosixAscii(OnigUnicode.Property(property), property, options);
+        builder.Add(negate ? set.Negate() : set);
+        _pos = p + 2;
+        return true;
+    }
+}
