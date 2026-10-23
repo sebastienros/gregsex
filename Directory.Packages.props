@@ -10,6 +10,8 @@
     <!-- Keep pinned to 5.0.0 (the Roslyn version shipped with the base .NET 10.0.100 SDK) so GregsEx.Generator
          does not force consumers onto a newer .NET 10 SDK feature band or IDE version. -->
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
+    <!-- Native Oniguruma 6.9.10 as TextMateSharp ships it: benchmark comparisons and the Oniguruma oracle only. -->
+    <PackageVersion Include="Onigwrap" Version="1.0.11" />
     <PackageVersion Include="System.CommandLine" Version="2.0.13" />
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.2" />

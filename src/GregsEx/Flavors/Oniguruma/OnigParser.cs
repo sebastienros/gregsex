@@ -557,7 +557,8 @@ internal sealed class OnigParser
         }
     }
 
-    // (?~absent): the absent repeater, for a literal absent string.
+    // (?~absent): the absent repeater, (?:(?!absent)\O)* (the range it matches holds no start of absent); a
+    // case-sensitive literal absent gets the dedicated instruction.
     private OnigNode ParseAbsent(OnigInlineOptions options, int start)
     {
         _pos++;
@@ -568,12 +569,19 @@ internal sealed class OnigParser
 
         var body = ParseGroupBody(options, start);
         var literal = new System.Text.StringBuilder();
-        if (!TryLiteral(body, literal, out var ignoreCase) || literal.Length == 0 || ignoreCase)
+        if (TryLiteral(body, literal, out var ignoreCase) && literal.Length > 0 && !ignoreCase)
         {
-            throw Unsupported("an absent repeater supports a case-sensitive literal only", start, _pos - start);
+            return new OnigNode(OnigNodeKind.Absent, start, _pos - start) { Literal = literal.ToString() };
         }
 
-        return new OnigNode(OnigNodeKind.Absent, start, _pos - start) { Literal = literal.ToString() };
+        var look = new OnigNode(OnigNodeKind.Look, start, _pos - start) { Value = 1 };
+        look.Children.Add(body);
+        var step = new OnigNode(OnigNodeKind.Sequence, start, _pos - start);
+        step.Children.Add(look);
+        step.Children.Add(new OnigNode(OnigNodeKind.AnyChar, start, _pos - start) { Flag = true });
+        var repeat = new OnigNode(OnigNodeKind.Repeat, start, _pos - start) { Min = 0, Max = -1, Mode = OnigRepeatMode.Greedy };
+        repeat.Children.Add(step);
+        return repeat;
     }
 
     private static bool TryLiteral(OnigNode node, System.Text.StringBuilder literal, out bool ignoreCase)
@@ -582,7 +590,7 @@ internal sealed class OnigParser
         switch (node.Kind)
         {
             case OnigNodeKind.Char:
-                literal.Append(char.ConvertFromUtf32(node.Value));
+                literal.Append(OnigUnicode.ToUtf16(node.Value));
                 ignoreCase = node.IgnoreCase;
                 return true;
             case OnigNodeKind.Sequence:

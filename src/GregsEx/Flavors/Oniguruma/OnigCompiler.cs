@@ -10,7 +10,8 @@ namespace GregsEx.Flavors.Oniguruma;
 //   Jmp target | Split first second | SplitLazy body exit | Alt first second firstBits secondBits (-1: any)
 //   Run item arg min max mode follow (follow: the bits of what may come next, or -1)
 //   SaveOpen n | SaveClose n | RetIfCalled n | Call target n
-//   LoopInit r | LoopHead r min max lazy exit | LoopEnter r | LoopTail r head exit
+//   LoopInit r | LoopHead r min max lazy exit | LoopEnter r snapshot groups | LoopTail r head exit snapshot groups
+//   (groups: index into LoopGroups, or -1; snapshot: offset of the loop's capture snapshot)
 //   AtomicStart id | AtomicEnd id | LookStart negative id continuation | LookEnd negative id
 //   BehindStart negative id continuation min max | BehindEnd negative id
 //   AssertSet negative behind s anchors (1: the input edge also holds, 2: a line start also holds, behind)
@@ -35,6 +36,10 @@ internal sealed class OnigCompiler
     private readonly RegexCompileLimits _limits;
     private int _loops;
     private int _ids;
+    private int _snapshots;
+    private readonly List<int[]> _loopGroups = [];
+    private readonly List<OnigNode> _backrefs = [];
+    private readonly Dictionary<int, OnigNode> _captureNodes = [];
 
     private OnigCompiler(int groupCount, RegexCompileLimits limits)
     {
@@ -61,16 +66,29 @@ internal sealed class OnigCompiler
         }
 
         var compiler = new OnigCompiler(groupCount, limits);
+        CollectCaptures(root, compiler._captureNodes);
         foreach (var reference in parser.References)
         {
             if (reference.Kind == OnigNodeKind.Call)
             {
                 compiler._called.Add(reference.Value);
             }
+            else if (reference.Kind == OnigNodeKind.Backref)
+            {
+                compiler._backrefs.Add(reference);
+            }
         }
 
+        compiler.CheckRecursion(root);
         compiler.Emit(root, OnigStartBits.Any);
         compiler.Add(Op.Match);
+        var callSaves = new int[groupCount][];
+        var callSaveMax = 0;
+        for (var g = 0; g < groupCount; g++)
+        {
+            callSaves[g] = compiler._called.Contains(g) && compiler._captureNodes.TryGetValue(g, out var called) ? GroupsIn(called) : [];
+            callSaveMax = Math.Max(callSaveMax, callSaves[g].Length);
+        }
         foreach (var (at, group) in compiler._callFixups)
         {
             compiler._code[at] = group == 0 ? 0 : compiler._groupPc[group];
@@ -149,6 +167,10 @@ internal sealed class OnigCompiler
             NotRequiredAscii = notRequiredAscii,
             MinLength = MinLength(root),
             LeadingRun = leadingRun,
+            CallSaves = callSaves,
+            CallSaveMax = callSaveMax,
+            LoopGroups = compiler._loopGroups.ToArray(),
+            SnapshotCount = compiler._snapshots,
             Tables = compiler._tables.ToArray(),
             PrecededBy = precededBy,
             PrecededAtStart = precededAtStart,
@@ -298,9 +320,10 @@ internal sealed class OnigCompiler
                 return;
             case OnigNodeKind.Atomic:
                 {
+                    // The body succeeds as it would alone: what follows the group must not steer it.
                     var id = _ids++;
                     Add(Op.AtomicStart, id);
-                    Emit(node.Child, follow);
+                    Emit(node.Child, OnigStartBits.Any);
                     Add(Op.AtomicEnd, id);
                     return;
                 }
@@ -353,7 +376,7 @@ internal sealed class OnigCompiler
                     Add(Op.CondStart, id);
                     var elseAt = Here;
                     Add(0);
-                    Emit(node.Children[0], Then(FollowBits(node.Children[1]), follow));
+                    Emit(node.Children[0], OnigStartBits.Any);
                     Add(Op.CondEnd, id);
                     Emit(node.Children[1], follow);
                     Add(Op.Jmp);
@@ -388,7 +411,7 @@ internal sealed class OnigCompiler
                 if (arg > 0xFFFF)
                 {
                     Add(Op.Str);
-                    Add(LiteralOffset(char.ConvertFromUtf32(arg)));
+                    Add(LiteralOffset(OnigUnicode.ToUtf16(arg)));
                     Add(2);
                 }
                 else
@@ -490,7 +513,7 @@ internal sealed class OnigCompiler
             var child = children[i];
             if (IsPlain(child, out var cp))
             {
-                run.Append(char.ConvertFromUtf32(cp));
+                run.Append(OnigUnicode.ToUtf16(cp));
                 continue;
             }
 
@@ -601,7 +624,7 @@ internal sealed class OnigCompiler
         {
             var id = _ids++;
             Add(Op.AtomicStart, id);
-            EmitLoop(child, min, max, lazy: false, bodyFollow);
+            EmitLoop(child, min, max, lazy: false, Bits(child).Union(OnigStartBits.Any));
             Add(Op.AtomicEnd, id);
             return;
         }
@@ -659,6 +682,18 @@ internal sealed class OnigCompiler
         }
 
         var r = _loops++;
+        // Only groups a backreference outside the body refers to make an empty iteration count as progress.
+        var groups = Nullable(child) ? GroupsIn(child).Where(g => _backrefs.Any(b => b.Groups!.Contains(g) && !Contains(child, b))).ToArray() : [];
+        var groupsIndex = -1;
+        var snapshot = 0;
+        if (groups.Length > 0)
+        {
+            groupsIndex = _loopGroups.Count;
+            _loopGroups.Add(groups);
+            snapshot = _snapshots;
+            _snapshots += 2 * groups.Length;
+        }
+
         Add(Op.LoopInit, r);
         var loopHead = Here;
         Add(Op.LoopHead);
@@ -667,11 +702,13 @@ internal sealed class OnigCompiler
         var exitAt = Here;
         Add(0);
         Add(LoopEnter, r);
+        Add(snapshot, groupsIndex);
         Emit(child, follow);
         Add(Op.LoopTail);
         Add(r, loopHead);
         var tailExit = Here;
         Add(0);
+        Add(snapshot, groupsIndex);
         _code[exitAt] = Here;
         _code[tailExit] = Here;
     }
@@ -925,6 +962,148 @@ internal sealed class OnigCompiler
         return true;
     }
 
+    private static bool Contains(OnigNode node, OnigNode target)
+    {
+        if (ReferenceEquals(node, target))
+        {
+            return true;
+        }
+
+        foreach (var child in node.Children)
+        {
+            if (Contains(child, target))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void CollectCaptures(OnigNode node, Dictionary<int, OnigNode> captures)
+    {
+        if (node.Kind == OnigNodeKind.Capture)
+        {
+            captures[node.Value] = node;
+        }
+
+        foreach (var child in node.Children)
+        {
+            CollectCaptures(child, captures);
+        }
+    }
+
+    // The capture groups node contains, itself included.
+    private static int[] GroupsIn(OnigNode node)
+    {
+        var groups = new List<int>();
+        Collect(node);
+        return groups.ToArray();
+
+        void Collect(OnigNode n)
+        {
+            if (n.Kind == OnigNodeKind.Capture)
+            {
+                groups.Add(n.Value);
+            }
+
+            foreach (var child in n.Children)
+            {
+                Collect(child);
+            }
+        }
+    }
+
+    // Oniguruma rejects a call that can reach itself before consuming input ("never ending recursion").
+    private void CheckRecursion(OnigNode root)
+    {
+        foreach (var g in _called)
+        {
+            var target = g == 0 ? root : _captureNodes[g];
+            if (ReachesAtStart(target, g, [g]))
+            {
+                throw new OnigSyntaxException(RegexDiagnosticCode.InvalidSyntax, target.Offset, target.Length, "never ending recursion");
+            }
+        }
+
+        // Whether node can call group before it consumes anything.
+        bool ReachesAtStart(OnigNode node, int group, HashSet<int> visiting)
+        {
+            switch (node.Kind)
+            {
+                case OnigNodeKind.Call:
+                    {
+                        if (node.Value == group)
+                        {
+                            return true;
+                        }
+
+                        var callee = node.Value == 0 ? root : _captureNodes[node.Value];
+                        return visiting.Add(node.Value) && ReachesAtStart(callee, group, visiting);
+                    }
+                case OnigNodeKind.Sequence:
+                    foreach (var child in node.Children)
+                    {
+                        if (ReachesAtStart(child, group, visiting))
+                        {
+                            return true;
+                        }
+
+                        if (MinWithCalls(child, []) > 0)
+                        {
+                            return false;
+                        }
+                    }
+                    return false;
+                case OnigNodeKind.Repeat when node.Max == 0:
+                    return false;
+                default:
+                    foreach (var child in node.Children)
+                    {
+                        if (ReachesAtStart(child, group, visiting))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+            }
+        }
+    }
+
+    // The minimum length of node, a call measuring its group (a recursive call counts as empty).
+    private int MinWithCalls(OnigNode node, HashSet<int> visiting)
+    {
+        switch (node.Kind)
+        {
+            case OnigNodeKind.Call:
+                return node.Value != 0 && visiting.Add(node.Value) && _captureNodes.TryGetValue(node.Value, out var callee)
+                    ? MinWithCalls(callee, visiting) : 0;
+            case OnigNodeKind.Sequence:
+                {
+                    var sum = 0;
+                    foreach (var child in node.Children)
+                    {
+                        sum = Math.Min(int.MaxValue / 2, sum + MinWithCalls(child, visiting));
+                    }
+                    return sum;
+                }
+            case OnigNodeKind.Alternation:
+                {
+                    var min = int.MaxValue;
+                    foreach (var child in node.Children)
+                    {
+                        min = Math.Min(min, MinWithCalls(child, [.. visiting]));
+                    }
+                    return min;
+                }
+            case OnigNodeKind.Repeat:
+                return node.Min == 0 ? 0 : (int)Math.Min(int.MaxValue / 2, (long)node.Min * MinWithCalls(node.Child, visiting));
+            case OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic:
+                return MinWithCalls(node.Child, visiting);
+            default:
+                return Lengths(node).Min;
+        }
+    }
+
     private static OnigNode LookOf(OnigNode look, OnigNode body)
     {
         var node = new OnigNode(OnigNodeKind.Look, look.Offset, look.Length) { Value = look.Value, Flag = look.Flag };
@@ -997,10 +1176,10 @@ internal sealed class OnigCompiler
         switch (node.Kind)
         {
             case OnigNodeKind.Char when IsPlain(node, out var cp):
-                literal.Append(char.ConvertFromUtf32(cp));
+                literal.Append(OnigUnicode.ToUtf16(cp));
                 return true;
             case OnigNodeKind.Set when node.Set!.Single >= 0:
-                literal.Append(char.ConvertFromUtf32(node.Set.Single));
+                literal.Append(OnigUnicode.ToUtf16(node.Set.Single));
                 return true;
             case OnigNodeKind.Sequence:
                 foreach (var child in node.Children)
@@ -1246,10 +1425,10 @@ internal sealed class OnigCompiler
         switch (node.Kind)
         {
             case OnigNodeKind.Char when IsPlain(node, out var cp):
-                prefix.Append(char.ConvertFromUtf32(cp));
+                prefix.Append(OnigUnicode.ToUtf16(cp));
                 return true;
             case OnigNodeKind.Set when node.Set!.Single >= 0:
-                prefix.Append(char.ConvertFromUtf32(node.Set.Single));
+                prefix.Append(OnigUnicode.ToUtf16(node.Set.Single));
                 return true;
             case OnigNodeKind.Anchor or OnigNodeKind.Look or OnigNodeKind.Empty:
                 return true;
@@ -1278,7 +1457,7 @@ internal sealed class OnigCompiler
         switch (node.Kind)
         {
             case OnigNodeKind.Char when IsPlain(node, out var cp):
-                Keep(char.ConvertFromUtf32(cp), ref best);
+                Keep(OnigUnicode.ToUtf16(cp), ref best);
                 return;
             case OnigNodeKind.Sequence:
                 {
@@ -1287,7 +1466,7 @@ internal sealed class OnigCompiler
                     {
                         if (IsPlain(child, out var c))
                         {
-                            run.Append(char.ConvertFromUtf32(c));
+                            run.Append(OnigUnicode.ToUtf16(c));
                             continue;
                         }
 
@@ -1343,7 +1522,7 @@ internal sealed class OnigCompiler
                     {
                         if (IsPlain(child, out var cp))
                         {
-                            literal.Append(char.ConvertFromUtf32(cp));
+                            literal.Append(OnigUnicode.ToUtf16(cp));
                             continue;
                         }
 

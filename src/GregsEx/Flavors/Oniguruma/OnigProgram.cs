@@ -89,15 +89,29 @@ internal sealed class OnigProgram
 
     internal const int MaxCallDepth = 20;
 
-    // Register layout: per group start and end, per group open start, keep start, call depth, loop bank base, the call
-    // frames (group, return) and one bank (count, start) of loop registers per call level.
+    // Per called group, the groups whose open start a call saves and its return restores (the group and those it
+    // contains), so a recursive call does not move the start of the enclosing instance; empty for other groups.
+    internal int[][] CallSaves { get; init; } = [];
+    internal int CallSaveMax { get; init; }
+    // Per loop with a nullable body containing groups, those groups: an empty iteration ends the loop only when it
+    // changed none of their captures (Oniguruma's EMPTY_CHECK_END_MEMST).
+    internal int[][] LoopGroups { get; init; } = [];
+    internal int SnapshotCount { get; init; }
+
+    // Register layout: per group start and end, per group open start, keep start, call depth, loop bank base, the
+    // consumption limit (the position of an enclosing look-behind: its body cannot consume past it), the call frames
+    // (group, return, saved open starts) and one bank of loop registers (count and start per loop, then the capture
+    // snapshots) per call level.
     internal int OpenBase => 2 * GroupCount;
     internal int KeepRegister => 3 * GroupCount;
     internal int DepthRegister => 3 * GroupCount + 1;
     internal int BankRegister => 3 * GroupCount + 2;
-    internal int FrameBase => 3 * GroupCount + 3;
-    internal int FirstBank => FrameBase + (UsesCalls ? 2 * MaxCallDepth : 0);
-    internal int RegisterCount => FirstBank + 2 * LoopCount * (UsesCalls ? MaxCallDepth + 1 : 1);
+    internal int LimitRegister => 3 * GroupCount + 3;
+    internal int FrameBase => 3 * GroupCount + 4;
+    internal int FrameSize => 2 + CallSaveMax;
+    internal int FirstBank => FrameBase + (UsesCalls ? FrameSize * MaxCallDepth : 0);
+    internal int LoopBankSize => 2 * LoopCount + SnapshotCount;
+    internal int RegisterCount => FirstBank + LoopBankSize * (UsesCalls ? MaxCallDepth + 1 : 1);
 }
 
 // The literals of a look-around over alternatives such as (?<=^until| until|\tuntil) or (?!nocorrect |readonly$):

@@ -13,6 +13,9 @@ internal static class OnigUnicode
     private static readonly OnigCharSet?[] s_properties = new OnigCharSet?[OnigurumaUnicodeData.PropertyCount];
     private static Dictionary<int, int[]>? s_classes;
 
+    // The UTF-16 units of a code point; a surrogate code point (from a lone surrogate unit) is that unit.
+    internal static string ToUtf16(int cp) => cp is >= 0xD800 and <= 0xDFFF ? ((char)cp).ToString() : char.ConvertFromUtf32(cp);
+
     // Oniguruma's name lookup: ASCII only, ' ', '-' and '_' ignored, case-insensitive.
     internal static bool TryGetProperty(ReadOnlySpan<char> name, out int property)
     {
