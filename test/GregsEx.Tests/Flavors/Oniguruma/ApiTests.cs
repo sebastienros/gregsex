@@ -197,4 +197,108 @@ public class ApiTests
         Assert.Equal(RegexSearchStatus.Match, pattern.CreateWorkspace().IsMatch(string.Concat(Enumerable.Repeat("\u00DF", 25))));
         Assert.Equal(RegexSearchStatus.Match, pattern.CreateWorkspace().IsMatch(new string('S', 50)));
     }
+
+    private static OnigurumaPattern Bounded(string source, long maxWork)
+        => OnigurumaPattern.Parse(source, RegexProfiles.Oniguruma,
+            new OnigurumaCompileOptions(defaultMatchLimits: new RegexMatchLimits(maxWork: maxWork)));
+
+    [Fact]
+    public void WorkIsBoundedPerSearchAcrossStarts()
+    {
+        // Every start runs to the space (the empty group keeps a start from skipping the run), so each costs little
+        // but the starts together cost the square of the input.
+        var input = new string('a', 5_000) + " c";
+        var workspace = Bounded("()[ab]+c", 1_000_000).CreateWorkspace();
+        Assert.Equal(RegexSearchStatus.LimitExceeded, workspace.IsMatch(input));
+        Assert.Equal(RegexSearchStatus.NoMatch, Bounded("()[ab]+c", 100_000_000).CreateWorkspace().IsMatch(input));
+    }
+
+    [Fact]
+    public void ForwardWorkIsCounted()
+    {
+        // No backtracking: each iteration's look-ahead rescans the rest of the input.
+        var input = new string('a', 3_000) + " z";
+        var workspace = Bounded("()(?:(?=[ab]*a)[ab])*z", 1_000_000).CreateWorkspace();
+        Assert.Equal(RegexSearchStatus.LimitExceeded, workspace.IsMatch(input));
+        Assert.True(workspace.LastWork > 1_000_000);
+    }
+
+    [Fact]
+    public void CancellationIsPolledBeforeAnyResult()
+    {
+        using var source = new CancellationTokenSource();
+        source.Cancel();
+        var workspace = Pattern("a").CreateWorkspace();
+        var options = new RegexMatchOptions { CancellationToken = source.Token };
+        Assert.Equal(RegexSearchStatus.Cancelled, workspace.IsMatch("a", 0, options));
+        Assert.Equal(RegexSearchStatus.Cancelled, workspace.Find("", 0, out _, options));
+        Assert.Equal(RegexSearchStatus.Match, workspace.IsMatch("a"));
+    }
+
+    [Fact]
+    public void TimeoutsStopLongSearches()
+    {
+        var workspace = Bounded("()[ab]+c", long.MaxValue / 2).CreateWorkspace();
+        var input = new string('a', 200_000) + " c";
+        var options = new RegexMatchOptions { Timeout = TimeSpan.FromMilliseconds(20) };
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        Assert.Equal(RegexSearchStatus.TimedOut, workspace.IsMatch(input, 0, options));
+        Assert.True(watch.Elapsed < TimeSpan.FromSeconds(5), watch.Elapsed.ToString());
+        Assert.Equal(RegexSearchStatus.Match, workspace.IsMatch("ac", 0, options));
+    }
+
+    [Fact]
+    public void MatchLimitOverridesCannotRaiseTheCeiling()
+    {
+        var workspace = Bounded("(a+)+b", 10_000).CreateWorkspace();
+        var lower = new RegexMatchOptions { Limits = new RegexMatchLimits(maxWork: 100) };
+        Assert.Equal(RegexSearchStatus.LimitExceeded, workspace.IsMatch(new string('a', 20) + "c", 0, lower));
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            workspace.IsMatch("a", 0, new RegexMatchOptions { Limits = new RegexMatchLimits(maxWork: 20_000) }));
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            workspace.IsMatch("a", 0, new RegexMatchOptions { Timeout = TimeSpan.Zero }));
+        // The pattern's own ceiling comes back after an override.
+        Assert.Equal(RegexSearchStatus.LimitExceeded, workspace.IsMatch(new string('a', 30) + "c"));
+        Assert.True(workspace.LastWork > 10_000);
+    }
+
+    [Fact]
+    public void ScannerCallsHonorCancellationAndTimeouts()
+    {
+        var scanner = new OnigurumaScanner(["()[ab]+c", "x"], RegexProfiles.OnigurumaTextMate,
+            new OnigurumaCompileOptions(defaultMatchLimits: new RegexMatchLimits(maxWork: long.MaxValue / 2)));
+        var line = new string('a', 200_000) + " cx";
+        Assert.Equal(RegexSearchStatus.TimedOut,
+            scanner.FindNextMatch(line, 0, out var index, new RegexMatchOptions { Timeout = TimeSpan.FromMilliseconds(20) }));
+        Assert.Equal(-1, index);
+        Assert.Equal(0, scanner.Captures.Length);
+        using var source = new CancellationTokenSource();
+        source.Cancel();
+        Assert.Equal(RegexSearchStatus.Cancelled,
+            scanner.FindNextMatch("ac", 0, out _, new RegexMatchOptions { CancellationToken = source.Token }));
+        // Nothing stopped was cached.
+        Assert.True(scanner.FindNextMatch("ac", 0, out index));
+        Assert.Equal(0, index);
+        Assert.True(scanner.FindNextMatch(line[^4..], 0, out index));
+        Assert.Equal(1, index);
+    }
+
+    [Theory]
+    [InlineData("abc", RegexDiagnosticCode.CompileWorkLimitExceeded)]
+    [InlineData("\\p{L}", RegexDiagnosticCode.ClassLimitExceeded)]
+    [InlineData("abcdefgh", RegexDiagnosticCode.CompileMemoryLimitExceeded)]
+    [InlineData("(a|b|c|d)+", RegexDiagnosticCode.PlanLimitExceeded)]
+    public void CompileResourcesAreBounded(string source, RegexDiagnosticCode code)
+    {
+        var limits = code switch
+        {
+            RegexDiagnosticCode.CompileWorkLimitExceeded => new RegexCompileLimits(maxCompileWork: 2),
+            RegexDiagnosticCode.ClassLimitExceeded => new RegexCompileLimits(maxClassRanges: 16),
+            RegexDiagnosticCode.CompileMemoryLimitExceeded => new RegexCompileLimits(maxCompileMemoryBytes: 64),
+            _ => new RegexCompileLimits(maxPlanBytes: 64),
+        };
+        Assert.False(OnigurumaPattern.TryParse(source, RegexProfiles.Oniguruma, out _, out var d, new OnigurumaCompileOptions(limits)));
+        Assert.Equal(code, d.Code);
+        Assert.True(OnigurumaPattern.TryParse(source, RegexProfiles.Oniguruma, out _, out _));
+    }
 }

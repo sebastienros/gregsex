@@ -45,7 +45,11 @@ internal sealed class OnigParser
     {
         _pattern = pattern;
         _limits = limits;
+        Budget = new OnigBudget(limits);
     }
+
+    // The compilation's work and memory budget, which the compiler goes on charging.
+    internal OnigBudget Budget { get; }
 
     internal int GroupCount => _groupCount + 1;
 
@@ -67,6 +71,8 @@ internal sealed class OnigParser
         }
 
         var parser = new OnigParser(pattern, limits);
+        parser.Budget.Charge(pattern.Length, 0, pattern.Length);
+        parser.Budget.Reserve(2L * pattern.Length, 0, pattern.Length);
         root = parser.ParseAlternation(options);
         if (parser._pos < pattern.Length)
         {
@@ -74,6 +80,21 @@ internal sealed class OnigParser
         }
 
         parser.Resolve();
+        // The tree, walked without recursion: it may be deeper than this thread's stack allows.
+        var nodes = 0L;
+        var pending = new Stack<OnigNode>();
+        pending.Push(root);
+        while (pending.TryPop(out var node))
+        {
+            nodes++;
+            foreach (var child in node.Children)
+            {
+                pending.Push(child);
+            }
+        }
+
+        parser.Budget.Charge(nodes, 0, pattern.Length);
+        parser.Budget.Reserve(nodes * OnigBudget.NodeBytes, 0, pattern.Length);
         return parser;
     }
 
@@ -599,7 +620,11 @@ internal sealed class OnigParser
         => new(OnigNodeKind.Char, start, _pos - start) { Value = cp, IgnoreCase = (options & OnigInlineOptions.IgnoreCase) != 0 };
 
     private OnigNode SetNode(OnigCharSet set, int start)
-        => new(OnigNodeKind.Set, start, _pos - start) { Set = set };
+    {
+        Budget.Charge(set.Ranges.Length / 2 + 1, start, _pos - start);
+        Budget.Reserve(OnigBudget.NodeBytes + 4L * set.Ranges.Length, start, _pos - start);
+        return new(OnigNodeKind.Set, start, _pos - start) { Set = set };
+    }
 
     private OnigNode? ParseGroup(OnigInlineOptions options)
     {

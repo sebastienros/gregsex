@@ -94,12 +94,20 @@ public class CorpusTests
             for (var s = 0; s < subjects.Count; s++)
             {
                 var text = Subject(subjects[s]!);
+                // MaxWork bounds a whole search where Oniguruma's retry limit bounds each start: on a subject where
+                // native hits that limit from some start, later starts may exhaust the shared budget.
+                var nearLimit = outcomes[i]![s]!.AsArray().Any(o => o![1] is JsonValue v && v.GetValue<int>() < 0);
                 foreach (var outcome in outcomes[i]![s]!.AsArray())
                 {
                     var start = outcome![0]!.GetValue<int>();
                     var native = outcome[1];
                     var status = workspace.FindCaptures(text, start, groups, out _);
                     var context = $"{source} on {JsonValue.Create(text)!.ToJsonString()} from {start}";
+                    if (nearLimit && status == RegexSearchStatus.LimitExceeded)
+                    {
+                        continue;
+                    }
+
                     if (native is null)
                     {
                         Assert.True(status == RegexSearchStatus.NoMatch, $"{context}: {status}");

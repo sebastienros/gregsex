@@ -12,7 +12,7 @@ internal static class Op
         RetIfCalled = 16, LoopInit = 17, LoopHead = 18, LoopTail = 19, AtomicStart = 20, AtomicEnd = 21,
         LookStart = 22, LookEnd = 23, BehindStart = 24, BehindEnd = 25, AssertSet = 26, AssertStr = 27,
         Backref = 28, Call = 29, CondRef = 30, CondStart = 31, CondEnd = 32, Absent = 33, Fail = 34,
-        SplitLazy = 35, AssertLiterals = 37;
+        SplitLazy = 35, AssertLiterals = 37, JmpBack = 38;
 }
 
 // The item a Run instruction repeats.
@@ -105,6 +105,50 @@ internal sealed class OnigProgram
     internal int[][] LoopGroups { get; init; } = [];
     internal int SnapshotCount { get; init; }
 
+    // An estimate of the retained bytes RegexCompileLimits.MaxPlanBytes bounds; interned sets count in full.
+    internal long PlanBytes()
+    {
+        var bytes = 4L * Code.Length + 2L * Literals.Length + 32L * Bits.Length + 4L * RegisterCount;
+        foreach (var set in Sets)
+        {
+            bytes += 64 + 4L * set.Ranges.Length;
+        }
+
+        foreach (var table in Tables)
+        {
+            bytes += table.Bytes;
+        }
+
+        foreach (var name in GroupNames)
+        {
+            bytes += 8 + 2L * (name?.Length ?? 0);
+        }
+
+        foreach (var saves in CallSaves)
+        {
+            bytes += 4L * saves.Length;
+        }
+
+        foreach (var groups in LoopGroups)
+        {
+            bytes += 4L * (groups?.Length ?? 0);
+        }
+
+        return bytes;
+    }
+
+    // Class intervals across the distinct sets, which RegexCompileLimits.MaxClassRanges bounds.
+    internal long ClassRanges()
+    {
+        var ranges = 0L;
+        foreach (var set in Sets)
+        {
+            ranges += set.Ranges.Length / 2;
+        }
+
+        return ranges;
+    }
+
     // Register layout: per group start and end, per group open start, keep start, call depth, loop bank base, the
     // consumption limit (the position of an enclosing look-behind: its body cannot consume past it), the call frames
     // (group, return, saved open starts) and one bank of loop registers (count and start per loop, then the capture
@@ -132,6 +176,26 @@ internal sealed class OnigLiteralTable
     private readonly string[] _literals;
     private readonly byte[] _anchors;
     private readonly int[][] _buckets;
+
+    // Retained bytes: the literals, their anchors and the bucket index.
+    internal long Bytes
+    {
+        get
+        {
+            var bytes = (long)_anchors.Length;
+            foreach (var literal in _literals)
+            {
+                bytes += 24 + 2L * literal.Length;
+            }
+
+            foreach (var bucket in _buckets)
+            {
+                bytes += 24 + 4L * (bucket?.Length ?? 0);
+            }
+
+            return bytes;
+        }
+    }
 
     internal OnigLiteralTable(IReadOnlyList<(string Literal, byte Anchors)> entries, bool behind)
     {

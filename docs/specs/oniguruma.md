@@ -90,15 +90,28 @@ stoppers (`(?~|..|..)`, `(?~|..)`), backreferences with a recursion level (`\k<n
 
 ## Limits and failures (OG-005)
 
-`RegexCompileLimits` bound pattern units, nesting, instructions, class ranges and groups (the TextMate adapter in
-TextMateSharp passes Oniguruma-sized limits: grammars hold patterns of 282k units). `RegexMatchLimits.MaxWork`
-counts backtracks per match attempt, as Oniguruma's retry limit (default 10,000,000) does, and `MaxWorkspaceBytes`
-bounds the stacks; either ends a search with `LimitExceeded` where Oniguruma returns a negative error code. As at
-Oniguruma's `SubexpCallMaxNestLevel` (20), a call nested 19 deep fails that path and the search goes on. Code size is
-checked while instructions are emitted, and repeats nest counters rather than copies of nested repeats, so a pattern
-compiles in time and space linear in its length. A tree deeper than a thread pool stack holds (a raised nesting limit) compiles on a thread with a stack
-sized for it, up to 1 GiB; deeper is `NestingLimitExceeded`, never a stack overflow. The work count is not Oniguruma's exact retry count, so a search near the
-limit may fail in one engine and not the other.
+`RegexCompileLimits` bound every compilation resource (the TextMate adapter in TextMateSharp passes Oniguruma-sized
+limits: grammars hold patterns of 282k units): pattern units, nesting, groups, instruction slots (checked while they
+are emitted), class intervals across the program's sets (`ClassLimitExceeded`), compile work (pattern units, parse
+nodes, class intervals built and the instruction slots of every follow pass), peak compile memory (parse tree, class
+intervals, the live pass's code) and the retained plan's bytes (`PlanLimitExceeded`). Repeats nest counters rather
+than copies of nested repeats, so a pattern compiles in time and space linear in its length. A tree deeper than a
+thread pool stack holds (a raised nesting limit) compiles on a thread with a stack sized for it, up to 1 GiB; deeper
+is `NestingLimitExceeded`, never a stack overflow.
+
+`RegexMatchLimits.MaxWork` bounds a whole search, every start position included. Work counts what can repeat
+without consuming input (backtracks, loop iterations and backward jumps, calls, look-around entries and start
+positions) and the units runs consume; code between two of these is straight-line, so time is bounded by work times
+the program's length. `MaxWorkspaceBytes` bounds the stacks. Either ends a search with `LimitExceeded`. Oniguruma's
+retry limit (default 10,000,000) counts backtracks per start position instead and its per-search limit is off by
+default, so where native exceeds its retry limit from one start, a later start may exhaust GregsEx's shared budget
+although its own native attempt completes; the work count is not the retry count, so a search near either limit may
+fail in one engine and not the other. `RegexMatchOptions` adds a cancellation token and a timeout, polled every 4,096
+work units and before any result, even an immediate one (`Cancelled`, `TimedOut`; Oniguruma's optional
+`onig_set_time_limit`), and lower limits; overrides cannot raise the pattern's ceilings. `OnigurumaScanner`'s options
+overloads apply the timeout and cancellation to the whole call and the limits to each pattern's search; a search
+that runs out of work counts as no match, as Onigwrap reports the retry-limit error, and nothing stopped is cached.
+As at Oniguruma's `SubexpCallMaxNestLevel` (20), a call nested 19 deep fails that path and the search goes on.
 
 ## Implementation (OG-006)
 

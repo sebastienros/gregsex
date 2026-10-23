@@ -69,30 +69,73 @@ public sealed class OnigurumaScanner
 
     /// <summary>Finds the next match at or after startAt, caching per pattern when input is string-backed.</summary>
     public bool FindNextMatch(ReadOnlyMemory<char> input, int startAt, out int patternIndex)
-    {
-        if (MemoryMarshal.TryGetString(input, out var text, out var start, out var length))
-        {
-            return Find(input.Span, startAt, text, start, length, out patternIndex);
-        }
-
-        return Find(input.Span, startAt, null, 0, 0, out patternIndex);
-    }
+        => FindNextMatch(input, startAt, out patternIndex, default) == RegexSearchStatus.Match;
 
     /// <summary>Finds the next match at or after startAt, caching per pattern for this string.</summary>
     public bool FindNextMatch(string input, int startAt, out int patternIndex)
-    {
-        ArgumentNullException.ThrowIfNull(input);
-        return Find(input, startAt, input, 0, input.Length, out patternIndex);
-    }
+        => FindNextMatch(input, startAt, out patternIndex, default) == RegexSearchStatus.Match;
 
     /// <summary>Finds the next match at or after startAt, without caching.</summary>
     public bool FindNextMatch(ReadOnlySpan<char> input, int startAt, out int patternIndex)
-        => Find(input, startAt, null, 0, 0, out patternIndex);
+        => Find(input, startAt, null, 0, 0, default, out patternIndex) == RegexSearchStatus.Match;
 
-    private bool Find(ReadOnlySpan<char> input, int startAt, string? text, int textStart, int textLength, out int patternIndex)
+    /// <summary>
+    /// Finds the next match at or after startAt (Match or NoMatch), caching per pattern when input is string-backed.
+    /// Options bound the call: its timeout and cancellation cover every pattern, and its limits each pattern's search.
+    /// A cancelled or timed-out call returns that status and caches nothing for the pattern it stopped in.
+    /// </summary>
+    public RegexSearchStatus FindNextMatch(ReadOnlyMemory<char> input, int startAt, out int patternIndex, RegexMatchOptions options)
+    {
+        if (MemoryMarshal.TryGetString(input, out var text, out var start, out var length))
+        {
+            return Find(input.Span, startAt, text, start, length, options, out patternIndex);
+        }
+
+        return Find(input.Span, startAt, null, 0, 0, options, out patternIndex);
+    }
+
+    /// <summary>As the ReadOnlyMemory overload, caching per pattern for this string.</summary>
+    public RegexSearchStatus FindNextMatch(string input, int startAt, out int patternIndex, RegexMatchOptions options)
+    {
+        ArgumentNullException.ThrowIfNull(input);
+        return Find(input, startAt, input, 0, input.Length, options, out patternIndex);
+    }
+
+    /// <summary>As the ReadOnlyMemory overload, without caching.</summary>
+    public RegexSearchStatus FindNextMatch(ReadOnlySpan<char> input, int startAt, out int patternIndex, RegexMatchOptions options)
+        => Find(input, startAt, null, 0, 0, options, out patternIndex);
+
+    private RegexSearchStatus Find(ReadOnlySpan<char> input, int startAt, string? text, int textStart, int textLength,
+        in RegexMatchOptions options, out int patternIndex)
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThan((uint)startAt, (uint)input.Length, nameof(startAt));
         patternIndex = -1;
+        if (options.Limits is null && options.Timeout is null && !options.CancellationToken.CanBeCanceled || _patterns.Length == 0)
+        {
+            return Find(input, startAt, text, textStart, textLength, ref patternIndex);
+        }
+
+        var limits = options.Resolve(_patterns[0].MatchLimits);
+        // Polled before any result, cached ones included.
+        if (options.CancellationToken.IsCancellationRequested)
+        {
+            _captureCount = 0;
+            return RegexSearchStatus.Cancelled;
+        }
+
+        _matcher.SetBudget(limits.MaxWork, limits.MaxWorkspaceBytes, options.CancellationToken, OnigMatcher.Deadline(options.Timeout));
+        try
+        {
+            return Find(input, startAt, text, textStart, textLength, ref patternIndex);
+        }
+        finally
+        {
+            _matcher.RestoreBudget();
+        }
+    }
+
+    private RegexSearchStatus Find(ReadOnlySpan<char> input, int startAt, string? text, int textStart, int textLength, ref int patternIndex)
+    {
         var bestStart = int.MaxValue;
         for (var i = 0; i < _patterns.Length; i++)
         {
@@ -111,6 +154,13 @@ public sealed class OnigurumaScanner
                 if (status == RegexSearchStatus.LimitExceeded)
                 {
                     LimitExceededCount++;
+                }
+                else if (status is RegexSearchStatus.Cancelled or RegexSearchStatus.TimedOut)
+                {
+                    _lastText[i] = null;
+                    patternIndex = -1;
+                    _captureCount = 0;
+                    return status;
                 }
 
                 // A search that ran out of work counts as no match, and is cached as one for later offsets, as Onigwrap
@@ -144,11 +194,11 @@ public sealed class OnigurumaScanner
         if (patternIndex < 0)
         {
             _captureCount = 0;
-            return false;
+            return RegexSearchStatus.NoMatch;
         }
 
         _captureCount = _patterns[patternIndex].GroupCount;
         OnigurumaWorkspace.Fill(_lastCaptures[patternIndex], _captures, _captureCount);
-        return true;
+        return RegexSearchStatus.Match;
     }
 }

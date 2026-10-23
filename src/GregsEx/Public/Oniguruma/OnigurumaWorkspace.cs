@@ -15,7 +15,10 @@ public sealed class OnigurumaWorkspace
     /// <summary>The pattern this workspace searches.</summary>
     public OnigurumaPattern Pattern { get; }
 
-    /// <summary>Backtracks of the last match attempt.</summary>
+    /// <summary>
+    /// Work units of the last search, which RegexMatchLimits.MaxWork bounds: backtracks, loop iterations, calls,
+    /// look-around entries and start positions tried, plus the units runs consume.
+    /// </summary>
     public long LastWork => _matcher.LastWork;
 
     /// <summary>Bytes of backtracking storage currently reserved.</summary>
@@ -28,18 +31,21 @@ public sealed class OnigurumaWorkspace
         _matcher.SetLimits(pattern.MatchLimits.MaxWork, pattern.MatchLimits.MaxWorkspaceBytes);
     }
 
-    /// <summary>Whether a match starts in [startAt, input.Length]; lookbehind and \A still see the whole input.</summary>
-    public RegexSearchStatus IsMatch(ReadOnlySpan<char> input, int startAt = 0)
+    /// <summary>
+    /// Whether a match starts in [startAt, input.Length]; lookbehind and \A still see the whole input. Options bound
+    /// the whole search with cancellation, a timeout and lower limits.
+    /// </summary>
+    public RegexSearchStatus IsMatch(ReadOnlySpan<char> input, int startAt = 0, RegexMatchOptions options = default)
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThan((uint)startAt, (uint)input.Length, nameof(startAt));
-        return _matcher.Search(Pattern.Program, input, startAt, _captures);
+        return Search(input, startAt, options);
     }
 
     /// <summary>The leftmost match starting in [startAt, input.Length]; \G matches at startAt.</summary>
-    public RegexSearchStatus Find(ReadOnlySpan<char> input, int startAt, out RegexMatchRange match)
+    public RegexSearchStatus Find(ReadOnlySpan<char> input, int startAt, out RegexMatchRange match, RegexMatchOptions options = default)
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThan((uint)startAt, (uint)input.Length, nameof(startAt));
-        var status = _matcher.Search(Pattern.Program, input, startAt, _captures);
+        var status = Search(input, startAt, options);
         match = status == RegexSearchStatus.Match ? new RegexMatchRange(_captures[0], _captures[1] - _captures[0]) : default;
         return status;
     }
@@ -48,7 +54,8 @@ public sealed class OnigurumaWorkspace
     /// The leftmost match and its captures; groups needs at least GroupCount entries. A group that did not participate
     /// is (false, 0, 0). With \K, group zero starts at the kept position.
     /// </summary>
-    public RegexSearchStatus FindCaptures(ReadOnlySpan<char> input, int startAt, Span<RegexCapture> groups, out RegexMatchRange match)
+    public RegexSearchStatus FindCaptures(ReadOnlySpan<char> input, int startAt, Span<RegexCapture> groups, out RegexMatchRange match,
+        RegexMatchOptions options = default)
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThan((uint)startAt, (uint)input.Length, nameof(startAt));
         match = default;
@@ -57,7 +64,7 @@ public sealed class OnigurumaWorkspace
             return RegexSearchStatus.DestinationTooSmall;
         }
 
-        var status = _matcher.Search(Pattern.Program, input, startAt, _captures);
+        var status = Search(input, startAt, options);
         if (status != RegexSearchStatus.Match)
         {
             return status;
@@ -66,6 +73,25 @@ public sealed class OnigurumaWorkspace
         Fill(_captures, groups, Pattern.GroupCount);
         match = new RegexMatchRange(_captures[0], _captures[1] - _captures[0]);
         return status;
+    }
+
+    private RegexSearchStatus Search(ReadOnlySpan<char> input, int startAt, in RegexMatchOptions options)
+    {
+        if (options.Limits is null && options.Timeout is null && !options.CancellationToken.CanBeCanceled)
+        {
+            return _matcher.Search(Pattern.Program, input, startAt, _captures);
+        }
+
+        var limits = options.Resolve(Pattern.MatchLimits);
+        _matcher.SetBudget(limits.MaxWork, limits.MaxWorkspaceBytes, options.CancellationToken, OnigMatcher.Deadline(options.Timeout));
+        try
+        {
+            return _matcher.Search(Pattern.Program, input, startAt, _captures);
+        }
+        finally
+        {
+            _matcher.RestoreBudget();
+        }
     }
 
     internal static void Fill(ReadOnlySpan<int> captures, Span<RegexCapture> groups, int count)

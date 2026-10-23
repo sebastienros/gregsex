@@ -1,4 +1,5 @@
 #nullable enable
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace GregsEx.Flavors.Oniguruma;
@@ -20,26 +21,77 @@ internal sealed class OnigMatcher
     private int[] _stack = new int[FrameWidth * 32];
     private int[] _undo = new int[64];
     private int[] _regs = new int[32];
+    // The pattern's limits, and those of the current search.
     private long _maxWork = 10_000_000;
+    private long _defaultBytes = 64L << 20;
     private long _maxBytes = 64L << 20;
 
-    internal long LastWork { get; private set; }
+    // Work units of the last search (see Run): backtracks, loop iterations, calls, look-around entries and starts,
+    // plus the units runs consume.
+    internal long LastWork => _work;
+
+    // The current search's budget, cancellation and deadline (a Stopwatch timestamp, long.MaxValue for none).
+    // Work is checked against _stopAt alone: the budget, or the next poll of the cancellation and the clock.
+    private const long PollStride = 4096;
+    private long _work;
+    private long _budget = 10_000_000;
+    private long _stopAt;
+    private CancellationToken _cancellation;
+    private long _deadline = long.MaxValue;
+    private bool _polls;
 
     // Where the leading run of the last attempt ended (OnigProgram.LeadingRun), or -1.
     private int _leadingEnd;
 
+    // The pattern's limits, which RestoreBudget returns to after a search with options.
     internal void SetLimits(long maxWork, long maxBytes)
     {
         _maxWork = maxWork;
-        _maxBytes = maxBytes;
+        _defaultBytes = maxBytes;
+        RestoreBudget();
+    }
+
+    internal void RestoreBudget() => SetBudget(_maxWork, _defaultBytes, default, long.MaxValue);
+
+    // The Stopwatch timestamp a timeout from now ends at, or long.MaxValue for none.
+    internal static long Deadline(TimeSpan? timeout)
+    {
+        if (timeout is not { } t)
+        {
+            return long.MaxValue;
+        }
+
+        var now = Stopwatch.GetTimestamp();
+        var ticks = t.TotalSeconds * Stopwatch.Frequency;
+        return ticks >= long.MaxValue - now ? long.MaxValue - 1 : now + (long)ticks;
     }
 
     internal long ReservedBytes => 4L * (_stack.Length + _undo.Length + _regs.Length);
 
-    // Searches for the leftmost match starting in [startAt, input.Length]. On Match, captures holds start and end per
-    // group (group zero first), -1 for groups that did not participate.
+    // Budget, cancellation and deadline for the searches that follow, until the next call; SetLimits restores the
+    // plain budget.
+    internal void SetBudget(long maxWork, long maxBytes, CancellationToken cancellation, long deadline)
+    {
+        _budget = maxWork;
+        _maxBytes = maxBytes;
+        _polls = cancellation.CanBeCanceled || deadline != long.MaxValue;
+        // Stored only when polled: a token field write costs a GC barrier.
+        _cancellation = _polls ? cancellation : default;
+        _deadline = deadline;
+    }
+
+    // Searches for the leftmost match starting in [startAt, input.Length], under the budget for the whole search
+    // and polling cancellation and the deadline throughout (before any result, even an immediate one). On Match,
+    // captures holds start and end per group (group zero first), -1 for groups that did not participate.
     internal RegexSearchStatus Search(OnigProgram program, ReadOnlySpan<char> input, int startAt, Span<int> captures)
     {
+        _work = 0;
+        if (_polls && !Poll(out var stopped))
+        {
+            return stopped;
+        }
+
+        _stopAt = NextStop();
         if (_regs.Length < program.RegisterCount)
         {
             _regs = new int[Math.Max(program.RegisterCount, 2 * _regs.Length)];
@@ -183,6 +235,47 @@ internal sealed class OnigMatcher
             pos += pos < end && char.IsHighSurrogate(input[pos]) ? 2 : 1;
         }
         return RegexSearchStatus.NoMatch;
+    }
+
+    private long NextStop() => _polls ? Math.Min(_budget, _work + PollStride) : _budget;
+
+    private bool Poll(out RegexSearchStatus stop)
+    {
+        if (_cancellation.IsCancellationRequested)
+        {
+            stop = RegexSearchStatus.Cancelled;
+            return false;
+        }
+
+        if (Stopwatch.GetTimestamp() >= _deadline)
+        {
+            stop = RegexSearchStatus.TimedOut;
+            return false;
+        }
+
+        stop = default;
+        return true;
+    }
+
+    // Whether the search may go on at this much work; otherwise why it stops.
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private bool Checkpoint(long work, out RegexSearchStatus stop)
+    {
+        _work = work;
+        if (work > _budget)
+        {
+            stop = RegexSearchStatus.LimitExceeded;
+            return false;
+        }
+
+        if (_polls && !Poll(out stop))
+        {
+            return false;
+        }
+
+        _stopAt = NextStop();
+        stop = default;
+        return true;
     }
 
     // Oniguruma's UTF-16LE decoding: a high surrogate always starts a two-unit character (whatever the next unit is;
@@ -442,6 +535,11 @@ internal sealed class OnigMatcher
 
     private RegexSearchStatus Attempt(OnigProgram program, ReadOnlySpan<char> input, int start, int searchStart, Span<int> captures)
     {
+        if (++_work > _stopAt && !Checkpoint(_work, out var stop))
+        {
+            return stop;
+        }
+
         try
         {
             return Run(program, input, start, searchStart, captures);
@@ -475,7 +573,12 @@ internal sealed class OnigMatcher
         var text = input;
         var end = input.Length;
         int pc = 0, pos = start, sp = 0, up = 0;
+        // Work counts what can repeat without consuming input: back edges (JmpBack, LoopTail), calls, look-around entries,
+        // backtracks and attempts (charged by Attempt), plus the units runs consume; code between them is
+        // straight-line, bounded by the program's length. It is counted per attempt against the room the search has
+        // left before its next checkpoint, and added to the search's total when the attempt ends.
         long work = 0;
+        var room = _stopAt - _work;
 
         while (true)
         {
@@ -570,6 +673,14 @@ internal sealed class OnigMatcher
                 case Op.Jmp:
                     pc = code[pc + 1];
                     continue;
+                case Op.JmpBack:
+                    if (++work > room)
+                    {
+                        goto Budget;
+                    }
+
+                    pc = code[pc + 1];
+                    continue;
                 case Op.Split:
                     Push(ref sp, Choice, code[pc + 2], pos, 0, up);
                     pc = code[pc + 1];
@@ -661,6 +772,7 @@ internal sealed class OnigMatcher
 
                             minPos = runStart + min;
                             pos += n;
+                            work += n;
                             if (pc == program.LeadingRun)
                             {
                                 _leadingEnd = pos;
@@ -685,6 +797,7 @@ internal sealed class OnigMatcher
 
                                 pos += w;
                                 count++;
+                                work++;
                                 if (count == min)
                                 {
                                     minPos = pos;
@@ -761,6 +874,11 @@ internal sealed class OnigMatcher
                         continue;
                     }
                 case Op.Call:
+                    if (++work > room)
+                    {
+                        goto Budget;
+                    }
+
                     {
                         var depth = regs[program.DepthRegister];
                         if (depth >= OnigProgram.MaxCallDepth - 1)
@@ -839,6 +957,11 @@ internal sealed class OnigMatcher
                         continue;
                     }
                 case Op.LoopTail:
+                    if (++work > room)
+                    {
+                        goto Budget;
+                    }
+
                     {
                         var bank = regs[program.BankRegister];
                         var r = bank + 2 * code[pc + 1];
@@ -876,6 +999,11 @@ internal sealed class OnigMatcher
                     pc += 2;
                     continue;
                 case Op.LookStart:
+                    if (++work > room)
+                    {
+                        goto Budget;
+                    }
+
                     Push(ref sp, code[pc + 1] != 0 ? BarrierNotLook : BarrierLook, code[pc + 2], pos, code[pc + 3], up);
                     pc += 4;
                     continue;
@@ -915,6 +1043,11 @@ internal sealed class OnigMatcher
                         continue;
                     }
                 case Op.BehindStart:
+                    if (++work > room)
+                    {
+                        goto Budget;
+                    }
+
                     {
                         var negative = code[pc + 1] != 0;
                         var min = code[pc + 4];
@@ -1083,7 +1216,7 @@ internal sealed class OnigMatcher
                             captures[2 * g] = gEnd < 0 ? -1 : regs[2 * g];
                             captures[2 * g + 1] = gEnd;
                         }
-                        LastWork = work;
+                        _work += work;
                         return RegexSearchStatus.Match;
                     }
                 case Op.Fail:
@@ -1092,20 +1225,36 @@ internal sealed class OnigMatcher
                     throw new InvalidOperationException($"opcode {code[pc]}");
             }
 
+        Budget:
+            // A checkpoint: stop, or run the same instruction again, which counts itself again.
+            if (!Checkpoint(_work + work, out var stopped))
+            {
+                return stopped;
+            }
+
+            work = -1;
+            room = _stopAt - _work;
+            continue;
+
         Fail:
             stack = _stack;
             while (true)
             {
                 if (sp == 0)
                 {
-                    LastWork = work;
+                    _work += work;
                     return RegexSearchStatus.NoMatch;
                 }
 
-                if (++work > _maxWork)
+                if (++work > room)
                 {
-                    LastWork = work;
-                    return RegexSearchStatus.LimitExceeded;
+                    if (!Checkpoint(_work + work, out var stop))
+                    {
+                        return stop;
+                    }
+
+                    work = 0;
+                    room = _stopAt - _work;
                 }
 
                 sp -= FrameWidth;

@@ -274,7 +274,11 @@ internal sealed class OnigCompiler
             NativePossessive(root, calledGroups);
         }
 
+        var budget = parser.Budget;
         var compiler = EmitPass(parser, root, groupCount, limits, null);
+        // Each pass is charged its instruction slots; the one kept holds its code until the program is built.
+        budget.Charge(compiler._code.Count);
+        budget.Reserve(4L * compiler._code.Count);
         if (compiler._called.Count > 0)
         {
             // A called group's body continues at its definition and after each call: its follow is the union of
@@ -289,6 +293,8 @@ internal sealed class OnigCompiler
             for (var i = 0; i < MaxFollowPasses; i++)
             {
                 var pass = EmitPass(parser, root, groupCount, limits, assumed);
+                budget.Charge(pass._code.Count);
+                budget.Reserve(4L * pass._code.Count);
                 var observed = pass._observedFollow;
                 var same = true;
                 foreach (var (g, bits) in assumed)
@@ -300,9 +306,12 @@ internal sealed class OnigCompiler
 
                 if (same)
                 {
+                    budget.Release(4L * compiler._code.Count);
                     compiler = pass;
                     break;
                 }
+
+                budget.Release(4L * pass._code.Count);
             }
         }
         var callSaves = new int[groupCount][];
@@ -370,7 +379,7 @@ internal sealed class OnigCompiler
                 notRequiredAscii = s_firstUnits.GetOrAdd((units.Low, units.High, true), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, false)));
             }
         }
-        return new OnigProgram
+        var program = new OnigProgram
         {
             Code = compiler._code.ToArray(),
             Sets = compiler._sets.ToArray(),
@@ -404,6 +413,17 @@ internal sealed class OnigCompiler
             PrecededBy = precededBy,
             PrecededAtStart = precededAtStart,
         };
+        if (program.ClassRanges() > limits.MaxClassRanges)
+        {
+            throw new OnigSyntaxException(RegexDiagnosticCode.ClassLimitExceeded, 0, pattern.Length, "too many class ranges");
+        }
+
+        if (program.PlanBytes() > limits.MaxPlanBytes)
+        {
+            throw new OnigSyntaxException(RegexDiagnosticCode.PlanLimitExceeded, 0, pattern.Length, "plan too large");
+        }
+
+        return program;
     }
 
     private static char[] AsciiMembers(ulong low, ulong high, bool members)
@@ -912,7 +932,8 @@ internal sealed class OnigCompiler
                     Add(BitsIndex(childBits), -1);
                 }
                 Emit(child, follow);
-                Add(Op.Jmp, head);
+                // The loop's back edge, which the matcher counts as work.
+                Add(Op.JmpBack, head);
                 _code[head + 2] = Here;
                 return;
             }
