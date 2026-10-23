@@ -113,6 +113,68 @@ internal static class OnigUnicode
         return cp;
     }
 
+    // Grapheme_Cluster_Break values as Oniguruma numbers them (unicode.c EGCB_TYPE).
+    internal const int GbOther = 0, GbCR = 1, GbLF = 2, GbControl = 3, GbExtend = 4, GbPrepend = 5,
+        GbRegionalIndicator = 6, GbSpacingMark = 7, GbZWJ = 8, GbL = 13, GbLV = 14, GbLVT = 15, GbT = 16, GbV = 17;
+
+    private static OnigCharSet? s_pictographic;
+
+    internal static int GraphemeBreak(int cp)
+    {
+        var table = OnigurumaUnicodeData.GraphemeBreaks;
+        int lo = 0, hi = table.Length / 3 - 1;
+        while (lo <= hi)
+        {
+            var mid = (lo + hi) >> 1;
+            if (cp < table[3 * mid])
+            {
+                hi = mid - 1;
+            }
+            else if (cp > table[3 * mid + 1])
+            {
+                lo = mid + 1;
+            }
+            else
+            {
+                return table[3 * mid + 2];
+            }
+        }
+        return GbOther;
+    }
+
+    internal static bool IsExtendedPictographic(int cp)
+    {
+        if (s_pictographic is null)
+        {
+            TryGetProperty("ExtendedPictographic", out var property);
+            s_pictographic = Property(property);
+        }
+
+        return s_pictographic.Contains(cp);
+    }
+
+    // Folds to several code points (ß -> ss): each with the code points that fold to it.
+    internal static IReadOnlyList<(int[] Fold, int[] Members)> MultiFolds => s_multiFolds ??= LoadMultiFolds();
+
+    private static IReadOnlyList<(int[] Fold, int[] Members)>? s_multiFolds;
+
+    private static IReadOnlyList<(int[] Fold, int[] Members)> LoadMultiFolds()
+    {
+        var data = OnigurumaUnicodeData.MultiFolds;
+        var list = new List<(int[], int[])>();
+        var i = 0;
+        while (i < data.Length)
+        {
+            var width = data[i];
+            var fold = data.Slice(i + 1, width).ToArray();
+            var count = data[i + 1 + width];
+            var members = data.Slice(i + 2 + width, count).ToArray();
+            list.Add((fold, members));
+            i += 2 + width + count;
+        }
+        return list;
+    }
+
     // Every code point that folds as cp does, cp included, in ascending order.
     internal static int[] CaseClass(int cp)
     {

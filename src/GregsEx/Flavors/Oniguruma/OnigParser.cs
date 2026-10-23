@@ -32,6 +32,9 @@ internal sealed class OnigParser
     private int _pos;
     private int _depth;
     private int _groupCount;
+    private int _behindDepth;
+    // Code points of a \x{H H ...} sequence still to be read as atoms or class members.
+    private readonly Queue<int> _pending = new();
     private readonly List<OnigNode> _captures = [null!];
     private readonly List<OnigNode> _references = [];
     private bool _hasNamed;
@@ -115,13 +118,13 @@ internal sealed class OnigParser
         while (true)
         {
             SkipExtended(options);
-            if (AtEnd || Peek() is '|' or ')')
+            if (_pending.Count == 0 && (AtEnd || Peek() is '|' or ')'))
             {
                 break;
             }
 
             // An isolated option, (?i), covers the rest of the enclosing group, alternatives included.
-            if (TryIsolatedOption(ref options))
+            if (_pending.Count == 0 && TryIsolatedOption(ref options))
             {
                 seq.Children.Add(ParseAlternation(options));
                 break;
@@ -138,7 +141,146 @@ internal sealed class OnigParser
             seq.Children.Add(atom);
         }
         seq.Length = _pos - start;
+        if (_behindDepth == 0)
+        {
+            ExpandMultiFolds(seq.Children);
+        }
+
         return seq.Children.Count == 1 ? seq.Children[0] : seq;
+    }
+
+    // Oniguruma's ignore-case strings also match through folds to several code points: (?i)ss matches ß, and (?i)ß
+    // matches ss. A run of ignore-case characters that holds such a fold, or a quantified such character, becomes
+    // alternatives (the plain reading first). Look-behind bodies keep single code point folding.
+    private static void ExpandMultiFolds(List<OnigNode> children)
+    {
+        for (var i = 0; i < children.Count; i++)
+        {
+            var child = children[i];
+            if (child.Kind == OnigNodeKind.Repeat && child.Child.Kind == OnigNodeKind.Char && child.Child.IgnoreCase)
+            {
+                child.Children[0] = Expand([child.Child], 0) ?? child.Child;
+                continue;
+            }
+
+            if (child.Kind != OnigNodeKind.Char || !child.IgnoreCase)
+            {
+                continue;
+            }
+
+            var end = i;
+            while (end < children.Count && children[end].Kind == OnigNodeKind.Char && children[end].IgnoreCase)
+            {
+                end++;
+            }
+
+            var run = children.GetRange(i, end - i);
+            if (Expand(run, 0) is { } expanded)
+            {
+                children.RemoveRange(i, end - i);
+                children.Insert(i, expanded);
+            }
+            else
+            {
+                i = end - 1;
+            }
+        }
+    }
+
+    // The alternatives for run[from..], or null when no multi-code-point fold applies anywhere in it.
+    private static OnigNode? Expand(List<OnigNode> run, int from)
+    {
+        if (from == run.Count)
+        {
+            return null;
+        }
+
+        var head = run[from];
+        var options = new List<(OnigNode Node, int Next)>();
+        foreach (var (fold, members) in OnigUnicode.MultiFolds)
+        {
+            if (Array.IndexOf(members, head.Value) >= 0)
+            {
+                // ß as another code point with the same fold (ẞ).
+                var same = new OnigCharSet.Builder();
+                foreach (var m in members)
+                {
+                    foreach (var e in OnigUnicode.CaseClass(m))
+                    {
+                        same.Add(e);
+                    }
+                }
+                options.Add((new OnigNode(OnigNodeKind.Set, head.Offset, head.Length) { Set = same.Build() }, from + 1));
+
+                // ß as ss.
+                var spelled = new OnigNode(OnigNodeKind.Sequence, head.Offset, head.Length);
+                foreach (var cp in fold)
+                {
+                    spelled.Children.Add(new OnigNode(OnigNodeKind.Char, head.Offset, head.Length) { Value = cp, IgnoreCase = true });
+                }
+                options.Add((spelled, from + 1));
+            }
+
+            if (from + fold.Length <= run.Count)
+            {
+                var folds = true;
+                for (var j = 0; j < fold.Length && folds; j++)
+                {
+                    folds = OnigUnicode.Fold(run[from + j].Value) == fold[j];
+                }
+
+                if (folds)
+                {
+                    // ss as ß.
+                    var builder = new OnigCharSet.Builder();
+                    foreach (var m in members)
+                    {
+                        foreach (var e in OnigUnicode.CaseClass(m))
+                        {
+                            builder.Add(e);
+                        }
+                    }
+                    options.Add((new OnigNode(OnigNodeKind.Set, head.Offset, head.Length) { Set = builder.Build() }, from + fold.Length));
+                }
+            }
+        }
+
+        var rest = Expand(run, from + 1);
+        if (options.Count == 0 && rest is null)
+        {
+            return null;
+        }
+
+        var alternation = new OnigNode(OnigNodeKind.Alternation, head.Offset, head.Length);
+        alternation.Children.Add(Then(head, rest ?? Plain(run, from + 1)));
+        foreach (var (node, next) in options)
+        {
+            alternation.Children.Add(Then(node, Expand(run, next) ?? Plain(run, next)));
+        }
+        return alternation;
+
+        static OnigNode Then(OnigNode first, OnigNode? rest)
+        {
+            var seq = new OnigNode(OnigNodeKind.Sequence, first.Offset, first.Length);
+            seq.Children.Add(first);
+            if (rest is not null)
+            {
+                seq.Children.Add(rest);
+            }
+            return seq;
+        }
+
+        static OnigNode? Plain(List<OnigNode> run, int from)
+        {
+            if (from >= run.Count)
+            {
+                return null;
+            }
+
+            var seq = new OnigNode(OnigNodeKind.Sequence, run[from].Offset, run[from].Length);
+            seq.Children.AddRange(run.GetRange(from, run.Count - from));
+            return seq;
+        }
     }
 
     private void SkipExtended(OnigInlineOptions options)
@@ -207,7 +349,7 @@ internal sealed class OnigParser
                 return atom;
             }
 
-            if (atom.Kind is OnigNodeKind.Anchor or OnigNodeKind.Keep)
+            if (IsZeroWidthAssertion(atom))
             {
                 throw Error("target of repeat operator is invalid", qStart, _pos - qStart);
             }
@@ -241,6 +383,11 @@ internal sealed class OnigParser
             atom = repeat;
         }
     }
+
+    // Anchors and look-arounds, also inside (?:...), which Oniguruma does not keep as a group.
+    private static bool IsZeroWidthAssertion(OnigNode node)
+        => node.Kind is OnigNodeKind.Anchor or OnigNodeKind.Keep or OnigNodeKind.Look
+            || (node.Kind == OnigNodeKind.Group && node.Children.Count == 1 && IsZeroWidthAssertion(node.Child));
 
     // {n}, {n,}, {,m} and {n,m}; anything else leaves '{' a literal.
     private bool TryInterval(out int min, out int max)
@@ -293,6 +440,11 @@ internal sealed class OnigParser
     private OnigNode? ParseAtom(OnigInlineOptions options)
     {
         var start = _pos;
+        if (_pending.Count > 0)
+        {
+            return CharNode(_pending.Dequeue(), start, options);
+        }
+
         var c = _pattern[_pos];
         switch (c)
         {
@@ -300,8 +452,9 @@ internal sealed class OnigParser
                 return ParseGroup(options);
             case '[':
                 {
-                    var set = ParseClass(options);
-                    return new OnigNode(OnigNodeKind.Set, start, _pos - start) { Set = set };
+                    var set = ParseClass(options, out var negated);
+                    var node = new OnigNode(OnigNodeKind.Set, start, _pos - start) { Set = set };
+                    return (options & OnigInlineOptions.IgnoreCase) != 0 && !negated && _behindDepth == 0 ? WithMultiFolds(node, start) : node;
                 }
             case '.':
                 _pos++;
@@ -338,6 +491,11 @@ internal sealed class OnigParser
         if (char.IsHighSurrogate(c) && _pos < _pattern.Length && char.IsLowSurrogate(_pattern[_pos]))
         {
             return char.ConvertToUtf32(c, _pattern[_pos++]);
+        }
+
+        if (char.IsSurrogate(c))
+        {
+            throw new OnigSyntaxException(RegexDiagnosticCode.InvalidPatternEncoding, _pos - 1, 1, "invalid code point value");
         }
 
         return c;
@@ -398,9 +556,22 @@ internal sealed class OnigParser
             case '(':
                 return ParseConditional(options, start);
             case '<' when Peek(1) is '=' or '!':
-                node = new OnigNode(OnigNodeKind.Look, start, 0) { Value = Peek(1) == '!' ? 1 : 0, Flag = true };
-                _pos += 2;
-                break;
+                {
+                    node = new OnigNode(OnigNodeKind.Look, start, 0) { Value = Peek(1) == '!' ? 1 : 0, Flag = true };
+                    _pos += 2;
+                    _behindDepth++;
+                    try
+                    {
+                        node.Children.Add(ParseGroupBody(options, start));
+                    }
+                    finally
+                    {
+                        _behindDepth--;
+                    }
+
+                    node.Length = _pos - start;
+                    return node;
+                }
             case '<' or '\'':
                 {
                     _pos++;
@@ -729,8 +900,10 @@ internal sealed class OnigParser
                 return GeneralNewline(start);
             case 'X':
                 return TextSegment(start);
-            case 'y' or 'Y':
-                throw Unsupported("text segment boundaries are not supported", start, 2);
+            case 'y':
+                return Anchor(OnigAnchor.TextSegmentBoundary, start);
+            case 'Y':
+                return Anchor(OnigAnchor.NotTextSegmentBoundary, start);
             case 'k':
                 if (Peek() is '<' or '\'')
                 {
@@ -779,7 +952,7 @@ internal sealed class OnigParser
                         return CharNode(_pattern[_pos - 1], start, options);
                     }
 
-                    return CharNode(ReadOctal(3), start, options);
+                    return CharNode(AssembleBytes(ReadOctal(3) & 0xFF, start, inClass: false), start, options);
                 }
             default:
                 _pos = start;
@@ -805,26 +978,19 @@ internal sealed class OnigParser
         return atomic;
     }
 
-    // \X approximated as (?>\r\n|\O[\p{M}\u200D]*): a base and its combining marks, not full UAX #29 clusters.
+    // \X is (?>\O(?:\Y\O)*): an extended grapheme cluster, from wherever it starts.
     private OnigNode TextSegment(int start)
     {
-        OnigUnicode.TryGetProperty("M", out var mark);
-        var marks = new OnigCharSet.Builder();
-        marks.Add(OnigUnicode.Property(mark));
-        marks.Add(0x200D);
+        var step = new OnigNode(OnigNodeKind.Sequence, start, 2);
+        step.Children.Add(Anchor(OnigAnchor.NotTextSegmentBoundary, start));
+        step.Children.Add(new OnigNode(OnigNodeKind.AnyChar, start, 2) { Flag = true });
+        var rest = new OnigNode(OnigNodeKind.Repeat, start, 2) { Min = 0, Max = -1, Mode = OnigRepeatMode.Greedy };
+        rest.Children.Add(step);
         var seq = new OnigNode(OnigNodeKind.Sequence, start, 2);
         seq.Children.Add(new OnigNode(OnigNodeKind.AnyChar, start, 2) { Flag = true });
-        var rep = new OnigNode(OnigNodeKind.Repeat, start, 2) { Min = 0, Max = -1, Mode = OnigRepeatMode.Greedy };
-        rep.Children.Add(SetNode(marks.Build(), start));
-        seq.Children.Add(rep);
-        var crlf = new OnigNode(OnigNodeKind.Sequence, start, 2);
-        crlf.Children.Add(new OnigNode(OnigNodeKind.Char, start, 2) { Value = '\r' });
-        crlf.Children.Add(new OnigNode(OnigNodeKind.Char, start, 2) { Value = '\n' });
-        var alt = new OnigNode(OnigNodeKind.Alternation, start, 2);
-        alt.Children.Add(crlf);
-        alt.Children.Add(seq);
+        seq.Children.Add(rest);
         var atomic = new OnigNode(OnigNodeKind.Atomic, start, 2);
-        atomic.Children.Add(alt);
+        atomic.Children.Add(seq);
         return atomic;
     }
 
@@ -1029,10 +1195,10 @@ internal sealed class OnigParser
             case 'e': return 0x1B;
             case 'b' when inClass: return '\b';
             case '0':
-                return ReadOctal(2);
+                return AssembleBytes(ReadOctal(2), start, inClass);
             case >= '1' and <= '7' when inClass:
                 _pos--;
-                return ReadOctal(3);
+                return AssembleBytes(ReadOctal(3), start, inClass);
             case 'x':
                 if (Peek() == '{')
                 {
@@ -1042,15 +1208,34 @@ internal sealed class OnigParser
                         throw Error("invalid code point value", start, _pattern.Length - start);
                     }
 
-                    var hex = _pattern.AsSpan(_pos + 1, end - _pos - 1).Trim();
-                    if (hex.Length == 0 || hex.Length > 8 || !int.TryParse(hex, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out var value)
-                        || (uint)value > OnigCharSet.MaxCodePoint)
+                    // \x{H H ...} is a sequence of code points: the first is returned, the others wait in _pending.
+                    var values = _pattern.Substring(_pos + 1, end - _pos - 1).Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    if (values.Length == 0)
+                    {
+                        throw Error("invalid code point value", start, end + 1 - start);
+                    }
+
+                    var codes = new int[values.Length];
+                    for (var i = 0; i < values.Length; i++)
+                    {
+                        if (values[i].Length > 8 || !int.TryParse(values[i], NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out codes[i])
+                            || (uint)codes[i] > OnigCharSet.MaxCodePoint)
+                        {
+                            throw Error("invalid code point value", start, end + 1 - start);
+                        }
+                    }
+
+                    if (codes.Any(c => c is >= 0xD800 and <= 0xDFFF))
                     {
                         throw Error("invalid code point value", start, end + 1 - start);
                     }
 
                     _pos = end + 1;
-                    return value;
+                    for (var i = 1; i < codes.Length; i++)
+                    {
+                        _pending.Enqueue(codes[i]);
+                    }
+                    return codes[0];
                 }
                 else
                 {
@@ -1062,7 +1247,13 @@ internal sealed class OnigParser
                         _pos++;
                         digits++;
                     }
-                    return value;
+
+                    if (digits == 0)
+                    {
+                        throw Error("invalid code point value", start, _pos - start);
+                    }
+
+                    return AssembleBytes(value, start, inClass);
                 }
             case 'u':
                 {
@@ -1082,6 +1273,12 @@ internal sealed class OnigParser
                         value = value * 16 + HexValue(Peek());
                         _pos++;
                     }
+
+                    if (value is >= 0xD800 and <= 0xDFFF)
+                    {
+                        throw Error("invalid code point value", start, _pos - start);
+                    }
+
                     return value;
                 }
             case 'o' when Peek() == '{':
@@ -1130,6 +1327,47 @@ internal sealed class OnigParser
         }
     }
 
+    // \xHH and octal escapes are encoded bytes: in UTF-16LE two make a unit (low byte first) and a high surrogate unit
+    // needs two more; an incomplete character is an error, as in Oniguruma.
+    private int AssembleBytes(int first, int start, bool inClass)
+    {
+        var low = NextByte(start, inClass);
+        var unit = first | (low << 8);
+        if (unit is < 0xD800 or > 0xDBFF)
+        {
+            return unit;
+        }
+
+        var second = NextByte(start, inClass) | (NextByte(start, inClass) << 8);
+        return 0x10000 + ((unit & 0x3FF) << 10) + (second & 0x3FF);
+    }
+
+    private int NextByte(int start, bool inClass)
+    {
+        if (Peek() == '\\')
+        {
+            if (Peek(1) == 'x' && Peek(2) != '{' && char.IsAsciiHexDigit(Peek(2)))
+            {
+                _pos += 2;
+                var value = 0;
+                for (var digits = 0; digits < 2 && !AtEnd && char.IsAsciiHexDigit(Peek()); digits++)
+                {
+                    value = value * 16 + HexValue(Peek());
+                    _pos++;
+                }
+                return value;
+            }
+
+            if (Peek(1) == '0' || (inClass && Peek(1) is >= '1' and <= '7'))
+            {
+                _pos++;
+                return ReadOctal(3) & 0xFF;
+            }
+        }
+
+        throw Error("too short multibyte code string", start, Math.Max(1, _pos - start));
+    }
+
     private int Control(int start)
     {
         if (AtEnd)
@@ -1142,6 +1380,39 @@ internal sealed class OnigParser
     }
 
     private static int HexValue(char c) => c <= '9' ? c - '0' : (c | 0x20) - 'a' + 10;
+
+    // Under ignore-case a class holding ß also matches ss (Oniguruma's i_apply_case_fold alternatives).
+    private OnigNode WithMultiFolds(OnigNode node, int start)
+    {
+        OnigNode? alternation = null;
+        foreach (var (fold, members) in OnigUnicode.MultiFolds)
+        {
+            if (!members.Any(node.Set!.Contains))
+            {
+                continue;
+            }
+
+            if (alternation is null)
+            {
+                alternation = new OnigNode(OnigNodeKind.Alternation, start, _pos - start);
+                alternation.Children.Add(node);
+            }
+
+            var spelled = new OnigNode(OnigNodeKind.Sequence, start, _pos - start);
+            foreach (var cp in fold)
+            {
+                spelled.Children.Add(new OnigNode(OnigNodeKind.Char, start, _pos - start) { Value = cp, IgnoreCase = true });
+            }
+            alternation.Children.Add(spelled);
+        }
+        return alternation ?? node;
+    }
+
+    private OnigCharSet ParseClass(OnigInlineOptions options, out bool negated)
+    {
+        negated = _pattern.Length > _pos + 1 && _pattern[_pos + 1] == '^';
+        return ParseClass(options);
+    }
 
     // A bracket class at '[': nested classes union, && intersects (lowest precedence above ^), ^ negates last. As in
     // Oniguruma's prs_cc, ignore-case folds the outermost class only, before its negation, and a nested negated class
@@ -1159,6 +1430,7 @@ internal sealed class OnigParser
         OnigCharSet? intersection = null;
         var builder = new OnigCharSet.Builder();
         var first = true;
+        var afterClass = false;
         while (true)
         {
             if (AtEnd)
@@ -1184,20 +1456,30 @@ internal sealed class OnigParser
             }
 
             first = false;
+            if (c == '-' && afterClass && Peek(1) != ']')
+            {
+                // A class (\w, [:alpha:], [..]) cannot start a range.
+                throw Error("unmatched range specifier in char-class", _pos, 1);
+            }
+
+            afterClass = false;
             if (c == '[')
             {
                 if (Peek(1) == ':' && TryPosixBracket(builder, options))
                 {
+                    afterClass = true;
                     continue;
                 }
 
                 builder.Add(ParseClass(options, nested: true));
+                afterClass = true;
                 continue;
             }
 
             var itemStart = _pos;
             if (!TryClassAtom(options, builder, out var low))
             {
+                afterClass = true;
                 continue;
             }
 
@@ -1225,11 +1507,8 @@ internal sealed class OnigParser
                     continue;
                 }
 
-                // The range end was a class such as \w: keep '-' and the class as members.
-                builder.Add(low);
-                builder.Add('-');
-                builder.Add(highBuilder.Build());
-                continue;
+                // A class cannot end a range either.
+                throw Error("char-class value at end of range", itemStart, _pos - itemStart);
             }
 
             builder.Add(low);
@@ -1256,6 +1535,19 @@ internal sealed class OnigParser
 
     // Reads one class member: returns true with a single code point, or false after adding a class (\w, \p{..}).
     private bool TryClassAtom(OnigInlineOptions options, OnigCharSet.Builder builder, out int cp)
+    {
+        var read = TryClassAtomCore(options, builder, out cp);
+        while (read && _pending.Count > 0)
+        {
+            // The earlier code points of a \x{H H ...} sequence are members; the last may start a range.
+            builder.Add(cp);
+            cp = _pending.Dequeue();
+        }
+
+        return read;
+    }
+
+    private bool TryClassAtomCore(OnigInlineOptions options, OnigCharSet.Builder builder, out int cp)
     {
         cp = -1;
         var start = _pos;

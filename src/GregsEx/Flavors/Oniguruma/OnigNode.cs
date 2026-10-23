@@ -10,7 +10,7 @@ internal enum OnigNodeKind
 internal enum OnigAnchor
 {
     LineStart, LineEnd, BufferStart, BufferEnd, SemiEnd, SearchStart, WordBoundary, NotWordBoundary,
-    AsciiWordBoundary, AsciiNotWordBoundary
+    AsciiWordBoundary, AsciiNotWordBoundary, TextSegmentBoundary, NotTextSegmentBoundary
 }
 
 internal enum OnigRepeatMode : byte { Greedy, Lazy, Possessive }

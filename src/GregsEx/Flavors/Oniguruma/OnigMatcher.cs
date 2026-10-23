@@ -261,9 +261,102 @@ internal sealed class OnigMatcher
                 return IsWordBefore(input, pos, false) == IsWordAt(input, pos, false);
             case OnigAnchor.AsciiWordBoundary:
                 return IsWordBefore(input, pos, true) != IsWordAt(input, pos, true);
-            default:
+            case OnigAnchor.AsciiNotWordBoundary:
                 return IsWordBefore(input, pos, true) == IsWordAt(input, pos, true);
+            case OnigAnchor.TextSegmentBoundary:
+                return IsGraphemeBreak(input, pos);
+            default:
+                return !IsGraphemeBreak(input, pos);
         }
+    }
+
+    // Where the character before pos starts (Oniguruma's prev char head), or -1.
+    private static int PreviousHead(ReadOnlySpan<char> input, int pos)
+    {
+        if (pos <= 0)
+        {
+            return -1;
+        }
+
+        return char.IsLowSurrogate(input[pos - 1]) && pos >= 2 ? pos - 2 : pos - 1;
+    }
+
+    // Oniguruma's onigenc_egcb_is_break_position: UAX #29 extended grapheme cluster boundaries.
+    private static bool IsGraphemeBreak(ReadOnlySpan<char> input, int pos)
+    {
+        if (pos == 0 || pos >= input.Length)
+        {
+            return true;
+        }
+
+        var prev = PreviousHead(input, pos);
+        var fromCode = CodePointAt(input, prev, out _);
+        var toCode = CodePointAt(input, pos, out _);
+        var from = OnigUnicode.GraphemeBreak(fromCode);
+        var to = OnigUnicode.GraphemeBreak(toCode);
+        if (from == 0 && to == 0)
+        {
+            return true;
+        }
+
+        if (from == OnigUnicode.GbCR && to == OnigUnicode.GbLF)
+        {
+            return false;
+        }
+
+        if (from is >= OnigUnicode.GbCR and <= OnigUnicode.GbControl || to is >= OnigUnicode.GbCR and <= OnigUnicode.GbControl)
+        {
+            return true;
+        }
+
+        if (from >= OnigUnicode.GbL && to >= OnigUnicode.GbL)
+        {
+            return !((from == OnigUnicode.GbL && to != OnigUnicode.GbT)
+                || ((from == OnigUnicode.GbLV || from == OnigUnicode.GbV) && (to == OnigUnicode.GbV || to == OnigUnicode.GbT))
+                || (to == OnigUnicode.GbT && (from == OnigUnicode.GbLVT || from == OnigUnicode.GbT)));
+        }
+
+        if (to is OnigUnicode.GbExtend or OnigUnicode.GbZWJ or OnigUnicode.GbSpacingMark || from == OnigUnicode.GbPrepend)
+        {
+            return false;
+        }
+
+        if (from == OnigUnicode.GbZWJ)
+        {
+            if (!OnigUnicode.IsExtendedPictographic(toCode))
+            {
+                return true;
+            }
+
+            // GB11: \p{ExtPict} Extend* ZWJ x \p{ExtPict}.
+            while ((prev = PreviousHead(input, prev)) >= 0)
+            {
+                var code = CodePointAt(input, prev, out _);
+                if (OnigUnicode.IsExtendedPictographic(code))
+                {
+                    return false;
+                }
+
+                if (OnigUnicode.GraphemeBreak(code) != OnigUnicode.GbExtend)
+                {
+                    break;
+                }
+            }
+            return true;
+        }
+
+        if (from == OnigUnicode.GbRegionalIndicator && to == OnigUnicode.GbRegionalIndicator)
+        {
+            // GB12, GB13: break between pairs of regional indicators.
+            var n = 0;
+            while ((prev = PreviousHead(input, prev)) >= 0 && OnigUnicode.GraphemeBreak(CodePointAt(input, prev, out _)) == OnigUnicode.GbRegionalIndicator)
+            {
+                n++;
+            }
+            return n % 2 != 0;
+        }
+
+        return true;
     }
 
     // Matches one run item at pos: the width in units, or 0 when it does not match.
