@@ -8,14 +8,15 @@ namespace GregsEx.Flavors.Oniguruma;
 // Lowers a parse tree to OnigProgram instructions. Layouts (operands after the opcode):
 //   Char c | CharIC2 a b | Str offset length | Set s | SetUnit s | AnyNL | Any | Anchor kind | Keep | Fail | Match
 //   Jmp target | Split first second | SplitLazy body exit | Alt first second firstBits secondBits (-1: any)
-//   Run item arg min max mode follow (follow: the unit that must come next, or -1)
+//   Run item arg min max mode follow (follow: the bits of what may come next, or -1)
 //   SaveOpen n | SaveClose n | RetIfCalled n | Call target n
 //   LoopInit r | LoopHead r min max lazy exit | LoopEnter r | LoopTail r head exit
 //   AtomicStart id | AtomicEnd id | LookStart negative id continuation | LookEnd negative id
 //   BehindStart negative id continuation min max | BehindEnd negative id
-//   AssertSet negative behind s | AssertStr negative behind offset length
+//   AssertSet negative behind s anchors (1: the input edge also holds, 2: a line start also holds, behind)
+//   AssertStr negative behind offset length
 //   Backref ignoreCase count groups... | CondRef else count groups... | CondStart id else | CondEnd id
-//   Absent offset length
+//   Absent offset length | AssertLiterals negative behind table
 internal sealed class OnigCompiler
 {
     internal const int LoopEnter = 36;
@@ -27,6 +28,7 @@ internal sealed class OnigCompiler
     private readonly Dictionary<OnigCharSet, int> _setIndex = new(ReferenceEqualityComparer.Instance);
     private readonly StringBuilder _literals = new();
     private readonly List<OnigStartBits> _bits = [];
+    private readonly List<OnigLiteralTable> _tables = [];
     private readonly HashSet<int> _called = [];
     private readonly int[] _groupPc;
     private readonly List<(int At, int Group)> _callFixups = [];
@@ -67,7 +69,7 @@ internal sealed class OnigCompiler
             }
         }
 
-        compiler.Emit(root);
+        compiler.Emit(root, OnigStartBits.Any);
         compiler.Add(Op.Match);
         foreach (var (at, group) in compiler._callFixups)
         {
@@ -79,7 +81,24 @@ internal sealed class OnigCompiler
             throw new OnigSyntaxException(RegexDiagnosticCode.ProgramLimitExceeded, 0, pattern.Length, "program too large");
         }
 
-        var startBits = Bits(root);
+        var leadingRun = -1;
+        if (compiler._called.Count == 0)
+        {
+            var pc = 0;
+            var code = compiler._code;
+            while (code[pc] == Op.SaveOpen)
+            {
+                pc += 2;
+            }
+
+            if (code[pc] == Op.Run && code[pc + 4] < 0 && code[pc + 5] != (int)OnigRepeatMode.Lazy)
+            {
+                leadingRun = pc;
+            }
+        }
+
+        var startBits = FollowBits(root);
+        var (precededBy, precededAtStart) = Preceded(root);
         SearchValues<char>? firstUnits = null, notFirstAscii = null;
         if (!startBits.Empty)
         {
@@ -97,6 +116,18 @@ internal sealed class OnigCompiler
         Prefix(root, prefix);
         string? required = null;
         Required(root, ref required);
+        SearchValues<char>? requiredUnits = null, notRequiredAscii = null;
+        if (required is null && RequiredUnits(root) is { } units && Cost(units) <= MaxRequiredCost)
+        {
+            if (!units.NonAscii)
+            {
+                requiredUnits = s_firstUnits.GetOrAdd((units.Low, units.High, false), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, true)));
+            }
+            else
+            {
+                notRequiredAscii = s_firstUnits.GetOrAdd((units.Low, units.High, true), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, false)));
+            }
+        }
         return new OnigProgram
         {
             Code = compiler._code.ToArray(),
@@ -114,7 +145,13 @@ internal sealed class OnigCompiler
             NotFirstAscii = notFirstAscii,
             Prefix = prefix.Length >= 2 ? prefix.ToString() : null,
             Required = required,
+            RequiredUnits = requiredUnits,
+            NotRequiredAscii = notRequiredAscii,
             MinLength = MinLength(root),
+            LeadingRun = leadingRun,
+            Tables = compiler._tables.ToArray(),
+            PrecededBy = precededBy,
+            PrecededAtStart = precededAtStart,
         };
     }
 
@@ -214,7 +251,8 @@ internal sealed class OnigCompiler
         return offset;
     }
 
-    private void Emit(OnigNode node)
+    // follow: what may come after node (FollowBits), for auto-possessive runs and give-back skipping.
+    private void Emit(OnigNode node, OnigStartBits follow)
     {
         switch (node.Kind)
         {
@@ -236,18 +274,19 @@ internal sealed class OnigCompiler
                 Add(Op.Keep);
                 return;
             case OnigNodeKind.Sequence:
-                EmitSequence(node.Children);
+                EmitSequence(node.Children, follow);
                 return;
             case OnigNodeKind.Alternation:
-                EmitAlternation(node.Children);
+                EmitAlternation(node.Children, follow);
                 return;
             case OnigNodeKind.Repeat:
-                EmitRepeat(node);
+                EmitRepeat(node, follow);
                 return;
             case OnigNodeKind.Capture:
                 _groupPc[node.Value] = Here;
                 Add(Op.SaveOpen, node.Value);
-                Emit(node.Child);
+                // A called group's code also runs from each call site, so its follow is unknown.
+                Emit(node.Child, _called.Contains(node.Value) ? OnigStartBits.Any : follow);
                 Add(Op.SaveClose, node.Value);
                 if (_called.Contains(node.Value))
                 {
@@ -255,18 +294,18 @@ internal sealed class OnigCompiler
                 }
                 return;
             case OnigNodeKind.Group:
-                Emit(node.Child);
+                Emit(node.Child, follow);
                 return;
             case OnigNodeKind.Atomic:
                 {
                     var id = _ids++;
                     Add(Op.AtomicStart, id);
-                    Emit(node.Child);
+                    Emit(node.Child, follow);
                     Add(Op.AtomicEnd, id);
                     return;
                 }
             case OnigNodeKind.Look:
-                EmitLook(node);
+                EmitLook(node, follow);
                 return;
             case OnigNodeKind.Backref:
                 Add(Op.Backref);
@@ -295,14 +334,14 @@ internal sealed class OnigCompiler
                         Add(g);
                     }
 
-                    Emit(node.Children[0]);
+                    Emit(node.Children[0], follow);
                     Add(Op.Jmp);
                     var endAt = Here;
                     Add(0);
                     _code[elseAt] = Here;
                     if (node.Children.Count > 1)
                     {
-                        Emit(node.Children[1]);
+                        Emit(node.Children[1], follow);
                     }
 
                     _code[endAt] = Here;
@@ -314,16 +353,16 @@ internal sealed class OnigCompiler
                     Add(Op.CondStart, id);
                     var elseAt = Here;
                     Add(0);
-                    Emit(node.Children[0]);
+                    Emit(node.Children[0], Then(FollowBits(node.Children[1]), follow));
                     Add(Op.CondEnd, id);
-                    Emit(node.Children[1]);
+                    Emit(node.Children[1], follow);
                     Add(Op.Jmp);
                     var endAt = Here;
                     Add(0);
                     _code[elseAt] = Here;
                     if (node.Children.Count > 2)
                     {
-                        Emit(node.Children[2]);
+                        Emit(node.Children[2], follow);
                     }
 
                     _code[endAt] = Here;
@@ -434,8 +473,17 @@ internal sealed class OnigCompiler
         return node.Kind == OnigNodeKind.Char && (!node.IgnoreCase || OnigUnicode.CaseClass(node.Value).Length == 1);
     }
 
-    private void EmitSequence(List<OnigNode> children)
+    private void EmitSequence(List<OnigNode> children, OnigStartBits follow)
     {
+        // What may follow each child: the rest of the sequence, then the sequence's own follow.
+        var after = new OnigStartBits[children.Count];
+        var next = follow;
+        for (var i = children.Count - 1; i >= 0; i--)
+        {
+            after[i] = next;
+            next = Then(FollowBits(children[i]), next);
+        }
+
         var run = new StringBuilder();
         for (var i = 0; i < children.Count; i++)
         {
@@ -447,10 +495,14 @@ internal sealed class OnigCompiler
             }
 
             FlushLiteral(run);
-            Emit(child);
+            Emit(child, after[i]);
         }
         FlushLiteral(run);
     }
+
+    // The bits of first followed by next: next only adds when first can match empty.
+    internal static OnigStartBits Then(OnigStartBits first, OnigStartBits next)
+        => first.Empty ? first.Union(next) with { Empty = next.Empty, End = first.End || next.End } : first;
 
     private void FlushLiteral(StringBuilder run)
     {
@@ -472,14 +524,14 @@ internal sealed class OnigCompiler
         run.Clear();
     }
 
-    private void EmitAlternation(List<OnigNode> branches)
+    private void EmitAlternation(List<OnigNode> branches, OnigStartBits follow)
     {
         var jumps = new List<int>();
         var rest = new OnigStartBits[branches.Count];
-        rest[^1] = Bits(branches[^1]);
+        rest[^1] = FollowBits(branches[^1]);
         for (var i = branches.Count - 2; i >= 0; i--)
         {
-            rest[i] = Bits(branches[i]).Union(rest[i + 1]);
+            rest[i] = FollowBits(branches[i]).Union(rest[i + 1]);
         }
 
         for (var i = 0; i < branches.Count - 1; i++)
@@ -487,21 +539,21 @@ internal sealed class OnigCompiler
             var at = Here;
             Add(Op.Alt);
             Add(at + 5, 0);
-            Add(BitsIndex(Bits(branches[i])), BitsIndex(rest[i + 1]));
-            Emit(branches[i]);
+            Add(BitsIndex(FollowBits(branches[i])), BitsIndex(rest[i + 1]));
+            Emit(branches[i], follow);
             Add(Op.Jmp);
             jumps.Add(Here);
             Add(0);
             _code[at + 2] = Here;
         }
-        Emit(branches[^1]);
+        Emit(branches[^1], follow);
         foreach (var j in jumps)
         {
             _code[j] = Here;
         }
     }
 
-    private void EmitRepeat(OnigNode node)
+    private void EmitRepeat(OnigNode node, OnigStartBits follow)
     {
         var child = node.Child;
         int min = node.Min, max = node.Max;
@@ -513,7 +565,7 @@ internal sealed class OnigCompiler
                 Add(Op.Jmp);
                 var over = Here;
                 Add(0);
-                Emit(child);
+                Emit(child, OnigStartBits.Any);
                 _code[over] = Here;
             }
             return;
@@ -521,41 +573,50 @@ internal sealed class OnigCompiler
 
         if (min == 1 && max == 1)
         {
-            Emit(child);
+            Emit(child, follow);
             return;
         }
 
         var (kind, arg) = Item(child);
         if (kind >= 0)
         {
+            var mode = node.Mode;
+            // A greedy run followed by something that cannot start with one of its units never gives units back
+            // usefully: Oniguruma makes such repeats possessive too.
+            if (mode == OnigRepeatMode.Greedy && !follow.Empty && FollowBits(child).DisjointUnits(follow))
+            {
+                mode = OnigRepeatMode.Possessive;
+            }
+
             Add(Op.Run);
             Add(kind, arg);
             Add(min, max);
-            Add((int)node.Mode);
-            Add(-1);
+            Add((int)mode);
+            Add(mode == OnigRepeatMode.Greedy ? BitsIndex(follow) : -1);
             return;
         }
 
+        var bodyFollow = Bits(child).Union(follow) with { Empty = follow.Empty, End = follow.End };
         if (node.Mode == OnigRepeatMode.Possessive)
         {
             var id = _ids++;
             Add(Op.AtomicStart, id);
-            EmitLoop(child, min, max, lazy: false);
+            EmitLoop(child, min, max, lazy: false, bodyFollow);
             Add(Op.AtomicEnd, id);
             return;
         }
 
-        EmitLoop(child, min, max, node.Mode == OnigRepeatMode.Lazy);
+        EmitLoop(child, min, max, node.Mode == OnigRepeatMode.Lazy, bodyFollow);
     }
 
-    private void EmitLoop(OnigNode child, int min, int max, bool lazy)
+    private void EmitLoop(OnigNode child, int min, int max, bool lazy, OnigStartBits follow)
     {
         var childBits = Bits(child);
-        if (!childBits.Empty && min <= 2 && (max == -1 || max == min + 1 || (max == 1 && min == 0)))
+        if (!Nullable(child) && min <= 2 && (max == -1 || max == min + 1 || (max == 1 && min == 0)))
         {
             for (var i = 0; i < min; i++)
             {
-                Emit(child);
+                Emit(child, follow);
             }
 
             if (max == -1)
@@ -573,7 +634,7 @@ internal sealed class OnigCompiler
                     Add(head + 5, 0);
                     Add(BitsIndex(childBits), -1);
                 }
-                Emit(child);
+                Emit(child, follow);
                 Add(Op.Jmp, head);
                 _code[head + 2] = Here;
                 return;
@@ -592,7 +653,7 @@ internal sealed class OnigCompiler
                 Add(at + 5, 0);
                 Add(BitsIndex(childBits), -1);
             }
-            Emit(child);
+            Emit(child, follow);
             _code[at + 2] = Here;
             return;
         }
@@ -606,7 +667,7 @@ internal sealed class OnigCompiler
         var exitAt = Here;
         Add(0);
         Add(LoopEnter, r);
-        Emit(child);
+        Emit(child, follow);
         Add(Op.LoopTail);
         Add(r, loopHead);
         var tailExit = Here;
@@ -615,18 +676,110 @@ internal sealed class OnigCompiler
         _code[tailExit] = Here;
     }
 
-    private void EmitLook(OnigNode node)
+    private void EmitLook(OnigNode node, OnigStartBits follow)
     {
         var negative = node.Value;
         var behind = node.Flag;
         var body = Unwrap(node.Child);
+        var branches = body.Kind == OnigNodeKind.Alternation ? body.Children : [body];
+        if (branches.Count > 1 && TryUnitsAndEdges(branches, behind, out var unitSet, out var edges))
+        {
+            // (?<=^|[\t &;]) or (?=[\t ;]|$): one unit test with the anchors as flags.
+            Add(Op.AssertSet);
+            Add(negative, behind ? 1 : 0);
+            Add(SetIndex(unitSet), edges);
+            return;
+        }
+
+        if (!ContainsCapture(body))
+        {
+            // Without captures only the outcome matters, so literal branches (with ^ before or $ after) share one
+            // bucketed table and the other branches are tested on their own.
+            var entries = new List<(string, byte)>();
+            var others = new List<OnigNode>();
+            foreach (var branch in branches)
+            {
+                if (TryLiteralEntry(branch, out var entry))
+                {
+                    entries.Add(entry);
+                }
+                else
+                {
+                    others.Add(branch);
+                }
+            }
+
+            if (entries.Count >= 2 || (entries.Count == 1 && entries[0].Item2 != 0))
+            {
+                var table = _tables.Count;
+                _tables.Add(new OnigLiteralTable(entries, behind));
+                if (others.Count == 0)
+                {
+                    Add(Op.AssertLiterals);
+                    Add(negative, behind ? 1 : 0);
+                    Add(table);
+                    return;
+                }
+
+                if (negative != 0)
+                {
+                    Add(Op.AssertLiterals);
+                    Add(negative, behind ? 1 : 0);
+                    Add(table);
+                    foreach (var other in others)
+                    {
+                        Emit(LookOf(node, other), follow);
+                    }
+                    return;
+                }
+
+                // Positive: the table first, then each other branch, as alternatives.
+                var at = Here;
+                Add(Op.Alt);
+                Add(at + 5, 0);
+                Add(-1, -1);
+                Add(Op.AssertLiterals);
+                Add(0, behind ? 1 : 0);
+                Add(table);
+                Add(Op.Jmp);
+                var jump = Here;
+                Add(0);
+                _code[at + 2] = Here;
+                var rest = new OnigNode(OnigNodeKind.Alternation, node.Offset, node.Length);
+                foreach (var other in others)
+                {
+                    rest.Children.Add(LookOf(node, other));
+                }
+
+                Emit(rest.Children.Count == 1 ? rest.Children[0] : rest, follow);
+                _code[jump] = Here;
+                return;
+            }
+        }
+
+        if (body.Kind == OnigNodeKind.Alternation)
+        {
+            // (?!A|B) is (?!A)(?!B), and (?=A|B) is (?=A)|(?=B); for look-behind this is also how Oniguruma divides
+            // alternatives of different lengths, each then stepping back by its own length.
+            var split = new OnigNode(negative != 0 ? OnigNodeKind.Sequence : OnigNodeKind.Alternation, node.Offset, node.Length);
+            foreach (var branch in body.Children)
+            {
+                var look = new OnigNode(OnigNodeKind.Look, node.Offset, node.Length) { Value = negative, Flag = behind };
+                look.Children.Add(branch);
+                split.Children.Add(look);
+            }
+
+            Emit(split, follow);
+            return;
+        }
+
         var (kind, arg) = Item(body);
         if (kind is RunItem.Set or RunItem.SetUnit or RunItem.Char)
         {
             var set = kind == RunItem.Char ? Single(arg) : _sets[arg];
             Add(Op.AssertSet);
             Add(negative, behind ? 1 : 0);
-            Add(SetIndex(set));
+            Add(SetIndex(set), 0);
             return;
         }
 
@@ -648,7 +801,7 @@ internal sealed class OnigCompiler
             var cont = Here;
             Add(0);
             Add(minLen, maxLen);
-            Emit(node.Child);
+            Emit(node.Child, OnigStartBits.Any);
             Add(Op.BehindEnd);
             Add(negative, id);
             _code[cont] = Here;
@@ -659,11 +812,174 @@ internal sealed class OnigCompiler
             Add(negative, id);
             var cont = Here;
             Add(0);
-            Emit(node.Child);
+            Emit(node.Child, OnigStartBits.Any);
             Add(Op.LookEnd);
             Add(negative, id);
             _code[cont] = Here;
         }
+    }
+
+    // The units that must precede a match from a leading positive look-behind of single units, ^ or \A.
+    private static (SearchValues<char>?, bool) Preceded(OnigNode root)
+    {
+        var first = root;
+        while (true)
+        {
+            if (first.Kind == OnigNodeKind.Sequence && first.Children.Count > 0)
+            {
+                first = first.Children[0];
+            }
+            else if (first.Kind is OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic)
+            {
+                first = first.Child;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (first.Kind != OnigNodeKind.Look || first.Value != 0 || !first.Flag)
+        {
+            return (null, false);
+        }
+
+        var body = Unwrap(first.Child);
+        var branches = body.Kind == OnigNodeKind.Alternation ? body.Children : [body];
+        ulong low = 0, high = 0;
+        var atStart = false;
+        foreach (var branch in branches)
+        {
+            var b = Unwrap(branch);
+            if (b.Kind == OnigNodeKind.Anchor && (OnigAnchor)b.Value is OnigAnchor.LineStart or OnigAnchor.BufferStart)
+            {
+                atStart = true;
+                if ((OnigAnchor)b.Value == OnigAnchor.LineStart)
+                {
+                    low |= 1UL << '\n';
+                }
+                continue;
+            }
+
+            if (b.Kind is not (OnigNodeKind.Char or OnigNodeKind.Set))
+            {
+                return (null, false);
+            }
+
+            var bits = Bits(b);
+            if (bits.NonAscii)
+            {
+                return (null, false);
+            }
+
+            low |= bits.Low;
+            high |= bits.High;
+        }
+
+        if (System.Numerics.BitOperations.PopCount(low) + System.Numerics.BitOperations.PopCount(high) > 16)
+        {
+            return (null, false);
+        }
+
+        return (s_firstUnits.GetOrAdd((low, high, false), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, true))), atStart);
+    }
+
+    // Branches that are single units, or ^ and \A behind, or $ and \z ahead ($ adds the newline to the set).
+    private static bool TryUnitsAndEdges(List<OnigNode> branches, bool behind, out OnigCharSet set, out int edges)
+    {
+        set = OnigCharSet.Empty;
+        edges = 0;
+        var builder = new OnigCharSet.Builder();
+        foreach (var branch in branches)
+        {
+            var b = Unwrap(branch);
+            switch (b.Kind)
+            {
+                case OnigNodeKind.Char:
+                    foreach (var m in b.IgnoreCase ? OnigUnicode.CaseClass(b.Value) : [b.Value])
+                    {
+                        builder.Add(m);
+                    }
+                    break;
+                case OnigNodeKind.Set:
+                    builder.Add(b.Set!);
+                    break;
+                case OnigNodeKind.Anchor when behind && (OnigAnchor)b.Value == OnigAnchor.BufferStart:
+                    edges |= 1;
+                    break;
+                case OnigNodeKind.Anchor when behind && (OnigAnchor)b.Value == OnigAnchor.LineStart:
+                    edges |= 3;
+                    break;
+                case OnigNodeKind.Anchor when !behind && (OnigAnchor)b.Value == OnigAnchor.BufferEnd:
+                    edges |= 1;
+                    break;
+                case OnigNodeKind.Anchor when !behind && (OnigAnchor)b.Value == OnigAnchor.LineEnd:
+                    edges |= 1;
+                    builder.Add('\n');
+                    break;
+                default:
+                    return false;
+            }
+        }
+        set = builder.Build();
+        return true;
+    }
+
+    private static OnigNode LookOf(OnigNode look, OnigNode body)
+    {
+        var node = new OnigNode(OnigNodeKind.Look, look.Offset, look.Length) { Value = look.Value, Flag = look.Flag };
+        node.Children.Add(body);
+        return node;
+    }
+
+    private static bool ContainsCapture(OnigNode node)
+    {
+        if (node.Kind is OnigNodeKind.Capture or OnigNodeKind.Call or OnigNodeKind.Backref or OnigNodeKind.Keep)
+        {
+            return true;
+        }
+
+        foreach (var child in node.Children)
+        {
+            if (ContainsCapture(child))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // A branch of plain units, optionally after ^ and before $.
+    private static bool TryLiteralEntry(OnigNode branch, out (string, byte) entry)
+    {
+        entry = default;
+        var items = Unwrap(branch).Kind == OnigNodeKind.Sequence ? Unwrap(branch).Children : [Unwrap(branch)];
+        byte anchors = 0;
+        var from = 0;
+        var to = items.Count;
+        if (to > 0 && items[0].Kind == OnigNodeKind.Anchor && (OnigAnchor)items[0].Value == OnigAnchor.LineStart)
+        {
+            anchors |= OnigLiteralTable.LineStartBefore;
+            from = 1;
+        }
+
+        if (to > from && items[to - 1].Kind == OnigNodeKind.Anchor && (OnigAnchor)items[to - 1].Value == OnigAnchor.LineEnd)
+        {
+            anchors |= OnigLiteralTable.LineEndAfter;
+            to--;
+        }
+
+        var literal = new StringBuilder();
+        for (var i = from; i < to; i++)
+        {
+            if (!PlainLiteral(items[i], literal))
+            {
+                return false;
+            }
+        }
+
+        entry = (literal.ToString(), anchors);
+        return true;
     }
 
     private static OnigCharSet Single(int cp)
@@ -719,7 +1035,14 @@ internal sealed class OnigCompiler
         return false;
     }
 
-    internal static OnigStartBits Bits(OnigNode node)
+    // What a match of node can start with, for start filters and alternative skipping. A positive look-ahead
+    // constrains the unit at its position as its body does.
+    internal static OnigStartBits Bits(OnigNode node) => Bits(node, anchors: false);
+
+    // What may come where node starts, for follow sets: end anchors also constrain ($ needs a newline or the end).
+    internal static OnigStartBits FollowBits(OnigNode node) => Bits(node, anchors: true);
+
+    private static OnigStartBits Bits(OnigNode node, bool anchors)
     {
         switch (node.Kind)
         {
@@ -744,42 +1067,68 @@ internal sealed class OnigCompiler
             case OnigNodeKind.AnyChar:
                 return node.Flag ? new OnigStartBits(ulong.MaxValue, ulong.MaxValue, true, false)
                     : new OnigStartBits(ulong.MaxValue & ~(1UL << '\n'), ulong.MaxValue, true, false);
+            case OnigNodeKind.Anchor when anchors:
+                return (OnigAnchor)node.Value switch
+                {
+                    OnigAnchor.LineEnd or OnigAnchor.SemiEnd => new OnigStartBits(1UL << '\n', 0, false, false, true),
+                    OnigAnchor.BufferEnd => new OnigStartBits(0, 0, false, false, true),
+                    _ => OnigStartBits.EmptyOnly,
+                };
+            case OnigNodeKind.Look when node.Value == 0 && !node.Flag:
+                {
+                    var b = Bits(node.Child, anchors);
+                    return b.Empty ? OnigStartBits.EmptyOnly : b;
+                }
             case OnigNodeKind.Anchor or OnigNodeKind.Keep or OnigNodeKind.Look or OnigNodeKind.Empty:
                 return OnigStartBits.EmptyOnly;
             case OnigNodeKind.Sequence:
-                {
-                    var result = OnigStartBits.EmptyOnly;
-                    foreach (var child in node.Children)
-                    {
-                        var b = Bits(child);
-                        result = new OnigStartBits(result.Low | b.Low, result.High | b.High, result.NonAscii || b.NonAscii, b.Empty);
-                        if (!b.Empty)
-                        {
-                            return result;
-                        }
-                    }
-                    return result with { Empty = true };
-                }
+                return SequenceBits(node.Children, 0, anchors);
             case OnigNodeKind.Alternation:
                 {
                     var result = OnigStartBits.None;
                     foreach (var child in node.Children)
                     {
-                        result = result.Union(Bits(child));
+                        result = result.Union(Bits(child, anchors));
                     }
                     return result;
                 }
             case OnigNodeKind.Repeat:
                 {
-                    var b = Bits(node.Child);
+                    var b = Bits(node.Child, anchors);
                     return node.Min == 0 || node.Max == 0 ? b with { Empty = true } : b;
                 }
             case OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic:
-                return Bits(node.Child);
+                return Bits(node.Child, anchors);
             default:
                 return OnigStartBits.Any;
         }
     }
+
+    private static OnigStartBits SequenceBits(List<OnigNode> children, int from, bool anchors)
+    {
+        var result = OnigStartBits.EmptyOnly;
+        for (var i = from; i < children.Count; i++)
+        {
+            var child = children[i];
+            if (child.Kind == OnigNodeKind.Look && child.Value == 0 && !child.Flag)
+            {
+                // The unit here must start both the look-ahead's body and the rest.
+                var look = Bits(child.Child, anchors);
+                var rest = SequenceBits(children, i + 1, anchors);
+                var here = look.Empty ? rest : rest.Empty ? look : look.Intersect(rest);
+                return Then(result, here);
+            }
+
+            result = Then(result, Bits(child, anchors));
+            if (!result.Empty)
+            {
+                return result;
+            }
+        }
+        return result;
+    }
+
+    private static bool Nullable(OnigNode node) => Lengths(node).Min == 0;
 
     private static OnigStartBits CodePointBits(int cp)
         => cp < 64 ? new(1UL << cp, 0, false, false) : cp < 128 ? new(0, 1UL << (cp - 64), false, false) : new(0, 0, true, false);
@@ -942,7 +1291,7 @@ internal sealed class OnigCompiler
                             continue;
                         }
 
-                        if (child.Kind is OnigNodeKind.Anchor or OnigNodeKind.Look)
+                        if (child.Kind is OnigNodeKind.Anchor || (child.Kind == OnigNodeKind.Look && (child.Value != 0 || child.Flag)))
                         {
                             continue;
                         }
@@ -957,12 +1306,102 @@ internal sealed class OnigCompiler
             case OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic:
                 Required(node.Child, ref best);
                 return;
+            // A positive look-ahead's text lies at or after the match start, so the subject must contain it too.
+            case OnigNodeKind.Look when node.Value == 0 && !node.Flag:
+                Required(node.Child, ref best);
+                return;
             case OnigNodeKind.Repeat when node.Min >= 1:
                 Required(node.Child, ref best);
                 return;
             default:
                 return;
         }
+    }
+
+    // A required-units set larger than this rarely rejects a subject, so it is not worth a scan.
+    private const int MaxRequiredCost = 24;
+
+    private static int Cost(OnigStartBits units)
+        => System.Numerics.BitOperations.PopCount(units.Low) + System.Numerics.BitOperations.PopCount(units.High) + (units.NonAscii ? 64 : 0);
+
+    // Units of which every match of node contains one, in the text it consumes or looks ahead at; null when none is
+    // known. Alternatives unite their branches' sets; a sequence keeps its most selective child; a literal offers its
+    // rarest unit.
+    internal static OnigStartBits? RequiredUnits(OnigNode node)
+    {
+        switch (node.Kind)
+        {
+            case OnigNodeKind.Char:
+                return Bits(node);
+            case OnigNodeKind.Set:
+                return Bits(node);
+            case OnigNodeKind.Sequence:
+                {
+                    OnigStartBits? best = null;
+                    var literal = new StringBuilder();
+                    foreach (var child in node.Children)
+                    {
+                        if (IsPlain(child, out var cp))
+                        {
+                            literal.Append(char.ConvertFromUtf32(cp));
+                            continue;
+                        }
+
+                        best = Better(best, RarestUnit(literal));
+                        literal.Clear();
+                        best = Better(best, RequiredUnits(child));
+                    }
+                    return Better(best, RarestUnit(literal));
+                }
+            case OnigNodeKind.Alternation:
+                {
+                    var result = OnigStartBits.None;
+                    foreach (var child in node.Children)
+                    {
+                        if (RequiredUnits(child) is not { } units)
+                        {
+                            return null;
+                        }
+
+                        result = result.Union(units);
+                    }
+                    return result;
+                }
+            case OnigNodeKind.Repeat when node.Min >= 1:
+                return RequiredUnits(node.Child);
+            case OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic:
+                return RequiredUnits(node.Child);
+            case OnigNodeKind.Look when node.Value == 0 && !node.Flag:
+                return RequiredUnits(node.Child);
+            default:
+                return null;
+        }
+    }
+
+    private static OnigStartBits? Better(OnigStartBits? a, OnigStartBits? b)
+        => a is null ? b : b is null ? a : Cost(b.Value) < Cost(a.Value) ? b : a;
+
+    // The unit of a literal least likely to occur in text: punctuation first, then digits and capitals, then the
+    // letters least frequent in code.
+    private static OnigStartBits? RarestUnit(StringBuilder literal)
+    {
+        if (literal.Length == 0)
+        {
+            return null;
+        }
+
+        const string common = "etaoinsrlcdumhpfgbyw_vkxjqz";
+        var best = literal[0];
+        var bestRank = int.MaxValue;
+        foreach (var c in literal.ToString())
+        {
+            var rank = c >= 128 ? 0 : char.IsAsciiLetterLower(c) ? 100 - common.IndexOf(c) : char.IsAsciiLetterUpper(c) || char.IsAsciiDigit(c) ? 20 : c == ' ' ? 200 : 1;
+            if (rank < bestRank)
+            {
+                (best, bestRank) = (c, rank);
+            }
+        }
+        return CodePointBits(best);
     }
 
     private static void Keep(string candidate, ref string? best)

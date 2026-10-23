@@ -697,7 +697,7 @@ internal sealed class OnigParser
         {
             case 'w' or 'W' or 's' or 'S' or 'd' or 'D' or 'h' or 'H':
                 return SetNode(TypeSet(c, options), start);
-            case 'p' or 'P':
+            case 'p' or 'P' when Peek() == '{':
                 return SetNode(ParseProperty(c == 'P', start, options), start);
             case 'b':
                 return Anchor((options & OnigInlineOptions.AsciiWord) != 0 ? OnigAnchor.AsciiWordBoundary : OnigAnchor.WordBoundary, start);
@@ -1269,7 +1269,7 @@ internal sealed class OnigParser
                 _pos += 2;
                 builder.Add(TypeSet(c, options));
                 return false;
-            case 'p' or 'P':
+            case 'p' or 'P' when Peek(2) == '{':
                 _pos += 2;
                 builder.Add(ParseProperty(c == 'P', start, options));
                 return false;

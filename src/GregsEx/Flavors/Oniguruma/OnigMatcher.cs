@@ -11,7 +11,7 @@ internal sealed class OnigMatcher
 {
     private const int FrameWidth = 5;
     // Frame kinds; barriers last.
-    private const int Choice = 0, RunBackUnit = 1, RunBackCodePoint = 2, LazyRun = 3, BehindNext = 4,
+    private const int Choice = 0, RunBackUnit = 1, RunBackCodePoint = 2, LazyRun = 3, BehindNext = 4, AbsentBack = 5,
         BarrierAtomic = 10, BarrierLook = 11, BarrierNotLook = 12, BarrierBehind = 13, BarrierNotBehind = 14,
         BarrierCond = 15;
 
@@ -24,6 +24,9 @@ internal sealed class OnigMatcher
     private long _maxBytes = 64L << 20;
 
     internal long LastWork { get; private set; }
+
+    // Where the leading run of the last attempt ended (OnigProgram.LeadingRun), or -1.
+    private int _leadingEnd;
 
     internal void SetLimits(long maxWork, long maxBytes)
     {
@@ -50,6 +53,12 @@ internal sealed class OnigMatcher
         }
 
         if (program.Required is { } required && input[startAt..].IndexOf(required, StringComparison.Ordinal) < 0)
+        {
+            return RegexSearchStatus.NoMatch;
+        }
+
+        if (program.RequiredUnits is { } units ? input[startAt..].IndexOfAny(units) < 0
+            : program.NotRequiredAscii is { } notUnits && input[startAt..].IndexOfAnyExcept(notUnits) < 0)
         {
             return RegexSearchStatus.NoMatch;
         }
@@ -89,10 +98,34 @@ internal sealed class OnigMatcher
         var prefix = program.Prefix;
         var first = program.FirstUnits;
         var notFirst = program.NotFirstAscii;
+        var preceded = program.PrecededBy;
+        var bits = program.StartBits;
+        var atEnd = bits.End;
         var pos = startAt;
         while (pos <= last)
         {
-            if (prefix is not null)
+            if (preceded is not null)
+            {
+                // The units that must precede a start drive the scan; each candidate then checks its own unit.
+                if (!(pos == 0 ? program.PrecededAtStart : preceded.Contains(input[pos - 1])))
+                {
+                    var from = Math.Max(pos - 1, 0);
+                    var i = input[from..(last < end ? last : end)].IndexOfAny(preceded);
+                    if (i < 0)
+                    {
+                        break;
+                    }
+
+                    pos = from + i + 1;
+                }
+
+                if (!bits.CanStartWith(pos < end ? input[pos] : -1) || (prefix is not null && !input[pos..].StartsWith(prefix)))
+                {
+                    pos++;
+                    continue;
+                }
+            }
+            else if (prefix is not null)
             {
                 var i = input[pos..].IndexOf(prefix, StringComparison.Ordinal);
                 if (i < 0 || (pos += i) > last)
@@ -100,34 +133,34 @@ internal sealed class OnigMatcher
                     break;
                 }
             }
-            else if (first is not null)
+            else if (first is not null || notFirst is not null)
             {
-                var i = input[pos..(last < end ? last + 1 : end)].IndexOfAny(first);
+                var window = input[pos..(last < end ? last + 1 : end)];
+                var i = first is not null ? window.IndexOfAny(first) : window.IndexOfAnyExcept(notFirst!);
                 if (i < 0)
                 {
-                    break;
-                }
+                    // Only the end of the input is left, where an end anchor can still match.
+                    if (!atEnd || last < end || pos > end)
+                    {
+                        break;
+                    }
 
-                pos += i;
-            }
-            else if (notFirst is not null)
-            {
-                var i = input[pos..(last < end ? last + 1 : end)].IndexOfAnyExcept(notFirst);
-                if (i < 0)
+                    pos = end;
+                }
+                else
                 {
-                    break;
+                    pos += i;
                 }
-
-                pos += i;
             }
 
+            _leadingEnd = -1;
             var status = Attempt(program, input, pos, startAt, captures);
             if (status != RegexSearchStatus.NoMatch)
             {
                 return status;
             }
 
-            pos++;
+            pos = _leadingEnd > pos ? _leadingEnd + 1 : pos + 1;
             if (pos < end && char.IsLowSurrogate(input[pos]) && char.IsHighSurrogate(input[pos - 1]))
             {
                 pos++;
@@ -298,10 +331,13 @@ internal sealed class OnigMatcher
         var groups = program.GroupCount;
         var openBase = program.OpenBase;
         var reset = program.FirstBank;
-        for (var i = 0; i < 3 * groups + 1; i++)
+        // Only ends mark participation: starts and open starts are written before they are read.
+        for (var g = 1; g < groups; g++)
         {
-            regs[i] = -1;
+            regs[2 * g + 1] = -1;
         }
+
+        regs[program.KeepRegister] = -1;
 
         regs[program.DepthRegister] = 0;
         regs[program.BankRegister] = program.FirstBank;
@@ -476,13 +512,17 @@ internal sealed class OnigMatcher
                                 n = span.Length;
                             }
 
+                            minPos = runStart + min;
+                            pos += n;
+                            if (pc == program.LeadingRun)
+                            {
+                                _leadingEnd = pos;
+                            }
+
                             if (n < min)
                             {
                                 goto Fail;
                             }
-
-                            minPos = runStart + min;
-                            pos += n;
                         }
                         else
                         {
@@ -503,18 +543,42 @@ internal sealed class OnigMatcher
                                     minPos = pos;
                                 }
                             }
+                            if (pc == program.LeadingRun)
+                            {
+                                _leadingEnd = pos;
+                            }
+
                             if (count < min)
                             {
                                 goto Fail;
                             }
                         }
 
+                        pc += 7;
                         if (mode == OnigRepeatMode.Greedy && pos > minPos)
                         {
-                            Push(ref sp, unitItems ? RunBackUnit : RunBackCodePoint, pc + 7, pos, minPos, up);
+                            var follow = code[pc - 1];
+                            if (follow >= 0)
+                            {
+                                // Give units back up front until what follows can start here.
+                                var bits = program.Bits[follow];
+                                while (pos > minPos && !bits.CanStartWith(pos < end ? input[pos] : -1))
+                                {
+                                    pos = StepBack(input, pos, unitItems, minPos);
+                                }
+
+                                if (!bits.CanStartWith(pos < end ? input[pos] : -1))
+                                {
+                                    goto Fail;
+                                }
+                            }
+
+                            if (pos > minPos)
+                            {
+                                Push(ref sp, unitItems ? RunBackUnit : RunBackCodePoint, pc, pos, minPos, up);
+                            }
                         }
 
-                        pc += 7;
                         continue;
                     }
                 case Op.SaveOpen:
@@ -670,19 +734,22 @@ internal sealed class OnigMatcher
                 case Op.AssertSet:
                     {
                         var set = program.Sets[code[pc + 3]];
+                        var edges = code[pc + 4];
                         bool ok;
                         if (code[pc + 2] != 0)
                         {
-                            ok = pos > 0 && set.Contains(CodePointBefore(input, pos));
+                            ok = pos > 0
+                                ? set.Contains(CodePointBefore(input, pos)) || ((edges & 2) != 0 && pos < end && input[pos - 1] == '\n')
+                                : (edges & 1) != 0;
                         }
                         else
                         {
-                            ok = pos < end && set.Contains(CodePointAt(input, pos, out _));
+                            ok = pos < end ? set.Contains(CodePointAt(input, pos, out _)) : (edges & 1) != 0;
                         }
 
                         if (ok == (code[pc + 1] == 0))
                         {
-                            pc += 4;
+                            pc += 5;
                             continue;
                         }
                         goto Fail;
@@ -700,6 +767,13 @@ internal sealed class OnigMatcher
                         }
                         goto Fail;
                     }
+                case Op.AssertLiterals:
+                    if (program.Tables[code[pc + 3]].Matches(input, pos, code[pc + 2] != 0) == (code[pc + 1] == 0))
+                    {
+                        pc += 4;
+                        continue;
+                    }
+                    goto Fail;
                 case Op.Backref:
                     {
                         var ignoreCase = code[pc + 1] != 0;
@@ -757,7 +831,7 @@ internal sealed class OnigMatcher
                         var limit = q < 0 ? end : pos + q + literal.Length - 1;
                         if (limit > pos)
                         {
-                            Push(ref sp, RunBackUnit, pc + 3, limit, pos, up);
+                            Push(ref sp, AbsentBack, pc + 3, limit, pos, up);
                         }
 
                         pos = limit;
@@ -824,15 +898,27 @@ internal sealed class OnigMatcher
                         break;
                     case RunBackUnit:
                     case RunBackCodePoint:
+                    case AbsentBack:
                         {
-                            var p = stack[sp + 2] - 1;
+                            var unit = stack[sp] != RunBackCodePoint;
                             var minPos = stack[sp + 3];
-                            if (stack[sp] == RunBackCodePoint && p > minPos && char.IsLowSurrogate(input[p]) && char.IsHighSurrogate(input[p - 1]))
+                            pc = stack[sp + 1];
+                            var p = StepBack(input, stack[sp + 2], unit, minPos);
+                            var follow = stack[sp] == AbsentBack ? -1 : code[pc - 1];
+                            if (follow >= 0)
                             {
-                                p--;
+                                var bits = program.Bits[follow];
+                                while (p > minPos && !bits.CanStartWith(input[p]))
+                                {
+                                    p = StepBack(input, p, unit, minPos);
+                                }
+
+                                if (!bits.CanStartWith(input[p]))
+                                {
+                                    continue;
+                                }
                             }
 
-                            pc = stack[sp + 1];
                             if (p > minPos)
                             {
                                 stack[sp + 2] = p;
@@ -890,6 +976,19 @@ internal sealed class OnigMatcher
                 break;
             }
         }
+    }
+
+    // One item back from pos in a run: a unit, or a code point when items may be surrogate pairs.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static int StepBack(ReadOnlySpan<char> input, int pos, bool unit, int minPos)
+    {
+        pos--;
+        if (!unit && pos > minPos && char.IsLowSurrogate(input[pos]) && char.IsHighSurrogate(input[pos - 1]))
+        {
+            pos--;
+        }
+
+        return pos;
     }
 
     // The length of input at pos matching the capture [start, end), or -1.
