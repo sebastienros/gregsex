@@ -4,6 +4,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" />
+    <!-- Native Oniguruma, the baseline of Oniguruma/TextMateScannerBenchmarks. -->
+    <PackageReference Include="Onigwrap" />
     <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" />
     <ProjectReference Include="../../src/GregsEx.Generator/GregsEx.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>

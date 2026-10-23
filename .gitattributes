@@ -18,6 +18,9 @@
 /src/GregsEx/Contracts/Posix/*.cs text eol=lf
 /src/GregsEx/Public/Posix/*.cs text eol=lf
 /test/corpora/posix/** text=auto eol=lf
+/test/corpora/oniguruma/** text=auto eol=lf
+/tools/oracles/oniguruma/** text=auto eol=lf
+/src/GregsEx/Flavors/Oniguruma/Tables/*.g.cs text eol=lf
 /tools/oracles/posix/** text=auto eol=lf
 /test/corpora/ecmascript/*.json text eol=lf
 /test/corpora/ecmascript/README.md text eol=lf

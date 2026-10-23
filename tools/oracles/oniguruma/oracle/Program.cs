@@ -14,15 +14,44 @@ if (args.Length != 3)
     return 2;
 }
 
-var input = JsonNode.Parse(File.ReadAllText(args[1]))!;
+var input = JsonNode.Parse(ReadText(args[1]))!;
 JsonNode output = args[0] switch
 {
     "cases" => Cases(input.AsArray()),
     "trace" => Trace(input.AsObject()),
     _ => throw new ArgumentException(args[0]),
 };
-File.WriteAllText(args[2], output.ToJsonString(new JsonSerializerOptions { WriteIndented = false }));
+WriteText(args[2], output.ToJsonString(new JsonSerializerOptions { WriteIndented = false }));
 return 0;
+
+// .gz paths are gzip-compressed; a written gzip header carries no timestamp, so outputs are reproducible.
+static string ReadText(string path)
+{
+    using var file = File.OpenRead(path);
+    using var stream = path.EndsWith(".gz", StringComparison.Ordinal) ? new System.IO.Compression.GZipStream(file, System.IO.Compression.CompressionMode.Decompress) : (Stream)file;
+    using var reader = new StreamReader(stream);
+    return reader.ReadToEnd();
+}
+
+static void WriteText(string path, string text)
+{
+    if (!path.EndsWith(".gz", StringComparison.Ordinal))
+    {
+        File.WriteAllText(path, text);
+        return;
+    }
+
+    using (var file = File.Create(path))
+    using (var gzip = new System.IO.Compression.GZipStream(file, System.IO.Compression.CompressionLevel.SmallestSize))
+    using (var writer = new StreamWriter(gzip))
+    {
+        writer.Write(text);
+    }
+
+    using var patch = File.OpenWrite(path);
+    patch.Seek(4, SeekOrigin.Begin);
+    patch.Write(new byte[4]);
+}
 
 // Per case: null when the pattern does not compile, else per subject and start: null (no match), an error code, or
 // the capture pairs (start, end; -1 when a group did not participate).

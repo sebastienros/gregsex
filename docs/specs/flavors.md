@@ -4,7 +4,7 @@ These contracts specify observable regex behavior and compatibility boundaries, 
 
 ## Profiles and claims
 
-Every compiled pattern must carry a versioned profile, input representation, Unicode/table revision, syntax options, match-selection policy and capability record. A flavor enum alone cannot identify a reproducible contract. ECMAScript is frozen in [ECMAScript contract](ecmascript.md), XML in [XML contract](xml.md); POSIX is frozen in [POSIX contract](posix.md); PCRE2 is frozen in [PCRE2 contract](pcre2.md). Pins are independent of whatever version an installed oracle happens to expose.
+Every compiled pattern must carry a versioned profile, input representation, Unicode/table revision, syntax options, match-selection policy and capability record. A flavor enum alone cannot identify a reproducible contract. ECMAScript is frozen in [ECMAScript contract](ecmascript.md), XML in [XML contract](xml.md); POSIX is frozen in [POSIX contract](posix.md); PCRE2 is frozen in [PCRE2 contract](pcre2.md); Oniguruma is frozen in [Oniguruma contract](oniguruma.md). Pins are independent of whatever version an installed oracle happens to expose.
 
 | Profile | Proposed reference | Admission and completion boundary |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ Every compiled pattern must carry a versioned profile, input representation, Uni
 | `Xsd11` | XSD 1.1 Part 2, Recommendation 5 April 2012, Appendix G | complete regex language membership on a supplied lexical value; XML1.0Fifth with selected Unicode16 (default) or17, strict scalar UTF-16/UTF-8 subjects. Does not claim a schema validator. |
 | `XPath31` / `XQuery31` | F&O 3.1, Recommendation 21 March 2017, §5.6 | shared regex semantics with selected Unicode16 (default) or17, plus all forms of `matches`, `replace`, `tokenize`, and immutable typed `analyze-string`. Does not claim an XPath/XQuery evaluator. |
 | `PosixBre2018-CByte` / `PosixEre2018-CByte` | POSIX Issue 7, 2018 edition, XBD §9/7.2/7.3 and regex interfaces | complete defined BRE/ERE in named managed C/POSIX byte-only profiles. Other locales/Issue 8 explicitly excluded; high-byte/strict/empty-pattern dispositions labelled. See POSIX contract. |
+| `Oniguruma-6.9.10-OnigurumaSyntax-Utf16-v1` | Oniguruma tag v6.9.10, commit `4ef89209`, `ONIG_SYNTAX_ONIGURUMA`, UTF-16LE | complete syntax and matching of TextMate grammars: Ruby syntax, possessive/atomic groups, variable-length look-behind, subexpression calls, absent repeater, Oniguruma's Unicode 16.0 tables and multi-code-point folds; TextMate multi-pattern scanner. Callouts, absent expressions/stoppers, level backreferences and whole options are unsupported. See Oniguruma contract. |
 | `Pcre2-10.46-ManagedStandard8_16-v1` | PCRE2 release10.46, commit`b2bd4254`, standard interpreter | complete defined8/16 language/matching, all controls/advanced/callback/partial/table/iteration/substitution obligations; typed native results plus explicit generic projection. NativeABI/JIT/DFA32/EBCDIC boundaries in PCRE2 contract. |
 
 **FL-COMMON-001:** An unsupported valid feature produces a structured unsupported-capability diagnostic identifying the profile, feature, source span and capability. An invalid expression produces a syntax/option diagnostic. Never silently change dialect, normalize text, switch to `System.Text.RegularExpressions`, or return no-match for either failure.
@@ -78,6 +79,23 @@ Source facts: PCRE2 has 8/16/32-bit code-unit libraries; UTF and UCP are separat
 - **FL-PCRE-004:** Preserve callout behavior: the managed manual/automatic callback/inspection adapter is mandatory. Until implemented, patterns needing callouts fail with unsupported capability. An explicit restricted profile may prohibit callouts, but full PCRE2 matching parity requires these capabilities. Callout count/order and auto-callouts need separate observable tests because optimizations affect them.
 - **FL-PCRE-005:** Model compile nesting/pattern size, maximum variable lookbehind, match work, heap/depth and cancellation separately. Map native error identities/categories without promising byte-identical human messages. Pattern directives may reduce caller ceilings. Exhaustion never becomes a mismatch. Configuration inventory must include all relevant compile/match extras, partial matching and start/end anchoring modes, including options introduced by the pinned release.
 - **FL-PCRE-006:** Explicit host boundaries: C ABI, native serialized-code bytes, native JIT stack/control APIs, EBCDIC builds, 32-bit inputs and `pcre2_dfa_match` are excluded from the named managed8/16 standard-matcher profile. Record them in the capability manifest with future parity/adapter decisions . Managed compiled execution is GregsEx's backend, not a claim to replicate native JIT artifacts. These boundaries must appear beside compatibility claims.
+
+## Oniguruma
+
+The [Oniguruma contract](oniguruma.md) specifies OG-001 through OG-007: syntax inventory, rejections, unsupported
+constructs, semantics, limits, implementation and conformance evidence.
+
+Source facts: TextMate grammars are written for Oniguruma's default syntax (doc/RE, `ONIG_SYNTAX_ONIGURUMA`) and run
+with `ONIG_OPTION_CAPTURE_GROUP` over UTF-16 lines by vscode-oniguruma and Onigwrap; Onigwrap rewrites `\xHH` to
+`\x{HH}` before compiling, since UTF-16 Oniguruma reads `\xHH` as an encoded byte.
+
+- **FL-ONIG-001:** Pin the Oniguruma release, syntax, encoding and options in the profile; take Unicode data from
+  that release's generated tables, not from another flavor.
+- **FL-ONIG-002:** Agree with the pinned native engine on pattern validity and on every capture of every search,
+  including quirks that grammars observe (nested negated classes holding U+0000, look-behind right range, empty-loop
+  capture checks, multi-code-point folds), against retained native observations.
+- **FL-ONIG-003:** Offer TextMate's scanner selection and per-pattern result cache with allocation-free warm searches,
+  since grammar tokenization searches many patterns from each position.
 
 ## Representative acceptance vectors
 

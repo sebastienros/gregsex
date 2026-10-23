@@ -55,6 +55,7 @@ dotnet add package GregsEx --prerelease
 | `XPathProfile` | XPath/XQuery F&O 3.1 substring matching, captures, backreferences, `s/m/i/x/q`, replacement, tokenization, analysis | Strict XML UTF-16 or UTF-8; typed functions use UTF-16 strings |
 | `PosixProfile` | Named Issue 7/2018 BRE/ERE C-byte profiles; leftmost-longest selection and POSIX submatch precedence | Bytes 1-255; `C`/`POSIX` locales only; no NUL |
 | `Pcre2Profile` | Named PCRE2 10.46 managed standard8/16 profile; recursion, subroutines, assertions, verbs, graphemes, callouts, partial matching | Raw 8-bit, UTF-8, raw 16-bit, or UTF-16 |
+| `OnigurumaProfile` | Oniguruma 6.9.10 default (Ruby) syntax, as TextMate grammars use it: possessive/atomic groups, variable-length look-behind, subexpression calls, absent repeater; a TextMate multi-pattern scanner | UTF-16 (Oniguruma's UTF-16LE decoding) |
 
 These are separate languages, not interchangeable option sets. Unsupported
 syntax or representations produce diagnostics; GregsEx never silently switches
@@ -97,7 +98,7 @@ operations, not an XML parser, schema validator, or query evaluator.
 
 The detailed contracts for [RegularCore](docs/specs/regular-core.md),
 [ECMAScript](docs/specs/ecmascript.md), [XML](docs/specs/xml.md),
-[POSIX](docs/specs/posix.md), and [PCRE2](docs/specs/pcre2.md)
+[POSIX](docs/specs/posix.md), [PCRE2](docs/specs/pcre2.md), and [Oniguruma](docs/specs/oniguruma.md)
 document exact admission rules and compatibility boundaries. XML behavior
 includes documented GregsEx interpretations of specification ambiguities;
 these are not W3C-approved errata.

@@ -43,6 +43,8 @@
     <Compile Remove="$(Engine)Public\RegexPattern.cs;$(Engine)Public\Compilation\RegexPattern.Compile.cs;$(Engine)Public\ExecutionModes\ExecutionModePolicy.cs" />
     <Compile Remove="$(Engine)Execution\**;$(Engine)Runtime\**;$(Engine)Flavors\*\Runtime\**;$(Engine)Flavors\*\Integration\**" />
     <Compile Remove="$(Engine)Flavors\XmlIntegration\**;$(Engine)Flavors\XPath\Execution\**;$(Engine)Flavors\XPath\Host\**" />
+    <!-- The Oniguruma flavor has no generated patterns; RegexProfiles only needs its profile type. -->
+    <Compile Remove="$(Engine)Flavors\Oniguruma\**;$(Engine)Public\Oniguruma\OnigurumaPattern.cs;$(Engine)Public\Oniguruma\OnigurumaWorkspace.cs;$(Engine)Public\Oniguruma\OnigurumaScanner.cs" />
     <Compile Remove="$(Engine)Text\ByteTextReader.cs;$(Engine)Text\CharTextReader.cs;$(Engine)Flavors\XmlShared\XmlTextReaders.cs;$(Engine)Flavors\Xsd\XsdExecutor.cs" />
     <!-- The analysis-only subset of the excluded executor folders: kernel plans, fast-path classifiers, character tables. -->
     <Compile Include="$(Engine)Execution\Compiled\*Plan.cs;$(Engine)Execution\Compiled\SourcePlanner.cs" />
