@@ -1,179 +1,1680 @@
 [
-  { "pattern": "abc", "subjects": ["xxabcxx", "ab", ""] },
-  { "pattern": "a|ab|abc", "subjects": ["abc", "xab"] },
-  { "pattern": "(a)|(b)", "subjects": ["b", "ab"] },
-  { "pattern": "(?:a(b)?)+", "subjects": ["abaab", "aaa"] },
-  { "pattern": "(a*)*b", "subjects": ["aaab", "b", "aac"] },
-  { "pattern": "(a|)*b", "subjects": ["aab", "b"] },
-  { "pattern": "(?:()|())*\\1\\2", "subjects": [""] },
-  { "pattern": "(?:\\1a|())*", "subjects": ["a", "aaa"] },
-  { "pattern": "x*", "subjects": ["", "xx", "axx"] },
-  { "pattern": "a{2}", "subjects": ["a", "aaa"] },
-  { "pattern": "a{2,}", "subjects": ["a", "aaaa"] },
-  { "pattern": "a{,2}", "subjects": ["aaa", "b"] },
-  { "pattern": "a{2,3}?", "subjects": ["aaaa"] },
-  { "pattern": "a{2}?", "subjects": ["aaa", "a"] },
-  { "pattern": "a{3,2}", "subjects": ["aaaa", "aa"] },
-  { "pattern": "a{3,2}a", "subjects": ["aaaa", "aaa"] },
-  { "pattern": "a{,}", "subjects": ["a{,}", "a"] },
-  { "pattern": "a{1", "subjects": ["a{1", "a"] },
-  { "pattern": "x{2}{3}", "subjects": ["xxxxxx", "xxxxx"] },
-  { "pattern": "a*+a", "subjects": ["aaa"] },
-  { "pattern": "a++b", "subjects": ["aab"] },
-  { "pattern": "a?+a", "subjects": ["a", "aa"] },
-  { "pattern": "(?>a+)a", "subjects": ["aaa"] },
-  { "pattern": "(?>a|ab)c", "subjects": ["abc", "ac"] },
-  { "pattern": "a*?b", "subjects": ["aab"] },
-  { "pattern": "(a+?)(a*)", "subjects": ["aaa"] },
-  { "pattern": "[^\"\\\\]*+\"", "subjects": ["ab\\\"cd\"", "abc"] },
-  { "pattern": "\\w+(?=\\()", "subjects": ["foo(x)", "foo bar("] },
-  { "pattern": "(?<=\\.)\\w+", "subjects": ["a.bc", "abc"], "starts": [0, 2, 3] },
-  { "pattern": "(?<!\\.)\\b\\w+", "subjects": ["a.bc d"] },
-  { "pattern": "(?<=ab|c)d", "subjects": ["abd", "cd", "bd"] },
-  { "pattern": "(?<=a|bc|^def)x", "subjects": ["defx", "bcx", "zax", "zx"] },
-  { "pattern": "(?<!a|bc)x", "subjects": ["ax", "bcx", "cx"] },
-  { "pattern": "(?<=a(b)?)c", "subjects": ["abc", "ac"] },
-  { "pattern": "(?<=^|[\\t &;])(?:do|done)(?=[\\t &;]|$)", "subjects": ["do", "x done;", "done\n", "redo"] },
-  { "pattern": "(?<=^[\\t ]*)#", "subjects": ["  # x", "a # x"] },
-  { "pattern": "(?=a)|b", "subjects": ["xa", "xb"] },
-  { "pattern": "(?!a)\\w", "subjects": ["ab"] },
-  { "pattern": "(?=(a+))a*b\\1", "subjects": ["baaabac"] },
-  { "pattern": "^a", "subjects": ["a", "b\na", "\n"] },
-  { "pattern": "a$", "subjects": ["a", "a\nb", "a\n", "ab"] },
-  { "pattern": "$", "subjects": ["", "\n", "a\n"] },
-  { "pattern": "^", "subjects": ["", "\n", "a\n"] },
-  { "pattern": "^$", "subjects": ["", "\n", "a\n\n", "a\n"] },
-  { "pattern": "\\Aa", "subjects": ["a", "ba"], "starts": [0, 1] },
-  { "pattern": "a\\z", "subjects": ["a", "a\n"] },
-  { "pattern": "a\\Z", "subjects": ["a", "a\n", "a\n\n"] },
-  { "pattern": "\\Ga", "subjects": ["aaba"], "starts": [0, 1, 2, 3] },
-  { "pattern": "\\G(?:a|b)+", "subjects": ["xab"], "starts": [0, 1] },
-  { "pattern": "(?:\\G|^)x", "subjects": ["xx yx"], "starts": [0, 1, 2, 3] },
-  { "pattern": "foo\\Kbar", "subjects": ["foobar", "xfoobar"] },
-  { "pattern": "\\bfoo\\b", "subjects": ["foo", "afoo", "foo_", "foo.", "é foo"] },
-  { "pattern": "\\Bo\\B", "subjects": ["foo", "o"] },
-  { "pattern": "\\w+", "subjects": ["héllo wörld", "日本語 x", "a_1"] },
-  { "pattern": "\\d+", "subjects": ["x١٢٣", "42"] },
-  { "pattern": "\\s+", "subjects": ["a 　b", "a\tb"] },
-  { "pattern": "\\h+", "subjects": ["xyz09afAFg", "  "] },
-  { "pattern": "\\H+", "subjects": ["09xyz"] },
-  { "pattern": "[\\h_]+", "subjects": ["ag_f"] },
-  { "pattern": ".+", "subjects": ["ab\ncd"] },
-  { "pattern": "(?m).+", "subjects": ["ab\ncd"] },
-  { "pattern": "\\N+", "subjects": ["ab\ncd"] },
-  { "pattern": "\\O+", "subjects": ["ab\ncd"] },
-  { "pattern": "\\R", "subjects": ["a\r\nb", "a\nb", "a b"] },
-  { "pattern": "\\R\\n", "subjects": ["\r\n\n", "\r\n"] },
-  { "pattern": "[[:alpha:]]+", "subjects": ["abc123", "été"] },
-  { "pattern": "[[:^alpha:]]+", "subjects": ["abc123"] },
-  { "pattern": "[[:alnum:]_$]+", "subjects": ["$foo_1 bar"] },
-  { "pattern": "[[:punct:]]+", "subjects": ["a$+<=>^`|~!b"] },
-  { "pattern": "[[:space:]]+", "subjects": ["a \t\n b"] },
-  { "pattern": "[[:upper:]][[:lower:]]+", "subjects": ["Hello ÉTÉ Été"] },
-  { "pattern": "[[:xdigit:]]+", "subjects": ["0x1fG"] },
-  { "pattern": "[[:word:]]+", "subjects": ["ab_9 x"] },
-  { "pattern": "[[:graph:]]+", "subjects": ["  a!b  "] },
-  { "pattern": "[[:cntrl:]]", "subjects": ["a\u0001", "a\u007f"] },
-  { "pattern": "\\p{L}+", "subjects": ["ab1", "αβγ"] },
-  { "pattern": "\\p{Lu}", "subjects": ["aBc"] },
-  { "pattern": "\\p{^Lu}+", "subjects": ["ABcd"] },
-  { "pattern": "\\P{L}+", "subjects": ["ab12cd"] },
-  { "pattern": "\\p{Greek}+", "subjects": ["abc αβγ"] },
-  { "pattern": "\\p{Alpha}+", "subjects": ["ab1"] },
-  { "pattern": "\\p{alpha}", "subjects": ["1a"] },
-  { "pattern": "\\p{White_Space}+", "subjects": ["a  b"] },
-  { "pattern": "\\p{Han}", "subjects": ["a中"] },
-  { "pattern": "\\p{In_Basic_Latin}+", "subjects": ["abc é"] },
-  { "pattern": "[\\p{Lu}\\d]+", "subjects": ["aB1c"] },
-  { "pattern": "[^\\p{L}]+", "subjects": ["ab 12 cd"] },
-  { "pattern": "\\p", "subjects": ["p", "\\p"] },
-  { "pattern": "[\\s\\d\\p]+", "subjects": ["ap 1 q"] },
-  { "pattern": "[a-z&&[^aeiou]]+", "subjects": ["hello"] },
-  { "pattern": "[a-w&&[^c-g]z]+", "subjects": ["abcdefghz"] },
-  { "pattern": "[[^b]]", "subjects": ["b", "a"] },
-  { "pattern": "[a[^\\x{00}-\\x{7F}]]", "subjects": [" ", "b", "é"] },
-  { "pattern": "[[^\\x{01}-\\x{7F}]]", "subjects": [" ", "é"] },
-  { "pattern": "(?i)[[^b]]", "subjects": ["b", "B"] },
-  { "pattern": "(?i)[a[^b]]", "subjects": ["B"] },
-  { "pattern": "(?i)[^b]", "subjects": ["B", "b", "c"] },
-  { "pattern": "(?i)[a-c]+", "subjects": ["ABCD"] },
-  { "pattern": "(?i)k", "subjects": ["K", "K"] },
-  { "pattern": "(?i)ſ", "subjects": ["s", "S"] },
-  { "pattern": "(?i)straße", "subjects": ["STRASSE", "Straße"] },
-  { "pattern": "(?i)\\p{Lu}", "subjects": ["a"] },
-  { "pattern": "(?i)(a)\\1", "subjects": ["aA", "Aa"] },
-  { "pattern": "ab(?i)c|d", "subjects": ["abC", "D", "abd"] },
-  { "pattern": "(?:(?i)a|b)c", "subjects": ["Bc", "Ac"] },
-  { "pattern": "a(?i:b)c", "subjects": ["aBc", "aBC"] },
-  { "pattern": "(?i)a(?-i)b", "subjects": ["Ab", "AB"] },
-  { "pattern": "(?x) a b # comment\n c", "subjects": ["abc", "a b c"] },
-  { "pattern": "(?x)[ ]a", "subjects": [" a", "a"] },
-  { "pattern": "(?W)\\w+", "subjects": ["héllo"] },
-  { "pattern": "(?D)\\d", "subjects": ["١1"] },
-  { "pattern": "(?S)\\s", "subjects": ["  "] },
-  { "pattern": "(?P)[[:alpha:]]+", "subjects": ["éab"] },
-  { "pattern": "(?<word>\\w+) \\k<word>", "subjects": ["hello hello", "a b"] },
-  { "pattern": "(?'w'\\w) \\k'w'", "subjects": ["a a"] },
-  { "pattern": "(?<n>a)|(?<n>b)\\k<n>", "subjects": ["bb", "a"] },
-  { "pattern": "(?<x>a)(?<x>b)?\\k<x>", "subjects": ["aba", "aa", "abb"] },
-  { "pattern": "(a)(?<n>b)(c)", "subjects": ["abc"] },
-  { "pattern": "(?<type-name>\\w+)", "subjects": ["ab c"] },
-  { "pattern": "(a)\\1", "subjects": ["aa", "ab"] },
-  { "pattern": "(a)|\\1b", "subjects": ["b"] },
-  { "pattern": "(a)(b)\\k<-1>", "subjects": ["abb"] },
-  { "pattern": "\\k<1>(a)", "subjects": ["aa"] },
-  { "pattern": "(a)\\12", "subjects": ["a\n", "a12"] },
-  { "pattern": "\\101", "subjects": ["A"] },
-  { "pattern": "\\0101", "subjects": ["\u00081"] },
-  { "pattern": "\\x41\\x{42}\\x{1F600}", "subjects": ["AB😀"] },
-  { "pattern": "\\x{41 42}", "subjects": ["AB"] },
-  { "pattern": "\\u0041", "subjects": ["A"] },
-  { "pattern": "\\o{101}", "subjects": ["A"] },
-  { "pattern": "\\cA\\C-b\\M-a", "subjects": ["\u0001\u0002á"] },
-  { "pattern": "\\t\\n\\r\\f\\v\\a\\e", "subjects": ["\t\n\r\f\u000b\u0007\u001b"] },
-  { "pattern": "[\\b]", "subjects": ["\b"] },
-  { "pattern": "\\y", "subjects": ["y"] },
-  { "pattern": "\\q\\%\\-", "subjects": ["q%-"] },
-  { "pattern": "[]a]", "subjects": ["]", "a"] },
-  { "pattern": "[a-]", "subjects": ["-"] },
-  { "pattern": "[-a]", "subjects": ["-"] },
-  { "pattern": "[\\w-z]", "subjects": ["-", "z"] },
-  { "pattern": "[a\\-z]", "subjects": ["-", "b"] },
-  { "pattern": "[\\x{1F600}-\\x{1F64F}]+", "subjects": ["a😀🙏b"] },
-  { "pattern": ".", "subjects": ["\ud83d\ude00", { "units": [56832] }, { "units": [55357] }, { "units": [97, 55357, 98] }] },
-  { "pattern": "\\w", "subjects": ["𐐀"] },
-  { "pattern": "(?<=😀)x", "subjects": ["😀x"] },
-  { "pattern": "(?#comment)a", "subjects": ["a"] },
-  { "pattern": "(?<name>a|b\\g<name>c)", "subjects": ["bbacc", "bac"] },
-  { "pattern": "\\A(?<a>|.|(?:(?<b>.)\\g<a>\\k<b>))\\z", "subjects": ["reer", "abcba", "abca"] },
-  { "pattern": "(?<p>\\((?:[^()]|\\g<p>)*\\))", "subjects": ["f(a(b)c)d", "((("] },
-  { "pattern": "(?<t>a){0}\\g<t>\\g<t>", "subjects": ["aa", "a"] },
-  { "pattern": "(?<id>[a-z]+)(?:\\.\\g<id>)*", "subjects": ["a.b.c x"] },
-  { "pattern": "(?<tl><\\s*(?:[^<>]|\\g<tl>)+>)", "subjects": ["List<Map<int, string>> x"] },
-  { "pattern": "\\g<0>?a", "subjects": ["aa"] },
-  { "pattern": "(a)?(?(1)b|c)", "subjects": ["ab", "c", "ac"] },
-  { "pattern": "(?<q>\")?\\w+(?(<q>)\")", "subjects": ["\"ab\"", "ab"] },
-  { "pattern": "(?(?=a)ab|cd)", "subjects": ["ab", "cd", "ad"] },
-  { "pattern": "(?~abc)", "subjects": ["abc", "aabcc", "xyz"] },
-  { "pattern": "/\\*(?~\\*/)\\*/", "subjects": ["/* a */ b */", "/* a"] },
-  { "pattern": "\\G(?=(?~\\*/)$)", "subjects": ["abc", "a */ b"] },
-  { "pattern": "(a+)+b", "subjects": ["aaaaaaaaaaaaaaaaaaaaaaaac"] },
-  { "pattern": "[\\t ]*+(?:\\b(function)\\b[\\t ]*+([^\\t\\n\\r \"'()=]+)(?:(\\()[\\t ]*+(\\)))?|([^\\t\\n\\r \"'()=]+)[\\t ]*+(\\()[\\t ]*+(\\)))", "subjects": ["  echo \"x\"", "function foo()", "bar ()", " f(x)"] },
-  { "pattern": "(?!^[\\t ]*+$)(?:(?<=(?:^until| until|\\tuntil|^while| while|\\twhile|^do| do|\\tdo)[\\t ]*+)|(?<=[\\t ]\\{))", "subjects": ["while x", "  do y", "x { z", ""] },
-  { "pattern": "(?=(?:[^-\\]!\"#%&'*,:>?@\\[`{|}\\s]|[-:?]\\S)([^:\\s]|:\\S|\\s+(?![#\\s]))*\\s*:(\\s|$))", "subjects": ["key: value", "a b c", "url: http://x"] },
-  { "pattern": "*", "subjects": ["*"] },
-  { "pattern": "a**", "subjects": ["aa"] },
-  { "pattern": "(?=a)*", "subjects": ["a"] },
-  { "pattern": "^*", "subjects": [""] },
-  { "pattern": "(a", "subjects": ["a"] },
-  { "pattern": "a)", "subjects": ["a"] },
-  { "pattern": "[a", "subjects": ["a"] },
-  { "pattern": "[z-a]", "subjects": ["a"] },
-  { "pattern": "\\k<nope>", "subjects": ["a"] },
-  { "pattern": "(a)\\2", "subjects": ["a"] },
-  { "pattern": "\\p{Nope}", "subjects": ["a"] },
-  { "pattern": "[[:nope:]]", "subjects": ["a"] },
-  { "pattern": "(?<1a>x)", "subjects": ["x"] },
-  { "pattern": "(?s)a", "subjects": ["a"] },
-  { "pattern": "\\x{110000}", "subjects": ["a"] }
+{
+"pattern": "abc",
+"subjects": [
+"xxabcxx",
+"ab",
+""
+]
+},
+{
+"pattern": "a|ab|abc",
+"subjects": [
+"abc",
+"xab"
+]
+},
+{
+"pattern": "(a)|(b)",
+"subjects": [
+"b",
+"ab"
+]
+},
+{
+"pattern": "(?:a(b)?)+",
+"subjects": [
+"abaab",
+"aaa"
+]
+},
+{
+"pattern": "(a*)*b",
+"subjects": [
+"aaab",
+"b",
+"aac"
+]
+},
+{
+"pattern": "(a|)*b",
+"subjects": [
+"aab",
+"b"
+]
+},
+{
+"pattern": "(?:()|())*\\1\\2",
+"subjects": [
+""
+]
+},
+{
+"pattern": "(?:\\1a|())*",
+"subjects": [
+"a",
+"aaa"
+]
+},
+{
+"pattern": "x*",
+"subjects": [
+"",
+"xx",
+"axx"
+]
+},
+{
+"pattern": "a{2}",
+"subjects": [
+"a",
+"aaa"
+]
+},
+{
+"pattern": "a{2,}",
+"subjects": [
+"a",
+"aaaa"
+]
+},
+{
+"pattern": "a{,2}",
+"subjects": [
+"aaa",
+"b"
+]
+},
+{
+"pattern": "a{2,3}?",
+"subjects": [
+"aaaa"
+]
+},
+{
+"pattern": "a{2}?",
+"subjects": [
+"aaa",
+"a"
+]
+},
+{
+"pattern": "a{3,2}",
+"subjects": [
+"aaaa",
+"aa"
+]
+},
+{
+"pattern": "a{3,2}a",
+"subjects": [
+"aaaa",
+"aaa"
+]
+},
+{
+"pattern": "a{,}",
+"subjects": [
+"a{,}",
+"a"
+]
+},
+{
+"pattern": "a{1",
+"subjects": [
+"a{1",
+"a"
+]
+},
+{
+"pattern": "x{2}{3}",
+"subjects": [
+"xxxxxx",
+"xxxxx"
+]
+},
+{
+"pattern": "a*+a",
+"subjects": [
+"aaa"
+]
+},
+{
+"pattern": "a++b",
+"subjects": [
+"aab"
+]
+},
+{
+"pattern": "a?+a",
+"subjects": [
+"a",
+"aa"
+]
+},
+{
+"pattern": "(?>a+)a",
+"subjects": [
+"aaa"
+]
+},
+{
+"pattern": "(?>a|ab)c",
+"subjects": [
+"abc",
+"ac"
+]
+},
+{
+"pattern": "a*?b",
+"subjects": [
+"aab"
+]
+},
+{
+"pattern": "(a+?)(a*)",
+"subjects": [
+"aaa"
+]
+},
+{
+"pattern": "[^\"\\\\]*+\"",
+"subjects": [
+"ab\\\"cd\"",
+"abc"
+]
+},
+{
+"pattern": "\\w+(?=\\()",
+"subjects": [
+"foo(x)",
+"foo bar("
+]
+},
+{
+"pattern": "(?<=\\.)\\w+",
+"subjects": [
+"a.bc",
+"abc"
+],
+"starts": [
+0,
+2,
+3
+]
+},
+{
+"pattern": "(?<!\\.)\\b\\w+",
+"subjects": [
+"a.bc d"
+]
+},
+{
+"pattern": "(?<=ab|c)d",
+"subjects": [
+"abd",
+"cd",
+"bd"
+]
+},
+{
+"pattern": "(?<=a|bc|^def)x",
+"subjects": [
+"defx",
+"bcx",
+"zax",
+"zx"
+]
+},
+{
+"pattern": "(?<!a|bc)x",
+"subjects": [
+"ax",
+"bcx",
+"cx"
+]
+},
+{
+"pattern": "(?<=a(b)?)c",
+"subjects": [
+"abc",
+"ac"
+]
+},
+{
+"pattern": "(?<=^|[\\t &;])(?:do|done)(?=[\\t &;]|$)",
+"subjects": [
+"do",
+"x done;",
+"done\n",
+"redo"
+]
+},
+{
+"pattern": "(?<=^[\\t ]*)#",
+"subjects": [
+"  # x",
+"a # x"
+]
+},
+{
+"pattern": "(?=a)|b",
+"subjects": [
+"xa",
+"xb"
+]
+},
+{
+"pattern": "(?!a)\\w",
+"subjects": [
+"ab"
+]
+},
+{
+"pattern": "(?=(a+))a*b\\1",
+"subjects": [
+"baaabac"
+]
+},
+{
+"pattern": "^a",
+"subjects": [
+"a",
+"b\na",
+"\n"
+]
+},
+{
+"pattern": "a$",
+"subjects": [
+"a",
+"a\nb",
+"a\n",
+"ab"
+]
+},
+{
+"pattern": "$",
+"subjects": [
+"",
+"\n",
+"a\n"
+]
+},
+{
+"pattern": "^",
+"subjects": [
+"",
+"\n",
+"a\n"
+]
+},
+{
+"pattern": "^$",
+"subjects": [
+"",
+"\n",
+"a\n\n",
+"a\n"
+]
+},
+{
+"pattern": "\\Aa",
+"subjects": [
+"a",
+"ba"
+],
+"starts": [
+0,
+1
+]
+},
+{
+"pattern": "a\\z",
+"subjects": [
+"a",
+"a\n"
+]
+},
+{
+"pattern": "a\\Z",
+"subjects": [
+"a",
+"a\n",
+"a\n\n"
+]
+},
+{
+"pattern": "\\Ga",
+"subjects": [
+"aaba"
+],
+"starts": [
+0,
+1,
+2,
+3
+]
+},
+{
+"pattern": "\\G(?:a|b)+",
+"subjects": [
+"xab"
+],
+"starts": [
+0,
+1
+]
+},
+{
+"pattern": "(?:\\G|^)x",
+"subjects": [
+"xx yx"
+],
+"starts": [
+0,
+1,
+2,
+3
+]
+},
+{
+"pattern": "foo\\Kbar",
+"subjects": [
+"foobar",
+"xfoobar"
+]
+},
+{
+"pattern": "\\bfoo\\b",
+"subjects": [
+"foo",
+"afoo",
+"foo_",
+"foo.",
+"é foo"
+]
+},
+{
+"pattern": "\\Bo\\B",
+"subjects": [
+"foo",
+"o"
+]
+},
+{
+"pattern": "\\w+",
+"subjects": [
+"héllo wörld",
+"日本語 x",
+"a_1"
+]
+},
+{
+"pattern": "\\d+",
+"subjects": [
+"x١٢٣",
+"42"
+]
+},
+{
+"pattern": "\\s+",
+"subjects": [
+"a 　b",
+"a\tb"
+]
+},
+{
+"pattern": "\\h+",
+"subjects": [
+"xyz09afAFg",
+"  "
+]
+},
+{
+"pattern": "\\H+",
+"subjects": [
+"09xyz"
+]
+},
+{
+"pattern": "[\\h_]+",
+"subjects": [
+"ag_f"
+]
+},
+{
+"pattern": ".+",
+"subjects": [
+"ab\ncd"
+]
+},
+{
+"pattern": "(?m).+",
+"subjects": [
+"ab\ncd"
+]
+},
+{
+"pattern": "\\N+",
+"subjects": [
+"ab\ncd"
+]
+},
+{
+"pattern": "\\O+",
+"subjects": [
+"ab\ncd"
+]
+},
+{
+"pattern": "\\R",
+"subjects": [
+"a\r\nb",
+"a\nb",
+"a b"
+]
+},
+{
+"pattern": "\\R\\n",
+"subjects": [
+"\r\n\n",
+"\r\n"
+]
+},
+{
+"pattern": "[[:alpha:]]+",
+"subjects": [
+"abc123",
+"été"
+]
+},
+{
+"pattern": "[[:^alpha:]]+",
+"subjects": [
+"abc123"
+]
+},
+{
+"pattern": "[[:alnum:]_$]+",
+"subjects": [
+"$foo_1 bar"
+]
+},
+{
+"pattern": "[[:punct:]]+",
+"subjects": [
+"a$+<=>^`|~!b"
+]
+},
+{
+"pattern": "[[:space:]]+",
+"subjects": [
+"a \t\n b"
+]
+},
+{
+"pattern": "[[:upper:]][[:lower:]]+",
+"subjects": [
+"Hello ÉTÉ Été"
+]
+},
+{
+"pattern": "[[:xdigit:]]+",
+"subjects": [
+"0x1fG"
+]
+},
+{
+"pattern": "[[:word:]]+",
+"subjects": [
+"ab_9 x"
+]
+},
+{
+"pattern": "[[:graph:]]+",
+"subjects": [
+"  a!b  "
+]
+},
+{
+"pattern": "[[:cntrl:]]",
+"subjects": [
+"a\u0001",
+"a"
+]
+},
+{
+"pattern": "\\p{L}+",
+"subjects": [
+"ab1",
+"αβγ"
+]
+},
+{
+"pattern": "\\p{Lu}",
+"subjects": [
+"aBc"
+]
+},
+{
+"pattern": "\\p{^Lu}+",
+"subjects": [
+"ABcd"
+]
+},
+{
+"pattern": "\\P{L}+",
+"subjects": [
+"ab12cd"
+]
+},
+{
+"pattern": "\\p{Greek}+",
+"subjects": [
+"abc αβγ"
+]
+},
+{
+"pattern": "\\p{Alpha}+",
+"subjects": [
+"ab1"
+]
+},
+{
+"pattern": "\\p{alpha}",
+"subjects": [
+"1a"
+]
+},
+{
+"pattern": "\\p{White_Space}+",
+"subjects": [
+"a  b"
+]
+},
+{
+"pattern": "\\p{Han}",
+"subjects": [
+"a中"
+]
+},
+{
+"pattern": "\\p{In_Basic_Latin}+",
+"subjects": [
+"abc é"
+]
+},
+{
+"pattern": "[\\p{Lu}\\d]+",
+"subjects": [
+"aB1c"
+]
+},
+{
+"pattern": "[^\\p{L}]+",
+"subjects": [
+"ab 12 cd"
+]
+},
+{
+"pattern": "\\p",
+"subjects": [
+"p",
+"\\p"
+]
+},
+{
+"pattern": "[\\s\\d\\p]+",
+"subjects": [
+"ap 1 q"
+]
+},
+{
+"pattern": "[a-z&&[^aeiou]]+",
+"subjects": [
+"hello"
+]
+},
+{
+"pattern": "[a-w&&[^c-g]z]+",
+"subjects": [
+"abcdefghz"
+]
+},
+{
+"pattern": "[[^b]]",
+"subjects": [
+"b",
+"a"
+]
+},
+{
+"pattern": "[a[^\\x{00}-\\x{7F}]]",
+"subjects": [
+" ",
+"b",
+"é"
+]
+},
+{
+"pattern": "[[^\\x{01}-\\x{7F}]]",
+"subjects": [
+" ",
+"é"
+]
+},
+{
+"pattern": "(?i)[[^b]]",
+"subjects": [
+"b",
+"B"
+]
+},
+{
+"pattern": "(?i)[a[^b]]",
+"subjects": [
+"B"
+]
+},
+{
+"pattern": "(?i)[^b]",
+"subjects": [
+"B",
+"b",
+"c"
+]
+},
+{
+"pattern": "(?i)[a-c]+",
+"subjects": [
+"ABCD"
+]
+},
+{
+"pattern": "(?i)k",
+"subjects": [
+"K",
+"K"
+]
+},
+{
+"pattern": "(?i)ſ",
+"subjects": [
+"s",
+"S"
+]
+},
+{
+"pattern": "(?i)straße",
+"subjects": [
+"STRASSE",
+"Straße"
+]
+},
+{
+"pattern": "(?i)\\p{Lu}",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "(?i)(a)\\1",
+"subjects": [
+"aA",
+"Aa"
+]
+},
+{
+"pattern": "ab(?i)c|d",
+"subjects": [
+"abC",
+"D",
+"abd"
+]
+},
+{
+"pattern": "(?:(?i)a|b)c",
+"subjects": [
+"Bc",
+"Ac"
+]
+},
+{
+"pattern": "a(?i:b)c",
+"subjects": [
+"aBc",
+"aBC"
+]
+},
+{
+"pattern": "(?i)a(?-i)b",
+"subjects": [
+"Ab",
+"AB"
+]
+},
+{
+"pattern": "(?x) a b # comment\n c",
+"subjects": [
+"abc",
+"a b c"
+]
+},
+{
+"pattern": "(?x)[ ]a",
+"subjects": [
+" a",
+"a"
+]
+},
+{
+"pattern": "(?W)\\w+",
+"subjects": [
+"héllo"
+]
+},
+{
+"pattern": "(?D)\\d",
+"subjects": [
+"١1"
+]
+},
+{
+"pattern": "(?S)\\s",
+"subjects": [
+"  "
+]
+},
+{
+"pattern": "(?P)[[:alpha:]]+",
+"subjects": [
+"éab"
+]
+},
+{
+"pattern": "(?<word>\\w+) \\k<word>",
+"subjects": [
+"hello hello",
+"a b"
+]
+},
+{
+"pattern": "(?'w'\\w) \\k'w'",
+"subjects": [
+"a a"
+]
+},
+{
+"pattern": "(?<n>a)|(?<n>b)\\k<n>",
+"subjects": [
+"bb",
+"a"
+]
+},
+{
+"pattern": "(?<x>a)(?<x>b)?\\k<x>",
+"subjects": [
+"aba",
+"aa",
+"abb"
+]
+},
+{
+"pattern": "(a)(?<n>b)(c)",
+"subjects": [
+"abc"
+]
+},
+{
+"pattern": "(?<type-name>\\w+)",
+"subjects": [
+"ab c"
+]
+},
+{
+"pattern": "(a)\\1",
+"subjects": [
+"aa",
+"ab"
+]
+},
+{
+"pattern": "(a)|\\1b",
+"subjects": [
+"b"
+]
+},
+{
+"pattern": "(a)(b)\\k<-1>",
+"subjects": [
+"abb"
+]
+},
+{
+"pattern": "\\k<1>(a)",
+"subjects": [
+"aa"
+]
+},
+{
+"pattern": "(a)\\12",
+"subjects": [
+"a\n",
+"a12"
+]
+},
+{
+"pattern": "\\101",
+"subjects": [
+"A"
+]
+},
+{
+"pattern": "\\0101",
+"subjects": [
+"\b1"
+]
+},
+{
+"pattern": "\\x41\\x{42}\\x{1F600}",
+"subjects": [
+"AB😀"
+]
+},
+{
+"pattern": "\\x{41 42}",
+"subjects": [
+"AB"
+]
+},
+{
+"pattern": "\\u0041",
+"subjects": [
+"A"
+]
+},
+{
+"pattern": "\\o{101}",
+"subjects": [
+"A"
+]
+},
+{
+"pattern": "\\cA\\C-b\\M-a",
+"subjects": [
+"\u0001\u0002á"
+]
+},
+{
+"pattern": "\\t\\n\\r\\f\\v\\a\\e",
+"subjects": [
+"\t\n\r\f\u000b\u0007\u001b"
+]
+},
+{
+"pattern": "[\\b]",
+"subjects": [
+"\b"
+]
+},
+{
+"pattern": "\\y",
+"subjects": [
+"y"
+]
+},
+{
+"pattern": "\\q\\%\\-",
+"subjects": [
+"q%-"
+]
+},
+{
+"pattern": "[]a]",
+"subjects": [
+"]",
+"a"
+]
+},
+{
+"pattern": "[a-]",
+"subjects": [
+"-"
+]
+},
+{
+"pattern": "[-a]",
+"subjects": [
+"-"
+]
+},
+{
+"pattern": "[\\w-z]",
+"subjects": [
+"-",
+"z"
+]
+},
+{
+"pattern": "[a\\-z]",
+"subjects": [
+"-",
+"b"
+]
+},
+{
+"pattern": "[\\x{1F600}-\\x{1F64F}]+",
+"subjects": [
+"a😀🙏b"
+]
+},
+{
+"pattern": ".",
+"subjects": [
+"😀",
+{
+"units": [
+56832
+]
+},
+{
+"units": [
+55357
+]
+},
+{
+"units": [
+97,
+55357,
+98
+]
+}
+]
+},
+{
+"pattern": "\\w",
+"subjects": [
+"𐐀"
+]
+},
+{
+"pattern": "(?<=😀)x",
+"subjects": [
+"😀x"
+]
+},
+{
+"pattern": "(?#comment)a",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "(?<name>a|b\\g<name>c)",
+"subjects": [
+"bbacc",
+"bac"
+]
+},
+{
+"pattern": "\\A(?<a>|.|(?:(?<b>.)\\g<a>\\k<b>))\\z",
+"subjects": [
+"reer",
+"abcba",
+"abca"
+]
+},
+{
+"pattern": "(?<p>\\((?:[^()]|\\g<p>)*\\))",
+"subjects": [
+"f(a(b)c)d",
+"((("
+]
+},
+{
+"pattern": "(?<t>a){0}\\g<t>\\g<t>",
+"subjects": [
+"aa",
+"a"
+]
+},
+{
+"pattern": "(?<id>[a-z]+)(?:\\.\\g<id>)*",
+"subjects": [
+"a.b.c x"
+]
+},
+{
+"pattern": "(?<tl><\\s*(?:[^<>]|\\g<tl>)+>)",
+"subjects": [
+"List<Map<int, string>> x"
+]
+},
+{
+"pattern": "\\g<0>?a",
+"subjects": [
+"aa"
+]
+},
+{
+"pattern": "(a)?(?(1)b|c)",
+"subjects": [
+"ab",
+"c",
+"ac"
+]
+},
+{
+"pattern": "(?<q>\")?\\w+(?(<q>)\")",
+"subjects": [
+"\"ab\"",
+"ab"
+]
+},
+{
+"pattern": "(?(?=a)ab|cd)",
+"subjects": [
+"ab",
+"cd",
+"ad"
+]
+},
+{
+"pattern": "(?~abc)",
+"subjects": [
+"abc",
+"aabcc",
+"xyz"
+]
+},
+{
+"pattern": "/\\*(?~\\*/)\\*/",
+"subjects": [
+"/* a */ b */",
+"/* a"
+]
+},
+{
+"pattern": "\\G(?=(?~\\*/)$)",
+"subjects": [
+"abc",
+"a */ b"
+]
+},
+{
+"pattern": "(a+)+b",
+"subjects": [
+"aaaaaaaaaaaaaaaaaaaaaaaac"
+]
+},
+{
+"pattern": "[\\t ]*+(?:\\b(function)\\b[\\t ]*+([^\\t\\n\\r \"'()=]+)(?:(\\()[\\t ]*+(\\)))?|([^\\t\\n\\r \"'()=]+)[\\t ]*+(\\()[\\t ]*+(\\)))",
+"subjects": [
+"  echo \"x\"",
+"function foo()",
+"bar ()",
+" f(x)"
+]
+},
+{
+"pattern": "(?!^[\\t ]*+$)(?:(?<=(?:^until| until|\\tuntil|^while| while|\\twhile|^do| do|\\tdo)[\\t ]*+)|(?<=[\\t ]\\{))",
+"subjects": [
+"while x",
+"  do y",
+"x { z",
+""
+]
+},
+{
+"pattern": "(?=(?:[^-\\]!\"#%&'*,:>?@\\[`{|}\\s]|[-:?]\\S)([^:\\s]|:\\S|\\s+(?![#\\s]))*\\s*:(\\s|$))",
+"subjects": [
+"key: value",
+"a b c",
+"url: http://x"
+]
+},
+{
+"pattern": "*",
+"subjects": [
+"*"
+]
+},
+{
+"pattern": "a**",
+"subjects": [
+"aa"
+]
+},
+{
+"pattern": "(?=a)*",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "^*",
+"subjects": [
+""
+]
+},
+{
+"pattern": "(a",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "a)",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "[a",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "[z-a]",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "\\k<nope>",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "(a)\\2",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "\\p{Nope}",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "[[:nope:]]",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "(?<1a>x)",
+"subjects": [
+"x"
+]
+},
+{
+"pattern": "(?s)a",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "\\x{110000}",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "(\\w*)-\\1",
+"subjects": [
+"xab-ab"
+]
+},
+{
+"pattern": "(a*)\\1b",
+"subjects": [
+"aaab"
+]
+},
+{
+"pattern": "(\\s*)\\1x",
+"subjects": [
+"   x"
+]
+},
+{
+"pattern": "(a+)b\\1",
+"subjects": [
+"aaabaa"
+]
+},
+{
+"pattern": "([ab]*)x\\1",
+"subjects": [
+"ababxab"
+]
+},
+{
+"pattern": "(a*)\\1$",
+"subjects": [
+"aaa"
+]
+},
+{
+"pattern": "(a*)(?(1)b|c)",
+"subjects": [
+"aab",
+"c"
+]
+},
+{
+"pattern": "(?<=\\n(?<=^|q))y",
+"subjects": [
+"\ny"
+]
+},
+{
+"pattern": "(?<=\\n(?<=^|a)|q)y",
+"subjects": [
+"b\ny"
+]
+},
+{
+"pattern": "(?<=a(?<=a|$))b",
+"subjects": [
+"ab"
+]
+},
+{
+"pattern": "a(?=b\\K)",
+"subjects": [
+"ab"
+]
+},
+{
+"pattern": "(?=a\\K)",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "(?<=a|(a))\\1",
+"subjects": [
+"aa"
+]
+},
+{
+"pattern": "(?<=(a)|(a))\\2",
+"subjects": [
+"aa"
+]
+},
+{
+"pattern": "(?<=(a)|(a))(?(2)|x)",
+"subjects": [
+"aa"
+]
+},
+{
+"pattern": "(?<=(a)|(xa))\\2",
+"subjects": [
+"xaxa"
+]
+},
+{
+"pattern": "(?<p>a\\g<p>?)",
+"subjects": [
+"aaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaab"
+]
+},
+{
+"pattern": "(?<p>\\((?:\\g<p>|x)*\\))",
+"subjects": [
+"(((((((((((((((((((((((((x)))))))))))))))))))))))))"
+]
+},
+{
+"pattern": "\\A(?<p>a\\g<p>?)\\z",
+"subjects": [
+"aaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaa"
+]
+},
+{
+"pattern": "(?<=(.))x",
+"subjects": [
+"𝐀x"
+]
+},
+{
+"pattern": "(?<=(\\O)\\O?)c",
+"subjects": [
+"a𝐀c"
+]
+},
+{
+"pattern": "(?i)(?:s)s",
+"subjects": [
+"ß"
+]
+},
+{
+"pattern": "(?i)(?:s)t",
+"subjects": [
+"ﬆ"
+]
+},
+{
+"pattern": "(?i)(?:s){1}t",
+"subjects": [
+"ﬆ"
+]
+},
+{
+"pattern": "(?i)(?:as)s",
+"subjects": [
+"aß"
+]
+},
+{
+"pattern": "(?i)a(?:s)s",
+"subjects": [
+"aß"
+]
+},
+{
+"pattern": "(?i)sss",
+"subjects": [
+"sß",
+"ßs",
+"sss"
+]
+},
+{
+"pattern": "(?i)ssss",
+"subjects": [
+"sßs",
+"ßß",
+"ssß"
+]
+},
+{
+"pattern": "(?i)ffi",
+"subjects": [
+"ﬀi",
+"fﬁ",
+"ﬃ"
+]
+},
+{
+"pattern": "(?i)sst",
+"subjects": [
+"sﬆ"
+]
+},
+{
+"pattern": "(?i)(?<=[ß])x",
+"subjects": [
+"ssx",
+"ßx"
+]
+},
+{
+"pattern": "(?i)(?<![ß])x",
+"subjects": [
+"ssx"
+]
+},
+{
+"pattern": "(?i)(?<=[ß]a)x",
+"subjects": [
+"ssax"
+]
+},
+{
+"pattern": "(?i)(?<=[\\x{DF}-\\x{E0}])x",
+"subjects": [
+"ssx"
+]
+},
+{
+"pattern": "(?<=a(?=b))c",
+"subjects": [
+"abc"
+]
+},
+{
+"pattern": "(?<=a(?=$|b))c",
+"subjects": [
+"ac"
+]
+},
+{
+"pattern": "(?<=a(?<!b))c",
+"subjects": [
+"ac"
+]
+},
+{
+"pattern": "(?<!(a))b",
+"subjects": [
+"cb"
+]
+},
+{
+"pattern": "(?<!(a)|(b))c",
+"subjects": [
+"dc"
+]
+},
+{
+"pattern": "[\\x{DC00}]",
+"subjects": [
+{
+"units": [
+56320
+]
+}
+]
+},
+{
+"pattern": "[\\x{D800}-\\x{DFFF}]",
+"subjects": [
+{
+"units": [
+56320
+]
+}
+]
+},
+{
+"pattern": "\\x{DC00}",
+"subjects": [
+"a"
+]
+},
+{
+"pattern": "a**************************************************",
+"subjects": [
+"aaa"
+]
+},
+{
+"pattern": "a{1,2}{1,2}{1,2}{1,2}{1,2}{1,2}{1,2}{1,2}{1,2}{1,2}{1,2}{1,2}",
+"subjects": [
+"aaaa"
+]
+},
+{
+"pattern": "(?i)ssssssssssss",
+"subjects": [
+"ssssssssssss",
+"ßßßßßß"
+]
+},
+{
+"pattern": "[^b]",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+},
+{
+"units": [
+55349,
+55349
+]
+}
+]
+},
+{
+"pattern": "\\S",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+},
+{
+"units": [
+55349,
+55349
+]
+}
+]
+},
+{
+"pattern": "\\D",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+},
+{
+"units": [
+55349,
+55349
+]
+}
+]
+},
+{
+"pattern": "\\H",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+},
+{
+"units": [
+55349,
+55349
+]
+}
+]
+},
+{
+"pattern": "\\P{L}",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+}
+]
+},
+{
+"pattern": "[^\\w]",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+}
+]
+},
+{
+"pattern": "\\W",
+"subjects": [
+"a b"
+]
+},
+{
+"pattern": ".",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+},
+{
+"units": [
+55349,
+55349
+]
+}
+]
+},
+{
+"pattern": "\\O",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+},
+{
+"units": [
+55349,
+55349
+]
+}
+]
+},
+{
+"pattern": "a[^b]*",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+},
+{
+"units": [
+55349,
+55349
+]
+}
+]
+},
+{
+"pattern": "a[^b]$",
+"subjects": [
+{
+"units": [
+97,
+55349
+]
+},
+{
+"units": [
+55349,
+55349
+]
+}
+]
+}
 ]

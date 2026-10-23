@@ -26,6 +26,13 @@ internal sealed class OnigNode
     // AnyChar: dot also matches newline. Look: look-behind.
     internal bool Flag;
     internal OnigCharSet? Set;
+    // Set: built by a negation ([^..], \W, \P{..}); such a class takes an incomplete character (a high surrogate at
+    // the end of the text) as one unit, as Oniguruma's negated classes do.
+    internal bool Negated;
+    // Compiler analysis caches (OnigCompiler.Bits, FollowBits and Lengths); nodes no longer change once compiling.
+    internal OnigStartBits? BitsCache;
+    internal OnigStartBits? FollowCache;
+    internal (int Min, int Max)? LengthsCache;
     internal List<OnigNode> Children = [];
     internal int Min;
     internal int Max;

@@ -96,7 +96,10 @@ public sealed class OnigurumaPattern
     /// <summary>Creates an exclusively owned, reusable workspace.</summary>
     public OnigurumaWorkspace CreateWorkspace() => new(this);
 
-    /// <summary>Whether the pattern matches anywhere; throws <see cref="RegexExecutionException"/> on a limit.</summary>
+    /// <summary>
+    /// Whether the pattern matches anywhere; throws <see cref="RegexExecutionException"/> on a limit. A convenience
+    /// that creates a workspace per call: reuse <see cref="CreateWorkspace"/> for repeated searches.
+    /// </summary>
     public bool IsMatch(ReadOnlySpan<char> input)
     {
         var status = CreateWorkspace().IsMatch(input);

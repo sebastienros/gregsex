@@ -53,13 +53,14 @@ internal sealed class OnigProgram
 {
     internal required int[] Code { get; init; }
     internal required OnigCharSet[] Sets { get; init; }
+    // Per set: a negated class, which takes a truncated high surrogate at the end of the text as one unit.
+    internal bool[] IncompleteSets { get; init; } = [];
     internal required string Literals { get; init; }
     internal required OnigStartBits[] Bits { get; init; }
     // Including group zero.
     internal required int GroupCount { get; init; }
     internal required int LoopCount { get; init; }
     internal required bool UsesCalls { get; init; }
-    internal required bool NeedsUndo { get; init; }
     internal required string?[] GroupNames { get; init; }
 
     internal required OnigStartAnchor StartAnchor { get; init; }

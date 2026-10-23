@@ -169,4 +169,32 @@ public class ApiTests
         Assert.Equal(100, matches);
         Assert.Equal(0, allocated);
     }
+
+    [Fact]
+    public void StackedQuantifiersCompileInLinearTime()
+    {
+        // Nested greedy quantifiers reduce as Oniguruma reduces them; others nest counters, not copies of the body.
+        var stars = Pattern("a" + new string('*', 60_000), RegexProfiles.Oniguruma);
+        Assert.Equal(RegexSearchStatus.Match, stars.CreateWorkspace().IsMatch("aaa"));
+        var ranges = string.Concat(Enumerable.Repeat("{1,2}", 1_000));
+        Assert.False(OnigurumaPattern.TryParse("a" + ranges, RegexProfiles.Oniguruma, out _, out var d));
+        Assert.Equal(RegexDiagnosticCode.NestingLimitExceeded, d.Code);
+        var deep = new OnigurumaCompileOptions(new RegexCompileLimits(maxNestingDepth: 4096));
+        var nested = OnigurumaPattern.Parse("a" + string.Concat(Enumerable.Repeat("{1,2}", 200)), RegexProfiles.Oniguruma, deep);
+        Assert.Equal(RegexSearchStatus.Match, nested.CreateWorkspace().IsMatch("a"));
+        // Deeper than a thread pool stack holds: compiled on a stack sized for the tree, not a stack overflow.
+        var unlimited = new OnigurumaCompileOptions(new RegexCompileLimits(maxPatternUnits: 1 << 20, maxNestingDepth: 1_000_000, maxCaptureGroups: 1_000_000));
+        var deeper = OnigurumaPattern.Parse("a" + string.Concat(Enumerable.Repeat("{1,2}", 4_000)), RegexProfiles.Oniguruma, unlimited);
+        Assert.Equal(RegexSearchStatus.Match, deeper.CreateWorkspace().IsMatch("a"));
+        Assert.False(OnigurumaPattern.TryParse(string.Concat(Enumerable.Repeat("(?:", 100_000)) + new string(')', 100_000), RegexProfiles.Oniguruma, out _, out d, unlimited));
+        Assert.Equal(RegexDiagnosticCode.NestingLimitExceeded, d.Code);
+    }
+
+    [Fact]
+    public void MultiCodePointFoldsExpandLinearly()
+    {
+        var pattern = Pattern("(?i)" + new string('s', 50));
+        Assert.Equal(RegexSearchStatus.Match, pattern.CreateWorkspace().IsMatch(string.Concat(Enumerable.Repeat("\u00DF", 25))));
+        Assert.Equal(RegexSearchStatus.Match, pattern.CreateWorkspace().IsMatch(new string('S', 50)));
+    }
 }

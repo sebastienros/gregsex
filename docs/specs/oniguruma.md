@@ -42,8 +42,11 @@ subexpression calls `\g<name>`, `\g<n>`, `\g<0>`, `\g<-n>`, `\g<+n>`, recursion 
 
 Rejected as Oniguruma rejects them (OG-002): a quantifier on an anchor or look-around (also inside `(?:)`), a class as
 a range endpoint (`[a-\w]`, `[\w-a]`), empty ranges, unknown properties and POSIX brackets, undefined names and
-group numbers, left-most recursion ("never ending recursion"), lone surrogates and surrogate code points in the
-pattern, group names starting with a digit or a non-word character.
+group numbers, left-most recursion ("never ending recursion"), lone surrogates in the pattern and surrogate code
+points outside classes, group names starting with a digit or a non-word character, and in a look-behind (Oniguruma's
+`check_node_in_look_behind`) a look-ahead, `\z`, `\Z`, a negative look-behind inside a positive one, or a capture
+inside a negative one. Nested greedy `?`, `*` and `+` reduce as Oniguruma reduces them (`a**` is `a*`); other stacked
+quantifiers count toward the nesting limit.
 
 Unsupported, with an `UnsupportedFeature` diagnostic (OG-003): callouts (`(?{..})`, `(*name)`), absent expressions and
 stoppers (`(?~|..|..)`, `(?~|..)`), backreferences with a recursion level (`\k<n+level>`), text-segment word mode
@@ -55,8 +58,10 @@ stoppers (`(?~|..|..)`, `(?~|..)`), backreferences with a recursion level (`\k<n
   newline; `\Z` at the end or before a final newline. Only `\n` is a newline; dot excludes it unless `(?m)`.
 - `\w`, `\d`, `\s`, POSIX brackets and `\b` are Unicode (Oniguruma's tables) unless `(?W)`, `(?D)`, `(?S)`, `(?P)`.
 - Ignore-case uses Oniguruma's simple folds and its folds to several code points: `(?i)ss` matches `ß`, `(?i)ß`
-  matches `ss`, and an outermost non-negated class holding such a character also matches its fold string. Look-behind
-  bodies keep single code point folding. A bracket class is folded once, as a whole, before its negation; nested
+  matches `ss`, and an outermost non-negated class holding such a character also matches its fold string (also in a
+  look-behind). As `expand_case_fold_string` does, a run of ignore-case characters, through plain `(?:...)` groups and
+  `{1}`, is read left to right, the longest fold taken where it starts (`(?i)sss` matches `ßs`, not `sß`); look-behind
+  strings keep single code point folding. A bracket class is folded once, as a whole, before its negation; nested
   classes are not folded on their own.
 - A nested negated class is merged as Oniguruma's `not_code_range_buf` builds it: when it holds U+0000 it contributes
   every code point (so `[a[^\x{00}-\x{7F}]]` matches a space).
@@ -65,11 +70,17 @@ stoppers (`(?~|..|..)`, `(?~|..)`), backreferences with a recursion level (`\k<n
 - A repeat whose body matched empty stops, unless the iteration changed a group that a backreference outside the body
   refers to (Oniguruma's `EMPTY_CHECK_END_MEMST`).
 - A look-behind body cannot consume past the look-behind position (Oniguruma's right range); its anchors still see
-  the whole input. Its candidate starts are tried nearest first; alternatives are tested separately.
+  the whole input. Its candidate starts are character heads, nearest first. Alternatives of different lengths are
+  divided as Oniguruma divides them; equal-length alternatives, and a positive look-ahead's, stay one atomic
+  look-around.
+- `\K` beyond the match end (inside a look-ahead) is clamped to it.
 - `(?~X)` is `(?:(?!X)\O)*`: the longest range holding no start of a match of `X`, then shorter.
 - UTF-16 decoding follows `ONIG_ENCODING_UTF16_LE`: a high surrogate always starts a two-unit character (whatever
-  follows; incomplete at the last unit), any other unit is a character; the character before a low surrogate starts
-  one unit earlier.
+  follows), any other unit is a character; the character before a low surrogate starts one unit earlier. A high
+  surrogate at the end is incomplete: only negated classes (`[^..]`, `\S`, `\D`, `\H`, `\W`, `\P{..}`) take it, as
+  one unit. Two boundaries on such malformed text: Oniguruma's `\W` takes that last unit as two (an end past the
+  input), and a high surrogate followed by another high surrogate decodes to a character negated property classes
+  accept natively; GregsEx takes one unit, and decodes the pair arithmetically.
 - `\X` is `(?>\O(?:\Y\O)*)` and `\y`/`\Y` are UAX #29 extended grapheme cluster boundaries (Unicode 16.0).
 
 ## Limits and failures (OG-005)
@@ -77,8 +88,11 @@ stoppers (`(?~|..|..)`, `(?~|..)`), backreferences with a recursion level (`\k<n
 `RegexCompileLimits` bound pattern units, nesting, instructions, class ranges and groups (the TextMate adapter in
 TextMateSharp passes Oniguruma-sized limits: grammars hold patterns of 282k units). `RegexMatchLimits.MaxWork`
 counts backtracks per match attempt, as Oniguruma's retry limit (default 10,000,000) does, and `MaxWorkspaceBytes`
-bounds the stacks; either ends a search with `LimitExceeded` where Oniguruma returns a negative error code. Calls nest
-at most 20 deep (`SubexpCallMaxNestLevel`). The work count is not Oniguruma's exact retry count, so a search near the
+bounds the stacks; either ends a search with `LimitExceeded` where Oniguruma returns a negative error code. As at
+Oniguruma's `SubexpCallMaxNestLevel` (20), a call nested 19 deep fails that path and the search goes on. Code size is
+checked while instructions are emitted, and repeats nest counters rather than copies of nested repeats, so a pattern
+compiles in time and space linear in its length. A tree deeper than a thread pool stack holds (a raised nesting limit) compiles on a thread with a stack
+sized for it, up to 1 GiB; deeper is `NestingLimitExceeded`, never a stack overflow. The work count is not Oniguruma's exact retry count, so a search near the
 limit may fail in one engine and not the other.
 
 ## Implementation (OG-006)
@@ -90,8 +104,8 @@ anchors, a required literal or a required unit set (one of which every match con
 first units of a match (look-aheads included), a leading look-behind's preceding units, a literal prefix, and the
 minimum length. Matching uses follow sets: a greedy run whose follow cannot start with one of its units becomes
 possessive, and runs give units back only where the follow can start; alternatives skip branches whose first units
-exclude the next unit; a failed attempt that started with an unbounded run resumes after the run (as Oniguruma
-does); literal and single-unit look-arounds are table and set tests. NativeAOT compatible: no runtime code generation.
+exclude the next unit; a failed attempt that started with an unbounded run resumes after the run when no
+backreference or condition can depend on where the run started; literal and single-unit look-arounds are table and set tests. NativeAOT compatible: no runtime code generation.
 
 ## Conformance evidence (OG-007)
 

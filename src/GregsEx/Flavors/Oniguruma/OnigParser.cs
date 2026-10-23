@@ -1,5 +1,6 @@
 #nullable enable
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace GregsEx.Flavors.Oniguruma;
 
@@ -31,6 +32,7 @@ internal sealed class OnigParser
     private readonly RegexCompileLimits _limits;
     private int _pos;
     private int _depth;
+    private int _treeDepth;
     private int _groupCount;
     private int _behindDepth;
     // Code points of a \x{H H ...} sequence still to be read as atoms or class members.
@@ -50,6 +52,9 @@ internal sealed class OnigParser
     internal IReadOnlyList<OnigNode> Captures => _captures;
 
     internal bool HasNamedGroups => _hasNamed;
+
+    // An upper bound of the syntax tree's depth: two nodes per group level, one per stacked quantifier.
+    internal int TreeDepth => _treeDepth;
 
     // Backrefs, calls and conditions, resolved by name once every group is known.
     internal IReadOnlyList<OnigNode> References => _references;
@@ -87,10 +92,12 @@ internal sealed class OnigParser
     private OnigNode ParseAlternation(OnigInlineOptions options)
     {
         var start = _pos;
-        if (++_depth > _limits.MaxNestingDepth)
+        if (++_depth > _limits.MaxNestingDepth || !RuntimeHelpers.TryEnsureSufficientExecutionStack())
         {
             throw new OnigSyntaxException(RegexDiagnosticCode.NestingLimitExceeded, _pos, 1, "nesting too deep");
         }
+
+        _treeDepth = Math.Max(_treeDepth, 2 * _depth);
 
         var first = ParseSequence(options);
         if (AtEnd || Peek() != '|')
@@ -150,16 +157,30 @@ internal sealed class OnigParser
     }
 
     // Oniguruma's ignore-case strings also match through folds to several code points: (?i)ss matches ß, and (?i)ß
-    // matches ss. A run of ignore-case characters that holds such a fold, or a quantified such character, becomes
-    // alternatives (the plain reading first). Look-behind bodies keep single code point folding.
+    // matches ss. As its expand_case_fold_string does, a run of ignore-case characters (plain (?:...) groups and {1}
+    // repeats included) is read left to right: where the longest such fold starts, those characters or a character
+    // folding to it; a character with such a fold, itself or the characters it folds to. Look-behind bodies keep single
+    // code point folding for strings.
     private static void ExpandMultiFolds(List<OnigNode> children)
     {
+        for (var i = 0; i < children.Count; i++)
+        {
+            if (PlainFoldChars(children[i]) is { } chars && children[i].Kind != OnigNodeKind.Char)
+            {
+                children.RemoveAt(i);
+                children.InsertRange(i, chars);
+            }
+        }
+
         for (var i = 0; i < children.Count; i++)
         {
             var child = children[i];
             if (child.Kind == OnigNodeKind.Repeat && child.Child.Kind == OnigNodeKind.Char && child.Child.IgnoreCase)
             {
-                child.Children[0] = Expand([child.Child], 0) ?? child.Child;
+                if (FoldOf(child.Child.Value) is { } own)
+                {
+                    child.Children[0] = MemberAlternatives(child.Child, own.Fold, own.Members);
+                }
                 continue;
             }
 
@@ -175,10 +196,40 @@ internal sealed class OnigParser
             }
 
             var run = children.GetRange(i, end - i);
-            if (Expand(run, 0) is { } expanded)
+            var segments = new List<OnigNode>();
+            var changed = false;
+            for (var at = 0; at < run.Count;)
+            {
+                var (length, members) = LongestFold(run, at);
+                if (length > 0)
+                {
+                    var plain = new OnigNode(OnigNodeKind.Sequence, run[at].Offset, run[at].Length);
+                    plain.Children.AddRange(run.GetRange(at, length));
+                    var alternation = new OnigNode(OnigNodeKind.Alternation, run[at].Offset, run[at].Length);
+                    alternation.Children.Add(plain);
+                    alternation.Children.Add(new OnigNode(OnigNodeKind.Set, run[at].Offset, run[at].Length) { Set = CaseClosedSet(members!) });
+                    segments.Add(alternation);
+                    at += length;
+                    changed = true;
+                }
+                else if (FoldOf(run[at].Value) is { } own)
+                {
+                    segments.Add(MemberAlternatives(run[at], own.Fold, own.Members));
+                    at++;
+                    changed = true;
+                }
+                else
+                {
+                    segments.Add(run[at]);
+                    at++;
+                }
+            }
+
+            if (changed)
             {
                 children.RemoveRange(i, end - i);
-                children.Insert(i, expanded);
+                children.InsertRange(i, segments);
+                i += segments.Count - 1;
             }
             else
             {
@@ -187,100 +238,98 @@ internal sealed class OnigParser
         }
     }
 
-    // The alternatives for run[from..], or null when no multi-code-point fold applies anywhere in it.
-    private static OnigNode? Expand(List<OnigNode> run, int from)
+    // The ignore-case characters of a plain non-capturing group or {1} repeat, or null.
+    private static List<OnigNode>? PlainFoldChars(OnigNode node)
     {
-        if (from == run.Count)
+        switch (node.Kind)
         {
-            return null;
+            case OnigNodeKind.Char when node.IgnoreCase:
+                return [node];
+            case OnigNodeKind.Group:
+                return PlainFoldChars(node.Child);
+            case OnigNodeKind.Repeat when node.Min == 1 && node.Max == 1:
+                return PlainFoldChars(node.Child);
+            case OnigNodeKind.Sequence:
+                {
+                    var chars = new List<OnigNode>();
+                    foreach (var child in node.Children)
+                    {
+                        if (PlainFoldChars(child) is not { } inner)
+                        {
+                            return null;
+                        }
+                        chars.AddRange(inner);
+                    }
+                    return chars.Count > 0 ? chars : null;
+                }
+            default:
+                return null;
         }
+    }
 
-        var head = run[from];
-        var options = new List<(OnigNode Node, int Next)>();
+    // The longest fold to several code points that run[at..] spells, by length, with its members.
+    private static (int Length, int[]? Members) LongestFold(List<OnigNode> run, int at)
+    {
+        var best = (0, (int[]?)null);
         foreach (var (fold, members) in OnigUnicode.MultiFolds)
         {
-            if (Array.IndexOf(members, head.Value) >= 0)
+            if (fold.Length <= best.Item1 || at + fold.Length > run.Count)
             {
-                // ß as another code point with the same fold (ẞ).
-                var same = new OnigCharSet.Builder();
-                foreach (var m in members)
-                {
-                    foreach (var e in OnigUnicode.CaseClass(m))
-                    {
-                        same.Add(e);
-                    }
-                }
-                options.Add((new OnigNode(OnigNodeKind.Set, head.Offset, head.Length) { Set = same.Build() }, from + 1));
-
-                // ß as ss.
-                var spelled = new OnigNode(OnigNodeKind.Sequence, head.Offset, head.Length);
-                foreach (var cp in fold)
-                {
-                    spelled.Children.Add(new OnigNode(OnigNodeKind.Char, head.Offset, head.Length) { Value = cp, IgnoreCase = true });
-                }
-                options.Add((spelled, from + 1));
+                continue;
             }
 
-            if (from + fold.Length <= run.Count)
+            var spells = true;
+            for (var j = 0; j < fold.Length && spells; j++)
             {
-                var folds = true;
-                for (var j = 0; j < fold.Length && folds; j++)
-                {
-                    folds = OnigUnicode.Fold(run[from + j].Value) == fold[j];
-                }
+                spells = OnigUnicode.Fold(run[at + j].Value) == fold[j];
+            }
 
-                if (folds)
-                {
-                    // ss as ß.
-                    var builder = new OnigCharSet.Builder();
-                    foreach (var m in members)
-                    {
-                        foreach (var e in OnigUnicode.CaseClass(m))
-                        {
-                            builder.Add(e);
-                        }
-                    }
-                    options.Add((new OnigNode(OnigNodeKind.Set, head.Offset, head.Length) { Set = builder.Build() }, from + fold.Length));
-                }
+            if (spells)
+            {
+                best = (fold.Length, members);
             }
         }
+        return best;
+    }
 
-        var rest = Expand(run, from + 1);
-        if (options.Count == 0 && rest is null)
+    private static (int[] Fold, int[] Members)? FoldOf(int cp)
+    {
+        foreach (var entry in OnigUnicode.MultiFolds)
         {
-            return null;
+            if (Array.IndexOf(entry.Members, cp) >= 0)
+            {
+                return entry;
+            }
         }
+        return null;
+    }
 
+    private static OnigCharSet CaseClosedSet(int[] members)
+    {
+        var builder = new OnigCharSet.Builder();
+        foreach (var m in members)
+        {
+            foreach (var e in OnigUnicode.CaseClass(m))
+            {
+                builder.Add(e);
+            }
+        }
+        return builder.Build();
+    }
+
+    // ß as itself, as another character with its fold (ẞ), or spelled out (ss).
+    private static OnigNode MemberAlternatives(OnigNode head, int[] fold, int[] members)
+    {
         var alternation = new OnigNode(OnigNodeKind.Alternation, head.Offset, head.Length);
-        alternation.Children.Add(Then(head, rest ?? Plain(run, from + 1)));
-        foreach (var (node, next) in options)
+        alternation.Children.Add(head);
+        alternation.Children.Add(new OnigNode(OnigNodeKind.Set, head.Offset, head.Length) { Set = CaseClosedSet(members) });
+        var spelled = new OnigNode(OnigNodeKind.Sequence, head.Offset, head.Length);
+        foreach (var cp in fold)
         {
-            alternation.Children.Add(Then(node, Expand(run, next) ?? Plain(run, next)));
+            spelled.Children.Add(new OnigNode(OnigNodeKind.Char, head.Offset, head.Length) { Value = cp, IgnoreCase = true });
         }
+        alternation.Children.Add(spelled);
         return alternation;
-
-        static OnigNode Then(OnigNode first, OnigNode? rest)
-        {
-            var seq = new OnigNode(OnigNodeKind.Sequence, first.Offset, first.Length);
-            seq.Children.Add(first);
-            if (rest is not null)
-            {
-                seq.Children.Add(rest);
-            }
-            return seq;
-        }
-
-        static OnigNode? Plain(List<OnigNode> run, int from)
-        {
-            if (from >= run.Count)
-            {
-                return null;
-            }
-
-            var seq = new OnigNode(OnigNodeKind.Sequence, run[from].Offset, run[from].Length);
-            seq.Children.AddRange(run.GetRange(from, run.Count - from));
-            return seq;
-        }
     }
 
     private void SkipExtended(OnigInlineOptions options)
@@ -311,8 +360,11 @@ internal sealed class OnigParser
         }
     }
 
+    private static bool IsSimpleQuantifier(int min, int max) => (min, max) is (0, 1) or (0, -1) or (1, -1);
+
     private OnigNode ParseQuantifiers(OnigNode atom, int atomStart, OnigInlineOptions options)
     {
+        var stacked = 0;
         while (true)
         {
             SkipExtended(options);
@@ -373,6 +425,23 @@ internal sealed class OnigParser
                 _pos++;
             }
 
+            if (atom.Kind == OnigNodeKind.Repeat && stacked > 0 && mode == OnigRepeatMode.Greedy && atom.Mode == OnigRepeatMode.Greedy
+                && IsSimpleQuantifier(atom.Min, atom.Max) && IsSimpleQuantifier(min, max))
+            {
+                // Oniguruma reduces nested ?, * and + (onig_reduce_nested_quantifier): x** is x*, (x+)? is x*.
+                (atom.Min, atom.Max) = atom.Min == 0 && atom.Max == 1 && min == 0 && max == 1 ? (0, 1)
+                    : atom.Min == 1 && min == 1 ? (1, -1) : (0, -1);
+                atom.Length = _pos - atomStart;
+                continue;
+            }
+
+            if (++stacked > _limits.MaxNestingDepth)
+            {
+                throw new OnigSyntaxException(RegexDiagnosticCode.NestingLimitExceeded, qStart, _pos - qStart, "too many nested quantifiers");
+            }
+
+            _treeDepth = Math.Max(_treeDepth, 2 * _depth + stacked);
+
             var repeat = new OnigNode(OnigNodeKind.Repeat, atomStart, _pos - atomStart)
             {
                 Min = min,
@@ -381,6 +450,28 @@ internal sealed class OnigParser
             };
             repeat.Children.Add(atom);
             atom = repeat;
+        }
+    }
+
+    // Oniguruma's check_node_in_look_behind: no look-ahead, \z or \Z in a look-behind; no negative look-behind in a
+    // positive one; no capture in a negative one.
+    private void CheckLookBehind(OnigNode node, bool negative, int start)
+    {
+        var invalid = node.Kind switch
+        {
+            OnigNodeKind.Look => !node.Flag || (node.Value != 0 && !negative),
+            OnigNodeKind.Anchor => (OnigAnchor)node.Value is OnigAnchor.BufferEnd or OnigAnchor.SemiEnd,
+            OnigNodeKind.Capture => negative,
+            _ => false,
+        };
+        if (invalid)
+        {
+            throw Error("invalid pattern in look-behind", start, _pos - start);
+        }
+
+        foreach (var child in node.Children)
+        {
+            CheckLookBehind(child, negative, start);
         }
     }
 
@@ -453,8 +544,8 @@ internal sealed class OnigParser
             case '[':
                 {
                     var set = ParseClass(options, out var negated);
-                    var node = new OnigNode(OnigNodeKind.Set, start, _pos - start) { Set = set };
-                    return (options & OnigInlineOptions.IgnoreCase) != 0 && !negated && _behindDepth == 0 ? WithMultiFolds(node, start) : node;
+                    var node = new OnigNode(OnigNodeKind.Set, start, _pos - start) { Set = set, Negated = negated };
+                    return (options & OnigInlineOptions.IgnoreCase) != 0 && !negated ? WithMultiFolds(node, start) : node;
                 }
             case '.':
                 _pos++;
@@ -569,6 +660,8 @@ internal sealed class OnigParser
                         _behindDepth--;
                     }
 
+                    CheckLookBehind(node.Child, negative: node.Value != 0, start);
+
                     node.Length = _pos - start;
                     return node;
                 }
@@ -583,7 +676,7 @@ internal sealed class OnigParser
                 throw Unsupported("callouts are not supported", start, 2);
             default:
                 {
-                    var scoped = ParseOptionLetters(ref options, start, out var isolated);
+                    ParseOptionLetters(ref options, start, out var isolated);
                     if (isolated)
                     {
                         // Only reached for an isolated option at the start of a sequence: see TryIsolatedOption.
@@ -591,7 +684,6 @@ internal sealed class OnigParser
                     }
 
                     node = new OnigNode(OnigNodeKind.Group, start, 0);
-                    _ = scoped;
                     break;
                 }
         }
@@ -875,9 +967,18 @@ internal sealed class OnigParser
         switch (c)
         {
             case 'w' or 'W' or 's' or 'S' or 'd' or 'D' or 'h' or 'H':
-                return SetNode(TypeSet(c, options), start);
+                {
+                    var node = SetNode(TypeSet(c, options), start);
+                    node.Negated = char.IsUpper(c);
+                    return node;
+                }
             case 'p' or 'P' when Peek() == '{':
-                return SetNode(ParseProperty(c == 'P', start, options), start);
+                {
+                    var negated = (c == 'P') != (Peek(1) == '^');
+                    var node = SetNode(ParseProperty(c == 'P', start, options), start);
+                    node.Negated = negated;
+                    return node;
+                }
             case 'b':
                 return Anchor((options & OnigInlineOptions.AsciiWord) != 0 ? OnigAnchor.AsciiWordBoundary : OnigAnchor.WordBoundary, start);
             case 'B':
@@ -1225,7 +1326,7 @@ internal sealed class OnigParser
                         }
                     }
 
-                    if (codes.Any(c => c is >= 0xD800 and <= 0xDFFF))
+                    if (!inClass && codes.Any(c => c is >= 0xD800 and <= 0xDFFF))
                     {
                         throw Error("invalid code point value", start, end + 1 - start);
                     }
@@ -1274,7 +1375,7 @@ internal sealed class OnigParser
                         _pos++;
                     }
 
-                    if (value is >= 0xD800 and <= 0xDFFF)
+                    if (!inClass && value is >= 0xD800 and <= 0xDFFF)
                     {
                         throw Error("invalid code point value", start, _pos - start);
                     }

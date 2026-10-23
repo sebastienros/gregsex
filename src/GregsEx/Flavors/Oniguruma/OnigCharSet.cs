@@ -26,7 +26,8 @@ internal sealed class OnigCharSet
     // units that end a run when the set holds every unit above ASCII (a negated ASCII class): see RunLength.
     private SearchValues<char>? _units;
     private SearchValues<char>? _stops;
-    private int _unitsState;
+    // Published after _units and _stops (volatile), so a reader that sees it set also sees them.
+    private volatile int _unitsState;
 
     private OnigCharSet(int[] ranges)
     {
@@ -63,11 +64,9 @@ internal sealed class OnigCharSet
     }
 
     internal static OnigCharSet Empty { get; } = new([]);
-    internal static OnigCharSet All { get; } = new([0, MaxCodePoint]);
+    internal static OnigCharSet All { get; } = Intern([0, MaxCodePoint]);
 
     internal bool IsEmpty => Ranges.Length == 0;
-
-    internal bool IsAsciiOnly => !HasNonAscii;
 
     internal static OnigCharSet Intern(int[] ranges)
     {
@@ -171,20 +170,6 @@ internal sealed class OnigCharSet
             }
 
             return _units is not null;
-        }
-    }
-
-    // Whether RunLength measures every run (single units, or every unit above ASCII where any unit sequence is a run).
-    internal bool HasVectorRun
-    {
-        get
-        {
-            if (_unitsState == 0)
-            {
-                PrepareUnits();
-            }
-
-            return _units is not null || _stops is not null;
         }
     }
 

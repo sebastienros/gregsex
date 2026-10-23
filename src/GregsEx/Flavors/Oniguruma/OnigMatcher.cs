@@ -383,10 +383,7 @@ internal sealed class OnigMatcher
             case RunItem.SetUnit:
                 return program.Sets[arg].ContainsUnit(input[pos]) ? 1 : 0;
             case RunItem.Set:
-                {
-                    var cp = CodePointAt(input, pos, out var w);
-                    return pos + w <= input.Length && program.Sets[arg].Contains(cp) ? w : 0;
-                }
+                return SetWidth(program, input, pos, arg);
             case RunItem.AnyNL:
                 {
                     if (input[pos] == '\n')
@@ -403,6 +400,20 @@ internal sealed class OnigMatcher
                     return pos + w <= input.Length ? w : 0;
                 }
         }
+    }
+
+    // The width of the set's character at pos, or 0. A high surrogate at the end is an incomplete character that only a
+    // negated class takes, as one unit (Oniguruma's CCLASS_NOT and negated ctypes).
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static int SetWidth(OnigProgram program, ReadOnlySpan<char> input, int pos, int set)
+    {
+        var cp = CodePointAt(input, pos, out var w);
+        if (pos + w <= input.Length)
+        {
+            return program.Sets[set].Contains(cp) ? w : 0;
+        }
+
+        return program.IncompleteSets[set] && program.Sets[set].Contains(cp) ? 1 : 0;
     }
 
     private void Grow(ref int[] array, int needed)
@@ -435,10 +446,8 @@ internal sealed class OnigMatcher
         var code = program.Code;
         var regs = _regs;
         var stack = _stack;
-        var undo = _undo;
         var groups = program.GroupCount;
         var openBase = program.OpenBase;
-        var reset = program.FirstBank;
         // Only ends mark participation: starts and open starts are written before they are read.
         for (var g = 1; g < groups; g++)
         {
@@ -450,7 +459,6 @@ internal sealed class OnigMatcher
         regs[program.DepthRegister] = 0;
         regs[program.BankRegister] = program.FirstBank;
         regs[program.LimitRegister] = input.Length;
-        _ = reset;
         // What consuming instructions see: the input, or its part before the position of an enclosing look-behind
         // (Oniguruma's right range). Anchors and boundaries always see the whole input.
         var text = input;
@@ -504,8 +512,8 @@ internal sealed class OnigMatcher
                 case Op.Set:
                     if (pos < end)
                     {
-                        var cp = CodePointAt(text, pos, out var w);
-                        if (pos + w <= end && program.Sets[code[pc + 1]].Contains(cp))
+                        var w = SetWidth(program, text, pos, code[pc + 1]);
+                        if (w > 0)
                         {
                             pos += w;
                             pc += 2;
@@ -625,9 +633,19 @@ internal sealed class OnigMatcher
                             }
 
                             n = kind == RunItem.Char ? span.IndexOfAnyExcept((char)arg) : program.Sets[arg].RunLength(text, pos, max < 0 ? int.MaxValue : max);
-                            if (n < 0)
+                            if (n < 0 && kind == RunItem.Char)
                             {
                                 n = span.Length;
+                            }
+                            else if (n < 0)
+                            {
+                                // No vectorized form: measure unit by unit.
+                                n = 0;
+                                var units = program.Sets[arg];
+                                while (n < span.Length && units.ContainsUnit(span[n]))
+                                {
+                                    n++;
+                                }
                             }
 
                             minPos = runStart + min;
@@ -726,10 +744,10 @@ internal sealed class OnigMatcher
                 case Op.Call:
                     {
                         var depth = regs[program.DepthRegister];
-                        if (depth >= OnigProgram.MaxCallDepth)
+                        if (depth >= OnigProgram.MaxCallDepth - 1)
                         {
-                            LastWork = work;
-                            return RegexSearchStatus.LimitExceeded;
+                            // As Oniguruma at SubexpCallMaxNestLevel: this path fails, the search goes on.
+                            goto Fail;
                         }
 
                         // The frame keeps the group, the return and the open starts the callee may move.
@@ -899,9 +917,16 @@ internal sealed class OnigMatcher
                         Set(ref regs, program.LimitRegister, pos, sp, ref up);
                         text = input[..pos];
                         end = pos;
-                        if (high > low)
+                        // Candidate starts are character heads: never between a high and a low surrogate.
+                        if (IsMidPair(input, high) && high - 1 >= low)
                         {
-                            Push(ref sp, BehindNext, pc + 6, high - 1, low, up);
+                            high--;
+                        }
+
+                        var next = PreviousCandidate(input, high, low);
+                        if (next >= low)
+                        {
+                            Push(ref sp, BehindNext, pc + 6, next, low, up);
                         }
 
                         pos = high;
@@ -916,12 +941,13 @@ internal sealed class OnigMatcher
                         if (code[pc + 2] != 0)
                         {
                             ok = pos > 0
-                                ? set.Contains(CodePointBefore(input, pos)) || ((edges & 2) != 0 && pos < end && input[pos - 1] == '\n')
+                                ? set.Contains(CodePointBefore(input, pos)) || ((edges & 2) != 0 && pos < input.Length && input[pos - 1] == '\n')
                                 : (edges & 1) != 0;
                         }
                         else
                         {
-                            ok = pos < end ? set.Contains(CodePointAt(text, pos, out _)) : (edges & 1) != 0;
+                            // The unit test respects an enclosing look-behind's limit; the end edge is the input's.
+                            ok = pos < end ? set.Contains(CodePointAt(text, pos, out _)) : pos >= input.Length && (edges & 1) != 0;
                         }
 
                         if (ok == (code[pc + 1] == 0))
@@ -945,7 +971,7 @@ internal sealed class OnigMatcher
                         goto Fail;
                     }
                 case Op.AssertLiterals:
-                    if (program.Tables[code[pc + 3]].Matches(code[pc + 2] != 0 ? input : text, pos, code[pc + 2] != 0) == (code[pc + 1] == 0))
+                    if (program.Tables[code[pc + 3]].Matches(input, pos, code[pc + 2] != 0) == (code[pc + 1] == 0))
                     {
                         pc += 4;
                         continue;
@@ -1029,7 +1055,8 @@ internal sealed class OnigMatcher
                         }
 
                         var keep = regs[program.KeepRegister];
-                        captures[0] = keep >= 0 ? keep : start;
+                        // \K inside a look-ahead may lie past the end: Oniguruma clamps it.
+                        captures[0] = keep >= 0 ? Math.Min(keep, pos) : start;
                         captures[1] = pos;
                         for (var g = 1; g < groups && 2 * g + 1 < captures.Length; g++)
                         {
@@ -1135,9 +1162,10 @@ internal sealed class OnigMatcher
                         {
                             var s = stack[sp + 2];
                             pc = stack[sp + 1];
-                            if (s > stack[sp + 3])
+                            var next = PreviousCandidate(input, s, stack[sp + 3]);
+                            if (next >= stack[sp + 3])
                             {
-                                stack[sp + 2] = s - 1;
+                                stack[sp + 2] = next;
                                 sp += FrameWidth;
                             }
 
@@ -1156,6 +1184,21 @@ internal sealed class OnigMatcher
                 break;
             }
         }
+    }
+
+    private static bool IsMidPair(ReadOnlySpan<char> input, int pos)
+        => pos > 0 && pos < input.Length && char.IsLowSurrogate(input[pos]) && char.IsHighSurrogate(input[pos - 1]);
+
+    // The look-behind candidate before s, a character head no lower than low, or low - 1 when none is left.
+    private static int PreviousCandidate(ReadOnlySpan<char> input, int s, int low)
+    {
+        var next = s - 1;
+        if (IsMidPair(input, next) && next - 1 >= low)
+        {
+            next--;
+        }
+
+        return next;
     }
 
     // One item back from pos in a run: a unit, or a code point when items may be surrogate pairs.

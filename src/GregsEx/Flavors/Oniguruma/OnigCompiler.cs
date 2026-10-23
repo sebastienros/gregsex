@@ -1,6 +1,7 @@
 #nullable enable
 using System.Buffers;
 using System.Collections.Concurrent;
+using System.Runtime.ExceptionServices;
 using System.Text;
 
 namespace GregsEx.Flavors.Oniguruma;
@@ -26,7 +27,8 @@ internal sealed class OnigCompiler
 
     private readonly List<int> _code = [];
     private readonly List<OnigCharSet> _sets = [];
-    private readonly Dictionary<OnigCharSet, int> _setIndex = new(ReferenceEqualityComparer.Instance);
+    private readonly Dictionary<(OnigCharSet, bool), int> _setIndex = [];
+    private readonly List<bool> _setIncomplete = [];
     private readonly StringBuilder _literals = new();
     private readonly List<OnigStartBits> _bits = [];
     private readonly List<OnigLiteralTable> _tables = [];
@@ -50,6 +52,44 @@ internal sealed class OnigCompiler
     internal static OnigProgram Compile(string pattern, OnigInlineOptions options, bool captureGroup, bool dontCaptureGroup, RegexCompileLimits limits)
     {
         var parser = OnigParser.Parse(pattern, options, limits, out var root);
+        if (parser.TreeDepth <= ShallowTreeDepth)
+        {
+            return Build(pattern, parser, root, captureGroup, dontCaptureGroup, limits);
+        }
+
+        // The compiler's passes recurse over the tree: a nesting limit raised past what a thread pool stack holds
+        // compiles on a thread whose stack is sized for the tree.
+        var stack = (1L << 20) + (long)parser.TreeDepth * StackPerLevel;
+        if (stack > MaxCompileStack)
+        {
+            throw new OnigSyntaxException(RegexDiagnosticCode.NestingLimitExceeded, 0, pattern.Length, "nesting too deep");
+        }
+
+        OnigProgram? program = null;
+        ExceptionDispatchInfo? error = null;
+        var thread = new Thread(() =>
+        {
+            try
+            {
+                program = Build(pattern, parser, root, captureGroup, dontCaptureGroup, limits);
+            }
+            catch (Exception e)
+            {
+                error = ExceptionDispatchInfo.Capture(e);
+            }
+        }, (int)stack);
+        thread.Start();
+        thread.Join();
+        error?.Throw();
+        return program!;
+    }
+
+    private const int ShallowTreeDepth = 512;
+    private const int StackPerLevel = 16 * 1024;
+    private const long MaxCompileStack = 1L << 30;
+
+    private static OnigProgram Build(string pattern, OnigParser parser, OnigNode root, bool captureGroup, bool dontCaptureGroup, RegexCompileLimits limits)
+    {
         var groupCount = parser.GroupCount;
         var names = new string?[groupCount];
         if (dontCaptureGroup || (!captureGroup && parser.HasNamedGroups))
@@ -100,7 +140,8 @@ internal sealed class OnigCompiler
         }
 
         var leadingRun = -1;
-        if (compiler._called.Count == 0)
+        // The skip is sound only when no later backreference or condition can depend on where the run started.
+        if (compiler._called.Count == 0 && !parser.References.Any(r => r.Kind is OnigNodeKind.Backref or OnigNodeKind.CondRef))
         {
             var pc = 0;
             var code = compiler._code;
@@ -150,12 +191,12 @@ internal sealed class OnigCompiler
         {
             Code = compiler._code.ToArray(),
             Sets = compiler._sets.ToArray(),
+            IncompleteSets = compiler._setIncomplete.ToArray(),
             Literals = compiler._literals.ToString(),
             Bits = compiler._bits.ToArray(),
             GroupCount = groupCount,
             LoopCount = compiler._loops,
             UsesCalls = compiler._called.Count > 0,
-            NeedsUndo = true,
             GroupNames = names,
             StartAnchor = Anchor(root),
             StartBits = startBits,
@@ -237,21 +278,31 @@ internal sealed class OnigCompiler
 
     private int Here => _code.Count;
 
-    private void Add(int value) => _code.Add(value);
+    private void Add(int value)
+    {
+        if (_code.Count >= _limits.MaxInstructions)
+        {
+            throw new OnigSyntaxException(RegexDiagnosticCode.ProgramLimitExceeded, 0, 0, "program too large");
+        }
+
+        _code.Add(value);
+    }
 
     private void Add(int a, int b)
     {
-        _code.Add(a);
-        _code.Add(b);
+        Add(a);
+        Add(b);
     }
 
-    private int SetIndex(OnigCharSet set)
+    // A negated set (incomplete: it also takes a truncated high surrogate) gets an index of its own.
+    private int SetIndex(OnigCharSet set, bool incomplete = false)
     {
-        if (!_setIndex.TryGetValue(set, out var index))
+        if (!_setIndex.TryGetValue((set, incomplete), out var index))
         {
             index = _sets.Count;
             _sets.Add(set);
-            _setIndex[set] = index;
+            _setIncomplete.Add(incomplete);
+            _setIndex[(set, incomplete)] = index;
         }
         return index;
     }
@@ -476,7 +527,7 @@ internal sealed class OnigCompiler
                         return (RunItem.Char, set.Single);
                     }
 
-                    return SetItem(set);
+                    return SetItem(set, node.Negated);
                 }
             case OnigNodeKind.AnyChar:
                 return (node.Flag ? RunItem.Any : RunItem.AnyNL, 0);
@@ -487,8 +538,8 @@ internal sealed class OnigCompiler
         }
     }
 
-    private (int, int) SetItem(OnigCharSet set)
-        => (set.IsUnitRun ? RunItem.SetUnit : RunItem.Set, SetIndex(set));
+    private (int, int) SetItem(OnigCharSet set, bool negated = false)
+        => (set.IsUnitRun ? RunItem.SetUnit : RunItem.Set, SetIndex(set, negated));
 
     // Whether a char node is a plain unit sequence: case-sensitive, or with no case variants.
     private static bool IsPlain(OnigNode node, out int cp)
@@ -636,7 +687,9 @@ internal sealed class OnigCompiler
     private void EmitLoop(OnigNode child, int min, int max, bool lazy, OnigStartBits follow)
     {
         var childBits = Bits(child);
-        if (!Nullable(child) && min <= 2 && (max == -1 || max == min + 1 || (max == 1 && min == 0)))
+        // Copies of the body unroll a small count; nested repeats and alternatives use counters instead, so code stays
+        // linear in the pattern ((?:a{1,2}){1,2}... would otherwise double per level).
+        if (!Nullable(child) && min <= 2 && (max == -1 || max == min + 1 || (max == 1 && min == 0)) && IsSimpleBody(child, 32))
         {
             for (var i = 0; i < min; i++)
             {
@@ -795,10 +848,11 @@ internal sealed class OnigCompiler
             }
         }
 
-        if (body.Kind == OnigNodeKind.Alternation)
+        if (body.Kind == OnigNodeKind.Alternation && (negative != 0 || (behind && !SameFixedLength(body.Children))))
         {
-            // (?!A|B) is (?!A)(?!B), and (?=A|B) is (?=A)|(?=B); for look-behind this is also how Oniguruma divides
-            // alternatives of different lengths, each then stepping back by its own length.
+            // (?!A|B) is (?!A)(?!B). A positive look-behind over alternatives of different lengths is divided as
+            // Oniguruma divides it, each then stepping back by its own length; otherwise a positive look-around keeps
+            // its alternatives together, atomic as a whole.
             var split = new OnigNode(negative != 0 ? OnigNodeKind.Sequence : OnigNodeKind.Alternation, node.Offset, node.Length);
             foreach (var branch in body.Children)
             {
@@ -1108,6 +1162,44 @@ internal sealed class OnigCompiler
     private static bool UsesAnchor(OnigNode node, OnigAnchor anchor)
         => (node.Kind == OnigNodeKind.Anchor && (OnigAnchor)node.Value == anchor) || node.Children.Any(c => UsesAnchor(c, anchor));
 
+    private static bool SameFixedLength(List<OnigNode> branches)
+    {
+        var (min, max) = Lengths(branches[0]);
+        foreach (var branch in branches)
+        {
+            var (bmin, bmax) = Lengths(branch);
+            if (bmin != bmax || bmin != min || bmax != max)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Whether node has no repeat or alternative and at most budget nodes.
+    private static bool IsSimpleBody(OnigNode node, int budget)
+    {
+        var count = 0;
+        return Visit(node);
+
+        bool Visit(OnigNode n)
+        {
+            if (++count > budget || n.Kind is OnigNodeKind.Repeat or OnigNodeKind.Alternation)
+            {
+                return false;
+            }
+
+            foreach (var child in n.Children)
+            {
+                if (!Visit(child))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     private static OnigNode LookOf(OnigNode look, OnigNode body)
     {
         var node = new OnigNode(OnigNodeKind.Look, look.Offset, look.Length) { Value = look.Value, Flag = look.Flag };
@@ -1227,6 +1319,12 @@ internal sealed class OnigCompiler
 
     private static OnigStartBits Bits(OnigNode node, bool anchors)
     {
+        ref var cache = ref anchors ? ref node.FollowCache : ref node.BitsCache;
+        return cache ??= ComputeBits(node, anchors);
+    }
+
+    private static OnigStartBits ComputeBits(OnigNode node, bool anchors)
+    {
         switch (node.Kind)
         {
             case OnigNodeKind.Char:
@@ -1317,7 +1415,9 @@ internal sealed class OnigCompiler
         => cp < 64 ? new(1UL << cp, 0, false, false) : cp < 128 ? new(0, 1UL << (cp - 64), false, false) : new(0, 0, true, false);
 
     // Minimum and maximum lengths in UTF-16 units; -1 is unbounded.
-    internal static (int Min, int Max) Lengths(OnigNode node)
+    internal static (int Min, int Max) Lengths(OnigNode node) => node.LengthsCache ??= ComputeLengths(node);
+
+    private static (int Min, int Max) ComputeLengths(OnigNode node)
     {
         switch (node.Kind)
         {

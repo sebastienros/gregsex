@@ -39,8 +39,8 @@ rewrite applied (`\xHH...` to `\x{HH...}`, `\x{7fffffff}` to `\x{7ffff}`). GZip 
 
 ## Integrity (SHA-256)
 
-- `edge-cases.json`: `6bc954d8af3205aeb539e7300d99bcf86db4d74b20af160357a9f1221ac911bb`
-- `edge-cases.expected.json`: `a5cc1130a77ee128185ff1fb289da9d500aad1e69311b3d5ffc05c09b4c89aea`
+- `edge-cases.json`: `c02ada68d0e910d78d229f8218626e881770074f0c4e2f594f30fab45fb62614`
+- `edge-cases.expected.json`: `b65dd5ba023091b945c9a521024049d99b33bc05bb782f5d662eaecc05d824b2`
 - `grammar-cases.json.gz`: `37fc413fc1df3cb9c6c07d5c7d89b4dba896d81d0c07716f3b570f251585f6d2`
 - `grammar-cases.expected.json.gz`: `db531cec04efb1c4cabc9739f1eec3657b97254a938067f13172003ff191e31b`
 - `trace.json.gz`: `838da5bc8544087aad6adc34de5d8745c2cf85d21d7db03e17401fd3bded78f3`
