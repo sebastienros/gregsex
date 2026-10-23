@@ -52,15 +52,26 @@ internal sealed class OnigMatcher
             return RegexSearchStatus.NoMatch;
         }
 
-        if (program.Required is { } required && input[startAt..].IndexOf(required, StringComparison.Ordinal) < 0)
+        // What every match contains lies at or after its start: no start after its last occurrence can match.
+        if (program.Required is { } required)
         {
-            return RegexSearchStatus.NoMatch;
-        }
+            var at = input.LastIndexOf(required, StringComparison.Ordinal);
+            if (at < startAt)
+            {
+                return RegexSearchStatus.NoMatch;
+            }
 
-        if (program.RequiredUnits is { } units ? input[startAt..].IndexOfAny(units) < 0
-            : program.NotRequiredAscii is { } notUnits && input[startAt..].IndexOfAnyExcept(notUnits) < 0)
+            last = Math.Min(last, at);
+        }
+        else if (program.RequiredUnits is { } units || program.NotRequiredAscii is not null)
         {
-            return RegexSearchStatus.NoMatch;
+            var at = program.RequiredUnits is not null ? input.LastIndexOfAny(program.RequiredUnits) : input.LastIndexOfAnyExcept(program.NotRequiredAscii!);
+            if (at < startAt)
+            {
+                return RegexSearchStatus.NoMatch;
+            }
+
+            last = Math.Min(last, at);
         }
 
         switch (program.StartAnchor)
@@ -694,9 +705,17 @@ internal sealed class OnigMatcher
                         if (mode == OnigRepeatMode.Greedy && pos > minPos)
                         {
                             var follow = code[pc - 1];
-                            if (follow >= 0)
+                            if (follow >= 0 && unitItems)
                             {
-                                // Give units back up front until what follows can start here.
+                                // Give units back up front to where what follows can start.
+                                pos = GiveBack(program, text, pos, minPos, follow);
+                                if (pos < minPos)
+                                {
+                                    goto Fail;
+                                }
+                            }
+                            else if (follow >= 0)
+                            {
                                 var bits = program.Bits[follow];
                                 while (pos > minPos && !bits.CanStartWith(pos < end ? text[pos] : -1))
                                 {
@@ -1112,7 +1131,15 @@ internal sealed class OnigMatcher
                             pc = stack[sp + 1];
                             var p = StepBack(text, stack[sp + 2], unit, minPos);
                             var follow = stack[sp] == AbsentBack ? -1 : code[pc - 1];
-                            if (follow >= 0)
+                            if (follow >= 0 && unit)
+                            {
+                                p = GiveBack(program, text, p, minPos, follow);
+                                if (p < minPos)
+                                {
+                                    continue;
+                                }
+                            }
+                            else if (follow >= 0)
                             {
                                 var bits = program.Bits[follow];
                                 while (p > minPos && !bits.CanStartWith(text[p]))
@@ -1199,6 +1226,20 @@ internal sealed class OnigMatcher
         }
 
         return next;
+    }
+
+    // The last position in [minPos, pos] of a unit run where the follow can start, or minPos - 1.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static int GiveBack(OnigProgram program, ReadOnlySpan<char> text, int pos, int minPos, int follow)
+    {
+        if (program.Bits[follow].CanStartWith(pos < text.Length ? text[pos] : -1))
+        {
+            return pos;
+        }
+
+        var window = text[minPos..pos];
+        var values = program.BitsBack[follow]!;
+        return minPos + (program.BitsBackExcept[follow] ? window.LastIndexOfAnyExcept(values) : window.LastIndexOfAny(values));
     }
 
     // One item back from pos in a run: a unit, or a code point when items may be surrogate pairs.

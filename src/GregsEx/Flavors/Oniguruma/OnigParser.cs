@@ -970,6 +970,7 @@ internal sealed class OnigParser
                 {
                     var node = SetNode(TypeSet(c, options), start);
                     node.Negated = char.IsUpper(c);
+                    node.WordType = c is 'w' or 'W';
                     return node;
                 }
             case 'p' or 'P' when Peek() == '{':

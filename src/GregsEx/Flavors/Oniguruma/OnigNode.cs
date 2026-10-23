@@ -29,6 +29,8 @@ internal sealed class OnigNode
     // Set: built by a negation ([^..], \W, \P{..}); such a class takes an incomplete character (a high surrogate at
     // the end of the text) as one unit, as Oniguruma's negated classes do.
     internal bool Negated;
+    // Set: \w or \W outside a class, which Oniguruma keeps as a ctype node rather than a class.
+    internal bool WordType;
     // Compiler analysis caches (OnigCompiler.Bits, FollowBits and Lengths); nodes no longer change once compiling.
     internal OnigStartBits? BitsCache;
     internal OnigStartBits? FollowCache;

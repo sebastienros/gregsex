@@ -74,6 +74,11 @@ stoppers (`(?~|..|..)`, `(?~|..)`), backreferences with a recursion level (`\k<n
   divided as Oniguruma divides them; equal-length alternatives, and a positive look-ahead's, stay one atomic
   look-around.
 - `\K` beyond the match end (inside a look-ahead) is clamped to it.
+- As Oniguruma's `tune_next` rewrites the tree, a greedy `x*` or `x+` that is the body of a capture group (through
+  nested captures) is possessive when the node after the group cannot start with `x`'s head literal
+  (`is_exclusive` under UTF-16: strings and classes compare, two classes never exclude each other, `\w` excludes
+  only `\W`; a character with case variants is a class of them). For a called group that holds for the calls
+  too: `(?<n>\d+)\.\g<n>\d` does not match `12.345`.
 - `(?~X)` is `(?:(?!X)\O)*`: the longest range holding no start of a match of `X`, then shorter.
 - UTF-16 decoding follows `ONIG_ENCODING_UTF16_LE`: a high surrogate always starts a two-unit character (whatever
   follows), any other unit is a character; the character before a low surrogate starts one unit earlier. A high
@@ -102,8 +107,10 @@ executors, and no other regex engine. Register writes are undone through a log p
 look-arounds cut to barrier frames. Per pattern the compiler derives search prefilters that preserve results: start
 anchors, a required literal or a required unit set (one of which every match contains, alternatives united), the
 first units of a match (look-aheads included), a leading look-behind's preceding units, a literal prefix, and the
-minimum length. Matching uses follow sets: a greedy run whose follow cannot start with one of its units becomes
-possessive, and runs give units back only where the follow can start; alternatives skip branches whose first units
+minimum length; no start after the last occurrence of the required literal or units is tried. Matching uses
+follow sets: a greedy run whose follow cannot start with one of its units becomes possessive, and runs give units
+back only where the follow can start, found with one vectorized search. A called group's follow is the union of
+those at its definition and at each call, computed to a fixpoint (at most four extra compile passes, else unknown); alternatives skip branches whose first units
 exclude the next unit; a failed attempt that started with an unbounded run resumes after the run when no
 backreference or condition can depend on where the run started; literal and single-unit look-arounds are table and set tests. NativeAOT compatible: no runtime code generation.
 

@@ -57,6 +57,10 @@ internal sealed class OnigProgram
     internal bool[] IncompleteSets { get; init; } = [];
     internal required string Literals { get; init; }
     internal required OnigStartBits[] Bits { get; init; }
+    // Per Bits entry that can fail: the ASCII units it admits (BitsBackExcept false) or, when it admits every non-ASCII
+    // unit, those it does not (true), so a greedy run gives units back to where the follow can start in one search.
+    internal SearchValues<char>?[] BitsBack { get; init; } = [];
+    internal bool[] BitsBackExcept { get; init; } = [];
     // Including group zero.
     internal required int GroupCount { get; init; }
     internal required int LoopCount { get; init; }

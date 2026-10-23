@@ -33,6 +33,9 @@ internal sealed class OnigCompiler
     private readonly List<OnigStartBits> _bits = [];
     private readonly List<OnigLiteralTable> _tables = [];
     private readonly HashSet<int> _called = [];
+    // What may follow each called group: assumed for this pass, and seen at its definition and call sites.
+    private Dictionary<int, OnigStartBits>? _groupFollow;
+    private readonly Dictionary<int, OnigStartBits> _observedFollow = [];
     private readonly int[] _groupPc;
     private readonly List<(int At, int Group)> _callFixups = [];
     private readonly RegexCompileLimits _limits;
@@ -85,6 +88,166 @@ internal sealed class OnigCompiler
     }
 
     private const int ShallowTreeDepth = 512;
+    private const int MaxFollowPasses = 4;
+
+    // Oniguruma's tune_next makes a greedy x* or x+ possessive when the node after it cannot start with x's head
+    // literal, looking through the capture groups around the quantifier. For a called group that follow is only the one
+    // at its definition, so calls from elsewhere run the quantifier possessive too: (?<n>\d+)\.\g<n>\d does not
+    // match 12.345. Elsewhere the rewrite cannot change a result, and the follow sets cover it.
+    private static void NativePossessive(OnigNode node, HashSet<int> called)
+    {
+        if (node.Kind == OnigNodeKind.Sequence)
+        {
+            for (var i = 0; i + 1 < node.Children.Count; i++)
+            {
+                var capture = node.Children[i];
+                if (capture.Kind != OnigNodeKind.Capture || !called.Contains(capture.Value))
+                {
+                    continue;
+                }
+
+                var body = capture.Child;
+                while (body.Kind is OnigNodeKind.Capture or OnigNodeKind.Group)
+                {
+                    body = body.Child;
+                }
+
+                if (body.Kind == OnigNodeKind.Repeat && body.Mode == OnigRepeatMode.Greedy && body.Max < 0 && body.Min <= 1
+                    && StrictHead(body.Child) is { } x && HeadLiteral(node.Children, i + 1) is { } y && IsExclusive(x, y))
+                {
+                    body.Mode = OnigRepeatMode.Possessive;
+                }
+            }
+        }
+
+        foreach (var child in node.Children)
+        {
+            NativePossessive(child, called);
+        }
+    }
+
+    // A head literal as Oniguruma's get_tree_head_literal finds it: a string (its units), a class, or the \w ctype.
+    private sealed record HeadNode(string? Text, OnigCharSet? Set = null, bool Word = false, bool Negated = false)
+    {
+        internal static HeadNode Of(OnigNode set) => new(null, set.Set, set.WordType, set.Negated);
+    }
+
+    // The quantified body's head when it is a string without real case folding, a class or a ctype
+    // (is_strict_real_node); plain groups are not nodes in Oniguruma's tree.
+    private static HeadNode? StrictHead(OnigNode body)
+    {
+        while (body.Kind == OnigNodeKind.Group)
+        {
+            body = body.Child;
+        }
+
+        if (body.Kind == OnigNodeKind.Set)
+        {
+            return HeadNode.Of(body);
+        }
+
+        var siblings = body.Kind == OnigNodeKind.Sequence ? body.Children : [body];
+        return siblings.Count > 0 && siblings.TrueForAll(c => IsPlain(c, out _)) ? HeadLiteral(siblings, 0) : null;
+    }
+
+    private static HeadNode? HeadLiteral(List<OnigNode> siblings, int from)
+    {
+        if (from >= siblings.Count)
+        {
+            return null;
+        }
+
+        var node = siblings[from];
+        if (node.Kind == OnigNodeKind.Char && !IsPlain(node, out _))
+        {
+            // A character with case variants is folded into a class of them.
+            var variants = new OnigCharSet.Builder();
+            foreach (var v in OnigUnicode.CaseClass(node.Value))
+            {
+                variants.Add(v);
+            }
+
+            return new HeadNode(null, variants.Build());
+        }
+
+        if (node.Kind == OnigNodeKind.Char)
+        {
+            // Adjacent characters under the same case option are one string node.
+            var text = new StringBuilder();
+            for (var i = from; i < siblings.Count && IsPlain(siblings[i], out _) && siblings[i].IgnoreCase == node.IgnoreCase; i++)
+            {
+                text.Append(OnigUnicode.ToUtf16(siblings[i].Value));
+            }
+
+            return new HeadNode(text.ToString(), null);
+        }
+
+        switch (node.Kind)
+        {
+            case OnigNodeKind.Set:
+                return HeadNode.Of(node);
+            case OnigNodeKind.Sequence:
+                return HeadLiteral(node.Children, 0);
+            case OnigNodeKind.Repeat when node.Min > 0:
+            case OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic:
+            case OnigNodeKind.Look when node.Value == 0 && !node.Flag:
+                return HeadLiteral(node.Children, 0);
+            default:
+                return null;
+        }
+    }
+
+    // Oniguruma's is_exclusive under UTF-16, where every class with members keeps them in its multibyte buffer.
+    private static bool IsExclusive(HeadNode x, HeadNode y)
+    {
+        if (x.Text is null && y.Text is not null)
+        {
+            (x, y) = (y, x);
+        }
+
+        if (x.Text is { } xs)
+        {
+            if (y.Text is { } ys)
+            {
+                var n = Math.Min(xs.Length, ys.Length);
+                return !xs.AsSpan(0, n).SequenceEqual(ys.AsSpan(0, n));
+            }
+
+            return !y.Set!.Contains(xs.Length > 1 && char.IsSurrogatePair(xs[0], xs[1]) ? char.ConvertToUtf32(xs[0], xs[1]) : xs[0]);
+        }
+
+        if (x.Word && y.Word)
+        {
+            return x.Negated != y.Negated && x.Set == y.Set!.Negate();
+        }
+
+        // A class without members has no multibyte buffer.
+        return (x.Set!.IsEmpty && !x.Negated && !x.Word) || (y.Set!.IsEmpty && !y.Negated && !y.Word);
+    }
+
+    // Emits the program once; groupFollow, when given, is what may follow each called group.
+    private static OnigCompiler EmitPass(OnigParser parser, OnigNode root, int groupCount, RegexCompileLimits limits,
+        Dictionary<int, OnigStartBits>? groupFollow)
+    {
+        var compiler = new OnigCompiler(groupCount, limits) { _groupFollow = groupFollow };
+        CollectCaptures(root, compiler._captureNodes);
+        foreach (var reference in parser.References)
+        {
+            if (reference.Kind == OnigNodeKind.Call)
+            {
+                compiler._called.Add(reference.Value);
+            }
+            else if (reference.Kind == OnigNodeKind.Backref)
+            {
+                compiler._backrefs.Add(reference);
+            }
+        }
+
+        compiler.CheckRecursion(root);
+        compiler.Emit(root, OnigStartBits.Any);
+        compiler.Add(Op.Match);
+        return compiler;
+    }
     private const int StackPerLevel = 16 * 1024;
     private const long MaxCompileStack = 1L << 30;
 
@@ -105,23 +268,43 @@ internal sealed class OnigCompiler
             }
         }
 
-        var compiler = new OnigCompiler(groupCount, limits);
-        CollectCaptures(root, compiler._captureNodes);
-        foreach (var reference in parser.References)
+        var calledGroups = parser.References.Where(r => r.Kind == OnigNodeKind.Call).Select(r => r.Value).ToHashSet();
+        if (calledGroups.Count > 0)
         {
-            if (reference.Kind == OnigNodeKind.Call)
-            {
-                compiler._called.Add(reference.Value);
-            }
-            else if (reference.Kind == OnigNodeKind.Backref)
-            {
-                compiler._backrefs.Add(reference);
-            }
+            NativePossessive(root, calledGroups);
         }
 
-        compiler.CheckRecursion(root);
-        compiler.Emit(root, OnigStartBits.Any);
-        compiler.Add(Op.Match);
+        var compiler = EmitPass(parser, root, groupCount, limits, null);
+        if (compiler._called.Count > 0)
+        {
+            // A called group's body continues at its definition and after each call: its follow is the union of
+            // theirs, which calls inside the group make circular. Iterate from nothing-follows to a fixpoint; without one
+            // within a few passes, anything may follow.
+            var assumed = new Dictionary<int, OnigStartBits>();
+            foreach (var g in compiler._called)
+            {
+                assumed[g] = OnigStartBits.None;
+            }
+
+            for (var i = 0; i < MaxFollowPasses; i++)
+            {
+                var pass = EmitPass(parser, root, groupCount, limits, assumed);
+                var observed = pass._observedFollow;
+                var same = true;
+                foreach (var (g, bits) in assumed)
+                {
+                    var seen = observed.TryGetValue(g, out var o) ? o : OnigStartBits.None;
+                    same &= seen == bits;
+                    assumed[g] = bits.Union(seen);
+                }
+
+                if (same)
+                {
+                    compiler = pass;
+                    break;
+                }
+            }
+        }
         var callSaves = new int[groupCount][];
         var callSaveMax = 0;
         for (var g = 0; g < groupCount; g++)
@@ -194,6 +377,10 @@ internal sealed class OnigCompiler
             IncompleteSets = compiler._setIncomplete.ToArray(),
             Literals = compiler._literals.ToString(),
             Bits = compiler._bits.ToArray(),
+            BitsBack = compiler._bits.Select(static b => b.Empty ? null : b.NonAscii
+                ? s_firstUnits.GetOrAdd((b.Low, b.High, true), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, false)))
+                : s_firstUnits.GetOrAdd((b.Low, b.High, false), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, true)))).ToArray(),
+            BitsBackExcept = compiler._bits.Select(static b => b.NonAscii).ToArray(),
             GroupCount = groupCount,
             LoopCount = compiler._loops,
             UsesCalls = compiler._called.Count > 0,
@@ -325,6 +512,9 @@ internal sealed class OnigCompiler
         return offset;
     }
 
+    private void Observe(int group, OnigStartBits follow)
+        => _observedFollow[group] = _observedFollow.TryGetValue(group, out var seen) ? seen.Union(follow) : follow;
+
     // follow: what may come after node (FollowBits), for auto-possessive runs and give-back skipping.
     private void Emit(OnigNode node, OnigStartBits follow)
     {
@@ -359,8 +549,17 @@ internal sealed class OnigCompiler
             case OnigNodeKind.Capture:
                 _groupPc[node.Value] = Here;
                 Add(Op.SaveOpen, node.Value);
-                // A called group's code also runs from each call site, so its follow is unknown.
-                Emit(node.Child, _called.Contains(node.Value) ? OnigStartBits.Any : follow);
+                // A called group's code also runs from each call site: its follow covers them all.
+                if (_called.Contains(node.Value))
+                {
+                    Observe(node.Value, follow);
+                    Emit(node.Child, _groupFollow is not null ? _groupFollow[node.Value] : OnigStartBits.Any);
+                }
+                else
+                {
+                    Emit(node.Child, follow);
+                }
+
                 Add(Op.SaveClose, node.Value);
                 if (_called.Contains(node.Value))
                 {
@@ -393,6 +592,7 @@ internal sealed class OnigCompiler
                 }
                 return;
             case OnigNodeKind.Call:
+                Observe(node.Value, follow);
                 Add(Op.Call);
                 _callFixups.Add((Here, node.Value));
                 Add(0);
