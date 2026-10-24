@@ -190,7 +190,8 @@ internal static class OnigUnicode
         return classes.TryGetValue(Fold(cp), out var members) ? members : [cp];
     }
 
-    // Adds the case variants of every member: Oniguruma folds a class under ignore-case before negating it.
+    // Adds the case variants of every member: Oniguruma folds a class under ignore-case before negating it. Code points
+    // that fold to the same several code points are variants too (ß and ẞ both fold to ss, ᾀ and ᾈ to ἀι).
     internal static OnigCharSet CaseClose(OnigCharSet set)
     {
         var classes = s_classes ?? BuildClasses();
@@ -199,29 +200,41 @@ internal static class OnigUnicode
         var added = false;
         foreach (var members in classes.Values)
         {
-            var any = false;
-            var all = true;
-            foreach (var m in members)
-            {
-                if (set.Contains(m))
-                {
-                    any = true;
-                }
-                else
-                {
-                    all = false;
-                }
-            }
-            if (any && !all)
-            {
-                foreach (var m in members)
-                {
-                    builder.Add(m);
-                }
-                added = true;
-            }
+            added |= AddVariants(set, members, builder);
+        }
+        foreach (var (_, members) in MultiFolds)
+        {
+            added |= AddVariants(set, members, builder);
         }
         return added ? builder.Build() : set;
+    }
+
+    // Adds all of members when set has some but not all of them.
+    private static bool AddVariants(OnigCharSet set, int[] members, OnigCharSet.Builder builder)
+    {
+        var any = false;
+        var all = true;
+        foreach (var m in members)
+        {
+            if (set.Contains(m))
+            {
+                any = true;
+            }
+            else
+            {
+                all = false;
+            }
+        }
+        if (!any || all)
+        {
+            return false;
+        }
+
+        foreach (var m in members)
+        {
+            builder.Add(m);
+        }
+        return true;
     }
 
     private static Dictionary<int, int[]> BuildClasses()
