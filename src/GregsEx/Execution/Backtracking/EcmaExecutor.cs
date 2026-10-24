@@ -310,19 +310,38 @@ internal sealed class EcmaExecutor : IEcmaExecutor
             }
         }
 
-        if (hostSized && _accelerator.PositionMatcher is { } positions)
+        // Every match contains one of the required units at or after its start (see EcmaUnitFilters.BuildRequired),
+        // so none starts after the last: /\.?\w*(?=\[)/ otherwise ran the VM from each position of a line without [.
+        var lastStart = input.Length;
+        if (_accelerator.RequiredUnits is { } requiredUnits)
         {
-            return SearchPositions(positions, input, startAt, sticky, operation, frames, ref state, groups, out match);
+            var at = input.Slice(startAt).LastIndexOfAny(requiredUnits);
+            if (!EcmaAccelerator.TryChargeFast(ref state, startAt, input.Length, Math.Max(1, at < 0 ? input.Length - startAt : input.Length - startAt - at)))
+            {
+                return Finish(FailureStatus(state), operation, groups);
+            }
+
+            if (at < 0)
+            {
+                return Finish(RegexSearchStatus.NoMatch, operation, groups);
+            }
+
+            lastStart = startAt + at;
         }
 
-        return SearchMachine(input, startAt, sticky, operation, frames, ref state, groups, out match);
+        if (hostSized && _accelerator.PositionMatcher is { } positions)
+        {
+            return SearchPositions(positions, input, startAt, lastStart, sticky, operation, frames, ref state, groups, out match);
+        }
+
+        return SearchMachine(input, startAt, lastStart, sticky, operation, frames, ref state, groups, out match);
     }
 
     // Kept out of SearchCore: the Machine is a large ref struct, and a method holding one zeroes its whole frame on
     // entry. Inline in SearchCore, every search paid that even when an accelerated plan answered first - 12 ns of a
     // 25 ns split(/a/) step.
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-    private RegexSearchStatus SearchMachine(ReadOnlySpan<char> input, int startAt, bool sticky,
+    private RegexSearchStatus SearchMachine(ReadOnlySpan<char> input, int startAt, int lastStart, bool sticky,
         SearchOperation operation, int frames, ref RunState state,
         Span<RegexCapture> groups, out RegexMatchRange match)
     {
@@ -339,6 +358,11 @@ internal sealed class EcmaExecutor : IEcmaExecutor
                 {
                     return Finish(candidate == NoCandidate ? RegexSearchStatus.NoMatch : FailureStatus(state), operation, groups);
                 }
+            }
+
+            if (candidate > lastStart)
+            {
+                return Finish(RegexSearchStatus.NoMatch, operation, groups);
             }
 
             var result = machine.Run(candidate, ref state);
@@ -464,6 +488,31 @@ internal sealed class EcmaExecutor : IEcmaExecutor
                 candidate += rel;
             }
         }
+        else if (_accelerator.FirstUnits is { } units && (candidate > 0 || !_accelerator.FirstUnitsTryStart))
+        {
+            // See EcmaAccelerator.FirstUnits. Non-ASCII units are candidates under FirstUnitsExcept, so a hit is a
+            // whole character's start whenever the search stood on one.
+            var rest = input.Slice(candidate);
+            var rel = _accelerator.FirstUnitsExcept ? rest.IndexOfAnyExcept(units) : rest.IndexOfAny(units);
+            if (rel < 0)
+            {
+                if (!EcmaAccelerator.TryChargeFast(ref state, candidate, input.Length, Math.Max(1, input.Length - candidate)))
+                {
+                    return CandidateFailure;
+                }
+
+                return NoCandidate;
+            }
+            if (rel > 0)
+            {
+                if (!EcmaAccelerator.TryChargeFast(ref state, candidate, input.Length, rel))
+                {
+                    return CandidateFailure;
+                }
+
+                candidate += rel;
+            }
+        }
         else if (_accelerator.FirstSet is { } fset)
         {
             var rel = fset.FindFirst(input.Slice(candidate), Program);
@@ -491,7 +540,7 @@ internal sealed class EcmaExecutor : IEcmaExecutor
     }
 
     // SearchMachine's candidate loop around the position matcher (see EcmaPositionMatcher), which needs no Machine.
-    private RegexSearchStatus SearchPositions(EcmaPositionMatcher matcher, ReadOnlySpan<char> input, int startAt, bool sticky,
+    private RegexSearchStatus SearchPositions(EcmaPositionMatcher matcher, ReadOnlySpan<char> input, int startAt, int lastStart, bool sticky,
         SearchOperation operation, int frames, ref RunState state, Span<RegexCapture> groups, out RegexMatchRange match)
     {
         match = default;
@@ -507,6 +556,11 @@ internal sealed class EcmaExecutor : IEcmaExecutor
                 {
                     return Finish(candidate == NoCandidate ? RegexSearchStatus.NoMatch : FailureStatus(state), operation, groups);
                 }
+            }
+
+            if (candidate > lastStart)
+            {
+                return Finish(RegexSearchStatus.NoMatch, operation, groups);
             }
 
             if (captures)
@@ -541,7 +595,7 @@ internal sealed class EcmaExecutor : IEcmaExecutor
             if (end == EcmaPositionMatcher.GiveUp)
             {
                 // The VM searches on from this candidate, which is where this search stands.
-                return SearchMachine(input, candidate, sticky, operation, frames, ref state, groups, out match);
+                return SearchMachine(input, candidate, lastStart, sticky, operation, frames, ref state, groups, out match);
             }
 
             if (sticky || candidate == input.Length || _accelerator.StartAnchoredNonMultiline)

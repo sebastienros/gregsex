@@ -44,8 +44,8 @@
     },
     {
       "path": "test/corpora/ecmascript/resource-corpus.json",
-      "length": 14336,
-      "sha256": "d5821ad62b462d92aef1623ae70c9de982b386a61dea2ca36ef29e19c25eaa20"
+      "length": 14360,
+      "sha256": "923a068fe30eefb0b7ee77d125628a8a92aa5abfa0c2387435570efbfbe9ac52"
     },
     {
       "path": "test/corpora/ecmascript/test262-dispositions.json",

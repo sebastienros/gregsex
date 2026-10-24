@@ -221,10 +221,10 @@ public class VmLimitsTests
         var p = new Plan();
         p.Seq(p.Rep(p.Cap(1, p.Alt(p.Lit('a'), p.Text("aa")))), p.Lit('b'));
         var prep = new Prepared(p.Build(), 128);
-        Assert.Equal(RegexSearchStatus.LimitExceeded, prep.Search("aaaaaaaaaaaaaaac", limits: new(maxWork: 5_000)));
+        Assert.Equal(RegexSearchStatus.LimitExceeded, prep.Search("aaaaaaaaaaaaaaacb", limits: new(maxWork: 5_000)));
         Assert.Equal(RegexExecutionFailureCode.WorkLimitExceeded, prep.Failure.Code);
         var failure = prep.Failure;
-        Assert.Equal(RegexSearchStatus.LimitExceeded, prep.Search("aaaaaaaaaaaaaaac", limits: new(maxWork: 5_000)));
+        Assert.Equal(RegexSearchStatus.LimitExceeded, prep.Search("aaaaaaaaaaaaaaacb", limits: new(maxWork: 5_000)));
         Assert.Equal(failure, prep.Failure);
         prep.Expect("b", 0, 1, default(RegexCapture));
     }

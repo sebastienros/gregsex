@@ -49,7 +49,7 @@
     <Compile Remove="$(Engine)Text\ByteTextReader.cs;$(Engine)Text\CharTextReader.cs;$(Engine)Flavors\XmlShared\XmlTextReaders.cs;$(Engine)Flavors\Xsd\XsdExecutor.cs" />
     <!-- The analysis-only subset of the excluded executor folders: kernel plans, fast-path classifiers, character tables. -->
     <Compile Include="$(Engine)Execution\Compiled\*Plan.cs;$(Engine)Execution\Compiled\SourcePlanner.cs" />
-    <Compile Include="$(Engine)Execution\Accelerated\**\*.cs;$(Engine)Execution\Backtracking\EcmaAccelerator.cs;$(Engine)Execution\Backtracking\EcmaPositionMatcher.cs" />
+    <Compile Include="$(Engine)Execution\Accelerated\**\*.cs;$(Engine)Execution\Backtracking\EcmaAccelerator.cs;$(Engine)Execution\Backtracking\EcmaPositionMatcher.cs;$(Engine)Execution\Backtracking\EcmaUnitFilters.cs" />
     <Compile Include="$(Engine)Execution\Pcre2\Kernel\Pcre2CharacterOps.cs;$(Engine)Flavors\Pcre2\Runtime\Composition\Pcre2Accelerator.cs" />
   </ItemGroup>
 </Project>
