@@ -658,6 +658,41 @@
 ]
 },
 {
+"pattern": "[a[^\\x{00}-b]]",
+"subjects": [
+"b",
+"a",
+"c"
+]
+},
+{
+"pattern": "[a[^\\x{00}]]",
+"subjects": [
+{
+"units": [
+0
+]
+},
+"a",
+"x"
+]
+},
+{
+"pattern": "[[-\\w][^\\x{00}-\\x{7F}]]+",
+"subjects": [
+"@var-name: 1px;",
+"é ü"
+]
+},
+{
+"pattern": "[a-z&&[^\\x{00}-c]]",
+"subjects": [
+"c",
+"d",
+"!"
+]
+},
+{
 "pattern": "[[^\\x{01}-\\x{7F}]]",
 "subjects": [
 " ",

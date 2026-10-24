@@ -2,8 +2,9 @@
 
 `Oniguruma-6.9.10-OnigurumaSyntax-Utf16-v1` is Oniguruma 6.9.10 (tag v6.9.10, commit
 `4ef89209a239c1aea328cf13c05a2807e5c146d1`) with `ONIG_SYNTAX_ONIGURUMA` (`ONIG_SYNTAX_DEFAULT`, the Ruby syntax of
-doc/RE) over `ONIG_ENCODING_UTF16_LE` subjects: the regex dialect of TextMate grammars as vscode-oniguruma and
-Onigwrap (TextMateSharp) run them. Data identity `Oniguruma-6.9.10-Unicode16.0.0-4ef89209`: Oniguruma's own generated
+doc/RE) over `ONIG_ENCODING_UTF16_LE` subjects: the regex dialect of TextMate grammars as Onigwrap (TextMateSharp) runs
+them. vscode-oniguruma compiles the same patterns with `ONIG_ENCODING_UTF8` over UTF-8 subjects; the one
+encoding-dependent result grammars observe, a nested negated class holding U+0000, follows UTF-8 (below). Data identity `Oniguruma-6.9.10-Unicode16.0.0-4ef89209`: Oniguruma's own generated
 property, case-fold and Grapheme_Cluster_Break tables, not .NET's or GregsEx's ECMAScript tables.
 
 ## Profiles and API
@@ -63,8 +64,11 @@ stoppers (`(?~|..|..)`, `(?~|..)`), backreferences with a recursion level (`\k<n
   `{1}`, is read left to right, the longest fold taken where it starts (`(?i)sss` matches `ßs`, not `sß`); look-behind
   strings keep single code point folding. A bracket class is folded once, as a whole, before its negation; nested
   classes are not folded on their own.
-- A nested negated class is merged as Oniguruma's `not_code_range_buf` builds it: when it holds U+0000 it contributes
-  every code point (so `[a[^\x{00}-\x{7F}]]` matches a space).
+- A nested negated class contributes its true complement, as UTF-8 Oniguruma (vscode-oniguruma) computes it:
+  `[a[^\x{00}-\x{7F}]]` matches `a` and non-ASCII characters, not a space. This deliberately departs from 6.9.10 over
+  UTF-16LE, where `not_code_range_buf` underflows (`from - 1` for a range starting at U+0000) and such a class
+  contributes every code point, which breaks grammars written against VS Code (CSS and Less identifiers
+  `[[-\w][^\x{00}-\x{7F}]]`). The oracle carries the one-line Oniguruma fix (`if (from > pre)`).
 - Captures are final values; an iteration that fails restores them. Captures set inside a subexpression call stay
   set after it returns, and a call saves and restores the open start of the groups it re-enters.
 - A repeat whose body matched empty stops, unless the iteration changed a group that a backreference outside the body
@@ -139,11 +143,11 @@ backreference or condition can depend on where the run started; literal and sing
 ## Conformance evidence (OG-007)
 
 [`test/corpora/oniguruma`](../../test/corpora/oniguruma/README.md) holds native observations recorded with an
-oracle built from Oniguruma's source at tag v6.9.10 ([`tools/oracles/oniguruma`](../../tools/oracles/oniguruma/README.md)):
+oracle built from Oniguruma's source at tag v6.9.10 with the nested negated class fix above ([`tools/oracles/oniguruma`](../../tools/oracles/oniguruma/README.md)):
 hand-written edge cases and every pattern of the shellscript, typescript, javascript, html, css, json, yaml and csharp
 grammars of tm-grammars 1.32.22 over lines of the shikijs/textmate-grammars-themes samples. Scanner selection (earliest
 start, first pattern on a tie, stopping at a match at the offset, the per-string result cache, `\G` patterns not
 cached) has unit tests. The checked-in `oracle differential` compares GregsEx with that oracle over all 15,034
-distinct patterns of the 260 tm-grammars 1.32.22 grammars and every line of the 238 samples: on 2026-10-23 it agreed on
+distinct patterns of the 260 tm-grammars 1.32.22 grammars and every line of the 238 samples: on 2026-10-24 it agreed on
 the validity of every pattern (83 rejected by both) and on all 88,475,049 searches, apart from the OG-005 retry-limit
 boundary (95 native retry-limit errors: 92 LimitExceeded and 3 completed GregsEx searches).

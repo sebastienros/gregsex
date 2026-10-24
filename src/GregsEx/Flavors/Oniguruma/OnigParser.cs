@@ -1543,8 +1543,9 @@ internal sealed class OnigParser
     }
 
     // A bracket class at '[': nested classes union, && intersects (lowest precedence above ^), ^ negates last. As in
-    // Oniguruma's prs_cc, ignore-case folds the outermost class only, before its negation, and a nested negated class
-    // is merged as ranges by not_code_range_buf, which yields every code point when the class holds U+0000.
+    // Oniguruma's prs_cc, ignore-case folds the outermost class only, before its negation. A nested negated class is its
+    // true complement, as UTF-8 Oniguruma (vscode-oniguruma) computes it: UTF-16 not_code_range_buf underflows for a
+    // class holding U+0000 and yields every code point, which grammars do not expect.
     private OnigCharSet ParseClass(OnigInlineOptions options, bool nested = false)
     {
         var start = _pos++;
@@ -1650,7 +1651,7 @@ internal sealed class OnigParser
 
         if (nested)
         {
-            return !negate ? set : set.IsEmpty || set.Ranges[0] == 0 ? OnigCharSet.All : set.Negate();
+            return negate ? set.Negate() : set;
         }
 
         if ((options & OnigInlineOptions.IgnoreCase) != 0)
