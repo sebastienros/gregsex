@@ -51,7 +51,8 @@ Publish and run real consumers; analyzer-only builds do not establish deployment
 compatibility. `test/GregsEx.AotSmoke` exercises ordinary interpreted and Auto
 operations. `test/GregsEx.AotDiagnostics` checks expected explicit `Compile()`
 diagnostics. `test/GregsEx.TrimSmoke` checks trimmed JIT behavior.
-The CI matrix is in [aot.yml](../../.github/workflows/aot.yml).
+[aot.yml](../../.github/workflows/aot.yml) runs them on linux-x64 before each release
+publish and on demand, not on pull requests or main.
 
 The shared `UnicodeVersionSmoke` probe runs under unit tests, NativeAOT and
 trimmed JIT. It covers both supported Unicode versions, version-specific new
