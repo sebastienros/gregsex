@@ -106,4 +106,34 @@ public class PatternGeneratorTests
         var result = Run(Wrap($$"""[GeneratedPattern("a+", {{flavor}}, UnicodeVersion = {{version}})] public static partial RegexPattern P();"""));
         Assert.Contains("GREGEX005", Ids(result));
     }
+
+    [Fact]
+    public void AttributeTypesDoNotConflictAcrossFriendAssemblies()
+    {
+        // Every project referencing GregsEx gets the attribute types; a friend assembly (InternalsVisibleTo) sees
+        // those of the library it references too, which must not raise CS0436 (TextMateSharp's tests and grammars).
+        var references = ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!)
+            .Split(Path.PathSeparator)
+            .Where(path => !path.Contains("xunit", StringComparison.OrdinalIgnoreCase))
+            .Select(path => (MetadataReference)MetadataReference.CreateFromFile(path))
+            .ToList();
+        var options = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+        var cancellation = TestContext.Current.CancellationToken;
+
+        var library = CSharpCompilation.Create("Library",
+            [CSharpSyntaxTree.ParseText("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("App")]""", cancellationToken: cancellation)],
+            references, options);
+        CSharpGeneratorDriver.Create(NewGenerator()).RunGeneratorsAndUpdateCompilation(library, out var libraryOutput, out _, cancellation);
+        using var image = new MemoryStream();
+        var emitted = libraryOutput.Emit(image, cancellationToken: cancellation);
+        Assert.True(emitted.Success, string.Join("\n", emitted.Diagnostics));
+
+        var app = CSharpCompilation.Create("App",
+            [CSharpSyntaxTree.ParseText(Wrap("""[GeneratedPattern("[a-z]+")] public static partial RegexPattern P();"""), cancellationToken: cancellation)],
+            [.. references, MetadataReference.CreateFromImage(image.ToArray())], options);
+        CSharpGeneratorDriver.Create(NewGenerator()).RunGeneratorsAndUpdateCompilation(app, out var appOutput, out _, cancellation);
+        var diagnostics = appOutput.GetDiagnostics(cancellation).Where(d => d.Severity >= DiagnosticSeverity.Warning).ToArray();
+        Assert.Empty(diagnostics);
+    }
 }
+
