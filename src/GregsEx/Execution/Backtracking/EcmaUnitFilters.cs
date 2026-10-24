@@ -132,6 +132,90 @@ internal static class EcmaUnitFilters
         return SearchValues.Create(Members(units, false));
     }
 
+    // Units the rest of the match can start with right after node: what follows it in each enclosing sequence, through
+    // nullable atoms, and a repeat's own body again. Null when the match can end there or an assertion encloses node,
+    // since anything may then follow. A greedy run gives back only to a position where one of these stands, as
+    // Oniguruma's GiveBack does: /\w+(?=\.)/ retried its lookahead after every character it gave back.
+    internal static SearchValues<char>? BuildFollow(EcmaProgram program, ReadOnlySpan<EcmaNode> nodes, int[] parents, int node,
+        EcmaCaseTables caseTables, out bool except)
+    {
+        except = false;
+        var units = default(Units);
+        var startOnly = false;
+        var cur = node;
+        while (true)
+        {
+            var parent = parents[cur];
+            if (parent < 0)
+            {
+                return null;
+            }
+
+            var p = nodes[parent];
+            switch (p.Kind)
+            {
+                case EcmaNodeKind.Sequence when p.X == cur:
+                    if (!First(program, nodes, p.Y, caseTables, ref units, ref startOnly, out var empty, 0) || startOnly)
+                    {
+                        return null;
+                    }
+
+                    if (!empty)
+                    {
+                        return Values(units, out except);
+                    }
+
+                    break;
+                case EcmaNodeKind.Sequence or EcmaNodeKind.Alternative or EcmaNodeKind.Capture:
+                    break;
+                case EcmaNodeKind.Repeat:
+                    if (!First(program, nodes, cur, caseTables, ref units, ref startOnly, out _, 0) || startOnly)
+                    {
+                        return null;
+                    }
+
+                    break;
+                default:
+                    return null;
+            }
+
+            cur = parent;
+        }
+    }
+
+    internal static int[] Parents(ReadOnlySpan<EcmaNode> nodes)
+    {
+        var parents = new int[nodes.Length];
+        parents.AsSpan().Fill(-1);
+        for (var i = 0; i < nodes.Length; i++)
+        {
+            var n = nodes[i];
+            if (n.Kind is EcmaNodeKind.Sequence or EcmaNodeKind.Alternative)
+            {
+                parents[n.X] = i;
+                parents[n.Y] = i;
+            }
+            else if (n.Kind is EcmaNodeKind.Repeat or EcmaNodeKind.Capture or EcmaNodeKind.Lookahead or EcmaNodeKind.NegativeLookahead or
+                EcmaNodeKind.Lookbehind or EcmaNodeKind.NegativeLookbehind && n.X >= 0)
+            {
+                parents[n.X] = i;
+            }
+        }
+
+        return parents;
+    }
+
+    private static SearchValues<char>? Values(Units units, out bool except)
+    {
+        except = units.NonAscii;
+        if (!units.Rejects)
+        {
+            return null;
+        }
+
+        return SearchValues.Create(Members(units, !except));
+    }
+
     private const int MaxDepth = 256;
 
     private static bool First(EcmaProgram program, ReadOnlySpan<EcmaNode> nodes, int id, EcmaCaseTables caseTables,
