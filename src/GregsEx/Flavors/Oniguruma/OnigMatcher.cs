@@ -16,7 +16,7 @@ internal sealed class OnigMatcher
         BarrierAtomic = 10, BarrierLook = 11, BarrierNotLook = 12, BarrierBehind = 13, BarrierNotBehind = 14,
         BarrierCond = 15;
 
-    private static readonly OnigCharSet s_word = OnigUnicode.Property(OnigUnicode.Word);
+    private static readonly OnigCharSet s_word = OnigUnicode.StandaloneWord;
 
     private int[] _stack = new int[FrameWidth * 32];
     private int[] _undo = new int[64];

@@ -301,4 +301,36 @@ public class ApiTests
         Assert.Equal(code, d.Code);
         Assert.True(OnigurumaPattern.TryParse(source, RegexProfiles.Oniguruma, out _, out _));
     }
+
+    // Outside a bracket class Oniguruma reads the word ctype of code points below U+0100 from its Latin-1 table, which
+    // also has these General_Category No characters; bracket classes use the Unicode Word property, which does not.
+    [Theory]
+    [InlineData('\u00B2')]
+    [InlineData('\u00B3')]
+    [InlineData('\u00B9')]
+    [InlineData('\u00BC')]
+    [InlineData('\u00BD')]
+    [InlineData('\u00BE')]
+    public void Latin1NumbersAreWordCharactersOutsideBracketClasses(char c)
+    {
+        string text = c.ToString();
+        Assert.Equal(RegexSearchStatus.Match, Find("\\A\\w", text).Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("\\A\\p{Word}", text).Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("(?i)\\A\\w", text).Status);
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("\\A\\W", text).Status);
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("\\A\\P{Word}", text).Status);
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("(?W)\\A\\w", text).Status);
+
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("\\A[\\w]", text).Status);
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("\\A[[:word:]]", text).Status);
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("\\A[\\p{Word}]", text).Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("\\A[\\W]", text).Status);
+
+        // No boundary between a letter and the character, one after it.
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("\\Ax\\b", "x" + text).Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("\\Ax\\B", "x" + text).Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("\\Ax" + c + "\\b", "x" + text).Status);
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("\\Ax" + c + "\\b", "x" + text + "y").Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("(?W)\\Ax\\b", "x" + text).Status);
+    }
 }

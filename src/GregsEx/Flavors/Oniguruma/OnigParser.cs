@@ -993,7 +993,7 @@ internal sealed class OnigParser
         {
             case 'w' or 'W' or 's' or 'S' or 'd' or 'D' or 'h' or 'H':
                 {
-                    var node = SetNode(TypeSet(c, options), start);
+                    var node = SetNode(TypeSet(c, options, standalone: true), start);
                     node.Negated = char.IsUpper(c);
                     node.WordType = c is 'w' or 'W';
                     return node;
@@ -1001,7 +1001,7 @@ internal sealed class OnigParser
             case 'p' or 'P' when Peek() == '{':
                 {
                     var negated = (c == 'P') != (Peek(1) == '^');
-                    var node = SetNode(ParseProperty(c == 'P', start, options), start);
+                    var node = SetNode(ParseProperty(c == 'P', start, options, standalone: true), start);
                     node.Negated = negated;
                     return node;
                 }
@@ -1218,14 +1218,15 @@ internal sealed class OnigParser
         }
     }
 
-    private OnigCharSet TypeSet(char c, OnigInlineOptions options)
+    // standalone: outside a bracket class, where the word ctype also has the Latin-1 numbers of OnigUnicode.StandaloneWord.
+    private OnigCharSet TypeSet(char c, OnigInlineOptions options, bool standalone = false)
     {
         var lower = char.ToLowerInvariant(c);
         OnigCharSet set;
         switch (lower)
         {
             case 'w':
-                set = Ascii(OnigUnicode.Property(OnigUnicode.Word), options, OnigInlineOptions.AsciiWord);
+                set = Ascii(standalone ? OnigUnicode.StandaloneWord : OnigUnicode.Property(OnigUnicode.Word), options, OnigInlineOptions.AsciiWord);
                 break;
             case 's':
                 set = Ascii(OnigUnicode.Property(OnigUnicode.Space), options, OnigInlineOptions.AsciiSpace);
@@ -1243,7 +1244,7 @@ internal sealed class OnigParser
     private static OnigCharSet Ascii(OnigCharSet set, OnigInlineOptions options, OnigInlineOptions flag)
         => (options & flag) != 0 ? set.Intersect(OnigUnicode.Property(OnigUnicode.Ascii)) : set;
 
-    private OnigCharSet ParseProperty(bool negative, int start, OnigInlineOptions options)
+    private OnigCharSet ParseProperty(bool negative, int start, OnigInlineOptions options, bool standalone = false)
     {
         if (Peek() != '{')
         {
@@ -1271,7 +1272,7 @@ internal sealed class OnigParser
             throw Error("invalid character property name", start, _pos - start);
         }
 
-        var set = OnigUnicode.Property(property);
+        var set = standalone && property == OnigUnicode.Word ? OnigUnicode.StandaloneWord : OnigUnicode.Property(property);
         if (property <= OnigUnicode.Ascii)
         {
             set = PosixAscii(set, property, options);
