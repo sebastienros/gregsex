@@ -59,9 +59,9 @@
     <None Update="Flavors/Pcre2/Parsing/Lowering/PCRE2-LOWERING-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-LOWERING-NOTICE.txt" />
     <None Update="Flavors/Oniguruma/ONIGURUMA-NOTICE.txt" Pack="true" PackagePath="licenses/ONIGURUMA-NOTICE.txt" />
     <None Update="Flavors/Pcre2/Runtime/Host/PCRE2-HOST-NOTICE.txt" Pack="true" PackagePath="licenses/PCRE2-HOST-NOTICE.txt" />
-    <InternalsVisibleTo Include="GregsEx.Tests" />
-    <InternalsVisibleTo Include="GregsEx.AotSmoke" />
-    <InternalsVisibleTo Include="GregsEx.Benchmarks" />
-    <InternalsVisibleTo Include="GregsEx.Generator" />
+    <InternalsVisibleTo Include="GregsEx.Tests" Key="$(GregsExPublicKey)" />
+    <InternalsVisibleTo Include="GregsEx.AotSmoke" Key="$(GregsExPublicKey)" />
+    <InternalsVisibleTo Include="GregsEx.Benchmarks" Key="$(GregsExPublicKey)" />
+    <InternalsVisibleTo Include="GregsEx.Generator" Key="$(GregsExPublicKey)" />
   </ItemGroup>
 </Project>

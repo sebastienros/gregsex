@@ -61,6 +61,11 @@ expected results and source pins. Audit each retained version independently
 with the ECMAScript/XML Unicode generation and audit scripts before changing
 its manifest or generated data.
 
+Every assembly is strong-named with the repository key `GregsEx.snk` (public key token `172acb106fb17aad`,
+pinned by `StrongNameTests`): .NET Framework refuses to load an unsigned assembly from a strong-named consumer such
+as TextMateSharp. The key pair is checked in on purpose, since strong names give identity, not security; keep it
+across releases, and give friend assemblies `InternalsVisibleTo` with `$(GregsExPublicKey)`.
+
 Ordinary interpreted/Auto consumers must remain warning-free. Explicit
 `Compile()` carries `RequiresDynamicCode` and `RequiresUnreferencedCode`;
 dedicated fixtures check IL3050/IL2026 and unsupported-runtime

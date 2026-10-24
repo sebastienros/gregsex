@@ -31,7 +31,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
     <PackageReference Include="Meziantou.Polyfill" PrivateAssets="all" />
     <PackageReference Include="System.Memory" />
-    <InternalsVisibleTo Include="GregsEx.Tests" />
+    <InternalsVisibleTo Include="GregsEx.Tests" Key="$(GregsExPublicKey)" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="*.cs" />
