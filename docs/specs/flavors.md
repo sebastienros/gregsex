@@ -86,14 +86,15 @@ The [Oniguruma contract](oniguruma.md) specifies OG-001 through OG-007: syntax i
 constructs, semantics, limits, implementation and conformance evidence.
 
 Source facts: TextMate grammars are written for Oniguruma's default syntax (doc/RE, `ONIG_SYNTAX_ONIGURUMA`) and run
-with `ONIG_OPTION_CAPTURE_GROUP` over UTF-16 lines by vscode-oniguruma and Onigwrap; Onigwrap rewrites `\xHH` to
+with `ONIG_OPTION_CAPTURE_GROUP` by vscode-oniguruma (UTF-8) and Onigwrap (UTF-16LE); Onigwrap rewrites `\xHH` to
 `\x{HH}` before compiling, since UTF-16 Oniguruma reads `\xHH` as an encoded byte.
 
 - **FL-ONIG-001:** Pin the Oniguruma release, syntax, encoding and options in the profile; take Unicode data from
   that release's generated tables, not from another flavor.
 - **FL-ONIG-002:** Agree with the pinned native engine on pattern validity and on every capture of every search,
-  including quirks that grammars observe (nested negated classes holding U+0000, look-behind right range, empty-loop
-  capture checks, multi-code-point folds), against retained native observations.
+  including quirks that grammars observe (look-behind right range, empty-loop capture checks, multi-code-point folds),
+  against retained native observations. A nested negated class holding U+0000 is its true complement, as under UTF-8
+  (vscode-oniguruma), not UTF-16's underflow to every code point; the oracle carries that one-line fix.
 - **FL-ONIG-003:** Offer TextMate's scanner selection and per-pattern result cache with allocation-free warm searches,
   since grammar tokenization searches many patterns from each position.
 

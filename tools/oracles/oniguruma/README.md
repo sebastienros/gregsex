@@ -9,6 +9,7 @@ outputs are [`test/corpora/oniguruma`](../../../test/corpora/oniguruma/README.md
 | Path | Role |
 | --- | --- |
 | `native/oracle.c`, `native/build-oracle.sh` | C shim over Oniguruma (`onig_new` with UTF-16LE, `ONIG_SYNTAX_DEFAULT`, `ONIG_OPTION_CAPTURE_GROUP`; `onig_search` from an offset; captures or error codes), compiled with Oniguruma's sources at a tag verified by commit SHA |
+| `native/not-code-range-underflow.patch` | The profile's one change to Oniguruma: a nested negated class holding U+0000 gets its true complement (UTF-8 Oniguruma's, so vscode-oniguruma's), not every code point (`docs/specs/oniguruma.md`) |
 | `fetch-inputs.sh` | tm-grammars by npm version and integrity, and the samples of shikijs/textmate-grammars-themes at a commit |
 | `oracle/` | `corpus`, `cases` and `differential`; P/Invokes the shim |
 | `generate.py` | The Unicode tables from the Oniguruma checkout |
@@ -20,7 +21,7 @@ tools/oracles/oniguruma/native/build-oracle.sh v6.9.10 4ef89209a239c1aea328cf13c
 tools/oracles/oniguruma/fetch-inputs.sh
 ```
 
-`build-oracle.sh` clones the tag into `artifacts/oniguruma/<tag>/src` and writes
+`build-oracle.sh` clones the tag into `artifacts/oniguruma/<tag>/src`, applies the patch, and writes
 `artifacts/oniguruma/<tag>/liboniguruma-oracle.{dylib,so}` with the system C compiler (no autotools or CMake).
 `fetch-inputs.sh [<tm-grammars-version> <npm-integrity> <samples-commit>]` writes `artifacts/oniguruma/inputs`; its
 defaults are the pins of the corpus README. `oracle` options: `--oniguruma <tag>` (default `v6.9.10`) selects the
@@ -64,9 +65,9 @@ design (OG-005 in `docs/specs/oniguruma.md`): where native reports a retry-limit
 `LimitExceeded` from any start of it, or a result where native reports the error, is counted, not a mismatch. It exits
 1 on any mismatch; the report holds counts and up to 10,000 mismatches.
 
-Run of 2026-10-23 (v6.9.10, tm-grammars 1.32.22, samples 8f1828eb; Apple M4 Pro, macOS 15.8.1, .NET 10.0.11, 24 s):
+Run of 2026-10-24 (v6.9.10 with `not-code-range-underflow.patch`, tm-grammars 1.32.22, samples 8f1828eb; Apple M4 Pro, macOS 15.8.1, .NET 10.0.11, 24 s):
 15,034 patterns from 260 grammars (83 rejected by both), 238 samples and a mix of 912 lines: 88,475,049 searches,
-10,804,417 matches, 95 native retry-limit errors (92 `LimitExceeded`, 3 completed GregsEx searches), 0 mismatches.
+10,782,960 matches, 95 native retry-limit errors (92 `LimitExceeded`, 3 completed GregsEx searches), 0 mismatches.
 
 The `Oniguruma differential` workflow (`.github/workflows/oniguruma-differential.yml`, manual and weekly) builds the
 oracle on Linux and runs it.
@@ -78,7 +79,8 @@ oracle on Linux and runs it.
    `Oniguruma-<version>-OnigurumaSyntax-Utf16-v1` (versioned flavor semantics: AGENTS.md, `docs/specs/flavors.md`),
    with the old profile kept as it is; only a release with no observable change may re-pin the existing profile, and
    then the differential below must still show zero mismatches against the old expectations.
-2. Build the oracle for the new tag, giving its commit SHA (`git ls-remote https://github.com/kkos/oniguruma <tag>`,
+2. Build the oracle for the new tag, giving its commit SHA (drop or rebase `not-code-range-underflow.patch` if the
+   release fixes or moves `not_code_range_buf`) (`git ls-remote https://github.com/kkos/oniguruma <tag>`,
    peeled `^{}` for an annotated tag): `native/build-oracle.sh <tag> <sha>`.
 3. Regenerate the Unicode tables: update the version and `PIN` in `generate.py`, run it on
    `artifacts/oniguruma/<tag>/src`, and review the diff (property names, ranges, folds, data identity in

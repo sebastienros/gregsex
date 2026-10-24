@@ -7,13 +7,16 @@ engine. Regenerate them with [`tools/oracles/oniguruma`](../../../tools/oracles/
 ## Oracle
 
 `tools/oracles/oniguruma/native/oracle.c` over Oniguruma tag v6.9.10 (commit 4ef89209a239c1aea328cf13c05a2807e5c146d1,
-Onigwrap 1.0.11's `ONIGURUMA_REF`), built from source by `build-oracle.sh`: `onig_new` with UTF-16LE,
+Onigwrap 1.0.11's `ONIGURUMA_REF`), built from source by `build-oracle.sh` with `not-code-range-underflow.patch` (a nested
+negated class holding U+0000 gets its true complement, as UTF-8 Oniguruma and so vscode-oniguruma compute it): `onig_new` with UTF-16LE,
 `ONIG_SYNTAX_DEFAULT` and `ONIG_OPTION_CAPTURE_GROUP`, then `onig_search` from each start to the end of the subject, as
 Onigwrap's `onigwrap_create`/`onigwrap_search` do. Patterns reach Oniguruma as written. Observations were recorded on
 macOS 15.8.1 arm64 (Apple clang 17.0.0, `-O2`; `liboniguruma-oracle.dylib` SHA-256
-`439e975452cf3ffd3304a2cc97ae58ec9e810054b537e850dd3c7d88af25398c`). This build reproduces byte for byte the
-`edge-cases.expected.json` and the former `grammar-cases.expected.json.gz` recorded earlier with Onigwrap 1.0.11's
-prebuilt `libonigwrap.dylib` (SHA-256 `5922d0c6c3cd31bfdf9997ea03d48d7aff952d891e8d46c2b9bfccd8d8160665`).
+`333a19f298d8a8693da530f0dc7d025e71cd7981160bb9420a1a12cd73efc0bf`). Without the patch (SHA-256
+`439e975452cf3ffd3304a2cc97ae58ec9e810054b537e850dd3c7d88af25398c`) the build reproduced byte for byte the expectations
+recorded earlier with Onigwrap 1.0.11's prebuilt `libonigwrap.dylib` (SHA-256
+`5922d0c6c3cd31bfdf9997ea03d48d7aff952d891e8d46c2b9bfccd8d8160665`); the patch changes one edge case and four CSS
+grammar patterns (`[...[^\x{00}-\x{7F}]]` identifiers).
 
 ## Files
 
@@ -44,8 +47,8 @@ Fetched by `tools/oracles/oniguruma/fetch-inputs.sh`:
 
 ## Integrity (SHA-256)
 
-- `edge-cases.json`: `e1beba98eb381b7dd0578b744335057e78b5dc8ac7f4ff381f7a9dd7ff38be49`
-- `edge-cases.expected.json`: `d9c4d0a8e5163e7f9fafe0b23183330c961dd357382e555b4c448a11359f0fea`
+- `edge-cases.json`: `2494e1a1a668fdbc2337c062cd75746ec121bd02c36a33a6e141a00cb456daa7`
+- `edge-cases.expected.json`: `784fcdf42c4089458d1dd077575c0a45ac7bd6ca6b773ae9ac6ae01a9480c000`
 - `grammar-cases.json.gz`: `5e3473d86b417ee92d7d29433a9d7eabffabe1f32ca4c2c28576911c0fe4f2f7`
-- `grammar-cases.expected.json.gz`: `604c220ec6af1f0dc4caaca85280fce5b2f0048f6e59aaa5d871457be8d3b1f1`
+- `grammar-cases.expected.json.gz`: `1845c1d73b7b5897c7142c7a3a8cf43346b6fd905944b1b83774198a16cfcfb4`
 - `LICENSE-tm-grammars.txt`: `e44aaac9beeffeaf1498b2111052ba2df4ac0986c3f4fffbefef89f23b007c67`

@@ -45,6 +45,23 @@ public class ApiTests
         Assert.Throws<RegexParseException>(() => OnigurumaPattern.Parse(source, RegexProfiles.OnigurumaTextMate));
     }
 
+    // A nested negated class holding U+0000 is its true complement, as UTF-8 Oniguruma (vscode-oniguruma) computes it,
+    // not every code point as UTF-16 not_code_range_buf's underflow makes it (issue #16).
+    [Theory]
+    [InlineData("[^\\x{00}-\\x{7F}]", " ", false)]
+    [InlineData("[a[^\\x{00}-\\x{7F}]]", " ", false)]
+    [InlineData("[a[^\\x{00}-\\x{7F}]]", "é", true)]
+    [InlineData("[a[^\\x{00}-b]]", "b", false)]
+    [InlineData("[a[^\\x{00}-b]]", "c", true)]
+    [InlineData("[a[^\\x{00}]]", "\0", false)]
+    [InlineData("[a[^\\x{00}]]", "x", true)]
+    [InlineData("[[-\\w][^\\x{00}-\\x{7F}]]", " ", false)]
+    [InlineData("[[-\\w][^\\x{00}-\\x{7F}]]", "-", true)]
+    [InlineData("[a-z&&[^\\x{00}-c]]", "c", false)]
+    [InlineData("[a-z&&[^\\x{00}-c]]", "d", true)]
+    public void NestedNegatedClassHoldingNulIsItsComplement(string source, string input, bool expected)
+        => Assert.Equal(expected ? RegexSearchStatus.Match : RegexSearchStatus.NoMatch, Pattern(source).CreateWorkspace().IsMatch(input));
+
     [Fact]
     public void LimitsAreDiagnosed()
     {

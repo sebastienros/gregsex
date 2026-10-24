@@ -3,7 +3,8 @@
 #
 #   tools/oracles/oniguruma/native/build-oracle.sh <tag> <commit-sha>
 #
-# Clones the tag into artifacts/oniguruma/<tag>/src, fails unless it is <commit-sha>, and compiles Oniguruma's library
+# Clones the tag into artifacts/oniguruma/<tag>/src, fails unless it is <commit-sha>, applies
+# not-code-range-underflow.patch, and compiles Oniguruma's library
 # sources and oracle.c with the system C compiler (no autotools or CMake) into
 # artifacts/oniguruma/<tag>/liboniguruma-oracle.{dylib,so}. Prints the library path.
 set -euo pipefail
@@ -23,6 +24,13 @@ actual="$(git -C "$src" rev-parse 'HEAD^{commit}')"
 if [ "$actual" != "$sha" ]; then
   echo "error: $tag is $actual, expected $sha" >&2
   exit 1
+fi
+
+# The profile's one deviation from the tag: a nested negated class holding U+0000 gets its true complement, as
+# UTF-8 Oniguruma (vscode-oniguruma) computes it, not the UTF-16 underflow (not-code-range-underflow.patch).
+patch="$here/not-code-range-underflow.patch"
+if ! git -C "$src" apply --reverse --check "$patch" 2>/dev/null; then
+  git -C "$src" apply "$patch"
 fi
 
 case "$(uname -s)" in
