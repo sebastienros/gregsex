@@ -69,6 +69,14 @@ internal static class OnigUnicode
         return false;
     }
 
+    private static OnigCharSet? s_standaloneWord;
+
+    // The word characters of \w, \W, \p{Word}, \P{Word}, \b and \B outside a bracket class. Oniguruma answers these
+    // ctype tests below U+0100 from EncUNICODE_ISO_8859_1_CtypeTable, which also marks U+00B2, U+00B3, U+00B9 and
+    // U+00BC-U+00BE (General_Category No) as word characters; bracket classes use CR_Word, which does not.
+    internal static OnigCharSet StandaloneWord
+        => s_standaloneWord ??= Property(Word).Union(OnigCharSet.Intern([0xB2, 0xB3, 0xB9, 0xB9, 0xBC, 0xBE]));
+
     internal static OnigCharSet Property(int property)
     {
         var set = Volatile.Read(ref s_properties[property]);
