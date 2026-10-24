@@ -57,3 +57,28 @@ The former `Oniguruma/TextMateScannerBenchmarks`, which replayed a TextMateSharp
 and `OnigurumaScanner`, was removed with that trace: the trace needed a hook in TextMateSharp and inputs that are not
 public. Scanner throughput is measured in TextMateSharp itself, against its tokenizer; GregsEx's correctness against
 native Oniguruma is covered by the [Oniguruma oracle](../tools/oracles/oniguruma/README.md).
+
+## ECMAScript: TextMate patterns
+
+`EcmaScript/TextMateLineSearch` searches every match per line, lastIndex-driven, for TextMate C# grammar patterns
+converted from Oniguruma to ES2025 (flags `dgv`, as Shiki's oniguruma-to-es converts them), against the source
+pattern under GregsEx's Oniguruma flavor; setup fails if the two disagree on the match count. Set
+`GREGSEX_TEXTMATE_CORPUS` to TextMateSharp's `bigfile.cs` for comparable numbers; without it the corpus is this
+repository's `src/GregsEx` sources.
+
+```bash
+GREGSEX_TEXTMATE_CORPUS=/path/to/bigfile.cs dotnet run -c Release --project benchmarks/GregsEx.Benchmarks -- --filter '*TextMateLineSearch*'
+```
+
+On bigfile.cs (5.8 MB, Apple M4 Pro, .NET 10, ShortRun), before and after the required-unit bound, the ASCII
+first-unit filter and the follow-filtered greedy give-back:
+
+| Pattern | ES before | ES after | Oniguruma |
+| --- | ---: | ---: | ---: |
+| element_access | 3,243.8 ms | 111.4 ms | 35.0 ms |
+| lookahead_bracket `(?=\[)` | 141.9 ms | 4.2 ms | 1.2 ms |
+| member_ident | 2,049.6 ms | 253.5 ms | 69.6 ms |
+| identifier (`\p{Alpha}`) | 153.1 ms | 49.0 ms | 22.8 ms |
+| identifier_ascii | 45.7 ms | 45.4 ms | 19.4 ms |
+| comment | 90.2 ms | 18.6 ms | 9.5 ms |
+| keywords | 56.9 ms | 59.5 ms | 31.5 ms |

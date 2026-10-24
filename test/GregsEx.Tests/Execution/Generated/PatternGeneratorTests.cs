@@ -135,5 +135,26 @@ public class PatternGeneratorTests
         var diagnostics = appOutput.GetDiagnostics(cancellation).Where(d => d.Severity >= DiagnosticSeverity.Warning).ToArray();
         Assert.Empty(diagnostics);
     }
-}
 
+    [Fact]
+    public void KernelsCompileWithoutImplicitUsings()
+    {
+        // Kernels call span extension methods (AsSpan, SequenceEqual, IndexOfAnyInRange); TextMateSharp's grammar
+        // project has no ImplicitUsings, so the generated file has to import System itself.
+        var references = ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!)
+            .Split(Path.PathSeparator)
+            .Where(path => !path.Contains("xunit", StringComparison.OrdinalIgnoreCase))
+            .Select(path => MetadataReference.CreateFromFile(path))
+            .ToList();
+        var cancellation = TestContext.Current.CancellationToken;
+        var compilation = CSharpCompilation.Create("App",
+            [CSharpSyntaxTree.ParseText(Wrap("""
+                [GeneratedPattern("prefix[a-z]+tail")] public static partial RegexPattern Literal();
+                [GeneratedPattern("(?:alpha|beta)[^\\n]*")] public static partial RegexPattern Branches();
+                """), cancellationToken: cancellation)],
+            references, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        CSharpGeneratorDriver.Create(NewGenerator()).RunGeneratorsAndUpdateCompilation(compilation, out var output, out _, cancellation);
+        Assert.Contains(output.SyntaxTrees, tree => tree.ToString().Contains(".AsSpan()", StringComparison.Ordinal));
+        Assert.Empty(output.GetDiagnostics(cancellation).Where(d => d.Severity == DiagnosticSeverity.Error));
+    }
+}

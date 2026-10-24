@@ -29,7 +29,7 @@ public sealed class CompositionLimitTests
         {
             output.AsSpan().Fill(sentinel);
             m.LastIndex = 0;
-            var status = captures ? m.Exec("aaaaaaaaaaaaaaac", output, out _, options) : m.Test("aaaaaaaaaaaaaaac", options);
+            var status = captures ? m.Exec("aaaaaaaaaaaaaaacb", output, out _, options) : m.Test("aaaaaaaaaaaaaaacb", options);
             Assert.Equal(RegexSearchStatus.LimitExceeded, status);
             var failure = m.LastFailure;
             Assert.Equal(RegexExecutionFailureCode.WorkLimitExceeded, failure.Code);

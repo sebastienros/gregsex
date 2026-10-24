@@ -776,6 +776,13 @@ internal sealed class EcmaAccelerator
     internal readonly SearchValues<char>? FirstChars;
     // FirstChars leaves out what a non-multiline ^ branch could start with, so the input's start is always a candidate.
     internal bool FirstCharsTryStart { get; private set; }
+    // See EcmaUnitFilters.BuildFirst: for a search none of the filters above covers, the ASCII units that can start a
+    // match (FirstUnitsExcept: those that cannot, any non-ASCII unit being able to).
+    internal readonly SearchValues<char>? FirstUnits;
+    internal readonly bool FirstUnitsExcept;
+    internal readonly bool FirstUnitsTryStart;
+    // See EcmaUnitFilters.BuildRequired: no match starts after the last of these units.
+    internal readonly SearchValues<char>? RequiredUnits;
     private StringSearchValues? _literalSearchValues;
 
     // The leading fixed strings of every branch (literals and small classes expanded), a superset prefilter for
@@ -986,12 +993,20 @@ internal sealed class EcmaAccelerator
         {
             FirstStrings = TryBuildFirstStrings(nodes, root);
             FirstChars = TryBuildFirstChars(nodes, root, caseTables);
+            if (FirstStrings is null && FirstChars is null)
+            {
+                FirstUnits = EcmaUnitFilters.BuildFirst(program, nodes, root, caseTables, out FirstUnitsExcept, out FirstUnitsTryStart);
+            }
         }
 
         if (TryExtractRequiredLiteral(nodes, root, minLengths, hasAmbiguousRepeat, out var reqLit, out var reqMinOffset))
         {
             RequiredLiteral = reqLit;
             RequiredLiteralMinOffset = reqMinOffset;
+        }
+        else if (!StartAnchoredNonMultiline)
+        {
+            RequiredUnits = EcmaUnitFilters.BuildRequired(program, nodes, root, caseTables);
         }
 
         _positionEligible = EcmaPositionMatcher.MayApply(program, nodes);
