@@ -30,3 +30,4 @@
 /src/GregsEx/Flavors/EcmaScript/Unicode/Unicode-LICENSE.txt text eol=lf
 /tools/oracles/ecmascript/** text=auto eol=lf
 /tools/unicode/ecmascript/** text=auto eol=lf
+*.snk binary
