@@ -129,8 +129,12 @@ backreference or condition can depend on where the run started; literal and sing
 
 ## Conformance evidence (OG-007)
 
-[`test/corpora/oniguruma`](../../test/corpora/oniguruma/README.md) holds native observations recorded through
-Onigwrap 1.0.11's `libonigwrap` (Oniguruma 6.9.10): hand-written edge cases, every pattern of the shellscript,
-typescript, javascript, html, css, json, yaml and csharp grammars of tm-grammars 1.32.22 over code lines, and 46,402
-TextMateSharp scanner calls with their selected pattern and captures. During development the same oracle agreed on
-the validity of all 22,489 distinct tm-grammars patterns and on 30.9 million searches over all 326 grammars.
+[`test/corpora/oniguruma`](../../test/corpora/oniguruma/README.md) holds native observations recorded with an
+oracle built from Oniguruma's source at tag v6.9.10 ([`tools/oracles/oniguruma`](../../tools/oracles/oniguruma/README.md)):
+hand-written edge cases and every pattern of the shellscript, typescript, javascript, html, css, json, yaml and csharp
+grammars of tm-grammars 1.32.22 over lines of the shikijs/textmate-grammars-themes samples. Scanner selection (earliest
+start, first pattern on a tie, stopping at a match at the offset, the per-string result cache, `\G` patterns not
+cached) has unit tests. The checked-in `oracle differential` compares GregsEx with that oracle over all 15,034
+distinct patterns of the 260 tm-grammars 1.32.22 grammars and every line of the 238 samples: on 2026-10-23 it agreed on
+the validity of every pattern (83 rejected by both) and on all 88,475,049 searches, apart from the OG-005 retry-limit
+boundary (95 native retry-limit errors: 92 LimitExceeded and 3 completed GregsEx searches).

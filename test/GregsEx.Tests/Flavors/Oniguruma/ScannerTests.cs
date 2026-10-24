@@ -23,6 +23,26 @@ public class ScannerTests
     }
 
     [Fact]
+    public void AMatchAtTheOffsetStopsTheScan()
+    {
+        // The second pattern exhausts a tiny work budget; it is only searched when the first does not match at the
+        // offset.
+        var options = new OnigurumaCompileOptions(defaultMatchLimits: new RegexMatchLimits(maxWork: 50));
+        var scanner = new OnigurumaScanner([
+            OnigurumaPattern.Parse("a", RegexProfiles.OnigurumaTextMate, options),
+            OnigurumaPattern.Parse("(x+x+)+(?=a)b", RegexProfiles.OnigurumaTextMate, options)]);
+        const string line = "axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxa";
+        Assert.True(scanner.FindNextMatch(line.AsSpan(), 0, out var index));
+        Assert.Equal(0, index);
+        Assert.Equal(0, scanner.LimitExceededCount);
+
+        Assert.True(scanner.FindNextMatch(line.AsSpan(), 1, out index));
+        Assert.Equal(0, index);
+        Assert.Equal(line.Length - 1, scanner.Captures[0].Index);
+        Assert.Equal(1, scanner.LimitExceededCount);
+    }
+
+    [Fact]
     public void CapturesAreThoseOfTheSelectedPattern()
     {
         var scanner = Scanner("(x)(y)?", "(a)");

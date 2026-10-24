@@ -20,50 +20,14 @@ public class CorpusTests
 
     [Fact]
     public void GrammarPatternsMatchNativeOniguruma()
-        => AssertCases(Read("grammar-cases.json.gz"), Read("grammar-cases.expected.json.gz"), minimumOutcomes: 29000);
-
-    [Fact]
-    public void TextMateScannerCallsMatchNativeOniguruma()
-    {
-        var trace = Read("trace.json.gz").AsObject();
-        var expected = Read("trace.expected.json.gz").AsObject();
-        var calls = 0;
-        foreach (var (language, node) in trace)
-        {
-            var patterns = node!["patterns"]!.AsArray().Select(p => OnigurumaPattern.Parse(p!.GetValue<string>(), RegexProfiles.OnigurumaTextMate, Options)).ToArray();
-            var scanners = node["scanners"]!.AsArray()
-                .Select(s => new OnigurumaScanner(s!.AsArray().Select(i => patterns[i!.GetValue<int>()]).ToArray())).ToArray();
-            var lines = node["lines"]!.AsArray().Select(l => l!.GetValue<string>()).ToArray();
-            var flat = node["calls"]!.AsArray().Select(c => c!.GetValue<int>()).ToArray();
-            var outcomes = expected[language]!.AsArray();
-            Assert.Equal(flat.Length / 3, outcomes.Count);
-            for (var c = 0; c < flat.Length; c += 3)
-            {
-                var scanner = scanners[flat[c]];
-                var found = scanner.FindNextMatch(lines[flat[c + 1]].AsSpan(), flat[c + 2], out var index);
-                var outcome = outcomes[c / 3];
-                var context = $"{language} call {c / 3}";
-                if (outcome is null)
-                {
-                    Assert.False(found, context);
-                    continue;
-                }
-
-                Assert.True(found, context);
-                Assert.Equal(outcome[0]!.GetValue<int>(), index);
-                Assert.Equal(outcome[1]!.ToJsonString(), Captures(scanner.Captures));
-                calls++;
-            }
-        }
-        Assert.True(calls > 10000, $"{calls} matching calls");
-    }
+        => AssertCases(Read("grammar-cases.json.gz"), Read("grammar-cases.expected.json.gz"), minimumOutcomes: 28000);
 
     [Fact]
     public void RetainedFilesMatchTheirRecordedHashes()
     {
         var readme = File.ReadAllText(Path.Combine(CorpusDirectory(), "README.md"));
         var entries = Regex.Matches(readme, @"- `([^`]+)`: `([0-9a-f]{64})`");
-        Assert.Equal(7, entries.Count);
+        Assert.Equal(5, entries.Count);
         foreach (Match entry in entries)
         {
             var hash = Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(Path.Combine(CorpusDirectory(), entry.Groups[1].Value))));
