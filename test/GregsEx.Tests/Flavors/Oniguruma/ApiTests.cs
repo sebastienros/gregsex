@@ -333,4 +333,19 @@ public class ApiTests
         Assert.Equal(RegexSearchStatus.NoMatch, Find("\\Ax" + c + "\\b", "x" + text + "y").Status);
         Assert.Equal(RegexSearchStatus.Match, Find("(?W)\\Ax\\b", "x" + text).Status);
     }
+
+    // Under ignore-case a bracket class also gets the code points that fold to the same several code points as a member.
+    [Theory]
+    [InlineData("\u00DF", "\u1E9E")] // ß, ẞ: ss
+    [InlineData("\u1F80", "\u1F88")] // ᾀ, ᾈ: ἀι
+    [InlineData("\u1FB3", "\u1FBC")] // ᾳ, ᾼ: αι
+    public void IgnoreCaseClassesCloseOverMultiCodePointFolds(string lower, string upper)
+    {
+        Assert.Equal(RegexSearchStatus.Match, Find("(?i)\\A[" + lower + "]\\z", upper).Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("(?i)\\A[" + upper + "]\\z", lower).Status);
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("(?i)\\A[^" + lower + "]", upper).Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("(?i)\\A[[:lower:]]\\z", upper).Status);
+        Assert.Equal(RegexSearchStatus.Match, Find("(?i)\\A[\\p{Lu}\\p{Lt}]\\z", lower).Status);
+        Assert.Equal(RegexSearchStatus.NoMatch, Find("\\A[" + lower + "]", upper).Status);
+    }
 }
