@@ -13,6 +13,8 @@ public class OnigurumaBacktracking
     private const string FuzzLine = "wwqqwwwwwwwwwwwwwwwwwwwwquotewordswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwthrows_okwwwwwwwwgetloginwwheredocwwwwwwww/>wwwwwwwwww{ww[[wwww((wwwwww wwww]wwKEEPwwxxwwww/wwwwwwygawwwwwwwwq4uncy70vwwwwww[wwrr9b4yndwwwwww*/wwwwwwwwwwsupersedewwwwwwwwwwwwwwww'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\twwww6n9d2gwwwwasecwwwwxxwwww>wwasinhwwwwwwwwwwwwßwwwwww\"wwwwwwwwwwwwwwwwww\"wwww6mww>wwwwwwwwforkwwwwvwwww'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwGraphemewwRangewwwwwwis_deeplywwwwwwwwwwwwwwwwwwwwwwwwrewinddirwwwwww[wwwwwwwwwwwwwwwwww\"wwwwwwwwwwwwww]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]";
 
     private OnigurumaWorkspace _quote = null!;
+    private OnigurumaScanner _giveUpScanner = null!;
+    private string _giveUpLine = null!;
     private OnigurumaWorkspace _reduced = null!;
     private string _reducedInput = null!;
 
@@ -22,6 +24,25 @@ public class OnigurumaBacktracking
         _quote = OnigurumaPattern.Parse(QuoteRule, RegexProfiles.OnigurumaTextMate).CreateWorkspace();
         _reduced = OnigurumaPattern.Parse(@"q(w|ww)*(w|ww)*\(\(", RegexProfiles.OnigurumaTextMate).CreateWorkspace();
         _reducedInput = "q" + new string('w', 22) + "x((";
+        var limited = new OnigurumaCompileOptions(defaultMatchLimits: new RegexMatchLimits(maxWork: 100_000));
+        _giveUpScanner = new OnigurumaScanner([OnigurumaPattern.Parse(@"(x+x+)+(?=a)b|y", RegexProfiles.OnigurumaTextMate, limited)]);
+        _giveUpLine = new string('x', 64) + "ay";
+    }
+
+    // A tokenizer searching one line from successive offsets with a pattern that runs out of work at each of them, as
+    // TextMateSharp's fuzzer inputs do: past the scanner's bounded retries, offsets reuse the give-up instead of each
+    // exhausting a fresh budget.
+    [Benchmark]
+    public int ScannerGiveUpAcrossOffsets()
+    {
+        // A new string each call, so the scanner's cache does not carry over between iterations.
+        var line = new string(_giveUpLine.AsSpan());
+        var misses = 0;
+        for (var offset = 0; offset < 64; offset++)
+        {
+            misses += _giveUpScanner.FindNextMatch(line, offset, out _) ? 0 : 1;
+        }
+        return misses;
     }
 
     [Benchmark]

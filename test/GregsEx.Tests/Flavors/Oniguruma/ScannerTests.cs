@@ -58,6 +58,29 @@ public class ScannerTests
     }
 
     [Fact]
+    public void AGiveUpIsSearchedAgainABoundedNumberOfTimes()
+    {
+        // Every offset in the x run exhausts the budget. The first searches after a give-up are fresh; past
+        // GiveUpRetries, later offsets of the string reuse the give-up, even one a fresh search would match from.
+        var options = new OnigurumaCompileOptions(defaultMatchLimits: new RegexMatchLimits(maxWork: 50));
+        var scanner = new OnigurumaScanner([OnigurumaPattern.Parse("(x+x+)+(?=a)b|y", RegexProfiles.OnigurumaTextMate, options)]);
+        var line = new string('x', 40) + "ay";
+        for (var offset = 0; offset <= OnigurumaScanner.GiveUpRetries + 2; offset++)
+        {
+            Assert.False(scanner.FindNextMatch(line, offset, out _));
+        }
+        Assert.False(scanner.FindNextMatch(line, 41, out _));
+        Assert.Equal(OnigurumaScanner.GiveUpRetries + 4, scanner.LimitExceededCount);
+
+        // A new string starts over.
+        line = new string(line.AsSpan());
+        Assert.False(scanner.FindNextMatch(line, 0, out _));
+        Assert.True(scanner.FindNextMatch(line, 41, out var index));
+        Assert.Equal(0, index);
+        Assert.Equal(41, scanner.Captures[0].Index);
+    }
+
+    [Fact]
     public void CapturesAreThoseOfTheSelectedPattern()
     {
         var scanner = Scanner("(x)(y)?", "(a)");

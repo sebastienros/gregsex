@@ -30,6 +30,9 @@ internal sealed class OnigMatcher
     // plus the units runs consume.
     internal long LastWork => _work;
 
+    // Where the last attempt started: after a LimitExceeded search, every start before it was explored without a match.
+    internal int LastAttemptStart { get; private set; }
+
     // The current search's budget, cancellation and deadline (a Stopwatch timestamp, long.MaxValue for none).
     // Work is checked against _stopAt alone: the budget, or the next poll of the cancellation and the clock.
     private const long PollStride = 4096;
@@ -586,6 +589,7 @@ internal sealed class OnigMatcher
 
     private RegexSearchStatus Attempt(OnigProgram program, ReadOnlySpan<char> input, int start, int searchStart, Span<int> captures)
     {
+        LastAttemptStart = start;
         if (++_work > _stopAt && !Checkpoint(_work, out var stop))
         {
             return stop;
