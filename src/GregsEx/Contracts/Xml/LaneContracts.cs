@@ -43,13 +43,13 @@ internal interface IXmlClassAlgebra
         SourceRange source, out XmlInterval[]? intervals, out RegexDiagnostic diagnostic);
 }
 
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
 internal interface IXmlTextReader<TUnit> where TUnit : unmanaged
 {
     // Whole subject encoding AND XML Char validation before start-boundary
     // validation; every inspected native unit charged in the same RunState.
-    static abstract RegexSearchStatus Validate(ReadOnlySpan<TUnit> input, int startAt, ref RunState state);
-    static abstract bool TryRead(ReadOnlySpan<TUnit> input, int offset, out int scalar, out int width);
+    RegexSearchStatus Validate(ReadOnlySpan<TUnit> input, int startAt, ref RunState state);
+    bool TryRead(ReadOnlySpan<TUnit> input, int offset, out int scalar, out int width);
 }
 #endif
 
@@ -64,7 +64,7 @@ internal interface IXmlExecutor
 {
     XmlProgram Program { get; }
     RegexWorkspaceCapacity GetRequiredCapacity(SearchOperation operation, int frameCapacity);
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
     // Both methods receive the SAME positive finite frameCapacity. Search
     // enforces it even when buffers have spare capacity, and checks that each
     // supplied logical partition covers GetRequiredCapacity for this request.

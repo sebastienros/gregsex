@@ -59,7 +59,7 @@ internal sealed class StartScan
     private readonly byte[]? _bytes;
     private readonly SearchValues<char>? _charSet;
     private readonly SearchValues<byte>? _byteSet;
-    private readonly SearchValues<string>? _stringSet;
+    private readonly StringSearchValues? _stringSet;
     private readonly bool _isStartAnchored;
     private readonly bool _isEndAnchored;
     private readonly char[]? _requiredChars;
@@ -89,7 +89,7 @@ internal sealed class StartScan
         byte[]? bytes,
         SearchValues<char>? charSet,
         SearchValues<byte>? byteSet,
-        SearchValues<string>? stringSet,
+        StringSearchValues? stringSet,
         int prefixLength,
         bool isStartAnchored,
         bool isEndAnchored,
@@ -414,7 +414,7 @@ internal sealed class StartScan
         }
 
         var altArr = alts.ToArray();
-        var stringSet = SearchValues.Create(altArr, StringComparison.Ordinal);
+        var stringSet = StringSearch.Create(altArr);
         var charSet = SearchValues.Create(firstChars.ToArray());
         scan = new(null, null, charSet, null, stringSet, 1, false, false, null, null,
             fastKind: CoreFastKind.LiteralAlternation, groupCount: 1, altStrings: altArr);

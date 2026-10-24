@@ -319,11 +319,14 @@ public sealed class JintRegressionTests
                     var expected = EcmaFastSet.ContainsInterval(intervals,
                         EcmaFastSet.Fold(c, unicodeAware: false, ignoreCase, unicode.CaseTables));
                     Assert.True(expected == set.MatchesSingleChar((char)c), $"{pattern} {flags} {version} U+{c:X4}");
+#if !GREGSEX_NETSTANDARD_ASSET
+                    // The netstandard2.0 asset holds its own polyfilled SearchValues type.
                     if (set.BmpBitsIsExact && set.SearchValues is { } values)
                     {
                         Assert.True(expected == (values.Contains((char)c) != set.IsNegatedSearchValues),
                             $"{pattern} {flags} {version} SearchValues U+{c:X4}");
                     }
+#endif
                 }
             }
         }

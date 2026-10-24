@@ -117,11 +117,13 @@ public class UnicodeVersionTests
             var interpreted = RegexPattern.Parse(source, profile);
             Assert.Equal(added, interpreted.IsMatch("\uA7CFx"));
             Assert.Equal(added, RegexPattern.Parse(source, profile, new(executionMode: RegexExecutionMode.Auto)).IsMatch("\uA7CFx"));
+#if !GREGSEX_NETSTANDARD_ASSET
             var compiled = interpreted.Compile();
             Assert.Equal(RegexExecutionBackend.Compiled, compiled.ExecutionBackend);
             Assert.Same(profile, compiled.Profile);
             Assert.Equal(added, compiled.IsMatch("\uA7CFx"));
             Assert.True(compiled.IsMatch("ax"));
+#endif
         }
     }
 

@@ -10,7 +10,7 @@ namespace GregsEx.Execution.Pcre2.Controls;
 
 internal interface IPcre2CalloutDriver<TUnit, TCallbacks> where TUnit : unmanaged where TCallbacks : class
 {
-    static abstract Pcre2Step Invoke(Pcre2Program program, ReadOnlySpan<TUnit> input,
+    Pcre2Step Invoke(Pcre2Program program, ReadOnlySpan<TUnit> input,
         TCallbacks? callbacks, Span<Pcre2OffsetPair> callbackPairs,
         ref Pcre2ControlState controls, ref Pcre2VmState machine, ref RunState state);
 }
@@ -20,6 +20,8 @@ internal readonly struct Pcre2CharCalloutDriver : IPcre2CalloutDriver<char, Pcre
         Pcre2CharCallbacks? callbacks, Span<Pcre2OffsetPair> callbackPairs,
         ref Pcre2ControlState controls, ref Pcre2VmState machine, ref RunState state) =>
         Pcre2Callouts.Invoke(program, input, callbacks, callbackPairs, ref controls, ref machine, ref state);
+
+    Pcre2Step IPcre2CalloutDriver<char, Pcre2CharCallbacks>.Invoke(Pcre2Program program, ReadOnlySpan<char> input, Pcre2CharCallbacks? callbacks, Span<Pcre2OffsetPair> callbackPairs, ref Pcre2ControlState controls, ref Pcre2VmState machine, ref RunState state) => Invoke(program, input, callbacks, callbackPairs, ref controls, ref machine, ref state);
 }
 internal readonly struct Pcre2ByteCalloutDriver : IPcre2CalloutDriver<byte, Pcre2ByteCallbacks>
 {
@@ -27,6 +29,8 @@ internal readonly struct Pcre2ByteCalloutDriver : IPcre2CalloutDriver<byte, Pcre
         Pcre2ByteCallbacks? callbacks, Span<Pcre2OffsetPair> callbackPairs,
         ref Pcre2ControlState controls, ref Pcre2VmState machine, ref RunState state) =>
         Pcre2Callouts.Invoke(program, input, callbacks, callbackPairs, ref controls, ref machine, ref state);
+
+    Pcre2Step IPcre2CalloutDriver<byte, Pcre2ByteCallbacks>.Invoke(Pcre2Program program, ReadOnlySpan<byte> input, Pcre2ByteCallbacks? callbacks, Span<Pcre2OffsetPair> callbackPairs, ref Pcre2ControlState controls, ref Pcre2VmState machine, ref RunState state) => Invoke(program, input, callbacks, callbackPairs, ref controls, ref machine, ref state);
 }
 
 internal readonly partial struct Pcre2Controls
@@ -67,7 +71,7 @@ internal readonly partial struct Pcre2Controls
         var node = program.Nodes[machine.Node];
         if (node.Kind == Pcre2NodeKind.Callout)
         {
-            return TDriver.Invoke(program, input, callbacks, callbackPairs, ref controls, ref machine, ref state);
+            return default(TDriver).Invoke(program, input, callbacks, callbackPairs, ref controls, ref machine, ref state);
         }
 
         if (node.Kind == Pcre2NodeKind.ResetStart)

@@ -40,7 +40,7 @@ internal sealed class AssertionFixture
         }
 
         var maxBehind = Program.Assertions.ToArray().Select(a => Math.Max(0, a.MaximumLength)).DefaultIfEmpty(0).Max();
-        var validation = TReader.Validate(input, start, maxBehind, Program.Profile, options.Flags, Pcre2ValidationPolicy.NativeWindow, ref state);
+        var validation = default(TReader).Validate(input, start, maxBehind, Program.Profile, options.Flags, Pcre2ValidationPolicy.NativeWindow, ref state);
         if (!validation.Valid)
         {
             return state.Failure.Code != RegexExecutionFailureCode.None ? Pcre2Kernel.Failure(ref machine, ref state) :
@@ -92,7 +92,7 @@ internal sealed class AssertionFixture
                 return Pcre2Kernel.Publish(Program, ref machine, ref state, pairs);
             }
 
-            var next = TReader.AdvanceAfterEmpty(input, machine.CandidateStart, Program.Profile, ref state);
+            var next = default(TReader).AdvanceAfterEmpty(input, machine.CandidateStart, Program.Profile, ref state);
             if (state.Failure.Code != RegexExecutionFailureCode.None)
             {
                 return Pcre2Kernel.Failure(ref machine, ref state);

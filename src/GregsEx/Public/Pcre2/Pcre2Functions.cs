@@ -90,7 +90,7 @@ public static class Pcre2Functions
         var output = new string[count];
         for (var i = 0; i < count; i++)
         {
-            output[i] = pairs[i].Participated ? new string(subject.Slice(pairs[i].Start, ListLength(subject.Length, pairs[i]))) : string.Empty;
+            output[i] = pairs[i].Participated ? subject.Slice(pairs[i].Start, ListLength(subject.Length, pairs[i])).ToString() : string.Empty;
         }
 
         return output;

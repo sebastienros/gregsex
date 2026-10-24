@@ -15,7 +15,11 @@ public class ValueStringBuilderTests
         builder.Append("c");
         builder.Append("de");
         builder.Append("_fg".AsSpan(1));
+#if GREGSEX_NETSTANDARD_ASSET
+        builder.Append("42");
+#else
         builder.Append(42, provider: CultureInfo.InvariantCulture);
+#endif
         builder.AppendScalar(0x1F600);
         var span = builder.GetSpan(2);
         span[0] = '!';

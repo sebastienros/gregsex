@@ -136,7 +136,7 @@ internal sealed class KernelFixture
             return Pcre2Kernel.Failure(ref machine, ref state);
         }
         // Concrete fragment binding is tested by byte/char methods separately.
-        var validation = TReader.Validate(input, start, Program.Nodes.ToArray().Any(n => n.Kind is Pcre2NodeKind.WordBoundary or Pcre2NodeKind.NotWordBoundary) ? 1 : 0, Program.Profile,
+        var validation = default(TReader).Validate(input, start, Program.Nodes.ToArray().Any(n => n.Kind is Pcre2NodeKind.WordBoundary or Pcre2NodeKind.NotWordBoundary) ? 1 : 0, Program.Profile,
             options.Flags | Program.PatternMatchFlags, Pcre2ValidationPolicy.NativeWindow, ref state);
         if (!validation.Valid)
         {
@@ -173,7 +173,7 @@ internal sealed class KernelFixture
                 return Pcre2Kernel.Publish(Program, ref machine, ref state, pairs);
             }
 
-            var next = TReader.AdvanceAfterEmpty(input, machine.CandidateStart, Program.Profile, ref state);
+            var next = default(TReader).AdvanceAfterEmpty(input, machine.CandidateStart, Program.Profile, ref state);
             if (state.Failure.Code != RegexExecutionFailureCode.None)
             {
                 return Pcre2Kernel.Failure(ref machine, ref state);

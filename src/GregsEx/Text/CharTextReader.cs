@@ -107,4 +107,7 @@ internal readonly struct CharTextReader : ITextReader<char>
         width = 2;
         return true;
     }
+
+    RegexSearchStatus ITextReader<char>.Validate(ReadOnlySpan<char> input, int startAt, ProfileDescriptor profile, ref RunState state) => Validate(input, startAt, profile, ref state);
+    bool ITextReader<char>.TryRead(ReadOnlySpan<char> input, int offset, ProfileDescriptor profile, out int value, out int width) => TryRead(input, offset, profile, out value, out width);
 }

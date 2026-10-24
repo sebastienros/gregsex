@@ -65,7 +65,7 @@ internal readonly partial struct Pcre2Kernel
                 }
 
                 if (!matches && program.Profile.Newline == Pcre2Newline.Crlf && machine.Position == machine.VisibleEnd - 1 &&
-                    TReader.Read(input, machine.Position, machine.VisibleEnd, true, program.Profile, ref state).Value == 13 &&
+                    default(TReader).Read(input, machine.Position, machine.VisibleEnd, true, program.Profile, ref state).Value == 13 &&
                     Partial(flags, ref machine, ref state, true))
                 {
                     return new(Pcre2StepKind.Partial);
@@ -77,7 +77,7 @@ internal readonly partial struct Pcre2Kernel
                 bool previous = false, current = false;
                 if (machine.Position > ScanStart(ref state))
                 {
-                    var before = TReader.ReadPrevious(input, machine.Position, program.Profile, ref state);
+                    var before = default(TReader).ReadPrevious(input, machine.Position, program.Profile, ref state);
                     if (before.Status == Pcre2ReadStatus.Value && machine.Position - before.Width >= ScanStart(ref state))
                     {
                         if (!RecordEarliestRead(machine.Position - before.Width, ref machine, ref state))
@@ -88,7 +88,7 @@ internal readonly partial struct Pcre2Kernel
                         previous = Pcre2CharacterOps.Word(before.Value, node.Flags, node.ExtraFlags, data);
                     }
                 }
-                var after = TReader.Read(input, machine.Position, machine.VisibleEnd, false, program.Profile, ref state);
+                var after = default(TReader).Read(input, machine.Position, machine.VisibleEnd, false, program.Profile, ref state);
                 if (after.Status == Pcre2ReadStatus.Value)
                 {
                     if (!UpdateLastUsedPosition(machine.Position + after.Width, ref machine, ref state))
@@ -112,7 +112,7 @@ internal readonly partial struct Pcre2Kernel
             case Pcre2NodeKind.Newline:
                 var previousFailure = state.Failure;
                 var interiorRead = false;
-                var read = TReader.Read(input, machine.Position, machine.VisibleEnd,
+                var read = default(TReader).Read(input, machine.Position, machine.VisibleEnd,
                     node.Kind == Pcre2NodeKind.CodeUnit || Pcre2CharacterOps.LiteralUsesUnit(node, data), program.Profile, ref state);
                 if (program.HasBackslashC && program.Profile.Utf && read.Status == Pcre2ReadStatus.InvalidBarrier &&
                     previousFailure.Code == RegexExecutionFailureCode.None && state.Failure.Code == RegexExecutionFailureCode.InvalidEncoding)
@@ -121,7 +121,7 @@ internal readonly partial struct Pcre2Kernel
                     // scalar. GETCHAR treats an interior unit as its own value;
                     // code-unit admission still proves the original scalar valid.
                     state.Failure = previousFailure;
-                    read = TReader.Read(input, machine.Position, machine.VisibleEnd, true, program.Profile, ref state);
+                    read = default(TReader).Read(input, machine.Position, machine.VisibleEnd, true, program.Profile, ref state);
                     interiorRead = read.Status == Pcre2ReadStatus.Value;
                     if (read.Status == Pcre2ReadStatus.Value && node.Kind == Pcre2NodeKind.Dot &&
                         program.Profile.Width == Pcre2CodeUnitWidth.Eight)
@@ -129,7 +129,7 @@ internal readonly partial struct Pcre2Kernel
                         var units = 1;
                         while (machine.Position + units < machine.VisibleEnd)
                         {
-                            var nextUnit = TReader.Read(input, machine.Position + units, machine.VisibleEnd, true, program.Profile, ref state);
+                            var nextUnit = default(TReader).Read(input, machine.Position + units, machine.VisibleEnd, true, program.Profile, ref state);
                             if (nextUnit.Status != Pcre2ReadStatus.Value || (nextUnit.Value & 0xC0) != 0x80)
                             {
                                 break;
@@ -181,7 +181,7 @@ internal readonly partial struct Pcre2Kernel
                 };
                 if (matches && node.Kind == Pcre2NodeKind.Newline && read.Value == 13 && machine.Position + width < machine.VisibleEnd)
                 {
-                    var next = TReader.Read(input, machine.Position + width, machine.VisibleEnd, false, program.Profile, ref state);
+                    var next = default(TReader).Read(input, machine.Position + width, machine.VisibleEnd, false, program.Profile, ref state);
                     if (next.Status == Pcre2ReadStatus.Value && next.Value == 10)
                     {
                         width += next.Width;
@@ -259,7 +259,7 @@ internal readonly partial struct Pcre2Kernel
         Pcre2Profile profile, ref RunState state)
         where TUnit : unmanaged where TReader : struct, IPcre2TextReader<TUnit>
     {
-        var read = TReader.Read(input, position, end, false, profile, ref state);
+        var read = default(TReader).Read(input, position, end, false, profile, ref state);
         if (state.Failure.Code != RegexExecutionFailureCode.None || read.Status != Pcre2ReadStatus.Value)
         {
             return 0;
@@ -267,7 +267,7 @@ internal readonly partial struct Pcre2Kernel
 
         if (read.Value == 13 && profile.Newline is Pcre2Newline.Crlf or Pcre2Newline.Any or Pcre2Newline.Anycrlf)
         {
-            var next = TReader.Read(input, position + read.Width, end, false, profile, ref state);
+            var next = default(TReader).Read(input, position + read.Width, end, false, profile, ref state);
             if (next.Status == Pcre2ReadStatus.Value && next.Value == 10)
             {
                 return read.Width + next.Width;
@@ -295,7 +295,7 @@ internal readonly partial struct Pcre2Kernel
             return false;
         }
 
-        var before = TReader.ReadPrevious(input, machine.Position, profile, ref state);
+        var before = default(TReader).ReadPrevious(input, machine.Position, profile, ref state);
         if (before.Status != Pcre2ReadStatus.Value || machine.Position - before.Width < floor)
         {
             return false;
@@ -304,7 +304,7 @@ internal readonly partial struct Pcre2Kernel
         var begin = machine.Position - before.Width;
         if (before.Value == 10 && profile.Newline is Pcre2Newline.Crlf or Pcre2Newline.Any or Pcre2Newline.Anycrlf && begin > floor)
         {
-            var earlier = TReader.ReadPrevious(input, begin, profile, ref state);
+            var earlier = default(TReader).ReadPrevious(input, begin, profile, ref state);
             if (earlier.Status == Pcre2ReadStatus.Value && earlier.Value == 13 && begin - earlier.Width >= floor)
             {
                 begin -= earlier.Width;

@@ -1,6 +1,6 @@
 # Performance specification
 
-Target: .NET 10. The [research note](../research/engine-techniques.md) records sources and candidate techniques; this specification defines the requirements for adopting them.
+Target: .NET 10. The net8.0 and netstandard2.0 assets share the code and results but may use slower fallbacks (see [platforms](../release/platforms.md)); performance requirements apply to net10.0. The [research note](../research/engine-techniques.md) records sources and candidate techniques; this specification defines the requirements for adopting them.
 
 ## Contracts and accounting
 

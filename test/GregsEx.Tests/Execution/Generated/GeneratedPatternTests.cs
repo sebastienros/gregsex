@@ -48,6 +48,7 @@ public class GeneratedPatternTests
         "walkedwalkedwalked!", string.Concat(Enumerable.Repeat("xx 12 winning walked ", 50)),
     ];
 
+#if !GREGSEX_NETSTANDARD_ASSET
     [Theory]
     [MemberData(nameof(Cases))]
     public void GeneratedKernelsReportCompiledAndAgreeWithTheInterpreter(string name)
@@ -79,6 +80,7 @@ public class GeneratedPatternTests
             }
         }
     }
+#endif
 
     [Fact]
     public void AHandWrittenAcceleratedPatternStaysOffTheGeneratedPath()

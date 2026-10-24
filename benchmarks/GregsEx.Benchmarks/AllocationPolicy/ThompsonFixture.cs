@@ -68,7 +68,7 @@ internal static class ThompsonFixture
     // validated readers; these make lane behavior executable without sibling implementation.
     private readonly struct CharReader : ITextReader<char>
     {
-        public static RegexSearchStatus Validate(ReadOnlySpan<char> input, int startAt, ProfileDescriptor profile, ref RunState state)
+        public readonly RegexSearchStatus Validate(ReadOnlySpan<char> input, int startAt, ProfileDescriptor profile, ref RunState state)
         {
             for (var offset = 0; offset < input.Length;)
             {
@@ -81,7 +81,7 @@ internal static class ThompsonFixture
             { state.Failure = new(RegexExecutionFailureCode.InvalidStartBoundary, startAt, state.Budget.WorkConsumed); return RegexSearchStatus.InvalidInput; }
             return RegexSearchStatus.NoMatch;
         }
-        public static bool TryRead(ReadOnlySpan<char> input, int offset, ProfileDescriptor profile, out int value, out int width)
+        public readonly bool TryRead(ReadOnlySpan<char> input, int offset, ProfileDescriptor profile, out int value, out int width)
         {
             value = width = 0;
             if (offset == input.Length) return false;
@@ -94,7 +94,7 @@ internal static class ThompsonFixture
 
     private readonly struct ByteReader : ITextReader<byte>
     {
-        public static RegexSearchStatus Validate(ReadOnlySpan<byte> input, int startAt, ProfileDescriptor profile, ref RunState state)
+        public readonly RegexSearchStatus Validate(ReadOnlySpan<byte> input, int startAt, ProfileDescriptor profile, ref RunState state)
         {
             for (var offset = 0; offset < input.Length;)
             {
@@ -107,7 +107,7 @@ internal static class ThompsonFixture
             { state.Failure = new(RegexExecutionFailureCode.InvalidStartBoundary, startAt, state.Budget.WorkConsumed); return RegexSearchStatus.InvalidInput; }
             return RegexSearchStatus.NoMatch;
         }
-        public static bool TryRead(ReadOnlySpan<byte> input, int offset, ProfileDescriptor profile, out int value, out int width)
+        public readonly bool TryRead(ReadOnlySpan<byte> input, int offset, ProfileDescriptor profile, out int value, out int width)
         {
             value = width = 0;
             if (offset == input.Length) return false;

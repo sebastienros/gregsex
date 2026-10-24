@@ -57,7 +57,11 @@ public sealed class PatternGenerator : IIncrementalGenerator
         context.RegisterPostInitializationOutput(static c => c.AddSource("GregsEx.GeneratedPatternAttribute.g.cs", AttributeSource));
         var specs = context.SyntaxProvider.ForAttributeWithMetadataName(AttributeMetadataName,
             static (node, _) => node is MethodDeclarationSyntax, Transform).WithTrackingName("Specs");
-        context.RegisterSourceOutput(specs, Emit);
+        // Emitted kernels bind .NET 8+ span APIs (SearchValues, IndexOfAnyInRange); older targets such as
+        // netstandard2.0 get the interpreted pattern instead, reported through GREGEX003.
+        var kernels = context.CompilationProvider.Select(static (compilation, _) =>
+            compilation.GetTypeByMetadataName("System.MemoryExtensions")?.GetMembers("IndexOfAnyInRange").Length > 0);
+        context.RegisterSourceOutput(specs.Combine(kernels), static (c, pair) => Emit(c, pair.Left, pair.Right));
     }
 
     private static PatternSpec Transform(GeneratorAttributeSyntaxContext context, System.Threading.CancellationToken cancellationToken)
@@ -165,7 +169,7 @@ public sealed class PatternGenerator : IIncrementalGenerator
             unicodeVersion, error, location);
     }
 
-    private static void Emit(SourceProductionContext context, PatternSpec spec)
+    private static void Emit(SourceProductionContext context, PatternSpec spec, bool kernels)
     {
         var location = spec.Location.ToLocation();
         if (spec.Error is not null)
@@ -220,6 +224,11 @@ public sealed class PatternGenerator : IIncrementalGenerator
         members.AppendLine($"private static global::GregsEx.RegexPattern? __GregsEx_{name}_Cache;");
         members.AppendLine($"{spec.Accessibility} static partial global::GregsEx.RegexPattern {name}() => __GregsEx_{name}_Cache ??= __GregsEx_{name}_Create();");
 
+        if (plan is not null && !kernels)
+        {
+            plan = null;
+            reason = "generated kernels require .NET 8 or later";
+        }
         if (plan is not null)
         {
             members.AppendLine($"private static global::GregsEx.RegexPattern __GregsEx_{name}_Create() =>");

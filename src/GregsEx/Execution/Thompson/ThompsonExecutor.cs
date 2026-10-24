@@ -95,7 +95,7 @@ internal sealed class ThompsonExecutor : IRegularExecutor
             status = Finish(FailureStatus(state), operation, groups);
             return false;
         }
-        var validation = TReader.Validate(input, startAt, _program.Profile, ref state);
+        var validation = default(TReader).Validate(input, startAt, _program.Profile, ref state);
         if (validation != RegexSearchStatus.NoMatch)
         {
             status = Finish(validation, operation, groups);
@@ -202,7 +202,7 @@ internal sealed class ThompsonExecutor : IRegularExecutor
                 return Finish(FailureStatus(state), operation, groups);
             }
 
-            if (!TReader.TryRead(input, offset, _program.Profile, out var value, out var width) ||
+            if (!default(TReader).TryRead(input, offset, _program.Profile, out var value, out var width) ||
                 width <= 0 || width > input.Length - offset)
             {
                 throw new InvalidOperationException("Reader violated the validated-input contract.");

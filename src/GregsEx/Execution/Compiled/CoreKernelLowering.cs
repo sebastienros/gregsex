@@ -7,7 +7,9 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+#if NET8_0_OR_GREATER
 using FastExpressionCompiler;
+#endif
 using GregsEx.Contracts;
 using GregsEx.IR;
 using E = System.Linq.Expressions.Expression;
@@ -117,6 +119,14 @@ internal static class CoreKernelHelpers
         => s.Slice(from, to - from).IndexOfAnyInRange('\uD800', '\uDFFF') >= 0;
 }
 
+#if !NET8_0_OR_GREATER
+// netstandard2.0 ships no FastExpressionCompiler. CompilationContract.IsRuntimeCompilationAvailable is false there, so
+// explicit Compile() throws PlatformNotSupportedException before reaching this stub and Auto stays interpreted/accelerated.
+internal static class CoreKernelLowering
+{
+    internal static CoreKernel? Compile(CoreKernelPlan plan, bool trackCaptures) => null;
+}
+#else
 // Plan-to-expression lowering (structure-aware: fused literal runs, vectorizable class runs, possessive loops,
 // search prefilters). The only member that emits code is Lower/Compile; both are trim- and AOT-unsafe by contract.
 [RequiresDynamicCode(CompilationContract.RequiresDynamicCodeMessage)]
@@ -534,3 +544,4 @@ internal static class CoreKernelLowering
             E.Label(done));
     }
 }
+#endif

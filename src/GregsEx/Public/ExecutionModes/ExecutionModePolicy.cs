@@ -45,8 +45,13 @@ internal static class CompilationContract
         => AppContext.TryGetSwitch(AutoCompilationSwitch, out var enabled) && enabled;
 
     // Direct feature guards: both must hold before any emission path may be called.
+    // netstandard2.0 ships no FastExpressionCompiler, so runtime compilation is never available there.
     internal static bool IsRuntimeCompilationAvailable
+#if NET8_0_OR_GREATER
         => RuntimeFeature.IsDynamicCodeSupported && RuntimeFeature.IsDynamicCodeCompiled;
+#else
+        => false;
+#endif
 
     internal static bool IsAutoCompilationPermitted
         => IsRuntimeCompilationAvailable && IsAutoCompilationSwitchEnabled;

@@ -23,7 +23,7 @@ internal readonly partial struct Pcre2UnicodeOps
             return true;
         }
 
-        var read = TReader.Read(input, start, end, false, program.Profile, ref state);
+        var read = default(TReader).Read(input, start, end, false, program.Profile, ref state);
         if (Denied(ref machine, ref state) || read.Status != Pcre2ReadStatus.Value)
         {
             return false;
@@ -162,7 +162,7 @@ internal readonly partial struct Pcre2UnicodeOps
                 return true;
             }
 
-            read = TReader.Read(input, position, end, false, program.Profile, ref state);
+            read = default(TReader).Read(input, position, end, false, program.Profile, ref state);
             if (Denied(ref machine, ref state) || read.Status != Pcre2ReadStatus.Value)
             {
                 return false;

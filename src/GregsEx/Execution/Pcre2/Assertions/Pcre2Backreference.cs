@@ -51,8 +51,8 @@ internal readonly partial struct Pcre2AssertionOps
                 return ReferenceFailure(program, flags, true, ref machine, ref state);
             }
 
-            var expected = TReader.Read(input, left, capture.End, !unicode, program.Profile, ref state);
-            var actual = TReader.Read(input, right, machine.VisibleEnd, !unicode, program.Profile, ref state);
+            var expected = default(TReader).Read(input, left, capture.End, !unicode, program.Profile, ref state);
+            var actual = default(TReader).Read(input, right, machine.VisibleEnd, !unicode, program.Profile, ref state);
             if (Denied(ref machine, ref state))
             {
                 return Resource();

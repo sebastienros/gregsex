@@ -7,21 +7,21 @@ namespace GregsEx.Flavors.Pcre2.Runtime.Host;
 
 internal interface IPcre2HostUnits<T, TCallbacks> where T : unmanaged where TCallbacks : class
 {
-    static abstract Pcre2CodeUnitWidth Width { get; }
-    static abstract int Unit(T value);
-    static abstract T From(int value);
-    static abstract Pcre2ReadResult Read(scoped ReadOnlySpan<T> input, int offset, Pcre2Profile profile, ref RunState state);
-    static abstract Pcre2ValidationResult Validate(ReadOnlySpan<T> input, Pcre2Profile profile, Pcre2MatchFlags flags, ref RunState state);
-    static abstract int Advance(ReadOnlySpan<T> input, int offset, Pcre2Profile profile, ref RunState state);
-    static abstract Pcre2MatchResult Match(IPcre2Executor executor, ReadOnlySpan<T> input, int start,
+    Pcre2CodeUnitWidth Width { get; }
+    int Unit(T value);
+    T From(int value);
+    Pcre2ReadResult Read(scoped ReadOnlySpan<T> input, int offset, Pcre2Profile profile, ref RunState state);
+    Pcre2ValidationResult Validate(ReadOnlySpan<T> input, Pcre2Profile profile, Pcre2MatchFlags flags, ref RunState state);
+    int Advance(ReadOnlySpan<T> input, int offset, Pcre2Profile profile, ref RunState state);
+    Pcre2MatchResult Match(IPcre2Executor executor, ReadOnlySpan<T> input, int start,
         Pcre2MatchOptions options, TCallbacks? callbacks, Pcre2ExecutionCapacity capacity, ref RunState state,
         Span<Pcre2OffsetPair> callbackPairs, Span<Pcre2OffsetPair> pairs);
-    static abstract ReadOnlySpan<T> Mark(Pcre2Program program, int index);
-    static abstract TCallbacks? Wrap(TCallbacks? callbacks, Pcre2HostCallbackBudget budget);
-    static abstract bool HasCase(TCallbacks? callbacks);
-    static abstract bool HasSubstitute(TCallbacks? callbacks);
-    static abstract int Case(TCallbacks callbacks, ReadOnlySpan<T> input, Span<T> output, Pcre2SubstituteCase mode);
-    static abstract int Substitute(TCallbacks callbacks, ReadOnlySpan<T> input, ReadOnlySpan<T> output,
+    ReadOnlySpan<T> Mark(Pcre2Program program, int index);
+    TCallbacks? Wrap(TCallbacks? callbacks, Pcre2HostCallbackBudget budget);
+    bool HasCase(TCallbacks? callbacks);
+    bool HasSubstitute(TCallbacks? callbacks);
+    int Case(TCallbacks callbacks, ReadOnlySpan<T> input, Span<T> output, Pcre2SubstituteCase mode);
+    int Substitute(TCallbacks callbacks, ReadOnlySpan<T> input, ReadOnlySpan<T> output,
         ReadOnlySpan<Pcre2OffsetPair> pairs, Pcre2SubstituteCalloutInfo info);
 }
 internal readonly struct Pcre2HostChars : IPcre2HostUnits<char, Pcre2CharCallbacks>
@@ -40,6 +40,20 @@ internal readonly struct Pcre2HostChars : IPcre2HostUnits<char, Pcre2CharCallbac
     public static int Case(Pcre2CharCallbacks callbacks, ReadOnlySpan<char> input, Span<char> output, Pcre2SubstituteCase mode) => callbacks.Case!(input, output, mode, callbacks.State);
     public static int Substitute(Pcre2CharCallbacks callbacks, ReadOnlySpan<char> input, ReadOnlySpan<char> output, ReadOnlySpan<Pcre2OffsetPair> pairs, Pcre2SubstituteCalloutInfo info)
     { var context = new Pcre2CharSubstituteContext(input, output, pairs, info); return callbacks.Substitute!(in context, callbacks.State); }
+
+    Pcre2CodeUnitWidth IPcre2HostUnits<char, Pcre2CharCallbacks>.Width => Width;
+    int IPcre2HostUnits<char, Pcre2CharCallbacks>.Unit(char value) => Unit(value);
+    char IPcre2HostUnits<char, Pcre2CharCallbacks>.From(int value) => From(value);
+    Pcre2ReadResult IPcre2HostUnits<char, Pcre2CharCallbacks>.Read(scoped ReadOnlySpan<char> input, int offset, Pcre2Profile profile, ref RunState state) => Read(input, offset, profile, ref state);
+    Pcre2ValidationResult IPcre2HostUnits<char, Pcre2CharCallbacks>.Validate(ReadOnlySpan<char> input, Pcre2Profile profile, Pcre2MatchFlags flags, ref RunState state) => Validate(input, profile, flags, ref state);
+    int IPcre2HostUnits<char, Pcre2CharCallbacks>.Advance(ReadOnlySpan<char> input, int offset, Pcre2Profile profile, ref RunState state) => Advance(input, offset, profile, ref state);
+    Pcre2MatchResult IPcre2HostUnits<char, Pcre2CharCallbacks>.Match(IPcre2Executor executor, ReadOnlySpan<char> input, int start, Pcre2MatchOptions options, Pcre2CharCallbacks? callbacks, Pcre2ExecutionCapacity capacity, ref RunState state, Span<Pcre2OffsetPair> callbackPairs, Span<Pcre2OffsetPair> pairs) => Match(executor, input, start, options, callbacks, capacity, ref state, callbackPairs, pairs);
+    ReadOnlySpan<char> IPcre2HostUnits<char, Pcre2CharCallbacks>.Mark(Pcre2Program program, int index) => Mark(program, index);
+    Pcre2CharCallbacks? IPcre2HostUnits<char, Pcre2CharCallbacks>.Wrap(Pcre2CharCallbacks? callbacks, Pcre2HostCallbackBudget budget) => Wrap(callbacks, budget);
+    bool IPcre2HostUnits<char, Pcre2CharCallbacks>.HasCase(Pcre2CharCallbacks? callbacks) => HasCase(callbacks);
+    bool IPcre2HostUnits<char, Pcre2CharCallbacks>.HasSubstitute(Pcre2CharCallbacks? callbacks) => HasSubstitute(callbacks);
+    int IPcre2HostUnits<char, Pcre2CharCallbacks>.Case(Pcre2CharCallbacks callbacks, ReadOnlySpan<char> input, Span<char> output, Pcre2SubstituteCase mode) => Case(callbacks, input, output, mode);
+    int IPcre2HostUnits<char, Pcre2CharCallbacks>.Substitute(Pcre2CharCallbacks callbacks, ReadOnlySpan<char> input, ReadOnlySpan<char> output, ReadOnlySpan<Pcre2OffsetPair> pairs, Pcre2SubstituteCalloutInfo info) => Substitute(callbacks, input, output, pairs, info);
 }
 internal readonly struct Pcre2HostBytes : IPcre2HostUnits<byte, Pcre2ByteCallbacks>
 {
@@ -57,4 +71,18 @@ internal readonly struct Pcre2HostBytes : IPcre2HostUnits<byte, Pcre2ByteCallbac
     public static int Case(Pcre2ByteCallbacks callbacks, ReadOnlySpan<byte> input, Span<byte> output, Pcre2SubstituteCase mode) => callbacks.Case!(input, output, mode, callbacks.State);
     public static int Substitute(Pcre2ByteCallbacks callbacks, ReadOnlySpan<byte> input, ReadOnlySpan<byte> output, ReadOnlySpan<Pcre2OffsetPair> pairs, Pcre2SubstituteCalloutInfo info)
     { var context = new Pcre2ByteSubstituteContext(input, output, pairs, info); return callbacks.Substitute!(in context, callbacks.State); }
+
+    Pcre2CodeUnitWidth IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Width => Width;
+    int IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Unit(byte value) => Unit(value);
+    byte IPcre2HostUnits<byte, Pcre2ByteCallbacks>.From(int value) => From(value);
+    Pcre2ReadResult IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Read(scoped ReadOnlySpan<byte> input, int offset, Pcre2Profile profile, ref RunState state) => Read(input, offset, profile, ref state);
+    Pcre2ValidationResult IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Validate(ReadOnlySpan<byte> input, Pcre2Profile profile, Pcre2MatchFlags flags, ref RunState state) => Validate(input, profile, flags, ref state);
+    int IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Advance(ReadOnlySpan<byte> input, int offset, Pcre2Profile profile, ref RunState state) => Advance(input, offset, profile, ref state);
+    Pcre2MatchResult IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Match(IPcre2Executor executor, ReadOnlySpan<byte> input, int start, Pcre2MatchOptions options, Pcre2ByteCallbacks? callbacks, Pcre2ExecutionCapacity capacity, ref RunState state, Span<Pcre2OffsetPair> callbackPairs, Span<Pcre2OffsetPair> pairs) => Match(executor, input, start, options, callbacks, capacity, ref state, callbackPairs, pairs);
+    ReadOnlySpan<byte> IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Mark(Pcre2Program program, int index) => Mark(program, index);
+    Pcre2ByteCallbacks? IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Wrap(Pcre2ByteCallbacks? callbacks, Pcre2HostCallbackBudget budget) => Wrap(callbacks, budget);
+    bool IPcre2HostUnits<byte, Pcre2ByteCallbacks>.HasCase(Pcre2ByteCallbacks? callbacks) => HasCase(callbacks);
+    bool IPcre2HostUnits<byte, Pcre2ByteCallbacks>.HasSubstitute(Pcre2ByteCallbacks? callbacks) => HasSubstitute(callbacks);
+    int IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Case(Pcre2ByteCallbacks callbacks, ReadOnlySpan<byte> input, Span<byte> output, Pcre2SubstituteCase mode) => Case(callbacks, input, output, mode);
+    int IPcre2HostUnits<byte, Pcre2ByteCallbacks>.Substitute(Pcre2ByteCallbacks callbacks, ReadOnlySpan<byte> input, ReadOnlySpan<byte> output, ReadOnlySpan<Pcre2OffsetPair> pairs, Pcre2SubstituteCalloutInfo info) => Substitute(callbacks, input, output, pairs, info);
 }

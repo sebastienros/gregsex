@@ -36,7 +36,7 @@ internal static class Pcre2ControlSearch
     {
         ArgumentNullException.ThrowIfNull(plan);
         var program = plan.Program;
-        if (!program.IsExecutable || input.Length != machine.SubjectLength || program.Profile.Width != TUnits.Width)
+        if (!program.IsExecutable || input.Length != machine.SubjectLength || program.Profile.Width != default(TUnits).Width)
         {
             throw new ArgumentException("Validated executable plan, matching width and original subject are required.", nameof(plan));
         }
@@ -195,7 +195,7 @@ internal static class Pcre2ControlSearch
                     }
                     else
                     {
-                        var advance = TReader.Read(input, machine.CandidateStart, fragment.VisibleEnd, false, program.Profile, ref state);
+                        var advance = default(TReader).Read(input, machine.CandidateStart, fragment.VisibleEnd, false, program.Profile, ref state);
                         if (Denied(ref machine, ref state))
                         {
                             return Failure(ref controls, ref machine, ref state);
@@ -216,7 +216,7 @@ internal static class Pcre2ControlSearch
                             return Failure(ref controls, ref machine, ref state);
                         }
 
-                        if (TUnits.Unit(input, next - 1) == 13 && TUnits.Unit(input, next) == 10)
+                        if (default(TUnits).Unit(input, next - 1) == 13 && default(TUnits).Unit(input, next) == 10)
                         {
                             next++;
                         }

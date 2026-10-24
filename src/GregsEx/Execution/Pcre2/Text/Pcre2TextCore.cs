@@ -9,9 +9,9 @@ namespace GregsEx.Execution.Pcre2.Text;
 // No decoding replacement, input copy, runtime Unicode data or retained span.
 internal interface IPcre2Units<TUnit> where TUnit : unmanaged
 {
-    static abstract Pcre2CodeUnitWidth Width { get; }
-    static abstract int Unit(scoped ReadOnlySpan<TUnit> input, int offset);
-    static abstract bool Interior(int value);
+    Pcre2CodeUnitWidth Width { get; }
+    int Unit(scoped ReadOnlySpan<TUnit> input, int offset);
+    bool Interior(int value);
 }
 
 internal readonly struct Pcre2ByteUnits : IPcre2Units<byte>
@@ -19,6 +19,10 @@ internal readonly struct Pcre2ByteUnits : IPcre2Units<byte>
     public static Pcre2CodeUnitWidth Width => Pcre2CodeUnitWidth.Eight;
     public static int Unit(scoped ReadOnlySpan<byte> input, int offset) => input[offset];
     public static bool Interior(int value) => (value & 0xC0) == 0x80;
+
+    Pcre2CodeUnitWidth IPcre2Units<byte>.Width => Width;
+    int IPcre2Units<byte>.Unit(scoped ReadOnlySpan<byte> input, int offset) => Unit(input, offset);
+    bool IPcre2Units<byte>.Interior(int value) => Interior(value);
 }
 
 internal readonly struct Pcre2CharUnits : IPcre2Units<char>
@@ -26,6 +30,10 @@ internal readonly struct Pcre2CharUnits : IPcre2Units<char>
     public static Pcre2CodeUnitWidth Width => Pcre2CodeUnitWidth.Sixteen;
     public static int Unit(scoped ReadOnlySpan<char> input, int offset) => input[offset];
     public static bool Interior(int value) => (value & 0xFC00) == 0xDC00;
+
+    Pcre2CodeUnitWidth IPcre2Units<char>.Width => Width;
+    int IPcre2Units<char>.Unit(scoped ReadOnlySpan<char> input, int offset) => Unit(input, offset);
+    bool IPcre2Units<char>.Interior(int value) => Interior(value);
 }
 
 internal static class Pcre2TextCore<TUnit, TUnits>
@@ -37,7 +45,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
     internal static void Admit(int length, int offset, Pcre2Profile profile)
     {
         ArgumentNullException.ThrowIfNull(profile);
-        if (profile.Width != TUnits.Width)
+        if (profile.Width != default(TUnits).Width)
         {
             throw new ArgumentException("Native reader width differs from profile.", nameof(profile));
         }
@@ -56,7 +64,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
             return false;
         }
 
-        value = TUnits.Unit(input, offset);
+        value = default(TUnits).Unit(input, offset);
         return true;
     }
 
@@ -81,7 +89,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
                 return -1;
             }
 
-            if (!TUnits.Interior(unit) || start == 0)
+            if (!default(TUnits).Interior(unit) || start == 0)
             {
                 return start;
             }
@@ -95,7 +103,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
         Pcre2Profile profile, Pcre2MatchFlags flags, Pcre2ValidationPolicy policy, ref RunState state) =>
         Pcre2TextFragments<TUnit, TUnits>.Bind(input, startAt, maxLookbehind, profile, flags, policy, ref state).Validation;
 
-    internal static int IsolatedError => TUnits.Width == Pcre2CodeUnitWidth.Eight
+    internal static int IsolatedError => default(TUnits).Width == Pcre2CodeUnitWidth.Eight
         ? (int)Pcre2ErrorCode.Utf8Err20 : (int)Pcre2ErrorCode.Utf16Err3;
 
     // On failure width is zero. Every actually inspected unit is charged,
@@ -109,7 +117,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
             return 0;
         }
 
-        if (TUnits.Width == Pcre2CodeUnitWidth.Sixteen)
+        if (default(TUnits).Width == Pcre2CodeUnitWidth.Sixteen)
         {
             if (first < 0xD800 || first > 0xDFFF)
             { value = first; width = 1; return 0; }
@@ -128,7 +136,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
                 return 0;
             }
 
-            if (!TUnits.Interior(second))
+            if (!default(TUnits).Interior(second))
             {
                 return (int)Pcre2ErrorCode.Utf16Err2;
             }
@@ -164,7 +172,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
                 return 0;
             }
 
-            if (!TUnits.Interior(unit))
+            if (!default(TUnits).Interior(unit))
             {
                 return -7 - part; // UTF8_ERR6..10.
             }
@@ -259,7 +267,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
                 return default;
             }
 
-            if (TUnits.Interior(raw))
+            if (default(TUnits).Interior(raw))
             {
                 // A chain of code-unit atoms can consume a valid scalar's
                 // individual units. Malformed original input remains a barrier.
@@ -360,7 +368,7 @@ internal static class Pcre2TextCore<TUnit, TUnits>
                     return offset;
                 }
 
-                if (!TUnits.Interior(unit))
+                if (!default(TUnits).Interior(unit))
                 {
                     break;
                 }

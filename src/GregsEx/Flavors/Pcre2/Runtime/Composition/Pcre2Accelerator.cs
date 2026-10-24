@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using GregsEx.Contracts;
 using GregsEx.Contracts.Pcre2;
 using GregsEx.Execution.Pcre2.Kernel;
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
 using GregsEx.Execution.Pcre2.Text;
 using GregsEx.Flavors.Pcre2.Runtime.Kernel;
 #endif
@@ -185,7 +185,7 @@ internal sealed class Pcre2Accelerator
     private readonly byte[]? _byteLiteral;
     private readonly string[]? _charAltLiterals;
     private readonly byte[][]? _byteAltLiterals;
-    private readonly SearchValues<string>? _charAltSearchValues;
+    private readonly StringSearchValues? _charAltSearchValues;
     private readonly SearchValues<byte>? _byteAltFirstBytes;
     private readonly FastCharSet _primarySet;
     private readonly int _repeatMin;
@@ -268,7 +268,7 @@ internal sealed class Pcre2Accelerator
         }
     }
 
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
     internal bool TryMatch(
         Pcre2Program program,
         Pcre2DataView data,
@@ -1786,7 +1786,7 @@ internal sealed class Pcre2Accelerator
                         return false;
                     }
 
-                    var c = s[^1];
+                    var c = s![^1];
                     if (c >= 128)
                     {
                         return false;
@@ -1915,7 +1915,7 @@ internal sealed class Pcre2Accelerator
         int rootId,
         out string[]? charLiterals,
         out byte[][]? byteLiterals,
-        out SearchValues<string>? charSv,
+        out StringSearchValues? charSv,
         out SearchValues<byte>? byteFirstSv)
     {
         charLiterals = null;
@@ -1940,13 +1940,13 @@ internal sealed class Pcre2Accelerator
             {
                 return false;
             }
-            cLits[i] = cLit;
+            cLits[i] = cLit!;
             bLits[i] = bLit;
             firstBytes[i] = bLit[0];
         }
         charLiterals = cLits;
         byteLiterals = bLits;
-        charSv = SearchValues.Create(cLits, StringComparison.Ordinal);
+        charSv = StringSearch.Create(cLits);
         byteFirstSv = SearchValues.Create(firstBytes);
         return true;
     }

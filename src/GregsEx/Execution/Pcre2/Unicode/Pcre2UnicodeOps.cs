@@ -123,7 +123,7 @@ internal readonly partial struct Pcre2UnicodeOps : IPcre2UnicodeOps
         where TUnit : unmanaged where TReader : struct, IPcre2TextReader<TUnit>
     {
         var position = machine.Position;
-        var first = TReader.Read(input, position, machine.VisibleEnd, false, program.Profile, ref state);
+        var first = default(TReader).Read(input, position, machine.VisibleEnd, false, program.Profile, ref state);
         if (Denied(ref machine, ref state))
         {
             return Resource();
@@ -150,7 +150,7 @@ internal readonly partial struct Pcre2UnicodeOps : IPcre2UnicodeOps
         var wasEpZwj = false;
         while (position < machine.VisibleEnd)
         {
-            var next = TReader.Read(input, position, machine.VisibleEnd, false, program.Profile, ref state);
+            var next = default(TReader).Read(input, position, machine.VisibleEnd, false, program.Profile, ref state);
             if (Denied(ref machine, ref state))
             {
                 return Resource();
@@ -174,7 +174,7 @@ internal readonly partial struct Pcre2UnicodeOps : IPcre2UnicodeOps
                 int cursor = leftStart, count = 0, floor = Pcre2Kernel.ScanStart(ref state);
                 while (cursor > floor)
                 {
-                    var previous = TReader.ReadPrevious(input, cursor, program.Profile, ref state);
+                    var previous = default(TReader).ReadPrevious(input, cursor, program.Profile, ref state);
                     if (Denied(ref machine, ref state))
                     {
                         return Resource();

@@ -27,6 +27,7 @@ public sealed partial class ExecutionAccelerationTests
         public void Dispose() => AppContext.SetSwitch(CompilationContract.AutoCompilationSwitch, false);
     }
 
+#if !GREGSEX_NETSTANDARD_ASSET
     [Fact]
     public void GuardedAutoCompilationSelectsCompiledBackendOnlyWhenSwitchIsEnabled()
     {
@@ -71,6 +72,7 @@ public sealed partial class ExecutionAccelerationTests
             Assert.Equal(RegexExecutionBackend.Interpreted, interpretedCore.ExecutionBackend);
         }
     }
+#endif
 
     [Theory]
     [InlineData("the")]
@@ -134,6 +136,7 @@ public sealed partial class ExecutionAccelerationTests
         }
     }
 
+#if !GREGSEX_NETSTANDARD_ASSET
     [Fact]
     public void EcmaScriptHostOperationsMatchUnderInterpretedAndAutoCompiled()
     {
@@ -160,6 +163,7 @@ public sealed partial class ExecutionAccelerationTests
             Assert.Equal(oracleGroups, autoGroups);
         }
     }
+#endif
 
     public static IEnumerable<TheoryDataRow<string, string>> CrossFlavorDifferentialData()
     {
@@ -310,6 +314,7 @@ public sealed partial class ExecutionAccelerationTests
         }
     }
 
+#if !GREGSEX_NETSTANDARD_ASSET
     [Fact]
     public async Task SharedAutoPatternsServeConcurrentWorkspacesWithoutCrossTalk()
     {
@@ -347,6 +352,7 @@ public sealed partial class ExecutionAccelerationTests
             await Task.WhenAll(tasks);
         }
     }
+#endif
 
     private static long SteadyStateBytes(Func<RegexSearchStatus> call)
     {
@@ -373,6 +379,7 @@ public sealed partial class ExecutionAccelerationTests
         return best;
     }
 
+#if !GREGSEX_NETSTANDARD_ASSET
     [Fact]
     public void SteadyStateMatchingUnderAutoAllocatesZeroForUtf16AndBytes()
     {
@@ -397,4 +404,5 @@ public sealed partial class ExecutionAccelerationTests
             Assert.Equal(0, SteadyStateBytes(() => bytesSpace.Find(utf8, 0, out _)));
         }
     }
+#endif
 }

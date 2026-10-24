@@ -44,10 +44,10 @@ internal sealed partial class Pcre2Host
                 ptr = returns[--stackCount];
                 continue;
             }
-            var c = U.Unit(replacement[ptr]);
+            var c = default(U).Unit(replacement[ptr]);
             if (quoted)
             {
-                if (c == '\\' && ptr + 1 < end && U.Unit(replacement[ptr + 1]) == 'E')
+                if (c == '\\' && ptr + 1 < end && default(U).Unit(replacement[ptr + 1]) == 'E')
                 { quoted = false; ptr += 2; continue; }
                 goto Literal;
             }
@@ -59,7 +59,7 @@ internal sealed partial class Pcre2Host
                 ptr++;
                 if (ptr >= end)
                 { errorOffset = ptr; return (int)Pcre2ErrorCode.Badreplacement; }
-                c = U.Unit(replacement[ptr]);
+                c = default(U).Unit(replacement[ptr]);
                 if (c == '$')
                 {
                     goto Literal;
@@ -85,15 +85,15 @@ internal sealed partial class Pcre2Host
                     ptr++;
                     if (ptr >= end)
                     { errorOffset = ptr; return (int)Pcre2ErrorCode.Badreplacement; }
-                    c = U.Unit(replacement[ptr]);
+                    c = default(U).Unit(replacement[ptr]);
                 }
                 if (!angle && c == '*')
-                { star = true; ptr++; if (ptr >= end) { errorOffset = ptr; return (int)Pcre2ErrorCode.Badreplacement; } c = U.Unit(replacement[ptr]); }
+                { star = true; ptr++; if (ptr >= end) { errorOffset = ptr; return (int)Pcre2ErrorCode.Badreplacement; } c = default(U).Unit(replacement[ptr]); }
                 if (!angle && !star && c is >= '0' and <= '9')
                 {
                     group = c - '0';
                     ptr++;
-                    while (ptr < end && U.Unit(replacement[ptr]) is >= '0' and <= '9')
+                    while (ptr < end && default(U).Unit(replacement[ptr]) is >= '0' and <= '9')
                     {
                         if (!state.TryCharge(1, ptr))
                         {
@@ -101,7 +101,7 @@ internal sealed partial class Pcre2Host
                         }
 
                         group = group > program.GroupCount ? program.GroupCount : group;
-                        group = checked(group * 10 + U.Unit(replacement[ptr]) - '0');
+                        group = checked(group * 10 + default(U).Unit(replacement[ptr]) - '0');
                         if (group >= program.GroupCount)
                         {
                             if ((flags & Pcre2SubstituteFlags.UnknownUnset) == 0)
@@ -113,7 +113,7 @@ internal sealed partial class Pcre2Host
                                 {
                                     return (int)Pcre2ErrorCode.Matchlimit;
                                 }
-                            } while (ptr < end && U.Unit(replacement[ptr]) is >= '0' and <= '9');
+                            } while (ptr < end && default(U).Unit(replacement[ptr]) is >= '0' and <= '9');
                             group = program.GroupCount;
                             break;
                         }
@@ -127,9 +127,9 @@ internal sealed partial class Pcre2Host
                 }
                 if (braces)
                 {
-                    if ((flags & Pcre2SubstituteFlags.Extended) != 0 && !star && ptr < end - 2 && U.Unit(replacement[ptr]) == ':')
+                    if ((flags & Pcre2SubstituteFlags.Extended) != 0 && !star && ptr < end - 2 && default(U).Unit(replacement[ptr]) == ':')
                     {
-                        special = U.Unit(replacement[++ptr]);
+                        special = default(U).Unit(replacement[++ptr]);
                         if (special is not ('+' or '-'))
                         { errorOffset = ptr; return (int)Pcre2ErrorCode.Badsubstitution; }
                         text1 = ++ptr;
@@ -137,7 +137,7 @@ internal sealed partial class Pcre2Host
                         if (rc != 0)
                         { errorOffset = ptr; return rc; }
                         text1End = ptr;
-                        if (special == '+' && U.Unit(replacement[ptr]) == ':')
+                        if (special == '+' && default(U).Unit(replacement[ptr]) == ':')
                         {
                             text2 = ++ptr;
                             rc = FindEnd<T, C, U>(program, replacement, ref ptr, end, true, ref state);
@@ -146,13 +146,13 @@ internal sealed partial class Pcre2Host
                             text2End = ptr;
                         }
                     }
-                    else if (ptr >= end || U.Unit(replacement[ptr]) != '}')
+                    else if (ptr >= end || default(U).Unit(replacement[ptr]) != '}')
                     { errorOffset = ptr; return (int)Pcre2ErrorCode.Repmissingbrace; }
                     ptr++;
                 }
                 if (angle)
                 {
-                    if (ptr >= end || U.Unit(replacement[ptr]) != '>')
+                    if (ptr >= end || default(U).Unit(replacement[ptr]) != '>')
                     { errorOffset = ptr; return (int)Pcre2ErrorCode.Badreplacement; }
                     ptr++;
                 }
@@ -160,7 +160,7 @@ internal sealed partial class Pcre2Host
                 {
                     if (!name[..nameLength].SequenceEqual("MARK"))
                     { errorOffset = ptr; return (int)Pcre2ErrorCode.Badreplacement; }
-                    value = U.Mark(program, mark);
+                    value = default(U).Mark(program, mark);
                     goto Value;
                 }
                 goto Group;
@@ -171,7 +171,7 @@ internal sealed partial class Pcre2Host
                 var single = false;
                 if (ptr + 1 < end)
                 {
-                    var next = U.Unit(replacement[ptr + 1]);
+                    var next = default(U).Unit(replacement[ptr + 1]);
                     switch (next)
                     {
                         case 'L':
@@ -193,7 +193,7 @@ internal sealed partial class Pcre2Host
                     {
                         ptr += 2;
                         // Source requires a character after the paired escape.
-                        if (single && ptr + 2 < end && U.Unit(replacement[ptr]) == '\\' && U.Unit(replacement[ptr + 1]) == (next == 'l' ? 'U' : 'L'))
+                        if (single && ptr + 2 < end && default(U).Unit(replacement[ptr]) == '\\' && default(U).Unit(replacement[ptr + 1]) == (next == 'l' ? 'U' : 'L'))
                         { mode = next == 'l' ? 4 : 3; single = false; ptr += 2; }
                         if (!FlushCase<T, C, U>(profile, callbacks, ref casing, ref callouts, maximumCallouts, ref output, ref state))
                         {
@@ -223,7 +223,7 @@ internal sealed partial class Pcre2Host
                 if (directive == 'g')
                 {
                     ptr++; // Escape left ptr at '<'.
-                    if (!ReadName<T, C, U>(replacement, ref ptr, end, profile, data, name, out nameLength, ref state) || ptr >= end || U.Unit(replacement[ptr]) != '>')
+                    if (!ReadName<T, C, U>(replacement, ref ptr, end, profile, data, name, out nameLength, ref state) || ptr >= end || default(U).Unit(replacement[ptr]) != '>')
                     { errorOffset = ptr; return (int)Pcre2ErrorCode.Badrepescape; }
                     ptr++;
                     goto Group;
@@ -283,7 +283,7 @@ internal sealed partial class Pcre2Host
             goto Value;
 
         Literal:
-            var read = U.Read(replacement[..end], ptr, profile, ref state);
+            var read = default(U).Read(replacement[..end], ptr, profile, ref state);
             if (!state.TryCharge(0, ptr) || read.Status != Pcre2ReadStatus.Value)
             {
                 return (int)Pcre2ErrorCode.Matchlimit;
@@ -312,7 +312,7 @@ internal sealed partial class Pcre2Host
         length = 0;
         while (ptr < end)
         {
-            var read = U.Read(text[..end], ptr, profile, ref state);
+            var read = default(U).Read(text[..end], ptr, profile, ref state);
             if (!state.TryCharge(0, ptr) || read.Status != Pcre2ReadStatus.Value)
             {
                 return false;
@@ -362,9 +362,9 @@ internal sealed partial class Pcre2Host
                 return (int)Pcre2ErrorCode.Matchlimit;
             }
 
-            var c = U.Unit(text[ptr]);
+            var c = default(U).Unit(text[ptr]);
             if (quote)
-            { if (c == '\\' && ptr + 1 < end && U.Unit(text[ptr + 1]) == 'E') { quote = false; ptr++; } }
+            { if (c == '\\' && ptr + 1 < end && default(U).Unit(text[ptr + 1]) == 'E') { quote = false; ptr++; } }
             else if (c == '}')
             { if (depth == 0) { return 0; } depth--; }
             else if (c == ':' && !last && depth == 0)
@@ -372,10 +372,10 @@ internal sealed partial class Pcre2Host
                 return 0;
             }
             else if (c == '$')
-            { if (ptr + 1 < end && U.Unit(text[ptr + 1]) == '{') { depth++; ptr++; } }
+            { if (ptr + 1 < end && default(U).Unit(text[ptr + 1]) == '{') { depth++; ptr++; } }
             else if (c == '\\')
             {
-                if (ptr + 1 < end && U.Unit(text[ptr + 1]) is 'L' or 'l' or 'U' or 'u')
+                if (ptr + 1 < end && default(U).Unit(text[ptr + 1]) is 'L' or 'l' or 'U' or 'u')
                 { ptr++; continue; }
                 ptr++;
                 var rc = Escape<T, C, U>(program, text, ref ptr, end, out _, out _, out var directive, ref state);
