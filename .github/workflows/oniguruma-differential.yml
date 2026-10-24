@@ -1,0 +1,48 @@
+name: Oniguruma differential
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Oniguruma tag
+        default: v6.9.10
+      sha:
+        description: Commit SHA the tag must resolve to
+        default: 4ef89209a239c1aea328cf13c05a2807e5c146d1
+  schedule:
+  - cron: '17 4 * * 1'
+
+jobs:
+  differential:
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      TAG: ${{ inputs.tag || 'v6.9.10' }}
+      SHA: ${{ inputs.sha || '4ef89209a239c1aea328cf13c05a2807e5c146d1' }}
+    steps:
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      with:
+        persist-credentials: false
+    - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5.4.0
+      with:
+        dotnet-version: |
+          10.0.x
+        global-json-file: global.json
+        check-latest: false
+    - name: Build the native oracle
+      run: tools/oracles/oniguruma/native/build-oracle.sh "$TAG" "$SHA"
+    - name: Fetch inputs
+      run: tools/oracles/oniguruma/fetch-inputs.sh
+    - name: Run the differential
+      run: dotnet run -c Release --project tools/oracles/oniguruma/oracle -- --oniguruma "$TAG" differential
+    - name: Upload the report
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      with:
+        name: oniguruma-differential
+        path: artifacts/oniguruma/differential.json
+        if-no-files-found: ignore
