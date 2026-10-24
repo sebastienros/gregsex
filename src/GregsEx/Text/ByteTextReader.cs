@@ -145,4 +145,7 @@ internal readonly struct ByteTextReader : ITextReader<byte>
         0xF4 => second <= 0x8F, // No scalar above U+10FFFF.
         _ => true
     };
+
+    RegexSearchStatus ITextReader<byte>.Validate(ReadOnlySpan<byte> input, int startAt, ProfileDescriptor profile, ref RunState state) => Validate(input, startAt, profile, ref state);
+    bool ITextReader<byte>.TryRead(ReadOnlySpan<byte> input, int offset, ProfileDescriptor profile, out int value, out int width) => TryRead(input, offset, profile, out value, out width);
 }

@@ -156,7 +156,7 @@ public sealed class Pcre2Workspace : IDisposable
                             return new((int)Pcre2ErrorCode.Matchlimit, -1, 0, state.Failure);
                         }
 
-                        ownedOutput = typeof(T) == typeof(char) ? new string(MemoryMarshal.Cast<T, char>(destination[..substituted.OutputUnits])) : MemoryMarshal.Cast<T, byte>(destination[..substituted.OutputUnits]).ToArray();
+                        ownedOutput = typeof(T) == typeof(char) ? MemoryMarshal.Cast<T, char>(destination[..substituted.OutputUnits]).ToString() : MemoryMarshal.Cast<T, byte>(destination[..substituted.OutputUnits]).ToArray();
                     }
                     return substituted;
                 }

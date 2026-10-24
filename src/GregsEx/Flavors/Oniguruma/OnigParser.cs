@@ -113,7 +113,7 @@ internal sealed class OnigParser
     private OnigNode ParseAlternation(OnigInlineOptions options)
     {
         var start = _pos;
-        if (++_depth > _limits.MaxNestingDepth || !RuntimeHelpers.TryEnsureSufficientExecutionStack())
+        if (++_depth > _limits.MaxNestingDepth || !TryEnsureStack())
         {
             throw new OnigSyntaxException(RegexDiagnosticCode.NestingLimitExceeded, _pos, 1, "nesting too deep");
         }
@@ -1755,4 +1755,10 @@ internal sealed class OnigParser
         _pos = p + 2;
         return true;
     }
+
+#if NETSTANDARD2_0
+    private static bool TryEnsureStack() => GregsExPolyfills.TryEnsureSufficientExecutionStack();
+#else
+    private static bool TryEnsureStack() => RuntimeHelpers.TryEnsureSufficientExecutionStack();
+#endif
 }

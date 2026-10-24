@@ -155,7 +155,7 @@ internal sealed class RecursionFixture
             return Pcre2Kernel.Failure(ref machine, ref state);
         }
 
-        var validation = TReader.Validate(input, start, 0, Program.Profile, options.Flags | Program.PatternMatchFlags, Pcre2ValidationPolicy.NativeWindow, ref state);
+        var validation = default(TReader).Validate(input, start, 0, Program.Profile, options.Flags | Program.PatternMatchFlags, Pcre2ValidationPolicy.NativeWindow, ref state);
         if (!validation.Valid)
         {
             return state.Failure.Code != RegexExecutionFailureCode.None ? Pcre2Kernel.Failure(ref machine, ref state) : new(Pcre2MatchStatus.Error, validation.NativeError, validation.Failure.Offset);

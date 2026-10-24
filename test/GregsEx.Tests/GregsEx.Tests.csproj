@@ -7,12 +7,18 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit.v3.mtp-v2" />
-    <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" />
+    <!-- -p:GregsExTargetFramework=net8.0|netstandard2.0 binds this net10.0 test host to that GregsEx asset instead of the
+         net10.0 one, so the same suite exercises each shipped binary on any OS (see docs/specs/verification.md). -->
+    <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" Condition="'$(GregsExTargetFramework)' == ''" />
+    <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" Condition="'$(GregsExTargetFramework)' != ''"
+                      SetTargetFramework="TargetFramework=$(GregsExTargetFramework)" GlobalPropertiesToRemove="GregsExTargetFramework" />
     <ProjectReference Include="../../src/GregsEx.Generator/GregsEx.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <!-- Driver tests load the generator by path, so it is copied beside the test assembly instead of referenced. -->
     <None Include="../../src/GregsEx.Generator/bin/$(Configuration)/netstandard2.0/GregsEx.Generator.dll" Link="generator/GregsEx.Generator.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
     <EmbeddedResource Include="Contracts/CoreFixtures.json" LogicalName="GregsEx.CoreFixtures.json" />
     <Compile Include="../GregsEx.AotSmoke/UnicodeVersionSmoke.cs" Link="Contracts/UnicodeVersionSmoke.cs" />
+    <!-- netstandard2.0 has no runtime compilation (Compile() throws PlatformNotSupportedException there). -->
+    <Compile Remove="Execution/Compiled/**;Execution/Generated/GeneratorPlannerParityTests.cs" Condition="'$(GregsExTargetFramework)' == 'netstandard2.0'" />
   </ItemGroup>
 </Project>

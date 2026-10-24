@@ -37,6 +37,7 @@ public sealed partial class ReleaseAllocationMatrixTests
         "PCRE2"
     ];
 
+#if !GREGSEX_NETSTANDARD_ASSET
     [Theory]
     [MemberData(nameof(ProfileNames))]
     public void AllProfilesPreserveWorkspaceCapacityAndResourceStabilityAcrossModes(string profileName)
@@ -132,6 +133,7 @@ public sealed partial class ReleaseAllocationMatrixTests
             Assert.Equal(default, ws.LastFailure);
         }
     }
+#endif
 
     [Fact]
     public void FallbackBackreferencePathsPreserveCapacityAndResourceStability()

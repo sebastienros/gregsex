@@ -57,7 +57,7 @@ internal readonly record struct AcceleratorAdmission(AcceleratorKind Kind, Accel
         => new(kind, reason, 0);
 }
 
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
 // An accelerated executor owns its prebuilt immutable data and always retains the reference
 // executor it decorates. Semantics, status, capture and failure reporting are the reference's;
 // an accelerator may only change how quickly the same result is reached.
@@ -114,7 +114,7 @@ internal delegate RegexSearchStatus Utf16SearchKernel(ReadOnlySpan<char> input, 
 internal delegate RegexSearchStatus ByteSearchKernel(ReadOnlySpan<byte> input, int startAt,
     SearchOperation operation, ref RunState state, Span<RegexCapture> groups, out RegexMatchRange match);
 
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
 // Plan-to-expression lowering plus the guarded FastExpressionCompiler adapter. Implementations live in
 // Execution/Compiled and never appear in a public signature. A false result is a known ineligibility
 // (explicit Compile reports NotSupportedException; Auto keeps the interpreted/accelerated executor).

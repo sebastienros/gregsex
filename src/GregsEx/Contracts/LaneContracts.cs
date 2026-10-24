@@ -77,17 +77,17 @@ internal interface IFlavorCompiler
         out SemanticProgram? program, out RegexDiagnostic diagnostic);
 }
 
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
 // Reader specialization is static; no per-character virtual interface dispatch is required.
 internal interface ITextReader<TUnit> where TUnit : unmanaged
 {
     // Full-subject validity precedes a search. Charge each inspected input unit in state.Budget.
     // Validate start boundary only after full encoding validation succeeds.
-    static abstract RegexSearchStatus Validate(ReadOnlySpan<TUnit> input, int startAt,
+    RegexSearchStatus Validate(ReadOnlySpan<TUnit> input, int startAt,
         ProfileDescriptor profile, ref RunState state);
     // On already validated input, decode exactly one element. End returns false, width=0.
     // The executor charges one read unit; the reader never retains the span.
-    static abstract bool TryRead(ReadOnlySpan<TUnit> input, int offset, ProfileDescriptor profile,
+    bool TryRead(ReadOnlySpan<TUnit> input, int offset, ProfileDescriptor profile,
         out int value, out int width);
 }
 

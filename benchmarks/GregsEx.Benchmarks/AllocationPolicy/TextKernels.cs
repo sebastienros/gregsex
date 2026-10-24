@@ -33,11 +33,11 @@ internal static class TextKernels
         where TUnit : unmanaged where TReader : struct, ITextReader<TUnit>
     {
         var state = new RunState(new([], [], []), limits);
-        var status = TReader.Validate(input, start, profile, ref state);
+        var status = default(TReader).Validate(input, start, profile, ref state);
         if (status != expected) return long.MinValue / 10000;
         long checksum = 1 + state.Budget.WorkConsumed;
         if (status != RegexSearchStatus.NoMatch) return checksum;
-        for (int offset = 0; TReader.TryRead(input, offset, profile, out int value, out int width); offset += width)
+        for (int offset = 0; default(TReader).TryRead(input, offset, profile, out int value, out int width); offset += width)
         {
             if (!state.TryCharge(1, offset) ||
                 !CoreCharacterClasses.TryContains(set, value, profile, ref state, offset, out bool contains)) return long.MinValue / 10000;

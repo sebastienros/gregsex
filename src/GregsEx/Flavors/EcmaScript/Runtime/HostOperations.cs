@@ -62,7 +62,7 @@ public sealed partial class EcmaScriptMatcher
     {
         host.Units(value.Length, ref state);
         host.Reserve(32L + 2L * value.Length, ref state);
-        return new string(value);
+        return value.ToString();
     }
     /// <summary>String match: one captured result without g, otherwise bounded whole-match strings.</summary>
     public EcmaScriptMatchResult? Match(string input, RegexMatchOptions options = default)

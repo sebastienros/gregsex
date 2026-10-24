@@ -56,7 +56,7 @@ internal sealed class XPathExecutor : IXmlExecutor
             state.Failure = new(RegexExecutionFailureCode.WorkspaceCapacityExceeded, startAt, state.Budget.WorkConsumed);
             return Finish(RegexSearchStatus.LimitExceeded, operation, groups);
         }
-        var validation = TReader.Validate(input, startAt, ref state);
+        var validation = default(TReader).Validate(input, startAt, ref state);
         if (validation != RegexSearchStatus.NoMatch)
         {
             return Finish(validation, operation, groups);
@@ -374,7 +374,7 @@ internal sealed class XPathExecutor : IXmlExecutor
         internal readonly bool Read(int offset, ref RunState state, out int scalar, out int next)
         {
             next = offset;
-            if (!TReader.TryRead(_input, offset, out scalar, out var width))
+            if (!default(TReader).TryRead(_input, offset, out scalar, out var width))
             {
                 return false;
             }

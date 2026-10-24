@@ -31,6 +31,7 @@ public sealed class AcceleratorContractTests
         }
     }
 
+#if !GREGSEX_NETSTANDARD_ASSET
     [Fact]
     public void CompileDeclarationAndShippedMethodAreAnnotated()
     {
@@ -45,6 +46,7 @@ public sealed class AcceleratorContractTests
         Assert.Equal(CompilationContract.RequiresDynamicCodeMessage, shipped.GetCustomAttribute<RequiresDynamicCodeAttribute>()!.Message);
         Assert.Equal(CompilationContract.RequiresUnreferencedCodeMessage, shipped.GetCustomAttribute<RequiresUnreferencedCodeAttribute>()!.Message);
     }
+#endif
 
     [Fact]
     public void SpanKernelDelegatesTakeSpansByValueAndRunStateByReference()
@@ -62,6 +64,7 @@ public sealed class AcceleratorContractTests
         Assert.False(default(LoweringLimits).IsValid);
     }
 
+#if !GREGSEX_NETSTANDARD_ASSET
     [Fact]
     public void FastExpressionCompilerSourceIsInternalOnly()
     {
@@ -72,6 +75,7 @@ public sealed class AcceleratorContractTests
         Assert.DoesNotContain(assembly.GetReferencedAssemblies(), a => a.Name!.StartsWith("FastExpressionCompiler", StringComparison.Ordinal));
         Assert.Empty(Directory.GetFiles(AppContext.BaseDirectory, "FastExpressionCompiler*.dll"));
     }
+#endif
 
     [Fact]
     public void ThirdPartyNoticeCarriesTheMitTermsAndIsPacked()

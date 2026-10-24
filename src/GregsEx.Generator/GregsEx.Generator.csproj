@@ -24,6 +24,7 @@
     <!-- The '(' restricts this prefix to synchronous HashData overloads, excluding HashDataAsync. -->
     <MeziantouPolyfill_IncludedPolyfills>$(MeziantouPolyfill_IncludedPolyfills)|M:System.Enum.IsDefined|M:System.Convert.ToHexStringLower|M:System.Security.Cryptography.SHA256.HashData(|M:System.Math.Clamp</MeziantouPolyfill_IncludedPolyfills>
     <NoWarn>$(NoWarn);RS1035;RS1041;RS2008;CS1591;CS1573;CS1587;CS1570;CS1574;CS1584;CS1658;CS8632;CS0436;CS8601;CS8602;CS0414;NU1701</NoWarn>
+    <DefineConstants>$(DefineConstants);GREGSEX_GENERATOR</DefineConstants>
     <Engine>$(MSBuildThisFileDirectory)..\GregsEx\</Engine>
   </PropertyGroup>
   <ItemGroup>

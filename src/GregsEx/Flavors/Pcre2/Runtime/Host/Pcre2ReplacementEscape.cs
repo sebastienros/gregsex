@@ -23,7 +23,7 @@ internal sealed partial class Pcre2Host
             return (int)Pcre2ErrorCode.Badrepescape;
         }
 
-        var c = U.Unit(text[ptr++]);
+        var c = default(U).Unit(text[ptr++]);
         cp = c;
         if (!state.TryCharge(1, ptr))
         {
@@ -67,7 +67,7 @@ internal sealed partial class Pcre2Host
                     return (int)Pcre2ErrorCode.Badrepescape;
                 }
 
-                cp = U.Unit(text[ptr]);
+                cp = default(U).Unit(text[ptr]);
                 if (cp < 32 || cp > 126)
                 {
                     return (int)Pcre2ErrorCode.Badrepescape;
@@ -82,26 +82,26 @@ internal sealed partial class Pcre2Host
                 ptr++;
                 return 0;
             case 'g':
-                if (ptr >= end || U.Unit(text[ptr]) != '<')
+                if (ptr >= end || default(U).Unit(text[ptr]) != '<')
                 {
                     return (int)Pcre2ErrorCode.Badrepescape;
                 }
 
                 var start = ptr;
                 var n = ptr + 1;
-                if (n < end && U.Unit(text[n]) is >= '0' and <= '9')
+                if (n < end && default(U).Unit(text[n]) is >= '0' and <= '9')
                 {
                     long number = 0;
-                    while (n < end && U.Unit(text[n]) is >= '0' and <= '9')
+                    while (n < end && default(U).Unit(text[n]) is >= '0' and <= '9')
                     {
                         if (!state.TryCharge(1, n))
                         {
                             return (int)Pcre2ErrorCode.Matchlimit;
                         }
 
-                        number = Math.Min(65536, number * 10 + U.Unit(text[n++]) - '0');
+                        number = Math.Min(65536, number * 10 + default(U).Unit(text[n++]) - '0');
                     }
-                    if (number > 65535 || n >= end || U.Unit(text[n]) != '>')
+                    if (number > 65535 || n >= end || default(U).Unit(text[n]) != '>')
                     { ptr = start; return (int)Pcre2ErrorCode.Badrepescape; }
                     group = (int)number;
                     ptr = n + 1;
@@ -110,13 +110,13 @@ internal sealed partial class Pcre2Host
                 directive = 'g';
                 return 0;
             case 'N':
-                if (!profile.Utf || ptr >= end || U.Unit(text[ptr]) != '{')
+                if (!profile.Utf || ptr >= end || default(U).Unit(text[ptr]) != '{')
                 {
                     return (int)Pcre2ErrorCode.Badrepescape;
                 }
 
                 ptr++;
-                while (ptr < end && U.Unit(text[ptr]) is ' ' or '\t')
+                while (ptr < end && default(U).Unit(text[ptr]) is ' ' or '\t')
                 {
                     ptr++;
                     if (!state.TryCharge(1, ptr))
@@ -124,7 +124,7 @@ internal sealed partial class Pcre2Host
                         return (int)Pcre2ErrorCode.Matchlimit;
                     }
                 }
-                if (ptr + 1 >= end || U.Unit(text[ptr]) != 'U' || U.Unit(text[ptr + 1]) != '+')
+                if (ptr + 1 >= end || default(U).Unit(text[ptr]) != 'U' || default(U).Unit(text[ptr + 1]) != '+')
                 {
                     return (int)Pcre2ErrorCode.Badrepescape;
                 }
@@ -133,7 +133,7 @@ internal sealed partial class Pcre2Host
                 return BracedNumber<T, C, U>(profile, text, ref ptr, end, 16, out cp, ref state);
             case 'x':
             case 'o':
-                var braced = ptr < end && U.Unit(text[ptr]) == '{';
+                var braced = ptr < end && default(U).Unit(text[ptr]) == '{';
                 if (c == 'o' && !braced)
                 {
                     return (int)Pcre2ErrorCode.Badrepescape;
@@ -141,15 +141,15 @@ internal sealed partial class Pcre2Host
 
                 if (braced)
                 { ptr++; return BracedNumber<T, C, U>(profile, text, ref ptr, end, c == 'x' ? 16 : 8, out cp, ref state); }
-                if (ptr >= end || Digit(U.Unit(text[ptr]), 16) < 0)
+                if (ptr >= end || Digit(default(U).Unit(text[ptr]), 16) < 0)
                 {
                     return (int)Pcre2ErrorCode.Badrepescape;
                 }
 
-                cp = Digit(U.Unit(text[ptr++]), 16);
-                if (ptr < end && Digit(U.Unit(text[ptr]), 16) >= 0)
+                cp = Digit(default(U).Unit(text[ptr++]), 16);
+                if (ptr < end && Digit(default(U).Unit(text[ptr]), 16) >= 0)
                 {
-                    cp = cp * 16 + Digit(U.Unit(text[ptr++]), 16);
+                    cp = cp * 16 + Digit(default(U).Unit(text[ptr++]), 16);
                 }
 
                 return 0;
@@ -159,17 +159,17 @@ internal sealed partial class Pcre2Host
             var first = ptr - 1;
             var numberEnd = ptr;
             long number = c - '0';
-            while (numberEnd < end && U.Unit(text[numberEnd]) is >= '0' and <= '9')
+            while (numberEnd < end && default(U).Unit(text[numberEnd]) is >= '0' and <= '9')
             {
                 if (!state.TryCharge(1, numberEnd))
                 {
                     return (int)Pcre2ErrorCode.Matchlimit;
                 }
 
-                number = Math.Min(65536, number * 10 + U.Unit(text[numberEnd++]) - '0');
+                number = Math.Min(65536, number * 10 + default(U).Unit(text[numberEnd++]) - '0');
             }
             var python = (profile.ExtraFlags & Pcre2ExtraFlags.PythonOctal) != 0;
-            var threeOctal = first + 2 < end && Digit(c, 8) >= 0 && Digit(U.Unit(text[first + 1]), 8) >= 0 && Digit(U.Unit(text[first + 2]), 8) >= 0;
+            var threeOctal = first + 2 < end && Digit(c, 8) >= 0 && Digit(default(U).Unit(text[first + 1]), 8) >= 0 && Digit(default(U).Unit(text[first + 2]), 8) >= 0;
             var reference = c != '0' && (python ? !threeOctal : number < 10 || c >= '8' || number < program.GroupCount);
             if (reference)
             {
@@ -184,9 +184,9 @@ internal sealed partial class Pcre2Host
             }
             cp = c - '0';
             var digits = 1;
-            while (digits < 3 && ptr < end && Digit(U.Unit(text[ptr]), 8) >= 0)
-            { cp = cp * 8 + Digit(U.Unit(text[ptr++]), 8); digits++; }
-            if (cp > 255 && (python || U.Width == Pcre2CodeUnitWidth.Eight && !profile.Utf))
+            while (digits < 3 && ptr < end && Digit(default(U).Unit(text[ptr]), 8) >= 0)
+            { cp = cp * 8 + Digit(default(U).Unit(text[ptr++]), 8); digits++; }
+            if (cp > 255 && (python || default(U).Width == Pcre2CodeUnitWidth.Eight && !profile.Utf))
             {
                 return (int)Pcre2ErrorCode.Badrepescape;
             }
@@ -212,7 +212,7 @@ internal sealed partial class Pcre2Host
         where T : unmanaged where C : class where U : struct, IPcre2HostUnits<T, C>
     {
         cp = 0;
-        while (ptr < end && U.Unit(text[ptr]) is ' ' or '\t')
+        while (ptr < end && default(U).Unit(text[ptr]) is ' ' or '\t')
         {
             ptr++;
             if (!state.TryCharge(1, ptr))
@@ -222,15 +222,15 @@ internal sealed partial class Pcre2Host
         }
         var digits = 0;
         var tooLarge = false;
-        var ceiling = profile.Utf ? 0x10FFFF : U.Width == Pcre2CodeUnitWidth.Eight ? 255 : 65535;
-        while (ptr < end && Digit(U.Unit(text[ptr]), radix) >= 0)
+        var ceiling = profile.Utf ? 0x10FFFF : default(U).Width == Pcre2CodeUnitWidth.Eight ? 255 : 65535;
+        while (ptr < end && Digit(default(U).Unit(text[ptr]), radix) >= 0)
         {
             if (!state.TryCharge(1, ptr))
             {
                 return (int)Pcre2ErrorCode.Matchlimit;
             }
 
-            var digit = Digit(U.Unit(text[ptr++]), radix);
+            var digit = Digit(default(U).Unit(text[ptr++]), radix);
             digits++;
             if (cp > (ceiling - digit) / radix)
             {
@@ -242,7 +242,7 @@ internal sealed partial class Pcre2Host
                 cp = cp * radix + digit;
             }
         }
-        while (ptr < end && U.Unit(text[ptr]) is ' ' or '\t')
+        while (ptr < end && default(U).Unit(text[ptr]) is ' ' or '\t')
         {
             ptr++;
             if (!state.TryCharge(1, ptr))
@@ -255,7 +255,7 @@ internal sealed partial class Pcre2Host
             return (int)Pcre2ErrorCode.Badrepescape;
         }
 
-        if (ptr >= end || U.Unit(text[ptr]) != '}')
+        if (ptr >= end || default(U).Unit(text[ptr]) != '}')
         { if (ptr > 0) { ptr--; } return (int)Pcre2ErrorCode.Badrepescape; }
         ptr++;
         if (profile.Utf && cp is >= 0xD800 and <= 0xDFFF && (profile.ExtraFlags & Pcre2ExtraFlags.AllowSurrogateEscapes) == 0)

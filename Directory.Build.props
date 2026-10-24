@@ -6,4 +6,13 @@
     <IsPackable>false</IsPackable>
     <VersionPrefix>0.1.0</VersionPrefix>
   </PropertyGroup>
+  <!-- A test build bound to a non-default GregsEx asset keeps its own obj/bin so it never mixes with the net10.0 build. -->
+  <PropertyGroup Condition="'$(GregsExTargetFramework)' != '' and '$(MSBuildProjectName)' == 'GregsEx.Tests'">
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)artifacts/GregsEx.Tests-$(GregsExTargetFramework)/obj/</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)artifacts/GregsEx.Tests-$(GregsExTargetFramework)/bin/</BaseOutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(GregsExTargetFramework)' == 'netstandard2.0' and '$(MSBuildProjectName)' == 'GregsEx.Tests'">
+    <DefineConstants>$(DefineConstants);GREGSEX_NETSTANDARD_ASSET</DefineConstants>
+  </PropertyGroup>
 </Project>

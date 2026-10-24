@@ -88,6 +88,21 @@ dotnet test -c Release --no-build --minimum-expected-tests 1
 dotnet pack -c Release --no-build -o artifacts
 ```
 
+`GregsEx.csproj` targets `netstandard2.0`, `net8.0` and `net10.0`; the Release
+build must be warning-free for all three. A test executable cannot target
+netstandard2.0, so the same suite also runs on the net10.0 host bound to the
+net8.0 and netstandard2.0 assets (each builds under ignored `artifacts/GregsEx.Tests-<tfm>/`):
+
+```sh
+dotnet test --project test/GregsEx.Tests -c Release -p:GregsExTargetFramework=net8.0 --minimum-expected-tests 1
+dotnet test --project test/GregsEx.Tests -c Release -p:GregsExTargetFramework=netstandard2.0 --minimum-expected-tests 1
+```
+
+Those runs load the shipped net8.0 or polyfilled netstandard2.0 `GregsEx.dll` (the latter
+has no FastExpressionCompiler and uses scalar search fallbacks) on any OS. Tests of explicit runtime compilation and
+netstandard-absent APIs are excluded there with `GREGSEX_NETSTANDARD_ASSET`; every other
+result must match the net10.0 run. It does not exercise the .NET Framework runtime itself.
+
 Use focused test selectors when appropriate. Deployment-specific commands are
 defined by the relevant consumer projects and CI workflow. Packaging does not
 authorize publication.

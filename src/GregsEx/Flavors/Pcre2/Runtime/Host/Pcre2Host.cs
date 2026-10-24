@@ -56,7 +56,7 @@ internal sealed partial class Pcre2Host : IPcre2Host
 
         var program = executor.Program;
         var profile = program.Profile;
-        if (profile.Width != U.Width)
+        if (profile.Width != default(U).Width)
         {
             throw new ArgumentException("Native host width mismatch.", nameof(input));
         }
@@ -114,7 +114,7 @@ internal sealed partial class Pcre2Host : IPcre2Host
         // Replacement validity is checked even if no subject match exists.
         if (profile.Utf && (options.Flags & Pcre2MatchFlags.NoUtfCheck) == 0)
         {
-            var valid = U.Validate(replacement, profile, default, ref state);
+            var valid = default(U).Validate(replacement, profile, default, ref state);
             if (!state.TryCharge(0, startAt))
             {
                 return Failed(ref state);
@@ -134,7 +134,7 @@ internal sealed partial class Pcre2Host : IPcre2Host
 
         int subs = 0, previousStart = -1, previousEnd = -1, previousOffset = -1;
         var calloutBudget = new Pcre2HostCallbackBudget(logical.MaxCallouts);
-        callbacks = U.Wrap(callbacks, calloutBudget);
+        callbacks = default(U).Wrap(callbacks, calloutBudget);
         var quoted = false;
         Pcre2MatchFlags retry = default;
         while (true)
@@ -149,7 +149,7 @@ internal sealed partial class Pcre2Host : IPcre2Host
             { result = precomputedResult; matched = false; }
             else
             {
-                result = U.Match(executor, input, startAt, options with { Flags = options.Flags | retry }, callbacks,
+                result = default(U).Match(executor, input, startAt, options with { Flags = options.Flags | retry }, callbacks,
                 capacity, ref state, callbackPairs, pairs);
             }
 
@@ -167,7 +167,7 @@ internal sealed partial class Pcre2Host : IPcre2Host
                     break;
                 }
 
-                var next = U.Advance(input, startAt, profile, ref state);
+                var next = default(U).Advance(input, startAt, profile, ref state);
                 if (!state.TryCharge(0, startAt))
                 {
                     return Failed(ref state);
@@ -230,7 +230,7 @@ internal sealed partial class Pcre2Host : IPcre2Host
                 return new(rc, errorOffset, 0, state.Failure);
             }
 
-            if (U.HasSubstitute(callbacks))
+            if (default(U).HasSubstitute(callbacks))
             {
                 if (!output.Overflowed)
                 {
@@ -239,7 +239,7 @@ internal sealed partial class Pcre2Host : IPcre2Host
                         return Failed(ref state);
                     }
 
-                    var returned = U.Substitute(callbacks!, input, output.Buffer[..output.Offset], pairs, new(subs, insert, output.Offset));
+                    var returned = default(U).Substitute(callbacks!, input, output.Buffer[..output.Offset], pairs, new(subs, insert, output.Offset));
                     if (!state.TryCharge(0, startAt))
                     {
                         return Failed(ref state);

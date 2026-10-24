@@ -134,7 +134,7 @@ internal static class Pcre2Substrings
             throw new InvalidOperationException("PCRE2 host materialization limit exceeded.");
         }
 
-        return new string(subject.Slice(pair.Start, length));
+        return subject.Slice(pair.Start, length).ToString();
     }
 
 }

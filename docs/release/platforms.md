@@ -2,10 +2,23 @@
 
 `GregsEx` ships as a single NuGet package (`GregsEx`) containing:
 
-- `lib/net10.0/GregsEx.dll` and `lib/net10.0/GregsEx.xml`: the single runtime assembly and XML API documentation for all six supported regex profiles (`RegularCore`, `ECMAScript`, `XSD`, `XPath`, `POSIX`, `PCRE2`).
+- `lib/net10.0/`, `lib/net8.0/` and `lib/netstandard2.0/` (`GregsEx.dll` and `GregsEx.xml`): the single runtime assembly and XML API documentation for all six supported regex profiles (`RegularCore`, `ECMAScript`, `XSD`, `XPath`, `POSIX`, `PCRE2`).
 - `analyzers/dotnet/cs/GregsEx.Generator.dll`: the Roslyn incremental source generator implementing `[GeneratedPattern]`.
 - `build/GregsEx.targets` and `buildTransitive/GregsEx.targets`: MSBuild targets that automatically configure the `GregsEx.RuntimeCompilation.Auto` feature switch when `<PublishTrimmed>true</PublishTrimmed>` or `<PublishAot>true</PublishAot>` is enabled.
 - `licenses/`: MIT license notices for `FastExpressionCompiler` (`THIRD-PARTY-NOTICES.txt`) and data/specification notices for Unicode 16.0.0/17.0.0, XML, and PCRE2.
+
+Each target is the same runtime assembly built from the same sources. NuGet picks the asset for the
+application's target framework, so a net10.0 application gets `lib/net10.0` even when it reaches GregsEx through
+a netstandard2.0-only library such as TextMateSharp. Assets differ only in how fast they run:
+
+| Asset | Runtime compilation (`Compile()`, Auto compiled backend) | `[GeneratedPattern]` kernels | Search primitives | Dependencies |
+| --- | --- | --- | --- | --- |
+| `net10.0` | Supported (FastExpressionCompiler) | Emitted | BCL vectorized `SearchValues`, `IndexOfAny*` | None |
+| `net8.0` | Supported (FastExpressionCompiler) | Emitted | BCL vectorized, except multi-string sets (`SearchValues<string>` is .NET 9+) use a first-character prefilter | None |
+| `netstandard2.0` | Not available: `Compile()` throws `PlatformNotSupportedException`, Auto stays interpreted/accelerated | Not emitted: the generator reports `GREGEX003` and the pattern is parsed at run time | Scalar polyfills (Meziantou.Polyfill plus `Polyfills/` in the source) | `System.Memory` |
+
+Matching results are identical on every asset. NativeAOT and trimming qualification applies to the net8.0 and net10.0
+assets (`IsAotCompatible`).
 
 ECMAScript, XSD and XPath profiles select `UnicodeVersion.Unicode16_0` (the
 unchanged default) or `UnicodeVersion.Unicode17_0`. Both datasets are embedded

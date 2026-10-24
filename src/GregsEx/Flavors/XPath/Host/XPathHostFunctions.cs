@@ -44,7 +44,7 @@ internal static partial class XPathHostFunctions
         Append(input.AsSpan(cursor), ref output, ref context);
         context.Reserve(32L + 2L * output.Count);
         context.Charge(output.Count);
-        return new string(output.Items);
+        return output.Items.ToString();
     }
 
     internal static IReadOnlyList<string> Tokenize(string? input, string pattern, string flags = "",
@@ -106,7 +106,7 @@ internal static partial class XPathHostFunctions
         context.Units(text.Length);
         context.Charge(text.Length);
         context.Reserve(32L + 2L * text.Length);
-        tokens.Add(new string(text), ref context);
+        tokens.Add(text.ToString(), ref context);
     }
     private static System.Collections.ObjectModel.ReadOnlyCollection<string> FinishTokens(ref HostBuffer<string> tokens, ref HostContext context)
     {

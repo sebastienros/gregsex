@@ -126,6 +126,8 @@ internal static class CompileSamples
     internal static bool Compile(IPcre2Compiler compiler, IPcre2Data data, ReadOnlySpan<byte> source,
         ref CompileBudget budget, out Pcre2Program? program, out Pcre2Diagnostic diagnostic)
         => compiler.TryCompile(source, new(Pcre2CodeUnitWidth.Eight), data, ref budget, out program, out diagnostic);
+#if !GREGSEX_NETSTANDARD_ASSET
+    // netstandard2.0 has no static abstract members, so these module contracts are documentation-only there.
     internal static Pcre2Step Kernel<TKernel, TReader>(Pcre2Program program, ReadOnlySpan<byte> input,
         Pcre2DataView data, ref Pcre2VmState machine, ref RunState state)
         where TKernel : struct, IPcre2VmKernel where TReader : struct, IPcre2TextReader<byte>
@@ -144,4 +146,5 @@ internal static class CompileSamples
         Pcre2ByteCallbacks? callbacks, Span<Pcre2OffsetPair> callbackPairs, ref Pcre2VmState machine, ref RunState state)
         where TControls : struct, IPcre2Controls => TControls.Notify(Pcre2ExecutionEvent.EnterNode,
             program, input, callbacks, callbackPairs, ref machine, ref state);
+#endif
 }

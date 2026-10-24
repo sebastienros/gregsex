@@ -55,6 +55,12 @@ jobs:
       run: dotnet build --configuration Release --no-restore -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True
     - name: Test
       run: dotnet test --configuration Release --no-build --minimum-expected-tests 1
+    # Same suite on the net10.0 host, bound to GregsEx's net8.0 and netstandard2.0 assets
+    # (netstandard2.0: polyfilled APIs, no runtime compilation or generated kernels).
+    - name: Test net8.0 asset
+      run: dotnet test --project test/GregsEx.Tests --configuration Release -p:GregsExTargetFramework=net8.0 -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True --minimum-expected-tests 1
+    - name: Test netstandard2.0 asset
+      run: dotnet test --project test/GregsEx.Tests --configuration Release -p:GregsExTargetFramework=netstandard2.0 -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True --minimum-expected-tests 1
 
     - name: Pack preview packages
       if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'

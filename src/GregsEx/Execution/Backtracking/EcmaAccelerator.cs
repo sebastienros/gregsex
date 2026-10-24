@@ -741,7 +741,7 @@ internal sealed class EcmaAccelerator
     private readonly bool _literalLeadBoundary;
     private readonly bool _literalTrailBoundary;
     private readonly string[] _altBranches = [];
-    private readonly SearchValues<string>? _altSearchValues;
+    private readonly StringSearchValues? _altSearchValues;
     private readonly SearchValues<char>? _altFirstCharValues;
     private readonly EcmaFastSet? _repeatSet;
     private readonly int _repeatMin;
@@ -776,12 +776,12 @@ internal sealed class EcmaAccelerator
     internal readonly SearchValues<char>? FirstChars;
     // FirstChars leaves out what a non-multiline ^ branch could start with, so the input's start is always a candidate.
     internal bool FirstCharsTryStart { get; private set; }
-    private SearchValues<string>? _literalSearchValues;
+    private StringSearchValues? _literalSearchValues;
 
     // The leading fixed strings of every branch (literals and small classes expanded), a superset prefilter for
     // an alternation or a case-insensitive literal run, which FirstChars leaves at nearly every position over a small
     // alphabet: /agggtaaa|tttaccct/i over DNA, /aaaaaaaaaa/i over text.
-    internal readonly SearchValues<string>? FirstStrings;
+    internal readonly StringSearchValues? FirstStrings;
 
     // An i-flag literal that no other character canonicalizes with (`@`, `-`, digits) matches exactly what the
     // case-sensitive literal matches, so the planners see it without the flag: they refuse i-flag literals, and an i
@@ -1353,7 +1353,7 @@ internal sealed class EcmaAccelerator
     private bool TryBuildLiteralAlternationPlan(
         ReadOnlySpan<EcmaNode> nodes,
         out string[] branches,
-        out SearchValues<string>? searchValues,
+        out StringSearchValues? searchValues,
         out SearchValues<char>? firstCharValues)
     {
         branches = [];
@@ -1416,7 +1416,7 @@ internal sealed class EcmaAccelerator
             }
         }
         branches = list.ToArray();
-        searchValues = SearchValues.Create(branches, StringComparison.Ordinal);
+        searchValues = StringSearch.Create(branches);
         if (allRareFirst && distinctCount is >= 1 and <= 5)
         {
             firstCharValues = SearchValues.Create(distinctFirst.Slice(0, distinctCount));
@@ -2196,7 +2196,7 @@ internal sealed class EcmaAccelerator
     private const int MaxStringsPerBranch = 64;
     private const int MaxFirstStrings = 256;
 
-    private SearchValues<string>? TryBuildFirstStrings(ReadOnlySpan<EcmaNode> nodes, int root)
+    private StringSearchValues? TryBuildFirstStrings(ReadOnlySpan<EcmaNode> nodes, int root)
     {
         var unicodeAware = _program.Profile.IsUnicodeAware;
         var branches = new List<int>();
@@ -2281,7 +2281,7 @@ internal sealed class EcmaAccelerator
         var distinct = new HashSet<string>(all, StringComparer.Ordinal);
         var strings = new string[distinct.Count];
         distinct.CopyTo(strings);
-        return SearchValues.Create(strings,
+        return StringSearch.Create(strings,
             ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
     }
 
@@ -2821,7 +2821,7 @@ internal sealed class EcmaAccelerator
             // A single-string SearchValues picks rarer anchor characters than IndexOf(string)'s first/last pair, which
             // is what .NET Regex searches with; IndexOf(string) took twice as long over common-letter text.
             var rel = litLen == 0 ? 0 : litLen == 1 ? input.Slice(searchPos).IndexOf(lit[0])
-                : input.Slice(searchPos).IndexOfAny(_literalSearchValues ??= SearchValues.Create([_literal], StringComparison.Ordinal));
+                : input.Slice(searchPos).IndexOfAny(_literalSearchValues ??= StringSearch.Create([_literal]));
             if (rel < 0)
             {
                 if (!TryChargeFast(ref state, startAt, input.Length, Math.Max(1, input.Length - startAt)))
@@ -2885,7 +2885,7 @@ internal sealed class EcmaAccelerator
         while (searchPos + litLen <= input.Length)
         {
             var rel = litLen == 1 ? input.Slice(searchPos).IndexOf(lit[0])
-                : input.Slice(searchPos).IndexOfAny(_literalSearchValues ??= SearchValues.Create([_literal], StringComparison.Ordinal));
+                : input.Slice(searchPos).IndexOfAny(_literalSearchValues ??= StringSearch.Create([_literal]));
             if (rel < 0)
             {
                 break;

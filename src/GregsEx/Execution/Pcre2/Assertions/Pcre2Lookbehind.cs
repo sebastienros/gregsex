@@ -151,7 +151,7 @@ internal readonly partial struct Pcre2AssertionOps
         int count = 0, floor = Pcre2Kernel.ScanStart(ref state);
         while (count < maximum && start > floor)
         {
-            var read = TReader.ReadPrevious(input, start, program.Profile, ref state);
+            var read = default(TReader).ReadPrevious(input, start, program.Profile, ref state);
             if (Denied(ref machine, ref state))
             {
                 return false;
@@ -218,7 +218,7 @@ internal readonly partial struct Pcre2AssertionOps
 
             if (start < minimumStart)
             {
-                var read = TReader.Read(input, start, origin, false, program.Profile, ref state);
+                var read = default(TReader).Read(input, start, origin, false, program.Profile, ref state);
                 if (Denied(ref machine, ref state))
                 {
                     return Resource();

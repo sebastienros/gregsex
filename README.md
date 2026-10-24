@@ -415,7 +415,8 @@ layout, feature switches, and execution-mode qualifications.
 
 ## Build
 
-Install the .NET 10 SDK, then:
+The package targets `net10.0`, `net8.0` and `netstandard2.0`; see the [platform matrix](docs/release/platforms.md)
+for what each asset supports. Install the .NET 10 SDK, then:
 
 ```sh
 dotnet restore

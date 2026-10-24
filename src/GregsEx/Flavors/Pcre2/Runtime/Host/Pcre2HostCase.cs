@@ -18,26 +18,26 @@ internal sealed partial class Pcre2Host
         where T : unmanaged where C : class where U : struct, IPcre2HostUnits<T, C>
     {
         if (!utf)
-        { target[0] = U.From(cp); return 1; }
-        if (U.Width == Pcre2CodeUnitWidth.Sixteen)
+        { target[0] = default(U).From(cp); return 1; }
+        if (default(U).Width == Pcre2CodeUnitWidth.Sixteen)
         {
             if (cp < 0x10000)
-            { target[0] = U.From(cp); return 1; }
+            { target[0] = default(U).From(cp); return 1; }
             cp -= 0x10000;
-            target[0] = U.From(0xD800 + (cp >> 10));
-            target[1] = U.From(0xDC00 + (cp & 1023));
+            target[0] = default(U).From(0xD800 + (cp >> 10));
+            target[1] = default(U).From(0xDC00 + (cp & 1023));
             return 2;
         }
         if (cp < 128)
-        { target[0] = U.From(cp); return 1; }
+        { target[0] = default(U).From(cp); return 1; }
         if (cp < 0x800)
-        { target[0] = U.From(0xC0 | (cp >> 6)); target[1] = U.From(0x80 | (cp & 63)); return 2; }
+        { target[0] = default(U).From(0xC0 | (cp >> 6)); target[1] = default(U).From(0x80 | (cp & 63)); return 2; }
         if (cp < 0x10000)
-        { target[0] = U.From(0xE0 | (cp >> 12)); target[1] = U.From(0x80 | ((cp >> 6) & 63)); target[2] = U.From(0x80 | (cp & 63)); return 3; }
-        target[0] = U.From(0xF0 | (cp >> 18));
-        target[1] = U.From(0x80 | ((cp >> 12) & 63));
-        target[2] = U.From(0x80 | ((cp >> 6) & 63));
-        target[3] = U.From(0x80 | (cp & 63));
+        { target[0] = default(U).From(0xE0 | (cp >> 12)); target[1] = default(U).From(0x80 | ((cp >> 6) & 63)); target[2] = default(U).From(0x80 | (cp & 63)); return 3; }
+        target[0] = default(U).From(0xF0 | (cp >> 18));
+        target[1] = default(U).From(0x80 | ((cp >> 12) & 63));
+        target[2] = default(U).From(0x80 | ((cp >> 6) & 63));
+        target[3] = default(U).From(0x80 | (cp & 63));
         return 4;
     }
     private static int MapCase(int cp, bool upper, Pcre2Profile profile, Pcre2DataView data)
@@ -80,7 +80,7 @@ internal sealed partial class Pcre2Host
         ref CaseState casing, ref Pcre2HostOutput<T> output, ref RunState state)
         where T : unmanaged where C : class where U : struct, IPcre2HostUnits<T, C>
     {
-        if (casing.Mode == 0 || U.HasCase(callbacks))
+        if (casing.Mode == 0 || default(U).HasCase(callbacks))
         {
             return output.Copy(input, ref state);
         }
@@ -113,7 +113,7 @@ internal sealed partial class Pcre2Host
         Span<T> encoded = stackalloc T[6];
         for (var offset = 0; offset < input.Length;)
         {
-            var read = U.Read(input, offset, profile, ref state);
+            var read = default(U).Read(input, offset, profile, ref state);
             if (!state.TryCharge(0, offset) || read.Status != Pcre2ReadStatus.Value)
             {
                 return false;
@@ -158,7 +158,7 @@ internal sealed partial class Pcre2Host
         ref int callouts, int maxCallouts, ref Pcre2HostOutput<T> output, ref RunState state)
         where T : unmanaged where C : class where U : struct, IPcre2HostUnits<T, C>
     {
-        if (!U.HasCase(callbacks) || casing.Mode == 0)
+        if (!default(U).HasCase(callbacks) || casing.Mode == 0)
         {
             return true;
         }
@@ -185,7 +185,7 @@ internal sealed partial class Pcre2Host
                 return false;
             }
 
-            required = U.Case(callbacks!, region[..length], region, (Pcre2SubstituteCase)casing.Mode);
+            required = default(U).Case(callbacks!, region[..length], region, (Pcre2SubstituteCase)casing.Mode);
             if (!state.TryCharge(0, casing.Start))
             {
                 return false;
@@ -198,7 +198,7 @@ internal sealed partial class Pcre2Host
         }
         else
         {
-            var read = U.Read(region[..length], 0, profile, ref state);
+            var read = default(U).Read(region[..length], 0, profile, ref state);
             if (!state.TryCharge(0, casing.Start) || read.Status != Pcre2ReadStatus.Value)
             {
                 return false;
@@ -216,7 +216,7 @@ internal sealed partial class Pcre2Host
                     return false;
                 }
 
-                required = U.Case(callbacks!, first[..read.Width], region[..firstCap], casing.Mode == 4 ? Pcre2SubstituteCase.Lower : (Pcre2SubstituteCase)casing.Mode);
+                required = default(U).Case(callbacks!, first[..read.Width], region[..firstCap], casing.Mode == 4 ? Pcre2SubstituteCase.Lower : (Pcre2SubstituteCase)casing.Mode);
                 if (!state.TryCharge(0, casing.Start))
                 {
                     return false;
@@ -248,7 +248,7 @@ internal sealed partial class Pcre2Host
                         return false;
                     }
 
-                    restRequired = U.Case(callbacks!, region.Slice(restStart, restLength), firstOverflow ? Span<T>.Empty : region[required..], Pcre2SubstituteCase.Upper);
+                    restRequired = default(U).Case(callbacks!, region.Slice(restStart, restLength), firstOverflow ? Span<T>.Empty : region[required..], Pcre2SubstituteCase.Upper);
                     if (!state.TryCharge(0, casing.Start))
                     {
                         return false;

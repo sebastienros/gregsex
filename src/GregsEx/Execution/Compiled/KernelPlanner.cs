@@ -1,5 +1,5 @@
 #nullable enable
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
 using GregsEx.Execution.Thompson;
 using GregsEx.Flavors.EcmaScript.Integration;
 using GregsEx.Flavors.Pcre2.Integration;

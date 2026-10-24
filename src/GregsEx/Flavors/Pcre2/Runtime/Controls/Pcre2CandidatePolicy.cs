@@ -36,7 +36,7 @@ internal struct Pcre2CandidatePolicy
             var p = candidate;
             while (p < end && !AtNewline<TUnit, TReader>(program, input, p, end, ref state))
             {
-                var read = TReader.Read(input, p, end, false, program.Profile, ref state);
+                var read = default(TReader).Read(input, p, end, false, program.Profile, ref state);
                 if (read.Status != Pcre2ReadStatus.Value || Denied(ref machine, ref state))
                 {
                     return false;
@@ -118,7 +118,7 @@ internal struct Pcre2CandidatePolicy
             {
                 while (candidate < scanEnd && !AfterNewline<TUnit, TReader>(program, input, candidate, end, ref state))
                 {
-                    var read = TReader.Read(input, candidate, scanEnd, false, program.Profile, ref state);
+                    var read = default(TReader).Read(input, candidate, scanEnd, false, program.Profile, ref state);
                     if (read.Status != Pcre2ReadStatus.Value || Denied(ref machine, ref state))
                     {
                         return false;
@@ -220,7 +220,7 @@ internal struct Pcre2CandidatePolicy
             return false;
         }
 
-        unit = TUnits.Unit(input, offset);
+        unit = default(TUnits).Unit(input, offset);
         return true;
     }
 
@@ -254,7 +254,7 @@ internal struct Pcre2CandidatePolicy
             return false;
         }
 
-        var read = TReader.Read(input, position, end, false, program.Profile, ref state);
+        var read = default(TReader).Read(input, position, end, false, program.Profile, ref state);
         if (read.Status != Pcre2ReadStatus.Value)
         {
             return false;
@@ -267,7 +267,7 @@ internal struct Pcre2CandidatePolicy
                 return false;
             }
 
-            var next = TReader.Read(input, position + read.Width, end, false, program.Profile, ref state);
+            var next = default(TReader).Read(input, position + read.Width, end, false, program.Profile, ref state);
             return next.Status == Pcre2ReadStatus.Value && next.Value == 10;
         }
         return program.Profile.Newline switch
@@ -285,7 +285,7 @@ internal struct Pcre2CandidatePolicy
         int position, int end, ref RunState state)
         where TUnit : unmanaged where TReader : struct, IPcre2TextReader<TUnit>
     {
-        var before = TReader.ReadPrevious(input, position, program.Profile, ref state);
+        var before = default(TReader).ReadPrevious(input, position, program.Profile, ref state);
         if (before.Status != Pcre2ReadStatus.Value)
         {
             return false;
@@ -298,7 +298,7 @@ internal struct Pcre2CandidatePolicy
                 return false;
             }
 
-            var earlier = TReader.ReadPrevious(input, position - before.Width, program.Profile, ref state);
+            var earlier = default(TReader).ReadPrevious(input, position - before.Width, program.Profile, ref state);
             return earlier.Status == Pcre2ReadStatus.Value && earlier.Value == 13;
         }
         return AtNewline<TUnit, TReader>(program, input, position - before.Width, end, ref state);

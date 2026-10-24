@@ -52,7 +52,7 @@ internal static class Pcre2TextFragments<TUnit, TUnits>
                     return Failed(in state);
                 }
 
-                if (TUnits.Interior(unit))
+                if (default(TUnits).Interior(unit))
                 {
                     if (!invalid)
                     {
@@ -93,7 +93,7 @@ internal static class Pcre2TextFragments<TUnit, TUnits>
                 return Failed(in state);
             }
 
-            if (TUnits.Interior(unit))
+            if (default(TUnits).Interior(unit))
             {
                 return window with { Validation = Pcre2TextCore<TUnit, TUnits>.BoundaryError(startAt, in state), Available = false };
             }
@@ -241,7 +241,7 @@ internal static class Pcre2TextFragments<TUnit, TUnits>
                 return offset;
             }
 
-            if (!TUnits.Interior(unit))
+            if (!default(TUnits).Interior(unit))
             {
                 break;
             }

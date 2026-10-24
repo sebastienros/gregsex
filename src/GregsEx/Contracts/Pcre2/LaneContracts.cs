@@ -165,16 +165,16 @@ internal enum Pcre2ValidationPolicy { NativeWindow, WholeSubjectProjection }
 internal enum Pcre2ReadStatus { End, Value, InvalidBarrier }
 internal readonly record struct Pcre2ReadResult(Pcre2ReadStatus Status, int Value, int Width);
 internal readonly record struct Pcre2ValidationResult(bool Valid, int NativeError = 0, RegexExecutionFailure Failure = default);
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
 internal interface IPcre2TextReader<TUnit> where TUnit : unmanaged
 {
-    static abstract Pcre2ValidationResult Validate(ReadOnlySpan<TUnit> input, int startAt, int maxLookbehind,
+    Pcre2ValidationResult Validate(ReadOnlySpan<TUnit> input, int startAt, int maxLookbehind,
         Pcre2Profile profile, Pcre2MatchFlags flags, Pcre2ValidationPolicy policy, ref RunState state);
-    static abstract Pcre2ReadResult Read(ReadOnlySpan<TUnit> input, int offset, int visibleEnd, bool codeUnit,
+    Pcre2ReadResult Read(ReadOnlySpan<TUnit> input, int offset, int visibleEnd, bool codeUnit,
         Pcre2Profile profile, ref RunState state);
-    static abstract Pcre2ReadResult ReadPrevious(ReadOnlySpan<TUnit> input, int offset,
+    Pcre2ReadResult ReadPrevious(ReadOnlySpan<TUnit> input, int offset,
         Pcre2Profile profile, ref RunState state);
-    static abstract int AdvanceAfterEmpty(ReadOnlySpan<TUnit> input, int offset, Pcre2Profile profile, ref RunState state);
+    int AdvanceAfterEmpty(ReadOnlySpan<TUnit> input, int offset, Pcre2Profile profile, ref RunState state);
 }
 #endif
 
@@ -306,9 +306,10 @@ internal readonly record struct Pcre2OperationLimits(long MaxWork, int MaxDepth,
 // Module calls are statically bound by the composition owner to concrete struct
 // implementations. Never box these modules or invoke Step through an interface
 // instance inside a consumed-character loop. IPcre2Executor is the once/search boundary.
-#if !NETSTANDARD2_0
+#if !GREGSEX_GENERATOR
 internal interface IPcre2VmKernel
 {
+#if NET8_0_OR_GREATER
     static abstract Pcre2Step Step<TUnit, TReader>(Pcre2Program program, ReadOnlySpan<TUnit> input,
         Pcre2DataView data, Pcre2MatchOptions options, ref Pcre2VmState machine, ref RunState state)
         where TUnit : unmanaged where TReader : struct, IPcre2TextReader<TUnit>;
@@ -316,29 +317,38 @@ internal interface IPcre2VmKernel
     // pairs unchanged, partial publishes group0 only; rc0 denotes short success.
     static abstract Pcre2MatchResult Publish(Pcre2Program program, ref Pcre2VmState machine, ref RunState state,
         Span<Pcre2OffsetPair> pairs);
+#endif
 }
 internal interface IPcre2AssertionOps
 {
+#if NET8_0_OR_GREATER
     static abstract Pcre2Step Step<TUnit, TReader>(Pcre2Program program, ReadOnlySpan<TUnit> input,
         Pcre2DataView data, ref Pcre2VmState machine, ref RunState state)
         where TUnit : unmanaged where TReader : struct, IPcre2TextReader<TUnit>;
+#endif
 }
 internal interface IPcre2RecursionOps
 {
+#if NET8_0_OR_GREATER
     static abstract Pcre2Step Step(Pcre2Program program, Pcre2MatchFlags flags, ref Pcre2VmState machine, ref RunState state);
+#endif
 }
 internal interface IPcre2UnicodeOps
 {
+#if NET8_0_OR_GREATER
     static abstract Pcre2Step Step<TUnit, TReader>(Pcre2Program program, ReadOnlySpan<TUnit> input,
         Pcre2DataView data, ref Pcre2VmState machine, ref RunState state)
         where TUnit : unmanaged where TReader : struct, IPcre2TextReader<TUnit>;
+#endif
 }
 internal interface IPcre2Controls
 {
+#if NET8_0_OR_GREATER
     static abstract Pcre2Step Notify(Pcre2ExecutionEvent occurrence, Pcre2Program program, ReadOnlySpan<char> input,
         Pcre2CharCallbacks? callbacks, Span<Pcre2OffsetPair> callbackPairs, ref Pcre2VmState machine, ref RunState state);
     static abstract Pcre2Step Notify(Pcre2ExecutionEvent occurrence, Pcre2Program program, ReadOnlySpan<byte> input,
         Pcre2ByteCallbacks? callbacks, Span<Pcre2OffsetPair> callbackPairs, ref Pcre2VmState machine, ref RunState state);
+#endif
 }
 #endif
 internal interface IPcre2Executor

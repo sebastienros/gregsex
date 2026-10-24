@@ -165,7 +165,7 @@ internal static class Pcre2VmSearch
                     // This is matcher bumpalong, not host empty-match iteration:
                     // AdvanceAfterEmpty always joins CRLF and would hide an
                     // explicitly matchable LF even when HASCRORLF is true.
-                    var advance = TReader.Read(input, machine.CandidateStart, fragment.VisibleEnd, false, program.Profile, ref state);
+                    var advance = default(TReader).Read(input, machine.CandidateStart, fragment.VisibleEnd, false, program.Profile, ref state);
                     if (state.Failure.Code != RegexExecutionFailureCode.None)
                     {
                         return Pcre2Kernel.Failure(ref machine, ref state);
@@ -187,7 +187,7 @@ internal static class Pcre2VmSearch
                             return Pcre2Kernel.Failure(ref machine, ref state);
                         }
 
-                        if (TUnits.Unit(input, next - 1) == 13 && TUnits.Unit(input, next) == 10)
+                        if (default(TUnits).Unit(input, next - 1) == 13 && default(TUnits).Unit(input, next) == 10)
                         {
                             next++;
                         }
@@ -237,7 +237,7 @@ internal static class Pcre2VmSearch
             return false;
         }
 
-        var read = TReader.Read(input, position, end, false, program.Profile, ref state);
+        var read = default(TReader).Read(input, position, end, false, program.Profile, ref state);
         if (read.Status != Pcre2ReadStatus.Value)
         {
             return false;
@@ -250,7 +250,7 @@ internal static class Pcre2VmSearch
                 return false;
             }
 
-            var next = TReader.Read(input, position + read.Width, end, false, program.Profile, ref state);
+            var next = default(TReader).Read(input, position + read.Width, end, false, program.Profile, ref state);
             return next.Status == Pcre2ReadStatus.Value && next.Value == 10;
         }
         return program.Profile.Newline switch

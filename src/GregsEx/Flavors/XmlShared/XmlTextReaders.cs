@@ -105,6 +105,9 @@ internal readonly struct XmlCharTextReader : IXmlTextReader<char>
         width = count;
         return true;
     }
+
+    RegexSearchStatus IXmlTextReader<char>.Validate(ReadOnlySpan<char> input, int startAt, ref RunState state) => Validate(input, startAt, ref state);
+    bool IXmlTextReader<char>.TryRead(ReadOnlySpan<char> input, int offset, out int scalar, out int width) => TryRead(input, offset, out scalar, out width);
 }
 
 internal readonly struct XmlByteTextReader : IXmlTextReader<byte>
@@ -205,4 +208,7 @@ internal readonly struct XmlByteTextReader : IXmlTextReader<byte>
     private static bool IsContinuation(byte next) => next is >= 0x80 and <= 0xBF;
     private static bool ValidSecond(byte first, byte second) => first switch
     { 0xE0 => second >= 0xA0, 0xED => second <= 0x9F, 0xF0 => second >= 0x90, 0xF4 => second <= 0x8F, _ => true };
+
+    RegexSearchStatus IXmlTextReader<byte>.Validate(ReadOnlySpan<byte> input, int startAt, ref RunState state) => Validate(input, startAt, ref state);
+    bool IXmlTextReader<byte>.TryRead(ReadOnlySpan<byte> input, int offset, out int scalar, out int width) => TryRead(input, offset, out scalar, out width);
 }

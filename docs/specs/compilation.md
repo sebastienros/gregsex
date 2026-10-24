@@ -46,8 +46,10 @@ Use the pinned private source package (version `6.0.0` in `Directory.Packages.pr
                   PrivateAssets="all" />
 ```
 
-Its compatible net8.0 Compile content assets become internal code in
-`GregsEx.dll`. Preserve those source assets and inspect restore/package outputs:
+Its compatible net8.0 Compile content assets become internal code in the
+net8.0 and net10.0 `GregsEx.dll`. The netstandard2.0 asset does not reference FEC:
+there `IsRuntimeCompilationAvailable` is false, explicit `Compile()` throws
+`PlatformNotSupportedException` and Auto never selects the compiled backend. Preserve those source assets and inspect restore/package outputs:
 no FEC DLL, transitive FEC dependency, or public FEC type may ship. Distribute the
 upstream MIT notice. Do not substitute the binary or public-source package.
 

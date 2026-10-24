@@ -93,5 +93,5 @@ internal static class CompileSamples
 
     internal static RegexSearchStatus TextLane<TUnit, TReader>(ReadOnlySpan<TUnit> input,
         ProfileDescriptor profile, ref RunState state) where TUnit : unmanaged where TReader : struct, ITextReader<TUnit>
-        => TReader.Validate(input, 0, profile, ref state);
+        => default(TReader).Validate(input, 0, profile, ref state);
 }

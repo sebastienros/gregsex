@@ -224,7 +224,7 @@ internal sealed class XsdExecutor(XmlProgram program, XsdInstruction[] code, int
             return Fail(ref state, RegexExecutionFailureCode.WorkspaceCapacityExceeded, 0);
         }
 
-        var status = TReader.Validate(input, 0, ref state);
+        var status = default(TReader).Validate(input, 0, ref state);
         if (status != RegexSearchStatus.NoMatch)
         {
             return status;
@@ -254,7 +254,7 @@ internal sealed class XsdExecutor(XmlProgram program, XsdInstruction[] code, int
                 return Failure(ref state);
             }
 
-            if (!TReader.TryRead(input, at, out var scalar, out var width))
+            if (!default(TReader).TryRead(input, at, out var scalar, out var width))
             {
                 return Fail(ref state, RegexExecutionFailureCode.InvalidEncoding, at);
             }

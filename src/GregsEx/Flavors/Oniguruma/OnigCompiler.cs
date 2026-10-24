@@ -258,7 +258,7 @@ internal sealed class OnigCompiler
         if (dontCaptureGroup || (!captureGroup && parser.HasNamedGroups))
         {
             groupCount = Renumber(parser, names, unnamedCapture: false);
-            names = names[..groupCount];
+            names = names.AsSpan(0, groupCount).ToArray();
         }
         else
         {

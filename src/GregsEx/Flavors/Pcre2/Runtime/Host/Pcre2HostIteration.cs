@@ -28,7 +28,7 @@ internal struct Pcre2HostIteration
     {
         ArgumentNullException.ThrowIfNull(executor);
         ArgumentNullException.ThrowIfNull(limits);
-        if (executor.Program.Profile.Width != U.Width)
+        if (executor.Program.Profile.Width != default(U).Width)
         {
             throw new ArgumentException("Native iterator width mismatch.", nameof(input));
         }
@@ -64,11 +64,11 @@ internal struct Pcre2HostIteration
             { state.Failure = new(RegexExecutionFailureCode.WorkspaceLimitExceeded, StartAt, state.Budget.WorkConsumed, 256); _complete = true; return Failure(ref state); }
             _calloutBudget = new((options.Limits ?? new()).MaxCallouts);
         }
-        callbacks = U.Wrap(callbacks, _calloutBudget);
+        callbacks = default(U).Wrap(callbacks, _calloutBudget);
         while (true)
         {
             var attempt = options with { Flags = options.Flags | (_retry ? Pcre2MatchFlags.Anchored | Pcre2MatchFlags.NotemptyAtstart : 0) };
-            var result = U.Match(executor, input, StartAt, attempt, callbacks, capacity, ref state, callbackPairs, pairs);
+            var result = default(U).Match(executor, input, StartAt, attempt, callbacks, capacity, ref state, callbackPairs, pairs);
             if (_calloutBudget.Denied)
             { state.Failure = new(RegexExecutionFailureCode.WorkLimitExceeded, StartAt, state.Budget.WorkConsumed); _complete = true; return Failure(ref state); }
             var pair = result.Status == Pcre2MatchStatus.Match ? pairs[0] : default;
@@ -84,7 +84,7 @@ internal struct Pcre2HostIteration
             {
                 if (StartAt == input.Length)
                 { _complete = true; return new(Pcre2MatchStatus.NoMatch, (int)Pcre2ErrorCode.Nomatch, 0); }
-                var next = U.Advance(input, StartAt, executor.Program.Profile, ref state);
+                var next = default(U).Advance(input, StartAt, executor.Program.Profile, ref state);
                 if (!state.TryCharge(0, StartAt))
                 { _complete = true; return Failure(ref state); }
                 if (next <= StartAt || next > input.Length)
