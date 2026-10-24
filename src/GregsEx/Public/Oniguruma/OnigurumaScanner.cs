@@ -163,10 +163,10 @@ public sealed class OnigurumaScanner
                     return status;
                 }
 
-                // A search that ran out of work counts as no match, and is cached as one for later offsets, as Onigwrap
-                // reports Oniguruma's retry-limit error.
+                // A search that ran out of work counts as no match but is not cached: a later offset gets a fresh budget
+                // and may match, as it does for Oniguruma searching a new string.
                 matched = status == RegexSearchStatus.Match;
-                if (text is not null)
+                if (text is not null && status != RegexSearchStatus.LimitExceeded)
                 {
                     _lastText[i] = text;
                     _lastStart[i] = textStart;
