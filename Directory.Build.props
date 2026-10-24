@@ -6,6 +6,14 @@
     <IsPackable>false</IsPackable>
     <VersionPrefix>0.1.0</VersionPrefix>
   </PropertyGroup>
+  <!-- Every assembly is strong-named with the repository key, so .NET Framework hosts that load strong-named
+       consumers (TextMateSharp) can load GregsEx, and the friend assemblies below can see its internals. The key pair
+       is public on purpose: strong names give identity, not security. -->
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)GregsEx.snk</AssemblyOriginatorKeyFile>
+    <GregsExPublicKey>00240000048000009400000006020000002400005253413100040000010001003fad499d89a5b2f9c8096b7eca6476468289e66f86803606615a45cf1a16c0e5a5f7197d3db19e3a7d768556618580c1b4912e6a73c6930de479059c691d46a2703d124d4af3423119d62c44c636e1cb7c81adc4f98142993861e45c5f66b676eac194a1233536ec1e3f8c86955b79e6a96616ccf933f95b0688fe7576842199</GregsExPublicKey>
+  </PropertyGroup>
   <!-- A test build bound to a non-default GregsEx asset keeps its own obj/bin so it never mixes with the net10.0 build. -->
   <PropertyGroup Condition="'$(GregsExTargetFramework)' != '' and '$(MSBuildProjectName)' == 'GregsEx.Tests'">
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)artifacts/GregsEx.Tests-$(GregsExTargetFramework)/obj/</BaseIntermediateOutputPath>
