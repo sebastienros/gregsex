@@ -62,8 +62,9 @@ jobs:
     - name: Test netstandard2.0 asset
       run: dotnet test --project test/GregsEx.Tests --configuration Release -p:GregsExTargetFramework=netstandard2.0 -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True --minimum-expected-tests 1
 
+    # Pack on every run so a missing target asset fails the pull request, not only main or a release tag.
     - name: Pack preview packages
-      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+      if: matrix.os == 'ubuntu-latest'
       run: dotnet pack --output artifacts --configuration Release --no-build -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True
 
     - name: Push preview packages to Feedz

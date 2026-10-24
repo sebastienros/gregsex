@@ -2,6 +2,8 @@
      push them into the netstandard2.0 build (NETSDK1207, NETSDK1124). The library itself is never published. -->
 <Project Sdk="Microsoft.NET.Sdk" TreatAsLocalProperty="PublishAot;PublishTrimmed">
   <PropertyGroup>
+    <!-- Directory.Build.props sets TargetFramework for every project; clear it so the outer build dispatches to every target. -->
+    <TargetFramework></TargetFramework>
     <TargetFrameworks>netstandard2.0;net8.0;net10.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <PublishAot>false</PublishAot>
