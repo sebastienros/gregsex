@@ -24,6 +24,8 @@ public sealed class OnigurumaWorkspace
     /// <summary>Bytes of backtracking storage currently reserved.</summary>
     public long ReservedBytes => _matcher.ReservedBytes + 4L * _captures.Length;
 
+    internal OnigMatcher Matcher => _matcher;
+
     internal OnigurumaWorkspace(OnigurumaPattern pattern)
     {
         Pattern = pattern;

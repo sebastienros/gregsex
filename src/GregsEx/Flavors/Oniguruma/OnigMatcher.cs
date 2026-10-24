@@ -43,6 +43,14 @@ internal sealed class OnigMatcher
     // Where the leading run of the last attempt ended (OnigProgram.LeadingRun), or -1.
     private int _leadingEnd;
 
+    // Failed backtrack resumes of the current search, one bit per (OnigProgram.MemoSlots slot, position), kept across
+    // its attempts: what follows a resume depends only on that pair, so a pair that failed once fails again. Started
+    // once a search has done MemoAfter work, so ordinary searches never clear it (tests lower it to cover every search).
+    internal long MemoAfter { get; set; } = 1024;
+    private const long MaxMemoBits = 1L << 25;
+    private ulong[] _memo = [];
+    private bool _memoOn;
+
     // The pattern's limits, which RestoreBudget returns to after a search with options.
     internal void SetLimits(long maxWork, long maxBytes)
     {
@@ -66,7 +74,7 @@ internal sealed class OnigMatcher
         return ticks >= long.MaxValue - now ? long.MaxValue - 1 : now + (long)ticks;
     }
 
-    internal long ReservedBytes => 4L * (_stack.Length + _undo.Length + _regs.Length);
+    internal long ReservedBytes => 4L * (_stack.Length + _undo.Length + _regs.Length) + 8L * _memo.Length;
 
     // Budget, cancellation and deadline for the searches that follow, until the next call; SetLimits restores the
     // plain budget.
@@ -86,6 +94,7 @@ internal sealed class OnigMatcher
     internal RegexSearchStatus Search(OnigProgram program, ReadOnlySpan<char> input, int startAt, Span<int> captures)
     {
         _work = 0;
+        _memoOn = false;
         if (_polls && !Poll(out var stopped))
         {
             return stopped;
@@ -523,7 +532,7 @@ internal sealed class OnigMatcher
     private void Grow(ref int[] array, int needed)
     {
         var size = Math.Max(needed, array.Length * 2);
-        if (4L * (size + (_stack.Length + _undo.Length + _regs.Length - array.Length)) > _maxBytes)
+        if (4L * (size + (_stack.Length + _undo.Length + _regs.Length - array.Length)) + 8L * _memo.Length > _maxBytes)
         {
             throw new OnigLimitException();
         }
@@ -532,6 +541,48 @@ internal sealed class OnigMatcher
     }
 
     private sealed class OnigLimitException : Exception;
+
+    // The cleared memo for a search of this program over length units, or null when it would not fit the limits.
+    private ulong[]? StartMemo(OnigProgram program, int length)
+    {
+        var words = (int)Math.Min(int.MaxValue, ((long)program.MemoSlotCount * (length + 1) + 63) >> 6);
+        if (64L * words > MaxMemoBits)
+        {
+            return null;
+        }
+
+        if (_memo.Length < words)
+        {
+            if (4L * (_stack.Length + _undo.Length + _regs.Length) + 8L * words > _maxBytes)
+            {
+                return null;
+            }
+
+            _memo = new ulong[words];
+        }
+        else
+        {
+            Array.Clear(_memo, 0, words);
+        }
+
+        _memoOn = true;
+        return _memo;
+    }
+
+    // Whether the resume at key already failed; marks it as visited.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool Seen(ulong[] memo, int key)
+    {
+        ref var word = ref memo[key >> 6];
+        var bit = 1UL << key;
+        if ((word & bit) != 0)
+        {
+            return true;
+        }
+
+        word |= bit;
+        return false;
+    }
 
     private RegexSearchStatus Attempt(OnigProgram program, ReadOnlySpan<char> input, int start, int searchStart, Span<int> captures)
     {
@@ -579,6 +630,9 @@ internal sealed class OnigMatcher
         // left before its next checkpoint, and added to the search's total when the attempt ends.
         long work = 0;
         var room = _stopAt - _work;
+        var slots = program.MemoSlots;
+        var memo = _memoOn ? _memo : null;
+        var stride = input.Length + 1;
 
         while (true)
         {
@@ -696,6 +750,11 @@ internal sealed class OnigMatcher
                         var b = code[pc + 4];
                         var okFirst = a < 0 || program.Bits[a].CanStartWith(c);
                         var okSecond = b < 0 || program.Bits[b].CanStartWith(c);
+                        if (okFirst && memo is not null && Seen(memo, slots![pc + 5] * stride + pos))
+                        {
+                            okFirst = false;
+                        }
+
                         if (okFirst)
                         {
                             if (okSecond)
@@ -918,15 +977,15 @@ internal sealed class OnigMatcher
                         }
                         else if (max < 0 || count < max)
                         {
-                            if (code[pc + 4] != 0)
+                            var (first, second) = code[pc + 4] != 0 ? (code[pc + 5], enter) : (enter, code[pc + 5]);
+                            if (memo is not null && Seen(memo, slots![first] * stride + pos))
                             {
-                                Push(ref sp, Choice, enter, pos, 0, up);
-                                pc = code[pc + 5];
+                                pc = second;
                             }
                             else
                             {
-                                Push(ref sp, Choice, code[pc + 5], pos, 0, up);
-                                pc = enter;
+                                Push(ref sp, Choice, second, pos, 0, up);
+                                pc = first;
                             }
                         }
                         else
@@ -1257,6 +1316,15 @@ internal sealed class OnigMatcher
                     room = _stopAt - _work;
                 }
 
+                if (memo is null && slots is not null && _work + work > MemoAfter)
+                {
+                    memo = StartMemo(program, input.Length);
+                    if (memo is null)
+                    {
+                        slots = null;
+                    }
+                }
+
                 sp -= FrameWidth;
                 Restore(regs, ref up, stack[sp + 4]);
                 if (regs[program.LimitRegister] != end)
@@ -1270,6 +1338,10 @@ internal sealed class OnigMatcher
                     case Choice:
                         pc = stack[sp + 1];
                         pos = stack[sp + 2];
+                        if (memo is not null && slots![pc] >= 0 && Seen(memo, slots[pc] * stride + pos))
+                        {
+                            continue;
+                        }
                         break;
                     case RunBackUnit:
                     case RunBackCodePoint:
@@ -1308,6 +1380,11 @@ internal sealed class OnigMatcher
                                 sp += FrameWidth;
                             }
 
+                            if (memo is not null && slots![pc] >= 0 && Seen(memo, slots[pc] * stride + p))
+                            {
+                                continue;
+                            }
+
                             pos = p;
                             break;
                         }
@@ -1328,6 +1405,11 @@ internal sealed class OnigMatcher
                                 stack[sp + 2] = p + w;
                                 stack[sp + 3] = count;
                                 sp += FrameWidth;
+                            }
+
+                            if (memo is not null && slots![runPc + 7] >= 0 && Seen(memo, slots[runPc + 7] * stride + p + w))
+                            {
+                                continue;
                             }
 
                             pos = p + w;

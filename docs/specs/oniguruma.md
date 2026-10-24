@@ -113,6 +113,15 @@ overloads apply the timeout and cancellation to the whole call and the limits to
 that runs out of work counts as no match, as Onigwrap reports the retry-limit error, and nothing stopped is cached.
 As at Oniguruma's `SubexpCallMaxNestLevel` (20), a call nested 19 deep fails that path and the search goes on.
 
+A search that has done 1,024 work units starts a failure memo when what follows each backtrack resume depends only
+on its instruction and position: no look-arounds, atomic groups or possessive loops, conditions, absent operators,
+backreferences or calls, and every counted loop unbounded with a minimum of at most one and a body that cannot match
+empty. Captures then only shape the result, so a resume (or the preferred branch of an alternative or loop) at a
+pair already tried is skipped. The memo holds one bit per resume point and position, at most 2^25 bits within
+`MaxWorkspaceBytes`, and lasts for the search's attempts. Results are the plain backtracker's, but ambiguous
+alternations under stars such as `(w|ww)*(w|ww)*\(\(` take polynomial rather than exponential work, so some searches
+complete where native Oniguruma reaches its retry limit.
+
 ## Implementation (OG-006)
 
 A dedicated backtracking machine over compact instructions (`Flavors/Oniguruma`): not the ECMAScript or PCRE2

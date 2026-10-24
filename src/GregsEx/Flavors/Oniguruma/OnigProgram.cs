@@ -93,6 +93,10 @@ internal sealed class OnigProgram
     // tries a subset of the same continuations, so the search resumes after e (as Oniguruma does).
     internal int LeadingRun { get; init; } = -1;
     internal OnigLiteralTable[] Tables { get; init; } = [];
+    // Per pc, the failure-memo slot of a backtrack resume point, or null when resumes depend on more than (pc,
+    // position) (see OnigCompiler.MemoSlots).
+    internal int[]? MemoSlots { get; init; }
+    internal int MemoSlotCount { get; init; }
 
     internal const int MaxCallDepth = 20;
 
@@ -124,6 +128,7 @@ internal sealed class OnigProgram
             bytes += 8 + 2L * (name?.Length ?? 0);
         }
 
+        bytes += 4L * (MemoSlots?.Length ?? 0);
         foreach (var saves in CallSaves)
         {
             bytes += 4L * saves.Length;
