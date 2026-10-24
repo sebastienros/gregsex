@@ -128,7 +128,7 @@ public class ApiTests
     [Fact]
     public void BacktrackingWorkIsBounded()
     {
-        var pattern = OnigurumaPattern.Parse("(a+)+b", RegexProfiles.Oniguruma,
+        var pattern = OnigurumaPattern.Parse("(a+)+\\1b", RegexProfiles.Oniguruma,
             new OnigurumaCompileOptions(defaultMatchLimits: new RegexMatchLimits(maxWork: 10_000)));
         var workspace = pattern.CreateWorkspace();
         Assert.Equal(RegexSearchStatus.LimitExceeded, workspace.IsMatch(new string('a', 30) + "c"));
@@ -250,7 +250,7 @@ public class ApiTests
     [Fact]
     public void MatchLimitOverridesCannotRaiseTheCeiling()
     {
-        var workspace = Bounded("(a+)+b", 10_000).CreateWorkspace();
+        var workspace = Bounded("(a+)+\\1b", 10_000).CreateWorkspace();
         var lower = new RegexMatchOptions { Limits = new RegexMatchLimits(maxWork: 100) };
         Assert.Equal(RegexSearchStatus.LimitExceeded, workspace.IsMatch(new string('a', 20) + "c", 0, lower));
         Assert.Throws<ArgumentOutOfRangeException>(() =>

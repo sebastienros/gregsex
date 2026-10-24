@@ -40,6 +40,8 @@ internal sealed class OnigCompiler
     private readonly List<(int At, int Group)> _callFixups = [];
     private readonly RegexCompileLimits _limits;
     private int _loops;
+    // A counted loop whose iteration count or start a later instruction may read (see MemoSlots).
+    private bool _stateLoops;
     private int _ids;
     private int _snapshots;
     private readonly List<int[]> _loopGroups = [];
@@ -379,6 +381,7 @@ internal sealed class OnigCompiler
                 notRequiredAscii = s_firstUnits.GetOrAdd((units.Low, units.High, true), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, false)));
             }
         }
+        var memoSlots = compiler._called.Count == 0 && !compiler._stateLoops ? MemoSlots(compiler._code) : null;
         var program = new OnigProgram
         {
             Code = compiler._code.ToArray(),
@@ -412,6 +415,8 @@ internal sealed class OnigCompiler
             Tables = compiler._tables.ToArray(),
             PrecededBy = precededBy,
             PrecededAtStart = precededAtStart,
+            MemoSlots = memoSlots,
+            MemoSlotCount = memoSlots is null ? 0 : memoSlots.Max() + 1,
         };
         if (program.ClassRanges() > limits.MaxClassRanges)
         {
@@ -424,6 +429,79 @@ internal sealed class OnigCompiler
         }
 
         return program;
+    }
+
+    // Per pc, a slot for the positions a backtrack resumes at (choice targets and run continuations, and the preferred
+    // branches of alternatives and loops, which the matcher marks on entry), or null when the
+    // program can resume somewhere with state beyond (pc, position) that changes what follows: look-arounds, atomic
+    // groups, conditions, absent operators and backreferences, or a loop whose count or start matters (bounded, with
+    // a minimum above one, or with a nullable body). Captures otherwise only shape the result, so a resume at a pair
+    // that already failed fails again and the matcher may skip it.
+    private static int[]? MemoSlots(List<int> code)
+    {
+        var slots = new int[code.Count];
+        Array.Fill(slots, -1);
+        var count = 0;
+        for (var pc = 0; pc < code.Count;)
+        {
+            int width;
+            switch (code[pc])
+            {
+                case Op.Match or Op.AnyNL or Op.Any or Op.Keep or Op.Fail:
+                    width = 1;
+                    break;
+                case Op.Char or Op.Set or Op.SetUnit or Op.Anchor or Op.Jmp or Op.JmpBack or Op.SaveOpen or Op.SaveClose
+                    or Op.LoopInit:
+                    width = 2;
+                    break;
+                case Op.CharIC2 or Op.Str:
+                    width = 3;
+                    break;
+                case Op.Split:
+                    Mark(code[pc + 2]);
+                    width = 3;
+                    break;
+                case Op.SplitLazy:
+                    Mark(code[pc + 1]);
+                    width = 3;
+                    break;
+                case Op.Alt:
+                    Mark(pc + 5);
+                    Mark(code[pc + 2]);
+                    width = 5;
+                    break;
+                case Op.Run:
+                    Mark(pc + 7);
+                    width = 7;
+                    break;
+                case Op.LoopHead:
+                    Mark(pc + 6);
+                    Mark(code[pc + 5]);
+                    width = 6;
+                    break;
+                case LoopEnter or Op.AssertLiterals:
+                    width = 4;
+                    break;
+                case Op.AssertSet or Op.AssertStr:
+                    width = 5;
+                    break;
+                case Op.LoopTail:
+                    width = 6;
+                    break;
+                default:
+                    return null;
+            }
+            pc += width;
+        }
+        return count == 0 ? null : slots;
+
+        void Mark(int target)
+        {
+            if (slots[target] < 0)
+            {
+                slots[target] = count++;
+            }
+        }
     }
 
     private static char[] AsciiMembers(ulong low, ulong high, bool members)
@@ -957,6 +1035,7 @@ internal sealed class OnigCompiler
         }
 
         var r = _loops++;
+        _stateLoops |= min > 1 || max != -1 || Nullable(child);
         // Only groups a backreference outside the body refers to make an empty iteration count as progress.
         var groups = Nullable(child) ? GroupsIn(child).Where(g => _backrefs.Any(b => b.Groups!.Contains(g) && !Contains(child, b))).ToArray() : [];
         var groupsIndex = -1;

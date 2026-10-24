@@ -22,6 +22,15 @@ public class CorpusTests
     public void GrammarPatternsMatchNativeOniguruma()
         => AssertCases(Read("grammar-cases.json.gz"), Read("grammar-cases.expected.json.gz"), minimumOutcomes: 28000);
 
+    // The failure memo from a search's first backtrack, so it covers every corpus search it applies to.
+    [Fact]
+    public void EdgeCasesMatchNativeOnigurumaWithTheMemoAlwaysOn()
+        => AssertCases(Read("edge-cases.json"), Read("edge-cases.expected.json"), minimumOutcomes: 1200, memoAfter: 0);
+
+    [Fact]
+    public void GrammarPatternsMatchNativeOnigurumaWithTheMemoAlwaysOn()
+        => AssertCases(Read("grammar-cases.json.gz"), Read("grammar-cases.expected.json.gz"), minimumOutcomes: 28000, memoAfter: 0);
+
     [Fact]
     public void RetainedFilesMatchTheirRecordedHashes()
     {
@@ -35,7 +44,7 @@ public class CorpusTests
         }
     }
 
-    private static void AssertCases(JsonNode input, JsonNode expected, int minimumOutcomes)
+    private static void AssertCases(JsonNode input, JsonNode expected, int minimumOutcomes, long? memoAfter = null)
     {
         var cases = input.AsArray();
         var outcomes = expected.AsArray();
@@ -53,6 +62,11 @@ public class CorpusTests
 
             Assert.True(parsed, $"{source}: {diagnostic.Message}");
             var workspace = pattern!.CreateWorkspace();
+            if (memoAfter is { } after)
+            {
+                workspace.Matcher.MemoAfter = after;
+            }
+
             var groups = new RegexCapture[pattern.GroupCount];
             var subjects = cases[i]!["subjects"]!.AsArray();
             for (var s = 0; s < subjects.Count; s++)
@@ -68,6 +82,12 @@ public class CorpusTests
                     var status = workspace.FindCaptures(text, start, groups, out _);
                     var context = $"{source} on {JsonValue.Create(text)!.ToJsonString()} from {start}";
                     if (nearLimit && status == RegexSearchStatus.LimitExceeded)
+                    {
+                        continue;
+                    }
+
+                    // The failure memo finishes some searches where native Oniguruma reaches its retry limit.
+                    if (native is JsonValue && pattern.Program.MemoSlots is not null && status != RegexSearchStatus.LimitExceeded)
                     {
                         continue;
                     }
