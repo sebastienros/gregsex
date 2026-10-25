@@ -17,6 +17,12 @@ public class Pcre2CompiledDifferentialTests
         "(?x) a b c", "[\\w-]+", "[^\\W\\d]+", "\\h+x", "\\H+", "(a)(?:b)(c)?", "((a)(b))+", "[\\x{100}-\\x{200}]+", "\\p{Lu}\\p{Ll}+",
         "(?<n>a)(?<m>b)", "a(?#comment)b", "(a+)+b", "(?=a)a", "(a)\\1", "a++b", "(?>a+)b", "a\\Kb", "\\Ga", "\\R", "\\C", "(*UTF)a",
         "a++a", "[ab]++b", "a*+a", "\\w++\\d", "x*+y", "[a-c]++d", "^a|^b", "^a|b", "(?s).*c", "(^a)|(^b)", "^(a|b)+c",
+        "(?=\\[)", "(?=[a-z]+ing)[a-z]+", "(?!the)[a-z]+", "(?<=the )[a-z]+", "(?<!\\w)[a-z]+", "(?=(a))a\\1", "(?=(a|ab))(a|ab)c",
+        "(?!(a))(b)", "(?<=(ab))c", "(?<=a(b)|(c))d", "(?<=ab|c)d", "(?<=^|\\s)[a-z]+", "(?<=a|bc)d", "(?<=a+)e", "(?<=a{2,3})e",
+        "(?=.*ed)[a-z]+", "a(?=b(?=c))", "a(?!b(?!c))", "(?<=(?<=a)b)c", "x(?=y)|z", "(?:(?=a)|b)c", "(?<=\\b)e", "(?=$)", "(?<=é)b",
+        "(?<=😀)b", "(?<=[^a])b", "(?<=.)b", "(?=(?:a|b){2})[ab]+", "\\b(?=[a-z]{3}\\b)[a-z]+", "\\Ga", "\\G[a-z]+", "\\Ga|b", "(?:\\Ga|b)c",
+        "\\G(a)|(b)", "a\\Gb", "(?=a\\G)a", "(*positive_lookahead:a)a", "(*nla:a)[a-z]", "(*plb:a)b", "(*nlb:a)b", "(?*a)b", "(?<*a)b",
+        "(?<=a(?=b))b", "(?(?=a)ab|cd)",
     ];
 
     private static readonly Pcre2CompileFlags[] Modes =
@@ -165,9 +171,82 @@ public class Pcre2CompiledDifferentialTests
     }
 
     [Fact]
+    public void LookaroundsAreLowered()
+    {
+        foreach (var pattern in new[] { "(?=\\[)", "(?=a)a", "(?<!a)b", "(?<=the )[a-z]+", "a(?!b(?!c))", "(?<=(ab))c", "(?<=ab|c)d", "\\Ga", "\\Ga|b" })
+        {
+            foreach (var flags in new[] { Pcre2CompileFlags.None, Pcre2CompileFlags.Caseless, Pcre2CompileFlags.Utf, Pcre2CompileFlags.Multiline })
+            {
+                var pat = Parse(pattern, flags);
+                try
+                { pat.Compile(); }
+                catch (NotSupportedException e) { Assert.Fail(pattern + "/" + flags + ": " + e.Message); }
+            }
+        }
+    }
+
+    // Focused lookaround and \G semantics, checked against the interpreter and against known PCRE2 results.
+    public static IEnumerable<TheoryDataRow<string, string, int, string?>> LookaroundCases()
+    {
+        yield return new("(?=(a))a", "xa", 0, "1:1|1:1");
+        yield return new("(?!(a))(b)", "ab", 0, "1:1|-|1:1");
+        yield return new("(?=(a|ab))(a|ab)c", "abc", 0, "0:3|0:1|0:2");
+        yield return new("(?<=(ab))c", "abc", 0, "2:1|0:2");
+        yield return new("(?<=(ab))c", "abc", 2, "2:1|0:2");
+        yield return new("(?<=a(b)|(c))d", "abd cd", 0, "2:1|1:1|-");
+        yield return new("(?<=a(b)|(c))d", "abd cd", 3, "5:1|-|4:1");
+        yield return new("(?<=ab|c)d", "cd abd", 0, "1:1");
+        yield return new("(?<=ab|c)d", "xd abd", 0, "5:1");
+        yield return new("(?<=^|\\s)[a-z]+", " the cat", 0, "1:3");
+        yield return new("(?<=the )[a-z]+", "the cat", 4, "4:3");
+        yield return new("(?<!a)b", "ab b", 0, "3:1");
+        yield return new("(?<=a)b", "b", 0, null);
+        yield return new("a(?=b(?=c))", "abd abc", 0, "4:1");
+        yield return new("a(?!b(?!c))", "abd abc", 0, "4:1");
+        yield return new("(?<=(?<=a)b)c", "abc bc", 0, "2:1");
+        yield return new("(?:(?=a)|b)c", "ac bc c", 0, "3:2");
+        yield return new("(?=$)", "ab", 0, "2:0");
+        yield return new("(?=\\[)", "x[y]", 2, null);
+        yield return new("\\Ga", "ba", 0, null);
+        yield return new("\\Ga", "ba", 1, "1:1");
+        yield return new("\\Ga|b", "cab", 0, "2:1");
+        yield return new("\\Ga|b", "ab", 0, "0:1");
+        yield return new("(?:\\Ga|b)c", "acbc", 0, "0:2");
+        yield return new("(?:\\Ga|b)c", "acbc", 1, "2:2");
+        yield return new("a\\Gb", "ab", 0, null);
+        yield return new("a\\Gb", "ab", 1, null);
+        yield return new("(?=a\\G)a", "ba", 1, null);
+        yield return new("(?=\\Ga)a", "ba", 1, "1:1");
+    }
+
+    [Theory]
+    [MemberData(nameof(LookaroundCases))]
+    public void LookaroundKernelsMatchKnownResults(string pattern, string input, int startAt, string? expected)
+    {
+        var oracle = Parse(pattern, Pcre2CompileFlags.None);
+        var compiled = oracle.Compile();
+        foreach (var pat in new[] { oracle, compiled })
+        {
+            var ws = pat.CreateWorkspace();
+            var groups = new RegexCapture[pat.GroupCount];
+            var status = ws.FindCaptures(input, startAt, groups, out var range);
+            string? actual = null;
+            if (status == RegexSearchStatus.Match)
+            {
+                actual = range.Index + ":" + range.Length;
+                for (var g = 1; g < groups.Length; g++)
+                {
+                    actual += "|" + (groups[g].Participated ? groups[g].Index + ":" + groups[g].Length : "-");
+                }
+            }
+            Assert.Equal(expected, actual);
+        }
+    }
+
+    [Fact]
     public void UnmodelledConstructsAreRejected()
     {
-        foreach (var pattern in new[] { "(a)\\1", "a++b", "(?>a+)b", "a\\Kb", "(?=a)a", "\\Ga", "\\R", "(a|b)(?1)", "(?(1)a|b)", "(*SKIP)a" })
+        foreach (var pattern in new[] { "(a)\\1", "a++b", "(?>a+)b", "a\\Kb", "\\R", "(a|b)(?1)", "(?(1)a|b)", "(*SKIP)a", "(?*a)b", "(?<*a)b", "(?<=a+)b", "(?(?=a)ab|cd)" })
         {
             RegexPattern oracle;
             try

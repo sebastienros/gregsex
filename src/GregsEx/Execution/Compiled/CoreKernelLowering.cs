@@ -94,6 +94,18 @@ internal static class CoreKernelHelpers
         return r < 0 ? -1 : r + from;
     }
 
+    internal static int IndexOfAnyExcept(ReadOnlySpan<char> s, int from, SearchValues<char> values)
+    {
+        var r = s.Slice(from).IndexOfAnyExcept(values);
+        return r < 0 ? -1 : r + from;
+    }
+
+    internal static int LastIndexOfAny(ReadOnlySpan<char> s, int from, SearchValues<char> values)
+    {
+        var r = s.Slice(from).LastIndexOfAny(values);
+        return r < 0 ? -1 : r + from;
+    }
+
     internal static int IndexOfPrefix(ReadOnlySpan<char> s, int from, string text)
     {
         var r = s.Slice(from).IndexOf(text.AsSpan(), StringComparison.Ordinal);
@@ -134,6 +146,7 @@ internal static class CoreKernelLowering
 internal static class CoreKernelLowering
 {
     private const int Back = 1 << 20; // resume id base for class-run backoff entries
+    private const int Look = 2 << 20; // id base for lookaround frames (b = saved position, c = enclosing frame)
     private static readonly SearchValues<char> Newline = SearchValues.Create("\n");
 
     // Returns null when FastExpressionCompiler declines the tree; there is deliberately no Expression.Compile fallback.
@@ -169,6 +182,10 @@ internal static class CoreKernelLowering
         var ci = E.Variable(typeof(int), "ci");
         var end = E.Variable(typeof(int), "end");
         var resume = E.Variable(typeof(int), "resume");
+        var fp = E.Variable(typeof(int), "fp");
+        var r = E.Variable(typeof(int), "r");
+        var d = E.Variable(typeof(int), "d");
+        var lastStart = E.Variable(typeof(int), "lastStart");
         var ret = E.Label(typeof(int), "ret");
         var overflow = E.Label("overflow");
         var surrogate = E.Label("surrogate");
@@ -190,6 +207,8 @@ internal static class CoreKernelLowering
         var pollHelper = H(nameof(CoreKernelHelpers.Poll));
         var nextPollField = typeof(KernelGuard).GetField(nameof(KernelGuard.NextPoll), BindingFlags.Instance | BindingFlags.Public)!;
         var indexOfAny = H(nameof(CoreKernelHelpers.IndexOfAny));
+        var indexOfAnyExcept = H(nameof(CoreKernelHelpers.IndexOfAnyExcept));
+        var lastIndexOfAny = H(nameof(CoreKernelHelpers.LastIndexOfAny));
         var indexOfPrefix = H(nameof(CoreKernelHelpers.IndexOfPrefix));
         var runEnd = H(nameof(CoreKernelHelpers.RunEnd));
         var runEndNegated = H(nameof(CoreKernelHelpers.RunEndNegated));
@@ -248,11 +267,27 @@ internal static class CoreKernelLowering
             E.Assign(w, E.Constant(0L)),
             E.Assign(poll, E.Field(guard, nextPollField)),
             E.Assign(start, startAt),
+            E.Assign(lastStart, len),
+        };
+        if (plan.RequiredLiteral is { } required)
+        {
+            body.Add(E.IfThen(E.OrElse(E.GreaterThan(E.Add(startAt, I(plan.RequiredLiteralMinOffset)), len),
+                E.LessThan(E.Call(indexOfPrefix, input, E.Add(startAt, I(plan.RequiredLiteralMinOffset)), E.Constant(required)), I(0))), E.Goto(noMatch)));
+        }
+
+        if (plan.RequiredSet is { Length: > 0 } requiredSet)
+        {
+            body.Add(E.Assign(lastStart, E.Call(lastIndexOfAny, input, startAt, E.Constant(SearchValues.Create(requiredSet), typeof(SearchValues<char>)))));
+            body.Add(E.IfThen(E.LessThan(lastStart, I(0)), E.Goto(noMatch)));
+        }
+
+        body.AddRange(new Expression[]
+        {
             E.Label(nextStart),
-            E.IfThen(E.GreaterThan(start, len), E.Goto(noMatch)),
+            E.IfThen(E.GreaterThan(start, lastStart), E.Goto(noMatch)),
             E.IfThen(E.GreaterThan(w, maxSteps), E.Goto(budget)),
             PollCheck(),
-        };
+        });
         if (plan.Anchored)
         {
             body.Add(E.IfThen(E.GreaterThan(start, I(0)), E.Goto(noMatch)));
@@ -265,8 +300,12 @@ internal static class CoreKernelLowering
         }
         else if (firstSet is not null)
         {
-            body.Add(E.Block(E.Assign(c, E.Call(indexOfAny, input, start, E.Constant(firstSet, typeof(SearchValues<char>)))),
+            body.Add(E.Block(E.Assign(c, E.Call(plan.FirstSetExcept ? indexOfAnyExcept : indexOfAny, input, start, E.Constant(firstSet, typeof(SearchValues<char>)))),
                 E.IfThen(E.LessThan(c, I(0)), E.Goto(noMatch)), E.Assign(start, c)));
+            if (plan.FirstSetExcept && plan.UnicodeScalars)
+            {
+                body.Add(E.IfThen(E.AndAlso(E.LessThan(start, len), IsSurrogate(E.Convert(E.Call(at, input, start), typeof(int)))), E.Goto(surrogate)));
+            }
         }
         else if (plan.UnicodeScalars)
         {
@@ -282,6 +321,7 @@ internal static class CoreKernelLowering
         }
 
         body.Add(E.Assign(sp, I(0)));
+        body.Add(E.Assign(fp, I(-1)));
         body.Add(E.Assign(p, start));
 
         // Resume table: Split alternates and non-atomic class-run backoffs.
@@ -300,6 +340,13 @@ internal static class CoreKernelLowering
                     E.IfThen(E.GreaterThan(p, c), Push(I(Back + i), E.Subtract(p, I(1)), c)),
                     E.Goto(labels[nodes[i].Next])), I(Back + i)));
             }
+            else if (nodes[i].Op == KernelOp.LookStart)
+            {
+                // The body ran out of alternatives (its capture changes are already undone): a positive assertion
+                // fails, a negative one holds and continues at the saved position.
+                cases.Add(E.SwitchCase(E.Block(E.Assign(fp, c),
+                    (nodes[i].Operand & 1) != 0 ? E.Goto(labels[nodes[i].Alternate]) : E.Goto(fail)), I(Look + i)));
+            }
         }
 
         for (var k = 0; k < order.Count; k++)
@@ -310,9 +357,35 @@ internal static class CoreKernelLowering
             body.Add(E.Label(labels[pc]));
             switch (o.Op)
             {
+                case KernelOp.Literal when o.Backward:
+                    body.Add(E.IfThen(E.OrElse(E.LessThanOrEqual(p, I(0)), E.NotEqual(E.Call(at, input, E.Subtract(p, I(1))), E.Constant((char)o.Operand))), E.Goto(fail)));
+                    body.Add(E.PreDecrementAssign(p));
+                    body.Add(E.PreIncrementAssign(w));
+                    break;
                 case KernelOp.Literal:
                     body.Add(E.IfThen(E.OrElse(E.GreaterThanOrEqual(p, len), E.NotEqual(E.Call(at, input, p), E.Constant((char)o.Operand))), E.Goto(fail)));
                     body.Add(E.PreIncrementAssign(p));
+                    body.Add(E.PreIncrementAssign(w));
+                    break;
+                case KernelOp.Any when o.Backward:
+                case KernelOp.Class when o.Backward:
+                    body.Add(E.IfThen(E.LessThanOrEqual(p, I(0)), E.Goto(fail)));
+                    body.Add(E.Assign(ci, E.Convert(E.Call(at, input, E.Subtract(p, I(1))), typeof(int))));
+                    if (o.SurrogateSensitive)
+                    {
+                        body.Add(E.IfThen(IsSurrogate(ci), E.Goto(surrogate)));
+                    }
+
+                    if (o.Op == KernelOp.Class)
+                    {
+                        body.Add(E.IfThen(E.Not(Test(o.Class!, ci)), E.Goto(fail)));
+                    }
+                    else if (!plan.DotAll)
+                    {
+                        body.Add(E.IfThen(E.Equal(ci, I('\n')), E.Goto(fail)));
+                    }
+
+                    body.Add(E.PreDecrementAssign(p));
                     body.Add(E.PreIncrementAssign(w));
                     break;
                 case KernelOp.Any:
@@ -445,6 +518,66 @@ internal static class CoreKernelLowering
                 case KernelOp.AssertStart:
                     body.Add(E.IfThen(E.NotEqual(p, I(0)), E.Goto(fail)));
                     break;
+                case KernelOp.AssertSearchStart:
+                    body.Add(E.IfThen(E.NotEqual(p, startAt), E.Goto(fail)));
+                    break;
+                case KernelOp.StepBack:
+                    body.Add(E.IfThen(E.LessThan(p, I(o.Count)), E.Goto(fail)));
+                    body.Add(E.SubtractAssign(p, I(o.Count)));
+                    body.Add(E.PreIncrementAssign(w));
+                    break;
+                case KernelOp.LookStart:
+                    // A frame entry delimits the body's choices and keeps the stack non-empty, so captures set in the
+                    // body always record their undo entries.
+                    body.Add(Push(I(Look + pc), p, fp));
+                    body.Add(E.Assign(fp, E.Subtract(sp, I(3))));
+                    break;
+                case KernelOp.LookEnd when (nodes[o.Operand].Operand & 1) != 0:
+                    {
+                        // The body of a negative assertion matched: undo its captures, drop its choices, then fail.
+                        var loop = E.Label("negLoop" + pc);
+                        var done = E.Label("negDone" + pc);
+                        body.Add(E.AddAssign(w, E.Convert(E.Divide(E.Subtract(sp, fp), I(3)), typeof(long))));
+                        body.Add(E.Assign(r, E.Subtract(sp, I(3))));
+                        body.Add(E.Label(loop));
+                        body.Add(E.IfThen(E.LessThanOrEqual(r, fp), E.Goto(done)));
+                        body.Add(E.Assign(id, E.Call(get, stack, r)));
+                        body.Add(E.IfThen(E.LessThan(id, I(0)), SetCap(E.Subtract(I(-1), id), E.Call(get, stack, E.Add(r, I(1))))));
+                        body.Add(E.SubtractAssign(r, I(3)));
+                        body.Add(E.Goto(loop));
+                        body.Add(E.Label(done));
+                        body.Add(E.Assign(sp, fp));
+                        body.Add(E.Assign(fp, E.Call(get, stack, E.Add(sp, I(2)))));
+                        body.Add(E.Goto(fail));
+                        continue;
+                    }
+                case KernelOp.LookEnd:
+                    {
+                        // The body of a positive assertion matched: it is atomic, so drop its choices and the frame but keep
+                        // the capture undo entries (compacted in order), and resume at the saved position.
+                        var loop = E.Label("posLoop" + pc);
+                        var done = E.Label("posDone" + pc);
+                        body.Add(E.AddAssign(w, E.Convert(E.Divide(E.Subtract(sp, fp), I(3)), typeof(long))));
+                        body.Add(E.Assign(end, E.Call(get, stack, E.Add(fp, I(1)))));
+                        body.Add(E.Assign(c, E.Call(get, stack, E.Add(fp, I(2)))));
+                        body.Add(E.Assign(d, fp));
+                        body.Add(E.Assign(r, E.Add(fp, I(3))));
+                        body.Add(E.Label(loop));
+                        body.Add(E.IfThen(E.GreaterThanOrEqual(r, sp), E.Goto(done)));
+                        body.Add(E.Assign(id, E.Call(get, stack, r)));
+                        body.Add(E.IfThen(E.LessThan(id, I(0)), E.Block(
+                            E.Call(set, stack, d, id),
+                            E.Call(set, stack, E.Add(d, I(1)), E.Call(get, stack, E.Add(r, I(1)))),
+                            E.Call(set, stack, E.Add(d, I(2)), E.Call(get, stack, E.Add(r, I(2)))),
+                            E.AddAssign(d, I(3)))));
+                        body.Add(E.AddAssign(r, I(3)));
+                        body.Add(E.Goto(loop));
+                        body.Add(E.Label(done));
+                        body.Add(E.Assign(sp, d));
+                        body.Add(E.Assign(fp, c));
+                        body.Add(E.Assign(p, end));
+                        break;
+                    }
                 case KernelOp.AssertEnd:
                     body.Add(E.IfThen(E.NotEqual(p, len), E.Goto(fail)));
                     break;
@@ -524,7 +657,7 @@ internal static class CoreKernelLowering
         }
         body.Add(E.Label(ret, I(0)));
 
-        var block = E.Block(typeof(int), new[] { len, stackLen, start, p, sp, w, id, b, c, ci, end, resume, poll, pr }, body);
+        var block = E.Block(typeof(int), new[] { len, stackLen, start, p, sp, w, id, b, c, ci, end, resume, fp, r, d, lastStart, poll, pr }, body);
         return E.Lambda<CoreKernel>(block, input, startAt, caps, stack, maxSteps, work, guard);
     }
 

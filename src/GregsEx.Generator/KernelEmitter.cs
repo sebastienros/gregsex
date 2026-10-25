@@ -9,6 +9,7 @@ namespace GregsEx.Generator;
 internal static class KernelEmitter
 {
     private const int Back = 1 << 20;
+    private const int Look = 2 << 20;
 
     // Pattern text and literals are only ever emitted as \uXXXX escapes, so no pattern byte can break out of a literal.
     internal static string Lit(string text)
@@ -64,7 +65,7 @@ internal static class KernelEmitter
             negated = cls.Negated;
             return Sv(chars);
         }
-        var testSv = new Dictionary<CharacterClass, string?>();
+        var bitmaps = new Dictionary<CharacterClass, string>();
         string Test(CharacterClass cls, string chr)
         {
             var ranges = cls.Ranges.ToArray().Where(r => r.First <= 0xFFFF).Select(r => (r.First, Last: Math.Min(r.Last, 0xFFFF))).ToArray();
@@ -73,20 +74,22 @@ internal static class KernelEmitter
                 return cls.Negated ? "true" : "false";
             }
 
-            string Chain() => "(" + string.Join(" || ", ranges.Select(r => r.First == r.Last ? $"{chr} == {r.First}" : $"(uint)({chr} - {r.First}) <= {r.Last - r.First}u")) + ")";
             string e;
             if (ranges.Length <= CoreKernelPlan.MaxClassRangesInline)
             {
-                e = Chain();
+                e = "(" + string.Join(" || ", ranges.Select(r => r.First == r.Last ? $"{chr} == {r.First}" : $"(uint)({chr} - {r.First}) <= {r.Last - r.First}u")) + ")";
             }
             else
             {
-                if (!testSv.TryGetValue(cls, out var name))
+                // A larger class is a 64 Ki-bit membership bitmap built once from its ranges, like the lowering's class test.
+                if (!bitmaps.TryGetValue(cls, out var name))
                 {
-                    testSv[cls] = name = SvOf(cls, out _);
+                    bitmaps[cls] = name = "Bits" + bitmaps.Count;
+                    var packed = new string(ranges.SelectMany(r => new[] { (char)r.First, (char)r.Last }).ToArray());
+                    fields.AppendLine($"    private static readonly ulong[] {name} = Bitmap({Lit(packed)});");
                 }
-                // A class too large for a search set is tested with a range chain.
-                e = name is not null ? $"{name}.Contains((char){chr})" : Chain();
+
+                e = $"((({name}[{chr} >> 6] >> ({chr} & 63)) & 1) != 0)";
             }
             return cls.Negated ? $"!{e}" : e;
         }
@@ -120,11 +123,24 @@ internal static class KernelEmitter
             firstSv = Sv(f);
         }
 
-        L("int len = input.Length, stackLen = stack.Length, start = startAt, p = 0, sp = 0, id = 0, b = 0, c = 0, ci = 0, end = 0, resume = 0;");
+        L("int len = input.Length, stackLen = stack.Length, start = startAt, p = 0, sp = 0, id = 0, b = 0, c = 0, ci = 0, end = 0, resume = 0, fp = -1, r = 0, d = 0, lastStart = input.Length;");
         L("long w = 0, poll = guard.NextPoll;");
         L("int pr = 0;");
+        if (plan.RequiredLiteral is { } required)
+        {
+            fields.AppendLine($"    private const string Required = {Lit(required)};");
+            L($"if (startAt + {plan.RequiredLiteralMinOffset} > len || input.Slice(startAt + {plan.RequiredLiteralMinOffset}).IndexOf(Required.AsSpan(), global::System.StringComparison.Ordinal) < 0) goto noMatch;");
+        }
+
+        if (plan.RequiredSet is { Length: > 0 } requiredSet)
+        {
+            L($"lastStart = input.Slice(startAt).LastIndexOfAny({Sv(requiredSet)});");
+            L("if (lastStart < 0) goto noMatch;");
+            L("lastStart += startAt;");
+        }
+
         L("nextStart:");
-        L("if (start > len) goto noMatch;");
+        L("if (start > lastStart) goto noMatch;");
         L("if (w > maxSteps) goto budget;");
         PollCheck();
         if (plan.Anchored)
@@ -140,9 +156,13 @@ internal static class KernelEmitter
         }
         else if (firstSv is not null)
         {
-            L($"c = input.Slice(start).IndexOfAny({firstSv});");
+            L($"c = input.Slice(start).{(plan.FirstSetExcept ? "IndexOfAnyExcept" : "IndexOfAny")}({firstSv});");
             L("if (c < 0) goto noMatch;");
             L("start += c;");
+            if (plan.FirstSetExcept && plan.UnicodeScalars)
+            {
+                L($"if (start < len && {IsSurrogate("At(input, start)")}) goto surrogate;");
+            }
         }
         else if (plan.UnicodeScalars)
         {
@@ -158,6 +178,7 @@ internal static class KernelEmitter
         }
 
         L("sp = 0;");
+        L("fp = -1;");
         L("p = start;");
 
         var order = Enumerable.Range(0, nodes.Length).Where(i => plan.Reachable[i]).ToList();
@@ -180,6 +201,11 @@ internal static class KernelEmitter
                 cases.AppendLine("                }");
                 cases.AppendLine($"                goto L{nodes[i].Next};");
             }
+            else if (nodes[i].Op == KernelOp.LookStart)
+            {
+                cases.AppendLine($"            case {Look + i}:");
+                cases.AppendLine((nodes[i].Operand & 1) != 0 ? $"                fp = c; goto L{nodes[i].Alternate};" : "                fp = c; goto fail;");
+            }
         }
 
         for (var k = 0; k < order.Count; k++)
@@ -190,9 +216,33 @@ internal static class KernelEmitter
             L($"L{pc}:");
             switch (o.Op)
             {
+                case KernelOp.Literal when o.Backward:
+                    L($"if (p <= 0 || At(input, p - 1) != '\\u{o.Operand:X4}') goto fail;");
+                    L("p--; w++;");
+                    break;
                 case KernelOp.Literal:
                     L($"if (p >= len || At(input, p) != '\\u{o.Operand:X4}') goto fail;");
                     L("p++; w++;");
+                    break;
+                case KernelOp.Any when o.Backward:
+                case KernelOp.Class when o.Backward:
+                    L("if (p <= 0) goto fail;");
+                    L("ci = At(input, p - 1);");
+                    if (o.SurrogateSensitive)
+                    {
+                        L($"if ({IsSurrogate("ci")}) goto surrogate;");
+                    }
+
+                    if (o.Op == KernelOp.Class)
+                    {
+                        L($"if (!({Test(o.Class!, "ci")})) goto fail;");
+                    }
+                    else if (!plan.DotAll)
+                    {
+                        L("if (ci == '\\n') goto fail;");
+                    }
+
+                    L("p--; w++;");
                     break;
                 case KernelOp.Any:
                     L("if (p >= len) goto fail;");
@@ -333,6 +383,30 @@ internal static class KernelEmitter
                 case KernelOp.AssertStart:
                     L("if (p != 0) goto fail;");
                     break;
+                case KernelOp.AssertSearchStart:
+                    L("if (p != startAt) goto fail;");
+                    break;
+                case KernelOp.StepBack:
+                    L($"if (p < {o.Count}) goto fail;");
+                    L($"p -= {o.Count}; w++;");
+                    break;
+                case KernelOp.LookStart:
+                    Push((Look + pc).ToString(), "p", "fp");
+                    L("fp = sp - 3;");
+                    break;
+                case KernelOp.LookEnd when (nodes[o.Operand].Operand & 1) != 0:
+                    L("w += (sp - fp) / 3;");
+                    L("for (r = sp - 3; r > fp; r -= 3) { id = Get(stack, r); if (id < 0) Set(caps, -1 - id, Get(stack, r + 1)); }");
+                    L("sp = fp;");
+                    L("fp = Get(stack, sp + 2);");
+                    L("goto fail;");
+                    continue;
+                case KernelOp.LookEnd:
+                    L("w += (sp - fp) / 3;");
+                    L("end = Get(stack, fp + 1); c = Get(stack, fp + 2); d = fp;");
+                    L("for (r = fp + 3; r < sp; r += 3) { id = Get(stack, r); if (id < 0) { Set(stack, d, id); Set(stack, d + 1, Get(stack, r + 1)); Set(stack, d + 2, Get(stack, r + 2)); d += 3; } }");
+                    L("sp = d; fp = c; p = end;");
+                    break;
                 case KernelOp.AssertEnd:
                     L("if (p != len) goto fail;");
                     break;
@@ -412,6 +486,16 @@ internal static class KernelEmitter
         sb.AppendLine("    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)] private static int At(global::System.ReadOnlySpan<char> s, int i) => global::System.Runtime.CompilerServices.Unsafe.Add(ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s), i);");
         sb.AppendLine("    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)] private static int Get(global::System.Span<int> s, int i) => global::System.Runtime.CompilerServices.Unsafe.Add(ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s), i);");
         sb.AppendLine("    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)] private static void Set(global::System.Span<int> s, int i, int v) => global::System.Runtime.CompilerServices.Unsafe.Add(ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s), i) = v;");
+        if (bitmaps.Count > 0)
+        {
+            sb.AppendLine("    private static ulong[] Bitmap(string ranges)");
+            sb.AppendLine("    {");
+            sb.AppendLine("        var bits = new ulong[1024];");
+            sb.AppendLine("        for (var i = 0; i < ranges.Length; i += 2) { for (int c = ranges[i], last = ranges[i + 1]; c <= last; c++) { bits[c >> 6] |= 1UL << (c & 63); } }");
+            sb.AppendLine("        return bits;");
+            sb.AppendLine("    }");
+        }
+
         sb.AppendLine();
         // Fully optimized on first call: tier-0 code can allocate in vectorized span helpers, which a match must never do.
         sb.AppendLine("    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization)]");

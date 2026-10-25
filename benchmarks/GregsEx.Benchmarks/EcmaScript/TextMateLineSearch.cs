@@ -87,7 +87,7 @@ public class TextMateLineSearch
         return n;
     }
 
-    private static string[] LoadLines()
+    internal static string[] LoadLines()
     {
         var corpus = Environment.GetEnvironmentVariable("GREGSEX_TEXTMATE_CORPUS");
         IEnumerable<string> files;

@@ -25,7 +25,11 @@ public class GeneratedPatternTests
         new(nameof(GeneratedPatterns.XPathIngLines)),
         new(nameof(GeneratedPatterns.Pcre2Ing)),
         new(nameof(GeneratedPatterns.Pcre2IngLines)),
-        new(nameof(GeneratedPatterns.Nested.Range))
+        new(nameof(GeneratedPatterns.Nested.Range)),
+        new(nameof(GeneratedPatterns.EcmaLook)),
+        new(nameof(GeneratedPatterns.Pcre2Look)),
+        new(nameof(GeneratedPatterns.Pcre2SearchStart)),
+        new(nameof(GeneratedPatterns.EcmaStickyLook)),
     ];
 
     private static (Func<RegexPattern> Create, string Pattern, RegexProfile Profile) GetCase(string name) => name switch
@@ -39,6 +43,10 @@ public class GeneratedPatternTests
         nameof(GeneratedPatterns.Pcre2Ing) => (GeneratedPatterns.Pcre2Ing, Ing, new Pcre2Profile()),
         nameof(GeneratedPatterns.Pcre2IngLines) => (GeneratedPatterns.Pcre2IngLines, "^[a-z]+(ing|ed)$", new Pcre2Profile(Pcre2CodeUnitWidth.Sixteen, Pcre2CompileFlags.Multiline)),
         nameof(GeneratedPatterns.Nested.Range) => (GeneratedPatterns.Nested.Range, "([a-z]+) ([0-9]+)(ing|ed)", new RegularCoreProfile(RegularCoreMode.UnicodeScalars, RegularCoreFlags.None)),
+        nameof(GeneratedPatterns.EcmaLook) => (GeneratedPatterns.EcmaLook, GeneratedPatterns.Look, new EcmaScriptProfile(EcmaScriptFlags.None)),
+        nameof(GeneratedPatterns.Pcre2Look) => (GeneratedPatterns.Pcre2Look, GeneratedPatterns.Look, new Pcre2Profile()),
+        nameof(GeneratedPatterns.Pcre2SearchStart) => (GeneratedPatterns.Pcre2SearchStart, @"\G(?<=\s|^)[a-z]+(?= \d)", new Pcre2Profile()),
+        nameof(GeneratedPatterns.EcmaStickyLook) => (GeneratedPatterns.EcmaStickyLook, @"(?<=\d )(?:(?=w)([a-z]+)|(?!w)([a-z]+))", new EcmaScriptProfile(EcmaScriptFlags.Sticky)),
         _ => throw new ArgumentOutOfRangeException(nameof(name), name, "Unknown generated pattern.")
     };
 

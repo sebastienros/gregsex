@@ -10,7 +10,11 @@ internal enum KernelOp : byte
 {
     Literal, Class, Any, Split, Jump, CaptureStart, CaptureEnd, Clear, AssertStart, AssertEnd, Match, LiteralRun, ClassRun,
     // Multiline anchors (Operand = line-terminator style) and word boundaries (Class = the word-character class).
-    AssertLineStart, AssertLineEnd, WordBoundary, NotWordBoundary
+    AssertLineStart, AssertLineEnd, WordBoundary, NotWordBoundary,
+    // Lookaround: LookStart (Operand bit 1 = negative, bit 2 = behind) saves the position, runs the body at Next and continues at Alternate;
+    // LookEnd (Operand = its LookStart) ends the body. StepBack moves Count units back (a fixed-length lookbehind branch).
+    // AssertSearchStart is \G: the position where the search started.
+    LookStart, LookEnd, StepBack, AssertSearchStart
 }
 
 // One node of the structure-aware plan. A node is either a 1:1 image of a SemanticProgram instruction or a fused
@@ -27,6 +31,7 @@ internal struct KernelNode
     internal bool Possessive;   // Split/ClassRun: lowered as a greedy loop, valid only if the continuation is disjoint (Atomic)
     internal bool Atomic;       // ClassRun: the continuation can never use a shorter run, so no backoff is recorded
     internal bool SurrogateSensitive; // consumes a unit that might be half of a scalar in UnicodeScalars mode
+    internal bool Backward;     // Literal/Class/Any inside a backward-matched lookbehind: reads the unit before the position
 }
 
 // Analysis half of compilation: validates eligibility and recovers structure. It emits no code, so it is
@@ -44,7 +49,14 @@ internal sealed class CoreKernelPlan
     internal bool DotAll { get; private init; }
     internal bool Sticky { get; private init; }
     internal char[]? FirstSet { get; private init; }
+    // FirstSet lists the ASCII units a match cannot start with (any non-ASCII unit can), for IndexOfAnyExcept.
+    internal bool FirstSetExcept { get; private init; }
     internal string? LiteralPrefix { get; private init; }
+    // Search-level prefilters: every match contains one of RequiredSet at or after its start, so none starts after the
+    // last; RequiredLiteral occurs at or after startAt + RequiredLiteralMinOffset in any subject with a match.
+    internal char[]? RequiredSet { get; private init; }
+    internal string? RequiredLiteral { get; private init; }
+    internal int RequiredLiteralMinOffset { get; private init; }
     internal int LeadingRunNode { get; private init; } = -1;
     internal bool Anchored { get; private init; }
     internal int FusedNodeCount { get; private init; }
@@ -131,7 +143,8 @@ internal sealed class CoreKernelPlan
     // Flavor-neutral half of plan creation: front ends translate their own IR into nodes (1:1 images of backtracking
     // instructions, entry node 0, every path ending in Match) and share the structural analysis below.
     internal static bool Analyze(KernelNode[] nodes, int groupCount, bool scalars, bool dotAll, bool sticky,
-        in LoweringLimits limits, out CoreKernelPlan? plan, out string reason)
+        in LoweringLimits limits, out CoreKernelPlan? plan, out string reason, char[]? requiredSet = null,
+        string? requiredLiteral = null, int requiredLiteralMinOffset = 0)
     {
         plan = null;
         if (nodes.Length == 0 || nodes.Length > limits.MaxNodes / 16)
@@ -171,15 +184,19 @@ internal sealed class CoreKernelPlan
             reason = "The lowered program exceeds the node or code-size bound.";
             return false;
         }
-        // A sticky search makes one attempt at the start offset, so it cannot skip ahead to a candidate.
-        string? prefix = null;
-        var first = sticky ? null : FirstSetOf(nodes, scalars, out prefix);
-        var lead = -1;
-        var anchored = false;
-        if (!sticky)
+        // A sticky search, or one whose every path begins with \G, makes one attempt at the start offset, so it cannot
+        // skip ahead to a candidate.
+        Leading(nodes, out var lead, out var anchored, out var searchAnchored);
+        sticky |= searchAnchored;
+        if (sticky)
         {
-            Leading(nodes, out lead, out anchored);
+            lead = -1;
+            anchored = false;
         }
+
+        string? prefix = null;
+        var except = false;
+        var first = sticky ? null : FirstSetOf(nodes, scalars, out prefix, out except);
 
         plan = new()
         {
@@ -190,7 +207,11 @@ internal sealed class CoreKernelPlan
             DotAll = dotAll,
             Sticky = sticky,
             FirstSet = first,
+            FirstSetExcept = except,
             LiteralPrefix = prefix,
+            RequiredSet = requiredSet,
+            RequiredLiteral = requiredLiteral,
+            RequiredLiteralMinOffset = requiredLiteralMinOffset,
             LeadingRunNode = lead,
             Anchored = anchored,
             FusedNodeCount = fused,
@@ -237,6 +258,19 @@ internal sealed class CoreKernelPlan
             }
         }
 
+        Mix(FirstSetExcept ? 1 : 0);
+        Mix(RequiredSet is null ? -1 : RequiredSet.Length);
+        if (RequiredSet is not null)
+        {
+            foreach (var ch in RequiredSet)
+            {
+                Mix(ch);
+            }
+        }
+
+        MixText(RequiredLiteral);
+        Mix(RequiredLiteralMinOffset);
+
         Mix(Nodes.Length);
         for (var i = 0; i < Nodes.Length; i++)
         {
@@ -252,7 +286,7 @@ internal sealed class CoreKernelPlan
             Mix(n.Alternate);
             Mix(n.Operand);
             Mix(n.Count);
-            Mix((n.Possessive ? 1 : 0) | (n.Atomic ? 2 : 0) | (n.SurrogateSensitive ? 4 : 0));
+            Mix((n.Possessive ? 1 : 0) | (n.Atomic ? 2 : 0) | (n.SurrogateSensitive ? 4 : 0) | (n.Backward ? 8 : 0));
             MixText(n.Text);
             if (n.Class is { } cls)
             {
@@ -289,9 +323,11 @@ internal sealed class CoreKernelPlan
         return false;
     }
 
+    // A lookaround body ends at its LookEnd, which is treated as a dead end: the continuation is reached through
+    // LookStart's Alternate edge, so a cycle can only pass through a lookaround without entering its body.
     private static int EpsilonEdge(in KernelNode node, int edge)
     {
-        if (node.Op is KernelOp.Literal or KernelOp.Class or KernelOp.Any or KernelOp.Match)
+        if (node.Op is KernelOp.Literal or KernelOp.Class or KernelOp.Any or KernelOp.Match or KernelOp.LookEnd)
         {
             return -1;
         }
@@ -301,7 +337,7 @@ internal sealed class CoreKernelPlan
             return node.Next;
         }
 
-        return edge == 1 && node.Op == KernelOp.Split ? node.Alternate : -1;
+        return edge == 1 && node.Op is KernelOp.Split or KernelOp.LookStart ? node.Alternate : -1;
     }
 
     private static bool HasEpsilonCycle(KernelNode[] nodes)
@@ -351,7 +387,7 @@ internal sealed class CoreKernelPlan
             }
 
             pred[nodes[i].Next]++;
-            if (nodes[i].Op == KernelOp.Split)
+            if (nodes[i].Op is KernelOp.Split or KernelOp.LookStart)
             {
                 pred[nodes[i].Alternate]++;
             }
@@ -373,7 +409,7 @@ internal sealed class CoreKernelPlan
 
             int body = nodes[s].Next, exit = nodes[s].Alternate;
             var b = nodes[body];
-            if (b.Op is not (KernelOp.Class or KernelOp.Any) || b.Next != s || pred[body] != 1)
+            if (b.Op is not (KernelOp.Class or KernelOp.Any) || b.Backward || b.Next != s || pred[body] != 1)
             {
                 continue;
             }
@@ -393,7 +429,7 @@ internal sealed class CoreKernelPlan
             {
                 for (var a = 0; a < n; a++)
                 {
-                    if (a != body && a != s && nodes[a].Op == b.Op && nodes[a].Next == s && nodes[a].Class == b.Class)
+                    if (a != body && a != s && nodes[a].Op == b.Op && !nodes[a].Backward && nodes[a].Next == s && nodes[a].Class == b.Class)
                     {
                         loop.Count = 1;
                         nodes[a] = loop;
@@ -412,7 +448,7 @@ internal sealed class CoreKernelPlan
         var continuation = new bool[n];
         for (var j = 0; j < n; j++)
         {
-            if (nodes[j].Op == KernelOp.Literal && nodes[nodes[j].Next].Op == KernelOp.Literal && pred[nodes[j].Next] == 1)
+            if (Forward(nodes, j) && Forward(nodes, nodes[j].Next) && pred[nodes[j].Next] == 1)
             {
                 continuation[nodes[j].Next] = true;
             }
@@ -420,12 +456,12 @@ internal sealed class CoreKernelPlan
 
         for (var i = 0; i < n; i++)
         {
-            if (nodes[i].Op != KernelOp.Literal || continuation[i])
+            if (!Forward(nodes, i) || continuation[i])
             {
                 continue;
             }
 
-            if (nodes[nodes[i].Next].Op != KernelOp.Literal || pred[nodes[i].Next] != 1 || nodes[i].Next == i)
+            if (!Forward(nodes, nodes[i].Next) || pred[nodes[i].Next] != 1 || nodes[i].Next == i)
             {
                 continue;
             }
@@ -433,7 +469,7 @@ internal sealed class CoreKernelPlan
             using var text = new ValueStringBuilder();
             text.Append((char)nodes[i].Operand);
             var cur = i;
-            while (nodes[nodes[cur].Next].Op == KernelOp.Literal && pred[nodes[cur].Next] == 1 && nodes[cur].Next != i)
+            while (Forward(nodes, nodes[cur].Next) && pred[nodes[cur].Next] == 1 && nodes[cur].Next != i)
             {
                 cur = nodes[cur].Next;
                 text.Append((char)nodes[cur].Operand);
@@ -457,7 +493,10 @@ internal sealed class CoreKernelPlan
         return fused;
     }
 
+    private static bool Forward(KernelNode[] nodes, int i) => nodes[i].Op == KernelOp.Literal && !nodes[i].Backward;
+
     // True when whatever follows the loop cannot start with a unit the loop accepts, so giving units back is futile.
+    // Reaching the end of a lookaround body settles the assertion and discards the body's choices, like reaching Match.
     private static bool FollowDisjoint(KernelNode[] nodes, int pc, CharacterClass? cls, bool any, bool dotAll)
     {
         for (var hops = 0; hops < nodes.Length; hops++)
@@ -473,12 +512,13 @@ internal sealed class CoreKernelPlan
                     continue;
                 case KernelOp.Match:
                 case KernelOp.AssertEnd:
+                case KernelOp.LookEnd:
                     return true;
-                case KernelOp.Literal:
+                case KernelOp.Literal when !o.Backward:
                     return any ? !dotAll && o.Operand == '\n' : !cls!.MatchesBmpChar((char)o.Operand);
                 case KernelOp.LiteralRun:
                     return any ? !dotAll && o.Text![0] == '\n' : !cls!.MatchesBmpChar(o.Text![0]);
-                case KernelOp.Class:
+                case KernelOp.Class when !o.Backward:
                     if (any)
                     {
                         return false;
@@ -520,7 +560,7 @@ internal sealed class CoreKernelPlan
             }
 
             stack.Push(nodes[i].Next);
-            if (nodes[i].Op == KernelOp.Split)
+            if (nodes[i].Op is KernelOp.Split or KernelOp.LookStart)
             {
                 stack.Push(nodes[i].Alternate);
             }
@@ -528,14 +568,147 @@ internal sealed class CoreKernelPlan
         return seen;
     }
 
-    // Units that can start a match, or null when the match may be empty/anchored or the set is too large to enumerate.
-    private static char[]? FirstSetOf(KernelNode[] nodes, bool scalars, out string? literalPrefix)
+    // Units that can start a match, or null when the match may be empty or the set is unknown. A positive look-ahead
+    // at the very start constrains the first unit as much as the continuation does, so the two sets are intersected.
+    // When the set is too large to enumerate but its ASCII part is not everything, the ASCII units that cannot start a
+    // match are returned instead (except = true), as the interpreter's FirstUnitsExcept filter does.
+    private static char[]? FirstSetOf(KernelNode[] nodes, bool scalars, out string? literalPrefix, out bool except)
     {
         literalPrefix = null;
-        var set = new HashSet<char>();
+        except = false;
+        var pc = 0;
+        for (var hops = 0; hops < nodes.Length && nodes[pc].Op is KernelOp.CaptureStart or KernelOp.CaptureEnd or KernelOp.Clear or KernelOp.Jump; hops++)
+        {
+            pc = nodes[pc].Next;
+        }
+
+        FirstUnits? units;
+        string? run = null;
+        if (nodes[pc].Op == KernelOp.LookStart && nodes[pc].Operand == 0)
+        {
+            var body = Collect(nodes, nodes[pc].Next, scalars, out _);
+            var rest = Collect(nodes, nodes[pc].Alternate, scalars, out _);
+            units = body is { Big: false } && rest is { Big: false } ? body.Intersect(rest)
+                : body is { Big: false } ? body : rest is { Big: false } ? rest : body ?? rest;
+        }
+        else
+        {
+            units = Collect(nodes, 0, scalars, out run);
+        }
+
+        if (units is null)
+        {
+            return null;
+        }
+
+        if (units.Big)
+        {
+            // Every non-ASCII unit stays a candidate; the surrogate guard after the skip covers UnicodeScalars mode.
+            var excluded = new List<char>();
+            for (var c = 0; c < 128; c++)
+            {
+                if (!units.Ascii[c])
+                {
+                    excluded.Add((char)c);
+                }
+            }
+
+            if (excluded.Count == 0)
+            {
+                return null;
+            }
+
+            except = true;
+            return excluded.ToArray();
+        }
+
+        if (units.Set.Count == 0)
+        {
+            return null;
+        }
+
+        if (scalars)
+        {
+            foreach (var c in units.Set)
+            {
+                if (char.IsSurrogate(c))
+                {
+                    return null;
+                }
+            }
+        }
+
+        literalPrefix = run;
+        return units.Set.ToArray();
+    }
+
+    private sealed class FirstUnits
+    {
+        internal readonly HashSet<char> Set = [];
+        internal readonly bool[] Ascii = new bool[128];
+        internal bool Big;
+
+        internal void Add(char c)
+        {
+            if (c < 128)
+            {
+                Ascii[c] = true;
+            }
+
+            if (!Big && Set.Add(c) && Set.Count > MaxFirstSet)
+            {
+                Big = true;
+                Set.Clear();
+            }
+        }
+
+        internal void AddAll(FirstUnits other)
+        {
+            for (var c = 0; c < 128; c++)
+            {
+                Ascii[c] |= other.Ascii[c];
+            }
+
+            if (other.Big)
+            {
+                Big = true;
+                Set.Clear();
+            }
+            else
+            {
+                foreach (var c in other.Set)
+                {
+                    Add(c);
+                }
+            }
+        }
+
+        internal FirstUnits Intersect(FirstUnits other)
+        {
+            var result = new FirstUnits();
+            foreach (var c in Set)
+            {
+                if (other.Set.Contains(c))
+                {
+                    result.Add(c);
+                }
+            }
+
+            return result;
+        }
+    }
+
+    // The union of first units over every path from root, or null when a path consumes nothing it constrains (an empty
+    // match, a surrogate-sensitive class, an unconstrained run). Zero-width assertions are stepped over; a positive
+    // look-ahead whose body has a first set constrains the position's unit even when the continuation is empty.
+    // literalPrefix is set when the only consumer is one literal run.
+    private static FirstUnits? Collect(KernelNode[] nodes, int root, bool scalars, out string? literalPrefix)
+    {
+        literalPrefix = null;
+        var units = new FirstUnits();
         var seen = new bool[nodes.Length];
         var stack = new Stack<int>();
-        stack.Push(0);
+        stack.Push(root);
         var consumers = 0;
         string? run = null;
         while (stack.Count > 0)
@@ -554,22 +727,40 @@ internal sealed class CoreKernelPlan
                 case KernelOp.CaptureEnd:
                 case KernelOp.Clear:
                 case KernelOp.Jump:
+                case KernelOp.AssertStart:
+                case KernelOp.AssertEnd:
+                case KernelOp.AssertSearchStart:
+                case KernelOp.AssertLineStart:
+                case KernelOp.AssertLineEnd:
+                case KernelOp.WordBoundary:
+                case KernelOp.NotWordBoundary:
                     stack.Push(o.Next);
                     break;
                 case KernelOp.Split:
                     stack.Push(o.Alternate);
                     stack.Push(o.Next);
                     break;
-                case KernelOp.Literal:
-                    set.Add((char)o.Operand);
+                case KernelOp.LookStart:
+                    consumers += 2;
+                    if (o.Operand == 0 && Collect(nodes, o.Next, scalars, out _) is { } body)
+                    {
+                        // The look-ahead reads the unit at this position, whatever the continuation does.
+                        units.AddAll(body);
+                        break;
+                    }
+
+                    stack.Push(o.Alternate);
+                    break;
+                case KernelOp.Literal when !o.Backward:
+                    units.Add((char)o.Operand);
                     consumers++;
                     break;
                 case KernelOp.LiteralRun:
-                    set.Add(o.Text![0]);
+                    units.Add(o.Text![0]);
                     consumers++;
                     run = o.Text;
                     break;
-                case KernelOp.Class:
+                case KernelOp.Class when !o.Backward:
                 case KernelOp.ClassRun:
                     if (o.Op == KernelOp.ClassRun && o.Operand == 1)
                     {
@@ -583,9 +774,9 @@ internal sealed class CoreKernelPlan
 
                     for (var c = 0; c <= 0xFFFF; c++)
                     {
-                        if (o.Class!.MatchesBmpChar((char)c) && set.Add((char)c) && set.Count > MaxFirstSet)
+                        if (o.Class!.MatchesBmpChar((char)c))
                         {
-                            return null;
+                            units.Add((char)c);
                         }
                     }
 
@@ -599,20 +790,6 @@ internal sealed class CoreKernelPlan
                 default:
                     return null;
             }
-            if (set.Count > MaxFirstSet)
-            {
-                return null;
-            }
-        }
-        if (scalars)
-        {
-            foreach (var c in set)
-            {
-                if (char.IsSurrogate(c))
-                {
-                    return null;
-                }
-            }
         }
 
         if (consumers == 1 && run is { Length: >= 2 })
@@ -620,14 +797,16 @@ internal sealed class CoreKernelPlan
             literalPrefix = run;
         }
 
-        return set.Count == 0 ? null : set.ToArray();
+        return units;
     }
 
-    // A leading anchor allows a single attempt; a leading atomic `[c]+` lets a failed attempt skip the whole run.
-    private static void Leading(KernelNode[] nodes, out int leadingRun, out bool anchored)
+    // A leading anchor allows a single attempt (at 0 for ^, at the search start for \G); a leading atomic `[c]+` lets a
+    // failed attempt skip the whole run.
+    private static void Leading(KernelNode[] nodes, out int leadingRun, out bool anchored, out bool searchAnchored)
     {
         leadingRun = -1;
         anchored = false;
+        searchAnchored = false;
         var pc = 0;
         for (var hops = 0; hops < nodes.Length; hops++)
         {
@@ -642,6 +821,9 @@ internal sealed class CoreKernelPlan
                     continue;
                 case KernelOp.AssertStart:
                     anchored = true;
+                    return;
+                case KernelOp.AssertSearchStart:
+                    searchAnchored = true;
                     return;
                 case KernelOp.ClassRun:
                     if (o.Count == 1 && o.Atomic && o.Operand == 0)

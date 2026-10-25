@@ -148,12 +148,30 @@ internal static class SourcePlanner
             return false;
         }
         // Whole-pattern direct plans (literal, alternation, set repeat, atomic sequence) already beat the generic kernel.
-        if (new EcmaAccelerator(program, unicode!.CaseTables).HasDirectPlan)
+        var accelerator = new EcmaAccelerator(program, unicode!.CaseTables);
+        if (accelerator.HasDirectPlan)
         {
             reason = "The interpreter's accelerated direct plan already serves this pattern; a compiled kernel shows no benefit.";
             return false;
         }
-        return EcmaKernelPlan.TryCreate(program, unicode.CaseTables, LoweringLimits.Default, out plan, out reason);
+        // The kernel keeps the interpreter's search-level prefilters: a required literal, else the required ASCII units.
+        char[]? required = null;
+        if (accelerator.RequiredLiteral is null
+            && EcmaUnitFilters.BuildRequiredUnits(program, program.Nodes, program.Root, unicode.CaseTables, accelerator.FastSets) is { } units)
+        {
+            var chars = new List<char>();
+            for (var c = 0; c < 128; c++)
+            {
+                if ((c < 64 ? units.Low >> c & 1 : units.High >> (c - 64) & 1) != 0)
+                {
+                    chars.Add((char)c);
+                }
+            }
+
+            required = chars.ToArray();
+        }
+        return EcmaKernelPlan.TryCreate(program, unicode.CaseTables, LoweringLimits.Default, out plan, out reason, required,
+            accelerator.RequiredLiteral, accelerator.RequiredLiteralMinOffset);
     }
 
     internal static bool PlanXml(XmlProgram program, out CoreKernelPlan? plan, out string reason)
