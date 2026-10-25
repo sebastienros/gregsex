@@ -92,6 +92,28 @@ internal sealed class OnigCompiler
     private const int ShallowTreeDepth = 512;
     private const int MaxFollowPasses = 4;
 
+    // The tree the kernel planner lowers: parsed, renumbered and possessified exactly as Build sees it. deep reports a
+    // tree too deep for a recursive walk on an ordinary stack (Build compiles those on a thread of their own).
+    internal static OnigNode Analyze(string pattern, OnigInlineOptions options, bool captureGroup, bool dontCaptureGroup,
+        RegexCompileLimits limits, out int groupCount, out bool deep)
+    {
+        var parser = OnigParser.Parse(pattern, options, limits, out var root);
+        deep = parser.TreeDepth > ShallowTreeDepth;
+        groupCount = parser.GroupCount;
+        if (dontCaptureGroup || (!captureGroup && parser.HasNamedGroups))
+        {
+            groupCount = Renumber(parser, new string?[groupCount], unnamedCapture: false);
+        }
+
+        var calledGroups = parser.References.Where(r => r.Kind == OnigNodeKind.Call).Select(r => r.Value).ToHashSet();
+        if (calledGroups.Count > 0)
+        {
+            NativePossessive(root, calledGroups);
+        }
+
+        return root;
+    }
+
     // Oniguruma's tune_next makes a greedy x* or x+ possessive when the node after it cannot start with x's head
     // literal, looking through the capture groups around the quantifier. For a called group that follow is only the one
     // at its definition, so calls from elsewhere run the quantifier possessive too: (?<n>\d+)\.\g<n>\d does not
@@ -1824,7 +1846,7 @@ internal sealed class OnigCompiler
     }
 
     // The case-sensitive literal every match starts with; returns whether the node was entirely that literal.
-    private static bool Prefix(OnigNode node, StringBuilder prefix)
+    internal static bool Prefix(OnigNode node, StringBuilder prefix)
     {
         switch (node.Kind)
         {
@@ -1856,7 +1878,7 @@ internal sealed class OnigCompiler
     }
 
     // The longest case-sensitive literal run every match consumes.
-    private static void Required(OnigNode node, ref string? best)
+    internal static void Required(OnigNode node, ref string? best)
     {
         switch (node.Kind)
         {
@@ -1902,9 +1924,9 @@ internal sealed class OnigCompiler
     }
 
     // A required-units set larger than this rarely rejects a subject, so it is not worth a scan.
-    private const int MaxRequiredCost = 24;
+    internal const int MaxRequiredCost = 24;
 
-    private static int Cost(OnigStartBits units)
+    internal static int Cost(OnigStartBits units)
         => System.Numerics.BitOperations.PopCount(units.Low) + System.Numerics.BitOperations.PopCount(units.High) + (units.NonAscii ? 64 : 0);
 
     // Units of which every match of node contains one, in the text it consumes or looks ahead at; null when none is

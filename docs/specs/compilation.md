@@ -93,5 +93,9 @@ warmed matching, allocations, retained memory, and break-even reuse separately.
 Upstream Expression.Compile comparisons do not establish GregsEx speedups.
 Expression.Compile is permitted only as an isolated benchmark comparator.
 
+`OnigurumaPattern.Compile()` and Oniguruma generated patterns follow the same
+boundary (annotations, runtime guards, no fallback engine, the interpreter owning
+every case the kernel does not model); see [oniguruma.md](oniguruma.md).
+
 Acceptance IDs ARCH-01, API-06, PERF-001/015, and VERIFY-04/05 cover these
 requirements.

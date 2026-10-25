@@ -9,9 +9,11 @@ using GregsEx.IR;
 namespace GregsEx.Execution.Compiled;
 
 // PCRE2 front end of the kernel framework, for a deliberately restricted subset: 16-bit subjects, LF newlines, and a tree made of
-// literals, classes, dot, sequences, alternatives, greedy/lazy repeats, capture groups and the simple anchors. Everything
-// else (possessive/atomic groups, assertions, backreferences, subroutines, conditionals, verbs, callouts, \K, \G, \C, \R,
-// graphemes, script runs) stays on the interpreter, which also remains the owner of resource-limit diagnostics.
+// literals, classes, dot, sequences, alternatives, greedy/lazy/possessive repeats, capture and atomic groups, the simple
+// anchors, \G, and atomic lookaround assertions (look-behind only with fixed-length branches, stepped back by the branch
+// length as the interpreter does). Everything else (non-atomic or variable-length assertions, backreferences, subroutines,
+// conditionals, verbs, callouts, \K, \C, \R, graphemes, script runs) stays on the interpreter, which also remains the owner
+// of resource-limit diagnostics.
 // Atoms are resolved here, once, into exact BMP membership tables by evaluating the interpreter's own character predicates
 // for every code unit, so case folding, UCP properties and character tables cannot drift from the interpreter.
 internal static class Pcre2KernelPlan
@@ -52,7 +54,7 @@ internal static class Pcre2KernelPlan
             || program.PatternMatchFlags != 0
             || program.HasBackslashC
             || !program.Callouts.IsEmpty || !program.Controls.IsEmpty || !program.Marks.IsEmpty || !program.Conditions.IsEmpty
-            || !program.References.IsEmpty || !program.ScanReferences.IsEmpty || !program.Assertions.IsEmpty)
+            || !program.References.IsEmpty || !program.ScanReferences.IsEmpty)
         {
             reason = "The PCRE2 profile or program uses features outside the compiled subset.";
             return false;
@@ -96,7 +98,7 @@ internal static class Pcre2KernelPlan
                     Pcre2NodeKind.Sequence => all,
                     Pcre2NodeKind.Alternative => any,
                     Pcre2NodeKind.Repeat => n.Min == 0 || _nullable[kids[0]],
-                    Pcre2NodeKind.Capture => _nullable[kids[0]],
+                    Pcre2NodeKind.Capture or Pcre2NodeKind.Atomic => _nullable[kids[0]],
                     _ => true
                 };
             }
@@ -109,6 +111,7 @@ internal static class Pcre2KernelPlan
             switch (n.Kind)
             {
                 case Pcre2NodeKind.AbsoluteStart:
+                case Pcre2NodeKind.StartOffset:
                     return true;
                 case Pcre2NodeKind.Start:
                     return (n.Flags & (Pcre2CompileFlags.Multiline | Pcre2CompileFlags.AltCircumflex)) == 0;
@@ -128,6 +131,9 @@ internal static class Pcre2KernelPlan
                     return StartsAnchored(kids[0]);
                 case Pcre2NodeKind.Repeat:
                     return n.Min >= 1 && StartsAnchored(kids[0]);
+                case Pcre2NodeKind.Assertion:
+                    // PCRE2 infers anchoring through a leading positive look-ahead whose body is anchored.
+                    return _program.Assertions[n.Operand].Kind == Pcre2AssertionKind.PositiveAhead && StartsAnchored(kids[0]);
                 default:
                     return false;
             }
@@ -219,8 +225,14 @@ internal static class Pcre2KernelPlan
                     }
                 case Pcre2NodeKind.Repeat:
                     return GenRepeat(n, next);
+                case Pcre2NodeKind.Atomic:
+                    return GenAtomic(Kids(n)[0], next);
                 case Pcre2NodeKind.AbsoluteStart:
                     return Alloc(new() { Op = KernelOp.AssertStart, Next = next });
+                case Pcre2NodeKind.StartOffset:
+                    return Alloc(new() { Op = KernelOp.AssertSearchStart, Next = next });
+                case Pcre2NodeKind.Assertion:
+                    return GenAssertion(index, n, next);
                 case Pcre2NodeKind.Start:
                     if ((n.Flags & Pcre2CompileFlags.Multiline) == 0)
                     {
@@ -266,6 +278,62 @@ internal static class Pcre2KernelPlan
                     Fail($"The PCRE2 node kind {n.Kind} is not lowered.");
                     return next;
             }
+        }
+
+        // Lookaround is an atomic frame around its body. A look-behind branch steps back its fixed length and then matches
+        // forward to the assertion's position, as the interpreter rewinds; every top-level branch has its own length.
+        private int GenAssertion(int index, Pcre2Node n, int next)
+        {
+            var assertion = _program.Assertions[n.Operand];
+            if (assertion.Kind is Pcre2AssertionKind.NonAtomicAhead or Pcre2AssertionKind.NonAtomicBehind)
+            {
+                Fail("Non-atomic assertions are not lowered.");
+                return next;
+            }
+            var behind = assertion.Kind is Pcre2AssertionKind.PositiveBehind or Pcre2AssertionKind.NegativeBehind;
+            var negative = assertion.Kind is Pcre2AssertionKind.NegativeAhead or Pcre2AssertionKind.NegativeBehind;
+            if (behind && (assertion.VariableLength || !_program.HasLookbehindMetadata && assertion.MinimumLength != assertion.MaximumLength))
+            {
+                Fail("Variable-length look-behind assertions are not lowered.");
+                return next;
+            }
+            var look = Alloc(default);
+            var end = Alloc(new() { Op = KernelOp.LookEnd, Operand = look, Next = next });
+            var child = Kids(n)[0];
+            int inner;
+            if (!behind)
+            {
+                inner = Gen(child, end);
+            }
+            else
+            {
+                var alternative = _tree[child].Kind == Pcre2NodeKind.Alternative;
+                var count = alternative ? _tree[child].Children.Count : 1;
+                var first = 0;
+                if (_program.HasLookbehindMetadata)
+                {
+                    var branches = _program.LookbehindBranches;
+                    while (first < branches.Length && branches[first].AssertionNode < index)
+                    {
+                        first++;
+                    }
+                }
+                inner = -1;
+                for (var ordinal = count - 1; ordinal >= 0 && _failure is null; ordinal--)
+                {
+                    var branch = alternative ? _children[_tree[child].Children.Offset + ordinal] : child;
+                    var length = _program.HasLookbehindMetadata ? _program.LookbehindBranches[first + ordinal].MaximumLength : assertion.MaximumLength;
+                    var body = Gen(branch, end);
+                    var entry = length == 0 ? body : Alloc(new() { Op = KernelOp.StepBack, Count = length, Next = body });
+                    inner = inner < 0 ? entry : Alloc(new() { Op = KernelOp.Split, Next = entry, Alternate = inner });
+                }
+            }
+            if (_failure is null)
+            {
+                _nodes[look] = new() { Op = KernelOp.LookStart, Next = inner, Alternate = next, Operand = (negative ? LookFlags.Negative : 0) | (behind ? LookFlags.Behind : 0) };
+            }
+
+            return look;
         }
 
         private int GenLiteral(Pcre2Node n, int next)
@@ -398,16 +466,37 @@ internal static class Pcre2KernelPlan
             return cls;
         }
 
+        // An atomic group is a frame whose body keeps its end position and whose choices are dropped once it matched.
+        private int GenAtomic(int child, int next)
+        {
+            var look = Alloc(default);
+            var end = Alloc(new() { Op = KernelOp.LookEnd, Operand = look, Next = next, Count = 1 });
+            var inner = Gen(child, end);
+            if (_failure is null)
+            {
+                _nodes[look] = new() { Op = KernelOp.LookStart, Next = inner, Alternate = -1, Operand = LookFlags.Atomic, Count = 1 };
+            }
+
+            return look;
+        }
+
         private int GenRepeat(Pcre2Node n, int next)
         {
             var child = Kids(n)[0];
             var possessive = n.Quantifier == Pcre2Quantifier.Possessive;
-            // Possessive loops over one unit (including the interpreter's automatic possessification) are lowered as greedy
-            // loops; the plan analysis rejects them unless the continuation is disjoint, which is exactly when they agree.
+            // An unbounded possessive loop over one unit (including the interpreter's automatic possessification) is an
+            // atomic class run; any other possessive repeat is the greedy repeat inside an atomic group, as PCRE2 compiles it.
             if (possessive && (n.Max >= 0 || _tree[child].Kind is not (Pcre2NodeKind.Literal or Pcre2NodeKind.Class or Pcre2NodeKind.Dot)))
             {
-                Fail("Possessive quantifiers over groups or bounded counts are not lowered.");
-                return next;
+                var look = Alloc(default);
+                var end = Alloc(new() { Op = KernelOp.LookEnd, Operand = look, Next = next, Count = 1 });
+                var inner = GenRepeat(n with { Quantifier = Pcre2Quantifier.Greedy }, end);
+                if (_failure is null)
+                {
+                    _nodes[look] = new() { Op = KernelOp.LookStart, Next = inner, Alternate = -1, Operand = LookFlags.Atomic, Count = 1 };
+                }
+
+                return look;
             }
             _loopAtom = _tree[child].Kind == Pcre2NodeKind.Literal;
             if (_nullable[child] && n.Max != n.Min)

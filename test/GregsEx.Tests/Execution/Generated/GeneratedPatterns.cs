@@ -34,6 +34,33 @@ internal static partial class GeneratedPatterns
     [GeneratedPattern("(a|aa)*c")]
     public static partial RegexPattern CoreAmbiguous();
 
+    internal const string Look = @"(?<!\w)(?!(?:ing|ed)\b)([a-z]+)(?=(ing|ed)\b)";
+
+    [GeneratedPattern(Look, EcmaScriptFlags.None)]
+    public static partial RegexPattern EcmaLook();
+
+    [GeneratedPattern(Look, Pcre2CompileFlags.None)]
+    public static partial RegexPattern Pcre2Look();
+
+    [GeneratedPattern(@"\G(?<=\s|^)[a-z]+(?= \d)", Pcre2CompileFlags.None)]
+    public static partial RegexPattern Pcre2SearchStart();
+
+    [GeneratedPattern(@"(?<=\d )(?:(?=w)([a-z]+)|(?!w)([a-z]+))", EcmaScriptFlags.Sticky)]
+    public static partial RegexPattern EcmaStickyLook();
+
+    [GeneratedPattern(Look, OnigurumaOptions.CaptureGroup)]
+    public static partial OnigurumaPattern OnigLook();
+
+    [GeneratedPattern(@"[\t ]*+(alias)[\t ]*+((?:((?<!\w)-\w+)\b[\t ]*+)*)[\t ]*+((?<!\w)[-0-9A-Z_a-z]+(?!\w))", OnigurumaOptions.CaptureGroup)]
+    public static partial OnigurumaPattern OnigAlias();
+
+    [GeneratedPattern(@"(?<=(ab)|(b))c|\G(?>x+)y", OnigurumaOptions.CaptureGroup)]
+    public static partial OnigurumaPattern OnigBehind();
+
+    // A backreference keeps the pattern on the interpreter.
+    [GeneratedPattern(@"(a)\1", OnigurumaOptions.CaptureGroup)]
+    public static partial OnigurumaPattern OnigBackref();
+
     // A literal is served by a hand-written accelerated path, so the generator leaves it on the interpreter.
     [GeneratedPattern("needle")]
     public static partial RegexPattern CoreLiteral();

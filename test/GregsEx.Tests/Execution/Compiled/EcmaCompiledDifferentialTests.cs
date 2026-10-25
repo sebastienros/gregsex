@@ -15,6 +15,10 @@ public class EcmaCompiledDifferentialTests
         "(a*)b", "(a|aa)*b", "\\bwin\\w*", "\\Bn\\b", "^\\w+$", "(?:ab){1,3}c", "a{2,}b", "[\\s\\S]b", "\\d+x", "[^\\d\\s]+",
         "(a)|(b)", "k", "\\u212a", "[k-m]+x", "ſ+", "\\bk\\b", "(?:a|b){0,2}c", "a{0}b",
         "([a-z]+)@([a-z]+)\\.com", "(?:(?:a)*)*b", "(a*)*b", "(a|b*)*c", "(a)\\1", "(?=a)a", "(?<!a)b",
+        "(?=\\[)", "(?=[a-z]+ing)[a-z]+", "([a-z]+)(?=\\s*(?:\\?\\s*)?\\.)", "(?!the)[a-z]+", "(?<=the )[a-z]+", "(?<!\\w)[a-z]+",
+        "(?=(a))a\\1", "(?=(a|ab))(a|ab)c", "(?!(a))(b)", "(?<=(ab))c", "(?<=a(b)|(c))d", "(?<=^|\\s)[a-z]+", "(?<=[a-z]+)e",
+        "(?=.*ed)[a-z]+", "a(?=b(?=c))", "a(?!b(?!c))", "(?<=(?<=a)b)c", "x(?=y)|z", "(?:(?=a)|b)c", "(?=a)?a", "(?<=\\b)e", "(?=$)",
+        "(?<=é)b", "(?<=😀)b", "(?<=[^a])b", "(?<=.)b", "((?=a)a)+", "(?=a)*b", "(?<=a*)b", "(?=a){2}a", "(?=(?:a|b){2})[ab]+", "\\b(?=[a-z]{3}\\b)[a-z]+",
     ];
 
     private static readonly string[] Alphabet =
@@ -168,9 +172,95 @@ public class EcmaCompiledDifferentialTests
     [Fact]
     public void UnmodelledConstructsAreRejected()
     {
-        foreach (var pattern in new[] { "(a)\\1", "(?=a)a", "(?<!a)b", "(a*)*b" })
+        foreach (var pattern in new[] { "(a)\\1", "(a*)*b", "((?=a)|b)*c" })
         {
             Assert.Null(TryCompile(Parse(pattern, EcmaScriptFlags.None)));
         }
+    }
+
+    [Fact]
+    public void LookaroundsAreLowered()
+    {
+        foreach (var pattern in new[] { "(?=\\[)", "(?=a)a", "(?<!a)b", "(?<=the )[a-z]+", "a(?!b(?!c))", "(?<=(ab))c", "x(?=y)|z" })
+        {
+            foreach (var flags in new[] { EcmaScriptFlags.None, EcmaScriptFlags.IgnoreCase, EcmaScriptFlags.Unicode, EcmaScriptFlags.Sticky })
+            {
+                Assert.NotNull(TryCompile(Parse(pattern, flags)));
+            }
+        }
+    }
+
+    // Focused lookaround semantics, checked against the interpreter and against known ECMAScript results.
+    public static IEnumerable<TheoryDataRow<string, string, int, string?>> LookaroundCases()
+    {
+        // pattern, input, startAt, expected "index:length|g1|g2..." or null for no match
+        yield return new("(?=(a))a", "xa", 0, "1:1|1:1");
+        yield return new("(?=(a))a", "xa", 1, "1:1|1:1");
+        yield return new("(?!(a))(b)", "ab", 0, "1:1|-|1:1");
+        yield return new("(?=(a|ab))(a|ab)c", "abc", 0, "0:3|0:1|0:2");
+        yield return new("(?<=(ab))c", "abc", 0, "2:1|0:2");
+        yield return new("(?<=(ab))c", "abc", 2, "2:1|0:2");
+        yield return new("(?<=a(b)|(c))d", "abd cd", 0, "2:1|1:1|-");
+        yield return new("(?<=a(b)|(c))d", "abd cd", 3, "5:1|-|4:1");
+        yield return new("(?<=^|\\s)[a-z]+", " the cat", 0, "1:3");
+        yield return new("(?<=the )[a-z]+", "the cat", 4, "4:3");
+        yield return new("(?<=the )[a-z]+", "the cat", 0, "4:3");
+        yield return new("(?<!a)b", "ab b", 0, "3:1");
+        yield return new("(?<!a)b", "b", 0, "0:1");
+        yield return new("(?<=a)b", "b", 0, null);
+        yield return new("(?<=[a-z]+)e", "abcde", 0, "4:1");
+        yield return new("(?<=(a+))b", "aaab", 0, "3:1|0:3");
+        yield return new("(?<=(a+?))b", "aaab", 0, "3:1|2:1");
+        yield return new("a(?=b(?=c))", "abc abd", 0, "0:1");
+        yield return new("a(?=b(?=c))", "abd abc", 0, "4:1");
+        yield return new("a(?!b(?!c))", "abd abc", 0, "4:1");
+        yield return new("(?<=(?<=a)b)c", "abc bc", 0, "2:1");
+        yield return new("(?:(?=a)|b)c", "ac bc c", 0, "3:2");
+        yield return new("(?:(?=a)|b)c", "bc c", 0, "0:2");
+        yield return new("(?=$)", "ab", 0, "2:0");
+        yield return new("(?=\\[)", "x[y]", 0, "1:0");
+        yield return new("(?=\\[)", "x[y]", 2, null);
+        yield return new("((?=a)a)+", "aaab", 0, "0:3|2:1");
+        yield return new("(?=(?:a|b){2})[ab]+", "cabab", 0, "1:4");
+        yield return new("(?=.*ed)[a-z]+", "winning winned", 0, "0:7");
+        yield return new("(?!the)[a-z]+", "the cat", 0, "1:2");
+        yield return new("(?<!\\w)[a-z]+", "the cat", 1, "4:3");
+    }
+
+    [Theory]
+    [MemberData(nameof(LookaroundCases))]
+    public void LookaroundKernelsMatchKnownResults(string pattern, string input, int startAt, string? expected)
+    {
+        var oracle = Parse(pattern, EcmaScriptFlags.None);
+        var compiled = TryCompile(oracle);
+        Assert.NotNull(compiled);
+        foreach (var pat in new[] { oracle, compiled })
+        {
+            var ws = pat.CreateWorkspace();
+            var groups = new RegexCapture[pat.GroupCount];
+            var status = ws.FindCaptures(input, startAt, groups, out var range);
+            string? actual = null;
+            if (status == RegexSearchStatus.Match)
+            {
+                actual = range.Index + ":" + range.Length;
+                for (var g = 1; g < groups.Length; g++)
+                {
+                    actual += "|" + (groups[g].Participated ? groups[g].Index + ":" + groups[g].Length : "-");
+                }
+            }
+            Assert.Equal(expected, actual);
+        }
+    }
+
+    [Fact]
+    public void LookaroundKernelsHonourTheStepBudget()
+    {
+        var input = new string('a', 2000) + "b";
+        var limits = new RegexMatchLimits(maxWork: 200);
+        var oracle = Parse("(?=(a+)+b)a", EcmaScriptFlags.None, limits);
+        var compiled = TryCompile(oracle);
+        Assert.NotNull(compiled);
+        Assert.Equal(oracle.CreateWorkspace().Find(input, 0, out _), compiled.CreateWorkspace().Find(input, 0, out _));
+        Assert.Equal(RegexSearchStatus.LimitExceeded, compiled.CreateWorkspace().Find(input, 0, out _));
     }
 }

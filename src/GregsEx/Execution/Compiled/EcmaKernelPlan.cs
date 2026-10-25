@@ -9,12 +9,15 @@ namespace GregsEx.Execution.Compiled;
 // ECMAScript front end of the kernel framework: translates the immutable semantic tree into the same backtracking
 // instruction graph the RegularCore front end produces, so one lowering (FEC) and one emitter (C#) serve both.
 // Case-insensitivity and Unicode data are resolved here, once, into plain BMP classes; the kernel never sees them.
-// Constructs without a faithful instruction-graph image (backreferences, lookaround, string sets, non-BMP literals,
-// loops that may iterate on an empty match) make the pattern ineligible instead of approximating them.
+// Lookarounds are atomic frames around their body; a lookbehind body is generated in reverse with backward-reading
+// consumers, as the interpreter matches it right to left. Constructs without a faithful instruction-graph image
+// (backreferences, string sets, non-BMP literals, loops that may iterate on an empty match) make the pattern ineligible
+// instead of approximating them.
 internal static class EcmaKernelPlan
 {
     internal static bool TryCreate(EcmaProgram program, EcmaCaseTables tables, in LoweringLimits limits,
-        out CoreKernelPlan? plan, out string reason)
+        out CoreKernelPlan? plan, out string reason, char[]? requiredSet = null, string? requiredLiteral = null,
+        int requiredLiteralMinOffset = 0)
     {
         plan = null;
         var builder = new Builder(program, tables, limits);
@@ -25,7 +28,8 @@ internal static class EcmaKernelPlan
 
         var flags = program.Profile.Flags;
         return CoreKernelPlan.Analyze(nodes!, program.GroupCount, program.Profile.IsUnicodeAware, dotAll: false,
-            sticky: (flags & EcmaScriptFlags.Sticky) != 0, limits, out plan, out reason);
+            sticky: (flags & EcmaScriptFlags.Sticky) != 0, limits, out plan, out reason, requiredSet, requiredLiteral,
+            requiredLiteralMinOffset);
     }
 
     private sealed class Builder
@@ -42,6 +46,7 @@ internal static class EcmaKernelPlan
         private readonly ProfileDescriptor _descriptor;
         private readonly bool[] _nullable;
         private string? _failure;
+        private bool _backward;
 
         internal Builder(EcmaProgram program, EcmaCaseTables tables, in LoweringLimits limits)
         {
@@ -125,10 +130,10 @@ internal static class EcmaKernelPlan
                             return next;
                         }
 
-                        return Alloc(new() { Op = KernelOp.Class, Next = next, Class = cls, SurrogateSensitive = sensitive });
+                        return Alloc(new() { Op = KernelOp.Class, Next = next, Class = cls, SurrogateSensitive = sensitive, Backward = _backward });
                     }
                 case EcmaNodeKind.Sequence:
-                    return Gen(n.X, Gen(n.Y, next));
+                    return _backward ? Gen(n.Y, Gen(n.X, next)) : Gen(n.X, Gen(n.Y, next));
                 case EcmaNodeKind.Alternative:
                     {
                         var y = Gen(n.Y, next);
@@ -137,9 +142,11 @@ internal static class EcmaKernelPlan
                     }
                 case EcmaNodeKind.Capture:
                     {
-                        var close = Alloc(new() { Op = KernelOp.CaptureEnd, Operand = n.Value, Next = next });
+                        // Matching backward, the group is entered at its end and left at its start.
+                        var (enter, leave) = _backward ? (KernelOp.CaptureEnd, KernelOp.CaptureStart) : (KernelOp.CaptureStart, KernelOp.CaptureEnd);
+                        var close = Alloc(new() { Op = leave, Operand = n.Value, Next = next });
                         var inner = Gen(n.X, close);
-                        return Alloc(new() { Op = KernelOp.CaptureStart, Operand = n.Value, Next = inner });
+                        return Alloc(new() { Op = enter, Operand = n.Value, Next = inner });
                     }
                 case EcmaNodeKind.Repeat:
                     return GenRepeat(n, next);
@@ -170,8 +177,28 @@ internal static class EcmaKernelPlan
                 case EcmaNodeKind.Backreference:
                     Fail("Backreferences are not lowered.");
                     return next;
+                case EcmaNodeKind.Lookahead:
+                case EcmaNodeKind.NegativeLookahead:
+                case EcmaNodeKind.Lookbehind:
+                case EcmaNodeKind.NegativeLookbehind:
+                    {
+                        var look = Alloc(default);
+                        var end = Alloc(new() { Op = KernelOp.LookEnd, Operand = look, Next = next });
+                        var outer = _backward;
+                        _backward = n.Kind is EcmaNodeKind.Lookbehind or EcmaNodeKind.NegativeLookbehind;
+                        var inner = Gen(n.X, end);
+                        _backward = outer;
+                        var negative = n.Kind is EcmaNodeKind.NegativeLookahead or EcmaNodeKind.NegativeLookbehind;
+                        var behind = n.Kind is EcmaNodeKind.Lookbehind or EcmaNodeKind.NegativeLookbehind;
+                        if (_failure is null)
+                        {
+                            _nodes[look] = new() { Op = KernelOp.LookStart, Next = inner, Alternate = next, Operand = (negative ? LookFlags.Negative : 0) | (behind ? LookFlags.Behind : 0) };
+                        }
+
+                        return look;
+                    }
                 default:
-                    Fail("Lookaround assertions are not lowered.");
+                    Fail("Unknown node kind.");
                     return next;
             }
         }
@@ -185,7 +212,7 @@ internal static class EcmaKernelPlan
             }
             if (!fold)
             {
-                return Alloc(new() { Op = KernelOp.Literal, Next = next, Operand = value });
+                return Alloc(new() { Op = KernelOp.Literal, Next = next, Operand = value, Backward = _backward });
             }
 
             if (!_literals.TryGetValue((value, true), out var cached))
@@ -212,8 +239,8 @@ internal static class EcmaKernelPlan
             }
 
             return cached.Class is null
-                ? Alloc(new() { Op = KernelOp.Literal, Next = next, Operand = value })
-                : Alloc(new() { Op = KernelOp.Class, Next = next, Class = cached.Class });
+                ? Alloc(new() { Op = KernelOp.Literal, Next = next, Operand = value, Backward = _backward })
+                : Alloc(new() { Op = KernelOp.Class, Next = next, Class = cached.Class, Backward = _backward });
         }
 
         private int GenRepeat(EcmaNode n, int next)

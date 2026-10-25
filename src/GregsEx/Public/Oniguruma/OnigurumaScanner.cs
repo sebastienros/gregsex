@@ -1,5 +1,6 @@
 #nullable enable
 using System.Runtime.InteropServices;
+using GregsEx.Execution.Compiled;
 using GregsEx.Flavors.Oniguruma;
 
 namespace GregsEx;
@@ -31,6 +32,10 @@ public sealed class OnigurumaScanner
     private readonly int[] _giveUps;
     private readonly RegexCapture[] _captures;
     private int _captureCount;
+    // The compiled kernels' backtracking stack (allocated on first use), and whether they may run: a call with options
+    // keeps its budget, cancellation and deadline in the matcher.
+    private int[]? _stack;
+    private bool _kernels = true;
 
     /// <summary>Creates a scanner over parsed patterns.</summary>
     public OnigurumaScanner(IReadOnlyList<OnigurumaPattern> patterns)
@@ -138,12 +143,14 @@ public sealed class OnigurumaScanner
         }
 
         _matcher.SetBudget(limits.MaxWork, limits.MaxWorkspaceBytes, options.CancellationToken, OnigMatcher.Deadline(options.Timeout));
+        _kernels = false;
         try
         {
             return Find(input, startAt, text, textStart, textLength, ref patternIndex);
         }
         finally
         {
+            _kernels = true;
             _matcher.RestoreBudget();
         }
     }
@@ -172,7 +179,12 @@ public sealed class OnigurumaScanner
             {
                 // After a give-up, the starts before the attempt that ran out of work were explored without a match.
                 var searchFrom = cached && _lastGiveUp[i] > startAt ? _lastGiveUp[i] : startAt;
-                var status = _matcher.Search(_patterns[i].Program, input, searchFrom, captures);
+                var pattern = _patterns[i];
+                if (!(_kernels && pattern.PlainKernel is not null && OnigCompiledSearch.TryRun(pattern, input, searchFrom, captures, true, ref _stack, out var status, out _)))
+                {
+                    status = _matcher.Search(pattern.Program, input, searchFrom, captures);
+                }
+
                 if (status == RegexSearchStatus.LimitExceeded)
                 {
                     LimitExceededCount++;

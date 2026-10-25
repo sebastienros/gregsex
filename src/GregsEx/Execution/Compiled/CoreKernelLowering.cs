@@ -94,26 +94,54 @@ internal static class CoreKernelHelpers
         return r < 0 ? -1 : r + from;
     }
 
+    internal static int IndexOfAnyExcept(ReadOnlySpan<char> s, int from, SearchValues<char> values)
+    {
+        var r = s.Slice(from).IndexOfAnyExcept(values);
+        return r < 0 ? -1 : r + from;
+    }
+
+    internal static int LastIndexOfAny(ReadOnlySpan<char> s, int from, SearchValues<char> values)
+    {
+        var r = s.Slice(from).LastIndexOfAny(values);
+        return r < 0 ? -1 : r + from;
+    }
+
+    // The last position in [from, to) holding one of values (or, except, a non-ASCII unit or an ASCII unit outside values).
+    internal static int LastInRange(ReadOnlySpan<char> s, int from, int to, SearchValues<char> values)
+    {
+        var r = s.Slice(from, to - from).LastIndexOfAny(values);
+        return r < 0 ? -1 : r + from;
+    }
+
+    internal static int LastInRangeExcept(ReadOnlySpan<char> s, int from, int to, SearchValues<char> values)
+    {
+        var r = s.Slice(from, to - from).LastIndexOfAnyExcept(values);
+        return r < 0 ? -1 : r + from;
+    }
+
+    internal static bool HasAnySurrogate(ReadOnlySpan<char> s) => s.IndexOfAnyInRange('\uD800', '\uDFFF') >= 0;
+
     internal static int IndexOfPrefix(ReadOnlySpan<char> s, int from, string text)
     {
         var r = s.Slice(from).IndexOf(text.AsSpan(), StringComparison.Ordinal);
         return r < 0 ? -1 : r + from;
     }
 
-    internal static int RunEnd(ReadOnlySpan<char> s, int from, SearchValues<char> accepted)
+    // Runs stop at lim, the consumption limit (the input's end, or an enclosing look-behind's position).
+    internal static int RunEnd(ReadOnlySpan<char> s, int from, int lim, SearchValues<char> accepted)
     {
-        var r = s.Slice(from).IndexOfAnyExcept(accepted);
-        return r < 0 ? s.Length : r + from;
+        var r = s.Slice(from, lim - from).IndexOfAnyExcept(accepted);
+        return r < 0 ? lim : r + from;
     }
 
-    internal static int RunEndNegated(ReadOnlySpan<char> s, int from, SearchValues<char> rejected)
+    internal static int RunEndNegated(ReadOnlySpan<char> s, int from, int lim, SearchValues<char> rejected)
     {
-        var r = s.Slice(from).IndexOfAny(rejected);
-        return r < 0 ? s.Length : r + from;
+        var r = s.Slice(from, lim - from).IndexOfAny(rejected);
+        return r < 0 ? lim : r + from;
     }
 
-    internal static bool Equals(ReadOnlySpan<char> s, int at, string text)
-        => s.Length - at >= text.Length && s.Slice(at, text.Length).SequenceEqual(text.AsSpan());
+    internal static bool Equals(ReadOnlySpan<char> s, int at, int lim, string text)
+        => lim - at >= text.Length && s.Slice(at, text.Length).SequenceEqual(text.AsSpan());
 
     internal static bool HasSurrogate(ReadOnlySpan<char> s, int from, int to)
         => s.Slice(from, to - from).IndexOfAnyInRange('\uD800', '\uDFFF') >= 0;
@@ -134,6 +162,8 @@ internal static class CoreKernelLowering
 internal static class CoreKernelLowering
 {
     private const int Back = 1 << 20; // resume id base for class-run backoff entries
+    private const int Look = 2 << 20; // id base for lookaround frames (b = saved position, c = enclosing frame)
+    private const int Limit = 3 << 20; // id base for frames that also limit the body's consumption to the saved position
     private static readonly SearchValues<char> Newline = SearchValues.Create("\n");
 
     // Returns null when FastExpressionCompiler declines the tree; there is deliberately no Expression.Compile fallback.
@@ -169,6 +199,11 @@ internal static class CoreKernelLowering
         var ci = E.Variable(typeof(int), "ci");
         var end = E.Variable(typeof(int), "end");
         var resume = E.Variable(typeof(int), "resume");
+        var fp = E.Variable(typeof(int), "fp");
+        var r = E.Variable(typeof(int), "r");
+        var d = E.Variable(typeof(int), "d");
+        var lastStart = E.Variable(typeof(int), "lastStart");
+        var lim = E.Variable(typeof(int), "lim");
         var ret = E.Label(typeof(int), "ret");
         var overflow = E.Label("overflow");
         var surrogate = E.Label("surrogate");
@@ -190,6 +225,17 @@ internal static class CoreKernelLowering
         var pollHelper = H(nameof(CoreKernelHelpers.Poll));
         var nextPollField = typeof(KernelGuard).GetField(nameof(KernelGuard.NextPoll), BindingFlags.Instance | BindingFlags.Public)!;
         var indexOfAny = H(nameof(CoreKernelHelpers.IndexOfAny));
+        var indexOfAnyExcept = H(nameof(CoreKernelHelpers.IndexOfAnyExcept));
+        var lastIndexOfAny = H(nameof(CoreKernelHelpers.LastIndexOfAny));
+        var lastInRange = H(nameof(CoreKernelHelpers.LastInRange));
+        var lastInRangeExcept = H(nameof(CoreKernelHelpers.LastInRangeExcept));
+        var hasAnySurrogate = H(nameof(CoreKernelHelpers.HasAnySurrogate));
+        // The next back-off position of a non-atomic class run below to, or -1: the previous unit, or the last unit in
+        // [c, to) the continuation can start with when that set is known.
+        Expression BackOff(in KernelNode run, Expression to)
+            => run.Follow is null
+                ? E.Condition(E.GreaterThan(to, c), E.Subtract(to, I(1)), I(-1))
+                : E.Call(run.FollowExcept ? lastInRangeExcept : lastInRange, input, c, to, E.Constant(SearchValues.Create(run.Follow), typeof(SearchValues<char>)));
         var indexOfPrefix = H(nameof(CoreKernelHelpers.IndexOfPrefix));
         var runEnd = H(nameof(CoreKernelHelpers.RunEnd));
         var runEndNegated = H(nameof(CoreKernelHelpers.RunEndNegated));
@@ -206,6 +252,27 @@ internal static class CoreKernelLowering
             E.Call(set, stack, sp, idE), E.Call(set, stack, E.Add(sp, I(1)), bE), E.Call(set, stack, E.Add(sp, I(2)), cE),
             E.AddAssign(sp, I(3)));
         Expression Undo(int slot) => E.IfThen(E.NotEqual(sp, I(0)), Push(I(-1 - slot), GetCap(I(slot)), I(0)));
+        // After a frame is left, the consumption limit is the nearest enclosing limit frame's saved position.
+        var limRestores = 0;
+        Expression RestoreLim()
+        {
+            if (!plan.HasLimitFrames)
+            {
+                return E.Empty();
+            }
+
+            var loop = E.Label("limLoop" + limRestores);
+            var done = E.Label("limDone" + ++limRestores);
+            return E.Block(
+                E.Assign(r, fp),
+                E.Label(loop),
+                E.IfThen(E.LessThan(r, I(0)), E.Block(E.Assign(lim, len), E.Goto(done))),
+                E.IfThen(E.GreaterThanOrEqual(E.Call(get, stack, r), I(Limit)), E.Block(E.Assign(lim, E.Call(get, stack, E.Add(r, I(1)))), E.Goto(done))),
+                E.Assign(r, E.Call(get, stack, E.Add(r, I(2)))),
+                E.Goto(loop),
+                E.Label(done));
+        }
+        int FrameId(int pc) => ((nodes[pc].Operand & LookFlags.Limit) != 0 ? Limit : Look) + pc;
         // Line terminators: style 0 = ECMAScript (LF CR LS PS), style 1 = LF only, style 2 = XPath/PCRE2 start (LF; see the assertion cases), style 3 = PCRE2 end before a final LF.
         Expression LineTerminator(Expression ch, int style)
             => style == 1 ? E.Equal(ch, I('\n'))
@@ -248,11 +315,33 @@ internal static class CoreKernelLowering
             E.Assign(w, E.Constant(0L)),
             E.Assign(poll, E.Field(guard, nextPollField)),
             E.Assign(start, startAt),
+            E.Assign(lastStart, E.Subtract(len, I(plan.MinLength))),
+        };
+        if (plan.RequiredLiteral is { } required)
+        {
+            body.Add(E.IfThen(E.OrElse(E.GreaterThan(E.Add(startAt, I(plan.RequiredLiteralMinOffset)), len),
+                E.LessThan(E.Call(indexOfPrefix, input, E.Add(startAt, I(plan.RequiredLiteralMinOffset)), E.Constant(required)), I(0))), E.Goto(noMatch)));
+        }
+
+        if (plan.RequiredSet is { Length: > 0 } requiredSet)
+        {
+            body.Add(E.Assign(c, E.Call(lastIndexOfAny, input, startAt, E.Constant(SearchValues.Create(requiredSet), typeof(SearchValues<char>)))));
+            body.Add(E.IfThen(E.LessThan(c, I(0)), E.Goto(noMatch)));
+            body.Add(E.IfThen(E.LessThan(c, lastStart), E.Assign(lastStart, c)));
+        }
+
+        if (plan.SurrogateScan)
+        {
+            body.Add(E.IfThen(E.Call(hasAnySurrogate, input), E.Goto(surrogate)));
+        }
+
+        body.AddRange(new Expression[]
+        {
             E.Label(nextStart),
-            E.IfThen(E.GreaterThan(start, len), E.Goto(noMatch)),
+            E.IfThen(E.GreaterThan(start, lastStart), E.Goto(noMatch)),
             E.IfThen(E.GreaterThan(w, maxSteps), E.Goto(budget)),
             PollCheck(),
-        };
+        });
         if (plan.Anchored)
         {
             body.Add(E.IfThen(E.GreaterThan(start, I(0)), E.Goto(noMatch)));
@@ -265,8 +354,12 @@ internal static class CoreKernelLowering
         }
         else if (firstSet is not null)
         {
-            body.Add(E.Block(E.Assign(c, E.Call(indexOfAny, input, start, E.Constant(firstSet, typeof(SearchValues<char>)))),
+            body.Add(E.Block(E.Assign(c, E.Call(plan.FirstSetExcept ? indexOfAnyExcept : indexOfAny, input, start, E.Constant(firstSet, typeof(SearchValues<char>)))),
                 E.IfThen(E.LessThan(c, I(0)), E.Goto(noMatch)), E.Assign(start, c)));
+            if (plan.FirstSetExcept && plan.UnicodeScalars)
+            {
+                body.Add(E.IfThen(E.AndAlso(E.LessThan(start, len), IsSurrogate(E.Convert(E.Call(at, input, start), typeof(int)))), E.Goto(surrogate)));
+            }
         }
         else if (plan.UnicodeScalars)
         {
@@ -282,6 +375,8 @@ internal static class CoreKernelLowering
         }
 
         body.Add(E.Assign(sp, I(0)));
+        body.Add(E.Assign(fp, I(-1)));
+        body.Add(E.Assign(lim, len));
         body.Add(E.Assign(p, start));
 
         // Resume table: Split alternates and non-atomic class-run backoffs.
@@ -296,9 +391,25 @@ internal static class CoreKernelLowering
         {
             if (nodes[i].Op == KernelOp.ClassRun && !nodes[i].Atomic)
             {
+                // Resume the continuation at the popped position, and arm the next back-off below it, down to c.
+                cases.Add(E.SwitchCase(E.Block(
+                    E.Assign(b, BackOff(nodes[i], p)),
+                    E.IfThen(E.GreaterThanOrEqual(b, I(0)), Push(I(Back + i), b, c)),
+                    E.Goto(labels[nodes[i].Next])), I(Back + i)));
+            }
+            else if (nodes[i].Op == KernelOp.BehindScan)
+            {
+                // The next candidate start, one unit nearer the input's start, down to c.
                 cases.Add(E.SwitchCase(E.Block(
                     E.IfThen(E.GreaterThan(p, c), Push(I(Back + i), E.Subtract(p, I(1)), c)),
                     E.Goto(labels[nodes[i].Next])), I(Back + i)));
+            }
+            else if (nodes[i].Op == KernelOp.LookStart)
+            {
+                // The body ran out of alternatives (its capture changes are already undone): a positive assertion
+                // fails, a negative one holds and continues at the saved position.
+                cases.Add(E.SwitchCase(E.Block(E.Assign(fp, c), RestoreLim(),
+                    (nodes[i].Operand & LookFlags.Negative) != 0 ? E.Goto(labels[nodes[i].Alternate]) : E.Goto(fail)), I(FrameId(i))));
             }
         }
 
@@ -310,13 +421,39 @@ internal static class CoreKernelLowering
             body.Add(E.Label(labels[pc]));
             switch (o.Op)
             {
+                case KernelOp.Literal when o.Backward:
+                    body.Add(E.IfThen(E.OrElse(E.LessThanOrEqual(p, I(0)), E.NotEqual(E.Call(at, input, E.Subtract(p, I(1))), E.Constant((char)o.Operand))), E.Goto(fail)));
+                    body.Add(E.PreDecrementAssign(p));
+                    body.Add(E.PreIncrementAssign(w));
+                    break;
                 case KernelOp.Literal:
-                    body.Add(E.IfThen(E.OrElse(E.GreaterThanOrEqual(p, len), E.NotEqual(E.Call(at, input, p), E.Constant((char)o.Operand))), E.Goto(fail)));
+                    body.Add(E.IfThen(E.OrElse(E.GreaterThanOrEqual(p, lim), E.NotEqual(E.Call(at, input, p), E.Constant((char)o.Operand))), E.Goto(fail)));
                     body.Add(E.PreIncrementAssign(p));
                     body.Add(E.PreIncrementAssign(w));
                     break;
+                case KernelOp.Any when o.Backward:
+                case KernelOp.Class when o.Backward:
+                    body.Add(E.IfThen(E.LessThanOrEqual(p, I(0)), E.Goto(fail)));
+                    body.Add(E.Assign(ci, E.Convert(E.Call(at, input, E.Subtract(p, I(1))), typeof(int))));
+                    if (o.SurrogateSensitive)
+                    {
+                        body.Add(E.IfThen(IsSurrogate(ci), E.Goto(surrogate)));
+                    }
+
+                    if (o.Op == KernelOp.Class)
+                    {
+                        body.Add(E.IfThen(E.Not(Test(o.Class!, ci)), E.Goto(fail)));
+                    }
+                    else if (!plan.DotAll)
+                    {
+                        body.Add(E.IfThen(E.Equal(ci, I('\n')), E.Goto(fail)));
+                    }
+
+                    body.Add(E.PreDecrementAssign(p));
+                    body.Add(E.PreIncrementAssign(w));
+                    break;
                 case KernelOp.Any:
-                    body.Add(E.IfThen(E.GreaterThanOrEqual(p, len), E.Goto(fail)));
+                    body.Add(E.IfThen(E.GreaterThanOrEqual(p, lim), E.Goto(fail)));
                     body.Add(E.Assign(ci, E.Convert(E.Call(at, input, p), typeof(int))));
                     if (o.SurrogateSensitive)
                     {
@@ -332,7 +469,7 @@ internal static class CoreKernelLowering
                     body.Add(E.PreIncrementAssign(w));
                     break;
                 case KernelOp.Class:
-                    body.Add(E.IfThen(E.GreaterThanOrEqual(p, len), E.Goto(fail)));
+                    body.Add(E.IfThen(E.GreaterThanOrEqual(p, lim), E.Goto(fail)));
                     body.Add(E.Assign(ci, E.Convert(E.Call(at, input, p), typeof(int))));
                     if (o.SurrogateSensitive)
                     {
@@ -346,7 +483,7 @@ internal static class CoreKernelLowering
                 case KernelOp.LiteralRun:
                     {
                         var t = o.Text!;
-                        Expression ok = E.GreaterThanOrEqual(E.Subtract(len, p), I(t.Length));
+                        Expression ok = E.GreaterThanOrEqual(E.Subtract(lim, p), I(t.Length));
                         if (t.Length <= CoreKernelPlan.MaxLiteralRunInline)
                         {
                             for (var j = 0; j < t.Length; j++)
@@ -356,7 +493,7 @@ internal static class CoreKernelLowering
                         }
                         else
                         {
-                            ok = E.Call(equals, input, p, E.Constant(t));
+                            ok = E.Call(equals, input, p, lim, E.Constant(t));
                         }
 
                         body.Add(E.IfThen(E.Not(ok), E.Goto(fail)));
@@ -370,11 +507,11 @@ internal static class CoreKernelLowering
                         {
                             if (plan.DotAll)
                             {
-                                body.Add(E.Assign(end, len));
+                                body.Add(E.Assign(end, lim));
                             }
                             else
                             {
-                                body.Add(E.Assign(end, E.Call(runEndNegated, input, p, E.Constant(Newline, typeof(SearchValues<char>)))));
+                                body.Add(E.Assign(end, E.Call(runEndNegated, input, p, lim, E.Constant(Newline, typeof(SearchValues<char>)))));
                             }
                         }
                         else
@@ -382,11 +519,11 @@ internal static class CoreKernelLowering
                             var sv = o.Class!.CreateCharSearchValues(out var negated);
                             if (sv is not null)
                             {
-                                body.Add(E.Assign(end, E.Call(negated ? runEndNegated : runEnd, input, p, E.Constant(sv, typeof(SearchValues<char>)))));
+                                body.Add(E.Assign(end, E.Call(negated ? runEndNegated : runEnd, input, p, lim, E.Constant(sv, typeof(SearchValues<char>)))));
                             }
                             else
                             {
-                                body.Add(RunLoop(input, p, len, end, at, ci, Test(o.Class!, ci)));
+                                body.Add(RunLoop(input, p, lim, end, at, ci, Test(o.Class!, ci)));
                             }
                         }
                         if (o.SurrogateSensitive)
@@ -404,7 +541,8 @@ internal static class CoreKernelLowering
                         body.Add(E.AddAssign(w, E.Convert(E.Subtract(end, p), typeof(long))));
                         if (!o.Atomic)
                         {
-                            body.Add(E.IfThen(E.GreaterThan(end, c), Push(I(Back + pc), E.Subtract(end, I(1)), c)));
+                            body.Add(E.Assign(b, BackOff(o, end)));
+                            body.Add(E.IfThen(E.GreaterThanOrEqual(b, I(0)), Push(I(Back + pc), b, c)));
                         }
 
                         body.Add(E.Assign(p, end));
@@ -445,6 +583,98 @@ internal static class CoreKernelLowering
                 case KernelOp.AssertStart:
                     body.Add(E.IfThen(E.NotEqual(p, I(0)), E.Goto(fail)));
                     break;
+                case KernelOp.AssertSearchStart:
+                    body.Add(E.IfThen(E.NotEqual(p, startAt), E.Goto(fail)));
+                    break;
+                case KernelOp.StepBack:
+                    body.Add(E.IfThen(E.LessThan(p, I(o.Count)), E.Goto(fail)));
+                    body.Add(E.SubtractAssign(p, I(o.Count)));
+                    body.Add(E.PreIncrementAssign(w));
+                    break;
+                case KernelOp.BehindScan:
+                    // Candidate starts from Count back to Operand back (-1: to the input's start), nearest first.
+                    body.Add(E.Assign(end, E.Subtract(p, I(o.Count))));
+                    body.Add(E.IfThen(E.LessThan(end, I(0)), E.Goto(fail)));
+                    body.Add(E.Assign(c, o.Operand < 0 ? I(0) : E.Condition(E.LessThan(E.Subtract(p, I(o.Operand)), I(0)), I(0), E.Subtract(p, I(o.Operand)))));
+                    body.Add(E.IfThen(E.GreaterThan(end, c), Push(I(Back + pc), E.Subtract(end, I(1)), c)));
+                    body.Add(E.Assign(p, end));
+                    body.Add(E.PreIncrementAssign(w));
+                    break;
+                case KernelOp.LookStart:
+                    // A frame entry delimits the body's choices and keeps the stack non-empty, so captures set in the
+                    // body always record their undo entries.
+                    body.Add(Push(I(FrameId(pc)), p, fp));
+                    body.Add(E.Assign(fp, E.Subtract(sp, I(3))));
+                    if ((o.Operand & LookFlags.Limit) != 0)
+                    {
+                        body.Add(E.Assign(lim, p));
+                    }
+
+                    break;
+                case KernelOp.LookEnd when (nodes[o.Operand].Operand & LookFlags.Negative) != 0:
+                    {
+                        // The body of a negative assertion matched (a limited body only when it ended at the saved
+                        // position): undo its captures, drop its choices, then fail.
+                        var loop = E.Label("negLoop" + pc);
+                        var done = E.Label("negDone" + pc);
+                        if ((nodes[o.Operand].Operand & LookFlags.Limit) != 0)
+                        {
+                            body.Add(E.IfThen(E.NotEqual(p, E.Call(get, stack, E.Add(fp, I(1)))), E.Goto(fail)));
+                        }
+                        body.Add(E.AddAssign(w, E.Convert(E.Divide(E.Subtract(sp, fp), I(3)), typeof(long))));
+                        body.Add(E.Assign(r, E.Subtract(sp, I(3))));
+                        body.Add(E.Label(loop));
+                        body.Add(E.IfThen(E.LessThanOrEqual(r, fp), E.Goto(done)));
+                        body.Add(E.Assign(id, E.Call(get, stack, r)));
+                        body.Add(E.IfThen(E.LessThan(id, I(0)), SetCap(E.Subtract(I(-1), id), E.Call(get, stack, E.Add(r, I(1))))));
+                        body.Add(E.SubtractAssign(r, I(3)));
+                        body.Add(E.Goto(loop));
+                        body.Add(E.Label(done));
+                        body.Add(E.Assign(sp, fp));
+                        body.Add(E.Assign(fp, E.Call(get, stack, E.Add(sp, I(2)))));
+                        body.Add(RestoreLim());
+                        body.Add(E.Goto(fail));
+                        continue;
+                    }
+                case KernelOp.LookEnd:
+                    {
+                        // The body of a positive assertion matched: it is atomic, so drop its choices and the frame but keep
+                        // the capture undo entries (compacted in order), and resume at the saved position (an atomic group
+                        // keeps the body's end). A limited body must have ended exactly at the saved position.
+                        var loop = E.Label("posLoop" + pc);
+                        var done = E.Label("posDone" + pc);
+                        var flags = nodes[o.Operand].Operand;
+                        if ((flags & LookFlags.Limit) != 0)
+                        {
+                            body.Add(E.IfThen(E.NotEqual(p, E.Call(get, stack, E.Add(fp, I(1)))), E.Goto(fail)));
+                        }
+
+                        body.Add(E.AddAssign(w, E.Convert(E.Divide(E.Subtract(sp, fp), I(3)), typeof(long))));
+                        body.Add(E.Assign(end, E.Call(get, stack, E.Add(fp, I(1)))));
+                        body.Add(E.Assign(c, E.Call(get, stack, E.Add(fp, I(2)))));
+                        body.Add(E.Assign(d, fp));
+                        body.Add(E.Assign(r, E.Add(fp, I(3))));
+                        body.Add(E.Label(loop));
+                        body.Add(E.IfThen(E.GreaterThanOrEqual(r, sp), E.Goto(done)));
+                        body.Add(E.Assign(id, E.Call(get, stack, r)));
+                        body.Add(E.IfThen(E.LessThan(id, I(0)), E.Block(
+                            E.Call(set, stack, d, id),
+                            E.Call(set, stack, E.Add(d, I(1)), E.Call(get, stack, E.Add(r, I(1)))),
+                            E.Call(set, stack, E.Add(d, I(2)), E.Call(get, stack, E.Add(r, I(2)))),
+                            E.AddAssign(d, I(3)))));
+                        body.Add(E.AddAssign(r, I(3)));
+                        body.Add(E.Goto(loop));
+                        body.Add(E.Label(done));
+                        body.Add(E.Assign(sp, d));
+                        body.Add(E.Assign(fp, c));
+                        body.Add(RestoreLim());
+                        if ((flags & LookFlags.Atomic) == 0)
+                        {
+                            body.Add(E.Assign(p, end));
+                        }
+
+                        break;
+                    }
                 case KernelOp.AssertEnd:
                     body.Add(E.IfThen(E.NotEqual(p, len), E.Goto(fail)));
                     break;
@@ -524,7 +754,7 @@ internal static class CoreKernelLowering
         }
         body.Add(E.Label(ret, I(0)));
 
-        var block = E.Block(typeof(int), new[] { len, stackLen, start, p, sp, w, id, b, c, ci, end, resume, poll, pr }, body);
+        var block = E.Block(typeof(int), new[] { len, stackLen, start, p, sp, w, id, b, c, ci, end, resume, fp, r, d, lastStart, lim, poll, pr }, body);
         return E.Lambda<CoreKernel>(block, input, startAt, caps, stack, maxSteps, work, guard);
     }
 

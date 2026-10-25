@@ -140,6 +140,22 @@ those at its definition and at each call, computed to a fixpoint (at most four e
 exclude the next unit; a failed attempt that started with an unbounded run resumes after the run when no
 backreference or condition can depend on where the run started; literal and single-unit look-arounds are table and set tests. NativeAOT compatible: no runtime code generation.
 
+### Compiled kernels
+
+`OnigurumaPattern.Compile()` and `[GeneratedPattern(pattern, OnigurumaOptions)]` on a `static partial OnigurumaPattern`
+method lower the analysed parse tree (renumbered and possessified as the compiler sees it) to the shared compiled
+kernel ([compilation.md](compilation.md)), with the interpreter's required-literal/required-units, prefix and
+minimum-length prefilters. The kernel models subjects without surrogates: a search over a subject holding one, a
+search with `RegexMatchOptions`, an exhausted kernel step budget and abandoned backtracking re-enter the interpreter
+unchanged, so results, captures, limits, cancellation and timeouts are the interpreter's. Lowered: literals and
+classes (ignore-case as the parser resolves it, folds to several code points included), dot, anchors (`\b` and `\B`
+over Oniguruma's word set), alternation, greedy/lazy/possessive repeats, capture and atomic groups, look-ahead,
+look-behind (candidate starts nearest first, the body limited to and ending at the look-behind position, a positive
+look-behind over alternatives of different lengths divided as the compiler divides it) and `\G`. Left to the
+interpreter: backreferences, subexpression calls, conditionals, the absent operator, `\K`, text-segment boundaries,
+non-BMP literals, loops over a nullable body, and patterns beyond the lowering's node and class bounds.
+`OnigurumaScanner` runs each compiled pattern's kernel under the same rules.
+
 ## Conformance evidence (OG-007)
 
 [`test/corpora/oniguruma`](../../test/corpora/oniguruma/README.md) holds native observations recorded with an

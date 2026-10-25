@@ -28,7 +28,10 @@ public sealed class PatternGenerator : IIncrementalGenerator
             [global::Microsoft.CodeAnalysis.EmbeddedAttribute]
             internal enum GeneratedPatternFlavor { RegularCore, EcmaScript, Xsd, XPath, Pcre2 }
 
-            /// <summary>Marks a <c>static partial RegexPattern Name();</c> method whose pattern is compiled at build time.</summary>
+            /// <summary>
+            /// Marks a <c>static partial RegexPattern Name();</c> method (or <c>static partial OnigurumaPattern Name();</c> with
+            /// Oniguruma options) whose pattern is compiled at build time.
+            /// </summary>
             [global::Microsoft.CodeAnalysis.EmbeddedAttribute]
             [global::System.AttributeUsage(global::System.AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
             internal sealed class GeneratedPatternAttribute : global::System.Attribute
@@ -37,6 +40,7 @@ public sealed class PatternGenerator : IIncrementalGenerator
                 public GeneratedPatternAttribute(string pattern, global::GregsEx.EcmaScriptFlags flags) { }
                 public GeneratedPatternAttribute(string pattern, global::GregsEx.XPathFlags flags) { }
                 public GeneratedPatternAttribute(string pattern, global::GregsEx.Pcre2CompileFlags flags) { }
+                public GeneratedPatternAttribute(string pattern, global::GregsEx.OnigurumaOptions options) { }
                 public GeneratedPatternAttribute(string pattern, GeneratedPatternFlavor flavor) { }
                 /// <summary>The Unicode dataset for ECMAScript, XSD, or XPath; defaults to Unicode 16.0.</summary>
                 public global::GregsEx.UnicodeVersion UnicodeVersion { get; set; } = global::GregsEx.UnicodeVersion.Unicode16_0;
@@ -80,10 +84,12 @@ public sealed class PatternGenerator : IIncrementalGenerator
         var name = method.Name;
         string? error = null;
 
+        var oniguruma = attribute.AttributeConstructor is { Parameters.Length: >= 2 } c && c.Parameters[1].Type.Name == "OnigurumaOptions";
+        var returnType = oniguruma ? "GregsEx.OnigurumaPattern" : "GregsEx.RegexPattern";
         if (!method.IsStatic || !method.IsPartialDefinition || method.Parameters.Length != 0 || method.IsGenericMethod
-            || method.ReturnType.ToDisplayString() != "GregsEx.RegexPattern")
+            || method.ReturnType.ToDisplayString() != returnType)
         {
-            error = "it must be declared 'static partial RegexPattern Name();' with no parameters and no type parameters";
+            error = $"it must be declared 'static partial {returnType.Substring("GregsEx.".Length)} Name();' with no parameters and no type parameters";
         }
 
         var containers = new List<string>();
@@ -160,6 +166,10 @@ public sealed class PatternGenerator : IIncrementalGenerator
                     flavor = "Pcre2";
                     flags = value;
                     break;
+                case "OnigurumaOptions":
+                    flavor = "Oniguruma";
+                    flags = value;
+                    break;
                 case "GeneratedPatternFlavor":
                     flavor = value switch { 1 => "EcmaScript", 2 => "Xsd", 3 => "XPath", 4 => "Pcre2", _ => "RegularCore" };
                     break;
@@ -227,10 +237,13 @@ public sealed class PatternGenerator : IIncrementalGenerator
 
         var name = spec.MethodName;
         var members = new StringBuilder();
-        var create = $"global::GregsEx.RegexPattern.Parse({KernelEmitter.Lit(spec.Pattern)}, {profileCode}, " +
+        var type = spec.Flavor == "Oniguruma" ? "global::GregsEx.OnigurumaPattern" : "global::GregsEx.RegexPattern";
+        var create = spec.Flavor == "Oniguruma"
+            ? $"global::GregsEx.OnigurumaPattern.Parse({KernelEmitter.Lit(spec.Pattern)}, {profileCode})"
+            : $"global::GregsEx.RegexPattern.Parse({KernelEmitter.Lit(spec.Pattern)}, {profileCode}, " +
             "new global::GregsEx.RegexCompileOptions(global::GregsEx.RegexInputKind.Utf16, global::GregsEx.RegexExecutionMode.Auto))";
-        members.AppendLine($"private static global::GregsEx.RegexPattern? __GregsEx_{name}_Cache;");
-        members.AppendLine($"{spec.Accessibility} static partial global::GregsEx.RegexPattern {name}() => __GregsEx_{name}_Cache ??= __GregsEx_{name}_Create();");
+        members.AppendLine($"private static {type}? __GregsEx_{name}_Cache;");
+        members.AppendLine($"{spec.Accessibility} static partial {type} {name}() => __GregsEx_{name}_Cache ??= __GregsEx_{name}_Create();");
 
         if (plan is not null && !kernels)
         {
@@ -239,7 +252,7 @@ public sealed class PatternGenerator : IIncrementalGenerator
         }
         if (plan is not null)
         {
-            members.AppendLine($"private static global::GregsEx.RegexPattern __GregsEx_{name}_Create() =>");
+            members.AppendLine($"private static {type} __GregsEx_{name}_Create() =>");
             var captureClass = plan!.GroupCount > 1 ? $"__GregsEx_{name}_Capture" : $"__GregsEx_{name}_Plain";
             members.AppendLine($"    {create}.WithGeneratedKernels(0x{plan.Fingerprint():X16}UL, __GregsEx_{name}_Plain.Run, {captureClass}.Run);");
             members.AppendLine();
@@ -253,13 +266,13 @@ public sealed class PatternGenerator : IIncrementalGenerator
         else
         {
             context.ReportDiagnostic(Diagnostic.Create(NotCompiled, location, name, reason));
-            members.AppendLine($"private static global::GregsEx.RegexPattern __GregsEx_{name}_Create() => {create};");
+            members.AppendLine($"private static {type} __GregsEx_{name}_Create() => {create};");
         }
         context.AddSource(HintName(spec), Wrap(spec, members.ToString()));
     }
 
     private static string FailureMember(PatternSpec spec) =>
-        $"{spec.Accessibility} static partial global::GregsEx.RegexPattern {spec.MethodName}() => throw new global::System.InvalidOperationException(\"The generated pattern is invalid.\");\n";
+        $"{spec.Accessibility} static partial {(spec.Flavor == "Oniguruma" ? "global::GregsEx.OnigurumaPattern" : "global::GregsEx.RegexPattern")} {spec.MethodName}() => throw new global::System.InvalidOperationException(\"The generated pattern is invalid.\");\n";
 
     private static RegexProfile CreateProfile(PatternSpec spec, out string code)
     {
@@ -280,6 +293,9 @@ public sealed class PatternGenerator : IIncrementalGenerator
             case "Pcre2":
                 code = $"new global::GregsEx.Pcre2Profile(global::GregsEx.Pcre2CodeUnitWidth.Sixteen, unchecked((global::GregsEx.Pcre2CompileFlags){f}))";
                 return new Pcre2Profile(Pcre2CodeUnitWidth.Sixteen, unchecked((Pcre2CompileFlags)spec.Flags));
+            case "Oniguruma":
+                code = $"new global::GregsEx.OnigurumaProfile(unchecked((global::GregsEx.OnigurumaOptions){f}))";
+                return new OnigurumaProfile(unchecked((OnigurumaOptions)spec.Flags));
             default:
                 code = $"new global::GregsEx.RegularCoreProfile(global::GregsEx.RegularCoreMode.UnicodeScalars, unchecked((global::GregsEx.RegularCoreFlags){f}))";
                 return new RegularCoreProfile(RegularCoreMode.UnicodeScalars, unchecked((RegularCoreFlags)spec.Flags));

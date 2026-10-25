@@ -1,4 +1,5 @@
 #nullable enable
+using GregsEx.Execution.Compiled;
 using GregsEx.Flavors.Oniguruma;
 
 namespace GregsEx;
@@ -11,6 +12,9 @@ public sealed class OnigurumaWorkspace
 {
     private readonly OnigMatcher _matcher = new();
     private readonly int[] _captures;
+    // The compiled kernel's backtracking stack, allocated on its first use.
+    private int[]? _stack;
+    private long _lastWork;
 
     /// <summary>The pattern this workspace searches.</summary>
     public OnigurumaPattern Pattern { get; }
@@ -19,10 +23,10 @@ public sealed class OnigurumaWorkspace
     /// Work units of the last search, which RegexMatchLimits.MaxWork bounds: backtracks, loop iterations, calls,
     /// look-around entries and start positions tried, plus the units runs consume.
     /// </summary>
-    public long LastWork => _matcher.LastWork;
+    public long LastWork => _lastWork;
 
     /// <summary>Bytes of backtracking storage currently reserved.</summary>
-    public long ReservedBytes => _matcher.ReservedBytes + 4L * _captures.Length;
+    public long ReservedBytes => _matcher.ReservedBytes + 4L * (_captures.Length + (_stack?.Length ?? 0));
 
     internal OnigMatcher Matcher => _matcher;
 
@@ -40,14 +44,14 @@ public sealed class OnigurumaWorkspace
     public RegexSearchStatus IsMatch(ReadOnlySpan<char> input, int startAt = 0, RegexMatchOptions options = default)
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThan((uint)startAt, (uint)input.Length, nameof(startAt));
-        return Search(input, startAt, options);
+        return Search(input, startAt, options, captures: false);
     }
 
     /// <summary>The leftmost match starting in [startAt, input.Length]; \G matches at startAt.</summary>
     public RegexSearchStatus Find(ReadOnlySpan<char> input, int startAt, out RegexMatchRange match, RegexMatchOptions options = default)
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThan((uint)startAt, (uint)input.Length, nameof(startAt));
-        var status = Search(input, startAt, options);
+        var status = Search(input, startAt, options, captures: false);
         match = status == RegexSearchStatus.Match ? new RegexMatchRange(_captures[0], _captures[1] - _captures[0]) : default;
         return status;
     }
@@ -66,7 +70,7 @@ public sealed class OnigurumaWorkspace
             return RegexSearchStatus.DestinationTooSmall;
         }
 
-        var status = Search(input, startAt, options);
+        var status = Search(input, startAt, options, captures: true);
         if (status != RegexSearchStatus.Match)
         {
             return status;
@@ -77,11 +81,18 @@ public sealed class OnigurumaWorkspace
         return status;
     }
 
-    private RegexSearchStatus Search(ReadOnlySpan<char> input, int startAt, in RegexMatchOptions options)
+    private RegexSearchStatus Search(ReadOnlySpan<char> input, int startAt, in RegexMatchOptions options, bool captures)
     {
         if (options.Limits is null && options.Timeout is null && !options.CancellationToken.CanBeCanceled)
         {
-            return _matcher.Search(Pattern.Program, input, startAt, _captures);
+            if (Pattern.PlainKernel is not null && OnigCompiledSearch.TryRun(Pattern, input, startAt, _captures, captures, ref _stack, out var status, out _lastWork))
+            {
+                return status;
+            }
+
+            status = _matcher.Search(Pattern.Program, input, startAt, _captures);
+            _lastWork = _matcher.LastWork;
+            return status;
         }
 
         var limits = options.Resolve(Pattern.MatchLimits);
@@ -92,6 +103,7 @@ public sealed class OnigurumaWorkspace
         }
         finally
         {
+            _lastWork = _matcher.LastWork;
             _matcher.RestoreBudget();
         }
     }

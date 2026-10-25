@@ -25,7 +25,11 @@ public class GeneratedPatternTests
         new(nameof(GeneratedPatterns.XPathIngLines)),
         new(nameof(GeneratedPatterns.Pcre2Ing)),
         new(nameof(GeneratedPatterns.Pcre2IngLines)),
-        new(nameof(GeneratedPatterns.Nested.Range))
+        new(nameof(GeneratedPatterns.Nested.Range)),
+        new(nameof(GeneratedPatterns.EcmaLook)),
+        new(nameof(GeneratedPatterns.Pcre2Look)),
+        new(nameof(GeneratedPatterns.Pcre2SearchStart)),
+        new(nameof(GeneratedPatterns.EcmaStickyLook)),
     ];
 
     private static (Func<RegexPattern> Create, string Pattern, RegexProfile Profile) GetCase(string name) => name switch
@@ -39,8 +43,63 @@ public class GeneratedPatternTests
         nameof(GeneratedPatterns.Pcre2Ing) => (GeneratedPatterns.Pcre2Ing, Ing, new Pcre2Profile()),
         nameof(GeneratedPatterns.Pcre2IngLines) => (GeneratedPatterns.Pcre2IngLines, "^[a-z]+(ing|ed)$", new Pcre2Profile(Pcre2CodeUnitWidth.Sixteen, Pcre2CompileFlags.Multiline)),
         nameof(GeneratedPatterns.Nested.Range) => (GeneratedPatterns.Nested.Range, "([a-z]+) ([0-9]+)(ing|ed)", new RegularCoreProfile(RegularCoreMode.UnicodeScalars, RegularCoreFlags.None)),
+        nameof(GeneratedPatterns.EcmaLook) => (GeneratedPatterns.EcmaLook, GeneratedPatterns.Look, new EcmaScriptProfile(EcmaScriptFlags.None)),
+        nameof(GeneratedPatterns.Pcre2Look) => (GeneratedPatterns.Pcre2Look, GeneratedPatterns.Look, new Pcre2Profile()),
+        nameof(GeneratedPatterns.Pcre2SearchStart) => (GeneratedPatterns.Pcre2SearchStart, @"\G(?<=\s|^)[a-z]+(?= \d)", new Pcre2Profile()),
+        nameof(GeneratedPatterns.EcmaStickyLook) => (GeneratedPatterns.EcmaStickyLook, @"(?<=\d )(?:(?=w)([a-z]+)|(?!w)([a-z]+))", new EcmaScriptProfile(EcmaScriptFlags.Sticky)),
         _ => throw new ArgumentOutOfRangeException(nameof(name), name, "Unknown generated pattern.")
     };
+
+    public static IEnumerable<TheoryDataRow<string>> OnigurumaCases() =>
+    [
+        new(nameof(GeneratedPatterns.OnigLook)),
+        new(nameof(GeneratedPatterns.OnigAlias)),
+        new(nameof(GeneratedPatterns.OnigBehind)),
+    ];
+
+    private static (Func<OnigurumaPattern> Create, string Pattern) GetOnigurumaCase(string name) => name switch
+    {
+        nameof(GeneratedPatterns.OnigLook) => (GeneratedPatterns.OnigLook, GeneratedPatterns.Look),
+        nameof(GeneratedPatterns.OnigAlias) => (GeneratedPatterns.OnigAlias, @"[\t ]*+(alias)[\t ]*+((?:((?<!\w)-\w+)\b[\t ]*+)*)[\t ]*+((?<!\w)[-0-9A-Z_a-z]+(?!\w))"),
+        nameof(GeneratedPatterns.OnigBehind) => (GeneratedPatterns.OnigBehind, @"(?<=(ab)|(b))c|\G(?>x+)y"),
+        _ => throw new ArgumentOutOfRangeException(nameof(name), name, "Unknown generated pattern.")
+    };
+
+#if !GREGSEX_NETSTANDARD_ASSET
+    [Theory]
+    [MemberData(nameof(OnigurumaCases))]
+    public void GeneratedOnigurumaKernelsAgreeWithTheInterpreter(string name)
+    {
+        var (create, pattern) = GetOnigurumaCase(name);
+        var generated = create();
+        var oracle = OnigurumaPattern.Parse(pattern, RegexProfiles.OnigurumaTextMate);
+        Assert.Equal(RegexExecutionBackend.Compiled, generated.ExecutionBackend);
+        Assert.Same(generated, create());
+        Assert.Same(generated, generated.Compile());
+        Assert.Equal(oracle.GroupCount, generated.GroupCount);
+        var expectedSpace = oracle.CreateWorkspace();
+        var actualSpace = generated.CreateWorkspace();
+        var expectedGroups = new RegexCapture[oracle.GroupCount];
+        var actualGroups = new RegexCapture[oracle.GroupCount];
+        foreach (var text in Texts.Concat(["alias -x -y name", "abc xxy", "  alias\t-n foo", "bc"]))
+        {
+            for (var start = 0; start <= Math.Min(text.Length, 12); start++)
+            {
+                Assert.Equal(expectedSpace.Find(text, start, out var expectedRange), actualSpace.Find(text, start, out var actualRange));
+                Assert.Equal(expectedRange, actualRange);
+                Assert.Equal(expectedSpace.IsMatch(text, start), actualSpace.IsMatch(text, start));
+                Assert.Equal(expectedSpace.FindCaptures(text, start, expectedGroups, out var expectedWhole),
+                    actualSpace.FindCaptures(text, start, actualGroups, out var actualWhole));
+                Assert.Equal(expectedWhole, actualWhole);
+                Assert.Equal(expectedGroups, actualGroups);
+            }
+        }
+    }
+
+    [Fact]
+    public void AnOnigurumaPatternTheGeneratorDeclinesStaysInterpreted()
+        => Assert.Equal(RegexExecutionBackend.Interpreted, GeneratedPatterns.OnigBackref().ExecutionBackend);
+#endif
 
     private static readonly string[] Texts =
     [
