@@ -2793,6 +2793,20 @@ internal sealed class EcmaAccelerator
             return CompleteLiteralMatch(startAt, end, operation, groups, out match);
         }
 
+        return ScanLiteral(input, startAt, operation, ref state, groups, out match);
+    }
+
+    // The unanchored literal scan, kept out of ExecuteLiteral: its search lanes inline into a frame of several hundred
+    // bytes the method zeroes on entry, which every anchored or sticky literal search paid before failing at its one
+    // position (/^aaaaaaaaaa/ took 20 ns, most of it that prologue).
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    private RegexSearchStatus ScanLiteral(
+        ReadOnlySpan<char> input, int startAt, SearchOperation operation, ref ExecutionState state,
+        Span<RegexCapture> groups, out RegexMatchRange match)
+    {
+        match = default;
+        var lit = _literal.AsSpan();
+        var litLen = lit.Length;
         var searchPos = startAt;
         var maxStartPos = input.Length - litLen;
         if (_hasRareLiteralChar && !_hasStartAnchor && !_hasEndAnchor && maxStartPos - searchPos >= 64)
