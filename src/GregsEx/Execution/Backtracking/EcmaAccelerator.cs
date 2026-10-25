@@ -995,7 +995,7 @@ internal sealed class EcmaAccelerator
             FirstChars = TryBuildFirstChars(nodes, root, caseTables);
             if (FirstStrings is null && FirstChars is null)
             {
-                FirstUnits = EcmaUnitFilters.BuildFirst(program, nodes, root, caseTables, out FirstUnitsExcept, out FirstUnitsTryStart);
+                FirstUnits = EcmaUnitFilters.BuildFirst(program, nodes, root, caseTables, FastSets, out FirstUnitsExcept, out FirstUnitsTryStart);
             }
         }
 
@@ -1006,7 +1006,7 @@ internal sealed class EcmaAccelerator
         }
         else if (!StartAnchoredNonMultiline)
         {
-            RequiredUnits = EcmaUnitFilters.BuildRequired(program, nodes, root, caseTables);
+            RequiredUnits = EcmaUnitFilters.BuildRequired(program, nodes, root, caseTables, FastSets);
         }
 
         _positionEligible = EcmaPositionMatcher.MayApply(program, nodes);
