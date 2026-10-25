@@ -50,6 +50,57 @@ public class GeneratedPatternTests
         _ => throw new ArgumentOutOfRangeException(nameof(name), name, "Unknown generated pattern.")
     };
 
+    public static IEnumerable<TheoryDataRow<string>> OnigurumaCases() =>
+    [
+        new(nameof(GeneratedPatterns.OnigLook)),
+        new(nameof(GeneratedPatterns.OnigAlias)),
+        new(nameof(GeneratedPatterns.OnigBehind)),
+    ];
+
+    private static (Func<OnigurumaPattern> Create, string Pattern) GetOnigurumaCase(string name) => name switch
+    {
+        nameof(GeneratedPatterns.OnigLook) => (GeneratedPatterns.OnigLook, GeneratedPatterns.Look),
+        nameof(GeneratedPatterns.OnigAlias) => (GeneratedPatterns.OnigAlias, @"[\t ]*+(alias)[\t ]*+((?:((?<!\w)-\w+)\b[\t ]*+)*)[\t ]*+((?<!\w)[-0-9A-Z_a-z]+(?!\w))"),
+        nameof(GeneratedPatterns.OnigBehind) => (GeneratedPatterns.OnigBehind, @"(?<=(ab)|(b))c|\G(?>x+)y"),
+        _ => throw new ArgumentOutOfRangeException(nameof(name), name, "Unknown generated pattern.")
+    };
+
+#if !GREGSEX_NETSTANDARD_ASSET
+    [Theory]
+    [MemberData(nameof(OnigurumaCases))]
+    public void GeneratedOnigurumaKernelsAgreeWithTheInterpreter(string name)
+    {
+        var (create, pattern) = GetOnigurumaCase(name);
+        var generated = create();
+        var oracle = OnigurumaPattern.Parse(pattern, RegexProfiles.OnigurumaTextMate);
+        Assert.Equal(RegexExecutionBackend.Compiled, generated.ExecutionBackend);
+        Assert.Same(generated, create());
+        Assert.Same(generated, generated.Compile());
+        Assert.Equal(oracle.GroupCount, generated.GroupCount);
+        var expectedSpace = oracle.CreateWorkspace();
+        var actualSpace = generated.CreateWorkspace();
+        var expectedGroups = new RegexCapture[oracle.GroupCount];
+        var actualGroups = new RegexCapture[oracle.GroupCount];
+        foreach (var text in Texts.Concat(["alias -x -y name", "abc xxy", "  alias\t-n foo", "bc"]))
+        {
+            for (var start = 0; start <= Math.Min(text.Length, 12); start++)
+            {
+                Assert.Equal(expectedSpace.Find(text, start, out var expectedRange), actualSpace.Find(text, start, out var actualRange));
+                Assert.Equal(expectedRange, actualRange);
+                Assert.Equal(expectedSpace.IsMatch(text, start), actualSpace.IsMatch(text, start));
+                Assert.Equal(expectedSpace.FindCaptures(text, start, expectedGroups, out var expectedWhole),
+                    actualSpace.FindCaptures(text, start, actualGroups, out var actualWhole));
+                Assert.Equal(expectedWhole, actualWhole);
+                Assert.Equal(expectedGroups, actualGroups);
+            }
+        }
+    }
+
+    [Fact]
+    public void AnOnigurumaPatternTheGeneratorDeclinesStaysInterpreted()
+        => Assert.Equal(RegexExecutionBackend.Interpreted, GeneratedPatterns.OnigBackref().ExecutionBackend);
+#endif
+
     private static readonly string[] Texts =
     [
         "", "x", "winning", "walked", "Winning WALKED", "xx 12 winning walked ", "ab\nwinning\nwalked\nzz", "ing", "12-345 and 6-7",

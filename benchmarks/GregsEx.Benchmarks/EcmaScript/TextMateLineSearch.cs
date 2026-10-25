@@ -107,6 +107,8 @@ public class TextMateLineSearch
                 "*.cs", SearchOption.AllDirectories).Order(StringComparer.Ordinal);
         }
 
-        return files.SelectMany(File.ReadLines).Select(l => l + "\n").ToArray();
+        // Lines a tokenizer sees; a generated table of thousands of units is left out, since the PCRE2 interpreter's own
+        // match ceiling ends a search over it where a vectorized kernel does not.
+        return files.SelectMany(File.ReadLines).Where(l => l.Length < 2000).Select(l => l + "\n").ToArray();
     }
 }

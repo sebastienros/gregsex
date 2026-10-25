@@ -53,8 +53,19 @@ public class GeneratorPlannerParityTests
                 yield return new(row.Data, "global::GregsEx.SourceGeneration.GeneratedPatternFlavor.Xsd", new XsdProfile());
             }
 
+            foreach (var row in Compiled.OnigurumaCompiledDifferentialTests.KnownCases())
+            {
+                yield return new(row.Data.Item1, "(global::GregsEx.OnigurumaOptions)8", RegexProfiles.OnigurumaTextMate);
+            }
+
+            foreach (var row in Compiled.Pcre2CompiledDifferentialTests.Data().Where(r => r.Data.Item2 == Pcre2CompileFlags.None))
+            {
+                yield return new(row.Data.Item1, "(global::GregsEx.OnigurumaOptions)8", RegexProfiles.OnigurumaTextMate);
+            }
+
             foreach (var bad in new[] { "(unclosed", "[z-a]", "a{3,2}", "\\", "(?<n>a)(?<n>b)", "*a" })
             {
+                yield return new(bad, "(global::GregsEx.OnigurumaOptions)8", RegexProfiles.OnigurumaTextMate);
                 yield return new(bad, "(global::GregsEx.RegularCoreFlags)0", new RegularCoreProfile(RegularCoreMode.UnicodeScalars, RegularCoreFlags.None));
                 yield return new(bad, "(global::GregsEx.EcmaScriptFlags)0", new EcmaScriptProfile(EcmaScriptFlags.None));
                 yield return new(bad, "(global::GregsEx.Pcre2CompileFlags)0", new Pcre2Profile(Pcre2CodeUnitWidth.Sixteen, Pcre2CompileFlags.None));
@@ -78,7 +89,8 @@ public class GeneratorPlannerParityTests
         var source = new System.Text.StringBuilder("using GregsEx;\nusing GregsEx.SourceGeneration;\npublic static partial class Patterns\n{\n");
         for (var i = 0; i < cases.Length; i++)
         {
-            source.AppendLine(System.Globalization.CultureInfo.InvariantCulture, $"[GeneratedPattern({Literal(cases[i].Pattern)}, {cases[i].Attribute})] public static partial RegexPattern P{i}();");
+            var type = cases[i].Profile is OnigurumaProfile ? "OnigurumaPattern" : "RegexPattern";
+            source.AppendLine(System.Globalization.CultureInfo.InvariantCulture, $"[GeneratedPattern({Literal(cases[i].Pattern)}, {cases[i].Attribute})] public static partial {type} P{i}();");
         }
 
         source.AppendLine("}");
@@ -99,7 +111,7 @@ public class GeneratorPlannerParityTests
         foreach (var tree in result.GeneratedTrees)
         {
             var text = tree.GetText(TestContext.Current.CancellationToken).ToString();
-            var match = Regex.Match(text, @"__GregsEx_(P\d+)_Create\(\) =>\s*global::GregsEx\.RegexPattern\.Parse.*?WithGeneratedKernels\(0x([0-9A-F]{16})UL", RegexOptions.Singleline);
+            var match = Regex.Match(text, @"__GregsEx_(P\d+)_Create\(\) =>\s*global::GregsEx\.(?:RegexPattern|OnigurumaPattern)\.Parse.*?WithGeneratedKernels\(0x([0-9A-F]{16})UL", RegexOptions.Singleline);
             if (match.Success)
             {
                 fingerprints[match.Groups[1].Value] = match.Groups[2].Value;
@@ -111,20 +123,28 @@ public class GeneratorPlannerParityTests
         for (var i = 0; i < cases.Length; i++)
         {
             var name = $"P{i}";
-            var parsed = RegexPattern.TryParse(cases[i].Pattern, cases[i].Profile, out var pattern, out _,
-                new RegexCompileOptions(RegexInputKind.Utf16, RegexExecutionMode.Auto));
             string expected;
-            if (!parsed)
+            if (cases[i].Profile is OnigurumaProfile oniguruma)
             {
-                expected = "invalid";
-            }
-            else if (!KernelPlanner.TryPlan(pattern!, out var plan, out _))
-            {
-                expected = "interpreted";
+                expected = !OnigKernelPlan.TryPlan(cases[i].Pattern, oniguruma, new RegexCompileLimits(), GregsEx.Contracts.Acceleration.LoweringLimits.Default, out var onigPlan, out _, out _)
+                    ? "invalid" : onigPlan is null ? "interpreted" : onigPlan.Fingerprint().ToString("X16", System.Globalization.CultureInfo.InvariantCulture);
             }
             else
             {
-                expected = plan!.Fingerprint().ToString("X16", System.Globalization.CultureInfo.InvariantCulture);
+                var parsed = RegexPattern.TryParse(cases[i].Pattern, cases[i].Profile, out var pattern, out _,
+                    new RegexCompileOptions(RegexInputKind.Utf16, RegexExecutionMode.Auto));
+                if (!parsed)
+                {
+                    expected = "invalid";
+                }
+                else if (!KernelPlanner.TryPlan(pattern!, out var plan, out _))
+                {
+                    expected = "interpreted";
+                }
+                else
+                {
+                    expected = plan!.Fingerprint().ToString("X16", System.Globalization.CultureInfo.InvariantCulture);
+                }
             }
 
             var actual = invalid.Contains(name) ? "invalid" : interpreted.Contains(name) ? "interpreted"

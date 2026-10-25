@@ -40,6 +40,8 @@ internal static class SourcePlanner
             case PosixProfile:
                 reason = PosixReason;
                 return true;
+            case OnigurumaProfile oniguruma:
+                return OnigKernelPlan.TryPlan(pattern, oniguruma, options.Limits, LoweringLimits.Default, out plan, out reason, out diagnostic);
             case Pcre2Profile pcre:
                 {
                     if (!pcre.Supports(options.InputKind))

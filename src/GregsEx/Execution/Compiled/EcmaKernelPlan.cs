@@ -192,7 +192,7 @@ internal static class EcmaKernelPlan
                         var behind = n.Kind is EcmaNodeKind.Lookbehind or EcmaNodeKind.NegativeLookbehind;
                         if (_failure is null)
                         {
-                            _nodes[look] = new() { Op = KernelOp.LookStart, Next = inner, Alternate = next, Operand = (negative ? 1 : 0) | (behind ? 2 : 0) };
+                            _nodes[look] = new() { Op = KernelOp.LookStart, Next = inner, Alternate = next, Operand = (negative ? LookFlags.Negative : 0) | (behind ? LookFlags.Behind : 0) };
                         }
 
                         return look;

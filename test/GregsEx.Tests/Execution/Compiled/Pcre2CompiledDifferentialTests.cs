@@ -23,6 +23,8 @@ public class Pcre2CompiledDifferentialTests
         "(?<=😀)b", "(?<=[^a])b", "(?<=.)b", "(?=(?:a|b){2})[ab]+", "\\b(?=[a-z]{3}\\b)[a-z]+", "\\Ga", "\\G[a-z]+", "\\Ga|b", "(?:\\Ga|b)c",
         "\\G(a)|(b)", "a\\Gb", "(?=a\\G)a", "(*positive_lookahead:a)a", "(*nla:a)[a-z]", "(*plb:a)b", "(*nlb:a)b", "(?*a)b", "(?<*a)b",
         "(?<=a(?=b))b", "(?(?=a)ab|cd)",
+        "(?>a|ab)c", "(?:ab)++c", "a{2,3}+a", "(?>(a)|b)+c", "(?>a*)a", "(?>\\w+)\\s", "(?>[a-z]+?)x", "(?>a+)+b", "(?:a|b)*+c",
+        "(a|b)++c", "\\s*+\\w", "(?>(?:a|b)*)c", "(?>a(?=b))bc", "(?<=(?>a+))b", "x(?>y|z)*w", "a?+a", "(?:a?)++b", "[a-z]{1,3}+\\d",
     ];
 
     private static readonly Pcre2CompileFlags[] Modes =
@@ -173,7 +175,7 @@ public class Pcre2CompiledDifferentialTests
     [Fact]
     public void LookaroundsAreLowered()
     {
-        foreach (var pattern in new[] { "(?=\\[)", "(?=a)a", "(?<!a)b", "(?<=the )[a-z]+", "a(?!b(?!c))", "(?<=(ab))c", "(?<=ab|c)d", "\\Ga", "\\Ga|b" })
+        foreach (var pattern in new[] { "(?=\\[)", "(?=a)a", "(?<!a)b", "(?<=the )[a-z]+", "a(?!b(?!c))", "(?<=(ab))c", "(?<=ab|c)d", "\\Ga", "\\Ga|b", "(?:ab)++c", "\\s*+\\w+\\d", "(?>a|ab)c" })
         {
             foreach (var flags in new[] { Pcre2CompileFlags.None, Pcre2CompileFlags.Caseless, Pcre2CompileFlags.Utf, Pcre2CompileFlags.Multiline })
             {
@@ -217,6 +219,17 @@ public class Pcre2CompiledDifferentialTests
         yield return new("a\\Gb", "ab", 1, null);
         yield return new("(?=a\\G)a", "ba", 1, null);
         yield return new("(?=\\Ga)a", "ba", 1, "1:1");
+        yield return new("(?>a|ab)c", "abc", 0, null);
+        yield return new("(?>ab|a)c", "abc", 0, "0:3");
+        yield return new("a++a", "aaa", 0, null);
+        yield return new("a{2,3}+a", "aaaa", 0, "0:4");
+        yield return new("a{2,3}+a", "aaa", 0, null);
+        yield return new("(?>(a)|b)+c", "abac", 0, "0:4|2:1");
+        yield return new("(?:a|b)*+c", "abab", 0, null);
+        yield return new("(?:a|ab)++c", "ababc", 0, null);
+        yield return new("(?:ab|a)++c", "ababc", 0, "0:5");
+        yield return new("(?>a(?=b))bc", "abc", 0, "0:3");
+        yield return new("\\s*+\\w+\\d", "  x1", 0, "0:4");
     }
 
     [Theory]
@@ -246,7 +259,7 @@ public class Pcre2CompiledDifferentialTests
     [Fact]
     public void UnmodelledConstructsAreRejected()
     {
-        foreach (var pattern in new[] { "(a)\\1", "a++b", "(?>a+)b", "a\\Kb", "\\R", "(a|b)(?1)", "(?(1)a|b)", "(*SKIP)a", "(?*a)b", "(?<*a)b", "(?<=a+)b", "(?(?=a)ab|cd)" })
+        foreach (var pattern in new[] { "(a)\\1", "a\\Kb", "\\R", "(a|b)(?1)", "(?(1)a|b)", "(*SKIP)a", "(?*a)b", "(?<*a)b", "(?<=a+)b", "(?(?=a)ab|cd)" })
         {
             RegexPattern oracle;
             try

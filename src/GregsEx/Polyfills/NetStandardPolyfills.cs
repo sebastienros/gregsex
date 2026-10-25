@@ -20,7 +20,6 @@ namespace System
         {
             public static bool IsFinite(double d) => !double.IsNaN(d) && !double.IsInfinity(d);
         }
-#if !GREGSEX_GENERATOR
 
         extension(ref HashCode hash)
         {
@@ -32,7 +31,6 @@ namespace System
                 }
             }
         }
-#endif
 
         public static int IndexOfAnyInRange(this ReadOnlySpan<char> span, char low, char high)
         {

@@ -23,6 +23,8 @@
     <MeziantouPolyfill_IncludedPolyfills>$(MeziantouPolyfill_IncludedPolyfills)|M:System.MemoryExtensions.IndexOfAny|M:System.MemoryExtensions.Contains|M:System.MemoryExtensions.StartsWith|M:System.MemoryExtensions.EndsWith|M:System.String.TryCopyTo|M:System.String.CopyTo</MeziantouPolyfill_IncludedPolyfills>
     <!-- The '(' restricts this prefix to synchronous HashData overloads, excluding HashDataAsync. -->
     <MeziantouPolyfill_IncludedPolyfills>$(MeziantouPolyfill_IncludedPolyfills)|M:System.Enum.IsDefined|M:System.Convert.ToHexStringLower|M:System.Security.Cryptography.SHA256.HashData(|M:System.Math.Clamp</MeziantouPolyfill_IncludedPolyfills>
+    <!-- The Oniguruma parser and compiler analyses. -->
+    <MeziantouPolyfill_IncludedPolyfills>$(MeziantouPolyfill_IncludedPolyfills)|M:System.Char.IsAscii|T:System.HashCode|M:System.Linq.Enumerable.ToHashSet|M:System.Collections.Generic.Stack`1.TryPop|M:System.Collections.Generic.KeyValuePair`2.Deconstruct|M:System.Int32.TryParse(System.ReadOnlySpan{System.Char}|M:System.String.Split|M:System.MemoryExtensions.IndexOfAnyExcept|M:System.MemoryExtensions.LastIndexOfAny|M:System.MemoryExtensions.LastIndexOfAnyExcept|M:System.MemoryExtensions.IndexOfAnyInRange</MeziantouPolyfill_IncludedPolyfills>
     <NoWarn>$(NoWarn);RS1035;RS1041;RS2008;CS1591;CS1573;CS1587;CS1570;CS1574;CS1584;CS1658;CS8632;CS0436;CS8601;CS8602;CS0414;NU1701</NoWarn>
     <DefineConstants>$(DefineConstants);GREGSEX_GENERATOR</DefineConstants>
     <Engine>$(MSBuildThisFileDirectory)..\GregsEx\</Engine>
@@ -44,8 +46,8 @@
     <Compile Remove="$(Engine)Public\RegexPattern.cs;$(Engine)Public\Compilation\RegexPattern.Compile.cs;$(Engine)Public\ExecutionModes\ExecutionModePolicy.cs" />
     <Compile Remove="$(Engine)Execution\**;$(Engine)Runtime\**;$(Engine)Flavors\*\Runtime\**;$(Engine)Flavors\*\Integration\**" />
     <Compile Remove="$(Engine)Flavors\XmlIntegration\**;$(Engine)Flavors\XPath\Execution\**;$(Engine)Flavors\XPath\Host\**" />
-    <!-- The Oniguruma flavor has no generated patterns; RegexProfiles only needs its profile type. -->
-    <Compile Remove="$(Engine)Flavors\Oniguruma\**;$(Engine)Public\Oniguruma\OnigurumaPattern.cs;$(Engine)Public\Oniguruma\OnigurumaWorkspace.cs;$(Engine)Public\Oniguruma\OnigurumaScanner.cs" />
+    <!-- The Oniguruma parser, compiler analyses and tables plan generated patterns; its matcher and public executors stay out. -->
+    <Compile Remove="$(Engine)Flavors\Oniguruma\OnigMatcher.cs;$(Engine)Public\Oniguruma\OnigurumaPattern.cs;$(Engine)Public\Oniguruma\OnigurumaWorkspace.cs;$(Engine)Public\Oniguruma\OnigurumaScanner.cs" />
     <Compile Remove="$(Engine)Text\ByteTextReader.cs;$(Engine)Text\CharTextReader.cs;$(Engine)Flavors\XmlShared\XmlTextReaders.cs;$(Engine)Flavors\Xsd\XsdExecutor.cs" />
     <!-- The analysis-only subset of the excluded executor folders: kernel plans, fast-path classifiers, character tables. -->
     <Compile Include="$(Engine)Execution\Compiled\*Plan.cs;$(Engine)Execution\Compiled\SourcePlanner.cs" />

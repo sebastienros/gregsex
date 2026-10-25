@@ -11,10 +11,19 @@ internal enum KernelOp : byte
     Literal, Class, Any, Split, Jump, CaptureStart, CaptureEnd, Clear, AssertStart, AssertEnd, Match, LiteralRun, ClassRun,
     // Multiline anchors (Operand = line-terminator style) and word boundaries (Class = the word-character class).
     AssertLineStart, AssertLineEnd, WordBoundary, NotWordBoundary,
-    // Lookaround: LookStart (Operand bit 1 = negative, bit 2 = behind) saves the position, runs the body at Next and continues at Alternate;
-    // LookEnd (Operand = its LookStart) ends the body. StepBack moves Count units back (a fixed-length lookbehind branch).
-    // AssertSearchStart is \G: the position where the search started.
-    LookStart, LookEnd, StepBack, AssertSearchStart
+    // Lookaround: LookStart (Operand bits: 1 = negative, 2 = behind, 4 = atomic group (the body's end position is
+    // kept), 8 = the body may not consume past the saved position and must end there) saves the position, runs the
+    // body at Next and continues at Alternate; LookEnd (Operand = its LookStart) ends the body. StepBack moves Count
+    // units back (a fixed-length lookbehind branch); BehindScan tries every start from Count units back to Operand
+    // units back (-1: to the input's start), nearest first. AssertSearchStart is \G: the position where the search started.
+    LookStart, LookEnd, StepBack, AssertSearchStart, BehindScan
+}
+
+// LookStart flag bits. An atomic group is a LookStart/LookEnd pair with Count = 1 and no Alternate edge: the body's
+// continuation is the LookEnd's Next.
+internal static class LookFlags
+{
+    internal const int Negative = 1, Behind = 2, Atomic = 4, Limit = 8;
 }
 
 // One node of the structure-aware plan. A node is either a 1:1 image of a SemanticProgram instruction or a fused
@@ -32,6 +41,10 @@ internal struct KernelNode
     internal bool Atomic;       // ClassRun: the continuation can never use a shorter run, so no backoff is recorded
     internal bool SurrogateSensitive; // consumes a unit that might be half of a scalar in UnicodeScalars mode
     internal bool Backward;     // Literal/Class/Any inside a backward-matched lookbehind: reads the unit before the position
+    // ClassRun (non-atomic): units the continuation can start with, so the run gives units back only to a position
+    // holding one; FollowExcept lists the ASCII units it cannot start with instead (non-ASCII units all can).
+    internal char[]? Follow;
+    internal bool FollowExcept;
 }
 
 // Analysis half of compilation: validates eligibility and recovers structure. It emits no code, so it is
@@ -57,6 +70,13 @@ internal sealed class CoreKernelPlan
     internal char[]? RequiredSet { get; private init; }
     internal string? RequiredLiteral { get; private init; }
     internal int RequiredLiteralMinOffset { get; private init; }
+    // Every match spans at least this many units, so no attempt starts closer to the end.
+    internal int MinLength { get; private init; }
+    // Whether a LookStart limits its body's consumption (LookFlags.Limit), so the kernel tracks that limit.
+    internal bool HasLimitFrames { get; private init; }
+    // Whether the kernel models no surrogate at all: a subject holding one is reported (SurrogateEncountered) after the
+    // search-level prefilters, so a subject the prefilters reject costs no scan.
+    internal bool SurrogateScan { get; private init; }
     internal int LeadingRunNode { get; private init; } = -1;
     internal bool Anchored { get; private init; }
     internal int FusedNodeCount { get; private init; }
@@ -144,7 +164,8 @@ internal sealed class CoreKernelPlan
     // instructions, entry node 0, every path ending in Match) and share the structural analysis below.
     internal static bool Analyze(KernelNode[] nodes, int groupCount, bool scalars, bool dotAll, bool sticky,
         in LoweringLimits limits, out CoreKernelPlan? plan, out string reason, char[]? requiredSet = null,
-        string? requiredLiteral = null, int requiredLiteralMinOffset = 0)
+        string? requiredLiteral = null, int requiredLiteralMinOffset = 0, int minLength = 0, string? literalPrefix = null,
+        bool surrogateScan = false)
     {
         plan = null;
         if (nodes.Length == 0 || nodes.Length > limits.MaxNodes / 16)
@@ -160,13 +181,54 @@ internal sealed class CoreKernelPlan
 
         var fused = Fuse(nodes, Predecessors(nodes), dotAll);
         var reachable = Reach(nodes);
-        // A possessive loop equals the greedy kernel loop only when giving units back can never help.
+        // A possessive single-unit loop is exactly an atomic class run: the longest run, never given back.
+        var limitFrames = false;
         for (var i = 0; i < nodes.Length; i++)
         {
-            if (reachable[i] && nodes[i].Possessive && !(nodes[i].Op == KernelOp.ClassRun && nodes[i].Atomic))
+            if (!reachable[i])
             {
-                reason = "A possessive loop is followed by something that could use a shorter run.";
-                return false;
+                continue;
+            }
+
+            if (nodes[i].Possessive)
+            {
+                if (nodes[i].Op != KernelOp.ClassRun)
+                {
+                    reason = "A possessive loop over more than one unit is not lowered.";
+                    return false;
+                }
+
+                nodes[i].Atomic = true;
+            }
+
+            limitFrames |= nodes[i].Op == KernelOp.LookStart && (nodes[i].Operand & LookFlags.Limit) != 0;
+            if (nodes[i].Op == KernelOp.ClassRun && !nodes[i].Atomic && Collect(nodes, nodes[i].Next, scalars, out _) is { } follow)
+            {
+                // The continuation needs one of these at the position it starts from; a run backs off straight to one.
+                if (!follow.Big)
+                {
+                    if (follow.Set.Count > 0)
+                    {
+                        nodes[i].Follow = follow.Set.ToArray();
+                    }
+                }
+                else
+                {
+                    var excluded = new List<char>();
+                    for (var c = 0; c < 128; c++)
+                    {
+                        if (!follow.Ascii[c])
+                        {
+                            excluded.Add((char)c);
+                        }
+                    }
+
+                    if (excluded.Count > 0)
+                    {
+                        nodes[i].Follow = excluded.ToArray();
+                        nodes[i].FollowExcept = true;
+                    }
+                }
             }
         }
 
@@ -197,6 +259,10 @@ internal sealed class CoreKernelPlan
         string? prefix = null;
         var except = false;
         var first = sticky ? null : FirstSetOf(nodes, scalars, out prefix, out except);
+        if (literalPrefix is { Length: >= 2 } && !sticky)
+        {
+            prefix = literalPrefix;
+        }
 
         plan = new()
         {
@@ -212,6 +278,9 @@ internal sealed class CoreKernelPlan
             RequiredSet = requiredSet,
             RequiredLiteral = requiredLiteral,
             RequiredLiteralMinOffset = requiredLiteralMinOffset,
+            MinLength = minLength,
+            HasLimitFrames = limitFrames,
+            SurrogateScan = surrogateScan,
             LeadingRunNode = lead,
             Anchored = anchored,
             FusedNodeCount = fused,
@@ -270,6 +339,9 @@ internal sealed class CoreKernelPlan
 
         MixText(RequiredLiteral);
         Mix(RequiredLiteralMinOffset);
+        Mix(MinLength);
+        Mix(HasLimitFrames ? 1 : 0);
+        Mix(SurrogateScan ? 1 : 0);
 
         Mix(Nodes.Length);
         for (var i = 0; i < Nodes.Length; i++)
@@ -286,8 +358,9 @@ internal sealed class CoreKernelPlan
             Mix(n.Alternate);
             Mix(n.Operand);
             Mix(n.Count);
-            Mix((n.Possessive ? 1 : 0) | (n.Atomic ? 2 : 0) | (n.SurrogateSensitive ? 4 : 0) | (n.Backward ? 8 : 0));
+            Mix((n.Possessive ? 1 : 0) | (n.Atomic ? 2 : 0) | (n.SurrogateSensitive ? 4 : 0) | (n.Backward ? 8 : 0) | (n.FollowExcept ? 16 : 0));
             MixText(n.Text);
+            MixText(n.Follow is null ? null : new string(n.Follow));
             if (n.Class is { } cls)
             {
                 Mix(cls.Negated ? 1 : 0);
@@ -324,10 +397,11 @@ internal sealed class CoreKernelPlan
     }
 
     // A lookaround body ends at its LookEnd, which is treated as a dead end: the continuation is reached through
-    // LookStart's Alternate edge, so a cycle can only pass through a lookaround without entering its body.
+    // LookStart's Alternate edge, so a cycle can only pass through a lookaround without entering its body. An atomic
+    // group's LookEnd continues into the body's continuation instead (its LookStart has no Alternate edge).
     private static int EpsilonEdge(in KernelNode node, int edge)
     {
-        if (node.Op is KernelOp.Literal or KernelOp.Class or KernelOp.Any or KernelOp.Match or KernelOp.LookEnd)
+        if (node.Op is KernelOp.Literal or KernelOp.Class or KernelOp.Any or KernelOp.Match || (node.Op == KernelOp.LookEnd && node.Count == 0))
         {
             return -1;
         }
@@ -337,7 +411,7 @@ internal sealed class CoreKernelPlan
             return node.Next;
         }
 
-        return edge == 1 && node.Op is KernelOp.Split or KernelOp.LookStart ? node.Alternate : -1;
+        return edge == 1 && (node.Op == KernelOp.Split || (node.Op == KernelOp.LookStart && node.Count == 0)) ? node.Alternate : -1;
     }
 
     private static bool HasEpsilonCycle(KernelNode[] nodes)
@@ -387,7 +461,7 @@ internal sealed class CoreKernelPlan
             }
 
             pred[nodes[i].Next]++;
-            if (nodes[i].Op is KernelOp.Split or KernelOp.LookStart)
+            if (nodes[i].Op == KernelOp.Split || (nodes[i].Op == KernelOp.LookStart && nodes[i].Count == 0))
             {
                 pred[nodes[i].Alternate]++;
             }
@@ -512,8 +586,13 @@ internal sealed class CoreKernelPlan
                     continue;
                 case KernelOp.Match:
                 case KernelOp.AssertEnd:
-                case KernelOp.LookEnd:
                     return true;
+                case KernelOp.LookEnd when o.Count == 0:
+                    return true;
+                case KernelOp.LookEnd:
+                    // An atomic group's end: whatever follows the group follows the run.
+                    pc = o.Next;
+                    continue;
                 case KernelOp.Literal when !o.Backward:
                     return any ? !dotAll && o.Operand == '\n' : !cls!.MatchesBmpChar((char)o.Operand);
                 case KernelOp.LiteralRun:
@@ -560,7 +639,7 @@ internal sealed class CoreKernelPlan
             }
 
             stack.Push(nodes[i].Next);
-            if (nodes[i].Op is KernelOp.Split or KernelOp.LookStart)
+            if (nodes[i].Op == KernelOp.Split || (nodes[i].Op == KernelOp.LookStart && nodes[i].Count == 0))
             {
                 stack.Push(nodes[i].Alternate);
             }
@@ -738,6 +817,14 @@ internal sealed class CoreKernelPlan
                     break;
                 case KernelOp.Split:
                     stack.Push(o.Alternate);
+                    stack.Push(o.Next);
+                    break;
+                case KernelOp.LookStart when o.Count != 0:
+                    // An atomic group (Count 1) consumes like its body, which continues at its LookEnd.
+                    consumers += 2;
+                    stack.Push(o.Next);
+                    break;
+                case KernelOp.LookEnd when o.Count != 0:
                     stack.Push(o.Next);
                     break;
                 case KernelOp.LookStart:
