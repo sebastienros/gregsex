@@ -164,6 +164,7 @@ internal static class CoreKernelLowering
     private const int Back = 1 << 20; // resume id base for class-run backoff entries
     private const int Look = 2 << 20; // id base for lookaround frames (b = saved position, c = enclosing frame)
     private const int Limit = 3 << 20; // id base for frames that also limit the body's consumption to the saved position
+    private const int Call = 4 << 20; // id base for call frames (b = the caller's frame, c = group << 5 | callee depth)
     private static readonly SearchValues<char> Newline = SearchValues.Create("\n");
 
     // Returns null when FastExpressionCompiler declines the tree; there is deliberately no Expression.Compile fallback.
@@ -204,6 +205,7 @@ internal static class CoreKernelLowering
         var d = E.Variable(typeof(int), "d");
         var lastStart = E.Variable(typeof(int), "lastStart");
         var lim = E.Variable(typeof(int), "lim");
+        var cfp = E.Variable(typeof(int), "cfp");
         var ret = E.Label(typeof(int), "ret");
         var overflow = E.Label("overflow");
         var surrogate = E.Label("surrogate");
@@ -252,6 +254,27 @@ internal static class CoreKernelLowering
             E.Call(set, stack, sp, idE), E.Call(set, stack, E.Add(sp, I(1)), bE), E.Call(set, stack, E.Add(sp, I(2)), cE),
             E.AddAssign(sp, I(3)));
         Expression Undo(int slot) => E.IfThen(E.NotEqual(sp, I(0)), Push(I(-1 - slot), GetCap(I(slot)), I(0)));
+        // Subexpression calls: the call frame pointer and the open-start registers of the saved groups (at the end of the
+        // stack span, after stackLen) are undone like capture slots, under slot numbers past the capture slots.
+        var cfpSlot = 2 * plan.GroupCount;
+        var openIndex = new Dictionary<int, int>();
+        if (track)
+        {
+            foreach (var g in plan.OpenGroups)
+            {
+                openIndex[g] = openIndex.Count;
+            }
+        }
+        Expression GetReg(int k) => E.Call(get, stack, E.Add(stackLen, I(k)));
+        Expression SetReg(int k, Expression v) => E.Call(set, stack, E.Add(stackLen, I(k)), v);
+        Expression Restore(Expression slot, Expression value)
+            => !plan.HasCalls ? SetCap(slot, value)
+                : openIndex.Count == 0 ? E.IfThenElse(E.Equal(slot, I(cfpSlot)), E.Assign(cfp, value), SetCap(slot, value))
+                : E.IfThenElse(E.Equal(slot, I(cfpSlot)), E.Assign(cfp, value),
+                    E.IfThenElse(E.GreaterThan(slot, I(cfpSlot)), E.Call(set, stack, E.Add(stackLen, E.Subtract(slot, I(cfpSlot + 1))), value), SetCap(slot, value)));
+        Expression UndoReg(int k) => E.IfThen(E.NotEqual(sp, I(0)), Push(I(-1 - (cfpSlot + 1 + k)), GetReg(k), I(0)));
+        // The groups whose open start a call saves: every group when captures are tracked, else only the match start.
+        int[] Saves(in KernelNode node) => (node.Groups ?? []).Where(g => track || g == 0).ToArray();
         // After a frame is left, the consumption limit is the nearest enclosing limit frame's saved position.
         var limRestores = 0;
         Expression RestoreLim()
@@ -280,6 +303,11 @@ internal static class CoreKernelLowering
                     E.LessThanOrEqual(E.Convert(E.Subtract(ch, I(0x2028)), typeof(uint)), E.Constant(1u)));
         Expression IsSurrogate(Expression unit)
             => E.LessThanOrEqual(E.Convert(E.Subtract(unit, I(0xD800)), typeof(uint)), E.Constant(0x7FFu));
+        // Whether a branch with these first units can match at a unit (-1 at the end of the input).
+        Expression CanStart(KernelStartUnits units, Expression unit)
+            => E.Condition(E.LessThan(unit, I(0)), E.Constant(units.End), E.Condition(E.LessThan(unit, I(128)),
+                E.NotEqual(E.And(E.RightShift(E.Condition(E.LessThan(unit, I(64)), E.Constant(units.Low), E.Constant(units.High)), unit), E.Constant(1UL)), E.Constant(0UL)),
+                E.Constant(units.NonAscii)));
         Expression Test(CharacterClass cls, Expression chr)
         {
             var ranges = cls.Ranges.ToArray();
@@ -311,7 +339,7 @@ internal static class CoreKernelLowering
         var body = new List<Expression>
         {
             E.Assign(len, E.Property(input, inputLength)),
-            E.Assign(stackLen, E.Call(length, stack)),
+            E.Assign(stackLen, E.Subtract(E.Call(length, stack), I(openIndex.Count))),
             E.Assign(w, E.Constant(0L)),
             E.Assign(poll, E.Field(guard, nextPollField)),
             E.Assign(start, startAt),
@@ -376,6 +404,7 @@ internal static class CoreKernelLowering
 
         body.Add(E.Assign(sp, I(0)));
         body.Add(E.Assign(fp, I(-1)));
+        body.Add(E.Assign(cfp, I(-1)));
         body.Add(E.Assign(lim, len));
         body.Add(E.Assign(p, start));
 
@@ -549,12 +578,32 @@ internal static class CoreKernelLowering
                         break;
                     }
                 case KernelOp.Split:
-                    body.Add(Push(I(o.Alternate), p, I(0)));
+                    if (o.NextStart is null && o.AlternateStart is null)
+                    {
+                        body.Add(Push(I(o.Alternate), p, I(0)));
+                        break;
+                    }
+
+                    // The unit at the position rules a branch out when its first units exclude it: no choice point for
+                    // a branch that cannot match, and the preferred branch is skipped outright when only it cannot.
+                    body.Add(E.Assign(ci, E.Condition(E.LessThan(p, lim), E.Convert(E.Call(at, input, p), typeof(int)), I(-1))));
+                    if (o.NextStart is { } firstOfNext)
+                    {
+                        body.Add(E.IfThen(E.Not(CanStart(firstOfNext, ci)), E.Goto(labels[o.Alternate])));
+                    }
+
+                    body.Add(o.AlternateStart is { } altStart ? E.IfThen(CanStart(altStart, ci), Push(I(o.Alternate), p, I(0))) : Push(I(o.Alternate), p, I(0)));
                     break;
                 case KernelOp.CaptureStart:
                     if (o.Operand == 0)
                     {
                         body.Add(SetCap(I(0), p));
+                    }
+                    else if (openIndex.TryGetValue(o.Operand, out var reg))
+                    {
+                        // A group a call may re-enter: the open start waits in its register until the group closes.
+                        body.Add(UndoReg(reg));
+                        body.Add(SetReg(reg, p));
                     }
                     else if (track)
                     { body.Add(Undo(2 * o.Operand)); body.Add(SetCap(I(2 * o.Operand), p)); }
@@ -563,6 +612,13 @@ internal static class CoreKernelLowering
                     if (o.Operand == 0)
                     {
                         body.Add(SetCap(I(1), p));
+                    }
+                    else if (openIndex.TryGetValue(o.Operand, out var reg))
+                    {
+                        body.Add(Undo(2 * o.Operand));
+                        body.Add(SetCap(I(2 * o.Operand), GetReg(reg)));
+                        body.Add(Undo(2 * o.Operand + 1));
+                        body.Add(SetCap(I(2 * o.Operand + 1), p));
                     }
                     else if (track)
                     { body.Add(Undo(2 * o.Operand + 1)); body.Add(SetCap(I(2 * o.Operand + 1), p)); }
@@ -626,7 +682,7 @@ internal static class CoreKernelLowering
                         body.Add(E.Label(loop));
                         body.Add(E.IfThen(E.LessThanOrEqual(r, fp), E.Goto(done)));
                         body.Add(E.Assign(id, E.Call(get, stack, r)));
-                        body.Add(E.IfThen(E.LessThan(id, I(0)), SetCap(E.Subtract(I(-1), id), E.Call(get, stack, E.Add(r, I(1))))));
+                        body.Add(E.IfThen(E.LessThan(id, I(0)), Restore(E.Subtract(I(-1), id), E.Call(get, stack, E.Add(r, I(1))))));
                         body.Add(E.SubtractAssign(r, I(3)));
                         body.Add(E.Goto(loop));
                         body.Add(E.Label(done));
@@ -714,6 +770,69 @@ internal static class CoreKernelLowering
                         body.Add(E.IfThen(E.Not(test), E.Goto(fail)));
                         break;
                     }
+                case KernelOp.Call:
+                    {
+                        // The frame: the site (the return address), the caller's frame and the group with the callee's
+                        // depth; below it the saved open starts. A call at the interpreter's nest limit fails.
+                        body.Add(E.Assign(d, E.Condition(E.LessThan(cfp, I(0)), I(0), E.And(E.Call(get, stack, E.Add(cfp, I(2))), I(31)))));
+                        body.Add(E.IfThen(E.GreaterThanOrEqual(d, I(19)), E.Goto(fail)));
+                        body.Add(E.PreIncrementAssign(w));
+                        body.Add(E.IfThen(E.GreaterThan(w, maxSteps), E.Goto(budget)));
+                        // The caller's frame pointer is undone like a capture (and kept by a look-around's compaction);
+                        // the saved starts sit right below the frame, at fixed offsets from it.
+                        body.Add(E.IfThen(E.NotEqual(sp, I(0)), Push(I(-1 - cfpSlot), cfp, I(0))));
+                        foreach (var g in Saves(o))
+                        {
+                            body.Add(g == 0 ? Push(I(-1), GetCap(I(0)), I(0)) : Push(I(-1 - (cfpSlot + 1 + openIndex[g])), GetReg(openIndex[g]), I(0)));
+                        }
+
+                        body.Add(Push(I(Call + pc), cfp, E.Or(I(o.Operand << 5), E.Add(d, I(1)))));
+                        body.Add(E.Assign(cfp, E.Subtract(sp, I(3))));
+                        body.Add(E.Goto(labels[o.Alternate]));
+                        continue;
+                    }
+                case KernelOp.CallReturn:
+                    {
+                        var sites = o.Targets ?? [];
+                        if (sites.Length == 0)
+                        {
+                            break;
+                        }
+
+                        var returning = new List<Expression>();
+                        var saves = Saves(o);
+                        for (var j = 0; j < saves.Length; j++)
+                        {
+                            var saved = E.Call(get, stack, E.Subtract(cfp, I(3 * (saves.Length - j) - 1)));
+                            if (saves[j] == 0)
+                            {
+                                // The match start, which only the whole pattern's calls save: no choice point reads it.
+                                returning.Add(SetCap(I(0), saved));
+                            }
+                            else
+                            {
+                                returning.Add(UndoReg(openIndex[saves[j]]));
+                                returning.Add(SetReg(openIndex[saves[j]], saved));
+                            }
+                        }
+
+                        returning.Add(Push(I(-1 - cfpSlot), cfp, I(0)));
+                        if (sites.Length == 1)
+                        {
+                            returning.Add(E.Assign(cfp, E.Call(get, stack, E.Add(cfp, I(1)))));
+                            returning.Add(E.Goto(labels[nodes[sites[0]].Next]));
+                        }
+                        else
+                        {
+                            returning.Add(E.Assign(id, E.Subtract(E.Call(get, stack, cfp), I(Call))));
+                            returning.Add(E.Assign(cfp, E.Call(get, stack, E.Add(cfp, I(1)))));
+                            returning.Add(E.Switch(id, E.Goto(fail), sites.Select(site => E.SwitchCase(E.Goto(labels[nodes[site].Next]), I(site))).ToArray()));
+                        }
+
+                        body.Add(E.IfThen(E.AndAlso(E.GreaterThanOrEqual(cfp, I(0)), E.Equal(E.RightShift(E.Call(get, stack, E.Add(cfp, I(2))), I(5)), I(o.Operand))),
+                            E.Block(returning)));
+                        break;
+                    }
                 case KernelOp.Match:
                     body.Add(E.Assign(work, w));
                     body.Add(E.Goto(ret, I(CoreKernelResult.Match)));
@@ -734,7 +853,13 @@ internal static class CoreKernelLowering
         body.Add(E.Assign(id, E.Call(get, stack, sp)));
         body.Add(E.Assign(b, E.Call(get, stack, E.Add(sp, I(1)))));
         body.Add(E.Assign(c, E.Call(get, stack, E.Add(sp, I(2)))));
-        body.Add(E.IfThen(E.LessThan(id, I(0)), E.Block(SetCap(E.Subtract(I(-1), id), b), E.Goto(fail))));
+        body.Add(E.IfThen(E.LessThan(id, I(0)), E.Block(Restore(E.Subtract(I(-1), id), b), E.Goto(fail))));
+        if (plan.HasCalls)
+        {
+            // A call frame: the callee ran out of choices, so the call fails; its caller's frame is current again.
+            body.Add(E.IfThen(E.GreaterThanOrEqual(id, I(Call)), E.Block(E.Assign(cfp, b), E.Goto(fail))));
+        }
+
         body.Add(E.Assign(p, b));
         body.Add(cases.Count > 0 ? E.Switch(id, E.Goto(advance), cases.ToArray()) : E.Goto(advance));
         body.Add(E.Label(advance));
@@ -754,7 +879,7 @@ internal static class CoreKernelLowering
         }
         body.Add(E.Label(ret, I(0)));
 
-        var block = E.Block(typeof(int), new[] { len, stackLen, start, p, sp, w, id, b, c, ci, end, resume, fp, r, d, lastStart, lim, poll, pr }, body);
+        var block = E.Block(typeof(int), new[] { len, stackLen, start, p, sp, w, id, b, c, ci, end, resume, fp, r, d, lastStart, lim, cfp, poll, pr }, body);
         return E.Lambda<CoreKernel>(block, input, startAt, caps, stack, maxSteps, work, guard);
     }
 

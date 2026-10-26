@@ -150,15 +150,26 @@ backreference or condition can depend on where the run started; literal and sing
 `OnigurumaPattern.Compile()` and `[GeneratedPattern(pattern, OnigurumaOptions)]` on a `static partial OnigurumaPattern`
 method lower the analysed parse tree (renumbered and possessified as the compiler sees it) to the shared compiled
 kernel ([compilation.md](compilation.md)), with the interpreter's required-literal/required-units, prefix and
-minimum-length prefilters. The kernel models subjects without surrogates: a search over a subject holding one, a
-search with `RegexMatchOptions`, an exhausted kernel step budget and abandoned backtracking re-enter the interpreter
-unchanged, so results, captures, limits, cancellation and timeouts are the interpreter's. Lowered: literals and
+minimum-length prefilters, and its matching-time pruning: an alternative (or optional group, or loop iteration) is
+skipped when its first units exclude the unit at the position, with no choice point when the other branch cannot
+start either; a greedy run is possessive when nothing its continuation can start with (through optional groups,
+alternatives, calls and look-arounds, `$` counting as a newline or the end) is a unit of the run; and other runs
+give units back only to positions holding such a unit. The kernel models subjects without surrogates: a search over
+a subject holding one, a search with `RegexMatchOptions`, an exhausted kernel step budget (bounded by the subject's
+length only for patterns the interpreter's failure memo applies to; others run to the work limit, since the
+interpreter would only repeat the kernel's work) and abandoned backtracking re-enter the interpreter unchanged, so
+results, captures, limits, cancellation and timeouts are the interpreter's. Lowered: literals and
 classes (ignore-case as the parser resolves it, folds to several code points included), dot, anchors (`\b` and `\B`
 over Oniguruma's word set), alternation, greedy/lazy/possessive repeats, capture and atomic groups, look-ahead,
 look-behind (candidate starts nearest first, the body limited to and ending at the look-behind position, a positive
-look-behind over alternatives of different lengths divided as the compiler divides it) and `\G`. Left to the
-interpreter: backreferences, subexpression calls, conditionals, the absent operator, `\K`, text-segment boundaries,
-non-BMP literals, loops over a nullable body, and patterns beyond the lowering's node and class bounds.
+look-behind over alternatives of different lengths divided as the compiler divides it), `\G` and subexpression
+calls (recursion included): a call pushes a frame holding the group, the return address and the open starts of the
+groups the callee re-enters, the group's close returns when the innermost frame is a call of that group, a call nested
+at Oniguruma's `SubexpCallMaxNestLevel` fails that path, and frames and saved starts are undone on backtracking like
+captures, so the captures of called groups are the interpreter's. Left to the interpreter: backreferences,
+conditionals, the absent operator, `\K`, text-segment boundaries, non-BMP literals, loops over a nullable body (a
+call measured by its group's minimum length, a recursive call as empty), and patterns beyond the lowering's node and
+class bounds.
 `OnigurumaScanner` runs each compiled pattern's kernel under the same rules. A source generator that cannot use
 `[GeneratedPattern]` obtains the same kernel source from `GregsEx.SourceGeneration.KernelSource.TryEmit` in the
 generator assembly and binds it with `WithGeneratedKernels` ([compilation.md](compilation.md)).

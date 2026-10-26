@@ -15,7 +15,7 @@ public class KernelSourceTests
 {
     private const int TextMate = 8; // OnigurumaOptions.CaptureGroup
 
-    private sealed class Shim
+    internal sealed class Shim
     {
         private readonly Assembly _assembly;
         private readonly MethodInfo _tryEmit;
@@ -53,10 +53,10 @@ public class KernelSourceTests
         }
     }
 
-    private sealed record Result(string Status, ulong Fingerprint, int GroupCount, string? PlainClass, string? CaptureClass,
+    internal sealed record Result(string Status, ulong Fingerprint, int GroupCount, string? PlainClass, string? CaptureClass,
         string? DeclineReason, int DiagnosticCode, int DiagnosticOffset, string? DiagnosticMessage);
 
-    private static readonly Shim Generator = new();
+    internal static readonly Shim Generator = new();
 
     private static ulong RuntimeFingerprint(string pattern, OnigurumaProfile profile, RegexCompileLimits? limits = null)
     {
@@ -66,11 +66,18 @@ public class KernelSourceTests
     }
 
     // Compiles the emitted classes as a consumer would host them and returns their Run methods as kernels.
-    private static (CoreKernel Plain, CoreKernel Capture) Compile(Result result)
+    internal static (CoreKernel Plain, CoreKernel Capture) Compile(Result result) => Compile([result], ["Plain"], ["Capture"])[0];
+
+    // The same for several results in one compilation, each emitted under its own class names.
+    internal static (CoreKernel Plain, CoreKernel Capture)[] Compile(IReadOnlyList<Result> results, IReadOnlyList<string> plainNames, IReadOnlyList<string> captureNames)
     {
-        var source = "using System;\n#nullable enable\n#pragma warning disable\nstatic class Host\n{\n" + result.PlainClass + "\n" + (result.CaptureClass ?? string.Empty) + "\n}\n";
+        var source = "using System;\n#nullable enable\n#pragma warning disable\nstatic class Host\n{\n"
+            + string.Concat(results.Select(r => r.PlainClass + "\n" + (r.CaptureClass ?? string.Empty) + "\n")) + "}\n";
+        // The framework assemblies the kernels bind (span, SearchValues, Unsafe) and GregsEx itself (KernelGuard).
+        var wanted = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            { "System.Private.CoreLib", "System.Runtime", "System.Memory", "System.Runtime.InteropServices", "netstandard", "GregsEx" };
         var references = ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!).Split(Path.PathSeparator)
-            .Where(path => !path.Contains("xunit", StringComparison.OrdinalIgnoreCase)).Select(path => MetadataReference.CreateFromFile(path)).ToList();
+            .Where(path => wanted.Contains(Path.GetFileNameWithoutExtension(path))).Select(path => MetadataReference.CreateFromFile(path)).ToList();
         var compilation = CSharpCompilation.Create("Kernels", [CSharpSyntaxTree.ParseText(source, cancellationToken: TestContext.Current.CancellationToken)],
             references, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
         using var image = new MemoryStream();
@@ -79,8 +86,14 @@ public class KernelSourceTests
         var host = Assembly.Load(image.ToArray()).GetType("Host", throwOnError: true)!;
         CoreKernel Run(string name) => (CoreKernel)Delegate.CreateDelegate(typeof(CoreKernel),
             host.GetNestedType(name, BindingFlags.NonPublic)!.GetMethod("Run", BindingFlags.NonPublic | BindingFlags.Static)!);
-        var plain = Run("Plain");
-        return (plain, result.CaptureClass is null ? plain : Run("Capture"));
+        var kernels = new (CoreKernel, CoreKernel)[results.Count];
+        for (var i = 0; i < results.Count; i++)
+        {
+            var plain = Run(plainNames[i]);
+            kernels[i] = (plain, results[i].CaptureClass is null ? plain : Run(captureNames[i]));
+        }
+
+        return kernels;
     }
 
     [Fact]

@@ -16,7 +16,15 @@ internal enum KernelOp : byte
     // body at Next and continues at Alternate; LookEnd (Operand = its LookStart) ends the body. StepBack moves Count
     // units back (a fixed-length lookbehind branch); BehindScan tries every start from Count units back to Operand
     // units back (-1: to the input's start), nearest first. AssertSearchStart is \G: the position where the search started.
-    LookStart, LookEnd, StepBack, AssertSearchStart, BehindScan
+    LookStart, LookEnd, StepBack, AssertSearchStart, BehindScan,
+    // Subexpression calls (Oniguruma's \g<name>): Call (Operand = the group, Alternate = the group's entry node, Next =
+    // the continuation the callee returns to, Count = 1 when the callee can match empty, Groups = the groups whose open
+    // starts the call saves) pushes a call frame and jumps to the entry; CallReturn (Operand = the group, Next = the
+    // definition's continuation, Targets = every Call of the group, Groups = the same saved groups) follows the group's
+    // CaptureEnd and, when the innermost frame is a call of this group, restores the saved starts and returns to that
+    // call's Next. A saved group keeps its open start in a register of its own, as the interpreter does, so a call's
+    // return cannot move a capture the callee closed.
+    Call, CallReturn
 }
 
 // LookStart flag bits. An atomic group is a LookStart/LookEnd pair with Count = 1 and no Alternate edge: the body's
@@ -24,6 +32,21 @@ internal enum KernelOp : byte
 internal static class LookFlags
 {
     internal const int Negative = 1, Behind = 2, Atomic = 4, Limit = 8;
+}
+
+// The units a branch can start with, as an ASCII bitmap plus whether any non-ASCII unit can (the interpreters' start
+// bits): a Split skips a branch whose first units exclude the unit at the position, and pushes no choice point when
+// the other branch cannot start either. Null when the branch may match empty or its first units are unknown.
+internal sealed class KernelStartUnits
+{
+    internal ulong Low;
+    internal ulong High;
+    internal bool NonAscii;
+    // Whether the branch can match at the end of the input without consuming (it ends there, or asserts the end).
+    internal bool End;
+
+    // Whether a branch with these first units can match at a position holding c (-1 at the end of the input).
+    internal bool CanStart(int c) => c < 0 ? End : c < 128 ? ((c < 64 ? Low : High) & (1UL << c)) != 0 : NonAscii;
 }
 
 // One node of the structure-aware plan. A node is either a 1:1 image of a SemanticProgram instruction or a fused
@@ -45,6 +68,13 @@ internal struct KernelNode
     // holding one; FollowExcept lists the ASCII units it cannot start with instead (non-ASCII units all can).
     internal char[]? Follow;
     internal bool FollowExcept;
+    // CallReturn: the Call nodes of its group (the return addresses). Call/CallReturn: the groups whose open start a
+    // call saves and its return restores, the called group and those inside it.
+    internal int[]? Targets;
+    internal int[]? Groups;
+    // Split: the first units of the Next and Alternate branches, when known.
+    internal KernelStartUnits? NextStart;
+    internal KernelStartUnits? AlternateStart;
 }
 
 // Analysis half of compilation: validates eligibility and recovers structure. It emits no code, so it is
@@ -74,6 +104,11 @@ internal sealed class CoreKernelPlan
     internal int MinLength { get; private init; }
     // Whether a LookStart limits its body's consumption (LookFlags.Limit), so the kernel tracks that limit.
     internal bool HasLimitFrames { get; private init; }
+    // Whether the kernel holds subexpression calls, so it keeps a call frame pointer and undoes it on backtracking.
+    internal bool HasCalls { get; private init; }
+    // The groups a call saves and restores (besides group zero), each with an open-start register of its own at the end
+    // of the stack span when captures are tracked.
+    internal int[] OpenGroups { get; private init; } = [];
     // Whether the kernel models no surrogate at all: a subject holding one is reported (SurrogateEncountered) after the
     // search-level prefilters, so a subject the prefilters reject costs no scan.
     internal bool SurrogateScan { get; private init; }
@@ -179,10 +214,12 @@ internal sealed class CoreKernelPlan
             return false;
         }
 
-        var fused = Fuse(nodes, Predecessors(nodes), dotAll);
+        var fused = Fuse(nodes, Predecessors(nodes), dotAll, scalars);
         var reachable = Reach(nodes);
         // A possessive single-unit loop is exactly an atomic class run: the longest run, never given back.
         var limitFrames = false;
+        var calls = false;
+        var open = new SortedSet<int>();
         for (var i = 0; i < nodes.Length; i++)
         {
             if (!reachable[i])
@@ -202,6 +239,17 @@ internal sealed class CoreKernelPlan
             }
 
             limitFrames |= nodes[i].Op == KernelOp.LookStart && (nodes[i].Operand & LookFlags.Limit) != 0;
+            if (nodes[i].Op == KernelOp.Call)
+            {
+                calls = true;
+                foreach (var g in nodes[i].Groups ?? [])
+                {
+                    if (g != 0)
+                    {
+                        open.Add(g);
+                    }
+                }
+            }
             if (nodes[i].Op == KernelOp.ClassRun && !nodes[i].Atomic && Collect(nodes, nodes[i].Next, scalars, out _) is { } follow)
             {
                 // The continuation needs one of these at the position it starts from; a run backs off straight to one.
@@ -229,6 +277,16 @@ internal sealed class CoreKernelPlan
                         nodes[i].FollowExcept = true;
                     }
                 }
+            }
+        }
+
+        // A Split tests the unit at the position against each branch's first units, as the interpreters' alternation does.
+        for (var i = 0; i < nodes.Length; i++)
+        {
+            if (reachable[i] && nodes[i].Op == KernelOp.Split)
+            {
+                nodes[i].NextStart = StartUnitsOf(Collect(nodes, nodes[i].Next, scalars, out _, cutAware: true));
+                nodes[i].AlternateStart = StartUnitsOf(Collect(nodes, nodes[i].Alternate, scalars, out _, cutAware: true));
             }
         }
 
@@ -280,6 +338,8 @@ internal sealed class CoreKernelPlan
             RequiredLiteralMinOffset = requiredLiteralMinOffset,
             MinLength = minLength,
             HasLimitFrames = limitFrames,
+            HasCalls = calls,
+            OpenGroups = [.. open],
             SurrogateScan = surrogateScan,
             LeadingRunNode = lead,
             Anchored = anchored,
@@ -308,6 +368,29 @@ internal sealed class CoreKernelPlan
                 foreach (var ch in s)
                 {
                     Mix(ch);
+                }
+            }
+        }
+        void MixStart(KernelStartUnits? units)
+        {
+            if (units is null)
+            {
+                Mix(-1);
+                return;
+            }
+
+            Mix((long)units.Low);
+            Mix((long)units.High);
+            Mix((units.NonAscii ? 1 : 0) | (units.End ? 2 : 0));
+        }
+        void MixInts(int[]? values)
+        {
+            Mix(values is null ? -1 : values.Length);
+            if (values is not null)
+            {
+                foreach (var v in values)
+                {
+                    Mix(v);
                 }
             }
         }
@@ -342,6 +425,8 @@ internal sealed class CoreKernelPlan
         Mix(MinLength);
         Mix(HasLimitFrames ? 1 : 0);
         Mix(SurrogateScan ? 1 : 0);
+        Mix(HasCalls ? 1 : 0);
+        MixInts(OpenGroups);
 
         Mix(Nodes.Length);
         for (var i = 0; i < Nodes.Length; i++)
@@ -361,6 +446,10 @@ internal sealed class CoreKernelPlan
             Mix((n.Possessive ? 1 : 0) | (n.Atomic ? 2 : 0) | (n.SurrogateSensitive ? 4 : 0) | (n.Backward ? 8 : 0) | (n.FollowExcept ? 16 : 0));
             MixText(n.Text);
             MixText(n.Follow is null ? null : new string(n.Follow));
+            MixInts(n.Targets);
+            MixInts(n.Groups);
+            MixStart(n.NextStart);
+            MixStart(n.AlternateStart);
             if (n.Class is { } cls)
             {
                 Mix(cls.Negated ? 1 : 0);
@@ -399,11 +488,18 @@ internal sealed class CoreKernelPlan
     // A lookaround body ends at its LookEnd, which is treated as a dead end: the continuation is reached through
     // LookStart's Alternate edge, so a cycle can only pass through a lookaround without entering its body. An atomic
     // group's LookEnd continues into the body's continuation instead (its LookStart has no Alternate edge).
+    // A Call is an epsilon step to its continuation only when the callee can match empty (as a grammar's nullable
+    // nonterminal); the callee's own nodes are walked from their own roots. A CallReturn continues the definition.
     private static int EpsilonEdge(in KernelNode node, int edge)
     {
         if (node.Op is KernelOp.Literal or KernelOp.Class or KernelOp.Any or KernelOp.Match || (node.Op == KernelOp.LookEnd && node.Count == 0))
         {
             return -1;
+        }
+
+        if (node.Op == KernelOp.Call)
+        {
+            return edge == 0 && node.Count != 0 ? node.Next : -1;
         }
 
         if (edge == 0)
@@ -461,7 +557,7 @@ internal sealed class CoreKernelPlan
             }
 
             pred[nodes[i].Next]++;
-            if (nodes[i].Op == KernelOp.Split || (nodes[i].Op == KernelOp.LookStart && nodes[i].Count == 0))
+            if (nodes[i].Op == KernelOp.Split || (nodes[i].Op == KernelOp.LookStart && nodes[i].Count == 0) || nodes[i].Op == KernelOp.Call)
             {
                 pred[nodes[i].Alternate]++;
             }
@@ -471,7 +567,7 @@ internal sealed class CoreKernelPlan
 
     // Recovers fused nodes from the graph: runs of single-predecessor literals and greedy single-class loops
     // (`[c]*` is Split(body, exit) with body looping back; `[c]+` additionally has one entry copy of the body).
-    private static int Fuse(KernelNode[] nodes, int[] pred, bool dotAll)
+    private static int Fuse(KernelNode[] nodes, int[] pred, bool dotAll, bool scalars)
     {
         var n = nodes.Length;
         for (var s = 0; s < n; s++)
@@ -556,7 +652,7 @@ internal sealed class CoreKernelPlan
         {
             if (nodes[i].Op == KernelOp.ClassRun)
             {
-                nodes[i].Atomic = FollowDisjoint(nodes, nodes[i].Next, nodes[i].Class, nodes[i].Operand == 1, dotAll);
+                nodes[i].Atomic = FollowDisjoint(nodes, nodes[i].Next, nodes[i].Class, nodes[i].Operand == 1, dotAll, scalars, new byte[n]);
             }
 
             if (nodes[i].Op is KernelOp.ClassRun or KernelOp.LiteralRun)
@@ -571,52 +667,138 @@ internal sealed class CoreKernelPlan
 
     // True when whatever follows the loop cannot start with a unit the loop accepts, so giving units back is futile.
     // Reaching the end of a lookaround body settles the assertion and discards the body's choices, like reaching Match.
-    private static bool FollowDisjoint(KernelNode[] nodes, int pc, CharacterClass? cls, bool any, bool dotAll)
+    // state: per node, 0 unvisited, 1 on the current path (a cycle through return edges, which consumes nothing: the
+    // consumers reached elsewhere decide), 2 known disjoint, 3 known not.
+    private static bool FollowDisjoint(KernelNode[] nodes, int pc, CharacterClass? cls, bool any, bool dotAll, bool scalars, byte[] state)
     {
-        for (var hops = 0; hops < nodes.Length; hops++)
+        // The chain walked here shares the answer of its end: settle every node on it.
+        var chain = new List<int>();
+        var result = Walk();
+        foreach (var at in chain)
         {
-            var o = nodes[pc];
-            switch (o.Op)
-            {
-                case KernelOp.CaptureStart:
-                case KernelOp.CaptureEnd:
-                case KernelOp.Clear:
-                case KernelOp.Jump:
-                    pc = o.Next;
-                    continue;
-                case KernelOp.Match:
-                case KernelOp.AssertEnd:
-                    return true;
-                case KernelOp.LookEnd when o.Count == 0:
-                    return true;
-                case KernelOp.LookEnd:
-                    // An atomic group's end: whatever follows the group follows the run.
-                    pc = o.Next;
-                    continue;
-                case KernelOp.Literal when !o.Backward:
-                    return any ? !dotAll && o.Operand == '\n' : !cls!.MatchesBmpChar((char)o.Operand);
-                case KernelOp.LiteralRun:
-                    return any ? !dotAll && o.Text![0] == '\n' : !cls!.MatchesBmpChar(o.Text![0]);
-                case KernelOp.Class when !o.Backward:
-                    if (any)
-                    {
-                        return false;
-                    }
+            state[at] = result ? (byte)2 : (byte)3;
+        }
 
-                    for (var c = 0; c <= 0xFFFF; c++)
-                    {
-                        if (cls!.MatchesBmpChar((char)c) && o.Class!.MatchesBmpChar((char)c))
+        return result;
+
+        bool Walk()
+        {
+            for (var hops = 0; hops < nodes.Length; hops++)
+            {
+                switch (state[pc])
+                {
+                    case 1:
+                    case 2:
+                        return true;
+                    case 3:
+                        return false;
+                }
+
+                state[pc] = 1;
+                chain.Add(pc);
+                var o = nodes[pc];
+                switch (o.Op)
+                {
+                    case KernelOp.CaptureStart:
+                    case KernelOp.CaptureEnd:
+                    case KernelOp.Clear:
+                    case KernelOp.Jump:
+                        pc = o.Next;
+                        continue;
+                    case KernelOp.Call:
+                        // The callee consumes first.
+                        pc = o.Alternate;
+                        continue;
+                    case KernelOp.CallReturn:
+                        {
+                            // The group's definition continues at Next, a call at its site's continuation: all must exclude.
+                            if (!FollowDisjoint(nodes, o.Next, cls, any, dotAll, scalars, state))
+                            {
+                                return false;
+                            }
+
+                            foreach (var site in o.Targets ?? [])
+                            {
+                                if (!FollowDisjoint(nodes, nodes[site].Next, cls, any, dotAll, scalars, state))
+                                {
+                                    return false;
+                                }
+                            }
+
+                            return true;
+                        }
+                    case KernelOp.Match:
+                    case KernelOp.AssertEnd:
+                        return true;
+                    case KernelOp.LookEnd when o.Count == 0:
+                        return true;
+                    case KernelOp.LookEnd:
+                        // An atomic group's end: whatever follows the group follows the run.
+                        pc = o.Next;
+                        continue;
+                    case KernelOp.Literal when !o.Backward:
+                        return any ? !dotAll && o.Operand == '\n' : !cls!.MatchesBmpChar((char)o.Operand);
+                    case KernelOp.LiteralRun:
+                        return any ? !dotAll && o.Text![0] == '\n' : !cls!.MatchesBmpChar(o.Text![0]);
+                    case KernelOp.Class when !o.Backward:
+                        if (any)
                         {
                             return false;
                         }
-                    }
 
-                    return true;
-                default:
-                    return false;
+                        for (var c = 0; c <= 0xFFFF; c++)
+                        {
+                            if (cls!.MatchesBmpChar((char)c) && o.Class!.MatchesBmpChar((char)c))
+                            {
+                                return false;
+                            }
+                        }
+
+                        return true;
+                    default:
+                        // A loop, an alternation, a look-around: the units the continuation can start with, as the
+                        // interpreters' follow sets, when every path consumes.
+                        return !any && Collect(nodes, pc, scalars, out _) is { } follow && Disjoint(cls!, follow);
+                }
+            }
+
+            return false;
+        }
+    }
+
+    // Whether no unit of cls can start the continuation whose first units are follow.
+    private static bool Disjoint(CharacterClass cls, FirstUnits follow)
+    {
+        for (var c = 0; c < 128; c++)
+        {
+            if (follow.Ascii[c] && cls.MatchesBmpChar((char)c))
+            {
+                return false;
             }
         }
-        return false;
+
+        if (follow.Big)
+        {
+            for (var c = 128; c <= 0xFFFF; c++)
+            {
+                if (cls.MatchesBmpChar((char)c))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        foreach (var c in follow.Set)
+        {
+            if (c >= 128 && cls.MatchesBmpChar(c))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static bool[] Reach(KernelNode[] nodes)
@@ -639,7 +821,7 @@ internal sealed class CoreKernelPlan
             }
 
             stack.Push(nodes[i].Next);
-            if (nodes[i].Op == KernelOp.Split || (nodes[i].Op == KernelOp.LookStart && nodes[i].Count == 0))
+            if (nodes[i].Op == KernelOp.Split || (nodes[i].Op == KernelOp.LookStart && nodes[i].Count == 0) || nodes[i].Op == KernelOp.Call)
             {
                 stack.Push(nodes[i].Alternate);
             }
@@ -675,8 +857,9 @@ internal sealed class CoreKernelPlan
             units = Collect(nodes, 0, scalars, out run);
         }
 
-        if (units is null)
+        if (units is null || units.End)
         {
+            // A match may end at the input's end without consuming: no unit to look for.
             return null;
         }
 
@@ -721,11 +904,47 @@ internal sealed class CoreKernelPlan
         return units.Set.ToArray();
     }
 
+    private static KernelStartUnits? StartUnitsOf(FirstUnits? units)
+    {
+        if (units is null)
+        {
+            return null;
+        }
+
+        var start = new KernelStartUnits { NonAscii = units.Big, End = units.End };
+        for (var c = 0; c < 128; c++)
+        {
+            if (units.Ascii[c])
+            {
+                if (c < 64)
+                {
+                    start.Low |= 1UL << c;
+                }
+                else
+                {
+                    start.High |= 1UL << (c - 64);
+                }
+            }
+        }
+
+        if (!units.Big)
+        {
+            foreach (var c in units.Set)
+            {
+                start.NonAscii |= c >= 128;
+            }
+        }
+
+        return start;
+    }
+
     private sealed class FirstUnits
     {
         internal readonly HashSet<char> Set = [];
         internal readonly bool[] Ascii = new bool[128];
         internal bool Big;
+        // A path asserts the end of the input (or the end of a line, which the terminator units cover elsewhere).
+        internal bool End;
 
         internal void Add(char c)
         {
@@ -743,6 +962,7 @@ internal sealed class CoreKernelPlan
 
         internal void AddAll(FirstUnits other)
         {
+            End |= other.End;
             for (var c = 0; c < 128; c++)
             {
                 Ascii[c] |= other.Ascii[c];
@@ -764,7 +984,7 @@ internal sealed class CoreKernelPlan
 
         internal FirstUnits Intersect(FirstUnits other)
         {
-            var result = new FirstUnits();
+            var result = new FirstUnits { End = End && other.End };
             foreach (var c in Set)
             {
                 if (other.Set.Contains(c))
@@ -780,8 +1000,9 @@ internal sealed class CoreKernelPlan
     // The union of first units over every path from root, or null when a path consumes nothing it constrains (an empty
     // match, a surrogate-sensitive class, an unconstrained run). Zero-width assertions are stepped over; a positive
     // look-ahead whose body has a first set constrains the position's unit even when the continuation is empty.
-    // literalPrefix is set when the only consumer is one literal run.
-    private static FirstUnits? Collect(KernelNode[] nodes, int root, bool scalars, out string? literalPrefix)
+    // literalPrefix is set when the only consumer is one literal run. cutAware stops at an atomic group's end: a branch
+    // that fails past that cut does not fall back to its Split's other branch, so skipping it there would be wrong.
+    private static FirstUnits? Collect(KernelNode[] nodes, int root, bool scalars, out string? literalPrefix, bool cutAware = false)
     {
         literalPrefix = null;
         var units = new FirstUnits();
@@ -807,17 +1028,46 @@ internal sealed class CoreKernelPlan
                 case KernelOp.Clear:
                 case KernelOp.Jump:
                 case KernelOp.AssertStart:
-                case KernelOp.AssertEnd:
                 case KernelOp.AssertSearchStart:
                 case KernelOp.AssertLineStart:
-                case KernelOp.AssertLineEnd:
                 case KernelOp.WordBoundary:
                 case KernelOp.NotWordBoundary:
                     stack.Push(o.Next);
                     break;
+                case KernelOp.AssertEnd:
+                    // The path holds at the input's end only: no unit, as the interpreters' follow sets record it.
+                    units.End = true;
+                    consumers++;
+                    break;
+                case KernelOp.AssertLineEnd:
+                    // At the end, or before a line terminator of the anchor's style (what follows only narrows this).
+                    units.End = true;
+                    units.Add('\n');
+                    if (o.Operand == 0)
+                    {
+                        units.Add('\r');
+                        units.Add('\u2028');
+                        units.Add('\u2029');
+                    }
+
+                    consumers++;
+                    break;
                 case KernelOp.Split:
                     stack.Push(o.Alternate);
                     stack.Push(o.Next);
+                    break;
+                case KernelOp.Call:
+                    // The callee consumes first; its CallReturn leads back to this call's continuation.
+                    stack.Push(o.Alternate);
+                    break;
+                case KernelOp.CallReturn:
+                    // The definition's continuation, or any call site's: the union covers whichever applies.
+                    stack.Push(o.Next);
+                    foreach (var site in o.Targets ?? [])
+                    {
+                        stack.Push(nodes[site].Next);
+                    }
+
                     break;
                 case KernelOp.LookStart when o.Count != 0:
                     // An atomic group (Count 1) consumes like its body, which continues at its LookEnd.
@@ -825,6 +1075,11 @@ internal sealed class CoreKernelPlan
                     stack.Push(o.Next);
                     break;
                 case KernelOp.LookEnd when o.Count != 0:
+                    if (cutAware)
+                    {
+                        return null;
+                    }
+
                     stack.Push(o.Next);
                     break;
                 case KernelOp.LookStart:
@@ -879,7 +1134,7 @@ internal sealed class CoreKernelPlan
             }
         }
 
-        if (consumers == 1 && run is { Length: >= 2 })
+        if (consumers == 1 && run is { Length: >= 2 } && !units.End)
         {
             literalPrefix = run;
         }

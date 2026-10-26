@@ -13,8 +13,11 @@ namespace GregsEx.Execution.Compiled;
 // by the parser (a character's case class; folds to several code points as alternations). Look-behind is Oniguruma's:
 // candidate starts nearest first, the body limited to the look-behind's position and ending exactly there, a positive
 // look-behind over alternatives of different lengths divided into one look-behind per alternative. Atomic groups and
-// possessive repeats are atomic frames. Backreferences, subexpression calls, conditionals, the absent operator, \K,
-// text-segment boundaries, non-BMP literals and loops over a nullable body stay on the interpreter.
+// possessive repeats are atomic frames. Subexpression calls are Call/CallReturn nodes with the interpreter's rules: a
+// call frame holds the group, the return address and the open starts of the groups the callee re-enters, the group's
+// CaptureEnd returns when the innermost frame is a call of that group, and a call nested at Oniguruma's
+// SubexpCallMaxNestLevel fails. Backreferences, conditionals, the absent operator, \K, text-segment boundaries,
+// non-BMP literals and loops over a nullable body stay on the interpreter.
 internal static class OnigKernelPlan
 {
     // Returns false only when the pattern does not parse (diagnostic is set); otherwise plan is null with reason set when
@@ -108,6 +111,15 @@ internal static class OnigKernelPlan
         private string? _failure;
         // The next character node is a loop body: a literal becomes a one-member class so the loop fuses into a class run.
         private bool _loopAtom;
+        // Subexpression calls: the capture node of each group, the called groups, each called group's entry node (the
+        // CaptureStart the compiler's calls jump to: the last emitted in the interpreter, so the first generated here,
+        // generation running back to front), its CallReturn node and the Call nodes awaiting their entry.
+        private readonly Dictionary<int, OnigNode> _captures = [];
+        private readonly HashSet<int> _called = [];
+        private readonly Dictionary<int, int> _entries = [];
+        private readonly Dictionary<int, int> _returns = [];
+        private readonly List<int> _calls = [];
+        private OnigNode? _root;
 
         internal Builder(int groups, in LoweringLimits limits)
         {
@@ -120,15 +132,148 @@ internal static class OnigKernelPlan
         {
             nodes = null;
             reason = string.Empty;
+            _root = root;
+            Survey(root);
             Alloc(default);
             var match = Alloc(new() { Op = KernelOp.Match });
-            var end = Alloc(new() { Op = KernelOp.CaptureEnd, Operand = 0, Next = match });
+            var end = match;
+            if (_called.Contains(0))
+            {
+                // \g<0>: the whole pattern is the callee, entered at node 0 and returning before Match. The interpreter
+                // saves no group start for it; the kernel saves the match start, which its Match reports.
+                end = Alloc(new() { Op = KernelOp.CallReturn, Operand = 0, Next = match, Groups = [0] });
+                _returns[0] = end;
+                _entries[0] = 0;
+            }
+
+            end = Alloc(new() { Op = KernelOp.CaptureEnd, Operand = 0, Next = end });
             var body = Gen(root, end);
             if (_failure is not null)
             { reason = _failure; return false; }
             _nodes[0] = new() { Op = KernelOp.CaptureStart, Operand = 0, Next = body };
+            foreach (var call in _calls)
+            {
+                var node = _nodes[call];
+                if (!_entries.TryGetValue(node.Operand, out var entry))
+                {
+                    reason = "A subexpression call has no callee.";
+                    return false;
+                }
+
+                node.Alternate = entry;
+                node.Groups = _nodes[_returns[node.Operand]].Groups;
+                _nodes[call] = node;
+            }
+
+            foreach (var (group, at) in _returns)
+            {
+                var node = _nodes[at];
+                node.Targets = _calls.Where(c => _nodes[c].Operand == group).ToArray();
+                _nodes[at] = node;
+            }
+
             nodes = [.. _nodes];
             return true;
+        }
+
+        // The capture nodes by group and the called groups, before generation: a call may precede its callee.
+        private void Survey(OnigNode node)
+        {
+            if (node.Kind == OnigNodeKind.Capture)
+            {
+                _captures[node.Value] = node;
+            }
+            else if (node.Kind == OnigNodeKind.Call)
+            {
+                _called.Add(node.Value);
+            }
+
+            foreach (var child in node.Children)
+            {
+                Survey(child);
+            }
+        }
+
+        // The groups a call of group saves, as the interpreter's CallSaves: the group and those inside it.
+        private int[] SavedGroups(int group)
+        {
+            var groups = new List<int>();
+            Collect(_captures[group]);
+            return groups.ToArray();
+
+            void Collect(OnigNode n)
+            {
+                if (n.Kind == OnigNodeKind.Capture)
+                {
+                    groups.Add(n.Value);
+                }
+
+                foreach (var child in n.Children)
+                {
+                    Collect(child);
+                }
+            }
+        }
+
+        private bool ContainsCalled(OnigNode node)
+        {
+            if (node.Kind == OnigNodeKind.Capture && _called.Contains(node.Value))
+            {
+                return true;
+            }
+
+            foreach (var child in node.Children)
+            {
+                if (ContainsCalled(child))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // The minimum length of node with a call measuring its group (a recursive call as empty): a lower bound of the
+        // true minimum, so a positive result proves the node consumes. The compiler's Lengths counts a call as empty.
+        private int MinLength(OnigNode node, HashSet<int> visiting)
+        {
+            switch (node.Kind)
+            {
+                case OnigNodeKind.Call:
+                    if (!visiting.Add(node.Value))
+                    {
+                        return 0;
+                    }
+
+                    return node.Value == 0 ? MinLength(_root!, visiting)
+                        : _captures.TryGetValue(node.Value, out var callee) ? MinLength(callee, visiting) : 0;
+                case OnigNodeKind.Sequence:
+                    {
+                        var sum = 0;
+                        foreach (var child in node.Children)
+                        {
+                            sum = Math.Min(int.MaxValue / 2, sum + MinLength(child, visiting));
+                        }
+
+                        return sum;
+                    }
+                case OnigNodeKind.Alternation:
+                    {
+                        var min = int.MaxValue;
+                        foreach (var child in node.Children)
+                        {
+                            min = Math.Min(min, MinLength(child, [.. visiting]));
+                        }
+
+                        return min;
+                    }
+                case OnigNodeKind.Repeat:
+                    return node.Min == 0 ? 0 : (int)Math.Min(int.MaxValue / 2, (long)node.Min * MinLength(node.Child, visiting));
+                case OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic:
+                    return MinLength(node.Child, visiting);
+                default:
+                    return OnigCompiler.Lengths(node).Min;
+            }
         }
 
         private int Alloc(KernelNode node)
@@ -197,9 +342,25 @@ internal static class OnigKernelPlan
                     return GenRepeat(n, next);
                 case OnigNodeKind.Capture:
                     {
+                        if (_called.Contains(n.Value))
+                        {
+                            // The interpreter's RetIfCalled after the group's SaveClose.
+                            next = Alloc(new() { Op = KernelOp.CallReturn, Operand = n.Value, Next = next, Groups = SavedGroups(n.Value) });
+                            if (!_returns.ContainsKey(n.Value))
+                            {
+                                _returns[n.Value] = next;
+                            }
+                        }
+
                         var close = Alloc(new() { Op = KernelOp.CaptureEnd, Operand = n.Value, Next = next });
                         var inner = Gen(n.Child, close);
-                        return Alloc(new() { Op = KernelOp.CaptureStart, Operand = n.Value, Next = inner });
+                        var open = Alloc(new() { Op = KernelOp.CaptureStart, Operand = n.Value, Next = inner });
+                        if (_called.Contains(n.Value) && !_entries.ContainsKey(n.Value))
+                        {
+                            _entries[n.Value] = open;
+                        }
+
+                        return open;
                     }
                 case OnigNodeKind.Group:
                     return Gen(n.Child, next);
@@ -211,8 +372,15 @@ internal static class OnigKernelPlan
                     Fail("Backreferences are not lowered.");
                     return next;
                 case OnigNodeKind.Call:
-                    Fail("Subexpression calls are not lowered.");
-                    return next;
+                    {
+                        // The entry is patched once the callee is generated (it may follow the call). A call whose group can
+                        // match empty is an epsilon step for the plan's cycle check.
+                        var callee = n.Value == 0 ? _root! : _captures[n.Value];
+                        var nullable = MinLength(callee, [n.Value]) == 0;
+                        var call = Alloc(new() { Op = KernelOp.Call, Operand = n.Value, Next = next, Alternate = -1, Count = nullable ? 1 : 0 });
+                        _calls.Add(call);
+                        return call;
+                    }
                 case OnigNodeKind.CondRef:
                 case OnigNodeKind.CondExpr:
                     Fail("Conditionals are not lowered.");
@@ -382,7 +550,12 @@ internal static class OnigKernelPlan
             int min = n.Min, max = n.Max;
             if (max == 0)
             {
-                // x{0} matches empty; a called group inside would still exist, but calls are not lowered.
+                // x{0} matches empty, but a called group inside still exists: its code is reached only through calls.
+                if (ContainsCalled(child))
+                {
+                    Gen(child, next);
+                }
+
                 return next;
             }
 
@@ -391,7 +564,7 @@ internal static class OnigKernelPlan
                 return Gen(child, next);
             }
 
-            if (OnigCompiler.Lengths(child).Min == 0 && max != min)
+            if (max != min && (_called.Count == 0 ? OnigCompiler.Lengths(child).Min : MinLength(child, [])) == 0)
             {
                 Fail("A loop whose body can match the empty string is not lowered.");
                 return next;

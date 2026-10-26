@@ -11,6 +11,7 @@ internal static class KernelEmitter
     private const int Back = 1 << 20;
     private const int Look = 2 << 20;
     private const int Limit = 3 << 20;
+    private const int Call = 4 << 20;
 
     // Pattern text and literals are only ever emitted as \uXXXX escapes, so no pattern byte can break out of a literal.
     internal static string Lit(string text)
@@ -100,6 +101,9 @@ internal static class KernelEmitter
         string LineTerm(string ch, int style)
             => style == 1 ? $"{ch} == 10" : $"({ch} == 10 || {ch} == 13 || (uint)({ch} - 0x2028) <= 1u)";
         string IsSurrogate(string ci) => $"(uint)({ci} - 0xD800) <= 0x7FFu";
+        // Whether a branch with these first units can match at a unit (-1 at the end of the input).
+        static string CanStart(KernelStartUnits units, string ci)
+            => $"({ci} < 0 ? {(units.End ? "true" : "false")} : {ci} < 128 ? ((({ci} < 64 ? {units.Low}UL : {units.High}UL) >> {ci}) & 1UL) != 0 : {(units.NonAscii ? "true" : "false")})";
         void Push(string idE, string bE, string cE)
         {
             L("{");
@@ -114,6 +118,25 @@ internal static class KernelEmitter
         }
         void Undo(int slot)
         { L("if (sp != 0)"); Push((-1 - slot).ToString(), $"Get(caps, {slot})", "0"); }
+        // Subexpression calls: the call frame pointer and the open-start registers of the saved groups (at the end of the
+        // stack span, after stackLen) are undone like capture slots, under slot numbers past the capture slots.
+        var cfpSlot = 2 * plan.GroupCount;
+        var openIndex = new Dictionary<int, int>();
+        if (track)
+        {
+            foreach (var g in plan.OpenGroups)
+            {
+                openIndex[g] = openIndex.Count;
+            }
+        }
+        string Restore(string slot, string value)
+            => !plan.HasCalls ? $"Set(caps, {slot}, {value});"
+                : openIndex.Count == 0 ? $"if ({slot} == {cfpSlot}) cfp = {value}; else Set(caps, {slot}, {value});"
+                : $"if ({slot} == {cfpSlot}) cfp = {value}; else if ({slot} > {cfpSlot}) Set(stack, stackLen + ({slot} - {cfpSlot + 1}), {value}); else Set(caps, {slot}, {value});";
+        void UndoReg(int k)
+        { L("if (sp != 0)"); Push((-1 - (cfpSlot + 1 + k)).ToString(), $"Get(stack, stackLen + {k})", "0"); }
+        // The groups whose open start a call saves: every group when captures are tracked, else only the match start.
+        int[] Saves(in KernelNode node) => (node.Groups ?? []).Where(g => track || g == 0).ToArray();
         void RestoreLim()
         {
             if (plan.HasLimitFrames)
@@ -148,7 +171,7 @@ internal static class KernelEmitter
             firstSv = Sv(f);
         }
 
-        L($"int len = input.Length, stackLen = stack.Length, start = startAt, p = 0, sp = 0, id = 0, b = 0, c = 0, ci = 0, end = 0, resume = 0, fp = -1, r = 0, d = 0, lastStart = input.Length - {plan.MinLength}, lim = input.Length;");
+        L($"int len = input.Length, stackLen = stack.Length{(openIndex.Count > 0 ? " - " + openIndex.Count : string.Empty)}, start = startAt, p = 0, sp = 0, id = 0, b = 0, c = 0, ci = 0, end = 0, resume = 0, fp = -1, r = 0, d = 0, lastStart = input.Length - {plan.MinLength}, lim = input.Length{(plan.HasCalls ? ", cfp = -1" : string.Empty)};");
         L("long w = 0, poll = guard.NextPoll;");
         L("int pr = 0;");
         if (plan.RequiredLiteral is { } required)
@@ -210,6 +233,11 @@ internal static class KernelEmitter
 
         L("sp = 0;");
         L("fp = -1;");
+        if (plan.HasCalls)
+        {
+            L("cfp = -1;");
+        }
+
         L("lim = len;");
         L("p = start;");
 
@@ -396,12 +424,37 @@ internal static class KernelEmitter
                         break;
                     }
                 case KernelOp.Split:
+                    if (o.NextStart is null && o.AlternateStart is null)
+                    {
+                        Push(o.Alternate.ToString(), "p", "0");
+                        break;
+                    }
+
+                    // The unit at the position rules a branch out when its first units exclude it: no choice point for
+                    // a branch that cannot match, and the preferred branch is skipped outright when only it cannot.
+                    L("ci = p < lim ? At(input, p) : -1;");
+                    if (o.NextStart is { } firstOfNext)
+                    {
+                        L($"if (!({CanStart(firstOfNext, "ci")})) goto L{o.Alternate};");
+                    }
+
+                    if (o.AlternateStart is { } altStart)
+                    {
+                        L($"if ({CanStart(altStart, "ci")})");
+                    }
+
                     Push(o.Alternate.ToString(), "p", "0");
                     break;
                 case KernelOp.CaptureStart:
                     if (o.Operand == 0)
                     {
                         L("Set(caps, 0, p);");
+                    }
+                    else if (openIndex.TryGetValue(o.Operand, out var reg))
+                    {
+                        // A group a call may re-enter: the open start waits in its register until the group closes.
+                        UndoReg(reg);
+                        L($"Set(stack, stackLen + {reg}, p);");
                     }
                     else if (track)
                     { Undo(2 * o.Operand); L($"Set(caps, {2 * o.Operand}, p);"); }
@@ -410,6 +463,13 @@ internal static class KernelEmitter
                     if (o.Operand == 0)
                     {
                         L("Set(caps, 1, p);");
+                    }
+                    else if (openIndex.TryGetValue(o.Operand, out var reg))
+                    {
+                        Undo(2 * o.Operand);
+                        L($"Set(caps, {2 * o.Operand}, Get(stack, stackLen + {reg}));");
+                        Undo(2 * o.Operand + 1);
+                        L($"Set(caps, {2 * o.Operand + 1}, p);");
                     }
                     else if (track)
                     { Undo(2 * o.Operand + 1); L($"Set(caps, {2 * o.Operand + 1}, p);"); }
@@ -465,7 +525,7 @@ internal static class KernelEmitter
                     }
 
                     L("w += (sp - fp) / 3;");
-                    L("for (r = sp - 3; r > fp; r -= 3) { id = Get(stack, r); if (id < 0) Set(caps, -1 - id, Get(stack, r + 1)); }");
+                    L("for (r = sp - 3; r > fp; r -= 3) { id = Get(stack, r); if (id < 0) { " + Restore("-1 - id", "Get(stack, r + 1)") + " } }");
                     L("sp = fp;");
                     L("fp = Get(stack, sp + 2);");
                     RestoreLim();
@@ -514,6 +574,85 @@ internal static class KernelEmitter
                         L($"if (!({left} {(o.Op == KernelOp.WordBoundary ? "!=" : "==")} {right})) goto fail;");
                         break;
                     }
+                case KernelOp.Call:
+                    {
+                        // The frame: the site (the return address), the caller's frame and the group with the callee's
+                        // depth; below it the saved open starts. A call at the interpreter's nest limit fails.
+                        L("d = cfp < 0 ? 0 : (Get(stack, cfp + 2) & 31);");
+                        L("if (d >= 19) goto fail;");
+                        L("w++;");
+                        L("if (w > maxSteps) goto budget;");
+                        // The caller's frame pointer is undone like a capture (and kept by a look-around's compaction);
+                        // the saved starts sit right below the frame, at fixed offsets from it.
+                        L("if (sp != 0)");
+                        Push((-1 - cfpSlot).ToString(), "cfp", "0");
+                        foreach (var g in Saves(o))
+                        {
+                            if (g == 0)
+                            {
+                                Push("-1", "Get(caps, 0)", "0");
+                            }
+                            else
+                            {
+                                Push((-1 - (cfpSlot + 1 + openIndex[g])).ToString(), $"Get(stack, stackLen + {openIndex[g]})", "0");
+                            }
+                        }
+
+                        Push((Call + pc).ToString(), "cfp", $"{o.Operand << 5} | (d + 1)");
+                        L("cfp = sp - 3;");
+                        L($"goto L{o.Alternate};");
+                        continue;
+                    }
+                case KernelOp.CallReturn:
+                    {
+                        var sites = o.Targets ?? [];
+                        if (sites.Length == 0)
+                        {
+                            break;
+                        }
+
+                        L($"if (cfp >= 0 && (Get(stack, cfp + 2) >> 5) == {o.Operand})");
+                        L("{");
+                        var saves = Saves(o);
+                        for (var j = 0; j < saves.Length; j++)
+                        {
+                            var saved = $"Get(stack, cfp - {3 * (saves.Length - j) - 1})";
+                            if (saves[j] == 0)
+                            {
+                                // The match start, which only the whole pattern's calls save: no choice point reads it.
+                                L($"Set(caps, 0, {saved});");
+                            }
+                            else
+                            {
+                                UndoReg(openIndex[saves[j]]);
+                                L($"Set(stack, stackLen + {openIndex[saves[j]]}, {saved});");
+                            }
+                        }
+
+                        Push((-1 - cfpSlot).ToString(), "cfp", "0");
+                        if (sites.Length == 1)
+                        {
+                            L("cfp = Get(stack, cfp + 1);");
+                            L($"goto L{nodes[sites[0]].Next};");
+                        }
+                        else
+                        {
+                            L($"id = Get(stack, cfp) - {Call};");
+                            L("cfp = Get(stack, cfp + 1);");
+                            L("switch (id)");
+                            L("{");
+                            foreach (var site in sites)
+                            {
+                                L($"    case {site}: goto L{nodes[site].Next};");
+                            }
+
+                            L("    default: goto fail;");
+                            L("}");
+                        }
+
+                        L("}");
+                        break;
+                    }
                 case KernelOp.Match:
                     L("work = w;");
                     L("return 1;");
@@ -532,7 +671,13 @@ internal static class KernelEmitter
         PollCheck();
         L("sp -= 3;");
         L("id = Get(stack, sp); b = Get(stack, sp + 1); c = Get(stack, sp + 2);");
-        L("if (id < 0) { Set(caps, -1 - id, b); goto fail; }");
+        L("if (id < 0) { " + Restore("-1 - id", "b") + " goto fail; }");
+        if (plan.HasCalls)
+        {
+            // A call frame: the callee ran out of choices, so the call fails; its caller's frame is current again.
+            L($"if (id >= {Call}) {{ cfp = b; goto fail; }}");
+        }
+
         L("p = b;");
         if (cases.Length > 0)
         {
