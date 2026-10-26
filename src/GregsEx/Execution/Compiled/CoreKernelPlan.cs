@@ -100,6 +100,9 @@ internal sealed class CoreKernelPlan
     internal char[]? RequiredSet { get; private init; }
     internal string? RequiredLiteral { get; private init; }
     internal int RequiredLiteralMinOffset { get; private init; }
+    // Whether every match contains RequiredLiteral (the Oniguruma compiler's Required), so no attempt starts after its
+    // last occurrence, as the interpreter's search bounds its starts.
+    internal bool RequiredLiteralInMatch { get; private init; }
     // Every match spans at least this many units, so no attempt starts closer to the end.
     internal int MinLength { get; private init; }
     // Whether a LookStart limits its body's consumption (LookFlags.Limit), so the kernel tracks that limit.
@@ -200,7 +203,7 @@ internal sealed class CoreKernelPlan
     internal static bool Analyze(KernelNode[] nodes, int groupCount, bool scalars, bool dotAll, bool sticky,
         in LoweringLimits limits, out CoreKernelPlan? plan, out string reason, char[]? requiredSet = null,
         string? requiredLiteral = null, int requiredLiteralMinOffset = 0, int minLength = 0, string? literalPrefix = null,
-        bool surrogateScan = false)
+        bool surrogateScan = false, bool requiredLiteralInMatch = false)
     {
         plan = null;
         if (nodes.Length == 0 || nodes.Length > limits.MaxNodes / 16)
@@ -336,6 +339,7 @@ internal sealed class CoreKernelPlan
             RequiredSet = requiredSet,
             RequiredLiteral = requiredLiteral,
             RequiredLiteralMinOffset = requiredLiteralMinOffset,
+            RequiredLiteralInMatch = requiredLiteralInMatch,
             MinLength = minLength,
             HasLimitFrames = limitFrames,
             HasCalls = calls,
@@ -422,6 +426,7 @@ internal sealed class CoreKernelPlan
 
         MixText(RequiredLiteral);
         Mix(RequiredLiteralMinOffset);
+        Mix(RequiredLiteralInMatch ? 1 : 0);
         Mix(MinLength);
         Mix(HasLimitFrames ? 1 : 0);
         Mix(SurrogateScan ? 1 : 0);

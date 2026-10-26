@@ -127,6 +127,13 @@ internal static class CoreKernelHelpers
         return r < 0 ? -1 : r + from;
     }
 
+    // The last occurrence of text at or after from, or -1.
+    internal static int LastIndexOfLiteral(ReadOnlySpan<char> s, int from, string text)
+    {
+        var r = s.Slice(from).LastIndexOf(text.AsSpan(), StringComparison.Ordinal);
+        return r < 0 ? -1 : r + from;
+    }
+
     // Runs stop at lim, the consumption limit (the input's end, or an enclosing look-behind's position).
     internal static int RunEnd(ReadOnlySpan<char> s, int from, int lim, SearchValues<char> accepted)
     {
@@ -239,6 +246,7 @@ internal static class CoreKernelLowering
                 ? E.Condition(E.GreaterThan(to, c), E.Subtract(to, I(1)), I(-1))
                 : E.Call(run.FollowExcept ? lastInRangeExcept : lastInRange, input, c, to, E.Constant(SearchValues.Create(run.Follow), typeof(SearchValues<char>)));
         var indexOfPrefix = H(nameof(CoreKernelHelpers.IndexOfPrefix));
+        var lastIndexOfLiteral = H(nameof(CoreKernelHelpers.LastIndexOfLiteral));
         var runEnd = H(nameof(CoreKernelHelpers.RunEnd));
         var runEndNegated = H(nameof(CoreKernelHelpers.RunEndNegated));
         var equals = H(nameof(CoreKernelHelpers.Equals));
@@ -345,10 +353,17 @@ internal static class CoreKernelLowering
             E.Assign(start, startAt),
             E.Assign(lastStart, E.Subtract(len, I(plan.MinLength))),
         };
-        if (plan.RequiredLiteral is { } required)
+        if (plan.RequiredLiteral is { } required && plan.RequiredLiteralInMatch)
+        {
+            // Every match contains the literal: no attempt starts after its last occurrence.
+            body.Add(E.Assign(c, E.Call(lastIndexOfLiteral, input, startAt, E.Constant(required))));
+            body.Add(E.IfThen(E.LessThan(c, I(0)), E.Goto(noMatch)));
+            body.Add(E.IfThen(E.LessThan(c, lastStart), E.Assign(lastStart, c)));
+        }
+        else if (plan.RequiredLiteral is { } requiredAnywhere)
         {
             body.Add(E.IfThen(E.OrElse(E.GreaterThan(E.Add(startAt, I(plan.RequiredLiteralMinOffset)), len),
-                E.LessThan(E.Call(indexOfPrefix, input, E.Add(startAt, I(plan.RequiredLiteralMinOffset)), E.Constant(required)), I(0))), E.Goto(noMatch)));
+                E.LessThan(E.Call(indexOfPrefix, input, E.Add(startAt, I(plan.RequiredLiteralMinOffset)), E.Constant(requiredAnywhere)), I(0))), E.Goto(noMatch)));
         }
 
         if (plan.RequiredSet is { Length: > 0 } requiredSet)

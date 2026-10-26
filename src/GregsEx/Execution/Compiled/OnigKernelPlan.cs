@@ -94,7 +94,7 @@ internal static class OnigKernelPlan
         OnigCompiler.Prefix(root, prefix);
         var (minLength, _) = OnigCompiler.Lengths(root);
         CoreKernelPlan.Analyze(nodes!, groups, scalars: false, dotAll: true, sticky: false, lowering, out plan, out reason,
-            requiredSet, required, 0, minLength, prefix.Length >= 2 ? prefix.ToString() : null, surrogateScan: true);
+            requiredSet, required, 0, minLength, prefix.Length >= 2 ? prefix.ToString() : null, surrogateScan: true, requiredLiteralInMatch: true);
         return true;
     }
 

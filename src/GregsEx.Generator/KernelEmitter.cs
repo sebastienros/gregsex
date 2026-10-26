@@ -177,7 +177,18 @@ internal static class KernelEmitter
         if (plan.RequiredLiteral is { } required)
         {
             fields.AppendLine($"    private const string Required = {Lit(required)};");
-            L($"if (startAt + {plan.RequiredLiteralMinOffset} > len || input.Slice(startAt + {plan.RequiredLiteralMinOffset}).IndexOf(Required.AsSpan(), global::System.StringComparison.Ordinal) < 0) goto noMatch;");
+            if (plan.RequiredLiteralInMatch)
+            {
+                // Every match contains the literal: no attempt starts after its last occurrence.
+                // The static form: a consumer that sees GregsEx's netstandard polyfills would find the extension ambiguous.
+                L("c = global::System.MemoryExtensions.LastIndexOf(input.Slice(startAt), Required.AsSpan(), global::System.StringComparison.Ordinal);");
+                L("if (c < 0) goto noMatch;");
+                L("if (startAt + c < lastStart) lastStart = startAt + c;");
+            }
+            else
+            {
+                L($"if (startAt + {plan.RequiredLiteralMinOffset} > len || input.Slice(startAt + {plan.RequiredLiteralMinOffset}).IndexOf(Required.AsSpan(), global::System.StringComparison.Ordinal) < 0) goto noMatch;");
+            }
         }
 
         if (plan.RequiredSet is { Length: > 0 } requiredSet)
