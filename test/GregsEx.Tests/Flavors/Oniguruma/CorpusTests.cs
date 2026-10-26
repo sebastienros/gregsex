@@ -11,8 +11,7 @@ namespace GregsEx.Tests.Flavors.Oniguruma;
 // profile TextMate hosts use. A native error code (the retry limit) agrees with LimitExceeded.
 public class CorpusTests
 {
-    private static readonly OnigurumaCompileOptions Options = new(new RegexCompileLimits(maxPatternUnits: 1 << 20,
-        maxNestingDepth: 4096, maxCaptureGroups: 32767));
+    private static readonly OnigurumaCompileOptions Options = OnigurumaCompileOptions.TextMate;
 
     [Fact]
     public void EdgeCasesMatchNativeOniguruma()

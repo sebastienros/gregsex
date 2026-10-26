@@ -10,8 +10,7 @@ namespace GregsEx.Tests.Execution.Compiled;
 // lowering models on their own.
 public class OnigurumaCompiledDifferentialTests
 {
-    private static readonly OnigurumaCompileOptions Options = new(new RegexCompileLimits(maxPatternUnits: 1 << 20,
-        maxNestingDepth: 4096, maxCaptureGroups: 32767));
+    private static readonly OnigurumaCompileOptions Options = OnigurumaCompileOptions.TextMate;
 
     private static OnigurumaPattern? TryCompile(OnigurumaPattern interpreted)
     {

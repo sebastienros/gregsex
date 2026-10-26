@@ -208,6 +208,31 @@ public class ApiTests
     }
 
     [Fact]
+    public void TheTextMatePresetCarriesGrammarSizedLimits()
+    {
+        // The limits the TextMateSharp adapter passes (objective-c's platform list is 282k units); match limits stay default.
+        var limits = OnigurumaCompileOptions.TextMate.Limits;
+        Assert.Equal(1 << 22, limits.MaxPatternUnits);
+        Assert.Equal(4096, limits.MaxNestingDepth);
+        Assert.Equal(1 << 24, limits.MaxInstructions);
+        Assert.Equal(1 << 20, limits.MaxClassRanges);
+        Assert.Equal(32767, limits.MaxCaptureGroups);
+        Assert.Equal(1L << 32, limits.MaxCompileWork);
+        Assert.Equal(1L << 30, limits.MaxPlanBytes);
+        Assert.Equal(1L << 30, limits.MaxCompileMemoryBytes);
+        Assert.Equal(new RegexMatchLimits(), OnigurumaCompileOptions.TextMate.DefaultMatchLimits);
+        Assert.Same(OnigurumaCompileOptions.TextMate, OnigurumaCompileOptions.TextMate);
+
+        var platforms = "\\b(?:" + string.Join("|", Enumerable.Range(0, 30_000).Select(i => "platform" + i)) + ")\\b";
+        Assert.True(platforms.Length > new RegexCompileLimits().MaxPatternUnits);
+        Assert.False(OnigurumaPattern.TryParse(platforms, RegexProfiles.OnigurumaTextMate, out _, out var d));
+        Assert.Equal(RegexDiagnosticCode.PatternLimitExceeded, d.Code);
+        var pattern = OnigurumaPattern.Parse(platforms, RegexProfiles.OnigurumaTextMate, OnigurumaCompileOptions.TextMate);
+        Assert.Equal(RegexSearchStatus.Match, pattern.CreateWorkspace().Find("on platform29999 only", 0, out var range));
+        Assert.Equal(new RegexMatchRange(3, 13), range);
+    }
+
+    [Fact]
     public void MultiCodePointFoldsExpandLinearly()
     {
         var pattern = Pattern("(?i)" + new string('s', 50));

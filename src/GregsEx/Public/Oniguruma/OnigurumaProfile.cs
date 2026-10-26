@@ -77,4 +77,14 @@ public sealed record OnigurumaCompileOptions
         Limits = limits ?? new RegexCompileLimits();
         DefaultMatchLimits = defaultMatchLimits ?? new RegexMatchLimits();
     }
+
+    /// <summary>
+    /// The compile limits TextMate grammars need (patterns of hundreds of thousands of units, Oniguruma's own parse
+    /// depth, tens of thousands of groups), with default match limits: 4 Mi pattern units, nesting 4096, 16 Mi
+    /// instructions, 1 Mi class ranges, 32767 groups, 4 Gi compile work units, 1 GiB plan and compile memory. Grammar
+    /// hosts, generators emitting their kernels and the patterns binding them name the same limits through it.
+    /// </summary>
+    public static OnigurumaCompileOptions TextMate { get; } = new(new RegexCompileLimits(maxPatternUnits: 1 << 22,
+        maxNestingDepth: 4096, maxInstructions: 1 << 24, maxClassRanges: 1 << 20, maxCaptureGroups: 32767,
+        maxCompileWork: 1L << 32, maxPlanBytes: 1L << 30, maxCompileMemoryBytes: 1L << 30));
 }
