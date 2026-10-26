@@ -410,6 +410,31 @@ The generator also accepts XPath flags, PCRE2 flags, and
 promised arbitrary generated-code coverage. Source generation is never required
 to consume the library.
 
+A source generator of your own cannot use `[GeneratedPattern]` (Roslyn
+generators never see each other's output). It can instead ask the generator
+assembly for the kernel source and bind it itself:
+
+```csharp
+// In the third-party generator, calling GregsEx.Generator.dll (the consumer's copy) at build time.
+var result = GregsEx.SourceGeneration.KernelSource.TryEmit(
+    pattern, OnigurumaOptions.CaptureGroup, "Plain", "Capture", compileOptions);
+if (result.Status == KernelSourceStatus.Succeeded)
+{
+    // Emit result.PlainClass and result.CaptureClass (null without capture groups) into the
+    // consumer, in a file starting with `using System;`, then bind:
+    //   OnigurumaPattern.Parse(pattern, profile, compileOptions)
+    //       .WithGeneratedKernels(result.Fingerprint, Plain.Run, Capture.Run)
+}
+```
+
+`KernelSource` is a supported public surface of `GregsEx.Generator.dll`, versioned
+with the library. Load the generator assembly from the consumer's own `GregsEx`
+package (`$(PkgGregsEx)/analyzers/dotnet/cs/GregsEx.Generator.dll` with
+`GeneratePathProperty="true"`) so the revision emitting the kernels is the one
+running them; the library ignores a kernel of another revision and runs the
+interpreter. `Declined` carries the planner's reason (the GREGEX003 text), `Invalid`
+the parse diagnostic (the GREGEX001 content).
+
 See the [deployment and trimming details](docs/release/platforms.md) for package
 layout, feature switches, and execution-mode qualifications.
 

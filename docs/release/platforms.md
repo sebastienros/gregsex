@@ -3,7 +3,7 @@
 `GregsEx` ships as a single NuGet package (`GregsEx`) containing:
 
 - `lib/net10.0/`, `lib/net8.0/` and `lib/netstandard2.0/` (`GregsEx.dll` and `GregsEx.xml`): the single runtime assembly and XML API documentation for all six supported regex profiles (`RegularCore`, `ECMAScript`, `XSD`, `XPath`, `POSIX`, `PCRE2`).
-- `analyzers/dotnet/cs/GregsEx.Generator.dll`: the Roslyn incremental source generator implementing `[GeneratedPattern]`.
+- `analyzers/dotnet/cs/GregsEx.Generator.dll`: the Roslyn incremental source generator implementing `[GeneratedPattern]`, and `GregsEx.SourceGeneration.KernelSource`, the kernel-emission entry point for third-party generators.
 - `build/GregsEx.targets` and `buildTransitive/GregsEx.targets`: MSBuild targets that automatically configure the `GregsEx.RuntimeCompilation.Auto` feature switch when `<PublishTrimmed>true</PublishTrimmed>` or `<PublishAot>true</PublishAot>` is enabled.
 - `licenses/`: MIT license notices for `FastExpressionCompiler` (`THIRD-PARTY-NOTICES.txt`) and data/specification notices for Unicode 16.0.0/17.0.0, XML, and PCRE2.
 

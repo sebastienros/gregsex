@@ -154,7 +154,9 @@ look-behind (candidate starts nearest first, the body limited to and ending at t
 look-behind over alternatives of different lengths divided as the compiler divides it) and `\G`. Left to the
 interpreter: backreferences, subexpression calls, conditionals, the absent operator, `\K`, text-segment boundaries,
 non-BMP literals, loops over a nullable body, and patterns beyond the lowering's node and class bounds.
-`OnigurumaScanner` runs each compiled pattern's kernel under the same rules.
+`OnigurumaScanner` runs each compiled pattern's kernel under the same rules. A source generator that cannot use
+`[GeneratedPattern]` obtains the same kernel source from `GregsEx.SourceGeneration.KernelSource.TryEmit` in the
+generator assembly and binds it with `WithGeneratedKernels` ([compilation.md](compilation.md)).
 
 ## Conformance evidence (OG-007)
 

@@ -93,6 +93,27 @@ warmed matching, allocations, retained memory, and break-even reuse separately.
 Upstream Expression.Compile comparisons do not establish GregsEx speedups.
 Expression.Compile is permitted only as an isolated benchmark comparator.
 
+## Kernel emission for other generators
+
+`GregsEx.Generator.dll` has two supported public types, both versioned with the
+library: `GregsEx.Generator.PatternGenerator` and
+`GregsEx.SourceGeneration.KernelSource`. `KernelSource.TryEmit(pattern,
+OnigurumaOptions, plainClassName, captureClassName, OnigurumaCompileOptions?)`
+plans a pattern exactly as `WithGeneratedKernels` does when it recomputes the
+fingerprint, and returns `Succeeded` with the fingerprint, the group count and
+the C# source of the plain and capture kernel classes (the capture class is null
+for a pattern without capture groups), `Declined` with the planner's reason, or
+`Invalid` with the parse diagnostic. The emitted classes are what
+`[GeneratedPattern]` emits; the caller places them in the consumer, binds them
+with `WithGeneratedKernels`, and parses the pattern with the same options and
+compile limits. The caller also decides, as `PatternGenerator` does, that the
+consumer targets .NET 8 or later before emitting kernels. Its purpose is a
+third-party Roslyn generator (a TextMate grammar generator, say) that cannot
+use `[GeneratedPattern]` because generators never see each other's output; it
+loads the consumer's own `GregsEx.Generator.dll` at build time so the emitting
+and running revisions always agree. The internal `SourcePlanner`,
+`KernelEmitter` and `CoreKernelPlan` remain internal.
+
 `OnigurumaPattern.Compile()` and Oniguruma generated patterns follow the same
 boundary (annotations, runtime guards, no fallback engine, the interpreter owning
 every case the kernel does not model); see [oniguruma.md](oniguruma.md).
