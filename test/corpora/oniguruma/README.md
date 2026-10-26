@@ -26,6 +26,7 @@ grammar patterns (`[...[^\x{00}-\x{7F}]]` identifiers).
 | `edge-cases.expected.json` | Per case: `null` when Oniguruma rejects the pattern, else per subject `[start, outcome]` pairs: `null` (no match), a negative Oniguruma error code (such as -17, the retry limit), or capture pairs (start, end; -1 when a group did not participate). |
 | `grammar-cases.json.gz` | Every distinct begin, end, while and match pattern of the shellscript, typescript, javascript, html, json, yaml and csharp grammars and those they embed (css), each searched from offsets 0, 7 and 21 of the first six distinct lines (with `\n` appended) of its language's sample. |
 | `grammar-cases.expected.json.gz` | As `edge-cases.expected.json`. |
+| `csharp-subexp-calls.json` | Every pattern of VS Code's C# grammar holding a subexpression call (`\g<name>`), verbatim with the rule path of its first occurrence, and C# subject lines; `OnigurumaCallKernelTests` compares the kernels with the interpreter over them from every offset (no native observations: the interpreter is that oracle). From `extensions/csharp/syntaxes/csharp.tmLanguage.json` of microsoft/vscode `main` on 2026-10-26 (dotnet/csharp-tmLanguage commit c2719309e91d2e26be21fce0ecaaca86c7b48ce4, MIT). |
 | `LICENSE-tm-grammars.txt` | tm-grammars' MIT license and the NOTICE sections of the grammars above. tm-grammars 1.32.22's NOTICE has no section for `yaml.json`. |
 
 Grammar patterns are stored as TextMate hosts hand them to Oniguruma: with Onigwrap's `UnicodeCharEscape` rewrite

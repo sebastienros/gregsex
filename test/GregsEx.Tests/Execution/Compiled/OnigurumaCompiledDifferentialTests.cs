@@ -196,6 +196,19 @@ public class OnigurumaCompiledDifferentialTests
         yield return new("(?<!a)-[bc]+\\b", "c-bc", 0, "1:3");
         yield return new("(?<!a)-\\w+\\b", "c-bc", 0, "1:3");
         yield return new("-\\w+\\b", "c-bc", 0, "1:3");
+        // Subexpression calls: a called group's capture is the last instance closed (the enclosing one in a recursion),
+        // a call saves and restores the open start of the groups it re-enters, and calls nest at most 20 deep.
+        yield return new("(?<t>\\((?:[^()]|\\g<t>)*\\))", "x((a)(b))y", 0, "1:8|1:8");
+        yield return new("(?<t>a\\g<t>?b)", "aaabbb", 0, "0:6|0:6");
+        yield return new("(?<x>a)\\g<x>(b)", "aab", 0, "0:3|1:1|2:1");
+        yield return new("\\g<x>(?<x>ab)", "abab", 0, "0:4|2:2");
+        yield return new("(?<t>a|b\\g<t>)", "bbba", 0, "0:4|0:4");
+        yield return new("(?<p>(?<q>a)|b\\g<p>)", "bba", 1, "1:2|1:2|2:1");
+        yield return new("(?<n>\\d+)\\.\\g<n>\\d", "12.345", 0, "NoMatch");
+        yield return new("(a)\\g<0>?b", "aaabbb", 0, "0:6|2:1");
+        yield return new("(?<t>a){2}\\g<t>", "aaa", 0, "0:3|2:1");
+        yield return new("(?<t>a){0}\\g<t>", "a", 0, "0:1|0:1");
+        yield return new("(?<t>\\[\\g<t>?\\])", new string('[', 25) + new string(']', 25), 0, "5:40|5:40");
     }
 
     [Theory]
@@ -220,7 +233,7 @@ public class OnigurumaCompiledDifferentialTests
     [Fact]
     public void ModelledConstructsAreLowered()
     {
-        foreach (var pattern in new[] { "(?<=(ab)|(b))c", "(?<=a+)b", "(?>a|ab)c", "a{2,3}+a", "(?:a|ab)++c", "\\Ga|b", "(?i)straße", "\\b\\w+\\b", "(?<!\\w)-\\w+\\b", "(?=\\[)" })
+        foreach (var pattern in new[] { "(?<=(ab)|(b))c", "(?<=a+)b", "(?>a|ab)c", "a{2,3}+a", "(?:a|ab)++c", "\\Ga|b", "(?i)straße", "\\b\\w+\\b", "(?<!\\w)-\\w+\\b", "(?=\\[)", "(?<n>a)\\g<n>", "(?<t>\\((?:[^()]|\\g<t>)*\\))" })
         {
             Assert.NotNull(TryCompile(OnigurumaPattern.Parse(pattern, RegexProfiles.OnigurumaTextMate)));
         }
@@ -229,7 +242,7 @@ public class OnigurumaCompiledDifferentialTests
     [Fact]
     public void UnmodelledConstructsAreRejected()
     {
-        foreach (var pattern in new[] { "(?<n>a)\\k<n>", "(?<n>a)\\g<n>", "(a)(?(1)b|c)", "(?~a)", "a\\Kb", "\\y", "\\X", "(a*)*b", "😀" })
+        foreach (var pattern in new[] { "(?<n>a)\\k<n>", "(a)(?(1)b|c)", "(?~a)", "a\\Kb", "\\y", "\\X", "(a*)*b", "😀", "(?<n>a?)\\g<n>*" })
         {
             Assert.Null(TryCompile(OnigurumaPattern.Parse(pattern, RegexProfiles.OnigurumaTextMate)));
         }

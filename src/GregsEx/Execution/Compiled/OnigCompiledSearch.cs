@@ -66,7 +66,11 @@ internal static class OnigCompiledSearch
             return false;
         }
 
-        var allowed = Math.Min(pattern.MatchLimits.MaxWork, StepsPerUnit * (input.Length - startAt) + StepsBase);
+        // The kernel hands a search that backtracks heavily to the interpreter early only when the interpreter has a
+        // better algorithm for it: its failure memo. Where the memo does not apply (calls, look-arounds, atomic groups,
+        // counted loops), the interpreter would only repeat the kernel's work, so the kernel runs to the work limit.
+        var allowed = pattern.Program.MemoSlots is null ? pattern.MatchLimits.MaxWork
+            : Math.Min(pattern.MatchLimits.MaxWork, StepsPerUnit * (input.Length - startAt) + StepsBase);
         if (allowed <= 0)
         {
             return false;
