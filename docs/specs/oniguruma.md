@@ -14,6 +14,11 @@ property, case-fold and Grapheme_Cluster_Break tables, not .NET's or GregsEx's E
 | `RegexProfiles.Oniguruma` | `ONIG_OPTION_NONE`: with a named group, unnamed groups do not capture and numbered references are errors. |
 | `RegexProfiles.OnigurumaTextMate` | `ONIG_OPTION_CAPTURE_GROUP`, as TextMate hosts compile grammar patterns: every group captures, numbered left to right. |
 
+`OnigurumaCompileOptions.TextMate` is the matching compile-options preset: the raised `RegexCompileLimits` grammars
+need (4 Mi pattern units, nesting 4096, 16 Mi instructions, 1 Mi class ranges, 32767 groups, 4 Gi compile work, 1 GiB
+plan and compile memory) with default match limits. A grammar host, a generator emitting kernels through
+`KernelSource` and the pattern binding them name the same limits through it, so fingerprints agree by construction.
+
 `OnigurumaOptions` also admits `IgnoreCase`, `Multiline` (dot matches newline, Oniguruma's `(?m)`), `Extended` and
 `DontCaptureGroup`. `OnigurumaPattern.Parse`/`TryParse` produce an immutable pattern; `OnigurumaWorkspace`
 (`IsMatch`, `Find`, `FindCaptures` from a start offset over `ReadOnlySpan<char>`) and `OnigurumaScanner` own the
@@ -94,8 +99,8 @@ stoppers (`(?~|..|..)`, `(?~|..)`), backreferences with a recursion level (`\k<n
 
 ## Limits and failures (OG-005)
 
-`RegexCompileLimits` bound every compilation resource (the TextMate adapter in TextMateSharp passes Oniguruma-sized
-limits: grammars hold patterns of 282k units): pattern units, nesting, groups, instruction slots (checked while they
+`RegexCompileLimits` bound every compilation resource (the TextMate adapter in TextMateSharp passes
+`OnigurumaCompileOptions.TextMate`: grammars hold patterns of 282k units): pattern units, nesting, groups, instruction slots (checked while they
 are emitted), class intervals across the program's sets (`ClassLimitExceeded`), compile work (pattern units, parse
 nodes, class intervals built and the instruction slots of every follow pass), peak compile memory (parse tree, class
 intervals, the live pass's code) and the retained plan's bytes (`PlanLimitExceeded`). Repeats nest counters rather

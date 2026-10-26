@@ -417,15 +417,19 @@ assembly for the kernel source and bind it itself:
 ```csharp
 // In the third-party generator, calling GregsEx.Generator.dll (the consumer's copy) at build time.
 var result = GregsEx.SourceGeneration.KernelSource.TryEmit(
-    pattern, OnigurumaOptions.CaptureGroup, "Plain", "Capture", compileOptions);
+    pattern, OnigurumaOptions.CaptureGroup, "Plain", "Capture", OnigurumaCompileOptions.TextMate);
 if (result.Status == KernelSourceStatus.Succeeded)
 {
     // Emit result.PlainClass and result.CaptureClass (null without capture groups) into the
     // consumer, in a file starting with `using System;`, then bind:
-    //   OnigurumaPattern.Parse(pattern, profile, compileOptions)
+    //   OnigurumaPattern.Parse(pattern, RegexProfiles.OnigurumaTextMate, OnigurumaCompileOptions.TextMate)
     //       .WithGeneratedKernels(result.Fingerprint, Plain.Run, Capture.Run)
 }
 ```
+
+`OnigurumaCompileOptions.TextMate` carries the raised compile limits TextMate
+grammars need; naming it on both sides keeps the emitted and recomputed
+fingerprints equal by construction.
 
 `KernelSource` is a supported public surface of `GregsEx.Generator.dll`, versioned
 with the library. Load the generator assembly from the consumer's own `GregsEx`

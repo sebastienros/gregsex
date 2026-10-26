@@ -29,14 +29,10 @@ public class KernelSourceTests
             _options = _assembly.GetType("GregsEx.OnigurumaOptions", throwOnError: true)!;
         }
 
-        // RegexCompileLimits(maxPatternUnits, maxNestingDepth, maxInstructions, maxClassRanges, maxCaptureGroups, ...): the
-        // raised ceilings TextMate grammars need, built in the generator assembly's own copy of the public types.
-        internal object RaisedLimits()
-        {
-            var limits = Activator.CreateInstance(_assembly.GetType("GregsEx.RegexCompileLimits", throwOnError: true)!,
-                1 << 22, 4096, 1 << 24, 65_536, 32_767, 10_000_000L, 67_108_864L, 67_108_864L)!;
-            return Activator.CreateInstance(_assembly.GetType("GregsEx.OnigurumaCompileOptions", throwOnError: true)!, limits, null)!;
-        }
+        // The raised ceilings TextMate grammars need, as the generator assembly's own copy of the preset: one static getter,
+        // the same limits OnigurumaCompileOptions.TextMate gives the pattern that binds the kernels.
+        internal object TextMateLimits() =>
+            _assembly.GetType("GregsEx.OnigurumaCompileOptions", throwOnError: true)!.GetProperty("TextMate")!.GetValue(null)!;
 
         internal Result TryEmit(string? pattern, int options, string plain = "Plain", string capture = "Capture", object? compileOptions = null)
         {
@@ -183,12 +179,11 @@ public class KernelSourceTests
         Assert.Equal("Invalid", rejected.Status);
         Assert.Equal((int)RegexDiagnosticCode.PatternLimitExceeded, rejected.DiagnosticCode);
 
-        var admitted = Generator.TryEmit(pattern, options, compileOptions: Generator.RaisedLimits());
+        var admitted = Generator.TryEmit(pattern, options, compileOptions: Generator.TextMateLimits());
         Assert.Equal("Succeeded", admitted.DeclineReason ?? admitted.Status);
-        var limits = new RegexCompileLimits(1 << 22, 4096, 1 << 24, 65_536, 32_767);
-        Assert.Equal(RuntimeFingerprint(pattern, profile, limits), admitted.Fingerprint);
+        Assert.Equal(RuntimeFingerprint(pattern, profile, OnigurumaCompileOptions.TextMate.Limits), admitted.Fingerprint);
         var (plain, capture) = Compile(admitted);
-        var bound = OnigurumaPattern.Parse(pattern, profile, new OnigurumaCompileOptions(limits))
+        var bound = OnigurumaPattern.Parse(pattern, profile, OnigurumaCompileOptions.TextMate)
             .WithGeneratedKernels(admitted.Fingerprint, plain, capture);
         Assert.Equal(RegexExecutionBackend.Compiled, bound.ExecutionBackend);
         Assert.Equal(RegexSearchStatus.Match, bound.CreateWorkspace().Find("they were winning", 0, out var range));

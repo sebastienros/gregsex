@@ -106,7 +106,7 @@ for a pattern without capture groups), `Declined` with the planner's reason, or
 `Invalid` with the parse diagnostic. The emitted classes are what
 `[GeneratedPattern]` emits; the caller places them in the consumer, binds them
 with `WithGeneratedKernels`, and parses the pattern with the same options and
-compile limits. The caller also decides, as `PatternGenerator` does, that the
+compile limits (`OnigurumaCompileOptions.TextMate` for grammar-sized ones). The caller also decides, as `PatternGenerator` does, that the
 consumer targets .NET 8 or later before emitting kernels. Its purpose is a
 third-party Roslyn generator (a TextMate grammar generator, say) that cannot
 use `[GeneratedPattern]` because generators never see each other's output; it
