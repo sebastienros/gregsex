@@ -33,9 +33,10 @@ internal sealed class OnigCompiler
     private readonly List<OnigStartBits> _bits = [];
     private readonly List<OnigLiteralTable> _tables = [];
     private readonly HashSet<int> _called = [];
-    // What may follow each called group: assumed for this pass, and seen at its definition and call sites.
-    private Dictionary<int, OnigStartBits>? _groupFollow;
-    private readonly Dictionary<int, OnigStartBits> _observedFollow = [];
+    // What may follow each called group, by group number: assumed for this pass, and seen at its definition and call
+    // sites (allocated only when a group is called; uncalled groups stay None).
+    private OnigStartBits[]? _groupFollow;
+    private OnigStartBits[]? _observedFollow;
     private readonly int[] _groupPc;
     private readonly List<(int At, int Group)> _callFixups = [];
     private readonly RegexCompileLimits _limits;
@@ -251,7 +252,7 @@ internal sealed class OnigCompiler
 
     // Emits the program once; groupFollow, when given, is what may follow each called group.
     private static OnigCompiler EmitPass(OnigParser parser, OnigNode root, int groupCount, RegexCompileLimits limits,
-        Dictionary<int, OnigStartBits>? groupFollow)
+        OnigStartBits[]? groupFollow)
     {
         var compiler = new OnigCompiler(groupCount, limits) { _groupFollow = groupFollow };
         CollectCaptures(root, compiler._captureNodes);
@@ -265,6 +266,11 @@ internal sealed class OnigCompiler
             {
                 compiler._backrefs.Add(reference);
             }
+        }
+
+        if (compiler._called.Count > 0)
+        {
+            compiler._observedFollow = new OnigStartBits[groupCount];
         }
 
         compiler.CheckRecursion(root);
@@ -308,26 +314,18 @@ internal sealed class OnigCompiler
             // A called group's body continues at its definition and after each call: its follow is the union of
             // theirs, which calls inside the group make circular. Iterate from nothing-follows to a fixpoint; without one
             // within a few passes, anything may follow.
-            var assumed = new Dictionary<int, OnigStartBits>();
-            foreach (var g in compiler._called)
-            {
-                assumed[g] = OnigStartBits.None;
-            }
-
+            var assumed = new OnigStartBits[groupCount];
             for (var i = 0; i < MaxFollowPasses; i++)
             {
                 var pass = EmitPass(parser, root, groupCount, limits, assumed);
                 budget.Charge(pass._code.Count);
                 budget.Reserve(4L * pass._code.Count);
-                var observed = pass._observedFollow;
+                var observed = pass._observedFollow!;
                 var same = true;
-                // Updating a dictionary value invalidates its enumerator on .NET Framework.
-                foreach (var g in compiler._called)
+                for (var g = 0; g < assumed.Length; g++)
                 {
-                    var bits = assumed[g];
-                    var seen = observed.TryGetValue(g, out var o) ? o : OnigStartBits.None;
-                    same &= seen == bits;
-                    assumed[g] = bits.Union(seen);
+                    same &= observed[g] == assumed[g];
+                    assumed[g] = assumed[g].Union(observed[g]);
                 }
 
                 if (same)
@@ -635,7 +633,7 @@ internal sealed class OnigCompiler
     }
 
     private void Observe(int group, OnigStartBits follow)
-        => _observedFollow[group] = _observedFollow.TryGetValue(group, out var seen) ? seen.Union(follow) : follow;
+        => _observedFollow![group] = _observedFollow[group].Union(follow);
 
     // follow: what may come after node (FollowBits), for auto-possessive runs and give-back skipping.
     private void Emit(OnigNode node, OnigStartBits follow)

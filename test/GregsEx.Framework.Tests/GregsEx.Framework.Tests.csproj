@@ -7,8 +7,16 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
+  <!-- It builds everywhere, but only Windows has the .NET Framework runtime to run it: elsewhere `dotnet test` skips it. -->
+  <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
+    <IsTestProject>false</IsTestProject>
+    <IsTestingPlatformApplication>false</IsTestingPlatformApplication>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit.v3.mtp-v2" />
     <ProjectReference Include="../../src/GregsEx/GregsEx.csproj" />
+    <!-- Loaded by path, as third-party generators load it (see KernelSourceTests): copied beside the tests, not referenced. -->
+    <ProjectReference Include="../../src/GregsEx.Generator/GregsEx.Generator.csproj" ReferenceOutputAssembly="false" />
+    <None Include="../../src/GregsEx.Generator/bin/$(Configuration)/netstandard2.0/GregsEx.Generator.dll" Link="generator/GregsEx.Generator.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
   </ItemGroup>
 </Project>
