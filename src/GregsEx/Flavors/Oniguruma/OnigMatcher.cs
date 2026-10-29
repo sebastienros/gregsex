@@ -11,6 +11,17 @@ namespace GregsEx.Flavors.Oniguruma;
 internal sealed class OnigMatcher
 {
     private const int FrameWidth = 5;
+    // The interpreter's hot methods are compiled fully optimized on their first call instead of starting in tier 0:
+    // tier-0 code runs them several times slower, and a host that keeps compiling new methods (an editor) postpones
+    // their promotion indefinitely (the runtime restarts its call-counting delay at every new tier-0 method). Run
+    // itself stays tiered: it is the one method whose dynamic profile pays (about 7% of a TextMate tokenizer's steady
+    // state, from the layout of its instruction switch), and its loop is long enough for on-stack replacement to
+    // optimize it without waiting for call counting (docs/specs/flavors.md, FL-ONIG-004).
+#if NETCOREAPP3_0_OR_GREATER
+    internal const MethodImplOptions FullOpts = MethodImplOptions.AggressiveOptimization;
+#else
+    internal const MethodImplOptions FullOpts = 0;
+#endif
     // Frame kinds; barriers last.
     private const int Choice = 0, RunBackUnit = 1, RunBackCodePoint = 2, LazyRun = 3, BehindNext = 4, AbsentBack = 5,
         BarrierAtomic = 10, BarrierLook = 11, BarrierNotLook = 12, BarrierBehind = 13, BarrierNotBehind = 14,
@@ -94,6 +105,7 @@ internal sealed class OnigMatcher
     // Searches for the leftmost match starting in [startAt, input.Length], under the budget for the whole search
     // and polling cancellation and the deadline throughout (before any result, even an immediate one). On Match,
     // captures holds start and end per group (group zero first), -1 for groups that did not participate.
+    [MethodImpl(FullOpts)]
     internal RegexSearchStatus Search(OnigProgram program, ReadOnlySpan<char> input, int startAt, Span<int> captures)
     {
         _work = 0;
@@ -322,6 +334,7 @@ internal sealed class OnigMatcher
         return c;
     }
 
+    [MethodImpl(FullOpts)]
     private static bool IsWordAt(ReadOnlySpan<char> input, int pos, bool ascii)
     {
         if (pos >= input.Length)
@@ -338,6 +351,7 @@ internal sealed class OnigMatcher
         return s_word.Contains(CodePointAt(input, pos, out _));
     }
 
+    [MethodImpl(FullOpts)]
     private static bool IsWordBefore(ReadOnlySpan<char> input, int pos, bool ascii)
     {
         if (pos <= 0)
@@ -354,6 +368,7 @@ internal sealed class OnigMatcher
         return s_word.Contains(CodePointBefore(input, pos));
     }
 
+    [MethodImpl(FullOpts)]
     private static bool Anchor(ReadOnlySpan<char> input, int pos, int searchStart, OnigAnchor anchor)
     {
         var end = input.Length;
@@ -387,6 +402,7 @@ internal sealed class OnigMatcher
     }
 
     // Where the character before pos starts (Oniguruma's prev char head), or -1.
+    [MethodImpl(FullOpts)]
     private static int PreviousHead(ReadOnlySpan<char> input, int pos)
     {
         if (pos <= 0)
@@ -398,6 +414,7 @@ internal sealed class OnigMatcher
     }
 
     // Oniguruma's onigenc_egcb_is_break_position: UAX #29 extended grapheme cluster boundaries.
+    [MethodImpl(FullOpts)]
     private static bool IsGraphemeBreak(ReadOnlySpan<char> input, int pos)
     {
         if (pos == 0 || pos >= input.Length)
@@ -546,6 +563,7 @@ internal sealed class OnigMatcher
     private sealed class OnigLimitException : Exception;
 
     // The cleared memo for a search of this program over length units, or null when it would not fit the limits.
+    [MethodImpl(FullOpts)]
     private ulong[]? StartMemo(OnigProgram program, int length)
     {
         var words = (int)Math.Min(int.MaxValue, ((long)program.MemoSlotCount * (length + 1) + 63) >> 6);
@@ -587,6 +605,7 @@ internal sealed class OnigMatcher
         return false;
     }
 
+    [MethodImpl(FullOpts)]
     private RegexSearchStatus Attempt(OnigProgram program, ReadOnlySpan<char> input, int start, int searchStart, Span<int> captures)
     {
         LastAttemptStart = start;
@@ -1448,10 +1467,12 @@ internal sealed class OnigMatcher
         }
     }
 
+    [MethodImpl(FullOpts)]
     private static bool IsMidPair(ReadOnlySpan<char> input, int pos)
         => pos > 0 && pos < input.Length && char.IsLowSurrogate(input[pos]) && char.IsHighSurrogate(input[pos - 1]);
 
     // The look-behind candidate before s, a character head no lower than low, or low - 1 when none is left.
+    [MethodImpl(FullOpts)]
     private static int PreviousCandidate(ReadOnlySpan<char> input, int s, int low)
     {
         var next = s - 1;
@@ -1491,6 +1512,7 @@ internal sealed class OnigMatcher
     }
 
     // The length of text at pos matching the capture [start, end) of input, or -1.
+    [MethodImpl(FullOpts)]
     private static int BackrefLength(ReadOnlySpan<char> input, ReadOnlySpan<char> text, int start, int end, int pos, bool ignoreCase)
     {
         var length = end - start;
@@ -1522,6 +1544,7 @@ internal sealed class OnigMatcher
     }
 
     // Returns from the call at depth: restores the open starts it saved and the caller's loop bank; the return pc.
+    [MethodImpl(FullOpts)]
     private int Return(OnigProgram program, ref int[] regs, int depth, int sp, ref int up)
     {
         var frame = program.FrameBase + program.FrameSize * (depth - 1);
@@ -1536,6 +1559,7 @@ internal sealed class OnigMatcher
         return regs[frame + 1];
     }
 
+    [MethodImpl(FullOpts)]
     private int FindBarrier(int sp, int id)
     {
         var stack = _stack;

@@ -1,4 +1,5 @@
 #nullable enable
+using System.Runtime.CompilerServices;
 using GregsEx.Execution.Compiled;
 using GregsEx.Flavors.Oniguruma;
 
@@ -108,6 +109,7 @@ public sealed class OnigurumaWorkspace
         }
     }
 
+    [MethodImpl(OnigMatcher.FullOpts)]
     internal static void Fill(ReadOnlySpan<int> captures, Span<RegexCapture> groups, int count)
     {
         for (var g = 0; g < count; g++)
