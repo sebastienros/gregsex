@@ -61,6 +61,9 @@ jobs:
       run: dotnet test --project test/GregsEx.Tests --configuration Release -p:GregsExTargetFramework=net8.0 -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True --minimum-expected-tests 1
     - name: Test netstandard2.0 asset
       run: dotnet test --project test/GregsEx.Tests --configuration Release -p:GregsExTargetFramework=netstandard2.0 -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True --minimum-expected-tests 1
+    - name: Test .NET Framework runtime
+      if: runner.os == 'Windows'
+      run: dotnet test --project test/GregsEx.Framework.Tests --configuration Release -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True --minimum-expected-tests 1
 
     # Pack on every run so a missing target asset fails the pull request, not only main or a release tag.
     - name: Pack preview packages

@@ -321,8 +321,10 @@ internal sealed class OnigCompiler
                 budget.Reserve(4L * pass._code.Count);
                 var observed = pass._observedFollow;
                 var same = true;
-                foreach (var (g, bits) in assumed)
+                // Updating a dictionary value invalidates its enumerator on .NET Framework.
+                foreach (var g in compiler._called)
                 {
+                    var bits = assumed[g];
                     var seen = observed.TryGetValue(g, out var o) ? o : OnigStartBits.None;
                     same &= seen == bits;
                     assumed[g] = bits.Union(seen);
