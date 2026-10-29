@@ -131,6 +131,10 @@ internal sealed class OnigCharSet
 
     // The number of units from start that belong to a run of single-unit members, at most max, or -1 when the set
     // has no vectorized form (the caller then steps code point by code point).
+#if NETCOREAPP3_0_OR_GREATER
+    // Compiled fully optimized on its first call, as OnigMatcher's methods are (see FullOpts there).
+    [MethodImpl(MethodImplOptions.AggressiveOptimization)]
+#endif
     internal int RunLength(ReadOnlySpan<char> input, int start, int max)
     {
         if (_unitsState == 0)

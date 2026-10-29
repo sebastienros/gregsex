@@ -97,6 +97,15 @@ with `ONIG_OPTION_CAPTURE_GROUP` by vscode-oniguruma (UTF-8) and Onigwrap (UTF-1
   (vscode-oniguruma), not UTF-16's underflow to every code point; the oracle carries that one-line fix.
 - **FL-ONIG-003:** Offer TextMate's scanner selection and per-pattern result cache with allocation-free warm searches,
   since grammar tokenization searches many patterns from each position.
+- **FL-ONIG-004:** The interpreter's search, attempt and helper methods (`OnigMatcher`) and the scanner's search are
+  compiled fully optimized on first call (`MethodImplOptions.AggressiveOptimization`) rather than starting in tier 0,
+  where they run several times slower until promoted: a tokenizer keeps reaching new patterns and an editor keeps
+  compiling new methods, and each new tier-0 method restarts the runtime's call-counting delay, so promotion can be
+  postponed for the life of a document. The instruction loop (`Run`) stays tiered: without its dynamic profile a
+  TextMate tokenizer's steady state is about 7% slower, and its loop is long enough for on-stack replacement.
+  Measured in Tint's editor-files benchmarks (Passenger's fixtures, `benchmarks/README.md` of sebastienros/tint):
+  the first ten passes over the XML fixture went from 3–5 times the steady-state time to about 2 times, with the
+  steady state unchanged. The `netstandard2.0` target has no such option and keeps tiering.
 
 ## Representative acceptance vectors
 

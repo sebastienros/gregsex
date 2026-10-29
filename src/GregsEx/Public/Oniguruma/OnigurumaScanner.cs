@@ -1,4 +1,5 @@
 #nullable enable
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using GregsEx.Execution.Compiled;
 using GregsEx.Flavors.Oniguruma;
@@ -124,6 +125,7 @@ public sealed class OnigurumaScanner
     public RegexSearchStatus FindNextMatch(ReadOnlySpan<char> input, int startAt, out int patternIndex, RegexMatchOptions options)
         => Find(input, startAt, null, 0, 0, options, out patternIndex);
 
+    [MethodImpl(OnigMatcher.FullOpts)]
     private RegexSearchStatus Find(ReadOnlySpan<char> input, int startAt, string? text, int textStart, int textLength,
         in RegexMatchOptions options, out int patternIndex)
     {
@@ -155,6 +157,7 @@ public sealed class OnigurumaScanner
         }
     }
 
+    [MethodImpl(OnigMatcher.FullOpts)]
     private RegexSearchStatus Find(ReadOnlySpan<char> input, int startAt, string? text, int textStart, int textLength, ref int patternIndex)
     {
         var bestStart = int.MaxValue;
