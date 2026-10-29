@@ -53,6 +53,7 @@ jobs:
       run: dotnet restore -p:Configuration=Release -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True
     - name: Build
       run: dotnet build --configuration Release --no-restore -p:VersionSuffix=preview.${{ github.run_number }} -p:ContinuousIntegrationBuild=True
+    # On Windows this also runs GregsEx.Framework.Tests on the .NET Framework runtime (other hosts build it, but skip it).
     - name: Test
       run: dotnet test --configuration Release --no-build --minimum-expected-tests 1
     # Same suite on the net10.0 host, bound to GregsEx's net8.0 and netstandard2.0 assets

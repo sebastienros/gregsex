@@ -8,6 +8,7 @@
   </Folder>
   <Folder Name="/test/">
     <Project Path="test/GregsEx.AotSmoke/GregsEx.AotSmoke.csproj" />
+    <Project Path="test/GregsEx.Framework.Tests/GregsEx.Framework.Tests.csproj" />
     <Project Path="test/GregsEx.Tests/GregsEx.Tests.csproj" />
   </Folder>
 </Solution>

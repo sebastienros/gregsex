@@ -107,7 +107,17 @@ dotnet test --project test/GregsEx.Tests -c Release -p:GregsExTargetFramework=ne
 Those runs load the shipped net8.0 or polyfilled netstandard2.0 `GregsEx.dll` (the latter
 has no FastExpressionCompiler and uses scalar search fallbacks) on any OS. Tests of explicit runtime compilation and
 netstandard-absent APIs are excluded there with `GREGSEX_NETSTANDARD_ASSET`; every other
-result must match the net10.0 run. It does not exercise the .NET Framework runtime itself.
+result must match the net10.0 run. It does not exercise the .NET Framework runtime itself, which rejects some
+collection behavior that .NET accepts (such as updating a dictionary value while enumerating it).
+
+`test/GregsEx.Framework.Tests` (net472) runs the netstandard2.0 asset and `GregsEx.Generator.dll` on the .NET Framework
+runtime: a compile-and-find per flavor, Oniguruma subexpression calls, and `KernelSource` emission. It is part of the
+solution, so `dotnet test` from the repository root runs it on Windows; other hosts build it but skip it, since they have
+no .NET Framework runtime. To run it alone on Windows:
+
+```sh
+dotnet test --project test/GregsEx.Framework.Tests -c Release --minimum-expected-tests 1
+```
 
 Use focused test selectors when appropriate. Deployment-specific commands are
 defined by the relevant consumer projects and CI workflow. Packaging does not
