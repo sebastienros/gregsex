@@ -116,6 +116,17 @@ with `ONIG_OPTION_CAPTURE_GROUP` by vscode-oniguruma (UTF-8) and Onigwrap (UTF-1
   Measured on TextMateSharp over `char[]` lines, which the per-string cache cannot serve: 1.6 to 2.6 times faster on
   ordinary files, 12 to 19 times on lines of 2,000 to 32,000 characters. Over `string` lines: 1.1 to 2.0 and 1.9 to 6.0
   times.
+- **FL-ONIG-006:** The interpreter does not start what its start units already rule out, and a scanner does once what
+  its patterns share; results are unchanged. A counted loop leaves a body that cannot start at the next unit (or
+  fails short of its minimum) without entering it, as alternatives skip branches; start units follow a call into the
+  group it calls; a look-around over an ignore-case class leaves out the spellings of its members' folds to several
+  code points whose unit next to the position is in the class (`(?i)(?<![\w-])`, before every keyword of the CSS
+  grammars, held 71 look-behinds); an attempt clears its group registers with one fill; a scanner keeps each pattern's
+  result in one entry and looks up a text several patterns require once per string, or once per call for other input.
+  Measured with Tint 0.2.2's BenchmarkDotNet suites (ShortRun, Apple M4 Pro, .NET 10.0.11, a shared host at load 4 to
+  11), interpreted grammars, the same allocations: Passenger's editor files 3 to 32% faster (CSS 32%, SCSS 28%,
+  JavaScript 19%, Markdown 17%, JSON 3%), `bigfile.cs` 18 to 20%, `sample.cs` and `medium.cs` 23%, the docs fences 2 to
+  33%. Over `char[]`-backed lines (Tint passing them, timed with a stopwatch): 4 to 30%, CSS the most.
 
 ## Representative acceptance vectors
 

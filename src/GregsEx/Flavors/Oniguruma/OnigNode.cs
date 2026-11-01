@@ -42,6 +42,8 @@ internal sealed class OnigNode
     // Capture: the name, if named. Backref/CondRef/Call: the referenced name before resolution.
     internal string? Name;
     internal int[]? Groups;
+    // Call: the node of the called group (the pattern for \g<0>), set when compiling, for its start bits.
+    internal OnigNode? Callee;
     internal string? Literal;
     internal int Offset;
     internal int Length;

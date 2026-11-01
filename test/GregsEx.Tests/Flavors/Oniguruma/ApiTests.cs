@@ -390,4 +390,66 @@ public class ApiTests
         Assert.Equal(RegexSearchStatus.Match, Find("(?i)\\A[\\p{Lu}\\p{Lt}]\\z", lower).Status);
         Assert.Equal(RegexSearchStatus.NoMatch, Find("\\A[" + lower + "]", upper).Status);
     }
+
+    // A look-around over an ignore-case class also holds where one of its members' folds to several code points is
+    // spelled: every spelling (?i)[\w-] holds (ss, ff, fi...) starts and ends with a word character, but the ss of
+    // (?i)[ß] has no s in the class (native Oniguruma's results for ssx are in the edge-case corpus).
+    [Theory]
+    [InlineData("(?i)(?<![\\w-])b", "ßb", -1)]
+    [InlineData("(?i)(?<![\\w-])b", "ﬁb", -1)]
+    [InlineData("(?i)(?<![\\w-])b", "-b", -1)]
+    [InlineData("(?i)(?<![\\w-])b", ".b", 1)]
+    [InlineData("(?i)a(?![\\w-])", "aﬁ", -1)]
+    [InlineData("(?i)a(?![\\w-])", "a.", 0)]
+    [InlineData("(?i)(?<![ß])x", "ssx", -1)]
+    [InlineData("(?i)(?<![ß])x", "sx", 1)]
+    [InlineData("(?i)(?<=[ß])x", "ssx", 2)]
+    [InlineData("(?i)x(?![ß])", "xs", 0)]
+    public void LookAroundsHoldWhereAClassMemberFoldsToSeveralCodePoints(string source, string input, int start)
+    {
+        var (status, groups) = Find(source, input);
+        Assert.Equal(start >= 0 ? RegexSearchStatus.Match : RegexSearchStatus.NoMatch, status);
+        if (start >= 0)
+        {
+            Assert.Equal(start, groups[0].Index);
+        }
+    }
+
+    // A loop whose body cannot start at the next unit leaves it, or fails short of its minimum, without trying an
+    // iteration.
+    [Theory]
+    [InlineData("x(?:(a)b|c(d))*y", "xabcdy", 0, 6)]
+    [InlineData("x(?:(a)b|c(d))*?y", "xabcdy", 0, 6)]
+    [InlineData("x(?:(a)b|c(d)){2,}y", "xaby", -1, 0)]
+    [InlineData("x(?:(a)b|c(d)){2,}y", "xabcdy", 0, 6)]
+    [InlineData("(?:(a)|(b))*c", "zzc", 2, 1)]
+    [InlineData("x(?:(a)|b)*$", "xab", 0, 3)]
+    [InlineData("x(?:(a?)b?)*y", "xy", 0, 2)]
+    [InlineData("(?:(\\w+)\\s*\\.\\s*)*(\\w+)\\(", "a . b.c(", 0, 8)]
+    public void LoopsLeaveBodiesThatCannotStart(string source, string input, int start, int length)
+    {
+        var (status, groups) = Find(source, input);
+        Assert.Equal(start >= 0 ? RegexSearchStatus.Match : RegexSearchStatus.NoMatch, status);
+        if (start >= 0)
+        {
+            Assert.Equal(new RegexCapture(true, start, length), groups[0]);
+        }
+    }
+
+    // Start filters and skips see through subexpression calls: a call starts as the group it calls, and a recursive call
+    // may start with anything.
+    [Theory]
+    [InlineData("\\g<n>z(?<n>ab|c){0}", "xxabz", 2, 3)]
+    [InlineData("\\g<n>z(?<n>ab|c){0}", "..cz", 2, 2)]
+    [InlineData("\\g<n>x(?<n>a*){0}", "zzx", 2, 1)]
+    [InlineData("(?<p>\\((?:[^()]|\\g<p>)*\\))", "a(b(c)d)e", 1, 7)]
+    [InlineData("(?<x>a|b\\g<x>)c", "zbbac", 1, 4)]
+    [InlineData("a|b\\g<0>c", "bbacc", 0, 5)]
+    [InlineData("(?:\\s*\\.\\s*\\g<id>)*;(?<id>[a-z]+){0}", "x . y;", 1, 5)]
+    public void StartBitsFollowSubexpressionCalls(string source, string input, int start, int length)
+    {
+        var (status, groups) = Find(source, input);
+        Assert.Equal(RegexSearchStatus.Match, status);
+        Assert.Equal(new RegexCapture(true, start, length), groups[0]);
+    }
 }

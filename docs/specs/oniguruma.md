@@ -127,8 +127,9 @@ A search limited to the starts before a better match begins without the failure 
 searches of one string-backed input that the limit stopped short have done 65,536 work units it searches to the end
 again, whichever offsets they were called with; searches that ran out of work are not counted, since their retries bound
 them. A limited miss does not reset the count of searches that ran out of work on that string, and where a
-pattern's required text last occurs is found once per string. Other input keeps no per-string state: every search that
-can be limited is, looks only for the next occurrence of its required text, and costs no more than it would unlimited. A limited search cannot run out of work past the best
+required text last occurs is found once per string for all of a scanner's patterns that require it. Other input keeps
+no per-string state: every search that can be limited is, looks only for the next occurrence of its required text (once
+per call for the patterns that require the same text), and costs no more than it would unlimited. A limited search cannot run out of work past the best
 start, so `LimitExceededCount` can be lower than with no limit, and a pattern that would have used its retries there
 stays available for the rest of the string.
 As at Oniguruma's `SubexpCallMaxNestLevel` (20), a call nested 19 deep fails that path and the search goes on.
@@ -148,13 +149,17 @@ A dedicated backtracking machine over compact instructions (`Flavors/Oniguruma`)
 executors, and no other regex engine. Register writes are undone through a log per choice frame; atomic groups and
 look-arounds cut to barrier frames. Per pattern the compiler derives search prefilters that preserve results: start
 anchors, a required literal or a required unit set (one of which every match contains, alternatives united), the
-first units of a match (look-aheads included), a leading look-behind's preceding units, a literal prefix, and the
-minimum length; no start after the last occurrence of the required literal or units is tried. Matching uses
+first units of a match (look-aheads included, and a call's those of the group it calls), a leading look-behind's
+preceding units, a literal prefix, and the minimum length; no start after the last occurrence of the required literal
+or units is tried. Matching uses
 follow sets: a greedy run whose follow cannot start with one of its units becomes possessive, and runs give units
 back only where the follow can start, found with one vectorized search. A called group's follow is the union of
-those at its definition and at each call, computed to a fixpoint (at most four extra compile passes, else unknown); alternatives skip branches whose first units
-exclude the next unit; a failed attempt that started with an unbounded run resumes after the run when no
-backreference or condition can depend on where the run started; literal and single-unit look-arounds are table and set tests. NativeAOT compatible: no runtime code generation.
+those at its definition and at each call, computed to a fixpoint (at most four extra compile passes, else unknown); alternatives skip branches, and loops
+their bodies, whose first units exclude the next unit; a failed attempt that started with an unbounded run resumes after the run when no
+backreference or condition can depend on where the run started; literal and single-unit look-arounds are table and set
+tests, and a look-around over an ignore-case class leaves out the class's spellings of folds to several code points
+whose unit next to the position (the first ahead, the last behind) is in the class, since they hold only where it does.
+NativeAOT compatible: no runtime code generation.
 
 ### Compiled kernels
 

@@ -11,7 +11,8 @@ namespace GregsEx.Flavors.Oniguruma;
 //   Jmp target | Split first second | SplitLazy body exit | Alt first second firstBits secondBits (-1: any)
 //   Run item arg min max mode follow (follow: the bits of what may come next, or -1)
 //   SaveOpen n | SaveClose n | RetIfCalled n | Call target n
-//   LoopInit r | LoopHead r min max lazy exit | LoopEnter r snapshot groups | LoopTail r head exit snapshot groups
+//   LoopInit r | LoopHead r min max lazy exit bodyBits (-1: any) | LoopEnter r snapshot groups
+//   LoopTail r head exit snapshot groups
 //   (groups: index into LoopGroups, or -1; snapshot: offset of the loop's capture snapshot)
 //   AtomicStart id | AtomicEnd id | LookStart negative id continuation | LookEnd negative id
 //   BehindStart negative id continuation min max | BehindEnd negative id
@@ -262,6 +263,7 @@ internal sealed class OnigCompiler
             if (reference.Kind == OnigNodeKind.Call)
             {
                 compiler._called.Add(reference.Value);
+                reference.Callee = reference.Value == 0 ? root : compiler._captureNodes.TryGetValue(reference.Value, out var callee) ? callee : null;
             }
             else if (reference.Kind == OnigNodeKind.Backref)
             {
@@ -499,9 +501,9 @@ internal sealed class OnigCompiler
                     width = 7;
                     break;
                 case Op.LoopHead:
-                    Mark(pc + 6);
+                    Mark(pc + 7);
                     Mark(code[pc + 5]);
-                    width = 6;
+                    width = 7;
                     break;
                 case LoopEnter or Op.AssertLiterals:
                     width = 4;
@@ -1079,7 +1081,7 @@ internal sealed class OnigCompiler
         Add(r, min);
         Add(max, lazy ? 1 : 0);
         var exitAt = Here;
-        Add(0);
+        Add(0, BitsIndex(childBits));
         Add(LoopEnter, r);
         Add(snapshot, groupsIndex);
         Emit(child, follow);
@@ -1097,6 +1099,14 @@ internal sealed class OnigCompiler
         var negative = node.Value;
         var behind = node.Flag;
         var body = Unwrap(node.Child);
+        if (body.Kind == OnigNodeKind.Alternation && !ContainsCapture(body) && WithoutSpelledFolds(body.Children, behind) is { } kept)
+        {
+            var rest = new OnigNode(OnigNodeKind.Alternation, body.Offset, body.Length);
+            rest.Children.AddRange(kept);
+            EmitLook(LookOf(node, kept.Count == 1 ? kept[0] : rest), follow);
+            return;
+        }
+
         var branches = body.Kind == OnigNodeKind.Alternation ? body.Children : [body];
         if (branches.Count > 1 && TryUnitsAndEdges(branches, behind, out var unitSet, out var edges))
         {
@@ -1299,6 +1309,45 @@ internal sealed class OnigCompiler
         }
 
         return (s_firstUnits.GetOrAdd((low, high, false), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, true))), atStart);
+    }
+
+    // The branches of a look-around worth testing, or null when all are. Under ignore-case a class also spells its
+    // members' folds to several code points ((?i)[\w-] holds 71: ss, ff, fi...), but a look-around only asks whether
+    // some branch matches, and a branch whose character next to the position (its last behind, its first ahead) is in a
+    // class branch matches only where that class does.
+    private static List<OnigNode>? WithoutSpelledFolds(List<OnigNode> branches, bool behind)
+    {
+        OnigCharSet? set = null;
+        foreach (var branch in branches)
+        {
+            if (Unwrap(branch) is { Kind: OnigNodeKind.Set, Negated: false } b)
+            {
+                set = b.Set!;
+                break;
+            }
+        }
+
+        if (set is null)
+        {
+            return null;
+        }
+
+        List<OnigNode>? kept = null;
+        for (var i = 0; i < branches.Count; i++)
+        {
+            var b = Unwrap(branches[i]);
+            var edge = b.Kind == OnigNodeKind.Sequence && b.Children.Count > 0 ? Unwrap(behind ? b.Children[^1] : b.Children[0]) : null;
+            if (edge?.Kind == OnigNodeKind.Char && (edge.IgnoreCase ? OnigUnicode.CaseClass(edge.Value) : [edge.Value]).All(set.Contains))
+            {
+                kept ??= branches.GetRange(0, i);
+            }
+            else
+            {
+                kept?.Add(branches[i]);
+            }
+        }
+
+        return kept;
     }
 
     // Branches that are single units, or ^ and \A behind, or $ and \z ahead ($ adds the newline to the set).
@@ -1645,7 +1694,14 @@ internal sealed class OnigCompiler
     private static OnigStartBits Bits(OnigNode node, bool anchors)
     {
         ref var cache = ref anchors ? ref node.FollowCache : ref node.BitsCache;
-        return cache ??= ComputeBits(node, anchors);
+        if (cache is { } bits)
+        {
+            return bits;
+        }
+
+        // A call inside can reach this node again: there it may start with anything, which only widens what is cached.
+        cache = OnigStartBits.Any;
+        return (cache = ComputeBits(node, anchors)).Value;
     }
 
     private static OnigStartBits ComputeBits(OnigNode node, bool anchors)
@@ -1705,6 +1761,8 @@ internal sealed class OnigCompiler
                 }
             case OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic:
                 return Bits(node.Child, anchors);
+            case OnigNodeKind.Call when node.Callee is { } callee:
+                return Bits(callee, anchors);
             default:
                 return OnigStartBits.Any;
         }

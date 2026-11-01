@@ -45,8 +45,9 @@ internal sealed class OnigMatcher
     // text that is absent answers for every start, whatever the limit.
     internal int LastCovered { get; private set; }
 
-    // Where the required text last occurs, -1 if nowhere, or the requiredAt passed if the last search did not look it up.
-    // It depends only on the input, so a caller searching the same input again passes it back.
+    // Where the required text last occurs, -1 if nowhere, int.MaxValue when a limited search only found that it occurs
+    // at or after its start (RequiredNotKept), or the requiredAt passed if the last search did not look it up. It depends
+    // only on the input (and that start), so a caller searching the same input again passes it back.
     internal int LastRequired { get; private set; }
 
     internal const int RequiredUnknown = -2;
@@ -157,7 +158,7 @@ internal sealed class OnigMatcher
             if (requiredAt == RequiredNotKept && limit < last)
             {
                 // The limit bounds the starts, so an occurrence at or after startAt is all a match needs.
-                requiredAt = FindRequired(program, input[startAt..], fromEnd: false) < 0 ? -1 : int.MaxValue;
+                LastRequired = requiredAt = FindRequired(program, input[startAt..], fromEnd: false) < 0 ? -1 : int.MaxValue;
             }
             else if (requiredAt is RequiredUnknown or RequiredNotKept)
             {
@@ -680,11 +681,9 @@ internal sealed class OnigMatcher
         var stack = _stack;
         var groups = program.GroupCount;
         var openBase = program.OpenBase;
-        // Only ends mark participation: starts and open starts are written before they are read.
-        for (var g = 1; g < groups; g++)
-        {
-            regs[2 * g + 1] = -1;
-        }
+        // Only ends mark participation: starts and open starts are written before they are read, so clearing both is
+        // one vectorized fill.
+        regs.AsSpan(2, 2 * groups - 2).Fill(-1);
 
         regs[program.KeepRegister] = -1;
 
@@ -1042,8 +1041,20 @@ internal sealed class OnigMatcher
                     {
                         var count = regs[regs[program.BankRegister] + 2 * code[pc + 1]];
                         var max = code[pc + 3];
-                        var enter = pc + 6;
-                        if (count < code[pc + 2])
+                        var enter = pc + 7;
+                        // A body that cannot start here would only fail: an iteration it still needs fails now, and
+                        // otherwise the loop exits without trying one, as the resume at the exit would.
+                        var bits = code[pc + 6];
+                        if (bits >= 0 && !program.Bits[bits].CanStartWith(pos < end ? text[pos] : -1))
+                        {
+                            if (count < code[pc + 2] || (memo is not null && Seen(memo, slots![code[pc + 5]] * stride + pos)))
+                            {
+                                goto Fail;
+                            }
+
+                            pc = code[pc + 5];
+                        }
+                        else if (count < code[pc + 2])
                         {
                             pc = enter;
                         }

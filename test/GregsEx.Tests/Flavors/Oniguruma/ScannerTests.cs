@@ -161,8 +161,20 @@ public class ScannerTests
     [InlineData("😀 let a = \"b\"; 😀.x(1) // c\n")]
     [InlineData("\n\n  x\ty\n\n")]
     public void SelectionAgreesWithSearchingEveryPatternToTheEnd(string line)
+        => AssertSelectionAgrees(["\\b(const|let|var)\\b", "//.*$", "\"", "(?<=\\.)\\w+", "\\w+(?=\\()", "^\\s+", "[{}()\\[\\];,.]", "\\d+", "\\G\\s"], line);
+
+    // Most of these patterns require ( or ;, looked up once per string (or per call for other input) for all of them.
+    [Theory]
+    [InlineData("call(a, b); x = (1 + 2);")]
+    [InlineData("no parens at all here")]
+    [InlineData("trailing (")]
+    [InlineData("((((;")]
+    [InlineData("a; b; c(d); e")]
+    public void SelectionAgreesWhenPatternsRequireTheSameText(string line)
+        => AssertSelectionAgrees(["\\w+(?=\\()", "\\(([^()]*)\\)", "[a-z]+\\s*\\(", ";.*\\(", "\\w+\\s*;", "\\d+", "[=;,]", "\\b[a-z]\\b(?=.*;)"], line);
+
+    private static void AssertSelectionAgrees(string[] patterns, string line)
     {
-        string[] patterns = ["\\b(const|let|var)\\b", "//.*$", "\"", "(?<=\\.)\\w+", "\\w+(?=\\()", "^\\s+", "[{}()\\[\\];,.]", "\\d+", "\\G\\s"];
         var workspaces = patterns.Select(p => OnigurumaPattern.Parse(p, RegexProfiles.OnigurumaTextMate).CreateWorkspace()).ToArray();
         var scanner = Scanner(patterns);
         // A span search clears the per-string results, so strings get a scanner of their own.
