@@ -14,7 +14,7 @@ scratch storage, and bounded execution. No external dependencies.
 | Source | Purpose | Package feed |
 | --- | --- | --- |
 | `v*.*.*` | Versioned releases | [![NuGet.org stable version](https://img.shields.io/nuget/v/GregsEx.svg?label=nuget.org)](https://www.nuget.org/packages/GregsEx) |
-| `main` branch | Development previews | [![Feedz preview version](https://img.shields.io/endpoint?url=https%3A%2F%2Ff.feedz.io%2Fsebastienros%2Fgregsex%2Fshield%2FGregsEx%2Flatest)](https://f.feedz.io/sebastienros/gregsex/nuget/index.json) |
+| `main` branch | Development previews | [![Feedz preview version](https://img.shields.io/endpoint?url=https%3A%2F%2Ff.feedz.io%2Fsebastienros%2Fgregsex%2Fshield%2FGregsEx%2Flatest)](https://feedz.io/org/sebastienros/repository/gregsex/packages/GregsEx) |
 
 For development previews, add Feedz alongside NuGet.org:
 
