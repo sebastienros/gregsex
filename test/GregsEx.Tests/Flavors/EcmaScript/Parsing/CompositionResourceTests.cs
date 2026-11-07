@@ -34,6 +34,9 @@ public sealed class CompositionResourceTests(ITestOutputHelper output)
     [InlineData(@"(?<α>a)(?<=a)\k<α>", "u")]
     public void ExactWorkBoundaryAndComponentRetentionUseOneBudget(string pattern, string flags)
     {
+        // Prepare the once-shared table, so the complete compile below is charged what the bounded ones are.
+        var warm = new CompileBudget(new());
+        _ = Composition.Data(ref warm);
         var budget = new CompileBudget(new());
         var data = Composition.Data(ref budget);
         var initial = budget.ReservedBytes;
