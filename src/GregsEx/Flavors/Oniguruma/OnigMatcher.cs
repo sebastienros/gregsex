@@ -814,6 +814,18 @@ internal sealed class OnigMatcher
                     Push(ref sp, Choice, code[pc + 1], pos, 0, up);
                     pc = code[pc + 2];
                     continue;
+                case Op.AltSwitch:
+                    {
+                        var key = pos < end ? (text[pos] < 128 ? text[pos] : OnigCompiler.AltSwitchNonAscii) : OnigCompiler.AltSwitchEnd;
+                        var target = program.AltSwitches[code[pc + 1]][key];
+                        if (target < 0)
+                        {
+                            goto Fail;
+                        }
+
+                        pc = target;
+                        continue;
+                    }
                 case Op.Alt:
                     {
                         var c = pos < end ? text[pos] : -1;

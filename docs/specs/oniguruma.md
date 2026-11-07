@@ -154,8 +154,11 @@ preceding units, a literal prefix, and the minimum length; no start after the la
 or units is tried. Matching uses
 follow sets: a greedy run whose follow cannot start with one of its units becomes possessive, and runs give units
 back only where the follow can start, found with one vectorized search. A called group's follow is the union of
-those at its definition and at each call, computed to a fixpoint (at most four extra compile passes, else unknown); alternatives skip branches, and loops
-their bodies, whose first units exclude the next unit; a failed attempt that started with an unbounded run resumes after the run when no
+those at its definition and at each call, computed to a fixpoint (at most four extra compile passes, else unknown);
+alternatives skip branches, and loops their bodies, whose first units exclude the next unit, and an alternation where
+that skips at least eight branches for some unit first jumps, by the unit (ASCII, any other unit, or the end), to the
+first branch that can start with it, or fails when none can, without testing the ones before (they would push no choice
+and count no work); a failed attempt that started with an unbounded run resumes after the run when no
 backreference or condition can depend on where the run started; literal and single-unit look-arounds are table and set
 tests, and a look-around over an ignore-case class leaves out the class's spellings of folds to several code points
 whose unit next to the position (the first ahead, the last behind) is in the class, since they hold only where it does.

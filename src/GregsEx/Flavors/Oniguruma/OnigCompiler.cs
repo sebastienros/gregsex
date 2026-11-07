@@ -9,6 +9,7 @@ namespace GregsEx.Flavors.Oniguruma;
 // Lowers a parse tree to OnigProgram instructions. Layouts (operands after the opcode):
 //   Char c | CharIC2 a b | Str offset length | Set s | SetUnit s | AnyNL | Any | Anchor kind | Keep | Fail | Match
 //   Jmp target | Split first second | SplitLazy body exit | Alt first second firstBits secondBits (-1: any)
+//   AltSwitch table (index into OnigProgram.AltSwitches)
 //   Run item arg min max mode follow (follow: the bits of what may come next, or -1)
 //   SaveOpen n | SaveClose n | RetIfCalled n | Call target n
 //   LoopInit r | LoopHead r min max lazy exit bodyBits (-1: any) | LoopEnter r snapshot groups
@@ -24,6 +25,13 @@ internal sealed class OnigCompiler
 {
     internal const int LoopEnter = 36;
 
+    // An alternation starts with an AltSwitch, a jump by the unit at the position to the first branch that can start
+    // with it, when that passes at least this many Alt tests for some unit.
+    internal const int AltSwitchMinSkip = 8;
+
+    // An AltSwitch table's entries: one per ASCII unit, then any non-ASCII unit, then the end of the input.
+    internal const int AltSwitchKeys = 130, AltSwitchNonAscii = 128, AltSwitchEnd = 129;
+
     private static readonly ConcurrentDictionary<(ulong, ulong, bool), SearchValues<char>> s_firstUnits = new();
 
     private readonly List<int> _code = [];
@@ -33,6 +41,7 @@ internal sealed class OnigCompiler
     private readonly StringBuilder _literals = new();
     private readonly List<OnigStartBits> _bits = [];
     private readonly List<OnigLiteralTable> _tables = [];
+    private readonly List<int[]> _altSwitches = [];
     private readonly HashSet<int> _called = [];
     // What may follow each called group, by group number: assumed for this pass, and seen at its definition and call
     // sites (allocated only when a group is called; uncalled groups stay None).
@@ -439,6 +448,7 @@ internal sealed class OnigCompiler
             LoopGroups = compiler._loopGroups.ToArray(),
             SnapshotCount = compiler._snapshots,
             Tables = compiler._tables.ToArray(),
+            AltSwitches = compiler._altSwitches.ToArray(),
             PrecededBy = precededBy,
             PrecededAtStart = precededAtStart,
             MemoSlots = memoSlots,
@@ -477,7 +487,7 @@ internal sealed class OnigCompiler
                     width = 1;
                     break;
                 case Op.Char or Op.Set or Op.SetUnit or Op.Anchor or Op.Jmp or Op.JmpBack or Op.SaveOpen or Op.SaveClose
-                    or Op.LoopInit:
+                    or Op.LoopInit or Op.AltSwitch:
                     width = 2;
                     break;
                 case Op.CharIC2 or Op.Str:
@@ -927,30 +937,102 @@ internal sealed class OnigCompiler
     private void EmitAlternation(List<OnigNode> branches, OnigStartBits follow)
     {
         var jumps = new List<int>();
+        var first = new OnigStartBits[branches.Count];
         var rest = new OnigStartBits[branches.Count];
-        rest[^1] = FollowBits(branches[^1]);
-        for (var i = branches.Count - 2; i >= 0; i--)
+        for (var i = 0; i < branches.Count; i++)
         {
-            rest[i] = FollowBits(branches[i]).Union(rest[i + 1]);
+            first[i] = FollowBits(branches[i]);
         }
 
+        rest[^1] = first[^1];
+        for (var i = branches.Count - 2; i >= 0; i--)
+        {
+            rest[i] = first[i].Union(rest[i + 1]);
+        }
+
+        var branchFor = AltSwitchBranches(first, rest);
+        // The table's slot is taken now: alternations nested in the branches add theirs while the branches are emitted.
+        var switchIndex = -1;
+        if (branchFor is not null)
+        {
+            switchIndex = _altSwitches.Count;
+            _altSwitches.Add([]);
+            Add(Op.AltSwitch, switchIndex);
+        }
+
+        // Where each branch's test starts: its Alt, or for the last branch its own code.
+        var entries = new int[branches.Count];
         for (var i = 0; i < branches.Count - 1; i++)
         {
             var at = Here;
+            entries[i] = at;
             Add(Op.Alt);
             Add(at + 5, 0);
-            Add(BitsIndex(FollowBits(branches[i])), BitsIndex(rest[i + 1]));
+            Add(BitsIndex(first[i]), BitsIndex(rest[i + 1]));
             Emit(branches[i], follow);
             Add(Op.Jmp);
             jumps.Add(Here);
             Add(0);
             _code[at + 2] = Here;
         }
+        entries[^1] = Here;
         Emit(branches[^1], follow);
         foreach (var j in jumps)
         {
             _code[j] = Here;
         }
+
+        if (switchIndex >= 0)
+        {
+            var table = new int[AltSwitchKeys];
+            for (var key = 0; key < AltSwitchKeys; key++)
+            {
+                table[key] = branchFor![key] < 0 ? -1 : entries[branchFor[key]];
+            }
+
+            _altSwitches[switchIndex] = table;
+        }
+    }
+
+    // Per unit class (ASCII units 0-127, any non-ASCII unit, the end of the input): the branch whose test the chain of
+    // Alt tests would enter first, or -1 where it would fail; null when no unit would pass AltSwitchMinSkip tests. A
+    // test the jump passes neither pushes a choice nor counts work nor reads the memo (the memo is only read for a
+    // branch the unit can start), so jumping leaves results, backtracking and work as the chain gives them.
+    // CanStartWith depends on a non-ASCII unit only through NonAscii, so one entry serves them all.
+    private static int[]? AltSwitchBranches(OnigStartBits[] first, OnigStartBits[] rest)
+    {
+        if (first.Length <= AltSwitchMinSkip)
+        {
+            return null;
+        }
+
+        var branchFor = new int[AltSwitchKeys];
+        var skips = 0;
+        for (var key = 0; key < AltSwitchKeys; key++)
+        {
+            var c = key < 128 ? key : key == AltSwitchNonAscii ? 128 : -1;
+            branchFor[key] = -1;
+            for (var i = 0; ; i++)
+            {
+                if (i == first.Length - 1 || Admits(first[i], c))
+                {
+                    branchFor[key] = i;
+                    break;
+                }
+
+                if (!Admits(rest[i + 1], c))
+                {
+                    break;
+                }
+            }
+
+            skips = Math.Max(skips, branchFor[key]);
+        }
+
+        return skips >= AltSwitchMinSkip ? branchFor : null;
+
+        // As the matcher reads an Alt operand: BitsIndex gives -1, which admits everything, for IsAny bits.
+        static bool Admits(OnigStartBits bits, int c) => bits.IsAny || bits.CanStartWith(c);
     }
 
     private void EmitRepeat(OnigNode node, OnigStartBits follow)

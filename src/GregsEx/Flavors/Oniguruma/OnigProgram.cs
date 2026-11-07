@@ -12,7 +12,7 @@ internal static class Op
         RetIfCalled = 16, LoopInit = 17, LoopHead = 18, LoopTail = 19, AtomicStart = 20, AtomicEnd = 21,
         LookStart = 22, LookEnd = 23, BehindStart = 24, BehindEnd = 25, AssertSet = 26, AssertStr = 27,
         Backref = 28, Call = 29, CondRef = 30, CondStart = 31, CondEnd = 32, Absent = 33, Fail = 34,
-        SplitLazy = 35, AssertLiterals = 37, JmpBack = 38;
+        SplitLazy = 35, AssertLiterals = 37, JmpBack = 38, AltSwitch = 39;
 }
 
 // The item a Run instruction repeats.
@@ -96,6 +96,8 @@ internal sealed class OnigProgram
     // tries a subset of the same continuations, so the search resumes after e (as Oniguruma does).
     internal int LeadingRun { get; init; } = -1;
     internal OnigLiteralTable[] Tables { get; init; } = [];
+    // Per AltSwitch: the pc to continue at for each unit class (OnigCompiler.AltSwitchBranches), -1 to fail.
+    internal int[][] AltSwitches { get; init; } = [];
     // Per pc, the failure-memo slot of a backtrack resume point, or null when resumes depend on more than (pc,
     // position) (see OnigCompiler.MemoSlots).
     internal int[]? MemoSlots { get; init; }
@@ -125,6 +127,8 @@ internal sealed class OnigProgram
         {
             bytes += table.Bytes;
         }
+
+        bytes += 4L * OnigCompiler.AltSwitchKeys * AltSwitches.Length;
 
         foreach (var name in GroupNames)
         {
