@@ -9,6 +9,7 @@ namespace GregsEx.Flavors.Oniguruma;
 // Lowers a parse tree to OnigProgram instructions. Layouts (operands after the opcode):
 //   Char c | CharIC2 a b | Str offset length | Set s | SetUnit s | AnyNL | Any | Anchor kind | Keep | Fail | Match
 //   Jmp target | Split first second | SplitLazy body exit | Alt first second firstBits secondBits (-1: any)
+//   AltSwitch table (index into OnigProgram.AltSwitches)
 //   Run item arg min max mode follow (follow: the bits of what may come next, or -1)
 //   SaveOpen n | SaveClose n | RetIfCalled n | Call target n
 //   LoopInit r | LoopHead r min max lazy exit bodyBits (-1: any) | LoopEnter r snapshot groups
@@ -24,6 +25,13 @@ internal sealed class OnigCompiler
 {
     internal const int LoopEnter = 36;
 
+    // An alternation starts with an AltSwitch, a jump by the unit at the position to the first branch that can start
+    // with it, when that passes at least this many Alt tests for some unit.
+    internal const int AltSwitchMinSkip = 8;
+
+    // An AltSwitch table's entries: one per ASCII unit, then any non-ASCII unit, then the end of the input.
+    internal const int AltSwitchKeys = 130, AltSwitchNonAscii = 128, AltSwitchEnd = 129;
+
     private static readonly ConcurrentDictionary<(ulong, ulong, bool), SearchValues<char>> s_firstUnits = new();
 
     private readonly List<int> _code = [];
@@ -33,6 +41,7 @@ internal sealed class OnigCompiler
     private readonly StringBuilder _literals = new();
     private readonly List<OnigStartBits> _bits = [];
     private readonly List<OnigLiteralTable> _tables = [];
+    private readonly List<int[]> _altSwitches = [];
     private readonly HashSet<int> _called = [];
     // What may follow each called group, by group number: assumed for this pass, and seen at its definition and call
     // sites (allocated only when a group is called; uncalled groups stay None).
@@ -42,8 +51,8 @@ internal sealed class OnigCompiler
     private readonly List<(int At, int Group)> _callFixups = [];
     private readonly RegexCompileLimits _limits;
     private int _loops;
-    // A counted loop whose iteration count or start a later instruction may read (see MemoSlots).
-    private bool _stateLoops;
+    // Where each counted loop whose iteration count or start a later instruction may read begins (see MemoSlots).
+    private readonly List<int> _stateLoops = [];
     private bool _usesKeep;
     private int _ids;
     private int _snapshots;
@@ -406,7 +415,8 @@ internal sealed class OnigCompiler
                 notRequiredAscii = s_firstUnits.GetOrAdd((units.Low, units.High, true), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, false)));
             }
         }
-        var memoSlots = compiler._called.Count == 0 && !compiler._stateLoops ? MemoSlots(compiler._code) : null;
+        var memoComplete = false;
+        var memoSlots = compiler._called.Contains(0) ? null : MemoSlots(compiler._code, compiler._called, compiler._stateLoops, out memoComplete);
         var program = new OnigProgram
         {
             Code = compiler._code.ToArray(),
@@ -439,10 +449,12 @@ internal sealed class OnigCompiler
             LoopGroups = compiler._loopGroups.ToArray(),
             SnapshotCount = compiler._snapshots,
             Tables = compiler._tables.ToArray(),
+            AltSwitches = compiler._altSwitches.ToArray(),
             PrecededBy = precededBy,
             PrecededAtStart = precededAtStart,
             MemoSlots = memoSlots,
             MemoSlotCount = memoSlots is null ? 0 : memoSlots.Max() + 1,
+            MemoComplete = memoSlots is not null && memoComplete,
         };
         if (program.ClassRanges() > limits.MaxClassRanges)
         {
@@ -458,77 +470,131 @@ internal sealed class OnigCompiler
     }
 
     // Per pc, a slot for the positions a backtrack resumes at (choice targets and run continuations, and the preferred
-    // branches of alternatives and loops, which the matcher marks on entry), or null when the
-    // program can resume somewhere with state beyond (pc, position) that changes what follows: look-arounds, atomic
-    // groups, conditions, absent operators and backreferences, or a loop whose count or start matters (bounded, with
-    // a minimum above one, or with a nullable body). Captures otherwise only shape the result, so a resume at a pair
-    // that already failed fails again and the matcher may skip it.
-    private static int[]? MemoSlots(List<int> code)
+    // branches of alternatives and loops, which the matcher marks on entry), or -1 where a resume carries state beyond
+    // (pc, position) that changes what follows: inside a called group, whose end returns to its caller, a look-around,
+    // whose end continues from where it was entered, or an atomic group, whose end drops what its body left to try.
+    // Outside them no call is active and a finished look-around or atomic group leaves nothing behind. Null when no
+    // pc has a slot, more pcs need one than a short holds, or when conditions, absent operators or backreferences
+    // occur, or a loop whose count or start matters (bounded, with a minimum above one, or with a nullable body) is
+    // outside those regions. Captures otherwise only shape the result, so a resume at a pair that already failed fails
+    // again and the matcher may skip it. complete: no resume point was left without a slot.
+    private static short[]? MemoSlots(List<int> code, HashSet<int> called, List<int> stateLoops, out bool complete)
     {
+        complete = false;
+        var inside = new bool[code.Count];
+        var depth = 0;
+        for (var pc = 0; pc < code.Count;)
+        {
+            var op = code[pc];
+            if (op == Op.SaveOpen && called.Contains(code[pc + 1]))
+            {
+                // The group's first instruction is where its calls jump.
+                depth++;
+            }
+
+            // A region's start resumes as any other instruction; its body and end belong to it.
+            inside[pc] = depth > 0;
+            if (op is Op.AtomicStart or Op.LookStart or Op.BehindStart)
+            {
+                depth++;
+            }
+            else if (op is Op.RetIfCalled or Op.AtomicEnd or Op.LookEnd or Op.BehindEnd)
+            {
+                depth--;
+            }
+
+            var width = Width(code, pc);
+            if (width == 0 || depth < 0)
+            {
+                return null;
+            }
+
+            pc += width;
+        }
+
+        if (depth != 0)
+        {
+            return null;
+        }
+
+        foreach (var at in stateLoops)
+        {
+            if (!inside[at])
+            {
+                return null;
+            }
+        }
+
         var slots = new int[code.Count];
         Array.Fill(slots, -1);
         var count = 0;
+        var skipped = false;
         for (var pc = 0; pc < code.Count;)
         {
-            int width;
             switch (code[pc])
             {
-                case Op.Match or Op.AnyNL or Op.Any or Op.Keep or Op.Fail:
-                    width = 1;
-                    break;
-                case Op.Char or Op.Set or Op.SetUnit or Op.Anchor or Op.Jmp or Op.JmpBack or Op.SaveOpen or Op.SaveClose
-                    or Op.LoopInit:
-                    width = 2;
-                    break;
-                case Op.CharIC2 or Op.Str:
-                    width = 3;
-                    break;
                 case Op.Split:
                     Mark(code[pc + 2]);
-                    width = 3;
                     break;
                 case Op.SplitLazy:
                     Mark(code[pc + 1]);
-                    width = 3;
                     break;
                 case Op.Alt:
                     Mark(pc + 5);
                     Mark(code[pc + 2]);
-                    width = 5;
                     break;
                 case Op.Run:
                     Mark(pc + 7);
-                    width = 7;
                     break;
                 case Op.LoopHead:
                     Mark(pc + 7);
                     Mark(code[pc + 5]);
-                    width = 7;
                     break;
-                case LoopEnter or Op.AssertLiterals:
-                    width = 4;
-                    break;
-                case Op.AssertSet or Op.AssertStr:
-                    width = 5;
-                    break;
-                case Op.LoopTail:
-                    width = 6;
-                    break;
-                default:
-                    return null;
             }
-            pc += width;
+            pc += Width(code, pc);
         }
-        return count == 0 ? null : slots;
+
+        complete = !skipped;
+        if (count == 0 || count > short.MaxValue + 1)
+        {
+            return null;
+        }
+
+        var narrow = new short[slots.Length];
+        for (var i = 0; i < slots.Length; i++)
+        {
+            narrow[i] = (short)slots[i];
+        }
+
+        return narrow;
 
         void Mark(int target)
         {
-            if (slots[target] < 0)
+            if (inside[target])
+            {
+                skipped = true;
+            }
+            else if (slots[target] < 0)
             {
                 slots[target] = count++;
             }
         }
     }
+
+    // The width of the instruction at pc, or 0 for the opcodes MemoSlots rejects (backreferences, conditions, absent
+    // operators).
+    private static int Width(List<int> code, int pc) => code[pc] switch
+    {
+        Op.Match or Op.AnyNL or Op.Any or Op.Keep or Op.Fail => 1,
+        Op.Char or Op.Set or Op.SetUnit or Op.Anchor or Op.Jmp or Op.JmpBack or Op.SaveOpen or Op.SaveClose
+            or Op.LoopInit or Op.RetIfCalled or Op.AtomicStart or Op.AtomicEnd or Op.AltSwitch => 2,
+        Op.CharIC2 or Op.Str or Op.Split or Op.SplitLazy or Op.Call or Op.LookEnd or Op.BehindEnd => 3,
+        LoopEnter or Op.AssertLiterals or Op.LookStart => 4,
+        Op.Alt or Op.AssertSet or Op.AssertStr => 5,
+        Op.LoopTail or Op.BehindStart => 6,
+        Op.Run or Op.LoopHead => 7,
+        _ => 0,
+    };
 
     private static char[] AsciiMembers(ulong low, ulong high, bool members)
     {
@@ -927,30 +993,102 @@ internal sealed class OnigCompiler
     private void EmitAlternation(List<OnigNode> branches, OnigStartBits follow)
     {
         var jumps = new List<int>();
+        var first = new OnigStartBits[branches.Count];
         var rest = new OnigStartBits[branches.Count];
-        rest[^1] = FollowBits(branches[^1]);
-        for (var i = branches.Count - 2; i >= 0; i--)
+        for (var i = 0; i < branches.Count; i++)
         {
-            rest[i] = FollowBits(branches[i]).Union(rest[i + 1]);
+            first[i] = FollowBits(branches[i]);
         }
 
+        rest[^1] = first[^1];
+        for (var i = branches.Count - 2; i >= 0; i--)
+        {
+            rest[i] = first[i].Union(rest[i + 1]);
+        }
+
+        var branchFor = AltSwitchBranches(first, rest);
+        // The table's slot is taken now: alternations nested in the branches add theirs while the branches are emitted.
+        var switchIndex = -1;
+        if (branchFor is not null)
+        {
+            switchIndex = _altSwitches.Count;
+            _altSwitches.Add([]);
+            Add(Op.AltSwitch, switchIndex);
+        }
+
+        // Where each branch's test starts: its Alt, or for the last branch its own code.
+        var entries = new int[branches.Count];
         for (var i = 0; i < branches.Count - 1; i++)
         {
             var at = Here;
+            entries[i] = at;
             Add(Op.Alt);
             Add(at + 5, 0);
-            Add(BitsIndex(FollowBits(branches[i])), BitsIndex(rest[i + 1]));
+            Add(BitsIndex(first[i]), BitsIndex(rest[i + 1]));
             Emit(branches[i], follow);
             Add(Op.Jmp);
             jumps.Add(Here);
             Add(0);
             _code[at + 2] = Here;
         }
+        entries[^1] = Here;
         Emit(branches[^1], follow);
         foreach (var j in jumps)
         {
             _code[j] = Here;
         }
+
+        if (switchIndex >= 0)
+        {
+            var table = new int[AltSwitchKeys];
+            for (var key = 0; key < AltSwitchKeys; key++)
+            {
+                table[key] = branchFor![key] < 0 ? -1 : entries[branchFor[key]];
+            }
+
+            _altSwitches[switchIndex] = table;
+        }
+    }
+
+    // Per unit class (ASCII units 0-127, any non-ASCII unit, the end of the input): the branch whose test the chain of
+    // Alt tests would enter first, or -1 where it would fail; null when no unit would pass AltSwitchMinSkip tests. A
+    // test the jump passes neither pushes a choice nor counts work nor reads the memo (the memo is only read for a
+    // branch the unit can start), so jumping leaves results, backtracking and work as the chain gives them.
+    // CanStartWith depends on a non-ASCII unit only through NonAscii, so one entry serves them all.
+    private static int[]? AltSwitchBranches(OnigStartBits[] first, OnigStartBits[] rest)
+    {
+        if (first.Length <= AltSwitchMinSkip)
+        {
+            return null;
+        }
+
+        var branchFor = new int[AltSwitchKeys];
+        var skips = 0;
+        for (var key = 0; key < AltSwitchKeys; key++)
+        {
+            var c = key < 128 ? key : key == AltSwitchNonAscii ? 128 : -1;
+            branchFor[key] = -1;
+            for (var i = 0; ; i++)
+            {
+                if (i == first.Length - 1 || Admits(first[i], c))
+                {
+                    branchFor[key] = i;
+                    break;
+                }
+
+                if (!Admits(rest[i + 1], c))
+                {
+                    break;
+                }
+            }
+
+            skips = Math.Max(skips, branchFor[key]);
+        }
+
+        return skips >= AltSwitchMinSkip ? branchFor : null;
+
+        // As the matcher reads an Alt operand: BitsIndex gives -1, which admits everything, for IsAny bits.
+        static bool Admits(OnigStartBits bits, int c) => bits.IsAny || bits.CanStartWith(c);
     }
 
     private void EmitRepeat(OnigNode node, OnigStartBits follow)
@@ -1062,7 +1200,13 @@ internal sealed class OnigCompiler
         }
 
         var r = _loops++;
-        _stateLoops |= min > 1 || max != -1 || Nullable(child);
+        // An optional body (x? as a counted loop, for a body with a repeat or an alternative) runs at most once: after it
+        // the loop can only exit, so its count never steers a resume; only bounds above one make the count matter.
+        if (min > 1 || (max != -1 && !(min == 0 && max == 1)) || Nullable(child))
+        {
+            _stateLoops.Add(Here);
+        }
+
         // Only groups a backreference outside the body refers to make an empty iteration count as progress.
         var groups = Nullable(child) ? GroupsIn(child).Where(g => _backrefs.Any(b => b.Groups!.Contains(g) && !Contains(child, b))).ToArray() : [];
         var groupsIndex = -1;
