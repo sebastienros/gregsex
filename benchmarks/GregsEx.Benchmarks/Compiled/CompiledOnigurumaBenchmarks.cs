@@ -181,7 +181,7 @@ public partial class CompiledOnigurumaBenchmarks
     }
 
     // The distinct patterns and sample lines of one grammar of the Oniguruma corpus, identified by its first sample line.
-    private static (List<string> Patterns, string[] Lines) LoadCorpus(string firstLine)
+    internal static (List<string> Patterns, string[] Lines) LoadCorpus(string firstLine)
     {
         var dir = AppContext.BaseDirectory;
         while (dir is not null && !File.Exists(Path.Combine(dir, "GregsEx.slnx")))

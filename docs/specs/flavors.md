@@ -106,16 +106,27 @@ with `ONIG_OPTION_CAPTURE_GROUP` by vscode-oniguruma (UTF-8) and Onigwrap (UTF-1
   Measured in Tint's editor-files benchmarks (Passenger's fixtures, `benchmarks/README.md` of sebastienros/tint):
   the first ten passes over the XML fixture went from 3–5 times the steady-state time to about 2 times, with the
   steady state unchanged. The `netstandard2.0` target has no such option and keeps tiering.
-- **FL-ONIG-005:** Once one pattern has matched, the scanner searches each later interpreted pattern only for starts
-  before the best so far, as `ONIG_REGSET_REGEX_LEAD` does, since a later start cannot win: a tokenizer's rule misses
-  most of the line, and without the bound its misses cost time proportional to the line for every token. A pattern
-  using `\K` searches to the end, because its reported start need not be its attempt start, and so does a kernel,
-  which takes no limit. Past 65,536 work in searches of one string that the bound stopped short, a pattern goes back to
-  searching to the end, because a bounded search loses the failure memo. Selection is the same except where a search would have run out of work past the best
-  start, or a result kept from an earlier offset would have differed from a fresh search.
-  Measured on TextMateSharp over `char[]` lines, which the per-string cache cannot serve: 1.6 to 2.6 times faster on
-  ordinary files, 12 to 19 times on lines of 2,000 to 32,000 characters. Over `string` lines: 1.1 to 2.0 and 1.9 to 6.0
-  times.
+- **FL-ONIG-005:** The scanner selects by walking the starts once and attempting at each the patterns whose first
+  units admit it, in pattern order, as `ONIG_REGSET_POSITION_LEAD` does, instead of searching each pattern in turn
+  (`ONIG_REGSET_REGEX_LEAD`, which only stops the patterns after the first match at the best start so far). A pattern
+  searched in turn runs past the start that wins, to its own match or the end of the line; a tokenizer's rule misses
+  most of the line, and those attempts, 30 to 60% of the scanner's time over the C#, CSS, JavaScript, Markdown and
+  shell grammars, served at best a later call of the same scanner on the same string. An attempt is the pattern's own
+  search's, with its prefilters, budget and failure memo, so selection is the same except where a search would have run
+  out of work past the winning start, and a result kept from an earlier offset is what a fresh search finds (but for a
+  `\K` match, kept while it starts at or after the offset). A pattern using `\K`, whose reported start need not be its
+  attempt start, a kernel and the pattern of a one-pattern scanner are searched whole; past 65,536 work in failed
+  attempts on one string a pattern goes back to whole searches, whose failure memo and result serve the rest of the
+  string.
+  Measured against the scanner it replaces on an Intel Xeon 2.1 GHz cloud VM (4 cores, load about 1), .NET 10.0.14,
+  interpreted patterns. `OnigurumaScannerBenchmarks` (BenchmarkDotNet ShortRun, no allocation either way): 1.1 to 1.8
+  times faster over string lines, 1.9 to 7.5 over array-backed lines, 1.0 to 1.7 on one long line. A stopwatch replay of
+  the scanner calls a TextMate tokenizer makes (vscode-textmate's rule compilation and line loop, without injections,
+  over the VS Code grammars and benchmark fixtures of sebastienros/tint at d05ffc3; best of 5 passes; the same match and
+  captures at every call): `bigfile.cs` 3.0 times faster (1,460 to 487 ms), `medium.cs` 2.7, Passenger's CSS 3.6,
+  shell 2.9, JavaScript 2.9, Markdown 2.5, Less 2.2, SCSS 2.1, JSON 1.9, XML 1.6, YAML 1.3 and HTML 1.05, the docs
+  fences 1.5 to 4.0; over `char[]`-backed lines 1.1 to 4.5 on the same files, and 4.7 to 5.6 on single lines of 5,200
+  to 41,600 characters (2.4 to 3.4 as strings). Tint's own suites were not run for this change.
 - **FL-ONIG-006:** The interpreter does not start what its start units already rule out, and a scanner does once what
   its patterns share; results are unchanged. A counted loop leaves a body that cannot start at the next unit (or
   fails short of its minimum) without entering it, as alternatives skip branches; start units follow a call into the

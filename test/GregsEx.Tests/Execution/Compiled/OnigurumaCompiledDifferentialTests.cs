@@ -269,18 +269,19 @@ public class OnigurumaCompiledDifferentialTests
     [Fact]
     public void AScannerKeepsAKernelsMissForTheWholeString()
     {
-        // The kernel takes no limit, so its miss holds past the first search's limit. Searching again would run in the
-        // interpreter here, because of the options, and exhaust their budget in the run of x.
+        // The first walk reaches a start of the kernel's pattern, and the kernel searches the whole string: its miss
+        // holds for the rest of it. Searching again would run in the interpreter here, because of the options, and
+        // exhaust their budget in the run of x.
         var scanner = new OnigurumaScanner([
             OnigurumaPattern.Parse("a", RegexProfiles.OnigurumaTextMate),
             OnigurumaPattern.Parse("(x+x+)+(?=a)b", RegexProfiles.OnigurumaTextMate).Compile()]);
-        var line = ".a.a" + new string('x', 10) + "a";
+        var line = "x.a.a" + new string('x', 10) + "a";
         Assert.True(scanner.FindNextMatch(line, 0, out var index));
         Assert.Equal(0, index);
         var options = new RegexMatchOptions { Limits = new RegexMatchLimits(maxWork: 50) };
-        Assert.Equal(RegexSearchStatus.Match, scanner.FindNextMatch(line, 4, out index, options));
+        Assert.Equal(RegexSearchStatus.Match, scanner.FindNextMatch(line, 5, out index, options));
         Assert.Equal(0, index);
-        Assert.Equal(14, scanner.Captures[0].Index);
+        Assert.Equal(15, scanner.Captures[0].Index);
         Assert.Equal(0, scanner.LimitExceededCount);
     }
 

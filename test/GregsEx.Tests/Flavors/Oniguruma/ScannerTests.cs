@@ -129,18 +129,35 @@ public class ScannerTests
         Assert.Equal(0, index);
     }
 
-    [Fact]
-    public void ALaterPatternIsNotSearchedPastTheBestStart()
+    [Theory]
+    // One pattern exhausts a tiny work budget, but only in the run of x after the other's match: wherever it stands
+    // among the patterns, it is not tried there.
+    [InlineData("a", "(x+x+)+(?=a)b")]
+    [InlineData("(x+x+)+(?=a)b", "a")]
+    public void NoPatternIsTriedPastTheWinningStart(string first, string second)
     {
-        // The second pattern exhausts a tiny work budget, but only in the run of x after the first pattern's match.
-        var scanner = Scanner(50, "a", "(x+x+)+(?=a)b");
+        var scanner = Scanner(50, first, second);
         var line = "xa" + new string('x', 40) + "a";
-        Assert.True(scanner.FindNextMatch(line.AsSpan(), 0, out var index));
-        Assert.Equal(0, index);
-        Assert.Equal(1, scanner.Captures[0].Index);
-        Assert.True(scanner.FindNextMatch(line, 0, out index));
-        Assert.Equal(0, index);
+        foreach (var memory in new[] { line.AsMemory(), line.ToCharArray().AsMemory() })
+        {
+            Assert.True(scanner.FindNextMatch(memory, 0, out var index));
+            Assert.Equal("a", scanner.Patterns[index] == scanner.Patterns[0] ? first : second);
+            Assert.Equal(1, scanner.Captures[0].Index);
+        }
+
         Assert.Equal(0, scanner.LimitExceededCount);
+    }
+
+    [Fact]
+    public void AnAttemptThatRunsOutOfWorkLeavesTheOtherPatternsTheirStarts()
+    {
+        // The first pattern runs out of work at 1 and counts as no match; the second still wins further on.
+        var scanner = Scanner(50, "(x+x+)+(?=a)b", "a");
+        var line = "." + new string('x', 40) + "a";
+        Assert.True(scanner.FindNextMatch(line, 0, out var index));
+        Assert.Equal(1, index);
+        Assert.Equal(41, scanner.Captures[0].Index);
+        Assert.Equal(1, scanner.LimitExceededCount);
     }
 
     [Theory]
@@ -172,6 +189,100 @@ public class ScannerTests
     [InlineData("a; b; c(d); e")]
     public void SelectionAgreesWhenPatternsRequireTheSameText(string line)
         => AssertSelectionAgrees(["\\w+(?=\\()", "\\(([^()]*)\\)", "[a-z]+\\s*\\(", ";.*\\(", "\\w+\\s*;", "\\d+", "[=;,]", "\\b[a-z]\\b(?=.*;)"], line);
+
+    [Theory]
+    // Every grammar pattern of the corpus, in scanners of a few patterns and of more than one word of them, over the
+    // corpus lines and two with surrogates: each call selects what searching every pattern to the end selects, in
+    // whatever order a string's offsets are searched from.
+    [InlineData(3)]
+    [InlineData(9)]
+    [InlineData(64)]
+    [InlineData(65)]
+    [InlineData(130)]
+    public void SelectionAgreesOverTheGrammarPatterns(int size)
+    {
+        var cases = CorpusTests.Read("grammar-cases.json.gz").AsArray();
+        var patterns = new List<OnigurumaPattern>();
+        var lines = new List<string> { "😀 let a = \"b\"; 😀.x(1) // c\n", "a\uD83Db = \uDE00 c\uD83D" };
+        foreach (var source in cases.Select(c => c!["pattern"]!.GetValue<string>()).Distinct())
+        {
+            if (OnigurumaPattern.TryParse(source, RegexProfiles.OnigurumaTextMate, out var pattern, out _, OnigurumaCompileOptions.TextMate))
+            {
+                patterns.Add(pattern!);
+            }
+        }
+
+        lines.AddRange(cases.SelectMany(c => c!["subjects"]!.AsArray()).Select(s => CorpusTests.Subject(s!)));
+        lines = [.. lines.Distinct()];
+        Assert.True(patterns.Count > 1000 && lines.Count > 30);
+
+        var random = new Random(size);
+        // Scanners over consecutive patterns; the sizes share the corpus between them.
+        var skip = size * 7 % 5;
+        for (var first = skip * size; first + size <= patterns.Count; first += 5 * size)
+        {
+            var set = patterns.GetRange(first, size);
+            var workspaces = set.Select(p => p.CreateWorkspace()).ToArray();
+            var ascending = new OnigurumaScanner(set);
+            var walking = new OnigurumaScanner(set);
+            var descending = new OnigurumaScanner(set);
+            var shuffled = new OnigurumaScanner(set);
+            var uncached = new OnigurumaScanner(set);
+            foreach (var line in lines)
+            {
+                var expected = new (int Index, RegexCapture[] Captures)[line.Length + 1];
+                for (var at = 0; at <= line.Length; at++)
+                {
+                    var best = new RegexMatchRange(int.MaxValue, 0);
+                    expected[at].Index = -1;
+                    for (var i = 0; i < workspaces.Length; i++)
+                    {
+                        if (workspaces[i].Find(line, at, out var match) == RegexSearchStatus.Match && match.Index < best.Index)
+                        {
+                            expected[at].Index = i;
+                            best = match;
+                        }
+                    }
+
+                    if (expected[at].Index >= 0)
+                    {
+                        expected[at].Captures = new RegexCapture[set[expected[at].Index].GroupCount];
+                        Assert.Equal(RegexSearchStatus.Match, workspaces[expected[at].Index].FindCaptures(line, at, expected[at].Captures, out _));
+                    }
+                }
+
+                void Check(string order, OnigurumaScanner scanner, ReadOnlyMemory<char> memory, int at)
+                {
+                    scanner.FindNextMatch(memory, at, out var index);
+                    Assert.True(expected[at].Index == index, $"{order} from {at} of {line}: pattern {index}, expected {expected[at].Index}, of {first}..{first + size}");
+                    if (index >= 0)
+                    {
+                        Assert.Equal(expected[at].Captures, scanner.Captures.ToArray());
+                    }
+                }
+
+                var buffer = line.ToCharArray();
+                var order = Enumerable.Range(0, line.Length + 1).OrderBy(_ => random.Next()).ToArray();
+                for (var at = 0; at <= line.Length; at++)
+                {
+                    Check("ascending", ascending, line.AsMemory(), at);
+                    Check("descending", descending, line.AsMemory(), line.Length - at);
+                    Check("shuffled", shuffled, line.AsMemory(), order[at]);
+                    Check("uncached", uncached, buffer, at);
+                }
+
+                // As a tokenizer goes, from match end to match end.
+                for (var at = 0; at <= line.Length;)
+                {
+                    Check("walking", walking, line.AsMemory(), at);
+                    var (index, captures) = expected[at];
+                    at = index >= 0 ? Math.Max(at + 1, captures[0].Index + captures[0].Length) : line.Length + 1;
+                }
+            }
+
+            Assert.Equal(0, ascending.LimitExceededCount + walking.LimitExceededCount + descending.LimitExceededCount + shuffled.LimitExceededCount + uncached.LimitExceededCount);
+        }
+    }
 
     private static void AssertSelectionAgrees(string[] patterns, string line)
     {
@@ -217,9 +328,9 @@ public class ScannerTests
     }
 
     [Fact]
-    public void AMissIsOnlyReusedUpToWhereItsSearchStopped()
+    public void APatternIsTriedPastWhereTheLastWalkStopped()
     {
-        // From 0, the search for b stops before the a at 1; from 2 it has to go on to the b at 3.
+        // From 0, the walk stops at the a at 1 without reaching the b; from 2 it has to go on to the b at 3.
         var scanner = Scanner("a", "b");
         const string line = ".a.b";
         Assert.True(scanner.FindNextMatch(line, 0, out var index));
@@ -230,11 +341,11 @@ public class ScannerTests
     }
 
     [Theory]
-    // Each search has its own budget, however many a best start divides the walk into, so the last token is found.
+    // Each call has its own budget for a pattern, however many calls walk the line, so the last token is found.
     [InlineData(",", "(?:\\w+\\s*,?\\s*)+:|\\d+;", 1600, 10_000_000)]
     [InlineData("c", "(?:a|c|ac)*b|z", 3000, 10_000_000)]
     [InlineData("c", "(?:a|c|ac)*b|z", 20, 2000)]
-    public void ALongWalkOfStoppedSearchesKeepsItsLastToken(string separator, string pattern, int repeats, long maxWork)
+    public void ALongWalkOfCallsKeepsItsLastToken(string separator, string pattern, int repeats, long maxWork)
     {
         var scanner = Scanner(maxWork, separator, pattern);
         var line = separator == "c"
@@ -263,29 +374,83 @@ public class ScannerTests
         Assert.Equal(0, scanner.LimitExceededCount);
     }
 
-    [Fact]
-    public void ASearchWhoseLimitIsBeforeItsStartAttemptsNothing()
+    [Theory]
+    // A walk of attempts does what one search does: the same result, captures and work, with the failure memo going
+    // from one attempt to the next wherever it starts.
+    [InlineData("(?:a|c|ac)*b|z", "acacacacacacacacacacacacacacacacacacXz", 64)]
+    [InlineData("(?:a|c|ac)*b|z", "acacacacacacacacacacacacacacacacacacX", 64)]
+    [InlineData("(?:a|c|ac)*b|z", "acacacXz", long.MaxValue)]
+    [InlineData("(?:a|c|ac)*b|z", "acacacacacacXz", 0)]
+    [InlineData("\\w+(?=\\()|\\d+;", "name0, name1, name2 (x), 42;", 8)]
+    [InlineData("\\s*(\\w+)\\s*=", "   a b c   d = 1", 4)]
+    [InlineData("😀+b", "😀😀😀a😀😀b", 2)]
+    [InlineData("^b|c$", "a\nb\nc", 0)]
+    public void AWalkOfAttemptsDoesWhatOneSearchDoes(string pattern, string line, long memoAfter)
     {
-        var program = OnigurumaPattern.Parse("\\Gb", RegexProfiles.OnigurumaTextMate).Program;
+        var program = OnigurumaPattern.Parse(pattern, RegexProfiles.OnigurumaTextMate).Program;
+        var whole = new OnigMatcher { MemoAfter = memoAfter };
+        var expectedCaptures = new int[2 * program.GroupCount];
+        var expected = whole.Search(program, line.AsSpan(), 0, expectedCaptures);
+
+        var matcher = new OnigMatcher { MemoAfter = memoAfter };
+        var captures = new int[2 * program.GroupCount];
+        var status = RegexSearchStatus.NoMatch;
+        long work = 0;
+        var memo = 0;
+        var last = Math.Min(line.Length - program.MinLength, whole.LastRequired == OnigMatcher.RequiredUnknown ? int.MaxValue : whole.LastRequired);
+        for (var pos = 0; pos <= last && status == RegexSearchStatus.NoMatch; pos++)
+        {
+            var inside = pos > 0 && pos < line.Length && char.IsLowSurrogate(line[pos]) && char.IsHighSurrogate(line[pos - 1]);
+            var lineStart = program.StartAnchor != OnigStartAnchor.LineStart || pos == 0 || (line[pos - 1] == '\n' && pos < line.Length);
+            if (inside || !lineStart || !program.StartBits.CanStartWith(pos < line.Length ? line[pos] : -1))
+            {
+                continue;
+            }
+
+            status = matcher.MatchAt(program, line.AsSpan(), pos, 0, captures, work, memo);
+            work = matcher.LastWork;
+            memo = matcher.MemoStarted;
+            pos = status == RegexSearchStatus.NoMatch ? matcher.NextStart(line.AsSpan(), pos) : pos;
+        }
+
+        Assert.Equal(expected, status);
+        Assert.Equal(whole.LastWork, work);
+        if (expected == RegexSearchStatus.Match)
+        {
+            Assert.Equal(expectedCaptures, captures);
+        }
+    }
+
+    [Fact]
+    public void AnotherSearchsMemoEndsAnAttemptsShareOfIt()
+    {
+        // The second walk starts its own memo over the first's, which then starts again instead of reading it.
+        var program = OnigurumaPattern.Parse("(?:a|c|ac)*b|z", RegexProfiles.OnigurumaTextMate).Program;
+        var matcher = new OnigMatcher { MemoAfter = 0 };
         var captures = new int[2];
-        Assert.Equal(RegexSearchStatus.NoMatch, new OnigMatcher().Search(program, "ab".AsSpan(), 1, captures, limit: 0));
-        Assert.Equal(RegexSearchStatus.Match, new OnigMatcher().Search(program, "ab".AsSpan(), 1, captures, limit: 1));
+        Assert.Equal(RegexSearchStatus.NoMatch, matcher.MatchAt(program, "acacX".AsSpan(), 0, 0, captures, 0, 0));
+        var first = matcher.MemoStarted;
+        Assert.NotEqual(0, first);
+        Assert.Equal(first, matcher.MemoVersion);
+        Assert.Equal(RegexSearchStatus.NoMatch, matcher.MatchAt(program, "cacaX".AsSpan(), 0, 0, captures, 0, 0));
+        Assert.NotEqual(first, matcher.MemoVersion);
+        // The first memo's count no longer names the memo: this attempt starts its own instead of reading the other input's.
+        Assert.Equal(RegexSearchStatus.Match, matcher.MatchAt(program, "acacb".AsSpan(), 0, 0, captures, 0, first));
     }
 
     [Theory]
-    // No start past the limit could match: "class" is absent, or the last possible start is at or within the limit.
-    [InlineData("class", "a b c d", 1, int.MaxValue)]
-    [InlineData("bc", ".bc.", 2, int.MaxValue)]
-    [InlineData("bc", ".bc.", 1, int.MaxValue)]
-    [InlineData("bc", ".bc.bc", 1, 1)]
-    public void ASearchSaysWhichStartsItAnswersFor(string pattern, string line, int limit, int covered)
+    [InlineData("\\Gb", "ab", 1, 1, true)]
+    [InlineData("\\Gb", "abb", 1, 2, false)]
+    [InlineData("\\Ab", "bb", 0, 1, false)]
+    [InlineData("^b", "b\nb", 0, 1, true)]
+    [InlineData("b", "abab", 0, 2, true)]
+    [InlineData("b", "abab", 0, 4, false)]
+    public void ASearchCanGoOnFromALaterStart(string pattern, string line, int startAt, int from, bool matches)
     {
         var program = OnigurumaPattern.Parse(pattern, RegexProfiles.OnigurumaTextMate).Program;
-        var matcher = new OnigMatcher();
-        // A limited search first: each search reports for itself, even one that ends before reaching its limit.
-        matcher.Search(OnigurumaPattern.Parse("bc", RegexProfiles.OnigurumaTextMate).Program, ".bc.bc".AsSpan(), 0, new int[2], 0);
-        matcher.Search(program, line.AsSpan(), 0, new int[2], limit);
-        Assert.Equal(covered, matcher.LastCovered);
+        var captures = new int[2];
+        Assert.Equal(matches, new OnigMatcher().Search(program, line.AsSpan(), startAt, captures, scanFrom: from) == RegexSearchStatus.Match);
+        Assert.True(!matches || captures[0] >= from);
     }
 
     [Theory]
@@ -303,10 +468,31 @@ public class ScannerTests
         Assert.Equal(new RegexCapture(true, expectedStart, expectedLength), scanner.Captures[0]);
     }
 
-    [Fact]
-    public void AKeepIsSearchedPastTheBestStartForLaterCalls()
+    [Theory]
+    // From 5, the keep's match starts at 4, before the search does: it is the earliest start, unless an earlier
+    // pattern matches at the offset, which ends the call. Two keeps: the earlier start, then the earlier pattern.
+    [InlineData(new[] { "(?<=\\K..)y", "x" }, 0, 4)]
+    [InlineData(new[] { "x", "(?<=\\K..)y" }, 0, 5)]
+    [InlineData(new[] { "y", "(?<=\\K..)y" }, 1, 4)]
+    [InlineData(new[] { "y", "(?<=\\K..)y", "(?<=\\K...)y" }, 2, 3)]
+    [InlineData(new[] { "(?<=\\K..)y", "(?<=\\K..)y|q" }, 0, 4)]
+    [InlineData(new[] { "q", "z|(?<=\\K...)y", "x", "(?<=\\K....)y" }, 3, 2)]
+    public void AKeepThatStartsBeforeTheSearchIsSelectedAsItsStartSays(string[] patterns, int expectedIndex, int expectedStart)
     {
-        // The whole search finds the match past the best start, and its result is reused from the later offset.
+        const string line = "abcdexy";
+        var scanner = Scanner(patterns);
+        foreach (var memory in new[] { line.AsMemory(), line.ToCharArray().AsMemory() })
+        {
+            Assert.True(scanner.FindNextMatch(memory, 5, out var index));
+            Assert.Equal(expectedIndex, index);
+            Assert.Equal(expectedStart, scanner.Captures[0].Index);
+        }
+    }
+
+    [Fact]
+    public void AKeepIsSearchedPastTheWinningStartForLaterCalls()
+    {
+        // The whole search finds the match past the winning start, and its result is reused from the later offset.
         var scanner = Scanner("a", "a\\Kb");
         const string line = "xab";
         Assert.True(scanner.FindNextMatch(line, 0, out var index));
@@ -319,9 +505,9 @@ public class ScannerTests
     [Fact]
     public void APatternThatKeepsMissingGoesBackToWholeSearchesAndTheirRetries()
     {
-        // Each search of a run of x completes within the budget, so bounded searches alone would never give up, on a
-        // line of any length. Once they have cost enough, a whole search does, and past the retries the rest of the
-        // string reuses the give-up without searching.
+        // The attempts in each run of x complete within the budget, so no call gives up, on a line of any length. Once
+        // they have cost enough, the pattern is searched whole, which does, and past the retries the rest of the string
+        // reuses the give-up without searching.
         var scanner = Scanner(200, "a", "(x+x+)+(?=a)b");
         var line = Repeat("xxxxa", 2000);
         long exceededBeforeTheLastRuns = 0;
@@ -342,7 +528,7 @@ public class ScannerTests
     }
 
     [Fact]
-    public void ANewStringStartsItsBoundedSearchesOver()
+    public void ANewStringStartsWhatItsAttemptsCostOver()
     {
         // The work of one string does not send the next one to whole searches, which would exhaust the tiny budget.
         var scanner = Scanner(200, "a", "(x+x+)+(?=a)b");
@@ -400,16 +586,13 @@ public class ScannerTests
         Assert.Equal(2, matcher.LastRequired);
         Assert.Equal(RegexSearchStatus.NoMatch, matcher.Search(program, "a.z".AsSpan(), 0, captures, requiredAt: -1));
         Assert.Equal(-1, matcher.LastRequired);
-        // A caller that keeps nothing gets a limited search's answer from the next occurrence alone.
-        Assert.Equal(RegexSearchStatus.Match, matcher.Search(program, "a.z".AsSpan(), 0, captures, limit: 0, requiredAt: OnigMatcher.RequiredNotKept));
-        Assert.Equal(RegexSearchStatus.NoMatch, matcher.Search(program, "a.y".AsSpan(), 0, captures, limit: 0, requiredAt: OnigMatcher.RequiredNotKept));
     }
 
     [Fact]
-    public void ACompletedLimitedMissKeepsTheStringsRetries()
+    public void ACallThatDoesNotReachThePatternKeepsTheStringsRetries()
     {
-        // Each run of a exhausts the budget, and the search of the gap after it completes, having stopped short of the
-        // next run. The first failure is still the string's, so past the retries the pattern is not searched again.
+        // Each run of a exhausts the budget, and the call for the gap after it ends before any start of the pattern.
+        // The first failure is still the string's, so past the retries the pattern is not searched again.
         var scanner = Scanner(50, ";", "(?:a|aa)*b|z");
         var line = Repeat(Repeat("a", 20) + "X;.;", 300) + "z";
         var offset = 0;
@@ -445,8 +628,8 @@ public class ScannerTests
     [Fact]
     public void GoingBackOnAStringKeepsItsWork()
     {
-        // A result from a later offset says nothing about an earlier one, but what limited searches have cost is the
-        // string's. Once that sends the pattern to a whole search, its match serves both offsets.
+        // A result from a later offset says nothing about an earlier one, but what the pattern's attempts have cost
+        // is the string's. Once that sends the pattern to a whole search from the earlier offset, its match serves both.
         var scanner = Scanner("c", "(?:a|c|ac)*b|z");
         var line = Repeat("ac", 40) + "Xz";
         // By then only the first pattern is searched, within a budget that one attempt of the second would exhaust.
@@ -458,6 +641,24 @@ public class ScannerTests
         }
 
         Assert.Equal(0, scanner.LimitExceededCount);
+    }
+
+    [Fact]
+    public void AStartInsideACharacterKeepsNothingOfTheStringsEarlierSearches()
+    {
+        // From 1, the first pattern reads the lone high surrogate and the b as one character, fails, and goes on after
+        // them: no match. A search from 2 reads the b on its own, whatever the string's earlier searches made of it.
+        string[] patterns = ["[^\\x{00}-\\x{7F}]x|bc", "q"];
+        const string line = "a\uD83Dbc";
+        var workspace = OnigurumaPattern.Parse(patterns[0], RegexProfiles.OnigurumaTextMate).CreateWorkspace();
+        Assert.Equal(RegexSearchStatus.NoMatch, workspace.Find(line, 1, out _));
+        Assert.Equal(RegexSearchStatus.Match, workspace.Find(line, 2, out var expected));
+
+        var scanner = Scanner(patterns);
+        Assert.False(scanner.FindNextMatch(line, 1, out _));
+        Assert.True(scanner.FindNextMatch(line, 2, out var index));
+        Assert.Equal(0, index);
+        Assert.Equal(new RegexCapture(true, expected.Index, expected.Length), scanner.Captures[0]);
     }
 
     [Theory]

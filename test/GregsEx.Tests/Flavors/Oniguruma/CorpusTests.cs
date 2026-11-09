@@ -111,7 +111,7 @@ public class CorpusTests
         Assert.True(checkedOutcomes >= minimumOutcomes, $"{checkedOutcomes} outcomes");
     }
 
-    private static string Subject(JsonNode subject)
+    internal static string Subject(JsonNode subject)
         => subject is JsonObject units ? new string(units["units"]!.AsArray().Select(u => (char)u!.GetValue<int>()).ToArray()) : subject.GetValue<string>();
 
     private static string Captures(ReadOnlySpan<RegexCapture> groups)
@@ -125,7 +125,7 @@ public class CorpusTests
         return "[" + string.Join(",", values) + "]";
     }
 
-    private static JsonNode Read(string name)
+    internal static JsonNode Read(string name)
     {
         var path = Path.Combine(CorpusDirectory(), name);
         using var file = File.OpenRead(path);

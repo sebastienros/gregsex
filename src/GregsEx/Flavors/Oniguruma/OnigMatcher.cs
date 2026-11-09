@@ -41,20 +41,11 @@ internal sealed class OnigMatcher
     // plus the units runs consume.
     internal long LastWork => _work;
 
-    // The last start the last search answers for: its limit if that left out a start it could have tried. A required
-    // text that is absent answers for every start, whatever the limit.
-    internal int LastCovered { get; private set; }
-
-    // Where the required text last occurs, -1 if nowhere, int.MaxValue when a limited search only found that it occurs
-    // at or after its start (RequiredNotKept), or the requiredAt passed if the last search did not look it up. It depends
-    // only on the input (and that start), so a caller searching the same input again passes it back.
+    // Where the required text last occurs, -1 if nowhere, or the requiredAt passed if the last search did not look it
+    // up. It depends only on the input, so a caller searching the same input again passes it back.
     internal int LastRequired { get; private set; }
 
     internal const int RequiredUnknown = -2;
-
-    // Unknown too, from a caller that keeps no result: a limited search then only needs the required text's next
-    // occurrence, which a forward scan finds without reading the rest of the input.
-    internal const int RequiredNotKept = -3;
 
     // Where the last attempt started: after a LimitExceeded search, every start before it was explored without a match.
     internal int LastAttemptStart { get; private set; }
@@ -117,22 +108,15 @@ internal sealed class OnigMatcher
         _deadline = deadline;
     }
 
-    // Searches for the leftmost match starting in [startAt, input.Length], no later than limit, under the budget for
-    // the whole search and polling cancellation and the deadline throughout (before any result, even an immediate
-    // one). A match may end past limit, and everything past it stays visible to the pattern. On Match, captures holds
-    // start and end per group (group zero first), -1 for groups that did not participate.
+    // Searches for the leftmost match starting in [startAt, input.Length], or in [scanFrom, input.Length] for a caller
+    // that knows no match starts before scanFrom, under the budget for the whole search and polling cancellation and
+    // the deadline throughout (before any result, even an immediate one). On Match, captures holds start and end per
+    // group (group zero first), -1 for groups that did not participate.
     [MethodImpl(FullOpts)]
-    internal RegexSearchStatus Search(OnigProgram program, ReadOnlySpan<char> input, int startAt, Span<int> captures, int limit = int.MaxValue, int requiredAt = RequiredUnknown)
+    internal RegexSearchStatus Search(OnigProgram program, ReadOnlySpan<char> input, int startAt, Span<int> captures, int requiredAt = RequiredUnknown, int scanFrom = -1)
     {
-        // The limit bounds attempts, and \K can report a start before its attempt.
-        if (program.UsesKeep)
-        {
-            limit = int.MaxValue;
-        }
-
         _work = 0;
         _memoOn = false;
-        LastCovered = int.MaxValue;
         LastRequired = requiredAt;
         if (_polls && !Poll(out var stopped))
         {
@@ -145,9 +129,10 @@ internal sealed class OnigMatcher
             _regs = new int[Math.Max(program.RegisterCount, 2 * _regs.Length)];
         }
 
+        var scan = scanFrom < 0 ? startAt : scanFrom;
         var end = input.Length;
         var last = end - program.MinLength;
-        if (last < startAt)
+        if (last < scan)
         {
             return RegexSearchStatus.NoMatch;
         }
@@ -155,17 +140,12 @@ internal sealed class OnigMatcher
         // What every match contains lies at or after its start: no start after its last occurrence can match.
         if (program.HasRequired)
         {
-            if (requiredAt == RequiredNotKept && limit < last)
-            {
-                // The limit bounds the starts, so an occurrence at or after startAt is all a match needs.
-                LastRequired = requiredAt = FindRequired(program, input[startAt..], fromEnd: false) < 0 ? -1 : int.MaxValue;
-            }
-            else if (requiredAt is RequiredUnknown or RequiredNotKept)
+            if (requiredAt == RequiredUnknown)
             {
                 LastRequired = requiredAt = FindRequired(program, input, fromEnd: true);
             }
 
-            if (requiredAt < startAt)
+            if (requiredAt < scan)
             {
                 return RegexSearchStatus.NoMatch;
             }
@@ -173,25 +153,15 @@ internal sealed class OnigMatcher
             last = Math.Min(last, requiredAt);
         }
 
-        if (limit < last)
-        {
-            LastCovered = last = limit;
-        }
-
-        if (last < startAt)
-        {
-            return RegexSearchStatus.NoMatch;
-        }
-
         switch (program.StartAnchor)
         {
             case OnigStartAnchor.BufferStart:
-                return startAt == 0 ? Attempt(program, input, 0, startAt, captures) : RegexSearchStatus.NoMatch;
+                return scan == 0 ? Attempt(program, input, 0, startAt, captures) : RegexSearchStatus.NoMatch;
             case OnigStartAnchor.SearchStart:
-                return Attempt(program, input, startAt, startAt, captures);
+                return scan == startAt ? Attempt(program, input, startAt, startAt, captures) : RegexSearchStatus.NoMatch;
             case OnigStartAnchor.LineStart:
                 {
-                    var s = startAt;
+                    var s = scan;
                     while (s <= last)
                     {
                         if (s == 0 || (input[s - 1] == '\n' && s < end))
@@ -222,7 +192,7 @@ internal sealed class OnigMatcher
         var preceded = program.PrecededBy;
         var bits = program.StartBits;
         var atEnd = bits.End;
-        var pos = startAt;
+        var pos = scan;
         while (pos <= last)
         {
             if (preceded is not null)
@@ -288,15 +258,53 @@ internal sealed class OnigMatcher
                 return status;
             }
 
-            // The next start is a character later (a high surrogate starts two units), or past the leading run.
-            pos = _leadingEnd > pos ? _leadingEnd : pos;
-            pos += pos < end && char.IsHighSurrogate(input[pos]) ? 2 : 1;
+            pos = NextStart(input, pos) + 1;
         }
         return RegexSearchStatus.NoMatch;
     }
 
+    // One attempt of the search from searchStart, at pos: what Search does there, for a caller that walks the starts
+    // itself, applies the search's prefilters and goes on from NextStart. work is what the search's earlier attempts
+    // have done (LastWork after each), so the budget stays that of the whole search. memo is the MemoStarted of the
+    // search's last attempt, if it still equals MemoVersion: the failure memo is then still that search's, and this
+    // attempt goes on with it.
+    [MethodImpl(FullOpts)]
+    internal RegexSearchStatus MatchAt(OnigProgram program, ReadOnlySpan<char> input, int pos, int searchStart, Span<int> captures, long work, int memo)
+    {
+        _work = work;
+        _memoOn = memo != 0 && memo == MemoVersion;
+        if (_polls && !Poll(out var stopped))
+        {
+            return stopped;
+        }
+
+        _stopAt = NextStop();
+        if (_regs.Length < program.RegisterCount)
+        {
+            _regs = new int[Math.Max(program.RegisterCount, 2 * _regs.Length)];
+        }
+
+        _leadingEnd = -1;
+        return Attempt(program, input, pos, searchStart, captures);
+    }
+
+    // Counts the failure memos started, and the count the last attempt's memo was started at (0 if it has none): the
+    // two are equal until another search starts a memo over it.
+    internal int MemoVersion { get; private set; }
+    internal int MemoStarted => _memoOn ? MemoVersion : 0;
+
+    // The last start the search rules out when its attempt at pos fails; it goes on from the start after it. That is
+    // pos, or the end of the attempt's leading run, and then the unit after a high surrogate there, which starts a
+    // character of two units.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal int NextStart(ReadOnlySpan<char> input, int pos)
+    {
+        pos = _leadingEnd > pos ? _leadingEnd : pos;
+        return pos < input.Length && char.IsHighSurrogate(input[pos]) ? pos + 1 : pos;
+    }
+
     // The first or last occurrence of the text every match of program contains.
-    private static int FindRequired(OnigProgram program, ReadOnlySpan<char> input, bool fromEnd)
+    internal static int FindRequired(OnigProgram program, ReadOnlySpan<char> input, bool fromEnd)
     {
         if (program.Required is { } required)
         {
@@ -637,6 +645,7 @@ internal sealed class OnigMatcher
         }
 
         _memoOn = true;
+        MemoVersion++;
         return _memo;
     }
 
