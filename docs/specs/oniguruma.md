@@ -28,9 +28,10 @@ the starts from the offset once and attempts at each the patterns whose first un
 order, as `onig_regset_search` does under `ONIG_REGSET_POSITION_LEAD` (vscode-oniguruma's choice for lines under 1,000
 units): the first match ends the call, so no pattern is attempted past the winning start. A pattern's attempts are
 those of its own search from the offset, with that search's prefilters, work budget and failure memo, as far as the
-walk needs them. A pattern using `\K` (whose match starts where it says, even before the offset), a compiled kernel
-and the pattern of a scanner that has only one are searched whole instead, and their match waits for the walk to reach
-its start. For string-backed input the scanner keeps per string what its walks learned of each pattern (a match further
+walk needs them. A pattern using `\K` (whose match starts where it says, even before the offset) and the pattern of a
+scanner that has only one are searched whole instead, and their match waits for the walk to reach its start. A
+compiled pattern is attempted in the walk like any other, by the interpreter: its kernel is a search, which cannot
+stop at the start another pattern wins at, and runs only where the pattern is searched whole. For string-backed input the scanner keeps per string what its walks learned of each pattern (a match further
 on, starts that cannot match, that none is left) and reuses it from later offsets while it holds, as Onigwrap's
 `OnigRegExp` cache does, except for patterns using `\G`; a call from an earlier offset keeps only the matches found
 from no later than it, and a call that starts just after a high surrogate (inside a character as every other search
@@ -203,7 +204,9 @@ captures, so the captures of called groups are the interpreter's. Left to the in
 conditionals, the absent operator, `\K`, text-segment boundaries, non-BMP literals, loops over a nullable body (a
 call measured by its group's minimum length, a recursive call as empty), and patterns beyond the lowering's node and
 class bounds.
-`OnigurumaScanner` runs each compiled pattern's kernel under the same rules. A source generator that cannot use
+`OnigurumaScanner` runs a compiled pattern's kernel under the same rules where it searches the pattern whole (a
+one-pattern scanner, and a pattern whose failed attempts on a string passed 65,536 work), and attempts it with the
+interpreter inside its walk otherwise. A source generator that cannot use
 `[GeneratedPattern]` obtains the same kernel source from `GregsEx.SourceGeneration.KernelSource.TryEmit` in the
 generator assembly and binds it with `WithGeneratedKernels` ([compilation.md](compilation.md)).
 

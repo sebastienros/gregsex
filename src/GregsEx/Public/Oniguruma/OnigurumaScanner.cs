@@ -110,8 +110,10 @@ public sealed class OnigurumaScanner
                 }
             }
 
-            // Searched whole before the walk: a pattern with no other to stop for, and one using \K. A kernel is
-            // searched whole too, when the walk first reaches one of its pattern's starts.
+            // Searched whole before the walk: a pattern with no other to stop for, and one using \K. A pattern with a
+            // kernel is attempted in the walk like any other, by the interpreter: its kernel is a search, which would
+            // run past the start that wins, to its own match or the end of the input, on every call that keeps no
+            // results. The kernel runs where the pattern is searched whole anyway (SearchWhole).
             var whole = n == 1 || program.UsesKeep;
             if (whole)
             {
@@ -127,7 +129,7 @@ public sealed class OnigurumaScanner
             e.Fixed = (program.StartAnchor != OnigStartAnchor.None ? Anchored : 0)
                 | (program.PrecededBy is not null ? Preceded : 0)
                 | (program.Prefix is not null ? Prefixed : 0)
-                | (whole || _patterns[i].PlainKernel is not null ? Whole : 0);
+                | (whole ? Whole : 0);
             groups = Math.Max(groups, _patterns[i].GroupCount);
         }
         _required = new RequiredSlot[keys.Count];
