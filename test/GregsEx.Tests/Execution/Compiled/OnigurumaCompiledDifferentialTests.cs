@@ -267,22 +267,32 @@ public class OnigurumaCompiledDifferentialTests
     }
 
     [Fact]
-    public void AScannerKeepsAKernelsMissForTheWholeString()
+    public void AScannerAttemptsACompiledPatternInItsWalk()
     {
-        // The first walk reaches a start of the kernel's pattern, and the kernel searches the whole string: its miss
-        // holds for the rest of it. Searching again would run in the interpreter here, because of the options, and
-        // exhaust their budget in the run of x.
-        var scanner = new OnigurumaScanner([
-            OnigurumaPattern.Parse("a", RegexProfiles.OnigurumaTextMate),
-            OnigurumaPattern.Parse("(x+x+)+(?=a)b", RegexProfiles.OnigurumaTextMate).Compile()]);
+        // A kernel is a search: it would run past the start that wins, to its own match or the end of the input. The
+        // scanner attempts the pattern start by start instead, as it does an interpreted one, and stops at the first
+        // match: the two scanners select, capture and run out of work alike, with and without kept results.
+        var first = OnigurumaPattern.Parse("a", RegexProfiles.OnigurumaTextMate);
+        var second = OnigurumaPattern.Parse("(x+x+)+(?=a)b", RegexProfiles.OnigurumaTextMate);
+        var compiled = second.Compile();
+        Assert.Equal(RegexExecutionBackend.Compiled, compiled.ExecutionBackend);
+        var interpreted = new OnigurumaScanner([first, second]);
+        var scanner = new OnigurumaScanner([first, compiled]);
         var line = "x.a.a" + new string('x', 10) + "a";
-        Assert.True(scanner.FindNextMatch(line, 0, out var index));
-        Assert.Equal(0, index);
         var options = new RegexMatchOptions { Limits = new RegexMatchLimits(maxWork: 50) };
-        Assert.Equal(RegexSearchStatus.Match, scanner.FindNextMatch(line, 5, out index, options));
-        Assert.Equal(0, index);
-        Assert.Equal(15, scanner.Captures[0].Index);
-        Assert.Equal(0, scanner.LimitExceededCount);
+        foreach (var memory in new[] { line.AsMemory(), line.ToCharArray().AsMemory() })
+        {
+            foreach (var start in new[] { 0, 3, 5, 16 })
+            {
+                var expected = interpreted.FindNextMatch(memory, start, out var expectedIndex);
+                Assert.Equal(expected, scanner.FindNextMatch(memory, start, out var index));
+                Assert.Equal(expectedIndex, index);
+                Assert.Equal(interpreted.Captures.ToArray(), scanner.Captures.ToArray());
+                Assert.Equal(interpreted.FindNextMatch(memory, start, out expectedIndex, options), scanner.FindNextMatch(memory, start, out index, options));
+                Assert.Equal(expectedIndex, index);
+                Assert.Equal(interpreted.LimitExceededCount, scanner.LimitExceededCount);
+            }
+        }
     }
 
     private static string Subject(JsonNode subject)

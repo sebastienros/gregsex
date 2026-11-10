@@ -115,9 +115,13 @@ with `ONIG_OPTION_CAPTURE_GROUP` by vscode-oniguruma (UTF-8) and Onigwrap (UTF-1
   search's, with its prefilters, budget and failure memo, so selection is the same except where a search would have run
   out of work past the winning start, and a result kept from an earlier offset is what a fresh search finds (but for a
   `\K` match, kept while it starts at or after the offset). A pattern using `\K`, whose reported start need not be its
-  attempt start, a kernel and the pattern of a one-pattern scanner are searched whole; past 65,536 work in failed
+  attempt start, and the pattern of a one-pattern scanner are searched whole; past 65,536 work in failed
   attempts on one string a pattern goes back to whole searches, whose failure memo and result serve the rest of the
-  string.
+  string. A compiled pattern is attempted in the walk by the interpreter and its kernel runs only for those whole
+  searches: a kernel is a search, and searching it whole when the walk first reached one of its starts ran it past
+  the winning start on every call that kept no results. Tint's C# tokenization of `bigfile.cs` (133k lines, Apple M4
+  Pro, .NET 10.0.11) with ahead-of-time kernels took 1,013 ms against 292 ms interpreted, and takes 282 ms against
+  284 ms with kernels attempted in the walk.
   Measured against the scanner it replaces on an Intel Xeon 2.1 GHz cloud VM (4 cores, load about 1), .NET 10.0.14,
   interpreted patterns. `OnigurumaScannerBenchmarks` (BenchmarkDotNet ShortRun, no allocation either way): 1.1 to 1.8
   times faster over string lines, 1.9 to 7.5 over array-backed lines, 1.0 to 1.7 on one long line. A stopwatch replay of
