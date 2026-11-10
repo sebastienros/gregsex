@@ -142,14 +142,20 @@ text last occurs is found once per string for all of a scanner's patterns that r
 input, which keeps nothing between calls.
 As at Oniguruma's `SubexpCallMaxNestLevel` (20), a call nested 19 deep fails that path and the search goes on.
 
-A search that has done 1,024 work units starts a failure memo when what follows each backtrack resume depends only
-on its instruction and position: no look-arounds, atomic groups or possessive loops, conditions, absent operators,
-backreferences or calls, and every counted loop unbounded with a minimum of at most one and a body that cannot match
-empty. Captures then only shape the result, so a resume (or the preferred branch of an alternative or loop) at a
+A search that has done 128 work units, or one unit per 2,048 bits of the memo where that is more (starting the memo
+clears it, so on a very long line a search that backtracks little does not pay for one), starts a failure memo over
+the backtrack resumes whose continuation depends
+only on their instruction and position: those outside the bodies of called groups (which return to their caller),
+look-arounds (which continue from where they were entered) and atomic groups or possessive loops (which drop what
+their body left to try). Arriving at a run's continuation counts as a resume there. It applies when
+the pattern has no conditions, absent operators or backreferences, does not call the whole pattern, and every counted
+loop outside those bodies is unbounded or optional (`{0,1}`), with a minimum of at most one and a body that cannot
+match empty. Captures then only shape the result, so a resume (or the preferred branch of an alternative or loop) at a
 pair already tried is skipped. The memo holds one bit per resume point and position, at most 2^25 bits within
 `MaxWorkspaceBytes`, and lasts for the search's attempts. Results are the plain backtracker's, but ambiguous
-alternations under stars such as `(w|ww)*(w|ww)*\(\(` take polynomial rather than exponential work, so some searches
-complete where native Oniguruma reaches its retry limit.
+alternations under stars such as `(w|ww)*(w|ww)*\(\(` take polynomial rather than exponential work, and a rule that
+can start inside every name, such as csharp.tmLanguage's local-variable-declaration over a dotted name, takes linear
+rather than quadratic work, so some searches complete where native Oniguruma reaches its retry limit.
 
 ## Implementation (OG-006)
 
@@ -183,8 +189,8 @@ start either; a greedy run is possessive when nothing its continuation can start
 alternatives, calls and look-arounds, `$` counting as a newline or the end) is a unit of the run; and other runs
 give units back only to positions holding such a unit. The kernel models subjects without surrogates: a search over
 a subject holding one, a search with `RegexMatchOptions`, an exhausted kernel step budget (bounded by the subject's
-length only for patterns the interpreter's failure memo applies to; others run to the work limit, since the
-interpreter would only repeat the kernel's work) and abandoned backtracking re-enter the interpreter unchanged, so
+length only for patterns whose resumes the interpreter's failure memo all covers; others run to the work limit, since
+the interpreter would only repeat the kernel's work) and abandoned backtracking re-enter the interpreter unchanged, so
 results, captures, limits, cancellation and timeouts are the interpreter's. Lowered: literals and
 classes (ignore-case as the parser resolves it, folds to several code points included), dot, anchors (`\b` and `\B`
 over Oniguruma's word set), alternation, greedy/lazy/possessive repeats, capture and atomic groups, look-ahead,

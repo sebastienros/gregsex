@@ -65,8 +65,13 @@ internal sealed class OnigMatcher
 
     // Failed backtrack resumes of the current search, one bit per (OnigProgram.MemoSlots slot, position), kept across
     // its attempts: what follows a resume depends only on that pair, so a pair that failed once fails again. Started
-    // once a search has done MemoAfter work, so ordinary searches never clear it (tests lower it to cover every search).
-    internal long MemoAfter { get; set; } = 1024;
+    // once a search has done MemoAfter work, so searches that barely backtrack never clear it (tests lower it to cover
+    // every search); everyday lines backtrack a few hundred units in C#'s and TypeScript's declaration and call rules.
+    // Clearing it costs its size, so a search also waits until it has done one unit of work per MemoBitsPerWork bits:
+    // on a long line, searches that each do little work would otherwise spend their time clearing a memo they barely
+    // read (three times the search itself for C#'s local-variable-declaration over 40,000 units).
+    internal long MemoAfter { get; set; } = 128;
+    private const int MemoBitsPerWorkShift = 11;
     private const long MaxMemoBits = 1L << 25;
     private ulong[] _memo = [];
     private bool _memoOn;
@@ -713,6 +718,7 @@ internal sealed class OnigMatcher
         var slots = program.MemoSlots;
         var memo = _memoOn ? _memo : null;
         var stride = input.Length + 1;
+        var memoAt = slots is null ? long.MaxValue : Math.Max(MemoAfter, ((long)program.MemoSlotCount * stride) >> MemoBitsPerWorkShift);
 
         while (true)
         {
@@ -842,7 +848,7 @@ internal sealed class OnigMatcher
                         var b = code[pc + 4];
                         var okFirst = a < 0 || program.Bits[a].CanStartWith(c);
                         var okSecond = b < 0 || program.Bits[b].CanStartWith(c);
-                        if (okFirst && memo is not null && Seen(memo, slots![pc + 5] * stride + pos))
+                        if (okFirst && memo is not null && slots![pc + 5] >= 0 && Seen(memo, slots[pc + 5] * stride + pos))
                         {
                             okFirst = false;
                         }
@@ -998,6 +1004,13 @@ internal sealed class OnigMatcher
                             }
                         }
 
+                        // A later start whose run ends where an earlier one's did continues as that one did: only its
+                        // give-backs (pushed above) are left to try.
+                        if (memo is not null && slots![pc] >= 0 && Seen(memo, slots[pc] * stride + pos))
+                        {
+                            goto Fail;
+                        }
+
                         continue;
                     }
                 case Op.SaveOpen:
@@ -1068,7 +1081,7 @@ internal sealed class OnigMatcher
                         var bits = code[pc + 6];
                         if (bits >= 0 && !program.Bits[bits].CanStartWith(pos < end ? text[pos] : -1))
                         {
-                            if (count < code[pc + 2] || (memo is not null && Seen(memo, slots![code[pc + 5]] * stride + pos)))
+                            if (count < code[pc + 2] || (memo is not null && slots![code[pc + 5]] >= 0 && Seen(memo, slots[code[pc + 5]] * stride + pos)))
                             {
                                 goto Fail;
                             }
@@ -1082,7 +1095,7 @@ internal sealed class OnigMatcher
                         else if (max < 0 || count < max)
                         {
                             var (first, second) = code[pc + 4] != 0 ? (code[pc + 5], enter) : (enter, code[pc + 5]);
-                            if (memo is not null && Seen(memo, slots![first] * stride + pos))
+                            if (memo is not null && slots![first] >= 0 && Seen(memo, slots[first] * stride + pos))
                             {
                                 pc = second;
                             }
@@ -1420,12 +1433,13 @@ internal sealed class OnigMatcher
                     room = _stopAt - _work;
                 }
 
-                if (memo is null && slots is not null && _work + work > MemoAfter)
+                if (memo is null && _work + work > memoAt)
                 {
                     memo = StartMemo(program, input.Length);
                     if (memo is null)
                     {
                         slots = null;
+                        memoAt = long.MaxValue;
                     }
                 }
 
