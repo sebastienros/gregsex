@@ -150,6 +150,16 @@ internal ref struct RunState
         Failure = default;
     }
 
+    // One call's state: the timeout begins at the budget's first clock read instead of here (see that constructor),
+    // so a call that ends within its first ClockStride work units reads no clock. Not for a session that outlives
+    // its construction.
+    internal RunState(WorkspaceBuffers buffers, long maxWork, CancellationToken cancellation, TimeSpan? timeout, bool deferStart)
+    {
+        Buffers = buffers;
+        Budget = new(maxWork, cancellation, timeout, deferStart);
+        Failure = default;
+    }
+
     // One charge for a run of one-unit-per-offset work that is known to fit the remaining budget;
     // otherwise per-unit charges reproduce the exact failing offset and consumed work.
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

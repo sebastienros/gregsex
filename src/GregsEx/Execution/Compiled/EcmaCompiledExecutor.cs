@@ -64,7 +64,7 @@ internal sealed class EcmaCompiledExecutor : IRegularExecutor
         {
             var caps = state.Buffers.Captures[..(captures ? 2 * _groups : 2)];
             long work = 0;
-            var guard = new KernelGuard(state.Budget);
+            var guard = KernelGuard.Start(ref state.Budget);
             var code = (captures ? _captureKernel : _plainKernel)(chars, startAt, caps, state.Buffers.Scratch, allowed, ref work, ref guard);
             if (code is CoreKernelResult.Cancelled or CoreKernelResult.TimedOut)
             {

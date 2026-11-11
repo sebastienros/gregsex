@@ -60,6 +60,14 @@ public struct KernelGuard
         NextPoll = budget.IsUnconstrained(0) ? long.MaxValue : 0;
     }
 
+    // The guard of a search's own budget. The copy polls with timestamps of its own, so a deferred timeout is begun on
+    // the original first; otherwise the copy would begin it alone and the interpreter, if the kernel gives up, again.
+    internal static KernelGuard Start(ref RunBudget budget)
+    {
+        budget.StartDeadline();
+        return new KernelGuard(budget);
+    }
+
     internal static KernelGuard None => new() { NextPoll = long.MaxValue };
 
     /// <summary>Checks cancellation and the deadline; returns 0 to continue or a negative kernel result code to return.</summary>

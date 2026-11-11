@@ -119,10 +119,10 @@ public sealed partial class EcmaScriptMatcher : IDisposable
         return CreateStateResolved(limits, options);
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private RunState CreateStateResolved(RegexMatchLimits limits, RegexMatchOptions options)
+    private RunState CreateStateResolved(RegexMatchLimits limits, RegexMatchOptions options, bool deferStart = false)
     {
         LastFailure = default;
-        var state = new RunState(new WorkspaceBuffers(_states, _registers, _scratch), limits, options.CancellationToken, options.Timeout);
+        var state = new RunState(new WorkspaceBuffers(_states, _registers, _scratch), limits.MaxWork, options.CancellationToken, options.Timeout, deferStart);
         if (_reservedBytes > limits.MaxWorkspaceBytes)
         {
             state.Failure = new(RegexExecutionFailureCode.WorkspaceLimitExceeded, 0, 0);
@@ -160,7 +160,8 @@ public sealed partial class EcmaScriptMatcher : IDisposable
                 LastFailure = new(RegexExecutionFailureCode.DestinationTooSmall, 0, 0, _groupCount);
                 return RegexSearchStatus.DestinationTooSmall;
             }
-            var state = CreateStateResolved(limits, options);
+            // Exec, Test and ExecNext are each one call, so the timeout may begin at the first stride (see RunBudget).
+            var state = CreateStateResolved(limits, options, deferStart: true);
             var status = ExecCore(input, operation, groups, out match, ref state);
             if (advance && status == RegexSearchStatus.Match && match.Length == 0)
             {

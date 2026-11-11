@@ -171,7 +171,8 @@ public sealed class RegexWorkspace : IDisposable
                     return AdmissionFailure(RegexExecutionFailureCode.WorkspaceLimitExceeded, startAt, operation, groups);
                 }
             }
-            var state = new RunState(new WorkspaceBuffers(_states, _captures, _scratch, _pcrePairs), maxWork, options.CancellationToken, timeout);
+            // One call from here to its end, so the timeout may begin at the first stride (see RunBudget).
+            var state = new RunState(new WorkspaceBuffers(_states, _captures, _scratch, _pcrePairs), maxWork, options.CancellationToken, timeout, deferStart: true);
             if (startAt > 0 && input.Length >= 64 && input.Length == _validLength &&
                 (startAt == _validNextStart || startAt == _validNextStart + 1) &&
                 MatchesFingerprint(input))
@@ -264,7 +265,7 @@ public sealed class RegexWorkspace : IDisposable
                     return NativeAdmissionFailure(RegexExecutionFailureCode.WorkspaceLimitExceeded, matches, publish);
                 }
             }
-            var state = new RunState(new WorkspaceBuffers(_states, _captures, _scratch, _pcrePairs), limits.MaxWork, options.CancellationToken, options.Timeout);
+            var state = new RunState(new WorkspaceBuffers(_states, _captures, _scratch, _pcrePairs), limits.MaxWork, options.CancellationToken, options.Timeout, deferStart: true);
             var groups = operation == SearchOperation.Captures ? adapter.Publication(_scratch) : default;
             var status = adapter.Executor.Search(input, 0, operation, flags, PosixExecutionCapacity.Default,
                 ref state, groups, out var range);
