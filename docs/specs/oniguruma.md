@@ -24,9 +24,10 @@ plan and compile memory) with default match limits. A grammar host, a generator 
 (`IsMatch`, `Find`, `FindCaptures` from a start offset over `ReadOnlySpan<char>`) and `OnigurumaScanner` own the
 mutable backtracking storage. `OnigurumaScanner` is TextMate's multi-pattern search (vscode-oniguruma's
 `findNextMatchSync`, Onigwrap's `OnigScanner`): the earliest match start wins, the first pattern on a tie. It walks
-the starts from the offset once and attempts at each the patterns whose first units admit the unit there, in pattern
-order, as `onig_regset_search` does under `ONIG_REGSET_POSITION_LEAD` (vscode-oniguruma's choice for lines under 1,000
-units): the first match ends the call, so no pattern is attempted past the winning start. A pattern's attempts are
+the starts from the offset once and attempts at each the patterns whose first units admit the unit there and whose
+leading look-behind admits the unit before it, in pattern order, as `onig_regset_search` does under
+`ONIG_REGSET_POSITION_LEAD` (vscode-oniguruma's choice for lines under 1,000 units): the first match ends the call,
+so no pattern is attempted past the winning start. A pattern's attempts are
 those of its own search from the offset, with that search's prefilters, work budget and failure memo, as far as the
 walk needs them. A pattern using `\K` (whose match starts where it says, even before the offset) and the pattern of a
 scanner that has only one are searched whole instead, and their match waits for the walk to reach its start. A
@@ -165,8 +166,10 @@ executors, and no other regex engine. Register writes are undone through a log p
 look-arounds cut to barrier frames. Per pattern the compiler derives search prefilters that preserve results: start
 anchors, a required literal or a required unit set (one of which every match contains, alternatives united), the
 first units of a match (look-aheads included, and a call's those of the group it calls), a leading look-behind's
-preceding units, a literal prefix, and the minimum length; no start after the last occurrence of the required literal
-or units is tried. Matching uses
+preceding units (the ASCII unit each branch ends with, at most 16 in all; none when a branch can match empty, ends in
+an ignore-case letter or in anything other than a character or class), a literal prefix, and the minimum length; no
+start after the last occurrence of the required literal or units is tried. A search scans by the literal prefix
+when there is one and checks the preceding unit per candidate, else by the preceding units. Matching uses
 follow sets: a greedy run whose follow cannot start with one of its units becomes possessive, and runs give units
 back only where the follow can start, found with one vectorized search. A called group's follow is the union of
 those at its definition and at each call, computed to a fixpoint (at most four extra compile passes, else unknown);

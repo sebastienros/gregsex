@@ -19,13 +19,14 @@ namespace GregsEx;
 /// </summary>
 public sealed class OnigurumaScanner
 {
-    // Start-unit classes: an ASCII unit is its own class, then every other unit, then the end of the input.
-    private const int NonAsciiUnit = 128, EndUnit = 129, UnitClasses = 130;
+    // Start-unit classes: an ASCII unit is its own class, then every other unit, then the end of the input. As the
+    // class of the unit before a start, the last stands for the start of the input.
+    private const int NonAsciiUnit = 128, EndUnit = 129, UnitClasses = 130, InputStart = EndUnit;
 
-    // What an entry still has to check before an attempt (Entry.Checks). The first four never change; the others
+    // What an entry still has to check before an attempt (Entry.Checks). The first three never change; the others
     // hold for the current input: its required text has not been looked up yet, its last search ran out of work, or
     // its attempts have cost enough for whole searches.
-    private const int Anchored = 1, Preceded = 2, Prefixed = 4, Whole = 8, Unresolved = 16, GaveUp = 32, Costly = 64;
+    private const int Anchored = 1, Prefixed = 4, Whole = 8, Unresolved = 16, GaveUp = 32, Costly = 64;
 
     private readonly OnigurumaPattern[] _patterns;
     private readonly OnigMatcher _matcher = new();
@@ -34,11 +35,13 @@ public sealed class OnigurumaScanner
     // Per distinct text the patterns require (Entry.RequiredKey): where it last occurs in the current input.
     private readonly RequiredSlot[] _required;
     // Pattern sets, one bit per pattern in _words words. Per start-unit class, the patterns a match of which can start
-    // with it (OnigProgram.StartBits). For the current input: the patterns still to be tried at later starts, those
-    // with a known match further on (Entry.MatchStart), and those whose search ran out of work. A pattern in none of
-    // the three has no match left.
+    // with it (OnigProgram.StartBits), and per class of the unit before a start, the patterns that may start after it
+    // (OnigProgram.PrecededBy). For the current input: the patterns still to be tried at later starts, those with a
+    // known match further on (Entry.MatchStart), and those whose search ran out of work. A pattern in none of the
+    // three has no match left.
     private readonly int _words;
     private readonly ulong[] _starts;
+    private readonly ulong[] _after;
     private readonly ulong[] _alive;
     private readonly ulong[] _parked;
     private readonly ulong[] _gaveUp;
@@ -71,6 +74,7 @@ public sealed class OnigurumaScanner
         _entries = new Entry[n];
         _words = (n + 63) >> 6;
         _starts = new ulong[UnitClasses * _words];
+        _after = new ulong[UnitClasses * _words];
         _alive = new ulong[_words];
         _parked = new ulong[_words];
         _gaveUp = new ulong[_words];
@@ -108,6 +112,13 @@ public sealed class OnigurumaScanner
                 {
                     _starts[unit * _words + (i >> 6)] |= bit;
                 }
+
+                // PrecededBy holds ASCII units only.
+                if (program.PrecededBy is not { } preceded
+                    || (unit < NonAsciiUnit ? preceded.Contains((char)unit) : unit == InputStart && program.PrecededAtStart))
+                {
+                    _after[unit * _words + (i >> 6)] |= bit;
+                }
             }
 
             // Searched whole before the walk: a pattern with no other to stop for, and one using \K. A pattern with a
@@ -127,7 +138,6 @@ public sealed class OnigurumaScanner
             }
 
             e.Fixed = (program.StartAnchor != OnigStartAnchor.None ? Anchored : 0)
-                | (program.PrecededBy is not null ? Preceded : 0)
                 | (program.Prefix is not null ? Prefixed : 0)
                 | (whole ? Whole : 0);
             groups = Math.Max(groups, _patterns[i].GroupCount);
@@ -441,6 +451,7 @@ public sealed class OnigurumaScanner
     {
         var entries = _entries;
         var starts = _starts;
+        var after = _after;
         var alive = _alive;
         var parked = _parked;
         var words = alive.Length;
@@ -448,6 +459,7 @@ public sealed class OnigurumaScanner
         var call = _call;
         var full = stop == int.MaxValue;
         var lastPos = full ? end : startAt;
+        var before = startAt == 0 ? InputStart : input[startAt - 1] < NonAsciiUnit ? input[startAt - 1] : NonAsciiUnit;
         for (var pos = startAt; pos <= lastPos; pos++)
         {
             var unit = EndUnit;
@@ -464,6 +476,8 @@ public sealed class OnigurumaScanner
             }
 
             var row = unit * words;
+            var afterRow = before * words;
+            before = unit;
             ulong anyAlive = 0, anyParked = 0;
             for (var w = 0; w < words; w++)
             {
@@ -471,7 +485,7 @@ public sealed class OnigurumaScanner
                 var p = parked[w];
                 anyAlive |= a;
                 anyParked |= p;
-                var m = inside ? p : (starts[row + w] & a) | p;
+                var m = inside ? p : (starts[row + w] & after[afterRow + w] & a) | p;
                 while (m != 0)
                 {
                     var i = (w << 6) + System.Numerics.BitOperations.TrailingZeroCount(m);
@@ -664,11 +678,6 @@ public sealed class OnigurumaScanner
                         return CheckResult.Skip;
                     }
             }
-        }
-
-        if ((checks & Preceded) != 0 && !(pos == 0 ? program.PrecededAtStart : program.PrecededBy!.Contains(input[pos - 1])))
-        {
-            return CheckResult.Skip;
         }
 
         if ((checks & Prefixed) != 0 && !input[pos..].StartsWith(e.Prefix))

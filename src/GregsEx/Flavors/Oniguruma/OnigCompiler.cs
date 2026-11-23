@@ -1393,7 +1393,7 @@ internal sealed class OnigCompiler
         }
     }
 
-    // The units that must precede a match from a leading positive look-behind of single units, ^ or \A.
+    // The units that must precede a match from a leading positive look-behind: each branch's last unit, ^ or \A.
     private static (SearchValues<char>?, bool) Preceded(OnigNode root)
     {
         var first = root;
@@ -1437,7 +1437,15 @@ internal sealed class OnigCompiler
 
             if (b.Kind is not (OnigNodeKind.Char or OnigNodeKind.Set))
             {
-                return (null, false);
+                // A longer branch is preceded by the unit it ends with.
+                if (LastUnits(b) is not { NonAscii: false } last)
+                {
+                    return (null, false);
+                }
+
+                low |= last.Low;
+                high |= last.High;
+                continue;
             }
 
             var bits = Bits(b);
@@ -1456,6 +1464,48 @@ internal sealed class OnigCompiler
         }
 
         return (s_firstUnits.GetOrAdd((low, high, false), static k => SearchValues.Create(AsciiMembers(k.Item1, k.Item2, true))), atStart);
+    }
+
+    // The units the last unit of every match of node is among, or null when not known or node can match empty. A
+    // character with several case forms gives none, which keeps ignore-case look-behinds unfiltered; the parser spells
+    // folds of several code points as alternatives whose classes hold non-ASCII units, which Preceded refuses.
+    private static OnigStartBits? LastUnits(OnigNode node)
+    {
+        switch (node.Kind)
+        {
+            case OnigNodeKind.Char when IsPlain(node, out _):
+            case OnigNodeKind.Set:
+                return Bits(node);
+            case OnigNodeKind.Sequence:
+                for (var i = node.Children.Count - 1; i >= 0; i--)
+                {
+                    if (node.Children[i].Kind != OnigNodeKind.Anchor)
+                    {
+                        return LastUnits(node.Children[i]);
+                    }
+                }
+                return null;
+            case OnigNodeKind.Alternation:
+                {
+                    var result = OnigStartBits.None;
+                    foreach (var child in node.Children)
+                    {
+                        if (LastUnits(child) is not { } units)
+                        {
+                            return null;
+                        }
+
+                        result = result.Union(units);
+                    }
+                    return result;
+                }
+            case OnigNodeKind.Capture or OnigNodeKind.Group or OnigNodeKind.Atomic:
+                return LastUnits(node.Child);
+            case OnigNodeKind.Repeat when node.Min >= 1:
+                return LastUnits(node.Child);
+            default:
+                return null;
+        }
     }
 
     // The branches of a look-around worth testing, or null when all are. Under ignore-case a class also spells its

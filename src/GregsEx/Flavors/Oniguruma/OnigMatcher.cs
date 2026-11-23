@@ -200,7 +200,23 @@ internal sealed class OnigMatcher
         var pos = scan;
         while (pos <= last)
         {
-            if (preceded is not null)
+            if (prefix is not null)
+            {
+                // The literal every match starts with drives the scan, and each candidate checks the unit before it:
+                // a look-behind's units, a space or a letter, are far more common than a literal of two or more.
+                var i = input[pos..Math.Min(end, last + prefix.Length)].IndexOf(prefix, StringComparison.Ordinal);
+                if (i < 0 || (pos += i) > last)
+                {
+                    break;
+                }
+
+                if (preceded is not null && !(pos == 0 ? program.PrecededAtStart : preceded.Contains(input[pos - 1])))
+                {
+                    pos++;
+                    continue;
+                }
+            }
+            else if (preceded is not null)
             {
                 // The units that must precede a start drive the scan; each candidate then checks its own unit.
                 if (!(pos == 0 ? program.PrecededAtStart : preceded.Contains(input[pos - 1])))
@@ -215,18 +231,10 @@ internal sealed class OnigMatcher
                     pos = from + i + 1;
                 }
 
-                if (!bits.CanStartWith(pos < end ? input[pos] : -1) || (prefix is not null && !input[pos..].StartsWith(prefix)))
+                if (!bits.CanStartWith(pos < end ? input[pos] : -1))
                 {
                     pos++;
                     continue;
-                }
-            }
-            else if (prefix is not null)
-            {
-                var i = input[pos..Math.Min(end, last + prefix.Length)].IndexOf(prefix, StringComparison.Ordinal);
-                if (i < 0 || (pos += i) > last)
-                {
-                    break;
                 }
             }
             else if (first is not null || notFirst is not null)
