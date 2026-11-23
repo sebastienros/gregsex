@@ -60,8 +60,9 @@ internal sealed class OnigMatcher
     private long _deadline = long.MaxValue;
     private bool _polls;
 
-    // Where the leading run of the last attempt ended (OnigProgram.LeadingRun), or -1.
-    private int _leadingEnd;
+    // Where the leading run of the last attempt ended (OnigProgram.LeadingRun), or -1: the first time the attempt
+    // ran it, since a call into the group that holds the run runs it again further on.
+    private int _leadingEnd = -1;
 
     // Failed backtrack resumes of the current search, one bit per (OnigProgram.MemoSlots slot, position), kept across
     // its attempts: what follows a resume depends only on that pair, so a pair that failed once fails again. Started
@@ -256,7 +257,6 @@ internal sealed class OnigMatcher
                 continue;
             }
 
-            _leadingEnd = -1;
             var status = Attempt(program, input, pos, startAt, captures);
             if (status != RegexSearchStatus.NoMatch)
             {
@@ -289,7 +289,6 @@ internal sealed class OnigMatcher
             _regs = new int[Math.Max(program.RegisterCount, 2 * _regs.Length)];
         }
 
-        _leadingEnd = -1;
         return Attempt(program, input, pos, searchStart, captures);
     }
 
@@ -673,6 +672,7 @@ internal sealed class OnigMatcher
     private RegexSearchStatus Attempt(OnigProgram program, ReadOnlySpan<char> input, int start, int searchStart, Span<int> captures)
     {
         LastAttemptStart = start;
+        _leadingEnd = -1;
         if (++_work > _stopAt && !Checkpoint(_work, out var stop))
         {
             return stop;
@@ -930,7 +930,7 @@ internal sealed class OnigMatcher
                             minPos = runStart + min;
                             pos += n;
                             work += n;
-                            if (pc == program.LeadingRun)
+                            if (pc == program.LeadingRun && _leadingEnd < 0)
                             {
                                 _leadingEnd = pos;
                             }
@@ -960,7 +960,7 @@ internal sealed class OnigMatcher
                                     minPos = pos;
                                 }
                             }
-                            if (pc == program.LeadingRun)
+                            if (pc == program.LeadingRun && _leadingEnd < 0)
                             {
                                 _leadingEnd = pos;
                             }

@@ -368,8 +368,10 @@ internal sealed class OnigCompiler
         }
 
         var leadingRun = -1;
-        // The skip is sound only when no later backreference or condition can depend on where the run started.
-        if (compiler._called.Count == 0 && !parser.References.Any(r => r.Kind is OnigNodeKind.Backref or OnigNodeKind.CondRef))
+        // The skip is sound only when no later backreference or condition can depend on where the run started. A call
+        // does not: the group it enters matches from the call's position. The matcher keeps the first end it reaches,
+        // the outer run's, since a call into the group holding the run runs it again.
+        if (!parser.References.Any(r => r.Kind is OnigNodeKind.Backref or OnigNodeKind.CondRef))
         {
             var pc = 0;
             var code = compiler._code;
